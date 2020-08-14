@@ -1,3 +1,16 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\usepackage{amsmath,amssymb}
+
+\usepackage{mathspec}
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\begin{document}
 \begin{tikzpicture}[x=1.5cm,y=1.5cm]
 
 \fill[even odd rule,inner color=black,outer color=white] (0,0) circle (0.15);
@@ -34,8 +47,9 @@
 \draw (6,2+1/3) to[bend left=15] (6+1/2,2+1/4);
 \draw (6,2-1/3) to[bend right=15] (6+1/2,2-1/4);
 
-\node at (-1/4,0) [label=left:{$\Spec \ZZ$}]{};
-\node at (-1/4,2) [label=left:{$\Spec \ZZ [i]$}]{};
+\node at (-1/4,0) [label=left:{$\operatorname{Spec} \mathbb{Z}$}]{};
+\node at (-1/4,2) [label=left:{$\operatorname{Spec} \mathbb{Z} [i]$}]{};
 \node at (7,0) {$\cdots$};
 \node at (7,2) {$\cdots$};
 \end{tikzpicture}
+\end{document}
