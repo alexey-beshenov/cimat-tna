@@ -1,0 +1,94 @@
+\documentclass[oneside]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{xcolor}
+\usepackage{framed}
+\definecolor{shadecolor}{rgb}{0.945, 0.902, 0.698}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usetikzlibrary{calc}
+
+\usepackage{amssymb,amsmath}
+\usepackage{multicol}
+
+\usepackage{fullpage}
+
+\usepackage{mathspec}
+
+\setmainfont{PT Serif}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\huge\bfseries}
+  {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titleformat{\section}
+  {\normalfont\sffamily\Large\bfseries}
+  {\thesection}{1em}{}
+
+\titleformat{\subsection}
+  {\normalfont\sffamily\large\bfseries}
+  {\thesubsection}{1em}{}
+
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\newcommand\term\textbf
+
+\input{amsthm.tex}
+
+\usepackage[numbers]{natbib}
+
+\usepackage[hidelinks,bookmarks=true]{hyperref}
+\hypersetup{
+	colorlinks,
+	linkcolor={red!60!black},
+	citecolor={blue!60!black},
+	urlcolor={blue!80!black}
+}
+\usepackage{bookmark}
+
+\renewcommand\gcd{\operatorname{mcd}}
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+
+\newcommand\FF{\mathbb{F}}
+\newcommand\NN{\mathbb{N}}
+\newcommand\ZZ{\mathbb{Z}}
+\newcommand\QQ{\mathbb{Q}}
+\newcommand\RR{\mathbb{R}}
+\newcommand\CC{\mathbb{C}}
+
+\renewcommand\O{\mathcal{O}}
+
+\renewcommand\Re{\operatorname{Re}}
+\renewcommand\Im{\operatorname{Im}}
+
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Spec}{Spec}
+
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+
+\usepackage[perpage,symbol]{footmisc}
+
+\begin{document}
+
+\input{1-introduccion.tex}
+
+\cleardoublepage
+
+\phantomsection
+
+\addcontentsline{toc}{chapter}{Bibliografía}
+
+\bibliography{tna}
+\bibliographystyle{amsalpha-cust}
+
+\end{document}

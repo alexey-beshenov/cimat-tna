@@ -1,0 +1,11 @@
+*~
+
+# LaTeX stuff
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+
+# LaTeX output
+*.pdf

@@ -1,0 +1,42 @@
+\usepackage{amsthm}
+
+\newcommand{\examplesymbol}{$\blacktriangle$}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\newtheoremstyle{myplain}
+{\topsep}   % ABOVESPACE
+{\topsep}   % BELOWSPACE
+{\itshape}  % BODYFONT
+{0pt}       % INDENT (empty value is the same as 0pt)
+{\bfseries} % HEADFONT
+{.}         % HEADPUNCT
+{5pt plus 1pt minus 1pt} % HEADSPACE
+{\thmnumber{#2}. \thmname{#1}\thmnote{ (#3)}}   % CUSTOM-HEAD-SPEC
+
+\newtheoremstyle{mydefinition}
+{\topsep}   % ABOVESPACE
+{\topsep}   % BELOWSPACE
+{\normalfont}  % BODYFONT
+{0pt}       % INDENT (empty value is the same as 0pt)
+{\bfseries} % HEADFONT
+{.}         % HEADPUNCT
+{5pt plus 1pt minus 1pt} % HEADSPACE
+{\thmnumber{#2}. \thmname{#1}\thmnote{ (#3)}}   % CUSTOM-HEAD-SPEC
+
+\theoremstyle{myplain}
+\newtheorem{proposicion}{Proposición}[section]
+\newtheorem{lema}[proposicion]{Lema}
+\newtheorem{teorema}[proposicion]{Teorema}
+\newtheorem{corolario}[proposicion]{Corolario}
+
+\theoremstyle{mydefinition}
+\newtheorem{definicion}[proposicion]{Definición}
+\newtheorem{comentario}[proposicion]{Comentario}
+\newtheorem{conjetura}[proposicion]{Conjetura}
+\newtheorem{ejemplox}[proposicion]{Ejemplo}
+\newenvironment{ejemplo}
+{\pushQED{\qed}\renewcommand{\qedsymbol}{\examplesymbol}\ejemplox}
+{\popQED\endejemplox}
+
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}[chapter]

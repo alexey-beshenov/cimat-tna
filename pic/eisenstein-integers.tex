@@ -1,0 +1,54 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{calc}
+
+\usepackage{mathspec}
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\begin{document}
+\begin{tikzpicture}[x=2cm,y=2cm]
+\draw ({cos(0)},{sin(0)}) coordinate (x);
+\draw ({cos(60)},{sin(60)}) coordinate (y);
+
+\draw[black!30,dashed] ($-2*(x)+2*(y)$) -- ($2*(x)-2*(y)$);
+\draw[black!30,dashed] ($2*(y)$) -- ($-2*(y)$);
+\draw[black!30,dashed] ($2*(x)$) -- ($-2*(x)$);
+\draw[black!30,dashed] ($-2*(x)+2*(y)$) -- ($-2*(x)$);
+\draw[black!30,dashed] ($-1*(x)+2*(y)$) -- ($-1*(x) + -1*(y)$);
+\draw[black!30,dashed] ($2*(x)-2*(y)$) -- ($2*(x)$);
+\draw[black!30,dashed] ($(x)-2*(y)$) -- ($(x) + (y)$);
+\draw[black!30,dashed] ($-2*(x)+2*(y)$) -- ($2*(y)$);
+\draw[black!30,dashed] ($-2*(x)+(y)$) -- ($(x) + (y)$);
+\draw[black!30,dashed] ($-1*(x) + -1*(y)$) -- ($2*(x)-(y)$);
+\draw[black!30,dashed] ($-2*(y)$) -- ($2*(x)-2*(y)$);
+\draw[black!30,dashed] ($2*(y)$) -- ($2*(x)$);
+\draw[black!30,dashed] ($-1*(x)+2*(y)$) -- ($2*(x)-(y)$);
+\draw[black!30,dashed] ($-2*(y)$) -- ($-2*(x)$);
+\draw[black!30,dashed] ($(x)-2*(y)$) -- ($-2*(x)+(y)$);
+
+\draw (0,0) node[circle,fill,inner sep=1pt, label=above:{\small $0$}] {};
+
+\draw (x) node[circle,fill,inner sep=1pt, label=above:{\small $1$}] {};
+\draw (y) node[circle,fill,inner sep=1pt, label=above:{\small $1+\zeta_3$}] {};
+\draw ($-1*(x)+(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $\zeta_3$}] {};
+\draw ($-1*(x)$) node[circle,fill,inner sep=1pt, label=above:{\small $-1$}] {};
+\draw ($-1*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-1-\zeta_3$}] {};
+\draw ($(x)-(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-\zeta_3$}] {};
+
+\draw ($(x) + (y)$) node[circle,fill,inner sep=1pt, label=above:{\small $2+\zeta_3$}] {};
+\draw ($-1*(x)+2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $1+2\,\zeta_3$}] {};
+\draw ($-2*(x)+(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-1+\zeta_3$}] {};
+\draw ($-1*(x) + -1*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2-\zeta_3$}] {};
+\draw ($(x)-2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2\,\zeta_3$}] {};
+\draw ($2*(x)-(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $1-\zeta_3$}] {};
+
+\draw ($2*(x)$) node[circle,fill,inner sep=1pt, label=above:{\small $2$}] {};
+\draw ($2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $2+2\,\zeta_3$}] {};
+\draw ($-2*(x)+2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $2\,\zeta_3$}] {};
+\draw ($-2*(x)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2$}] {};
+\draw ($-2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2-2\,\zeta_3$}] {};
+\draw ($2*(x)-2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2\,\zeta_3$}] {};
+\end{tikzpicture}
+
+\end{document}
