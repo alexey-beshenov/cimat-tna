@@ -1,0 +1,33 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{calc}
+
+\usepackage{amsmath}
+
+\usepackage{mathspec}
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\begin{document}
+\begin{tikzpicture}[x=1.5cm,y=1.5cm]
+  \draw (0,0) circle (1);
+
+  \draw ({cos(45)},{sin(45)}) node[circle,fill,inner sep=1.5pt, label=above right:$\zeta_8$] (z1) {};
+  \draw ({cos(135)},{sin(135)}) node[circle,fill,inner sep=1.5pt, label=above left:$\zeta_8^3$] (z2) {};
+  \draw ({cos(225)},{sin(225)}) node[circle,fill,inner sep=1.5pt, label=below left:$\zeta_8^{-3}$] (z3) {};
+  \draw ({cos(315)},{sin(315)}) node[circle,fill,inner sep=1.5pt, label=below right:$\zeta_8^{-1}$] (z4) {};
+
+  \draw[dashed] ({sqrt(2)},0) -- (0,{sqrt(2)}) -- ({-sqrt(2)},0) -- (0,{-sqrt(2)}) -- ({sqrt(2)},0);
+
+  \draw ({sqrt(2)},0) node[circle,fill,inner sep=1.5pt, label=above right:$\alpha$] {};
+  \draw ({-sqrt(2)},0) node[circle,fill,inner sep=1.5pt, label=above left:$-\alpha$] {};
+
+  \draw (0,0) -- (z1);
+  \draw (0,0) -- (z2);
+  \draw (0,0) -- (z3);
+  \draw (0,0) -- (z4);
+
+  \draw[->] (-1.75,0) -- (+1.75,0) node[right] {$\operatorname{Re}$};
+  \draw[->] (0,-1.75) -- (0,+1.75) node[above] {$\operatorname{Im}$};
+\end{tikzpicture}
+\end{document}

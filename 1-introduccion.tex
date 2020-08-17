@@ -299,14 +299,213 @@ El polinomio mínimo y el polinomio característico se encuentran mediante
 \end{verbatim}
 \end{shaded}
 
-Otro ejemplo: para un primo impar $p$ consideremos las expresiones
-$$g = \sum_{1 \le k \le p-1} \legendre{k}{p}\,\zeta_p^k \in \ZZ [\zeta_p],$$
-donde $\legendre{k}{p}$ denota el símbolo de Legendre.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Reciprocidad cuadrática mediante sumas de Gauss en \texorpdfstring{$\ZZ [\zeta_p]$}{ℤ[ζₚ]}}
+\label{sec:reciprocidad-cuadratica}
+
+\marginpar{\small Lectura\\adicional}
+
+Existen muchísimas pruebas de la ley de reciprocidad cuadrática, y en esta
+seccón vamos a ver la prueba de Gauss basada en cálculos ingeniosos en el anillo
+ciclotómoco $\ZZ [\zeta_p]$. Este es un ejemplo curioso de cómo propiedades
+de los números enteros $\ZZ$ se establecen al pasar a un anillo más grande.
+
+\begin{definicion}
+  Sea $p$ un número primo fijo. Para un número entero $a$ tal que $p\nmid a$
+  el \term{símbolo de Legendre} se define mediante
+  \[ \legendre{a}{p} = \begin{cases}
+    +1, & a\text{ es un cuadrado módulo }p,\\
+    -1, & a\text{ no es un cuadrado módulo }p.
+  \end{cases} \]
+  Además, para $p \mid a$ se pone $\legendre{a}{p} = 0$.
+\end{definicion}
+
+De la definición está claro que si $a \equiv b \pmod{p}$, entonces
+$\legendre{a}{p} = \legendre{b}{p}$. Recordemos que el grupo multiplicativo
+$\FF_p^\times$ es cíclico, lo que significa que existe un generador
+$x\in \FF_p^\times$ tal que
+$$\FF_p^\times = \{ 1, x, x^2, x^3, \ldots, x^{p-1} \}.$$
+Entonces, $x^k$ es un cuadrado si y solamente si $k$ es par.
+De aquí se ve fácilmente que el símbolo de Legendre es multiplicativo:
+$$\legendre{ab}{p} = \legendre{a}{p}\,\legendre{b}{p}.$$
+Entonces, se trata de un homomorfismo
+$$\legendre{\cdot}{p}\colon \FF_p^\times \to \{ \pm 1 \}.$$
+
+Para calcular el símbolo de Legendre, se usa el siguiente resultado, descubierto
+por Gauss.
+
+\begin{teorema}[Reciprocidad cuadrática]
+  Sean $p$ y $q$ diferentes primos impares. Entonces,
+  \[ \legendre{q}{p} =
+     (-1)^{\frac{p-1}{2}\,\frac{q-1}{2}}\,\legendre{p}{q}.\]
+  Además, se cumple
+  \begin{align*}
+    \legendre{-1}{p} & = (-1)^{\frac{p-1}{2}},\\
+    \legendre{2}{p} & = (-1)^{\frac{p^2-1}{8}}.
+  \end{align*}
+\end{teorema}
+
+\begin{ejemplo}
+  \label{ejemplo:legendre--3}
+  Para $p \ne 3$ calculemos el símbolo de Legendre $\legendre{-3}{p}$.
+  Tenemos
+  \[ \legendre{-3}{p} = \legendre{-1}{p}\,\legendre{3}{p} =
+       (-1)^{\frac{p-1}{2}}\,(-1)^{\frac{3-1}{2}\,\frac{p-1}{2}}\,\legendre{p}{3} =
+         \legendre{p}{3}. \]
+  El único cuadrado no nulo módulo $3$ es $1$, así que
+  \[ \legendre{-3}{p} = \begin{cases}
+    +1, & \text{si } p\equiv 1 \pmod{3},\\
+    -1, & \text{si } p\equiv 2 \pmod{3}.
+  \end{cases} \]
+  Por ejemplo,
+  \[ -3 \equiv 2^2 ~ (7), -3 \equiv 6^2 ~ (13), -3 \equiv 4^2 ~ (19), -3 \equiv 11^2 ~ (31), -3 \equiv 16^2 ~ (37). \qedhere \]
+\end{ejemplo}
+
+\subsection{Congruencia de Euler y leyes suplementarias}
+
+Primero, nos servirá la siguiente interpretación del símbolo de Legendre.
+
+\begin{lema}[Congruencia Euler]
+  Para $p \ne 2$ y $a$ tal que $p \nmid a$ se tiene
+  $$\legendre{a}{p} \equiv a^{\frac{p-1}{2}} \pmod{p}.$$
+
+  \begin{proof}
+    Sea $x$ un generador de $\FF_p^\times$. Tenemos $[a]_p = x^i$ para algún
+    $i$, y este es un cuadrado en $\FF_p^\times$ si y solamente si $i$ es
+    par. Luego,
+    $$[a]_p^{\frac{p-1}{2}} = x^{i\frac{p-1}{2}}.$$
+    Si $i$ es par, entonces $i\frac{p-1}{2}$ es divisible por
+    $p-1 = \#\FF_p^\times$, así que
+    $$x^{i\frac{p-1}{2}} = 1$$
+    (usando que $|\FF_p^\times| = p-1$). Si $i$ es impar, entonces
+    $i\frac{p-1}{2}$ no es divisible por $p-1$, y por ende
+    $$x^{i\frac{p-1}{2}} \ne 1.$$
+    Sin embargo,
+    $$\left(x^{i\frac{p-1}{2}}\right)^2 = x^{i\,(p-1)} = 1,$$
+    lo que nos permite concluir que
+    \[ x^{i\frac{p-1}{2}} = -1. \qedhere \]
+  \end{proof}
+\end{lema}
+
+\begin{corolario}[Primera ley suplementaria]
+  \label{cor:primera-ley-suplementaria}
+  Para $p \ne 2$ se cumple
+  \[ \legendre{-1}{p} = (-1)^{\frac{p-1}{2}} = \begin{cases}
+    +1, & p \equiv 1 \pmod{4},\\
+    -1, & p \equiv 3 \pmod{4}.
+  \end{cases} \]
+
+  \begin{proof}
+    Basta sustituir $a = -1$ en el criterio de Euler.
+  \end{proof}
+\end{corolario}
+
+\begin{corolario}[Segunda ley suplementaria]
+  \label{cor:segunda-ley-suplementaria}
+  Para $p \ne 2$ se cumple
+  \[ \legendre{2}{p} = (-1)^{\frac{p^2-1}{8}} = \begin{cases}
+    +1, & p \equiv 1,7 \pmod{8},\\
+    -1, & p \equiv 3,5 \pmod{8}.
+  \end{cases} \]
+
+\begin{proof}
+  De nuevo, se puede aplicar el criterio de Euler
+  $$\legendre{2}{p} \equiv 2^{\frac{p-1}{2}} \pmod{p},$$
+  y hay que solo identificar el número a la derecha. Hay argumentos elementales,
+  pero me gustaría presentar un cálculo con las raíces octavas de la
+  unidad. Consideremos $\zeta_8 = \exp (2\pi i/8)$ y el número
+  $$\alpha = \zeta_8 + \zeta_8^{-1}.$$
+
+  \begin{center}
+    \includegraphics{pic/eighth-roots.pdf}
+  \end{center}
+
+  Notamos que en el anillo $\ZZ [\zeta_8]$ se cumple
+  \[ \alpha^p =
+     (\zeta_8 + \zeta_8^{-1})^p \equiv
+     \zeta_8^p + \zeta_8^{-p} \equiv
+     \begin{cases}
+       \zeta_8 + \zeta_8^{-1} = +\alpha, & p \equiv \pm 1\pmod{8},\\ \zeta_8^3 +
+       \zeta_8^{-3} = -\alpha, & p \equiv \pm 3\pmod{8}.
+     \end{cases} \pmod{p} \]
+   (usando la identidad $(x+y)^p \equiv x^p + y^p \pmod{p}$).
+   Puesto que $\alpha = \sqrt{2}$, calculamos
+   \[ 2^{\frac{p-1}{2}} =
+      \alpha^{p-1} =
+      \alpha^p\,\alpha^{-1} \equiv
+      (\zeta_8 + \zeta_8^{-1})^p\,\alpha^{-1} \equiv
+      \begin{cases}
+        +1, & p \equiv \pm 1\pmod{8},\\
+        -1, & p \equiv \pm 3\pmod{8}.
+      \end{cases} \pmod{p} \qedhere \]
+\end{proof}
+\end{corolario}
+
+\subsection{Sumas cuadráticas de Gauss}
+
+Vamos a trabajar en el anillo ciclotómico $\ZZ [\zeta_p]$, donde $p$ es un primo
+impar fijo y $\zeta_p = \exp (2\pi i/p)$.
+
+\begin{definicion}
+  Para $a \in \ZZ$ la \term{suma cuadrática de Gauss} correspondiente viene dada
+  $$g_a = \sum_{0 \le i \le p-1} \legendre{i}{p} \, \zeta_p^{ai} \in \ZZ [\zeta_p].$$
+  Además, pongamos $g = g_1$.
+\end{definicion}
+
+A partir de ahora todas las sumas serán entre $0$ y $p-1$, así que vamos
+a escribir ``$\sum_i$'' en lugar de ``$\sum_{0 \le i \le p-1}$''.
+Primero necesitamos algunos lemas.
+
+\begin{lema}
+  \label{lema:QR-1}
+  \[ \sum_i \zeta_p^{ai} = \begin{cases}
+    p, & \text{si } p \mid a,\\
+    0, & \text{si } p \nmid a.
+  \end{cases} \]
+
+  \begin{proof}
+    Si $p \mid a$, entonces $\zeta_p^{ai} = 1$ y $\alpha^{ai} = 1$.
+    Por otra parte, si $p \nmid a$, entonces $\zeta_p^a \ne 1$, $\zeta_p^p = 1$,
+    y en $\QQ (\zeta_p)$ se cumple
+    \[ \sum_i \zeta_p^{ai} = \frac{\zeta_p^{ap} - 1}{\zeta_p^a - 1} = 0. \qedhere \]
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  \label{lema:QR-2}
+  $g_a = \legendre{a}{p}\,g$.
+
+  \begin{proof}
+    Primero, si $p\mid a$, entonces $\legendre{a}{p} = 0$ y
+    \[ g_a =
+       \sum_{0 \le i \le p-1} \legendre{i}{p} \, \underbrace{\zeta_p^{ai}}_{= 1} =
+       \sum_{0 \le i \le p-1} \legendre{i}{p} = 0. \]
+
+    Ahora supongamos que $p \nmid a$. En este caso calculamos
+    \[ \legendre{a}{p}\,g_a =
+       \legendre{a}{p}\,\sum_i \legendre{i}{p}\,\zeta_p^{ai} =
+       \sum_i \legendre{ai}{p}\,\zeta_p^{ai} =
+       \sum_j \legendre{j}{p}\,\zeta_p^{j} = g. \]
+    Esto establece el resultado, dado que $\legendre{a}{p} = \pm 1$.
+  \end{proof}
+\end{lema}
+
+Ahora consideremos el cuadrado de nuestra suma de Gauss:
+$$g^2 = \left(\sum_i \legendre{i}{p} \, \zeta_p^i\right)^2.$$
+Se puede ver fácilmente que este es un entero (un elemento de $\ZZ$ y no
+solamente $\ZZ [\zeta_p]$) usando la teoría de Galois. A saber, el grupo
+$\Gal (\QQ (\zeta_p)/\QQ)$ consiste en automorfismos
+$\sigma\colon \zeta_p \mapsto \zeta_p^a$ donde $1 \le a \le p-1$.
+Cada uno de ellos deja $g^2$ fijo:
+$$\sigma (g^2) = \sigma (g)^2 = g_a^2 = \legendre{a}{p}^2\cdot g^2 = g^2.$$
+Podemos concluir que $g^2 \in \ZZ [\zeta_p] \cap \QQ = \ZZ$.
+Algunos cálculos suguieren cuál es el número entero en cuestión.
 
 \begin{shaded}
 \begin{verbatim}
-? charsum (p) = sum (k=1,p-1,kronecker(k,p)*Mod (x^k,polcyclo(p)));
-? forprime (p=3,23, print ([p, lift(charsum(p)^2)]))
+? test (p) = liftall (Mod(sum(i=1,p-1,kronecker(i,p)*x^i), polcyclo(p))^2);
+? forprime (p=3,23, print ([p, test(p)]))
 [3, -3]
 [5, 5]
 [7, -7]
@@ -318,14 +517,109 @@ donde $\legendre{k}{p}$ denota el símbolo de Legendre.
 \end{verbatim}
 \end{shaded}
 
-Así de manera experimental descubrimos que para $p$ impar se cumple
-$$g^2 = (-1)^{\frac{p-1}{2}}\,p.$$
-De hecho, Gauss demostró que
-$$g = \begin{cases}
-  \sqrt{p}, & \text{si }p \equiv 1 \pmod{4},\\
-  i\sqrt{p}, & \text{si }p \equiv 3 \pmod{4}.
-\end{cases}.$$
-Véase \cite[Chapter~6]{Ireland-Rosen} para más detalles.
+\begin{lema}
+  \label{lema:QR-3}
+  $g^2 = p^*$.
+
+  \begin{proof}
+    El truco consiste en calcular la suma $\sum_a g_a\,g_{-a}$ de dos maneras
+    diferentes. Primero, usando \ref{lema:QR-2}, calculamos que para $p \nmid a$
+    se tiene
+    \[ g_a\,g_{-a} =
+       \legendre{a}{p}\,g\cdot \legendre{-a}{p}\,g =
+       \legendre{-1}{p}\,\legendre{a}{p}^2\,g^2 =
+       \legendre{-1}{p}\,g^2. \]
+    Por otra parte, si $p \mid a$, entonces $g_a\,g_{-a} = 0$.
+    Todo esto nos da la identidad
+    \[ \tag{*} \sum_a g_a\,g_{-a} = \legendre{-1}{p}\,(p-1)\,g^2. \]
+
+    Ahora el cálculo directo nos lleva a
+    \[ \sum_a g_a \, g_{-a} =
+       \sum_a \Bigl(\sum_i \legendre{i}{p} \zeta_p^{ai}\Bigr)\cdot\Bigl(\sum_j \legendre{j}{p} \zeta_p^{-aj}\Bigr) =
+       \sum_i \sum_j \legendre{i}{p}\,\legendre{j}{p}\,\sum_a \zeta_p^{a\,(i-j)}. \]
+    Usando \ref{lema:QR-1}, calculamos
+    \[ \sum_a \zeta_p^{a\,(i-j)} = \begin{cases}
+      p, & \text{if } i = j,\\
+      0, & \text{if } i \ne j.
+    \end{cases} \]
+    Así se puede concluir que
+    $$\sum_a g_a \, g_{-a} = \sum_i \legendre{i}{p}^2\,p = (p-1)\,p,$$
+    y nos queda comparar el resultado con (*).
+  \end{proof}
+\end{lema}
+
+De hecho, el signo fue calculado por Gauss:
+\[ g = \begin{cases}
+  \sqrt{p}, & p \equiv 1 \pmod{4},\\
+  i\sqrt{p}, & p \equiv 3 \pmod{4}
+\end{cases} \]
+(véase \cite[Chapter~6]{Ireland-Rosen}), pero esto no será relevante para
+nuestra prueba.
+
+\subsection{Demostración de la reciprocidad cuadrática}
+
+Sean $p$ y $q$ diferentes primos impares. Denotemos
+$$p^* = \legendre{-1}{p} p = (-1)^{\frac{p-1}{2}} p.$$
+Entonces, la reciprocidad cuadrática es equivalente a la fórmula
+\[ \legendre{q}{p} = \legendre{p^*}{q} =
+   (-1)^{\frac{p-1}{2}\,\frac{q-1}{2}}\,\legendre{p}{q}. \]
+
+Vamos a trabajar con congruencias módulo $q$ en el anillo $\ZZ [\zeta_p]$:
+$$x \equiv y \pmod{q} \iff x-y = qz \text{ para algún }z\in \ZZ [\zeta_p],$$
+o de manera equivalente, trabajar en el anillo cociente finito
+$\ZZ [\zeta_p]/(q)$. Por el momento no necesitamos saber mucho de su estructura,
+salvo las siguientes sencillas observaciones.
+
+\begin{enumerate}
+\item \emph{Para cualesquiera $x,y \in \ZZ [\zeta_p]$ se tiene
+  $(x+y)^q \equiv x^q + y^q \pmod{q}$.}
+
+  Esto se sigue inmediatamente del teorema de binomio.
+
+\item \emph{Dos enteros $a,b \in \ZZ$ son congruentes módulo $q$ en $\ZZ$ si y
+  solamente si son congruentes módulo $q$ en el anillo más grande
+  $\ZZ [\zeta_p]$.}
+
+  En efecto, para la implicación menos obvia, si $a-b = qx$ para algún $x \in
+  \ZZ [\zeta_p]$, entonces $x = \frac{a-b}{q} \in \QQ$, pero por otro lado,
+  $\ZZ [\zeta_p] \cap \QQ = \ZZ$.
+\end{enumerate}
+
+Según \ref{lema:QR-3}, tenemos
+$$g^2 = p^*.$$
+Luego, en $\ZZ [\zeta_p]$ se cumple
+\[ g^{q-1} =
+   (g^2)^{\frac{q-1}{2}} =
+   (p^*)^{\frac{q-1}{2}} \equiv
+   \legendre{p^*}{q} \pmod{q} \]
+(usando la congruencia de Euler). Ahora
+$$g^q \equiv \legendre{p^*}{q}\,g \pmod{q}.$$
+Por otro lado,
+\[ g^q =
+   \Bigl(\sum_i \legendre{i}{p}\,\zeta_p^i\Bigr)^q \stackrel{\text{Obs. 1}}{\equiv}
+   \sum_i \legendre{i}{p}^q\,\zeta_p^{qi} =
+   \sum_i \legendre{i}{p}\,\zeta_p^{qi} =
+   g_q \stackrel{\text{\ref{lema:QR-2}}}{\equiv}
+   \legendre{q}{p}\,g \pmod{q}. \]
+
+Combinando las dos congruencias,
+$$\legendre{p^*}{q}\,g \equiv \legendre{q}{p}\,g \pmod{q}.$$
+El anillo $\ZZ [\zeta_p]/(q)$ no tiene por qué ser un dominio, así que hay que
+tener cuidado antes de cancelar $g$. Sin embargo, multiplicando por $g$ y usando
+otra vez más \ref{lema:QR-3}, se obtiene la congruencia en $\ZZ [\zeta_p]$
+$$\legendre{p^*}{q}\,p^* \equiv \legendre{q}{p}\,p^* \pmod{q}.$$
+Gracias a la segunda observación de arriba, esto es lo mismo que una congruencia
+módulo $q$ en $\ZZ$, donde
+\[ \legendre{p^*}{q}\,p^* \equiv \legendre{q}{p}\,p^* \Longrightarrow
+   \legendre{p^*}{q} \equiv \legendre{q}{p} \Longrightarrow
+   \legendre{p^*}{q} = \legendre{q}{p}, \]
+y hemos terminado la demostración. \qed
+
+\vspace{1em}
+
+La prueba de arriba ya demuestra el poder de los anillos de números.
+Además, a partir de ahora vamos a ocupar la reciprocidad cuadrática libremente
+en nuestras pruebas.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -601,7 +895,9 @@ La razón de ser de la noción de dominio euclidiano es el siguiente resultado.
 \end{teorema}
 
 Para resumir, hemos establecido las implicaciones
-$$\text{dominio euclidiano} \Longrightarrow \text{dominio de ideales principales} \Longrightarrow \text{dominio de factorización única}.$$
+\[ \text{dominio euclidiano} \Longrightarrow
+   \text{dominio de ideales principales} \Longrightarrow
+   \text{dominio de factorización única}. \]
 
 En general, un dominio de factorización única no tiene por qué ser un
 dominio de ideales principales, y de la misma manera, un dominio de ideales
@@ -679,7 +975,7 @@ relacionar la aritmética en $\ZZ [i]$ con la aritmética de números enteros.
 \end{lema}
 
 Ahora sabiendo que $\ZZ [i]$ es un dominio de factorización única, ¿cómo se ven
-los elementos primos (= irreducibles) en este caso? Supongamos que
+los elementos primos (=~irreducibles) en este caso? Supongamos que
 $\pi \in \ZZ [i]$ es primo. Luego,
 $$\pi \, \overline{\pi} = N (\pi) = p_1\cdots p_s,$$
 donde los $p_i$ son los factores primos del número natural $N (\pi)$. Entonces,
@@ -722,20 +1018,20 @@ $p \equiv 3 \pmod{4}$. El primo $2$ es excepcional.
 
 \begin{proof}
   Primero notamos que $N (1+i) = 2$, así que $1 + i$ debe ser irreducible
-  (= primo).
+  (=~primo).
  
   Si $p \equiv 3 \pmod{4}$, notamos que $a^2 + b^2 \not\equiv 3 \pmod{4}$, así
   que en $\ZZ [i]$ no hay elementos de norma $p$. Dado que $N (p) = p^2$, esto
   implica que $p$ es irreducible, y por lo tanto primo.
 
-  En fin, si $p \equiv 1 \pmod{4}$, entonces $\legendre{-1}{p} = +1$, lo que
-  significa que existe un entero $a$ tal que $a^2 \equiv -1 \pmod{p}$.
-  Ahora $p \mid (a^2 + 1) = (a + i)\,(a - i)$. Dado que $p \nmid (a \pm i)$,
-  esto implica que $p$ no es primo en $\ZZ [i]$. Entonces, $p = \pi\rho$ para
-  algunos elementos no-invertibles $\pi$ y $\rho$.
-  Ahora $p^2 = N (\pi) \, N (\rho)$ implica que
-  $N (\pi) = \pi\,\overline{\pi} = p$. Por el lema de arriba $\pi$ es primo,
-  y es fácil ver que $\pi$ y $\overline{\pi}$ no son asociados.
+  En fin, si $p \equiv 1 \pmod{4}$, entonces $\legendre{-1}{p} = +1$ (véase
+  \ref{cor:primera-ley-suplementaria}), lo que significa que existe un entero
+  $a$ tal que $a^2 \equiv -1 \pmod{p}$. Ahora
+  $p \mid (a^2 + 1) = (a + i)\,(a - i)$. Dado que $p \nmid (a \pm i)$, esto
+  implica que $p$ no es primo en $\ZZ [i]$. Entonces, $p = \pi\rho$ para algunos
+  elementos no-invertibles $\pi$ y $\rho$.  Ahora $p^2 = N (\pi) \, N (\rho)$
+  implica que $N (\pi) = \pi\,\overline{\pi} = p$. Por el lema de arriba $\pi$
+  es primo, y es fácil ver que $\pi$ y $\overline{\pi}$ no son asociados.
 \end{proof}
 
 \begin{figure}
@@ -797,21 +1093,23 @@ Recordemos el siguiente resultado.
 \begin{proposicion}
   Si $R$ es un dominio de ideales principales y $\pi \in R$ es un elemento
   primo, entonces $R/(\pi)$ es un campo.
-
-  \begin{proof}
-    El siguiente argumento es idéntico a la prueba de que $\ZZ/(p)$ es un campo
-    para todo primo $p$.
-
-    Un elemento no nulo en $R/(\pi)$ será representado por $\alpha \in R$ tal
-    que $\pi \nmid \alpha$. El ideal $(\pi,\alpha)$ es generado por algún
-    $\gamma \in R$, ya que estamos en un dominio de ideales principales. Pero
-    $\gamma\mid\pi$ y $\gamma\mid\alpha$ implica que $\gamma\in R^\times$, así
-    que $(\pi,\alpha) = R$, y existen elementos $\beta,\alpha' \in R$
-    tales que
-    $$\pi\beta + \alpha\alpha' = 1.$$
-    Esto significa que $\alpha'$ es el inverso de $\alpha$ módulo $\pi$.
-  \end{proof}
 \end{proposicion}
+(De hecho, ya lo hemos usado de manera implícita cuando decíamos que $k[x]/(f)$
+es un campo para un polinomio irreducible $f \in k[x]$.)
+
+\begin{proof}
+  El siguiente argumento es idéntico a la prueba de que $\ZZ/(p)$ es un campo
+  para todo primo $p$.
+
+  Un elemento no nulo en $R/(\pi)$ será representado por $\alpha \in R$ tal
+  que $\pi \nmid \alpha$. El ideal $(\pi,\alpha)$ es generado por algún
+  $\gamma \in R$, ya que estamos en un dominio de ideales principales. Pero
+  $\gamma\mid\pi$ y $\gamma\mid\alpha$ implica que $\gamma\in R^\times$, así
+  que $(\pi,\alpha) = R$, y existen elementos $\beta,\alpha' \in R$
+  tales que
+  $$\pi\beta + \alpha\alpha' = 1.$$
+  Esto significa que $\alpha'$ es el inverso de $\alpha$ módulo $\pi$.
+\end{proof}
 
 Volviendo al anillo $\ZZ [i]$, tenemos lo siguiente.
 
@@ -925,8 +1223,9 @@ factorizaciones de los primos racionales $p \in \ZZ$.
     2\pmod{3}$ y en $\ZZ [\zeta_3]$ no hay elementos de norma $p$.
 
     En fin en 3), si $p \equiv 1 \pmod{3}$, calculamos usando la reciprocidad
-    cuadrática que $\legendre{-3}{p} = +1$. Esto significa que existe un entero
-    $a$ tal que $a^2 \equiv -3 \pmod{p}$, y luego se tiene
+    cuadrática que $\legendre{-3}{p} = +1$
+    (véase \ref{ejemplo:legendre--3}). Esto significa que existe un entero $a$
+    tal que $a^2 \equiv -3 \pmod{p}$, y luego se tiene
     \[ p \mid (a^2 + 3) = (a + \sqrt{-3})\,(a - \sqrt{-3})
            = (a + 1 + 2\zeta_3)\,(a - 1 - 2\zeta_3), \]
     donde $p \nmid (a \pm (1 + 2\zeta_3))$, así que $p$ no es primo. El resto
@@ -982,12 +1281,11 @@ es también una condición necesaria.)
 
 \section{Reciprocidad cúbica}
 
-Los anillos de números sirven para formular varias leyes de reciprocidad
-parecidas a la reciprocidad cuadrática
-$$\legendre{p}{q} = (-1)^{\frac{p-1}{2}\,\frac{q-1}{2}}\,\legendre{q}{p}.$$
-Como un ejemplo particular, en la presente sección me gustaría presentar la ley
-de reciprocidad cúbica que puede ser formulada en términos de los enteros de
-Eisenstein $\ZZ [\zeta_3]$.
+Los anillos de números sirven para establecer varias leyes de reciprocidad
+parecidas a la reciprocidad cuadrática que revisamos en
+\S\ref{sec:reciprocidad-cuadratica}. Como un ejemplo particular, en la presente
+sección me gustaría presentar la ley de reciprocidad cúbica que se formula en
+términos de los enteros de Eisenstein $\ZZ [\zeta_3]$.
 
 \begin{lema}
   Sea $\pi \in \ZZ [\zeta_3]$ un primo de Eisenstein tal que
@@ -1026,7 +1324,7 @@ y
 \[ \alpha\equiv\beta\pmod{\pi} \Longrightarrow \legendre{\alpha}{\pi}_3
        = \legendre{\beta}{\pi}_3. \]
 Entonces, el símbolo cúbico de Legendre es un homomorfismo
-\[ \legendre{-}{\pi}_3\colon (\ZZ [\zeta_3]/(\pi))^\times
+\[ \legendre{\cdot}{\pi}_3\colon (\ZZ [\zeta_3]/(\pi))^\times
        \to \mu_3 (\CC) = \{ 1,\zeta_3,\zeta_3^2 \}. \]
 
 \begin{lema}
@@ -1058,11 +1356,16 @@ precisamente uno es primario.
   $$\legendre{\pi_1}{\pi_2}_3 = \legendre{\pi_2}{\pi_1}_3.$$
 
   \begin{proof}
-    Para una prueba con sumas de Gauss véase por ejemplo
-    \cite[Chapter~9]{Ireland-Rosen}. El argumento no es muy difícil, pero nos
-    llevaría un poco lejos del tema principal del curso.
+    Para una prueba con sumas de Gauss (parecidas a las de
+    \S\ref{sec:reciprocidad-cuadratica}) véase por ejemplo
+    \cite[Chapter~9]{Ireland-Rosen}. El argumento no es muy difícil,
+    pero involucra varios cálculos y nos llevaría un poco lejos del tema
+    principal del curso.
   \end{proof}
 \end{teorema}
+(También existe una ley suplementaria que calcula el símbolo
+$\legendre{1-\zeta_3}{\pi}_3$, pero no la vamos a ocupar;
+véase por ejemplo \cite{Williams-1977}.)
 
 Como una aplicación de la reciprocidad cúbica, vamos a probar el siguiente
 resultado que fue conjeturado por Euler.
@@ -1130,20 +1433,11 @@ La observación clave es la siguiente.
 \begin{ejemplo}
   Los primeros primos de la forma $x^2 + 27 y^2$ son
   \begin{align*}
-    31 & = 2^2 + 27\cdot 1^2,\\
-    43 & = 4^2 + 27\cdot 1^2,\\
-    109 & = 1^2 + 27\cdot 2^2,\\
-    127 & = 10^2 + 27\cdot 1^2,\\
-    157 & = 7^2 + 27\cdot 2^2.\\
-  \end{align*}
-
-  Tenemos
-  \begin{align*}
-    4^3 & \equiv 2 \pmod{31},\\
-    20^3 & \equiv 2 \pmod{43},\\
-    57^3 & \equiv 2 \pmod{109},\\
-    32^3 & \equiv 2 \pmod{127},\\
-    62^3 & \equiv 2 \pmod{157}. \qedhere
+     31 & = 2^2 + 27\cdot 1^2,  & (2 & \equiv 4^3 \pmod{31}) \\
+     43 & = 4^2 + 27\cdot 1^2,  & (2 & \equiv 20^3 \pmod{43}) \\
+    109 & = 1^2 + 27\cdot 2^2,  & (2 & \equiv 57^3 \pmod{109}) \\
+    127 & = 10^2 + 27\cdot 1^2, & (2 & \equiv 32^3 \pmod{127}) \\
+    157 & = 7^2 + 27\cdot 2^2.  & (2 & \equiv 62^3 \pmod{157}) \qedhere
   \end{align*}
 \end{ejemplo}
 
@@ -1197,6 +1491,7 @@ primo $p \equiv 2 \pmod{3}$, por ejemplo $5$.
   $x^3 \equiv 5 \pmod{\pi}$ tiene solución.
   Pero $\ZZ [\zeta_3]/(\pi) \cong \FF_{13}$, lo cual significa que
   $x^3 \equiv 5 \pmod{13}$ tiene solución en $\ZZ$.
+  En efecto, $7^3 \equiv 5 \pmod{13}$.
 \end{ejemplo}
 
 \begin{comentario}
@@ -1206,6 +1501,9 @@ primo $p \equiv 2 \pmod{3}$, por ejemplo $5$.
 \end{comentario}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark{Clase 4 (19/08/20)}{clase-4}
+\marginpar{\small Clase 4 \\ 19/08/20}
 
 \section{Ternas pitagóricas}
 
@@ -1321,9 +1619,16 @@ en 1995) fue uno de los logros más publicitados de las matemáticas del siglo
 pasado.
 
 El caso particular de $n = 3$ fue resuelto por Euler. Aquí vamos a ver una
-demostración con los enteros de Eisenstein $\ZZ [\zeta_3]$. A saber, usando las
-terceras raíces de la unidad, la ecuación de Fermat se factoriza como
-$$x^3 + y^3 = (x + y)\,(x + \zeta_3 y)\,(x + \zeta_3^2 y) = z^3.$$
+demostración con los enteros de Eisenstein $\ZZ [\zeta_3]$. Curiosamente,
+el mismo Euler trabajaba con el anillo más pequeño
+$\ZZ [\sqrt{-3}] \subsetneq \ZZ \Bigl[\frac{1+\sqrt{-3}}{2}\Bigr]$, suponiendo
+erróneamente que este tiene factorización única.
+(Véase \cite[Chapter 2]{Edwards-1996} para más detalles.)
+
+Antes de lanzarnos en la prueba, notamos que con las terceras raíces de la
+unidad la ecuación de Fermat se factoriza como
+$$x^3 + y^3 = (x + y)\,(x + \zeta_3 y)\,(x + \zeta_3^2 y) = z^3,$$
+y esto explica la utilidad de los enteros de Eisenstein en nuestro problema.
 
 \marginpar{\small Lectura\\adicional}
 
@@ -1847,7 +2152,7 @@ algoritmo para encontrarla.
 \begin{ejercicio}
   Demuestre que los anillos $\ZZ [x]$ y $k [x,y]$ (donde $k$ es un campo) no son
   dominios de ideales principales. (Son dominios de factorización única, ya que
-  para cualquier DFU $R$, el anillo de polinomios es también un DFU.)
+  para cualquier DFU $R$, el anillo de polinomios $R[X]$ es también un DFU.)
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -1984,6 +2289,8 @@ algoritmo para encontrarla.
 
 \begin{ejercicio}
   Encuentre las soluciones enteras de $y^2 = x^3 - 4$.
+
+  Sugerencia: $y^2 + 4 = (y + 2i)\,(y - 2i)$.
 \end{ejercicio}
 
 \begin{ejercicio}[\cite{Nagell-1964}]
@@ -2035,7 +2342,20 @@ algoritmo para encontrarla.
 \end{ejercicio}
 
 \begin{ejercicio}
-  Demuestre que $u = 1 + \zeta_5$ es una unidad en el anillo $\ZZ [\zeta_5]$
-  y el subgrupo de $\ZZ [\zeta_5]^\times$ generado por $u$ es infinito.
-  (En realidad, $\ZZ [\zeta_5] \cong \mu_{10} (\CC) \times \langle u\rangle$.)
+  Consideremos el anillo ciclotómico $\ZZ [\zeta_5]$.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que $u = 1 + \zeta_5$ es una unidad en el anillo 
+    y el subgrupo de $\ZZ [\zeta_5]^\times$ generado por $u$ es infinito.
+
+    En realidad,
+    $\ZZ [\zeta_5]^\times \cong \mu_{10} (\CC) \times \langle u\rangle$,
+    pero lo probaremos más adelante en el curso.
+
+  \item[b)] Demuestre que
+    $\ZZ \Bigl[\frac{1 + \sqrt{5}}{2}\Bigr] \subset \ZZ [\zeta_5]$ y calcule
+    el índice
+    $\Bigl[\ZZ [\zeta_5]^\times :
+           \ZZ \Bigl[\frac{1 + \sqrt{5}}{2}\Bigr]^\times \Bigr]$.
+  \end{enumerate}
 \end{ejercicio}
