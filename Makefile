@@ -1,8 +1,9 @@
-all: book
+all: pics tna.pdf
 
-book:
+pics:
 	cd pic && $(MAKE)
 
+tna.pdf:
 	xelatex tna
 	bibtex tna
 	xelatex tna
