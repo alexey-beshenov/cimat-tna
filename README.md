@@ -22,7 +22,7 @@ alexey.beshenov@cimat.mx
 
   https://youtube.com/watch?v=5dzd4Fs1fxw
 
-* Clase 3. Campos residuales Z[i]/(π). Enteros de Eisenstein Z[ζ3].
+* Clase 3. Campos residuales Z[i]/(π). Enteros de Eisenstein Z[ζ₃].
   Reciprocidad cúbica.
 
   https://youtube.com/watch?v=5UiURLLFmK8
