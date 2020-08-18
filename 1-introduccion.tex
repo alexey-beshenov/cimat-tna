@@ -1,5 +1,9 @@
 \chapter{Introducción}
 
+En este capítulo introductorio vamos a definir los campos y anillos de números y
+para motivar su estudio, veremos varios ejemplos de sus aplicaciones a los
+problemas de la teoría de números clásica.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pdfbookmark{Clase 1 (10/08/20)}{clase-1}
@@ -74,20 +78,11 @@ grado $[K : \QQ] = \dim_\QQ K$ finito.
   Sea $\zeta_n = \exp (2\pi i/n)$ una raíz $n$-ésima primitiva. El polinomio
   mínimo de $\zeta_n$ es el \textbf{$n$-ésimo polinomio ciclotómico}
   \[ \Phi_n = \prod_{\substack{1 \le k < n \\ \gcd (k,n) = 1}} (x - \zeta_n^k)
-         \in \ZZ [x]. \]
-  Por ejemplo,
-  \begin{align*}
-    \Phi_2 & = x + 1, \\
-    \Phi_3 & = x^2 + x + 1, \\
-    \Phi_4 & = x^2 + 1, \\
-    \Phi_5 & = x^4 + x^3 + x^2 + x + 1, \\
-    \Phi_6 & = x^2 - x + 1, \\
-    \Phi_7 & = x^6 + x^5 + x^4 + x^3 + x^2 + x + 1, \\
-    \Phi_8 & = x^4 + 1, \\
-    \Phi_9 & = x^6 + x^3 + 1, \\
-    \Phi_{10} & = x^4 - x^3 + x^2 - x + 1, \\
-    & \cdots
-  \end{align*}
+       \in \ZZ [x]. \]
+
+  El hecho de que el polinomio de arriba tiene coeficientes enteros y es
+  irreducible no es tan inmediato. El lector que no conoce los polinomios
+  ciclotómicos puede revisar el Apéndice~\ref{ap:polinomios-ciclotomicos}.
 
   El \textbf{$n$-ésimo campo ciclotómico}
   $$\QQ (\zeta_n) \cong \QQ [x] / (\Phi_n)$$
@@ -234,21 +229,6 @@ lo siguiente:
 ? lift (%)
 % = [x + 1, 2*x + 3, 5*x + 7, 12*x + 17, 29*x + 41, 70*x + 99,
      169*x + 239, 408*x + 577, 985*x + 1393, 2378*x + 3363]
-\end{verbatim}
-\end{shaded}
-
-La función \texttt{polcylo($n$)} devuelve el $n$-ésimo polinomio ciclotómico.
-
-\begin{shaded}
-\begin{verbatim}
-? polcyclo(105)
-% = x^48 + x^47 + x^46 - x^43 - x^42 - 2*x^41 - x^40 - x^39 + x^36
-    + x^35 + x^34 + x^33 + x^32 + x^31 - x^28 - x^26 - x^24 - x^22
-    - x^20 + x^17 + x^16 + x^15 + x^14 + x^13 + x^12 - x^9 - x^8 - 2*x^7
-    - x^6 - x^5 + x^2 + x + 1
-
-? polcyclo(1)*polcyclo(3)*polcyclo(5)*polcyclo(15)
-% = x^15 - 1
 \end{verbatim}
 \end{shaded}
 
@@ -1552,10 +1532,9 @@ de esta manera.
 Notamos que si $(x,y,z)$ es una terna pitagórica, entonces $(cx, cy, cz)$
 también lo es para cualquier $c \in \ZZ$. Por este motivo será conveniente
 considerar solamente las ternas \textbf{primitivas} que satisfacen
-$\gcd (x,y,z) = 1$ (lo que también equivale a $\gcd (x,y) = 1$).
-
-Las ternas primitivas corresponden a los puntos \emph{racionales} en el círculo
-unitario $x^2 + y^2 = 1$, como por ejemplo
+$\gcd (x,y,z) = 1$ (lo que también equivale a $\gcd (x,y) = 1$). Las ternas
+primitivas corresponden a los puntos \emph{racionales} en el círculo unitario
+$x^2 + y^2 = 1$, como por ejemplo
 \[ \Bigl(\frac{3}{5}, \frac{4}{5}\Bigr), ~
    \Bigl(\frac{5}{13}, \frac{12}{13}\Bigr), ~
    \Bigl(\frac{7}{25}, \frac{24}{25}\Bigr). \]
@@ -1572,32 +1551,33 @@ impar e $y$ es par, de acuerdo con la expresión
   par. Luego, existen enteros coprimos $a > b > 0$ tales que
   $$x = a^2 - b^2, \quad y = 2ab, \quad z = a^2 + b^2.$$
 
-\begin{proof}
-  Consideremos el entero de Gauss $x + yi$. Por nuestra hipótesis,
-  $$N (x + yi) = (x + yi)\,(x - yi) = z^2.$$
+  \begin{proof}
+    Consideremos el entero de Gauss $x + yi$. Por nuestra hipótesis,
+    $$N (x + yi) = (x + yi)\,(x - yi) = z^2.$$
 
-  No es difícil ver que si $x$ e $y$ son coprimos y tienen diferente paridad,
-  entonces $\gcd (x + yi, \, x - yi) = 1$ (ejercicio). Usando esto y el hecho de
-  que su producto es un cuadrado,
-  \emph{gracias a la factorización única en $\ZZ [i]$} podemos concluir que
-  $x \pm yi$ son también cuadrados; existen $\alpha = a + bi \in \ZZ[i]$ y
-  $u \in \ZZ[i]^\times$ tales que
-  $$x+yi = u\alpha^2 = u\,(a^2 - b^2 + 2ab i).$$
-  Dado que $-1 = i^2$, podemos asumir que $u \in \{ +1, +i \}$. Nuestra
-  hipótesis de que $x$ es impar e $y$ es par implica que $u = +1$. Además,
-  $x,y > 0$, así que $a > b > 0$. En fin, $\gcd (x,y) = 1$ implica que
-  $\gcd (a,b) = 1$.
-\end{proof}
+    No es difícil ver que si $x$ e $y$ son coprimos y tienen diferente paridad,
+    entonces $\gcd (x + yi, \, x - yi) = 1$ (ejercicio). Usando esto y el hecho
+    de que su producto es un cuadrado,
+    \emph{gracias a la factorización única en $\ZZ [i]$} podemos concluir que
+    $x \pm yi$ son también cuadrados; existen $\alpha = a + bi \in \ZZ[i]$ y
+    $u \in \ZZ[i]^\times$ tales que
+    $$x+yi = u\alpha^2 = u\,(a^2 - b^2 + 2ab i).$$
+    Dado que $-1 = i^2$, podemos asumir que $u \in \{ +1, +i \}$. Nuestra
+    hipótesis de que $x$ es impar e $y$ es par implica que $u = +1$. Además,
+    $x,y > 0$, así que $a > b > 0$. En fin, $\gcd (x,y) = 1$ implica que
+    $\gcd (a,b) = 1$.
+  \end{proof}
 \end{teorema}
 
-\begin{comentario}
-  La última demostración usa de manera esencial la factorización única en
-  $\ZZ [i]$. A saber, usamos que si $\alpha\beta = \gamma^2$ para
-  $\gcd (\alpha,\beta) = 1$, entonces $\alpha \sim \alpha'^2$ y
-  $\beta \sim \beta'^2$ para algunos $\alpha', \beta'$.
+Nuestra demostración usa de manera esencial la factorización única en
+$\ZZ [i]$. A saber, usamos que si $\alpha\beta = \gamma^2$ para
+$\gcd (\alpha,\beta) = 1$, entonces $\alpha \sim \alpha'^2$ y
+$\beta \sim \beta'^2$ para algunos $\alpha', \beta'$. Sin factorización
+única no se puede llegar a esta conclusión.
 
-  Consideremos por ejemplo el anillo $\ZZ [\sqrt{-5}]$. En este caso las
-  unidades son $\ZZ [\sqrt{-5}]^\times = \{ \pm 1 \}$. Los números
+\begin{ejemplo}
+  Consideremos el anillo $\ZZ [\sqrt{-5}]$. En este caso las unidades son
+  $\ZZ [\sqrt{-5}]^\times = \{ \pm 1 \}$. Los números
   $$\alpha = 2 + 3\sqrt{-5}, \quad \overline{\alpha} = 2 - 3\sqrt{-5}$$
   tienen norma
   $$N (\alpha) = \alpha\overline{\alpha} = 7^2.$$
@@ -1606,7 +1586,7 @@ impar e $y$ es par, de acuerdo con la expresión
   sí. Su producto es un cuadrado, pero no son asociados con cuadrados
   (¡son irreducibles!). Aquí no hay ninguna contradicción porque
   $\ZZ [\sqrt{-5}]$ no es un dominio de factorización única.
-\end{comentario}
+\end{ejemplo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1621,14 +1601,16 @@ pasado.
 El caso particular de $n = 3$ fue resuelto por Euler. Aquí vamos a ver una
 demostración con los enteros de Eisenstein $\ZZ [\zeta_3]$. Curiosamente,
 el mismo Euler trabajaba con el anillo más pequeño
-$\ZZ [\sqrt{-3}] \subsetneq \ZZ \Bigl[\frac{1+\sqrt{-3}}{2}\Bigr]$, suponiendo
-erróneamente que este tiene factorización única.
-(Véase \cite[Chapter 2]{Edwards-1996} para más detalles.)
+$\ZZ [\sqrt{-3}] \subsetneq \ZZ [\zeta_3]$, suponiendo erróneamente que este
+tiene factorización única. (Véase \cite[Chapter 2]{Edwards-1996} para más
+detalles.)
 
 Antes de lanzarnos en la prueba, notamos que con las terceras raíces de la
 unidad la ecuación de Fermat se factoriza como
 $$x^3 + y^3 = (x + y)\,(x + \zeta_3 y)\,(x + \zeta_3^2 y) = z^3,$$
 y esto explica la utilidad de los enteros de Eisenstein en nuestro problema.
+
+\vspace{1em}
 
 \marginpar{\small Lectura\\adicional}
 
@@ -1803,7 +1785,9 @@ el resultado será un poco más general.
 
   Los métodos mencionados establecen algunos casos particulares del último
   teorema de Fermat para anillos de números más grandes que $\ZZ$. Sin embargo,
-  el caso general de $n \ge 3$ es un problema abierto.
+  el caso general de $n \ge 3$ es un problema abierto: no se sabe si la ecuación
+  de Fermat $x^n + y^n = z^n$ no tiene soluciones no triviales en $\ZZ [i]$,
+  $\ZZ [\zeta_3]$, etc.
 \end{comentario}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

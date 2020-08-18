@@ -1,0 +1,368 @@
+\chapter{Polinomios ciclotómicos}
+\label{ap:polinomios-ciclotomicos}
+
+En este apéndice vamos a revisar brevemente los polinomios ciclotómicos $\Phi_n$
+y probar su irreducibilidad.
+
+\section{Definición y propiedades básicas}
+
+\begin{definicion}
+  Consideremos las raíces $n$-ésimas de la unidad
+  $$1, \zeta_n, \zeta_n^2, \ldots, \zeta_n^{n-1} \in \CC,$$
+  donde $\zeta_n = \exp (2\pi i/n)$. Se dice que $\zeta_n^a$ es una raíz
+  \term{primitiva} si $\gcd (a,n) = 1$.
+\end{definicion}
+
+El número de las raíces $n$-ésimas primitivas coincide entonces con la función
+de Euler $\phi (n)$.
+
+\begin{lema}
+  \label{lema:descomposicion-en-raices-primitivas}
+  Para todo $a = 0,1,\ldots,n-1$ el número $\zeta_n^a$ es una raíz $d$-ésima
+  primitiva para algún $d \mid n$. Este $d$ está definido de modo único.
+
+  Si $\zeta$ es una raíz $d$-ésima primitiva, entonces, todas las raíces
+  $d$-ésimas primitivas son de la forma $\zeta^a$ para $\gcd (a,d) = 1$.
+
+  \begin{proof}
+    Teoría de números elemental. Si denotamos por $\mathcal{S}_d$ el conjunto de
+    las raíces primitivas de orden $d$, entonces
+    \[ \{ 1, \zeta_n, \zeta_n^2, \ldots, \zeta_n^{n-1} \} =
+        \bigcup_{d\mid n} \mathcal{S}_d \]
+    es una partición gracias a la identidad $\sum_{d\mid n} \phi (n) = n$.
+    La última afirmación también está clara.
+  \end{proof}
+\end{lema}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{pic/sixth-roots.pdf}
+  \end{center}
+
+  \caption{Raíces sextas de la unidad}
+\end{figure}
+
+\begin{definicion}
+  El $n$-ésimo \term{polinomio ciclotómico}\footnote{La palabra ``ciclotomia''
+    significa ``división del círculo'' en griego y se refiere al hecho de que
+    las $n$-ésimas raíces de la unidad son vértices de un $n$-ágono regular
+    inscrito en el circulo unitario.} es el polinomio mónico que tiene como sus
+  raíces las raíces $n$-ésimas primitivas de la unidad:
+  $$\Phi_n = \prod_{\substack{0 \le a < n \\ \gcd (a,n) = 1}} (x - \zeta_n^a).$$
+\end{definicion}
+
+Esta claro que $\Phi_n$ es un poliomio mónico de grado $\phi (n)$.
+
+\begin{ejemplo}
+  Los primeros polinomios ciclotómicos son
+  \begin{align*}
+    \Phi_1 & = x - 1,\\
+    \Phi_2 & = x + 1,\\
+    \Phi_3 & = (x - \zeta_3)\,(x - \zeta_3^2) = x^2 + x + 1,\\
+    \Phi_4 & = (x - \zeta_4)\,(x - \zeta_4^3) = x^2 + 1. \qedhere
+  \end{align*}
+\end{ejemplo}
+
+Lo que no está tan claro de la definición es que los coeficientes de $\Phi_n$
+son números enteros.
+
+\begin{proposicion}
+~
+
+  \begin{enumerate}
+  \item[1)] Para todo primo $p$ se tiene
+    $$\Phi_p = \frac{x^p-1}{x-1} = x^{p-1} + x^{p-2} + \cdots + x^2 + x + 1.$$
+
+  \item[2)] Para todo primo $p$ y $k \ge 1$ se tiene
+    \[ \Phi_{p^k} = \frac{x^{p^k} - 1}{x^{p^{k-1}} - 1} =
+       \Phi_p (x^{p^{k-1}}) =
+       x^{(p-1)\,p^{k-1}} + x^{(p-2)\,p^{k-1}} + \cdots + x^{2p^{k-1}} + x^{p^{k-1}} + 1. \]
+
+  \item[3)] Para todo $n$ se tiene
+    $$\prod_{d\mid n} \Phi_d = x^n - 1.$$
+
+  \item[4)] Todos los polinomios $\Phi_n$ tienen coeficientes enteros.
+  \end{enumerate}
+
+  \begin{proof}
+    Observamos que
+    $$\prod_{0 \le a < n} (x - \zeta_n^a) = x^n - 1.$$
+
+    En la parte 1), basta notar que entre las raíces $p$-ésimas, todas son
+    primitivas, salvo la raíz trivial $1$, así que
+    \[ \Phi_p = \prod_{1 \le a < p} (x - \zeta_p^a) =
+       \left.\prod_{0 \le a < p} (x - \zeta_p^a)\right/(x-1) =
+       \frac{x^p-1}{x-1}. \]
+
+    De la misma manera, en 2) notamos que un número $0 \le a < p^k$ tal que
+    $\gcd (a, p^k) \ne 1$ es necesariamente divisible por $p$, así que las
+    raíces de orden $p^k$ que no son primitivas tienen forma
+    $\zeta_{p^k}^{pb} = \zeta_{p^{k-1}}^b$ y son precisamente todas las
+    raíces de orden $p^{k-1}$:
+    \[ \Phi_{p^k} =
+       \prod_{\substack{0 \le a < p^k \\ \gcd (a,p^k) = 1}} (x - \zeta_{p^k}^a) =
+       \left.\prod_{0 \le a < p^k} (x - \zeta_{p^k}^a)\right/\prod_{0 \le b < p^{k-1}} (x - \zeta_{p^{k-1}}^b) =
+       \frac{x^{p^k} - 1}{x^{p^{k-1}}-1}. \]
+
+    En la parte 3), basta notar que
+    \[ x^n - 1 = \prod_{0\le a < n} (x - \zeta_n^a) = \prod_{d\mid n}
+       \prod_{\substack{0 \le a < n \\ \gcd (a,d) = 1}} (x - \zeta_n^a) =
+       \prod_{d\mid n} \Phi_d, \]
+    usando la observación que hicimos en
+    \ref{lema:descomposicion-en-raices-primitivas}.
+
+    La parte 4) se demuestra por inducción sobre $n$. Esto es cierto, por
+    ejemplo, para $\Phi_1 = x-1$. Luego, si $\Phi_m \in \ZZ [x]$ para todo
+    $m < n$, entonces podemos considerar el polinomio
+    $$g = \prod_{\substack{d\mid n \\ d\ne n}} \Phi_d \in \ZZ [x].$$
+    Este es mónico, siendo un producto de polinomios mónicos. La división con
+    resto en el anillo $\ZZ [x]$ nos da
+    $$x^n - 1 = q\,g + r, \quad \deg (r) < \deg (g)$$
+    para algunos $q, r \in \ZZ [x]$, mientras que en el anillo más grande
+    $\QQ [x] \supset \ZZ [x]$ se cumple
+    $$x^n - 1 = \Phi_n\,g.$$
+    Pero para la división con resto en $\QQ [x]$ el cociente y el resto están
+    definidos de modo único, así que $r = 0$ y $\Phi_n = q \in \ZZ[x]$.
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  Tenemos
+  \begin{align*}
+    \Phi_4 & = \Phi_2 (x^2) = x^2 + 1,\\
+    \Phi_5 & = x^4 + x^3 + x^2 + x + 1,\\
+    \Phi_6 & = \frac{x^6 - 1}{\Phi_1\,\Phi_2\,\Phi_3} = \frac{(x^3-1)\,(x^3+1)}{\Phi_1\,\Phi_2\,\Phi_3} = \frac{x^3+1}{\Phi_2} = \frac{x^3+1}{x+1} = x^2 - x + 1,\\
+    \Phi_7 & = x^6 + x^5 + x^4 + x^3 + x^2 + x + 1,\\
+    \Phi_8 & = \Phi_2 (x^4) = x^4 + 1,\\
+    \Phi_9 & = \Phi_3 (x^2) = x^6 + x^3 + 1,\\
+    \Phi_{10} & = \frac{x^{10}-1}{\Phi_1\,\Phi_2\,\Phi_5} = \frac{(x^5+1)\,(x^5-1)}{(x^5-1)\,\Phi_2} = \frac{x^5+1}{x+1} = x^4 - x^3 + x^2 - x + 1.
+  \end{align*}
+
+  Notamos que
+  \begin{gather*}
+    \Phi_3 = x^2 + x + 1, \quad \Phi_6 = x^2 - x + 1 = \Phi_3 (-x),\\
+    \Phi_5 = x^4 + x^3 + x^2 + x + 1, \quad \Phi_{10} = x^4 - x^3 + x^2 - x + 1 = \Phi_5 (-x).
+  \end{gather*}
+  Esto no es una coincidencia: en general, $\Phi_{2m} = \Phi_m (-x)$ para todo
+  $m > 1$ impar (este es un buen ejercicio para el lector).
+\end{ejemplo}
+
+El resultado de arriba nos permite calcular de manera bastante eficaz los
+polinomios ciclotómicos. En PARI/GP la función \texttt{polcylo($n$)} devuelve
+$\Phi_n$.
+
+\begin{shaded}
+\begin{verbatim}
+? polcyclo(105)
+% = x^48 + x^47 + x^46 - x^43 - x^42 - 2*x^41 - x^40 - x^39 + x^36
+    + x^35 + x^34 + x^33 + x^32 + x^31 - x^28 - x^26 - x^24 - x^22
+    - x^20 + x^17 + x^16 + x^15 + x^14 + x^13 + x^12 - x^9 - x^8 - 2*x^7
+    - x^6 - x^5 + x^2 + x + 1
+
+? polcyclo(1)*polcyclo(3)*polcyclo(5)*polcyclo(15)
+% = x^15 - 1
+\end{verbatim}
+\end{shaded}
+
+\begin{comentario}
+  Una prueba mucho más lista de que $\Phi_n \in \ZZ [x]$ es la siguiente.
+  El grupo de Galois $\Gal (\QQ (\zeta_n)/\QQ)$ es isomorfo a
+  $(\ZZ/n\ZZ)^\times$ y consiste en automorfismos
+  $\sigma\colon \zeta_n \mapsto \zeta_n^a$ con $\gcd (a,n) = 1$. Se ve que cada
+  $\sigma$ deja fijo los coeficientes de $\Phi_n$, y la teoría de Galois nos
+  dice entonces que los coeficientes están en $\QQ \cap \ZZ [\zeta_n] = \ZZ$.
+
+  Sin embargo, este argumento me parece un poco tramposo: uno que sabe calcular
+  $\Gal (\QQ (\zeta_n)/\QQ)$ normalmente también sabrá manejar los polinomios
+  ciclotómicos\dots
+\end{comentario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Irreducibilidad}
+
+El objetivo de esta sección es probar que los polinomios ciclotómicos $\Phi_n$
+son irreducibles en $\ZZ [x]$ (y luego en $\QQ [x]$ gracias al lema de
+Gauss). Para tratar primero el caso de $n = p^k$ donde $p$ es primo, recordemos
+el siguiente criterio de irreducibilidad.
+
+\begin{proposicion}[Eisenstein]
+  Sea
+  $$f = x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 \in \ZZ [x]$$
+  un polinomio mónico con coeficientes enteros. Supongamos que existe un primo
+  $p$ tal que $p \mid a_i$ para todo $i = 0,1,\ldots,n-1$, pero $p^2 \nmid
+  a_0$. Entonces, $f$ es irreducible.
+\end{proposicion}
+
+La prueba es muy breve, así que será más fácil recordarla por completo que citar
+un libro de texto.
+
+\begin{proof}
+  Si $f$ es reducible, entonces $f = gh$, donde $1 \le \deg (g), \deg (h) < n$.
+  Reduciendo módulo $p$, se obtiene la identidad
+  \[ \overline{x^n} = \overline{f} =
+     \overline{g}\,\overline{h}\quad\text{en }\FF_p [x] \]
+  por la hipótesis sobre los coeficientes de $f$. Esto implica que
+  $$\overline{g} = c\,x^k, \quad \overline{h} = c^{-1}\,x^\ell,$$
+  para algún $c\in \FF_p^\times$ y $k + \ell = n$, donde $k \le \deg (g)$ y $\ell
+  \le \deg (h)$, así que $k,\ell > 0$.
+
+  Sin embargo, si ambos $g$ y $h$ se reducen a un polinomio sin término
+  constante, esto significa que los términos constantes de $g$ y $h$ son
+  divisibles por $p$. Esto implicaría que el término constante de $f$ es
+  divisible por $p^2$, pero no es el caso por nuestra hipótesis.
+\end{proof}
+
+Una aplicación típica del criterio de Eisenstein es la irreducibilidad de los
+polinomios ciclotómicos $\Phi_{p^k}$. Notamos que el término constante de
+cualquier polinomio ciclotómico viene dado por
+\[ \Phi_n (0) =
+   (-1)^{\phi (n)} \prod_{\substack{0 \le a < n \\ \gcd (a,n) = 1}} \zeta_n^a. \]
+
+Excluyendo el caso excepcional de $\Phi_1 = x-1$ y $\Phi_2 = x+1$, notamos que
+para $n > 2$ el número $\phi (n)$ es par y cada $\zeta_n^a$ en el producto se
+cancela con su inverso $\zeta_n^{-a}$, así que $\Phi_n (0) = 1$.
+
+Esto significa que el criterio de Eisenstein nunca se aplica directamente a
+$\Phi_n$, pero para $n = p^k$ funciona la sustitución de $x+1$ en lugar de
+$x$. Por ejemplo,
+$$\Phi_8 (x+1) = (x+1)^4 + 1 = x^4 + 4x^3 + 6x^2 + 4x + 2,$$
+y el criterio de Eisenstein sí funciona para $p = 2$.
+
+Notamos que un polinomio no constante $f \in \ZZ [x]$ es irreducible si y solo
+si $f (x + a)$ es irreducible para algún $a \in \ZZ$: esta sustitución no cambia
+el grado y una factorización no trivial $f (x + a) = g (x)\,h(x)$ corresponde a
+una factorización no trivial $f (x) = g (x-a)\,h (x-a)$.
+
+\begin{proposicion}
+  Para todo primo $p$ el polinomio $\Phi_p$ es irreducible.
+
+  \begin{proof}
+    Al sustituir $x+1$ en lugar de $x$, nos salen los coeficientes
+    $a_i = {p\choose i}$, y a estos se aplica el criterio de Eisenstein:
+    \begin{multline*}
+      \Phi_p (x+1) = \frac{(x+1)^p - 1}{(x+1) - 1} = \frac{1}{x}\,\sum_{1 \le i \le p} {p\choose i} x^i \\
+      = {p\choose p}\,x^{p-1} + {p\choose p-1}\,x^{p-2} + \cdots + {p\choose 3}\,x^2 + {p\choose 2}\,x + {p \choose 1}. \qedhere
+    \end{multline*}
+  \end{proof}
+\end{proposicion}
+
+\begin{proposicion}
+  Para todo primo $p$ y $k \ge 1$ el polinomio $\Phi_{p^k}$ es irreducible.
+
+  \begin{proof}
+    Ya vimos el caso de $k = 1$. Podemos asumir entonces que $k \ge 2$. De
+    nuevo, consideremos la sustitución
+    \[ \Phi_{p^k} (x+1) =
+       \frac{(x+1)^{p^k} - 1}{(x+1)^{p^{k-1}} - 1} =
+       \sum_{0 \le i \le p-1} (x+1)^{i\,p^{k-1}}. \]
+    Tenemos para todo $k \ge 2$
+    $$(x+1)^{p^{k-1}} \equiv x^{p^{k-1}} + 1 \pmod{p},$$
+    y luego
+    \begin{multline*}
+      \Phi_{p^k} (x+1) \equiv \sum_{0 \le i \le p-1} (x^{p^{k-1}}+1)^i =
+      \frac{(x^{p^{k-1}}+1)^p - 1}{(x^{p^{k-1}}+1) - 1} \\
+      = \frac{(x^{p^{k-1}}+1)^p - 1}{x^{p^{k-1}}} \equiv \frac{x^{p^k}}{x^{p^{k-1}}} =
+      x^{p^{k-1}\,(p-1)} \pmod{p}.
+    \end{multline*}
+    Esto significa que todos los coeficientes menores de $\Phi_{p^k} (x+1)$ son
+    divisibles por $p$. El coeficiente constante es igual a
+    $$\Phi_{p^k} (1) = \Phi_p (1^{p^{k-1}}) = \Phi_p (1) = p,$$
+    y de nuevo podemos aplicar el criterio de Eisenstein.
+  \end{proof}
+\end{proposicion}
+
+La irreducibilidad de $\Phi_n$ para todo $n$ es un resultado más difícil.
+
+\begin{teorema}[Gauss]
+  Para cualquier $n = 1,2,3,\ldots$ el polinomio ciclotómico $\Phi_n$ es
+  irreducible.
+\end{teorema}
+
+Un poco de la historia: el 1808 Gauss anotó en su diario matemático que había
+establecido la irreducibilidad de $\Phi_n$ para cualquier $n$. Su argumento
+original se considera perdido, pero ya que se trata de Gauss, es muy probable
+que él disponía de una prueba correcta y completa. Sin embargo, la primera
+demostración publicada pertenece a Kronecker (1854).
+
+\vspace{1em}
+
+Empecemos por un pequeño lema.
+
+\begin{lema}
+  \label{lema:factor-repetido-en-xn-1}
+  Si $p \nmid n$, entonces en la factorización del polinomio ciclotómico
+  $\Phi_n$ en $\FF_p [x]$ no hay factores repetidos.
+
+  \begin{proof}
+    Gracias a la fórmula $x^n - 1 = \prod_{d\mid n} \Phi_n$, sería suficiente
+    probar que en la factorización de $f = x^n - 1$ en $\FF_p [x]$ no hay
+    factores repetidos. Para esto basta calcular que
+    $\gcd (f,f') = \gcd (x^n-1, n x^{n-1}) = 1$. Por ejemplo, usando $p\nmid n$,
+    podemos escribir laa identidad de Bézout
+    \[ \frac{x}{n}\cdot (n\,x^{n-1}) - (x^n - 1) = 1. \qedhere \]
+  \end{proof}
+\end{lema}
+
+\begin{proof}[Demostración del teorema]
+  Escribamos
+  $$\Phi_n = f\,g$$
+  para algunos polinomios $f,g\in \ZZ[x]$, donde $f$ es irreducible. Dado que
+  $\Phi_n$ es mónico, el coeficiente mayor de $f$ y $g$ es $\pm 1$, y podemos
+  asumir que son también mónicos. Sea $\zeta$ una raíz $n$-ésima
+  primitiva. Tenemos entonces
+  $$\Phi_n (\zeta) = f (\zeta)\,g (\zeta) = 0.$$
+  Esto implica que $f (\zeta) = 0$ o $g (\zeta) = 0$. Puesto que $f$ no es
+  constante, alguna raíz $n$-ésima primitiva $\zeta$ debe ser una raíz de $f$, y
+  nuestro objetivo es probar que todas las raíces primitivas
+  $$\zeta^a, \quad \gcd (a,n) = 1$$
+  son raíces de $f$.
+
+  \vspace{1em}
+
+  Asumamos entonces que $f (\zeta) = 0$. Por la irreducibilidad de $f$, esto
+  significa que $f$ es el polinomio mínimo de $\zeta$. Sea $p$ un número primo
+  tal que $p \nmid n$. Entonces, $\zeta^p$ es también una raíz $n$-ésima
+  primitiva y
+  $$\Phi_n (\zeta^p) = f (\zeta^p)\,g (\zeta^p) = 0.$$
+  Asumamos que $g (\zeta^p) = 0$. En este caso $f \mid g (x^p)$ en $\ZZ [x]$, ya
+  que $f$ es el polinomio mínimo de $\zeta$. Reduciendo módulo $p$, se
+  obtiene\footnote{Usando el teorema del binomio en característica $p$ y $a^p =
+    a$ en $\FF_p$, notamos que
+    $$g(x)^p = (a_n\,x^n + a_{n-1}\,x^{n-1} + \cdots + a_1\,x + a_0)^p = a_n\,(x^p)^n + a_{n-1}\,(x^p)^{n-1} + \cdots + a_1\,x^p + a_0 = g (x^p).$$}
+  $\overline{f} \mid \overline{g} (x^p) = \overline{g}^p$ en $\FF_p [x]$. Pero
+  esto implica que $\overline{\Phi_n} = \overline{f}\,\overline{g}$ tiene un
+  factor repetido en su factorización en $\FF_p [x]$, lo que contradice el lema
+  \ref{lema:factor-repetido-en-xn-1}. Entonces, $f (\zeta^p) = 0$.
+
+  Esto demuestra que para cualquier primo $p$ tal que $p\nmid n$ se tiene
+  $$f (\zeta) = 0 \Longrightarrow f (\zeta^p) = 0.$$
+  Ahora todas las raíces $n$-ésimas primitivas son de la forma $\zeta^a$ donde
+  $\gcd (a,n) = 1$. Podemos factorizar entonces $a = p_1\cdots p_s$ donde $p_i$
+  son primos (no necesariamente diferentes) tales que $p_i\nmid n$, y luego
+  $$\zeta^a = (((\zeta^{p_1})^{p_2})^{\cdots})^{p_s}.$$
+  El argumento de arriba nos dice que $f (\zeta^{p_1}) = 0$. Luego, el mismo
+  argumento aplicado a $\zeta^{p_1}$ demuestra que
+  $f ((\zeta^{p_1})^{p_2}) = 0$, etcétera, y en fin $f (\zeta^a) = 0$. Entonces,
+  todas las raíces $n$-ésimas primitivas son raíces de $f$ y por ende $g = 1$.
+\end{proof}
+
+\begin{comentario}
+  La idea principal del argumento de arriba es probar que \emph{si para un
+    polinomio irreducible $f \in \ZZ [x]$ se tiene $f (\zeta) = 0$ para una raíz
+    $n$-ésima primitiva $\zeta$, entonces $f (\zeta^a) = 0$ para todo $a$ tal
+    que $\gcd (a,n) = 1$}. Esto precisamente significa que $\QQ (\zeta_n)/\QQ$
+  es una extensión de Galois.
+
+  He aquí otro modo de establecerlo. Primero notamos que para cualquier primo
+  $p$ se tiene $f (\zeta^p) \equiv f (\zeta)^p \pmod{p}$ en el anillo $\ZZ
+  [\zeta_n]$. Ahora, el \term{teorema de Dirichlet sobre primos en progresiones
+    aritméticas} (!) afirma que para todo $a$ tal que $\gcd (a,n) = 1$ hay un
+  número infinito de primos $p$ que cumplen $p \equiv a \pmod{n}$. Entonces,
+  $$p \mid f (\zeta^p) = f (\zeta^a) \quad \text{en }\ZZ [\zeta_n]$$
+  para un número infinito de $p$, lo que implica que $f (\zeta^a) = 0$.
+
+  Sin embargo, no es tan fácil demostrar el teorema de Dirichlet: la prueba se
+  basa en la teoría analítica de números; el lector interesado puede consultar
+  \cite[Chapter~16]{Ireland-Rosen} o \cite[Chapter~7]{Apostol-analytic}.
+\end{comentario}

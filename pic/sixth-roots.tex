@@ -1,0 +1,30 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{calc}
+
+\usepackage{amsmath}
+
+\usepackage{mathspec}
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\begin{document}
+\begin{tikzpicture}[x=2cm,y=2cm]
+  \draw (0,0) circle (1);
+
+  \draw (0:1) node[circle,fill,inner sep=1.5pt, label=above right:$1$] (m0) {} --
+  (60:1) node[circle,fill,inner sep=1.5pt, label=above right:$\zeta_6$] (m1) {} --
+  (120:1) node[circle,fill,inner sep=1.5pt, label=above:{$\zeta_6^2 = \zeta_3$}] (m2) {} --
+  (180:1) node[circle,fill,inner sep=1.5pt, label=above left:{$\zeta_6^3 = \zeta_2 = -1$}] (m3) {} --
+  (240:1) node[circle,fill,inner sep=1.5pt, label=below left:{$\zeta_6^4 = \zeta_3^2$}] (m4) {} --
+  (300:1) node[circle,fill,inner sep=1.5pt, label=below right:{$\zeta_6^5$}] (m5) {} -- (m0);
+
+  \draw[dashed] (0,0) -- (60:1);
+  \draw[dashed] (0,0) -- (120:1);
+  \draw[dashed] (0,0) -- (240:1);
+  \draw[dashed] (0,0) -- (300:1);
+
+  \draw[->] (-1.5,0) -- (+1.5,0) node[right] {$\operatorname{Re}$};
+  \draw[->] (0,-1.5) -- (0,+1.5) node[above] {$\operatorname{Im}$};
+\end{tikzpicture}
+\end{document}
