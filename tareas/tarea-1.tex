@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath,amssymb}
+
+\title{Teoría de números algebraicos. Tarea 1}
+\author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
+\date{19 de agosto de 2020}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\noindent Elija y resuelva \emph{cuatro} problemas de la siguiente lista.
+
+\begin{enumerate}
+\item Para $d \ge 3$ libre de cuadrados demuestre que $2$ es irreducible,
+  pero no es primo en los anillos
+  \begin{enumerate}
+  \item[a)] $\mathbb{Z} [\sqrt{-d}]$,
+  \item[b)] $\mathbb{Z} [\sqrt{d}]$ para $d \equiv 1 \pmod{4}$.
+  \end{enumerate}
+
+  Concluya que estos no son dominios de factorización única.
+
+\item Sea $p \equiv 1 \pmod{3}$ un primo racional. Usando la factorización única
+  en $\mathbb{Z} [\zeta_3]$, demuestre que los números $u,v \in \mathbb{Z}$ en
+  la expresión $4p = u^2 + 27 v^2$ están bien definidos salvo el signo.
+
+\item Verifique sin computadora si la congruencia
+  $$x^3 \equiv 2 - 3\zeta_3 \pmod{23}$$
+  tiene solución en $\mathbb{Z} [\zeta_3]$.
+
+  \emph{Sugerencia: en total en $(\mathbb{Z} [\zeta_3]/(23))^\times$ habrá
+    $\frac{23^2 - 1}{3} = 177$ cubos y no es una buena idea enumerarlos uno por
+    uno\dots}
+
+\item Encuentre las soluciones enteras de $y^2 = x^3 - 4$.
+
+  \emph{Sugerencia: $y^2 + 4 = (y + 2i)\,(y - 2i)$.}
+
+\item Consideremos la ecuación $x^2 - 7y^2 = n$, donde
+  $$n = 2,3,4,5,6,7,8,9,10.$$
+  ¿Para cuáles de estos $n$ existen soluciones enteras?
+  Demuestre que en este caso hay un número infinito de ellas.
+
+\item Calcule el índice de subgrupo
+  \[ \Bigl[ \mathbb{Z} \Bigl[\frac{1+\sqrt{5}}{2}\Bigr]^\times :
+            \mathbb{Z} [\sqrt{5}]^\times \Bigr]. \]
+\end{enumerate}
+
+\noindent\rule{50pt}{1pt}
+
+\noindent Fecha límite: viernes, 28 de agosto.
+
+\end{document}
