@@ -1,0 +1,23 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{calc}
+
+\usepackage{mathspec}
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\begin{document}
+
+\begin{tikzpicture}[x=2cm,y=2cm]
+  \draw (-1,0) node[circle,fill,inner sep=1pt,label=above left:$P$] (p) {};
+  \draw ({1/sqrt(2)},{1/sqrt(2)}) node[circle,fill,inner sep=1pt,label=above:$Q$] (q) {};
+  \draw[->] (-1.5,0) -- (1.5,0) node[right] {$x$};
+  \draw[->] (0,-1.5) -- (0,1.5) node[above] {$y$};
+  \draw (0,0) circle [radius=1];
+
+  \draw (-1,0) -- (1.5, {(sqrt(2) - 1)*1.5 + sqrt(2) - 1}) node [right] {$\ell$};
+
+  \draw (0,{(sqrt(2) - 1)/2}) node[right] {$t$};
+\end{tikzpicture}
+
+\end{document}

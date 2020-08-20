@@ -1438,13 +1438,19 @@ primo $p \equiv 2 \pmod{3}$, por ejemplo $5$.
 
   \begin{shaded}
 \begin{verbatim}
-? cubes = List ([]);
-? { for (a=0,4,
-      for (b=0,4,
-        listput (cubes, Mod (a + b*x, polcyclo(3)*Mod(1,5))^3)
-      )
-    )};
-? liftall (Set (cubes))
+? eisenstein_cubes_mod (p) = {
+  local (cubes = List ([]));
+
+  for (a=0,p-1,
+    for (b=0,p-1,
+      listput (cubes, Mod(Mod(a,p) + Mod(b,p)*x, polcyclo(3))^3)
+    )
+  );
+
+  Set (cubes)
+};
+
+? liftall (eisenstein_cubes_mod(5))
 % = [0, 1, 2, 3, 4, 2*x + 1, 4*x + 2, x + 3, 3*x + 4]
 \end{verbatim}
   \end{shaded}
@@ -1792,7 +1798,7 @@ el resultado será un poco más general.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Puntos enteros en curvas \texorpdfstring{$y^2 = x^3 + b$}{y² = x³ + b}}
+\section{Puntos enteros en curvas \texorpdfstring{$y^2 = x^3 + t$}{y² = x³ + t}}
 
 Consideremos la curva plana definida por la ecuación
 $$E\colon y^2 = x^3 - 1.$$
@@ -1891,6 +1897,27 @@ factorización única, así que hay que trabajar en este anillo.
   \label{fig:y2-x3-19}
 \end{figure}
 
+\begin{ejemplo}
+  He aquí los puntos enteros sobre algunas curvas de la forma $y^2 = x^3 + t$.
+  Para la teoría detrás de esta ecuación diofántica, véase por ejemplo
+  \cite{Cohen-GTM239}.
+
+  \begin{center}
+    \begin{tabular}{ll|ll}
+      $y^2 = x^2 + 1\colon$ & $(-1,0), (0,\pm 1), (2,\pm 3)$ & $y^2 = x^3 - 1\colon$ & $(1,0)$ \\
+      $y^2 = x^2 + 2\colon$ & $(-1,\pm 1)$ & $y^2 = x^3 - 2\colon$ & $(3,\pm 5)$ \\
+      $y^2 = x^2 + 3\colon$ & $(1,\pm 2)$ & $y^2 = x^2 - 3\colon$ & --- \\
+      $y^2 = x^2 + 4\colon$ & $(0,\pm 2)$ & $y^2 = x^2 - 4\colon$ & $(2,\pm 2), (5,\pm 11)$ \\
+      $y^2 = x^2 + 5\colon$ & $(-1,\pm 2)$ & $y^2 = x^2 - 5\colon$ & --- \\
+      $y^2 = x^2 + 6\colon$ & --- & $y^2 = x^2 - 6\colon$ & --- \\
+      $y^2 = x^2 + 7\colon$ & --- & $y^2 = x^2 - 7\colon$ & $(2,\pm 1), (32,\pm 181)$ \\
+      $y^2 = x^2 + 8\colon$ & $(-2,0), (1,\pm 3), (2,\pm 4), (46,\pm 312)$ & $y^2 = x^2 - 8\colon$ & $(2,0)$ \\
+      $y^2 = x^2 + 9\colon$ & $(-2,\pm 1), (0,\pm 3), (3,\pm 6), (6,\pm 15), (40,\pm 253)$ & $y^2 = x^2 - 9\colon$ & --- \\
+      $y^2 = x^2 + 10\colon$ & $(-1,\pm 3)$ & $y^2 = x^2 - 10\colon$ & --- \\
+    \end{tabular}
+  \end{center}
+\end{ejemplo}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Ecuación de Pell \texorpdfstring{$x^2 - dy^2 = 1$}{x² - dy² = 1}}
@@ -1921,7 +1948,15 @@ en los valores de $y$, y luego $x = \pm\sqrt{1 + 3y^2}$.
 
 \begin{shaded}
 \begin{verbatim}
-? for (y=0,10^6, if (issquare(1+3*y^2), print([sqrtint(1+3*y^2), y])))
+? pell_sol_naive (d,n) = {
+  for (y=0,n,
+    if (issquare (1+d*y^2),
+      print ([sqrtint (1+d*y^2), y])
+    )
+  )
+};
+
+? pell_sol_naive (3,10^6)
 [1, 0]
 [2, 1]
 [7, 4]
@@ -1943,7 +1978,7 @@ y el argumento que ya hemos visto arriba demuestra que
 \[ \ZZ [\sqrt{3}]^\times
        = \{ \alpha \in \ZZ [\zeta_3] \mid N (\alpha) = \pm 1 \}. \]
 Considerando $x^2 - 3y^2$ módulo $4$, notamos que la norma $-1$ nunca
-ocurre. Entonces, las soluciones de $x^2 - 3y^2 = 1$ corresponden exactamente
+ocurre. Entonces, las soluciones de ${x^2 - 3y^2 = 1}$ corresponden exactamente
 a las unidades $u \in \ZZ [\sqrt{3}]^\times$. Por ejemplo, la solución $(2,1)$
 corresponde a la unidad $u = 2 + \sqrt{3}$, y nuestra sucesión de arriba nada
 más viene de las potencias $u^n$ para $n = 0,1,2,3,\ldots$ Por ejemplo,
@@ -1979,6 +2014,7 @@ El número $2 + \sqrt{3}$ se llama la \textbf{unidad fundamental} y surge de la
 siguiente manera.
 
 \begin{lema}
+  \label{lema:unidad-fundamental-3}
   El número $2 + \sqrt{3}$ es la unidad más pequeña
   $u \in \ZZ [\sqrt{3}]^\times$ que cumple $u > 1$.
 
@@ -2029,9 +2065,12 @@ encuentra ninguna solución no trivial.
 \begin{verbatim}
 ? #
    timer = 1 (on)
-? for (y=0,10^9, if (issquare(1+2011*y^2), print(y)))
-0
-time = 4min, 26,091 ms.
+? pell_sol_naive (2011,10^7)
+[1, 0]
+time = 5,093 ms.
+? pell_sol_naive (2011,10^8)
+[1, 0]
+time = 50,371 ms.
 \end{verbatim}
 \end{shaded}
 
@@ -2068,6 +2107,30 @@ Salvo algunos detalles, la ecuación de Pell siempre se resuelve encontrando
 la unidad fundamental correspondiente. Más adelante en el curso veremos un
 algoritmo para encontrarla.
 
+\begin{ejemplo}
+  He aquí una breve lista de unidades fundamentales (es decir, las unidades más
+  pequeñas tales que $u > 1$) en los anillos de la forma $\ZZ [\sqrt{d}]$.
+
+  \renewcommand{\arraystretch}{1.5}
+  \begin{center}
+    \begin{tabular}{rcccccccc}
+      \hline
+      $R\colon $ & $\ZZ [\sqrt{2}]$ & $\ZZ [\sqrt{3}]$ & $\ZZ [\sqrt{5}]$ & $\ZZ [\sqrt{6}]$ & $\ZZ [\sqrt{7}]$ & $\ZZ [\sqrt{10}]$ & $\ZZ [\sqrt{11}]$ & $\ZZ [\sqrt{13}]$ \\
+      $u\colon$ & $1 + \sqrt{2}$ & $2 + \sqrt{3}$ & $2 + \sqrt{5}$ & $5 + 2\sqrt{6}$ & $8 + 3\sqrt{7}$ & $3 + \sqrt{10}$ & $10 + 3\sqrt{11}$ & $18 + 5\sqrt{13}$ \\
+      $N (u)\colon$ & $-1$ & $+1$ & $-1$ & $+1$ & $-1$ & $-1$ & $+1$ & $-1$ \\
+      \hline
+      $R\colon $ & & & $\ZZ \Bigl[\frac{1+\sqrt{5}}{2}\Bigr]$ & & & & & $\ZZ \Bigl[\frac{1+\sqrt{13}}{2}\Bigr]$ \\
+      $u\colon$ & & & $\frac{1+\sqrt{5}}{2}$ & & & & & $1 + \frac{1+\sqrt{13}}{2}$ \\
+      $N (u)\colon$ & & & $-1$ & & & & & $-1$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \renewcommand{\arraystretch}{1}
+
+  Invito al lector a comprobar algunos casos (de la misma manera que hicimos con
+  $\ZZ [\sqrt{3}]$ en \ref{lema:unidad-fundamental-3}).
+\end{ejemplo}
+
 \pagebreak
 
 \phantomsection
@@ -2075,6 +2138,8 @@ algoritmo para encontrarla.
 \addcontentsline{toc}{section}{Ejercicios}
 
 \section*{Ejercicios}
+
+\subsection*{Campos y anillos de números}
 
 \begin{ejercicio}[Campos cuadráticos]
   Consideremos una extensión cuadrática $K/\QQ$ (es decir, $[K : \QQ] = 2$).
@@ -2133,6 +2198,8 @@ algoritmo para encontrarla.
   \end{enumerate}
 \end{ejercicio}
 
+\subsection*{Factorización única}
+
 \begin{ejercicio}
   Demuestre que los anillos $\ZZ [x]$ y $k [x,y]$ (donde $k$ es un campo) no son
   dominios de ideales principales. (Son dominios de factorización única, ya que
@@ -2150,7 +2217,48 @@ algoritmo para encontrarla.
 \end{ejercicio}
 
 \begin{ejercicio}
-  Factorice el número $210$ en $\ZZ [i]$ y en $\ZZ [\zeta_3]$.
+  Demuestre que los siguientes anillos son euclidianos respecto a su norma
+  habitual:
+  \[ \ZZ [\sqrt{-2}], ~ \ZZ [\sqrt{2}], ~
+     \ZZ [\zeta_3] = \ZZ \Bigl[\frac{1+\sqrt{-3}}{2}\Bigr], ~
+     \ZZ \Bigl[\frac{1+\sqrt{-7}}{2}\Bigr], ~
+     \ZZ \Bigl[\frac{1+\sqrt{-11}}{2}\Bigr]. \]
+\end{ejercicio}
+
+\begin{ejercicio}
+  En este ejercicio vamos a probar que el anillo
+  $R = \ZZ \Bigl[\frac{1+\sqrt{-19}}{2}\Bigr]$ no es euclidiano.
+
+  Supongamos que $R$ es euclidiano (respecto a alguna función
+  $\delta\colon R\setminus \{0\} \to \NN$). Sea $\alpha$ un elemento no nulo
+  y no invertible con el mínimo posible valor de $\delta (\alpha)$
+  (es decir, si $\delta (r) < \delta (\alpha)$, entonces $r = 0$ o
+  $r \in R^\times$).
+
+  \begin{enumerate}
+  \item[a)] Demuestre que para cualquier $\beta \in R$ se tiene
+    $\alpha \mid \beta$, o $\alpha \mid (\beta \pm 1)$.
+
+  \item[b)] Considere qué sucede con $\beta = 2$ y
+    $\beta = \frac{1+\sqrt{-19}}{2}$ para concluir que tal $\alpha$ no existe.
+  \end{enumerate}
+
+  Más adelante en el curso veremos que $\ZZ \Bigl[\frac{1+\sqrt{-19}}{2}\Bigr]$
+  es un dominio de ideales principales. De la misma manera,
+  $\ZZ \Bigl[\frac{1+\sqrt{-43}}{2}\Bigr]$,
+  $\ZZ \Bigl[\frac{1+\sqrt{-67}}{2}\Bigr]$,
+  $\ZZ \Bigl[\frac{1+\sqrt{-163}}{2}\Bigr]$
+  son dominios de ideales principales, pero no son euclidianos. La moraleja de
+  este ejercicio: la noción de dominio euclidiano no tiene ningún sentido
+  profundo; es puramente utilitaria y se ocupa para probar que ciertos anillos
+  son dominios de ideales principales. En práctica no es fácil demostrar que
+  algo es un dominio euclidiano, ni que no lo es.
+\end{ejercicio}
+
+\subsection*{Enteros de Gauss $\ZZ [i]$}
+
+\begin{ejercicio}
+  Factorice el número $210$ en $\ZZ [i]$.
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -2160,9 +2268,37 @@ algoritmo para encontrarla.
 \end{ejercicio}
 
 \begin{ejercicio}
-  Demuestre que si $a \ne 0$ es par, entonces en el anillo $\ZZ [\sqrt{-19}]$
-  $$(a + \sqrt{-19}, a - \sqrt{-19}) = \ZZ [\sqrt{-19}].$$
+  Calcule $\gcd (a + i, a - i)$ y $\gcd (a + 2i, a - 2i)$ en el anillo
+  $\ZZ [i]$.
+
+  \emph{Sugerencia: la respuesta depende de $a$ módulo $2$ y $4$.}
 \end{ejercicio}
+
+\begin{ejercicio}
+  Ya que nuestro curso está dedicado a números algebraicos, hemos usado el
+  anillo $\ZZ [i]$ para describir las ternas pitagóricas. He aquí un modo más
+  geométrico de hacerlo.
+
+  Notamos que una terna pitagórica primitiva $(x,y,z)$ corresponde a un punto
+  racional $(u,v) = \left(\frac{x}{y}, \frac{y}{z}\right)$ en el circulo
+  unitario. Fijemos el punto $P = (-1,0)$ y tracemos una recta que pasa por $P$
+  y tiene otra intersección $Q$ con el círculo. Esta recta tendrá la ecuación
+  $$\ell\colon y = tx + t$$
+  para algún $t$.
+
+  \begin{center}
+    \includegraphics{pic/circle-parametrization.pdf}
+  \end{center}
+
+  La intersección de esta recta con el círculo viene dada por
+  $$Q = \left(\frac{1 - t^2}{1 + t^2}, \frac{2t}{1 + t^2}\right).$$ Demuestre
+  que de esta manera los puntos racionales en el círculo unitario salvo el punto
+  $P$ están en biyección con $t \in \QQ$. Escribiendo $t = \frac{b}{a}$ con
+  $\gcd (a,b) = 1$, recupere nuestra parametrización de las ternas pitagóricas
+  primitivas.
+\end{ejercicio}
+
+\subsection*{Campos y anillos cuadráticos}
 
 \begin{ejercicio}
   Sea $d < 0$ un entero \emph{negativo} libre de cuadrados. Usando la norma
@@ -2183,12 +2319,12 @@ algoritmo para encontrarla.
     \item[a)] Demuestre que en el anillo $\ZZ [\sqrt{-d}]$ el número $2$ es
       irreducible pero no es primo.
 
-      Sugerencia: si $d$ es par, $2 \mid (\sqrt{-d})^2$ y si $d$ es impar,
-      $2 \mid (1 + \sqrt{-d})\,(1 - \sqrt{-d})$.
+      \emph{Sugerencia: si $d$ es par, $2 \mid (\sqrt{-d})^2$ y si $d$ es impar,
+      $2 \mid (1 + \sqrt{-d})\,(1 - \sqrt{-d})$.}
 
     \item[b)] La misma pregunta para $\ZZ [\sqrt{d}]$ si $d \equiv 1 \pmod{4}$.
 
-      Sugerencia: $2 \mid (\sqrt{d} + 1)\,(\sqrt{d} - 1)$.
+      \emph{Sugerencia: $2 \mid (\sqrt{d} + 1)\,(\sqrt{d} - 1)$.}
   \end{enumerate}
 \end{ejercicio}
 
@@ -2198,59 +2334,26 @@ algoritmo para encontrarla.
   \begin{enumerate}
   \item[a)] Demuestre que $I$ no es principal.
 
-    Sugerencia: use la norma.
+    \emph{Sugerencia: use la norma.}
 
   \item[b)] Demuestre que $I$ es principal en el anillo más grande
     $\ZZ \Bigl[\frac{1+\sqrt{-3}}{2}\Bigr]$.
   \end{enumerate}
 \end{ejercicio}
 
-\begin{ejercicio}
-  Demuestre que los siguientes anillos son euclidianos respecto a su norma
-  habitual:
-  \[ \ZZ [\sqrt{-2}], ~ \ZZ [\sqrt{2}], ~
-     \ZZ \Bigl[\frac{1+\sqrt{-3}}{2}\Bigr], ~
-     \ZZ \Bigl[\frac{1+\sqrt{-7}}{2}\Bigr], ~
-     \ZZ \Bigl[\frac{1+\sqrt{-11}}{2}\Bigr]. \]
-\end{ejercicio}
+\subsection*{Enteros de Eisenstein $\ZZ [\zeta_3]$}
 
 \begin{ejercicio}
-  En este ejercicio vamos a probar que el anillo
-  $R = \ZZ \Bigl[\frac{1+\sqrt{-19}}{2}\Bigr]$ no es euclidiano.
-
-  Supongamos que $R$ es euclidiano (respecto a alguna función
-  $\delta\colon R\setminus \{0\} \to \NN$). Sea $\alpha$ un elemento no nulo
-  y no invertible con el mínimo posible valor de $\delta (\alpha)$
-  (es decir, si $\delta (r) < \delta (\alpha)$, entonces $r = 0$ o
-  $r \in R^\times$).
-
-  \begin{enumerate}
-  \item[a)] Demuestre que para cualquier $\beta \in R$ se tiene
-    $\alpha \mid \beta$, o $\alpha \mid \beta \pm 1$.
-
-  \item[b)] Considere qué sucede con $\beta = 2$ y
-    $\beta = \frac{1+\sqrt{-19}}{2}$ para concluir que tal $\alpha$ no existe.
-  \end{enumerate}
-
-  Más adelante en el curso veremos que $\ZZ \Bigl[\frac{1+\sqrt{-19}}{2}\Bigr]$
-  es un dominio de ideales principales. De la misma manera,
-  $\ZZ \Bigl[\frac{1+\sqrt{-43}}{2}\Bigr]$,
-  $\ZZ \Bigl[\frac{1+\sqrt{-67}}{2}\Bigr]$,
-  $\ZZ \Bigl[\frac{1+\sqrt{-163}}{2}\Bigr]$
-  son dominios de ideales principales, pero no son euclidianos. La moraleja de
-  este ejercicio: la noción de dominio euclidiano no tiene ningún sentido
-  profundo; es puramente utilitaria y se ocupa para probar que ciertos anillos
-  son dominios de ideales principales. En práctica no es fácil demostrar que
-  algo es un dominio euclidiano, ni que no lo es.
+  Factorice el número $210$ en $\ZZ [\zeta_3]$.
 \end{ejercicio}
 
 \begin{ejercicio}
   Para un primo $p\equiv 1\pmod{3}$ demuestre que en la expresión
-  $4p = x^2 + 27y^2$ los números $x$ e $y$ están bien definidos salvo
-  signos.
+  $4p = u^2 + 27v^2$ los números $u$ y $v$ están bien definidos salvo
+  signo.
 
-  Sugerencia: revise cómo estas expresiones surgen de los enteros de Eisenstein
-  $\ZZ [\zeta_3]$ y use la factorización única en $\ZZ [\zeta_3]$.
+  \emph{Sugerencia: revise cómo estas expresiones surgen de los enteros de
+    Eisenstein $\ZZ [\zeta_3]$ y use la factorización única en $\ZZ [\zeta_3]$.}
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -2260,21 +2363,25 @@ algoritmo para encontrarla.
 \end{ejercicio}
 
 \begin{ejercicio}
-  Demuestre que $\legendre{\alpha}{\pi}_3 = 1$ si y solamente si $\alpha$ es un
-  residuo cúbico en $\ZZ [\zeta_3]/(\pi)$ (es decir, si la congruencia
-  $x^3 \equiv \alpha \pmod{\pi}$ tiene solución en $\ZZ [\zeta_3]$).
-\end{ejercicio}
-
-\begin{ejercicio}
   Sea $\pi \in \ZZ [\zeta_3]$ un primo de Eisenstein tal que
   $N (\pi) = p \equiv 1 \pmod{3}$. Demuestre que entre sus asociados
   $\pi' \sim \pi$ precisamente uno cumple $\pi' \equiv 2 \pmod{3}$.
 \end{ejercicio}
 
 \begin{ejercicio}
-  Encuentre las soluciones enteras de $y^2 = x^3 - 4$.
+  Demuestre que $\legendre{\alpha}{\pi}_3 = 1$ si y solamente si $\alpha$ es un
+  residuo cúbico en $\ZZ [\zeta_3]/(\pi)$ (es decir, si la congruencia
+  $x^3 \equiv \alpha \pmod{\pi}$ tiene solución en $\ZZ [\zeta_3]$).
+\end{ejercicio}
 
-  Sugerencia: $y^2 + 4 = (y + 2i)\,(y - 2i)$.
+\begin{ejercicio}
+  Verifique sin computadora si la congruencia
+  $$x^3 \equiv 2 - 3\zeta_3 \pmod{23}$$
+  tiene solución en $\mathbb{Z} [\zeta_3]$.
+
+  \emph{Sugerencia: en total en $(\mathbb{Z} [\zeta_3]/(23))^\times$ habrá
+    $\frac{23^2 - 1}{3} = 177$ cubos y no es una buena idea enumerarlos uno por
+    uno\dots}
 \end{ejercicio}
 
 \begin{ejercicio}[\cite{Nagell-1964}]
@@ -2282,9 +2389,25 @@ algoritmo para encontrarla.
   $x,y,z \in \ZZ [\zeta_3]$ con $z\ne 0$.
 \end{ejercicio}
 
+\subsection*{Ecuación $y^2 = x^3 + b$}
+
+\begin{ejercicio}
+  Demuestre que si $a \ne 0$ es par, entonces en el anillo $\ZZ [\sqrt{-19}]$
+  $$(a + \sqrt{-19}, a - \sqrt{-19}) = \ZZ [\sqrt{-19}].$$
+  (Lo ocupamos en nuestro análisis de la ecuación $y^2 = x^3 - 19$.)
+\end{ejercicio}
+
+\begin{ejercicio}
+  Encuentre las soluciones enteras de $y^2 = x^3 - 4$.
+
+  \emph{Sugerencia: $y^2 + 4 = (y + 2i)\,(y - 2i)$.}
+\end{ejercicio}
+
+\subsection*{Ecuación de Pell y grupos $\ZZ [\sqrt{d}]^\times$ y $\ZZ \Bigl[\frac{\sqrt{d}}{2}\Bigr]^\times$}
+
 \begin{ejercicio}
   Sea $d > 1$ un entero libre de cuadrados. Demuestre que si la ecuación
-  $x^2 - dy^2 = -1$ tiene soluciones enteras, entonces $x^2 - dy^2 = 1$
+  $x^2 - dy^2 = -1$ tiene soluciones enteras, entonces $x^2 - dy^2 = +1$
   también tiene soluciones enteras.
 \end{ejercicio}
 
@@ -2308,8 +2431,6 @@ algoritmo para encontrarla.
   Describa las soluciones enteras de las ecuaciones
   $$x^2 - dy^2 = +1 \quad\text{y}\quad x^2 - dy^2 = -1,$$
   donde $d = 2$ y $5$.
-  Sugerencia: primero encuentre la unidad más pequeña
-  $u \in \ZZ[\sqrt{d}]^\times$ tal que $u > 1$.
 \end{ejercicio}
 
 \begin{ejercicio}
