@@ -2111,7 +2111,8 @@ algoritmo para encontrarla.
 
 \begin{ejemplo}
   He aquí una breve lista de unidades fundamentales (es decir, las unidades más
-  pequeñas tales que $u > 1$) en los anillos de la forma $\ZZ [\sqrt{d}]$.
+  pequeñas tales que $u > 1$) en los anillos de la forma $\ZZ [\sqrt{d}]$
+  (y $\ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]$ para $d \equiv 1 \pmod{4}$).
 
   \renewcommand{\arraystretch}{1.5}
   \begin{center}
@@ -2132,6 +2133,19 @@ algoritmo para encontrarla.
   Invito al lector a comprobar algunos casos (de la misma manera que hicimos con
   $\ZZ [\sqrt{3}]$ en \ref{lema:unidad-fundamental-3}).
 \end{ejemplo}
+
+Para que el lector no piense que los anillos cuadráticos reales $\ZZ [\sqrt{d}]$
+tienen algo especial, por ejemplo, tomemos el anillo ciclotómico
+$$\ZZ[\zeta_p] \cong \ZZ[x]/(\Phi_p) = \ZZ[x]/(x^{p-1} + x^{p-2} + \cdots + x + 1).$$
+Allí la división con resto de polinomios nos da
+$$\Phi_p = (x+1)\,(x^{p-2} + x^{p-4} + \cdots + x^3 + x) + 1,$$
+lo que demuestra que
+\[ (1 + \zeta_p)^{-1} =
+   - (\zeta_p + \zeta_p^3 + \cdots + \zeta_p^{p-4} + \zeta_p^{p-1}), \]
+así que $1 + \zeta_p \in \ZZ [\zeta_p]^\times$. En general, en el anillo
+ciclotómico $\ZZ[\zeta_n]$ habrá muchas unidades, y el grupo
+$\ZZ[\zeta_n]^\times$ es finitamente generado de rango $\phi(n)/2 - 1$.
+Lo veremos más adelante en el curso.
 
 \pagebreak
 
