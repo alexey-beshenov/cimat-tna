@@ -33,6 +33,12 @@ alexey.beshenov@cimat.mx
 
   https://youtube.com/watch?v=-Tf1Cv2uu7k
 
+* Clase 5 (24/08/20). Suma y producto de ideales. Ideales coprimos. Teorema
+  chino del resto. Ideales primos y maximales. Ideales en anillos de números.
+
+  https://youtube.com/watch?v=bgxPkGiQlOQ
+
+
 ## Agradecimientos
 
 Agradezco a CIMAT por la oportunidad de dar este curso, y en particular al
