@@ -12,6 +12,7 @@
 \usetikzlibrary{calc}
 
 \usepackage{amssymb,amsmath}
+
 \usepackage{multicol}
 
 \usepackage{fullpage}
@@ -53,8 +54,11 @@
 }
 \usepackage{bookmark}
 
+\renewcommand{\AA}{\mathbb{A}}
 \renewcommand\gcd{\operatorname{mcd}}
 \newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+
+\newcommand{\mapsfrom}{\mathrel{\reflectbox{\ensuremath{\mapsto}}}}
 
 \newcommand\FF{\mathbb{F}}
 \newcommand\NN{\mathbb{N}}
@@ -68,8 +72,10 @@
 \renewcommand\Re{\operatorname{Re}}
 \renewcommand\Im{\operatorname{Im}}
 
+\DeclareMathOperator{\coker}{coker}
 \DeclareMathOperator{\Frac}{Frac}
 \DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Pic}{Pic}
 \DeclareMathOperator{\Spec}{Spec}
 
 \usepackage{array}
@@ -81,6 +87,8 @@
 \begin{document}
 
 \input{1-introduccion.tex}
+
+\input{2-picard.tex}
 
 \appendix
 \input{a-polinomios-ciclotomicos.tex}
