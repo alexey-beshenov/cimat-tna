@@ -1021,6 +1021,59 @@ a investigar este concepto.
   \end{proof}
 \end{lema}
 
+\begin{ejemplo}
+  $\alpha = \sqrt{2}$ y $\beta = \frac{1 + \sqrt{-5}}{2}$ son enteros
+  algebraicos:
+  \[ \alpha^2 - 2 = 0, \quad
+     \beta^2 - \beta - 1 = 0. \]
+  El anillo $\ZZ [\alpha,\beta]$ está generado como $\ZZ$-módulo por
+  $$1, \alpha, \beta, \alpha\beta.$$
+  Calculamos en esta base
+  \begin{align*}
+    (\alpha+\beta) \cdot 1 & = \alpha + \beta,\\
+    (\alpha+\beta) \cdot \alpha & = 2 + \alpha\beta,\\
+    (\alpha+\beta) \cdot \beta & = 1 + \beta + \alpha\beta,\\
+    (\alpha+\beta) \cdot \alpha\beta & = \alpha + 2\beta + \alpha\beta
+  \end{align*}
+
+  Entonces, la multiplicación por $\alpha+\beta$ se representa por la matriz
+  \[ A = \begin{pmatrix}
+    0 & 2 & 1 & 0 \\
+    1 & 0 & 0 & 1 \\
+    1 & 0 & 1 & 2 \\
+    0 & 1 & 1 & 1
+  \end{pmatrix} \]
+  Calculamos que su polinomio característico es
+  $$p_A (x) = x^4 - 2x^3 - 5x^2 + 6x - 1.$$
+  Esto nos da la relación mónica
+  \[ (\alpha+\beta)^4 - 2 (\alpha+\beta)^3 - 5 (\alpha+\beta)^2
+       + 6 (\alpha+\beta) - 1 = 0. \]
+  \begin{shaded}
+\begin{verbatim}
+? charpoly ([0,2,1,0;1,0,0,1; 1,0,1,2; 0,1,1,1])
+% = x^4 - 2*x^3 - 5*x^2 + 6*x - 1
+? algdep (sqrt(2) + (1+sqrt(5))/2, 4)
+% = x^4 - 2*x^3 - 5*x^2 + 6*x - 1
+
+? K = nfinit(t^2-2);
+? L = rnfinit(K, x^2-5);
+? rnfeltreltoabs(L, t + (1+x)/2)
+% = Mod(-1/4*x^3 + 13/4*x + 1/2, x^4 - 14*x^2 + 9)
+? charpoly(%)
+% = x^4 - 2*x^3 - 5*x^2 + 6*x - 1
+? subst (%, x, sqrt(2) + (1+sqrt(5))/2)
+% = -2.115889831480117514 E-37
+\end{verbatim}
+  Esta sesión de PARI/GP de arriba demuestra el uso de campos de números
+  relativos: definimos $K = \QQ (\sqrt{2})$ y luego
+  $L = K (\sqrt{5})$.
+
+  Recordamos que el polinomio característico no siempre coincide con
+  el polinomio mínimo. En PARI/GP estos se calculan mediante \texttt{charpoly}
+  y \texttt{minpoly} respectivamente.
+  \end{shaded}
+\end{ejemplo}
+
 \begin{proposicion-definicion}
   Dado un campo de números $K$, su \textbf{anillo de enteros} viene dado
   $$\O_K = \{ \alpha \in K \mid \alpha\text{ es entero sobre }\ZZ \}.$$
