@@ -1,7 +1,10 @@
-all: pics tna.pdf
+all: pics tareas tna.pdf
 
 pics:
 	cd pic && $(MAKE)
+
+hw:
+	cd tareas && $(MAKE)
 
 tna.pdf:
 	xelatex tna
@@ -12,3 +15,4 @@ tna.pdf:
 clean:
 	rm -f *.aux *.log *.bbl *.blg *.pdf
 	cd pic && $(MAKE) clean
+	cd tareas && $(MAKE) clean
