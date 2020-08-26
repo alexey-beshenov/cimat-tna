@@ -894,13 +894,30 @@ $$\sigma\colon \alpha = a + bi \mapsto \overline{\alpha} = a - bi$$
 es un automorfismo no trivial de $\QQ (i)$. Ahora para
 $\alpha = a + bi \in \QQ (i)$ definamos
 $$N (\alpha) = \alpha \, \sigma (\alpha) = a^2 + b^2.$$
-La aplicación $N\colon \QQ (i) \to \QQ$ se llama la \textbf{norma}. Se ve que es
-multiplicativa:
+La aplicación $N\colon \QQ (i) \to \QQ$ se llama la \textbf{norma}.
+Se ve que es multiplicativa:
 $$N (\alpha\beta) = N (\alpha) \, N (\beta).$$
 
 Además, notamos que la norma se restringe a $\ZZ [i]$ e induce una aplicación
-$N\colon \ZZ [i] \mapsto \NN$. Vamos a ver al instante que la norma ayuda a
-relacionar la aritmética en $\ZZ [i]$ con la aritmética de números enteros.
+$N\colon \ZZ [i] \mapsto \NN$.
+
+\begin{comentario}
+  Recordemos que en general la \textbf{norma} y \textbf{traza} de una extensión
+  finita de campos $L/K$ se definen mediante el álgebra lineal: si
+  $$\mu_\alpha\colon L\to L, \quad x \mapsto \alpha x$$
+  es la applicación $K$-lineal de multiplicación por $\alpha \in L$, entonces
+  \[ N_{L/K} (\alpha) = \det \mu_\alpha, \quad
+     T_{L/K} (\alpha) = \tr  \mu_\alpha. \]
+  Ahora, \emph{si $L/K$ es una extensión de Galois}, entonces
+  \[ N_{L/K} (\alpha) = \prod_{\sigma\in\Gal (L/K)} \sigma (\alpha), \quad
+     T_{L/K} (\alpha) = \sum_{\sigma\in\Gal (L/K)} \sigma (\alpha). \]
+  Más adelante en el curso vamos a definir otros tipos de normas y trazas,
+  pero por el momento estos términos van a significar lo que conocemos
+  de la teoría de campos básica.
+\end{comentario}
+
+Vamos a ver al instante que la norma ayuda a relacionar la aritmética en
+$\ZZ [i]$ con la aritmética de números enteros.
 
 \begin{lema}
   \begin{enumerate}
@@ -2317,8 +2334,10 @@ Lo veremos más adelante en el curso.
 
 \begin{ejercicio}
   Sea $d < 0$ un entero \emph{negativo} libre de cuadrados. Usando la norma
-  correspondiente\footnote{$N (\alpha) = \alpha\,\sigma (\alpha)$, donde
-    $\Gal (K/\QQ) = \{ 1, \sigma \}$.}, calcule los grupos de unidades
+  correspondiente\footnote{En este caso particular,
+    $N_{K/\QQ} (\alpha) = \alpha\,\sigma (\alpha)$,
+    donde $\Gal (K/\QQ) = \{ 1, \sigma \}$.},
+  calcule los grupos de unidades
 
   \begin{enumerate}
   \item[a)] $\ZZ [\sqrt{d}]^\times$,

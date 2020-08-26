@@ -1,0 +1,78 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\newcounter{tarea}
+\setcounter{tarea}{2}
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}[tarea]
+\newtheorem*{ejercicio-adicional}{Ejercicio adicional}
+
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\usepackage{mathspec}
+
+\setmainfont{PT Serif}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+
+\title{Teoría de números algebraicos\\Tarea 2}
+\author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
+\date{26 de agosto de 2020}
+
+% \def\solutions{true}
+
+\begin{document}
+
+{\sffamily\bfseries\maketitle}
+
+\noindent Fecha límite: viernes, 4 de septiembre.
+
+\ifdefined\solutions
+\else
+\thispagestyle{empty}
+\fi
+
+\begin{ejercicio}
+  Demuestre que para $\alpha \in \mathbb{Z} [i]$ no nulo se tiene
+  $$N_{\mathbb{Q} (i)/\mathbb{Q}} (\alpha) = \# (\mathbb{Z} [i]/(\alpha)).$$
+
+\noindent (Más adelante veremos un resultado general.)
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para $R = \mathbb{Z} [\sqrt{-5}]$ encuentre todos los ideales maximales
+  $\mathfrak{p} \subset R$ tales que $R/\mathfrak{p} \cong \mathbb{F}_{23}$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Demuestre que el ideal $(23,x)$ no es invertible en el anillo
+  $\mathbb{Z} [x]$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos el anillo $\mathbb{Z} [\sqrt{5}]$ y los ideales
+  \[ \mathfrak{p}_2 = (2, 1 + \sqrt{5}), \quad
+     \mathfrak{p}_{11} = (11, 4 + \sqrt{5}). \]
+  Determine si son invertibles y encuentre $I^{-1}$ en cada caso.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Asumiendo que $\operatorname{Pic} (\mathbb{Z} [\sqrt{-37}]) \cong \mathbb{Z}/2\mathbb{Z}$,
+  demuestre que la curva elíptica $y^2 = x^3 - 37$ no tiene puntos enteros.
+\end{ejercicio}
+
+\begin{ejercicio-adicional}
+  Encuentre el anillo de enteros $\mathcal{O}_K$ para
+  $K = \mathbb{Q} (\sqrt{3}, \sqrt{5})$.
+
+  \noindent (Hay modos listos de hacerlo, pero también se pueden ocupar cálculos
+  directos como veremos el lunes para los campos cuadráticos; véase
+  \emph{Kenneth S. Williams, Integers of biquadratic fields,
+    Canad. Math. Bull. 13 (1970), 519--526}.)
+\end{ejercicio-adicional}
+
+\end{document}
