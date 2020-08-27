@@ -1,0 +1,136 @@
+\addcontentsline{toc}{chapter}{Introducción}
+\chapter*{Introducción}
+
+La teoría de números algebraicos estudia\dots los
+\textbf{números algebraicos}, es decir, los números complejos $\alpha \in \CC$
+que satisfacen una relación algebraica no trivial
+$$a_n \alpha^n + a_{n-1} \alpha^{n-1} + \cdots + a_1 \alpha + a_0 = 0,$$
+donde $a_i \in \QQ$ y $a_n \ne 0$. Estos números viven en
+los \textbf{campos de números} que son extensiones finitas $K/\QQ$.
+A saber, los campos de números son de la forma $K = \QQ
+(\alpha_1,\ldots,\alpha_s)$, donde los $\alpha_i$ son números algebraicos.
+
+Un ejemplo sencillo de campo de números es
+$$\QQ (\sqrt{-5}) = \{ a + b\sqrt{-5} \mid a,b \in \QQ \},$$
+la extensión cuadrática de los números racionales que se obtiene añadiendo la
+raíz cuadrada $\sqrt{-5}$.
+
+La teoría de números surge al considerar subanillos en los campos de números
+$R \subset K$, que sería lógico denominar los \textbf{anillos de números}.
+(No es un término muy común, pero lo adoptaremos en nuestro curso, siguiendo
+a \cite{Stevenhagen-NR}.) Por ejemplo
+$$\ZZ [\sqrt{-5}] = \{ a + b\sqrt{-5} \mid a,b \in \ZZ \}$$
+es un anillo de números dentro del campo de números $\QQ (\sqrt{-5})$.
+
+Los anillos de números son objetos unidimensionales. Específicamente, a
+cualquier anillo conmutativo $R$ se puede asociar su \emph{dimensión de Krull}
+$\dim R$, y para cualquier anillo de números se cumple $\dim R = 1$. En este
+sentido la teoría de anillos de números se parece mucho a la teoría de curvas
+algebraicas.
+
+Los anillos de números son generalizaciones bastante sencillas del anillo de los
+números enteros $\ZZ$, pero en los anillos de números, entre otras cosas,
+ya no necesariamente se cumple el \emph{teorema fundamental de la aritmética}
+(que afirma que todo número se expresa esencialmente de manera única como un
+producto de números primos). Por ejemplo, en el anillo $\ZZ [\sqrt{-5}]$
+$$2\cdot 3 = (1 + \sqrt{-5})\,(1 - \sqrt{-5})$$
+son dos factorizaciones distintas del número $6$. La idea de Richard Dedekind
+consistía en remplazar las factorizaciones en números primos por factorizaciones
+de \emph{ideales} en \emph{ideales primos} del anillo. En el ejemplo de arriba,
+\[ (2) = \mathfrak{p}^2, \quad
+   (3) = \mathfrak{q}_1 \mathfrak{q}_2, \quad
+   (1 + \sqrt{-5}) = \mathfrak{p} \mathfrak{q}_1, \quad
+   (1 - \sqrt{-5}) = \mathfrak{p} \mathfrak{q}_2, \]
+
+donde
+\[ \mathfrak{p} = (2, 1 + \sqrt{-5}); \quad
+   \mathfrak{q}_1 = (3, 1 + \sqrt{-5}); \quad
+   \mathfrak{q}_2 = (3, 2 + \sqrt{-5}) \]
+son ideales primos en $\ZZ [\sqrt{-5}]$. Los anillos de números donde los
+ideales se descomponen de manera única en ideales primos se conocen como
+los \textbf{anillos de Dedekind}. Todas estas nociones serán introducidas y
+consideradas en detalles en el curso.
+
+El objetivo principal será definir algunos invariantes fundamentales de los
+campos de números: el \textbf{anillo de enteros} $\O_K \subset K$,
+\textbf{grupo de clases} $\Cl (K)$, y \textbf{grupo de unidades}
+$\O_K^\times$, demostrar sus propiedades básicas y aprender a
+calcularlos.
+
+Todos los invariantes que serán considerados en el curso se pueden calcular
+algorítmicamente. En particular, veremos ejemplos de cálculos en el programa
+PARI/GP (\url{https://pari.math.u-bordeaux.fr/}) y la base de datos LMFDB
+(\url{https://lmfdb.org/}). Todo el material teórico será acompañado de
+problemas con pruebas y cálculos particulares.
+
+\section{Para qué sirve este curso}
+
+Este curso podría ser interesante para los que estudian álgebra conmutativa,
+ya que serán consideradas algunas nociones fundamentales de esta área (ideales
+primos, anillos de valuación discreta, anillos de Dedekind, el grupo de Picard
+de un anillo conmutativo, el grupo de unidades, etc.), basándose en ejemplos muy
+concretos y calculables. En cierto sentido, el álgebra conmutativa
+históricamente se originó en la teoría de números algebraicos. (El mismo término
+«anillo» fue introducido por Hilbert en un contexto de anillos de números,
+e «ideal» es la abreviación del «número ideal».)
+
+Además, la similitud entre los anillos de números y curvas algebraicas que
+mencioné arriba, haría este material útil para los que están aprendiendo
+superficies de Riemann, singularidades de curvas, etc. y los interesados
+en la geometría algebraica moderna (la teoría de esquemas etc.).
+
+Por último, y no menos importante, este curso es fundamental para los
+estudiantes con intención de aprender la teoría de números.
+
+\section{Conocimientos preliminares}
+
+Tendré que suponer que los oyentes conozcan las nociones como anillo
+(conmutativo), ideal (primo, maximal), anillo cociente, módulo sobre un anillo
+(módulo libre, rango), y campo (incluso la teoría de campos finitos).
+Tampoco estaría mal conocer la teoría de Galois básica. De todas maneras,
+cuando sea necesario en el transcurso, trataremos las nociones poco
+conocidas. Uno de mis objetivos es presentar diferentes herramientas
+algebraicas, así como ejemplos muy concretos.
+
+\section{Referencias}
+
+Mi fuente principal de inspiración son los apuntes de
+Peter Stevenhagen \cite{Stevenhagen-NR} de un curso que se imparte en
+la universidad de Leiden (Países Bajos). Además, podrían ser útiles diferentes
+libros de texto sobre el tema; he aquí algunas fuentes que puedo recomendar.
+
+Algunos apuntes en línea, a parte de \cite{Stevenhagen-NR}, son los siguientes:
+\begin{itemize}
+\item el curso de Andrew Sutherland en MIT:
+  \url{https://dspace.mit.edu/handle/1721.1/124987}
+
+\item J.S. Milne: 
+  \url{https://www.jmilne.org/math/CourseNotes/ant.html}
+
+\item Paul Garrett:
+  \url{http://www-users.math.umn.edu/~garrett/m/number_theory/}
+
+\item varios apuntes de Keith Conrad:
+  \url{https://kconrad.math.uconn.edu/blurbs/}
+
+\item un curso de Robert B. Ash:
+  \url{https://faculty.math.illinois.edu/~r-ash/ANT.html}
+\end{itemize}
+
+Algunos libros introductorios son
+\cite[Chapters 12, 13, 17]{Ireland-Rosen}, 
+\cite{Alaca-Williams},
+\cite{Kato-NT-2},
+\cite{Frohlich-Taylor},
+\cite{Marcus-NF},
+\cite{Samuel-TAN},
+\cite[Chapters 4, 5]{Borevich-Shafarevich},
+\cite{Cox-2013}.
+
+Para experimentos en PARI/GP, véase el libro
+\cite{Rodriguez-Villegas-2007}.
+
+Alguna lectura avanzada:
+\cite{Neukirch-ANT},
+\cite{Lang-ANT},
+\cite{Cassels-Frohlich}.
