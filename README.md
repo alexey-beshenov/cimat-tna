@@ -38,11 +38,16 @@ alexey.beshenov@cimat.mx
 
   https://youtube.com/watch?v=bgxPkGiQlOQ
 
+* Clase 6 (26/08/20). Ideales en anillos de números (continuación).
+  Ideales fraccionarios y el grupo de Picard. Anillo de enteros O_K.
+
+  https://youtube.com/watch?v=pEFsrF595M8
+
 
 ## Agradecimientos
 
-Agradezco a CIMAT por la oportunidad de dar este curso, y en particular al
-Dr. Xavier Gómez Mont y Dr. Perdo Luis del Ángel.
+Agradezco a CIMAT por la oportunidad de dar este curso, y en particular
+al Dr. Xavier Gómez Mont y Dr. Perdo Luis del Ángel.
 
-Pavel Solomatin ha echo varias observaciones útiles acerca de una versión
-preliminar de mis notas.
+Pavel Solomatin y Dmitry Shvetsov han echo varias observaciones útiles acerca de
+una versión preliminar de mis notas.
