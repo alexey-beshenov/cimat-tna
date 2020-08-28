@@ -2,10 +2,11 @@
 
 # LaTeX stuff
 *.aux
-*.log
-*.out
 *.bbl
 *.blg
+*.log
+*.out
+*.toc
 
 # LaTeX output
 *.pdf

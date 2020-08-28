@@ -13,6 +13,6 @@ tna.pdf:
 	xelatex tna
 
 clean:
-	rm -f *.aux *.log *.bbl *.blg *.pdf
+	rm -f *.aux *.log *.bbl *.blg *.toc *.pdf
 	cd pic && $(MAKE) clean
 	cd tareas && $(MAKE) clean
