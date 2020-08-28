@@ -3,7 +3,7 @@
 La idea de Richard Dedekind consistía en remplazar las operaciones aritméticas
 con elementos $\alpha \in R$ por las operaciones con ideales $I\subseteq R$.
 Los anillos de números donde este programa funciona sin obstáculos se conocen
-como los \textbf{anillos de Dedekind}. Los vamos a definir en este capítulo.
+como los \textbf{dominios de Dedekind}. Los vamos a definir en este capítulo.
 
 Una gran parte del material de abajo (ideales primos y maximales, localización,
 dominios de valuación discreta, etc.) se encuentra en los libros de texto de
@@ -108,8 +108,8 @@ particular un poco más adelante.
      \text{donde }\gamma = \gcd (\alpha,\beta). \]
   Entonces, $\gcd (\alpha,\beta) = 1$ implica que $(\alpha)+(\beta) = R$.
  
-  En general (si $R$ no es un dominio de ideales principales), esto no es
-  cierto. Por ejemplo, en el anillo de polinomios $k[x,y]$ se tiene $\gcd (x,y)
+  En general (si $R$ no es un dominio de ideales principales), esto es
+  falso. Por ejemplo, en el anillo de polinomios $k[x,y]$ se tiene $\gcd (x,y)
   = 1$: los polinomios $x$ e $y$ claramente no tienen divisor en común (excepto
   constantes $c\ne 0$). Por otra parte, $(x,y) \ne k [x,y]$; de hecho,
   $k [x,y]/(x,y) \cong k$.
@@ -523,6 +523,9 @@ Sea $R$ un anillo de números.
 \pdfbookmark{Clase 6 (26/08/20)}{clase-6}
 \marginpar{\small Clase 6 \\ 26/08/20}
 
+Después de definir el anillo de enteros $\O_K$, vamos a establecer algunas
+de sus propiedades básicas.
+
 \begin{corolario}
   Todo anillo de números $R$ es noetheriano.
 
@@ -540,8 +543,8 @@ Sea $R$ un anillo de números.
 
   \begin{proof}
     El anillo cociente $R/\mathfrak{p}$ es un dominio finito, pero recordemos
-    que todo dominio finito es un campo.\footnote{Si $D$ es un dominio finito, entonces para todo elemento no nulo $a \in D$
-    la multiplicación por $a$
+    que todo dominio finito es un campo.\footnote{Si $D$ es un dominio finito,
+      entonces para todo elemento no nulo $a \in D$ la multiplicación por $a$
     $$\mu_a\colon D \to D, \quad x \mapsto ax$$ es una aplicación
     inyectiva. Dado que $D$ es finito, $\mu_a$ es también sobreyectiva y existe
     $a^{-1} \in D$ tal que $\mu_a (a^{-1}) = a a^{-1} = 1$.}
@@ -609,7 +612,9 @@ extensión de $\FF_p$ de grado finito $f_\mathfrak{p} \le [K : \QQ]$.
     En este caso $f = 1$.
 
   \item[2)] Si $p \equiv 1 \pmod{4}$, entonces
-    $p\ZZ [i] = \mathfrak{p} \,\overline{\mathfrak{p}}$ para dos diferentes primos $\mathfrak{p},\overline{\mathfrak{p}}$. Aquí $f_\mathfrak{p} = f_{\overline{\mathfrak{p}}} = 1$.
+    $p\ZZ [i] = \mathfrak{p} \,\overline{\mathfrak{p}}$
+    para dos diferentes primos $\mathfrak{p},\overline{\mathfrak{p}}$.
+    Aquí $f_\mathfrak{p} = f_{\overline{\mathfrak{p}}} = 1$.
 
   \item[3)] Si $p \equiv 3 \pmod{4}$, entonces $p\ZZ [i]$ es primo, y en este
     caso $f = 2$. \qedhere
@@ -644,7 +649,7 @@ un dominio. Denotemos por $K$ el campo de fracciones de $R$.
   $\alpha \in K^\times$.
 
   Si $I \subseteq R$, entonces $I$ es un ideal en el sentido normal, y para
-  subrayar este hecho se dice que $I$ es un ideal \textbf{integral}.
+  subrayar este hecho se dice que $I$ es un ideal \textbf{entero}.
 \end{definicion}
 
 La condición $\alpha I \subseteq R$ significa lo siguiente: aunque en $I$ pueden
@@ -666,10 +671,14 @@ al multiplicar $I$ por un solo elemento.
 El ejemplo de arriba funciona de manera similar en cualquier dominio de ideales
 principales.
 
-Las operaciones $I + J$, $I \cap J$, $IJ$ definidas para los ideales integrales en la sección anterior se definen de la misma manera para los ideales fraccionarios (se deja como un ejercicio verificar que el resultado es también un ideal fraccionario).
+Las operaciones $I + J$, $I \cap J$, $IJ$ definidas para los ideales enteros
+en la sección anterior se definen de la misma manera para los ideales
+fraccionarios (se deja como un ejercicio verificar que el resultado es también
+un ideal fraccionario).
 
 \begin{definicion}
-  Se dice que un $R$-ideal fraccionario $I$ es \textbf{invertible} si existe otro ideal fraccionario $J$ tal que $IJ = R$.
+  Se dice que un $R$-ideal fraccionario $I$ es \textbf{invertible} si existe
+  otro ideal fraccionario $J$ tal que $IJ = R$.
 \end{definicion}
 
 \begin{proposicion}
@@ -678,7 +687,9 @@ Las operaciones $I + J$, $I \cap J$, $IJ$ definidas para los ideales integrales 
     Entonces, $I$ es invertible si y solamente si $I I^{-1} = R$.
 
     \begin{proof}
-      Notamos que $II^{-1} \subseteq R$. Ahora si $IJ = R$, entonces se ve que $J \subseteq I^{-1}$. Por otra parte, $I^{-1} = I^{-1}\cdot IJ = (I^{-1} I)\cdot J \subseteq RJ = J$.
+      Notamos que $II^{-1} \subseteq R$. Ahora si $IJ = R$, entonces se ve que
+      $J \subseteq I^{-1}$. Por otra parte,
+      $I^{-1} = I^{-1}\cdot IJ = (I^{-1} I)\cdot J \subseteq RJ = J$.
     \end{proof}
 \end{proposicion}
 
@@ -916,6 +927,7 @@ descomposiciones en productos de ideales primos, no pueden existir ideales no
 invertibles.
 
 \begin{proposicion}
+  \label{prop:factorizacion-en-primos-invertibilidad}
   Sea $R$ un anillo de números donde todo ideal propio no nulo $I \subset R$
   puede ser escrito como producto de ideales primos
   $$I = \mathfrak{p}_1^{e_1}\cdots \mathfrak{p}_s^{e_s}.$$
@@ -955,7 +967,7 @@ dar una definición.
   Sea $R$ un dominio. Se dice que $\alpha \in \Frac (R)$
   es \textbf{entero} sobre $R$ si existe una relación mónica
   $$\alpha^n + a_{n-1} \alpha^{n-1} + \cdots + a_1 \alpha + a_0 = 0,$$
-  donde $a_i \in R$. Si todo elemento integral sobre $R$ está en $R$,
+  donde $a_i \in R$. Si todo elemento entero sobre $R$ está en $R$,
   entonces se dice que $R$ es \textbf{integralmente cerrado}.
 \end{definicion}
 
@@ -985,9 +997,10 @@ problemas.
 Ahora sabiendo la importancia de anillos integralmente cerrados, vamos
 a investigar este concepto.
 
-\begin{lema}
-  Sea $R$ un dominio y $K$ su campo de fracciones. Para $\alpha \in K$ las
-  siguientes condiciones son equivalentes.
+\begin{lema}[Caracterización de integralidad]
+  \label{lema:caracterizacion-de-integralidad}
+  Sea $K$ un campo y $R \subset K$ un subanillo.
+  Para $\alpha \in K$ las siguientes condiciones son equivalentes.
 
   \begin{enumerate}
   \item[a)] $\alpha$ es entero sobre $R$.
@@ -1064,9 +1077,8 @@ a investigar este concepto.
 ? subst (%, x, sqrt(2) + (1+sqrt(5))/2)
 % = -2.115889831480117514 E-37
 \end{verbatim}
-  Esta sesión de PARI/GP de arriba demuestra el uso de campos de números
-  relativos: definimos $K = \QQ (\sqrt{2})$ y luego
-  $L = K (\sqrt{5})$.
+  Esta sesión de PARI/GP demuestra el uso de campos de números relativos:
+  definimos $K = \QQ (\sqrt{2})$ y luego $L = K (\sqrt{5})$.
 
   Recordamos que el polinomio característico no siempre coincide con
   el polinomio mínimo. En PARI/GP estos se calculan mediante \texttt{charpoly}
@@ -1093,7 +1105,470 @@ a investigar este concepto.
   \end{proof}
 \end{proposicion-definicion}
 
-\noindent\emph{Continuará\dots}
+\pdfbookmark{Clase 6 (31/08/20)}{clase-6}
+\marginpar{\small Clase 6 \\ 31/08/20}
+
+\begin{lema}
+  Sea $K$ un campo de números. Dado $\alpha \in K$, existe $N \in \ZZ$ no nulo
+  tal que $N\alpha \in \O_K$.
+
+  \begin{proof}
+    El elemento $\alpha$ satisface alguna relación algebraica
+    $$a_n \alpha^n + a_{n-1} \alpha^{n-1} + \cdots + a_1 \alpha + a_0 = 0,$$   
+    donde $a_i \in \QQ$ y $a_n \ne 0$. Multiplicando los coeficientes por su
+    mínimo común denominador, siempre podemos asumir que $a_n \in \ZZ$. Ahora
+    al multiplicar la ecuación por $a_n^{n-1}$ nos queda
+    \[ (a_n \alpha)^n + a_{n-1} (a_n \alpha)^{n-1} + \cdots +
+           a_1 a_n^{n-2} (a_n \alpha) + a_0 a_n^{n-1} = 0. \]
+    Esto quiere decir que $a_n \alpha \in \O_K$.
+  \end{proof}
+\end{lema}
+
+\begin{proposicion}
+  Se tiene $\Frac\O_K = K$.
+
+  \begin{proof}
+    Por la definición tenemos $\O_K \subset K$, y luego la inclusión
+    $\Frac \O_K \subseteq K$. Por otro lado, dado un elemento $\alpha \in K$,
+    por el lema anterior tenemos $N\alpha \in \O_K$ para algún $N \in \ZZ$
+    no nulo. Esto implica que $\alpha = \frac{1}{N}\,N\,\alpha \in \Frac\O_K$.
+  \end{proof}
+\end{proposicion}
+
+\begin{proposicion}
+  $\O_K$ es un anillo integralmente cerrado; es decir, si
+  $\alpha\in K = \Frac\O_K$ es entero sobre $\O_K$, entonces
+  $\alpha \in \O_K$.
+
+  \begin{proof}
+    Tenemos una relación mónica
+    $$\alpha^n + a_{n-1} \alpha^{n-1} + \cdots + a_1 \alpha + a_0 = 0,$$
+    donde $a_i \in \O_K$. Esta relación implica que $R [\alpha]$
+    es un $R$-módulo finitamente generado, donde
+    $R = \ZZ [a_0,\ldots,a_{n-1}]$. Pero los $a_i\in \O_K$ también cumplen
+    algunas relaciones mónicas sobre $\ZZ$, así que $R$ es finitamente
+    generado como $\ZZ$-módulo. De aquí se sigue que $R [\alpha]$
+    es finitamente generado como $\ZZ$-módulo\footnote{Estamos usando la
+      siguiente observación: para una extensión de anillos
+      $A \subseteq B \subseteq C$, si $B$ es finitamente generado como un
+      $A$-módulo y $C$ es finitamente generado como $B$-módulo, entonces
+      $C$ es finitamente generado como un $A$-módulo. De hecho, si
+      $B = A\langle b_1,\ldots,b_m\rangle$ y
+      $C = B\langle c_1,\ldots,c_n\rangle$, entonces
+      $C = A\langle b_i c_j \rangle$.}.
+    Pero luego por nuestra caracterización de integralidad
+    \ref{lema:caracterizacion-de-integralidad}, esto implica que $\alpha$ es
+    entero sobre $\ZZ$.
+  \end{proof}
+\end{proposicion}
+
+Otra propiedad importante del anillo de enteros: $\O_K$ es un $\ZZ$-módulo libre
+de rango $[K : \QQ]$.
+\[ \begin{tikzcd}
+  \O_K \ar[-]{d}{\rk = n} &[-3em] \subset &[-3em] K \ar[-]{d}{\deg = n} \\
+  \ZZ & \subset & \QQ
+\end{tikzcd} \]
+Lo vamos a probar un poco más adelante cuando tengamos las herramientas
+adecuadas, pero me gustaría mencionarlo ahora. Procedamos con algunos ejemplos
+de anillos de números.
+
+\begin{ejemplo}
+  Está claro que para $K = \QQ$ se tiene $\O_K = \ZZ$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Calculemos el anillo de enteros $\O_K$ para el campo cuadrático
+  $K = \QQ (\sqrt{d})$, donde $d$ es un entero libre de cuadrados.
+
+  Consideremos un elemento $\alpha = a + b\sqrt{d} \in K$.
+  Si $\alpha \in \QQ$, entonces $\alpha \in \O_K$ si y solamente si
+  $\alpha \in \ZZ$. Si $\alpha \notin \QQ$, entonces el polinomio mínimo de
+  $\alpha$ viene dado por
+  $$f = (x - (a + b\sqrt{d}))\,(x - (a - b\sqrt{d})) = x^2 - 2ax + a^2 - db^2.$$
+  Para que los coeficientes sean enteros, necesitamos que se cumpla
+  $$2a, \quad a^2 - db^2 \in \ZZ.$$
+  La primera condición implica que $a = a'/2$ para algún $a' \in \ZZ$.
+  Para la segunda condición, dado que $d$ es un entero libre de cuadrados,
+  se ve que necesariamente $b = \frac{b'}{2}$ para algún $b' \in \ZZ$.
+
+  Analicemos entonces la condición
+  $$a^2 - db^2 \in \ZZ \iff a'^2 - db'^2 \equiv 0 \pmod{4}.$$
+
+  Si $d \equiv 1 \pmod{4}$, entonces nos queda $a'^2 \equiv b'^2 \pmod{4}$,
+  lo que sucede precisamente cuando $a' \equiv b' \pmod{2}$.
+  Entonces, en este caso
+  \[ \O_K = \Bigl\{ \frac{a'}{2} + \frac{b'}{2}\sqrt{d} \Bigm|
+                    a', b' \in \ZZ, ~ a'\equiv b' \pmod{2} \}
+          = \ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]. \]
+
+  Por otra parte, si $d \equiv 2,3 \pmod{4}$, se ve que la condición es
+  equivalente a $a' \equiv b' \equiv 0 \pmod{2}$, así que
+  \[ \O_K = \ZZ [\sqrt{d}]. \qedhere \]
+\end{ejemplo}
+
+Este ejemplo demuestra que si $K = \QQ (\alpha)$, donde $\alpha$ es un entero
+algebraico, entonces no es necesariamente cierto que $\O_K = \ZZ [\alpha]$.
+
+\begin{ejemplo}
+  Para el campo ciclotómico $K = \QQ (\zeta_n)$ se tiene $\O_K = \ZZ [\zeta_n]$.
+  Todavía no tenemos las herramientas adecuadas para probarlo en toda
+  generalidad, y por el momento sugiero considerar el caso de $n = p$ primo.
+
+  La extensión ciclotómica $\QQ (\zeta_p)/\QQ$ es de Galois, y los automorfismos
+  vienen dados por $\zeta_p \mapsto \zeta_p^k$, donde $k = 1,2,3,\ldots,p-1$.
+  El grupo de Galois es cíclico, isomorfo a $(\ZZ/p\ZZ)^\times$. Denotemos por
+  $\sigma$ su generador:
+  $$\Gal (\QQ (\zeta_p)/\QQ) = \{ 1, \sigma, \ldots, \sigma^{p-2} \}.$$
+
+  Si $\alpha \in \O_K$, entonces $\sigma^i (\alpha) \in \O_K$: todos los
+  conjugados de Galois son raíces del mismo polinomio mínimo. Para una extensión
+  de Galois la norma es el producto de todos los conjugados:
+  \[ N (\alpha) = N_{K/\QQ} (\alpha) =
+     \alpha\,\sigma (\alpha)\,\sigma^2(\alpha)\cdots\sigma^{p-2}(\alpha). \]
+  Además, la \textbf{traza} es la suma de todos los conjugados:
+  \[ T (\alpha) = T_{K/\QQ} (\alpha) =
+     \alpha + \sigma (\alpha) + \sigma^2 (\alpha) + \cdots + \sigma^{p-2} (\alpha). \]
+  Las expresiones de arriba son invariantes respecto a la acción del grupo de
+  Galois, así que para todo $\alpha \in \O_K$ se tiene
+  $$N (\alpha), T (\alpha) \in \O_K \cap \QQ = \ZZ.$$
+
+  De estas definiciones está claro que la norma es multiplicativa y la traza es
+  $\QQ$-lineal: para $\alpha,\beta \in K$ y $a,b \in \QQ$
+  \[ N (\alpha\beta) = N (\alpha) \, N (\beta), \quad
+     T (a\alpha + b\beta) = a\,T (\alpha) + b\,T (\beta). \]
+
+  Por ejemplo,
+  \[ N (1 - \zeta_p) = (1 - \zeta_p)\,(1 - \zeta_p^2)\cdots (1 - \zeta_p^{p-1})
+     = \Phi_p (1) = p. \]
+  Esto implica que $1 - \zeta_p \notin \O_K^\times$ (como siempre, por la
+  multiplicatividad de la norma, las unidades deben tener norma $\pm
+  1$). Además, este cálculo nos dice que
+  $$p\ZZ \subseteq (1 - \zeta_p) \O_K \cap \ZZ.$$
+  Pero el ideal $(1 - \zeta_p) \subset \O_K$ es propio y $p\ZZ$ es maximal en
+  $\ZZ$, así que
+  $$(1-\zeta_p) \O_K \cap \ZZ = p\ZZ.$$
+
+  Ahora consideremos un elemento $\alpha \in \O_K$ dado por
+  $$\alpha = a_0 + a_1 \zeta_p + \cdots + a_{p-2} \zeta_p^{p-2},$$
+  donde $a_i \in \QQ$. Calculamos
+  $$T (\alpha \, (1 - \zeta_p)) =
+    \sigma (\alpha)\,(1 - \zeta_p) +
+    \sigma^2 (\alpha)\,(1 - \zeta_p^2) +
+    \cdots + 
+    \sigma^{p-2} (\alpha)\,(1 - \zeta_p^{p-2}).$$
+  Para todo $i = 1,2,\ldots,p-1$ tenemos
+  $$1 - \zeta_p^i = (1 - \zeta_p)\,(1 + \zeta_p + \cdots + \zeta_p^{i-1}),$$
+  así que
+  $$T (\alpha \, (1 - \zeta_p)) \in (1 - \zeta_p) \O_K \cap \ZZ = p\ZZ.$$
+
+  Por otro lado, podemos calcular directamente que
+  $$T (\alpha \, (1 - \zeta_p)) = a_0 p$$
+  (un pequeño ejercicio para el lector: calcule $T (\zeta_p^k)$ y use
+  la linealidad de la traza). Esto implica que $a_0 \in \ZZ$.
+  Luego podemos pasar al entero algebraico
+  $$(\alpha - a_0)/\zeta_p = a_1 + a_2\,\zeta_p + a_3\,\zeta_p^2 + \cdots,$$
+  y el mismo argumento nos dirá que $a_1 \in \ZZ$, etcétera.
+  Al final vamos a concluir que $\alpha \in \ZZ [\zeta_p]$.
+\end{ejemplo}
+
+\begin{advertencia}
+  Los ejemplos que vimos hasta el momento son algo peligrosos porque en estos
+  el anillo de enteros tiene forma
+  \[ \ZZ [\alpha] = \ZZ \oplus \alpha \ZZ \oplus \cdots \oplus \alpha^{n-1} \ZZ
+         \quad\text{para algún }\alpha \in \O_K; \]
+  en otras palabras, $\O_K$ tiene una base sobre $\ZZ$ que consiste en potencias
+  del mismo elemento $\alpha$. Dedekind observó por primera vez que esto no es
+  siempre posible y dio el primer ejemplo particular
+  $$K = \QQ [x]/(x^3-x^2-2x-8).$$
+  En este caso él anillo de enteros $\O_K$ no tiene forma $\ZZ [\alpha]$, pero
+  lo vamos probar más adelante, en el momento adecuado.
+
+  Los campos de números cuyo anillo de enteros tiene forma $\ZZ [\alpha]$
+  se llaman \textbf{monogénicos} y de hecho son muy especiales. Vamos a volver
+  a este asunto más adelante, pero lo menciono para que el lector no quede con
+  la falsa impresión de que todos los campos de números son monogénicos.
+  En realidad, pocos lo son.
+\end{advertencia}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dominios de Dedekind}
+
+Para resumir la situación, dado un campo de números $K$, hemos definido
+\emph{de manera canónica} un subanillo $\O_K \subset K$ que es integralmente
+cerrado. Este es un dominio de Dedekind.
+
+\begin{definicion}
+  Un \textbf{dominio de Dedekind} es un dominio $R$ que cumple las siguientes
+  condiciones:
+  \begin{enumerate}
+  \item[a)] $R$ es noetheriano,
+
+  \item[b)] $\dim R = 1$\footnote{Algunos autores piden $\dim R \le 1$.}
+    (es decir, todo ideal primo no nulo $\mathfrak{p}\subset R$ es maximal),
+
+  \item[c)] $R$ es integralmente cerrado.
+  \end{enumerate}
+\end{definicion}
+
+Como hemos visto, las condiciones a) y b) se cumplen para cualquier anillo
+de números $R \subset K$. Sin embargo, la condición c) no siempre se cumple,
+y por esto introducimos el anillo de enteros $\O_K$.
+
+No todos los dominios de Dedekind son de la forma $\O_K$. Por ejemplo,
+el anillo de polinomios $k[x]$ (donde $k$ es un campo) es un anillo de Dedekind.
+
+\begin{comentario}
+  Tal vez cabe mencionar que un anillo puede ser integralmente cerrado y
+  unidimensional, pero no ser noetheriano. Consideremos por ejemplo el anillo
+  $R$ que consiste en \emph{todos} los enteros algebraicos; es decir,
+  los elementos de $\overline{\QQ}$ enteros sobre $\ZZ$. Los mismos argumentos
+  que vimos arriba demuestran que de hecho $R$ es un anillo (pero muy grande).
+  En este caso $\dim R = \dim \ZZ = 1$ por el teorema ``going up''
+  \cite[Theorem 5.11]{Atiyah-Macdonald}. Sin embargo, no es difícil encontrar
+  una cadena infinita de ideales en $R$, como por ejemplo
+  \[ (2)\subsetneq (\sqrt{2})\subsetneq (\sqrt[4]{2})\subsetneq (\sqrt[8]{2})
+       \subsetneq (\sqrt[16]{2}) \subsetneq \cdots
+         \subsetneq (2^{1/2^n}) \subsetneq \cdots \]
+
+  Este anillo tampoco es un dominio de factorización única (recordemos que
+  la factorización única implica que las cadenas de ideales principales
+  se estabilizan).
+\end{comentario}
+
+Nuestro próximo objetivo será probar que todo dominio de Dedekind admite
+factorización única de ideales en ideales primos. De hecho, también es cierta
+la otra implicación: un dominio donde todo ideal propio no nulo $I \subset R$
+se expresa como un producto de ideales primos debe ser un dominio de
+Dedekind. El lector interesado puede consultar \cite[Chapter 20]{Clark-CA} para
+más detalles y otras caracterizaciones de dominios de Dedekind.
+
+\vspace{1em}
+
+Hasta el final de esta sección, sea $R$ un dominio de Dedekind y $K$ su campo
+de fracciones. En particular, esto funciona para el anillo de enteros
+$R = \O_K$ de un campo de números $K$. El lector notará que los argumentos
+de abajo usan todas las condiciones sobre $R$ (noetheriano, unidimensional,
+integralmente cerrado).
+
+\begin{lema}
+  Todo ideal $I \subset R$ contiene un producto de ideales primos no nulos.
+
+  \begin{proof}
+    Supongamos que esto es falso. Sea $I$ un ideal no nulo que es maximal
+    respecto a la propiedad que $I$ no contiene un producto de ideales primos
+    no nulos. Este $I$ existe gracias a la condición noetheriana. El mismo $I$
+    no es primo, así que existen $\alpha,\beta \in R$ tales que
+    $\alpha\beta \in I$, pero $\alpha,\beta \notin I$. Ahora tenemos
+    $$I \subsetneq I + \alpha R, \quad I \subsetneq I + \beta R.$$
+    Por la maximalidad de $I$, tenemos
+    \[ \mathfrak{p}_1\cdots\mathfrak{p}_s \subseteq I + \alpha R, \quad
+       \mathfrak{q}_1\cdots\mathfrak{q}_t \subseteq I + \beta R. \]
+    Pero ahora
+    \[ \mathfrak{p}_1\cdots\mathfrak{p}_s\,\mathfrak{q}_1\cdots\mathfrak{q}_t
+       \subseteq (I + \alpha R)\,(I + \beta R) \subseteq I. \]
+    Contradicción.
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  \begin{enumerate}
+  \item[a)] Para todo $R$-ideal fraccionario $I$ se tiene
+    \[ (I : I) \stackrel{\text{def}}{=}
+           \{ \alpha \in K \mid \alpha I \subseteq I \} = R. \]
+           
+  \item[b)] Dado un ideal entero propio no nulo $I \subsetneq R$, se tiene
+    $R \subsetneq I^{-1}$.
+  \end{enumerate}
+
+  \begin{proof}
+    En a), la inclusión $R \subseteq (I : I)$ está clara por la definición de
+    $(I : I)$. Para la otra inclusión, si $\alpha I \subseteq I$, entonces, dado
+    que $I$ es un $R$-módulo finitamente generado, podemos concluir que $\alpha$
+    es entero sobre $R$ (recuerde nuestra caracterización de integralidad de
+    \ref{lema:caracterizacion-de-integralidad}). Pero $R$ es integralmente
+    cerrado por nuestra hipótesis, y por lo tanto $\alpha \in R$.
+
+    En b), recordemos que por la definición,
+    $$I^{-1} = \{ \alpha \in K \mid \alpha I \subseteq R \}.$$
+    Para un elemento no nulo $\alpha \in I$, por el lema anterior tenemos
+    \[ \mathfrak{p}_1\cdots\mathfrak{p}_s \subseteq \alpha R
+           \subseteq I \subsetneq R \]
+    para algunos ideales primos no nulos $\mathfrak{p}_i$. Sea $s$ el mínimo
+    posible tal que $\alpha R$ contiene un producto de $s$ ideales primos no
+    nulos. Sea $\mathfrak{p}$ un ideal maximal tal que
+    $I \subseteq \mathfrak{p}$. Ahora
+    $\mathfrak{p}_1\cdots\mathfrak{p}_s \subseteq \mathfrak{p}$,
+    y por la primalidad de $\mathfrak{p}$ y maximalidad de $\mathfrak{p}_i$
+    (¡gracias a la hipótesis que $\dim R = 1$!), tenemos
+    $\mathfrak{p} = \mathfrak{p}_i$ para algún $i$. Sin pérdida de generalidad,
+    $i = 1$.
+
+    Si $s = 1$, entonces
+    $\mathfrak{p}_1 \subseteq \alpha R \subseteq I \subseteq \mathfrak{p}$
+    implica que $I = \alpha R$. Tenemos $R \subsetneq I^{-1} = \alpha^{-1} R$
+    (note que $I$ es un ideal propio, así que $\alpha$ no es invertible en $R$).
+
+    Si $s > 1$, entonces por la minimalidad de $s$, tenemos
+    $\mathfrak{p}_2\cdots\mathfrak{p}_s \not\subseteq \alpha R$. Tomemos
+    $\beta \in \mathfrak{p}_2\cdots\mathfrak{p}_s \setminus \alpha R$.
+    Notamos que $\alpha^{-1}\beta \notin R$. Por otra parte,
+    \[ \alpha^{-1}\beta I \subseteq \alpha^{-1}\beta\mathfrak{p}
+       \subseteq \alpha^{-1} \mathfrak{p}\mathfrak{p}_2\cdots\mathfrak{p}_s
+       \subseteq \alpha^{-1} (\alpha R) = R. \]
+    Entonces, $\alpha^{-1}\beta \in I^{-1}$.
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  Todo $R$-ideal fraccionario es invertible.
+
+  \begin{proof}
+    Tenemos que probar que $I I^{-1} = R$. La inclusión
+    $I I^{-1} \subseteq R$ se cumple en cualquier caso por la definición
+    de $I^{-1}$. De modo similar,
+    \[ (I I^{-1})\,(I I^{-1})^{-1} \subseteq R \Longrightarrow
+           I^{-1}\,(I I^{-1})^{-1} \subseteq I^{-1}. \]
+    Esto significa que
+    $$(I I^{-1})^{-1} \subseteq (I^{-1} : I^{-1}) = R,$$
+    donde la última igualdad se cumple por la parte a) del lema anterior.
+
+    Ahora $I I^{-1} \subseteq R$ es un ideal integral y podemos aplicar la parte
+    b) del lema: si $I I^{-1} \subsetneq R$, entonces
+    $R \subsetneq (I I^{-1})^{-1}$. Pero no es el caso, y por ende $I I^{-1} = R$.
+  \end{proof}
+\end{lema}
+
+Ahora estamos listos para establecer la factorización única en dominios
+de Dedekind.
+
+\begin{teorema}
+  En un dominio de Dedekind $R$ todo ideal entero propio, no nulo $I \subset R$
+  puede ser escrito como un producto de ideales primos
+  $I = \mathfrak{p}_1\cdots\mathfrak{p}_s$. Además, esta expresión es única
+  salvo una permutación de los $\mathfrak{p}_i$.
+
+  \begin{proof}
+    Primero vamos a establecer existencia de factorizaciones, y luego su
+    unicidad. Supongamos que existen ideales propios no nulos que no se expresan
+    como un producto de ideales primos. Sea $I$ un ideal maximal con esta
+    propiedad (este existe gracias a la condición noetheriana). El mismo $I$
+    no es primo, así que existe un ideal maximal $\mathfrak{p}$ tal que
+    $I \subsetneq \mathfrak{p}$. Tenemos $I = \mathfrak{p} J$, donde
+    $J = \mathfrak{p}^{-1} I$ (esto tiene sentido, ya que los ideales son
+    invertibles). Notamos que $J \subseteq \mathfrak{p} \mathfrak{p}^{-1} = R$,
+    así que $J$ es un ideal integral. Ahora tenemos $I \subsetneq J$
+    (si $I = J = \mathfrak{p}^{-1} I$, entonces $\mathfrak{p} = R$
+    gracias a la invertibilidad de $I$, pero no es el caso). Por la elección
+    de $I$, tenemos $J = \mathfrak{p}_1\cdots\mathfrak{p}_s$, pero luego
+    $I = \mathfrak{p}\mathfrak{p}_1\cdots\mathfrak{p}_s$. Contradicción.
+
+    Ahora para probar que las factorizaciones son únicas, procedamos por
+    inducción de la manera habitual. Si
+    \[ I = \mathfrak{p}_1\cdots\mathfrak{p}_s =
+           \mathfrak{q}_1\cdots\mathfrak{q}_t, \]
+    entonces, usando que los ideales son maximales, tenemos sin pérdida de
+    generalidad $\mathfrak{p}_s = \mathfrak{q}_t$. Gracias a la invertibilidad
+    de ideales, los podemos cancelar y obtener de esta manera
+    \[ \mathfrak{p}_1\cdots\mathfrak{p}_{s-1} =
+       \mathfrak{q}_1\cdots\mathfrak{q}_{t-1}. \]
+    Esto nos da el paso inductivo.
+  \end{proof}
+\end{teorema}
+
+Entonces, dado un ideal entero no nulo $I$ en un dominio de Dedekind, se tiene
+$$I = \prod_{\mathfrak{p}} \mathfrak{p}^{v_{\mathfrak{p}} (I)},$$
+donde el producto es sobre todos los ideales primos no nulos y los números
+$v_{\mathfrak{p}} (I) \ge 0$ están bien definidos (y casi todos son nulos, salvo
+un número finito de ellos).
+
+Si $I$ es un $R$-ideal fraccionario, entonces existe $\alpha \in K^\times$
+tal que $\alpha I \subseteq R$ es un ideal integral, y luego
+$$I = \prod_{\mathfrak{p}} \mathfrak{p}^{v_{\mathfrak{p}} (I)},$$
+donde $v_{\mathfrak{p}} (I) = v_{\mathfrak{p}} (\alpha I) - v_{\mathfrak{p}} (\alpha R)$.
+De esta manera la factorización única se generaliza a ideales fraccionarios
+(permitiendo potencias negativas de ideales primos).
+
+El lector puede comprobar que la función $v_{\mathfrak{p}}$ se comporta como las
+valuaciones habituales: se cumple
+\[ v_{\mathfrak{p}} (IJ) = v_{\mathfrak{p}} (I) + v_{\mathfrak{p}} (J), \quad
+   v_{\mathfrak{p}} (I+J) \ge \min \{ v_{\mathfrak{p}} (I), v_{\mathfrak{p}} (J) \}. \]
+
+Otra manera de expresar el hecho de que los ideales fraccionarios se factorizan
+de manera única en ideales primos es decir que el grupo abeliano de ideales
+invertibles (en un dominio de Dedekind todo ideal es invertible) es libre,
+generado por los ideales primos: tenemos un isomorfismo
+\[ \mathcal{I} (R) \xrightarrow{\cong} \bigoplus_{\mathfrak{p}} \ZZ, \quad
+   I \mapsto (v_{\mathfrak{p}} (I))_\mathfrak{p}. \]
+
+\vspace{1em}
+
+Para un dominio de Dedekind $R$, el grupo de Picard $\Pic (R)$ en algún sentido
+mide qué tan lejos $R$ está de ser un dominio de factorización única.
+Específicamente, tenemos el siguiente resultado.
+
+\begin{teorema}
+  Para un dominio de Dedekind $R$ las siguientes condiciones son equivalentes:
+  \begin{itemize}
+  \item[1)] $\Pic (R) = 0$,
+  \item[2)] $R$ es un dominio de ideales principales,
+  \item[3)] $R$ es un dominio de factorización única.
+  \end{itemize}
+
+  \begin{proof}
+    Los ideales fraccionarios son principales si y solamente si los ideales
+    enteros son principales, así que las condiciones 1) y 2) son
+    equivalentes.
+
+    En el capítulo anterior ya vimos la implicación 2)$\Rightarrow$3).
+
+    La implicación 3)$\Rightarrow$2) funciona gracias al hecho de que
+    $\dim R = 1$. A saber, supongamos que $R$ es un dominio de factorización
+    única. Todos los ideales en un dominio de Dedekind se factorizan en
+    productos de ideales primos, así que será suficiente probar que todo ideal
+    primo es principal. Para esto, dado un ideal primo no nulo $\mathfrak{p}$,
+    tomemos un elemento no nulo $\alpha \in \mathfrak{p}$. Por la hipótesis
+    sobre $R$, tenemos una factorización en \emph{elementos} primos
+    $$\alpha = \pi_1 \cdots \pi_s.$$
+    Ahora
+    $$\alpha R = \mathfrak{p}_1\cdots\mathfrak{p}_s \subseteq \mathfrak{p},$$
+    donde $\mathfrak{p}_i = \pi_i R$ son ideales primos principales, y son
+    también maximales, ya que $\dim R = 1$.
+    Como siempre, dado que $\mathfrak{p}$ es primo y los $\mathfrak{p}_i$ son
+    maximales, podemos concluir que $\mathfrak{p} = \mathfrak{p}_i = \pi_i R$
+    es principal.
+  \end{proof}
+\end{teorema}
+
+Terminamos por una definición.
+
+\begin{definicion}
+  Dado un campo de números $K$, su \term{grupo de clases} viene dado por
+  $$\Cl (K) = \Pic (\O_K).$$
+\end{definicion}
+
+El término ``grupo de clases'' es una abreviación de ``grupo de clases
+de ideales'' (\emph{Idealklassengruppe} en alemán) y se refiere al hecho de que
+los elementos de $\Pic (\O_K)$ son \emph{clases} de equivalencia de ideales
+modulo ideales principales.
+
+Uno de los resultados importantes del curso será probar que el grupo $\Cl (K)$
+es finito para cualquier campo de números $K$. También veremos cómo se
+pueden calcular $\O_K$ y $\Cl (K)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Teorema de Kummer--Dedekind}
+
+**TODO**
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Factorización de ideales en PARI/GP}
+
+**TODO**
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagebreak
 
@@ -1184,4 +1659,8 @@ a investigar este concepto.
   Si $R$ es un anillo finito, demuestre que
   \[ \# R^\times = \# R \cdot \prod_{\mathfrak{p} \in \Spec R}
                     \left(1 - \frac{1}{\# (R/\mathfrak{p})}\right). \]
+\end{ejercicio}
+
+\begin{ejercicio}
+  Demuestre que todo dominio de factorización única es integralmente cerrado.
 \end{ejercicio}
