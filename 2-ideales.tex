@@ -1007,8 +1007,8 @@ a investigar este concepto.
 
   \item[b)] $R [\alpha] \subset K$ es un $R$-módulo finitamente generado.
 
-  \item[c)] Existe un $R$-módulo finitamente generado $M \subseteq K$ tal que
-    $\alpha M \subseteq M$.
+  \item[c)] Existe un $R$-módulo finitamente generado no nulo
+    $M \subseteq K$ tal que $\alpha M \subseteq M$.
   \end{enumerate}
 
   \begin{proof}
@@ -1162,6 +1162,9 @@ a investigar este concepto.
   \end{proof}
 \end{proposicion}
 
+Para los resultados generales acerca de elementos enteros en extensiones de
+anillos $R \subset S$, véase por ejemplo \cite[Chapter~5]{Atiyah-Macdonald}.
+
 Otra propiedad importante del anillo de enteros: $\O_K$ es un $\ZZ$-módulo libre
 de rango $[K : \QQ]$.
 \[ \begin{tikzcd}
@@ -1207,7 +1210,8 @@ de anillos de números.
 \end{ejemplo}
 
 Este ejemplo demuestra que si $K = \QQ (\alpha)$, donde $\alpha$ es un entero
-algebraico, entonces no es necesariamente cierto que $\O_K = \ZZ [\alpha]$.
+algebraico, entonces el anillo de enteros $\O_K$ puede ser más grande que
+$\ZZ [\alpha]$.
 
 \begin{ejemplo}
   Para el campo ciclotómico $K = \QQ (\zeta_n)$ se tiene $\O_K = \ZZ [\zeta_n]$.
@@ -1320,20 +1324,10 @@ el anillo de polinomios $k[x]$ (donde $k$ es un campo) es un anillo de Dedekind.
 
 \begin{comentario}
   Tal vez cabe mencionar que un anillo puede ser integralmente cerrado y
-  unidimensional, pero no ser noetheriano. Consideremos por ejemplo el anillo
-  $R$ que consiste en \emph{todos} los enteros algebraicos; es decir,
-  los elementos de $\overline{\QQ}$ enteros sobre $\ZZ$. Los mismos argumentos
-  que vimos arriba demuestran que de hecho $R$ es un anillo (pero muy grande).
-  En este caso $\dim R = \dim \ZZ = 1$ por el teorema ``going up''
-  \cite[Theorem 5.11]{Atiyah-Macdonald}. Sin embargo, no es difícil encontrar
-  una cadena infinita de ideales en $R$, como por ejemplo
-  \[ (2)\subsetneq (\sqrt{2})\subsetneq (\sqrt[4]{2})\subsetneq (\sqrt[8]{2})
-       \subsetneq (\sqrt[16]{2}) \subsetneq \cdots
-         \subsetneq (2^{1/2^n}) \subsetneq \cdots \]
-
-  Este anillo tampoco es un dominio de factorización única (recordemos que
-  la factorización única implica que las cadenas de ideales principales
-  se estabilizan).
+  unidimensional, pero no ser noetheriano. Un ejemplo natural es el anillo de
+  todos los enteros algebraicos (es decir, elementos de $\overline{\QQ}$ enteros
+  sobre $\ZZ$). Este es un anillo muy grande que contiene todos los anillos de
+  enteros $\O_K$. (Haga el ejercicio~\ref{ejerc:todos-enteros-algebraicos}.)
 \end{comentario}
 
 Nuestro próximo objetivo será probar que todo dominio de Dedekind admite
@@ -1352,7 +1346,8 @@ de abajo usan todas las condiciones sobre $R$ (noetheriano, unidimensional,
 integralmente cerrado).
 
 \begin{lema}
-  Todo ideal $I \subset R$ contiene un producto de ideales primos no nulos.
+  Todo ideal integral no nulo $I \subset R$ contiene un producto de ideales
+  primos no nulos.
 
   \begin{proof}
     Supongamos que esto es falso. Sea $I$ un ideal no nulo que es maximal
@@ -1363,17 +1358,19 @@ integralmente cerrado).
     $$I \subsetneq I + \alpha R, \quad I \subsetneq I + \beta R.$$
     Por la maximalidad de $I$, tenemos
     \[ \mathfrak{p}_1\cdots\mathfrak{p}_s \subseteq I + \alpha R, \quad
-       \mathfrak{q}_1\cdots\mathfrak{q}_t \subseteq I + \beta R. \]
+       \mathfrak{q}_1\cdots\mathfrak{q}_t \subseteq I + \beta R \]
+    para algunos ideales primos $\mathfrak{p}_i, \mathfrak{q}_j$.
     Pero ahora
     \[ \mathfrak{p}_1\cdots\mathfrak{p}_s\,\mathfrak{q}_1\cdots\mathfrak{q}_t
-       \subseteq (I + \alpha R)\,(I + \beta R) \subseteq I. \]
+       \subseteq (I + \alpha R)\,(I + \beta R) =
+       I^2 + \alpha I + \beta I + \alpha\beta R \subseteq I. \]
     Contradicción.
   \end{proof}
 \end{lema}
 
 \begin{lema}
   \begin{enumerate}
-  \item[a)] Para todo $R$-ideal fraccionario $I$ se tiene
+  \item[a)] Para todo $R$-ideal fraccionario no nulo $I$ se tiene
     \[ (I : I) \stackrel{\text{def}}{=}
            \{ \alpha \in K \mid \alpha I \subseteq I \} = R. \]
            
@@ -1384,8 +1381,9 @@ integralmente cerrado).
   \begin{proof}
     En a), la inclusión $R \subseteq (I : I)$ está clara por la definición de
     $(I : I)$. Para la otra inclusión, si $\alpha I \subseteq I$, entonces, dado
-    que $I$ es un $R$-módulo finitamente generado, podemos concluir que $\alpha$
-    es entero sobre $R$ (recuerde nuestra caracterización de integralidad de
+    que $I$ es un $R$-módulo finitamente generado (por la condición
+    noetheriana), podemos concluir que $\alpha$ es entero sobre $R$ (recuerde
+    nuestra caracterización de integralidad de
     \ref{lema:caracterizacion-de-integralidad}). Pero $R$ es integralmente
     cerrado por nuestra hipótesis, y por lo tanto $\alpha \in R$.
 
@@ -1407,7 +1405,7 @@ integralmente cerrado).
     Si $s = 1$, entonces
     $\mathfrak{p}_1 \subseteq \alpha R \subseteq I \subseteq \mathfrak{p}$
     implica que $I = \alpha R$. Tenemos $R \subsetneq I^{-1} = \alpha^{-1} R$
-    (note que $I$ es un ideal propio, así que $\alpha$ no es invertible en $R$).
+    (note que $I$ es un ideal propio, así que $\alpha^{-1} \notin R$).
 
     Si $s > 1$, entonces por la minimalidad de $s$, tenemos
     $\mathfrak{p}_2\cdots\mathfrak{p}_s \not\subseteq \alpha R$. Tomemos
@@ -1421,7 +1419,7 @@ integralmente cerrado).
 \end{lema}
 
 \begin{lema}
-  Todo $R$-ideal fraccionario es invertible.
+  Todo $R$-ideal fraccionario no nulo es invertible.
 
   \begin{proof}
     Tenemos que probar que $I I^{-1} = R$. La inclusión
@@ -1439,8 +1437,7 @@ integralmente cerrado).
   \end{proof}
 \end{lema}
 
-Ahora estamos listos para establecer la factorización única en dominios
-de Dedekind.
+Ahora todo está listo para establecer la factorización única de ideales.
 
 \begin{teorema}
   En un dominio de Dedekind $R$ todo ideal entero propio, no nulo $I \subset R$
@@ -1482,17 +1479,31 @@ donde el producto es sobre todos los ideales primos no nulos y los números
 $v_{\mathfrak{p}} (I) \ge 0$ están bien definidos (y casi todos son nulos, salvo
 un número finito de ellos).
 
+Usando la factorización única, no es difícil ver que
+$$J = I I' \iff I \mid J \iff J \subseteq I.$$
+La función $v_{\mathfrak{p}}$ se comporta como las
+valuación:
+\[ v_{\mathfrak{p}} (IJ) = v_{\mathfrak{p}} (I) + v_{\mathfrak{p}} (J), \quad
+   v_{\mathfrak{p}} (I+J) = \min \{ v_{\mathfrak{p}} (I), v_{\mathfrak{p}} (J) \}. \]
+Además,
+$$v_{\mathfrak{p}} (I\cap J) = \max \{ v_{\mathfrak{p}} (I), v_{\mathfrak{p}} (J) \}.$$
+
+Para los ideales tiene sentido poner
+\begin{align*}
+\gcd (I,J) & = I + J = \prod_\mathfrak{p} \mathfrak{p}^{\min \{v_\mathfrak{p} (I), v_\mathfrak{p} (J)\}},\\
+\lcm (I,J) & = I\cap J = \prod_\mathfrak{p} \mathfrak{p}^{\max \{v_\mathfrak{p} (I), v_\mathfrak{p} (J)\})}.
+\end{align*}
+En particular, se tiene
+$$(I + J)\,(I\cap J) = IJ.$$
+Este es un análogo\footnote{Análogo ideal :-)} de la fórmula
+$$\gcd (\alpha,\beta)\,\lcm (\alpha,\beta) = \alpha\beta.$$
+
 Si $I$ es un $R$-ideal fraccionario, entonces existe $\alpha \in K^\times$
 tal que $\alpha I \subseteq R$ es un ideal integral, y luego
 $$I = \prod_{\mathfrak{p}} \mathfrak{p}^{v_{\mathfrak{p}} (I)},$$
 donde $v_{\mathfrak{p}} (I) = v_{\mathfrak{p}} (\alpha I) - v_{\mathfrak{p}} (\alpha R)$.
 De esta manera la factorización única se generaliza a ideales fraccionarios
 (permitiendo potencias negativas de ideales primos).
-
-El lector puede comprobar que la función $v_{\mathfrak{p}}$ se comporta como las
-valuaciones habituales: se cumple
-\[ v_{\mathfrak{p}} (IJ) = v_{\mathfrak{p}} (I) + v_{\mathfrak{p}} (J), \quad
-   v_{\mathfrak{p}} (I+J) \ge \min \{ v_{\mathfrak{p}} (I), v_{\mathfrak{p}} (J) \}. \]
 
 Otra manera de expresar el hecho de que los ideales fraccionarios se factorizan
 de manera única en ideales primos es decir que el grupo abeliano de ideales
@@ -1544,6 +1555,45 @@ Específicamente, tenemos el siguiente resultado.
     es principal.
   \end{proof}
 \end{teorema}
+
+La factorización única nos permite demostrar que los dominios de Dedekind no
+están muy lejos de ser dominios de ideales principales: cada ideal puede ser
+generado por dos elementos.
+
+\begin{proposicion}
+  Sea $R$ un dominio de Dedekind. Dado un ideal no nulo $I \subset R$ y un
+  elemento no nulo $\alpha \in I$ existe $\beta \in I$ tal que
+  $$(\alpha,\beta) = \alpha R + \beta R = I.$$
+
+  \begin{proof}
+    Consideremos la factorización de ideales primos
+    $$\alpha R = \mathfrak{p}_1^{e_1}\cdots\mathfrak{p}_s^{e_s}.$$
+    Ahora $I \mid \alpha R$, así que
+    $$I = \mathfrak{p}_1^{e_1'}\cdots \mathfrak{p}_s^{e_s'},$$
+    donde $e_i \le e_i'$.
+
+    Se puede escoger $\beta \in R$ tal que $\mathfrak{p}_i^{e_i'} \mid \beta R$,
+    pero $\mathfrak{p}_i^{e_i' + 1} \nmid \beta R$. A saber, esto se hace
+    mediante el teorema chino del resto, escogiendo
+    $\beta_i \in \mathfrak{p}_i^{e_i'+1}\setminus\mathfrak{p}_i^{e_i'}$:
+
+    \[ \begin{tikzcd}
+      R/(\mathfrak{p}_1^{e_1'+1}\cdots\mathfrak{p}_s^{e_s'+1}) \ar{rrr}{\cong}\ar[->>]{dd} &[-2em] &&[-2em]
+      R/\mathfrak{p}_1^{e_1'+1}\times\cdots\times R/\mathfrak{p}_s^{e_s'+1} \ar[->>]{dd} \\[-2em]
+      & \beta \ar[|->]{r} & (\beta_1, \ldots, \beta_s) \\
+      R/(\mathfrak{p}_1^{e_1'}\cdots\mathfrak{p}_s^{e_s'}) \ar{rrr}{\cong} &&&
+      R/\mathfrak{p}_1^{e_1'}\times\cdots\times R/\mathfrak{p}_s^{e_s'}
+    \end{tikzcd} \]
+
+    Ahora $\beta R = IJ$, donde $\mathfrak{p}_i \nmid J$ para ningún
+    $i = 1,\ldots,s$, y por lo tanto
+    \[ (\alpha,\beta) =
+       \alpha R + \beta R =
+       \prod_\mathfrak{p}
+         \mathfrak{p}^{\min \{ v_\mathfrak{p} (\alpha R), v_\mathfrak{p} (\beta R) \}}
+       = I. \qedhere \]
+  \end{proof}
+\end{proposicion}
 
 Terminamos por una definición.
 
@@ -1668,4 +1718,25 @@ pueden calcular $\O_K$ y $\Cl (K)$.
 
 \begin{ejercicio}
   Demuestre que todo dominio de factorización única es integralmente cerrado.
+\end{ejercicio}
+
+\begin{ejercicio}
+  \label{ejerc:todos-enteros-algebraicos}
+  Consideremos el anillo $R$ que consiste en \emph{todos} los enteros
+  algebraicos; es decir, los elementos de $\overline{\QQ}$ que son enteros sobre
+  $\ZZ$.
+
+  \begin{enumerate}
+  \item[1)] Verifique que $R$ es un anillo.
+
+  \item[2)] Demuestre que $\dim R = \dim \ZZ = 1$ usando
+    \cite[Theorem 5.11]{Atiyah-Macdonald}.
+
+  \item[3)] Encuentre una sucesión infinita de enteros algebraicos
+    $\alpha_1, \alpha_2, \alpha_3, \ldots$ tal que $\alpha_{i+1}\mid\alpha_i$,
+    pero $\alpha_i \nmid \alpha_{i+1}$.
+
+  \item[4)] Concluya que $R$ no es noetheriano y no es un dominio de
+    factorización única.
+  \end{enumerate}
 \end{ejercicio}
