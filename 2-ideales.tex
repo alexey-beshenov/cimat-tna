@@ -1498,7 +1498,7 @@ $$(I + J)\,(I\cap J) = IJ.$$
 Este es un análogo\footnote{Análogo ideal :-)} de la fórmula
 $$\gcd (\alpha,\beta)\,\lcm (\alpha,\beta) = \alpha\beta.$$
 
-Si $I$ es un $R$-ideal fraccionario, entonces existe $\alpha \in K^\times$
+Si $I$ es un $R$-ideal fraccionario, entonces existe $\alpha \in R$ no nulo
 tal que $\alpha I \subseteq R$ es un ideal integral, y luego
 $$I = \prod_{\mathfrak{p}} \mathfrak{p}^{v_{\mathfrak{p}} (I)},$$
 donde $v_{\mathfrak{p}} (I) = v_{\mathfrak{p}} (\alpha I) - v_{\mathfrak{p}} (\alpha R)$.
@@ -1611,8 +1611,16 @@ Uno de los resultados importantes del curso será probar que el grupo $\Cl (K)$
 es finito para cualquier campo de números $K$. También veremos cómo se
 pueden calcular $\O_K$ y $\Cl (K)$.
 
+
+La evidencia numérica \emph{sugiere que} todo grupo abeliano finito es isomorfo
+a $\Cl (K)$ para algún campo de números $K$, pero esta es una conjetura abierta.
+Sin embargo, si consideramos todos los dominios de Dedekind, un teorema
+de Claborn dice que cualquier grupo abeliano $A$ es isomorfo a $\Pic (R)$
+para algún dominio de Dedekind $R$. Véase \cite{Claborn-1966}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\iffalse
 \section{Teorema de Kummer--Dedekind}
 
 **TODO**
@@ -1622,6 +1630,7 @@ pueden calcular $\O_K$ y $\Cl (K)$.
 \section{Factorización de ideales en PARI/GP}
 
 **TODO**
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
