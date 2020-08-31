@@ -47,7 +47,7 @@ alexey.beshenov@cimat.mx
 ## Agradecimientos
 
 Agradezco a CIMAT por la oportunidad de dar este curso, y en particular
-al Dr. Xavier Gómez Mont y Dr. Perdo Luis del Ángel.
+al Dr. Xavier Gómez Mont y Dr. Pedro Luis del Ángel.
 
 Pavel Solomatin y Dmitry Shvetsov han echo varias observaciones útiles acerca de
 una versión preliminar de mis notas.
