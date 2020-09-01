@@ -1,4 +1,4 @@
-all: pics tareas tna.pdf
+all: pics hw tna.pdf
 
 pics:
 	cd pic && $(MAKE)
