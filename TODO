@@ -5,3 +5,5 @@ Después de ver trazas y discriminantes.
 
 * Volver al ejemplo de Dedekind de un campo no-monogénico
   K = Q[x]/(x^3 - x^2 - 2x - 8).
+
+* Kummer-Dedekind cuando O_K /= Z [\alpha].
