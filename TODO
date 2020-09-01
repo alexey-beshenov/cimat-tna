@@ -1,0 +1,7 @@
+Después de ver trazas y discriminantes.
+
+* En algún momento calcular que el anillo de enteros de Q (\zeta_n)
+  es Z [\zeta_n].
+
+* Volver al ejemplo de Dedekind de un campo no-monogénico
+  K = Q[x]/(x^3 - x^2 - 2x - 8).
