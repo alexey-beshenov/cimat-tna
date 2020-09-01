@@ -43,6 +43,11 @@ alexey.beshenov@cimat.mx
 
   https://youtube.com/watch?v=pEFsrF595M8
 
+* Clase 7 (31/08/20). Anillo de enteros O_K (continuación).
+Dominios de Dedekind.
+
+  https://youtube.com/watch?v=7iGKFW5F-nI
+
 
 ## Agradecimientos
 
