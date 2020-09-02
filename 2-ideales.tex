@@ -1214,6 +1214,7 @@ algebraico, entonces el anillo de enteros $\O_K$ puede ser más grande que
 $\ZZ [\alpha]$.
 
 \begin{ejemplo}
+\label{ejemplo:O_K-para-Q(zeta_p)}
   Para el campo ciclotómico $K = \QQ (\zeta_n)$ se tiene $\O_K = \ZZ [\zeta_n]$.
   Todavía no tenemos las herramientas adecuadas para probarlo en toda
   generalidad, y por el momento sugiero considerar el caso de $n = p$ primo.
@@ -1620,17 +1621,461 @@ para algún dominio de Dedekind $R$. Véase \cite{Claborn-1966}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\iffalse
+\pdfbookmark{Clase 8 (02/09/20)}{clase-8}
+\marginpar{\small Clase 8 \\ 02/09/20}
+
 \section{Teorema de Kummer--Dedekind}
 
-**TODO**
+Hasta el momento, hemos introducido el anillo de enteros $\O_K$ y probamos
+mediante argumentos muy generales que todo ideal no nulo en $\O_K$ se factoriza
+de manera única en ideales primos. Me gustaría presentar algunas técnicas que
+nos permiten factorizar ideales en práctica, y en particular un resultado
+conocido como el teorema de Kummer--Dedekind. Aunque todavía no sabemos bien
+cómo calcular $\O_K$ a partir de un campo de números específico $K$, este
+teorema no trabaja con el mismo $\O_K$, sino con un subanillo posiblemente más
+pequeño que no es necesariamente integralmente cerrado.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Empecemos entonces por el siguiente resultado auxiliar.
 
-\section{Factorización de ideales en PARI/GP}
+\begin{lema}
+  Sea $R$ un anillo de números, no necesariamente integralmente cerrado.
+  Entonces, para todo ideal primo invertible $\mathfrak{p} \subset R$ y
+  $e \ge 1$ se cumple
+  $$\# (R/\mathfrak{p}^e) = \# (R/\mathfrak{p})^e.$$
 
-**TODO**
-\fi
+  \begin{proof}
+    Esto se establece por inducción sobre $e$, donde el caso base es $e = 1$.
+    Consideremos una filtración de $R$ por potencias de $\mathfrak{p}$:
+    \[ R \supsetneq \mathfrak{p} \supsetneq \mathfrak{p}^2 \supsetneq
+       \mathfrak{p}^3 \supsetneq \cdots \]
+    Aquí $\mathfrak{p}^{n+1} \subsetneq \mathfrak{p}^n$ son inclusiones
+    estrictas, por ejemplo, por la invertibilidad de $\mathfrak{p}$.
+    Tenemos un isomorfismo de grupos abelianos
+    \[ \frac{R/\mathfrak{p}^e}{\mathfrak{p}^{e-1}/\mathfrak{p}^e} \cong
+       R/\mathfrak{p}^{e-1}. \]
+    Será suficiente establecer un isomorfismo de grupos abelianos
+    $$R/\mathfrak{p} \cong \mathfrak{p}^{e-1}/\mathfrak{p}^e,$$
+    y luego la inducción funcionará gracias a
+    \[ \# (R/\mathfrak{p}^e) =
+       \# (\mathfrak{p}^{e-1}/\mathfrak{p}^e) \cdot \# (R/\mathfrak{p}^{e-1}) =
+       \# (R/\mathfrak{p})\cdot \# (R/\mathfrak{p}^{e-1}). \]
+
+    Escojamos un elemento
+    $\alpha \in \mathfrak{p}^{e-1}\setminus\mathfrak{p}^e$.  Tenemos
+    $$\mathfrak{p}^e \subsetneq \mathfrak{p}^e + \alpha R \subseteq \mathfrak{p}^{e-1},$$
+    y gracias a la invertibilidad (!) y maximalidad de $\mathfrak{p}$
+    esto implica que
+    \[ \tag{*} \mathfrak{p}^e + \alpha R = \mathfrak{p}^{e-1}. \]
+    Consideremos el homomorfismo de grupos
+    \[ \phi\colon R \to \mathfrak{p}^{e-1}/\mathfrak{p}^e, \quad
+       x \mapsto \alpha x + \mathfrak{p}^e. \]
+    Este es sobreyectivo gracias a (*). Calculamos el núcleo
+    $$\ker \phi = \{ x \in R \mid \alpha x \in \mathfrak{p}^e \}.$$
+    Está claro que si $x \in \mathfrak{p}$, entonces
+    $\alpha x \in \mathfrak{p}^{e-1} \, \mathfrak{p} = \mathfrak{p}^e$.
+    Por otra parte, supongamos que $\alpha x \in \mathfrak{p}^e$ y
+    $x \notin \mathfrak{p}$. En este caso $x$ es invertible módulo
+    $\mathfrak{p}$: existe $y \in R$ tal que $xy - 1 \in \mathfrak{p}$. Luego,
+    \[ \underbrace{\alpha x y}_{\in \mathfrak{p}^e} - \alpha =
+       \alpha (xy - 1) \in \mathfrak{p}^e, \]
+    así que $\alpha \in \mathfrak{p}^e$, pero esto contradice nuestra elección
+    de $\alpha$. Esto demuestra que $\ker \phi = \mathfrak{p}$, y podemos
+    concluir que
+    \[ R/\mathfrak{p} \cong \mathfrak{p}^{e-1}/\mathfrak{p}^e. \qedhere \]
+  \end{proof}
+\end{lema}
+
+\begin{comentario}
+  No estaría mal observar qué deja de funcionar en la prueba si $\mathfrak{p}$
+  no es invertible. Consideremos el anillo $R = \ZZ [\sqrt{-3}]$ y el ideal
+  maximal $\mathfrak{p} = (2, 1 + \sqrt{-3})$. Tenemos inclusiones estrictas
+  $$\mathfrak{p}^2 \subsetneq 2R \subsetneq \mathfrak{p},$$
+  lo que no puede pasar cuando $\mathfrak{p}$ es invertible.
+
+  De hecho, tenemos $\mathfrak{p}^2 = 2R\cdot \mathfrak{p}$. No es difícil
+  calcular que $R/\mathfrak{p} \cong \FF_2$. Ahora si $\mathfrak{p}$ como
+  $\ZZ$-submódulo de $R \cong \ZZ \oplus \sqrt{-3}\ZZ$ está generado por
+  $\omega_1, \omega_2$, entonces $\mathfrak{p}^2$ está generado por
+  $2\omega_1, 2\omega_2$, y se ve que $\# (\mathfrak{p}/\mathfrak{p}^2) = 4$
+  y no es $2$, como nos diría el lema si $\mathfrak{p}$ fuera invertible.
+\end{comentario}
+
+El teorema de Kummer--Dedekind considera la siguiente situación: dado un anillo
+de números $R = \ZZ [\alpha]$ con $\alpha$ un entero algebraico y un primo
+racional $p \in \ZZ$, cómo el ideal $pR$ se factoriza en ideales primos
+$\mathfrak{p} \subset R$.
+
+\begin{teorema}[Kummer--Dedekind]
+  Sean $\alpha$ un entero algebraico y $f (x) \in \ZZ [x]$ el polinomio mínimo
+  de $\alpha$ sobre $\QQ$. Pongamos $n = \deg f = [\QQ (\alpha) : \QQ]$.
+
+  Para un primo racional $p$, sean $g_i (x) \in \ZZ [x]$ polinomios mónicos
+  tales que
+  $$\overline{f} (x) = \overline{g_1}^{e_1} (x) \cdots \overline{g_s}^{e_s} (x)$$
+  es la factorización de $f$ en polinomios irreducibles en $\FF_p [x]$.
+
+  \begin{enumerate}
+  \item[1)] Los ideales primos en $\ZZ [\alpha]$ que contienen $p$ son precisamente
+    $$\mathfrak{p}_i = (p, g_i (\alpha)).$$
+    Tenemos $\mathfrak{p}_i \ne \mathfrak{p}_j$ para $i\ne j$.
+
+  \item[2)] Se tiene
+    $$\mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s} \subseteq p \ZZ [\alpha],$$
+    y la igualdad se cumple si y solamente si cada $\mathfrak{p}_i$ es invertible.
+
+    Además, si $\ZZ [\alpha]/\mathfrak{p}_i \cong \FF_{p^{f_i}}$,
+    entonces $\sum_i e_i f_i = n$.
+  \end{enumerate}
+
+  \begin{proof}
+    La evaluación de polinomios en $\alpha$ induce un isomorfismo de anillos
+    \[ \tag{*} \ZZ [x] / (f) \xrightarrow{\cong} \ZZ [\alpha], \quad
+       g \operatorname{mod} f \mapsto g (\alpha). \]
+    Tenemos una biyección
+    \[ \{ \text{primos }\mathfrak{p}\subset\ZZ[\alpha] \mid p\in\mathfrak{p} \}
+       \longleftrightarrow
+       \{ \text{primos }\mathfrak{p} \subset \ZZ[\alpha]/(p) \}. \]
+    Ahora reduciendo el isomorfismo (*) módulo $p$
+    $$\ZZ[\alpha]/(p) \cong \FF_p [x]/(\overline{f}),$$
+    así que
+    \[ \{ \text{primos }\mathfrak{p}\subset\ZZ[\alpha] \mid p \in \mathfrak{p} \}
+       \longleftrightarrow
+       \{ \text{primos }\mathfrak{p}\subset\FF_p [x]/(\overline{f}) \}. \]
+    Dado que $\FF_p [x]$ es un dominio de ideales principales, los primos no
+    nulos $\mathfrak{p} \subset \FF_p [x]/(\overline{f})$ son de la forma
+    $\mathfrak{p} = (\overline{g})$, donde $\overline{g} \in \FF_p [x]$
+    es un polinomio irreducible tal que $\overline{g} \mid \overline{f}$.
+    Haciendo explícitas todas las biyecciones, se obtiene la parte 1).
+
+    Notamos que $\deg g_i = f_i$, donde
+    $\ZZ[\alpha]/\mathfrak{p}_i \cong \FF_{p^{f_i}}$, así que
+    $$n = \deg f = \sum_i e_i \deg g_i = \sum_i e_i f_i.$$
+
+    Ahora en 2), si multiplicamos los ideales
+    $$(p, g_1 (\alpha))^{e_1}\cdots (p, g_s (\alpha))^{e_s},$$
+    se ve que el resultado tiene sus generadores divisibles por $p$, con una
+    posible excepción
+    $$g_1 (\alpha)^{e_1}\cdots g_s (\alpha)^{e_s}.$$
+    Pero en este caso por nuestra elección de $g_i$ y $e_i$ se tiene
+    $$g_1 (\alpha)^{e_1}\cdots g_s (\alpha)^{e_s} \equiv f (\alpha) = 0 \pmod{p}.$$
+    Esto establece la inclusión
+    \[ \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s} \subseteq p \ZZ [\alpha]. \]
+
+    El ideal $p \ZZ[\alpha]$ es invertible, como todo ideal principal, así que
+    la igualdad implicaría que los $\mathfrak{p}_i$ son invertibles.
+
+    Viceversa, supongamos que los $\mathfrak{p}_i$ son invertibles. Dado que
+    $\mathfrak{p}_i \ne \mathfrak{p}_j$ para $i\ne j$ y los $\mathfrak{p}_i$ son
+    maximales, tenemos $\mathfrak{p}_i + \mathfrak{p}_j = \ZZ [\alpha]$,
+    y luego $\mathfrak{p}_i^{e_i} + \mathfrak{p}_j^{e_j} = \ZZ [\alpha]$.
+    Esto nos permite aplicar el teorema chino del resto:
+    \[ \ZZ[\alpha]/(\mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s}) \cong
+         \ZZ[\alpha]/\mathfrak{p}_1^{e_1} \times \cdots \times
+           \ZZ[\alpha]/\mathfrak{p}_s^{e_s}. \]
+
+    Por el lema de arriba, se tiene
+    \[ \# (\ZZ[\alpha]/\mathfrak{p}_1^{e_1}) =
+       \#(\ZZ[\alpha]/\mathfrak{p}_1)^{e_1} = p^{f_i e_i}, \]
+    así que
+    \[ \# (\ZZ [\alpha] / (\mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s})) =
+       p^{\sum_i f_i e_i} = p^n. \]
+    Por otra parte, está claro que
+    $$\# (\ZZ [\alpha] / (p)) = p^n,$$
+    dado que cómo $\ZZ$-módulo, nuestro anillo tiene forma
+    $$\ZZ [\alpha] = \ZZ \oplus \alpha \ZZ \oplus \cdots \oplus \alpha^{n-1} \ZZ$$
+    This way we proved that
+    Entonces, hemos probado que
+    \[ [\ZZ [\alpha] : \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s}] =
+       [\ZZ [\alpha] : p \ZZ [\alpha]], \]
+    y luego
+    \[ \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s} = p \ZZ [\alpha]. \qedhere \]
+  \end{proof}
+\end{teorema}
+
+\begin{comentario}
+  Recomiendo que el lector consulte \S\S 2--3 de los apuntes de Stevenhagen
+  \cite{Stevenhagen-NR}, donde los argumentos parecidos a los de arriba usan
+  la siguiente caracterización:
+  \[ \mathfrak{p}\text{ es invertible} \iff
+     R_\mathfrak{p}\text{ es un anillo de valuación discreta}. \]
+  Aquí $R_\mathfrak{p}$ es el \textbf{anillo local} en $\mathfrak{p}$.
+  La presentación de Stevenhagen es mejor conceptualmente, pero decidí omitir
+  por el momento las localizaciones.
+\end{comentario}
+
+\begin{comentario}
+  Se puede probar que $\mathfrak{p}_i$ \emph{no será} invertible precisamente
+  cuando $e_i > 1$ y la división con resto de $f$ por $g_i$ en $\ZZ [x]$ nos da
+  $$f (x) = g_i (x) \, q_i (x) + r_i (x),$$
+  donde $p^2 \mid r_i (x)$. Para esto refiero de nuevo a \cite{Stevenhagen-NR}.
+\end{comentario}
+
+Procedamos con algunos ejemplos de uso de Kummer--Dedekind.
+
+\begin{ejemplo}
+  Consideremos el anillo $R = \ZZ [\sqrt{-3}]$. En este caso $f = x^2 + 3$.
+
+  Módulo $2$ tenemos
+  $$x^2 + 3 \equiv (x+1)^2 \pmod{2}, \quad g = x+1, ~ e = 2.$$
+  Podemos concluir que
+  \[ \mathfrak{p}^2 \subset 2 \ZZ [\sqrt{-3}], \quad
+     \mathfrak{p} = (2, 1 + \sqrt{-3}). \]
+  La igualdad no se cumple, pero es algo esperado, dado que $\mathfrak{p}$
+  no es invertible.
+
+  Por otra parte, módulo $3$ se tiene
+  $$x^2 + 3 \equiv x^2 \pmod{3}, \quad g = x, ~ e = 2,$$
+  y esto nos da la factorización obvia
+  $$(\sqrt{-3} R)^2 = 3R.$$
+
+  Módulo $5$ el polinomio $x^2 + 3$ es irreducible y se obtiene un ideal primo
+  $5 R$. En fin, módulo $7$ se tiene $(\pm 2)^2 \equiv -3 \pmod{7}$, así que
+  $$f \equiv (x + 2)\,(x - 2) \pmod{7}.$$
+  Tenemos entonces
+  $$\mathfrak{p} \, \overline{\mathfrak{p}} \subseteq 7R,$$
+  donde
+  \[ \mathfrak{p} = (7, 2 + \sqrt{-3}), \quad
+     \overline{\mathfrak{p}} = (7, 2 - \sqrt{-3}). \]
+     De hecho es fácil ver que se cumple la igualdad; esto sucede gracias
+     a la invertibilidad de los ideales $\mathfrak{p}$ y
+     $\overline{\mathfrak{p}}$.
+\end{ejemplo}
+
+En los siguientes ejemplos vamos a tener $\O_K = \ZZ [\alpha]$, así que todos
+los ideales son invertibles.
+
+\subsection{Ejemplo: campos cuadráticos}
+
+Consideremos el campo cuadrático $K = \QQ (\sqrt{d})$, donde $d$ es libre de
+cuadrados y $d \equiv 2,3\pmod{4}$. En este caso $\O_K = \ZZ [\sqrt{d}]$.
+Entonces, el teorema de arriba nos dice que para factorizar los ideales
+$p \O_K$, hay que ver cómo se factoriza el polinomio $f = x^2 - d$ módulo
+$p$. Esto depende del símbolo de Legendre $\legendre{d}{p}$.
+
+El siguiente resultado es una aplicación inmediata de Kummer--Dedekind.
+
+\begin{proposicion}
+  Sea $d \equiv 2,3 \pmod{4}$ libre de cuadrados y $K = \QQ (\sqrt{d})$.
+
+  \begin{itemize}
+  \item Si $p \mid d$, entonces
+    $$p \O_K = \mathfrak{p}^2, \quad \mathfrak{p} = (p, \sqrt{d}).$$
+    (En este caso se dice que $p$ \textbf{se ramifica} en $K$.)
+
+  \item Si $\legendre{d}{p} = +1$, entonces $d \equiv a^2 \pmod{p}$ para
+    algún $a \in \ZZ$, y se tiene
+    $$p \O_K = \mathfrak{p} \, \overline{\mathfrak{p}},$$
+    donde
+    \[ \mathfrak{p} = (p, a + \sqrt{d}), \quad
+       \overline{\mathfrak{p}} = (p, a - \sqrt{d}). \]
+    (Se dice que $p$ \textbf{se escinde} en $K$.)
+
+  \item En fin, si $\legendre{d}{p} = -1$, entonces
+    $$\mathfrak{p} = p \O_K$$
+    es un ideal primo. (Se dice que $p$ es \textbf{inerte} en $K$.)
+  \end{itemize}
+
+  El primo $p = 2$ siempre se ramifica: tenemos
+  $$2 \O_K = \mathfrak{p}^2,$$
+  donde
+  \[ \mathfrak{p} = \begin{cases}
+    (2, \sqrt{d}), & \text{si }d \equiv 2\pmod{4},\\
+    (2, 1+\sqrt{d}), & \text{si }d \equiv 3\pmod{4}.
+  \end{cases} \]
+\end{proposicion}
+
+De la misma manera podemos analizar el caso de $K = \QQ (\sqrt{d})$,
+donde $d \equiv 1 \pmod{4}$, solo que en este caso
+$\O_K = \ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]$, así que nos interesa
+el polinomio
+$$f = x^2 - x - \frac{d-1}{4}.$$
+En este caso no cambiará mucho; la descripción para los primos impares será
+la misma. Por otra parte, el primo $p = 2$ se comporta de manera más
+interesante: se ve que la factorización de $f$ módulo $2$ depende de
+$d \pmod {8}$.
+
+\begin{proposicion}
+  Sea $d \equiv 1 \pmod{4}$ libre de cuadrados y $K = \QQ (\sqrt{d})$.
+
+  \begin{itemize}
+  \item Si $d \equiv 1 \pmod{8}$, entonces
+    $$2 \O_K = \mathfrak{p}\,\overline{\mathfrak{p}},$$
+    donde
+    \[ \mathfrak{p} = \left(2, \frac{1 + \sqrt{d}}{2}\right), \quad
+       \overline{\mathfrak{p}} = \left(2, \frac{1 - \sqrt{d}}{2}\right). \]
+
+  \item Si $d \equiv 5 \pmod{8}$, entonces $2$ es inerte; es decir,
+    $$\mathfrak{p} = 2\O_K$$
+    es un ideal primo.
+  \end{itemize}
+\end{proposicion}
+
+\subsection{Ejemplo: campos ciclotómicos $\QQ [\zeta_p]$}
+
+Ahora me gustaría considerar el caso de campos ciclotómicos $K = \QQ (\zeta_p)$,
+donde para simplificar la vida, $p$ es primo.
+
+Para el $p$-ésimo campo ciclotómico $K = \QQ (\zeta_p)$ tenemos
+$\O_K = \ZZ [\zeta_p]$ (véase \ref{ejemplo:O_K-para-Q(zeta_p)}). El polinomio
+mínimo de $\zeta_p$ es el polinomio ciclotómico
+$$\Phi_p (x) = \frac{x^p - 1}{x-1} = x^{p-1} + x^{p-2} + \cdots + x + 1.$$
+Kummer--Dedekind nos dice que para saber factorizar $q\O_K$, hay que
+factorizar $\Phi_p (x)$ módulo $q$.
+
+Primero, si $q = p$, entonces
+\[ \Phi_p (x) = \frac{x^p - 1}{x-1} \equiv \frac{(x - 1)^p}{x-1} =
+   (x-1)^{p-1} \pmod{p}. \]
+
+Ahora supongamos que $q \ne p$. En este caso se ve que $\Phi_p (x)$ es un
+polinomio separable en $\FF_q [x]$. Para esto podemos notar que por ejemplo,
+$$\gcd (f,f') = \gcd (x^p - 1, p\,x^{p-1}) = 1,$$
+dado que $p$ es invertible en $\FF_q [x]$, y se tiene
+$\frac{x}{p} \cdot (p x^{p-1}) - (x^p - 1) = 1$. Esto quiere decir que
+$\overline{\Phi_p} (x)$ no tendrá factores irreducibles $\overline{g}^e$ con
+$e > 1$, y también que los primos $q \ne p$ no se ramifican en $\O_K$.
+
+Pero no cualquier factorización es posible.
+
+\begin{ejemplo}
+  Aquí están factorizaciones de $\Phi_7 (x)$ módulo diferentes $q$ (calculadas
+  en PARI/GP):
+  \begin{align*}
+    q = 2\colon & (x^3 + x + 1)\,(x^3 + x^2 + 1) \\
+    q = 3\colon & \text{irreducible} \\
+    q = 5\colon & \text{irreducible} \\
+    q = 7\colon & (x + 6)^6 \\
+    q = 11\colon & (x^3 + 5x^2 + 4x + 10)\,(x^3 + 7x^2 + 6x + 10) \\
+    q = 13\colon & (x^2 + 3x + 1)\,(x^2 + 5x + 1)\,(x^2 + 6x + 1) \\
+    q = 17\colon & \text{irreducible} \\
+    q = 19\colon & \text{irreducible} \\
+    q = 23\colon & (x^3 + 10x^2 + 9x + 22)\,(x^3 + 14x^2 + 13x + 22) \\
+    q = 29\colon & (x + 4)\,(x + 5)\,(x + 6)\,(x + 9)\,(x + 13)\,(x + 22) \\
+    q = 31\colon & \text{irreducible} \\
+    q = 37\colon & (x^3 + 9x^2 + 8x + 36)\,(x^3 + 29x^2 + 28x + 36) \\
+    & \cdots
+  \end{align*}
+\end{ejemplo}
+
+\begin{lema}
+  Sea $f$ el orden de $q$ módulo $p$; es decir, el mínimo posible $f$
+  tal que $q^f \equiv 1 \pmod{p}$. En este caso todos los factores irreducibles
+  en la factorización
+  \[ \overline{\Phi_p} (x) = \overline{g_1} (x) \cdots \overline{g_s} (x)
+     \quad\text{en }\FF_q [x] \]
+  tendrán el mismo grado $f$. El número de factores irreducibles será entonces
+  $s = (p-1)/f$.
+
+  \begin{proof}
+    Consideremos el campo finito $E = \FF_{q^f}$. El grupo multiplicativo
+    $E^\times$ es cíclico de orden $q^f - 1$, y por nuestra hipótesis
+    $p \mid (q^f - 1)$, así que $E^\times$ tiene un subgrupo de orden $p$
+    formado por las $p$-ésimas raíces de la unidad. Esto significa que $x^p - 1$
+    (y por lo tanto $\Phi_p (x)$) se descompone en factores lineales en $E$.
+
+    De hecho, tenemos $E = \FF_q (\alpha)$, donde $\alpha \ne 1$ es cualquier
+    raíz de $x^p - 1$ en $E$. En efecto, supongamos que $\FF_q (\alpha) = F$
+    para algún campo intermedio
+    \[ \begin{tikzcd}
+      E \ar[-]{d} \ar[-,bend left=30]{dd}{f} \\
+      F \ar[-]{d}[swap]{n} \\
+      \FF_q
+    \end{tikzcd} \]
+    En este caso $\alpha \in F^\times$ implica que $p \mid (q^n - 1)$, pero por
+    nuestra elección de $f$, esto es posible solo cuando $n = f$ y $F = E$. Esto
+    demuestra que para toda raíz de $\Phi_n (x)$ en $E$, el polinomio mínimo
+    sobre $\FF_q$ tiene grado $f$.
+  \end{proof}
+\end{lema}
+
+Aplicando Kummer--Dedekind, tenemos el siguiente resultado.
+
+\begin{proposicion}
+  Para un primo $p \ne 2$ consideremos el campo ciclotómico $K = \QQ (\zeta_p)$.
+
+  El mismo $p$ se ramifica en $K$: tenemos
+  $$p \O_K = \mathfrak{p}^{p-1}, \quad \mathfrak{p} = (p, 1 - \zeta_p).$$
+
+  Para $q \ne p$ se tiene
+  $$q \O_K = \mathfrak{p}_1\cdots \mathfrak{p}_s,$$
+  donde $\mathfrak{p}_i$ son diferentes primos y $s = (p-1)/f$.
+\end{proposicion}
+
+\begin{ejemplo}
+  Tenemos $K = \QQ (\sqrt{-3}) = \QQ (\zeta_3)$, así que podemos comparar
+  nuestras dos descripciones para la factorización de primos racionales en
+  campos cuadráticos y ciclotómicos.
+
+  Para un primo $q \ne 2,3$ se tiene
+  \[ q \ZZ \Bigl[\frac{1+\sqrt{-3}}{2}\Bigr] = \mathfrak{p}\,\mathfrak{p}'
+     \iff \legendre{-3}{q} = +1. \]
+  Por otra parte, en los campos ciclotómicos la condición es
+  $$q \ZZ [\zeta_3] = \mathfrak{p}\,\mathfrak{p}' \iff q \equiv 1 \pmod{3} = +1.$$
+  Entonces,
+  \[ \legendre{-3}{q} = \legendre{q}{3} = \begin{cases}
+    +1, & \text{si }q\equiv 1 \pmod{3},\\
+    -1, & \text{si }q\equiv 2 \pmod{3}.
+  \end{cases} \]
+  Este es un caso particular de la reciprocidad cuadrática.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Consideremos el campo ciclotómico $K = \QQ (\zeta_5)$ y su anillo de enteros
+  $\O_K = \ZZ [\zeta_5]$. La extensión $K/\QQ$ es Galois, con el grupo de Galois
+  cíclico
+  $$\Gal (K/\QQ) \cong (\ZZ/5\ZZ)^\times = \{ 1, \sigma, \sigma^2, \sigma^3 \}.$$
+
+  Primero, tenemos la ramificación
+  $$5\O_K = \mathfrak{p}^4, \quad \mathfrak{p} = (5, 1 - \zeta_5).$$
+  De hecho, en este caso se puede ver que $5/(1-\zeta_5) \in \ZZ [\zeta_5]$,
+  así que $\mathfrak{p} = (1-\zeta_5)$.
+
+  Ahora para un primo $q \ne 5$ hay tres diferentes casos que corresponden
+  al orden de $q$ módulo $5$.
+
+  \begin{itemize}
+  \item Si $q \equiv 1 \pmod{5}$, entonces $q$ se escinde en cuatro ideales
+    primos
+    $$q \O_K = \mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4.$$
+
+  \item Si $q \equiv 2,3 \pmod{5}$, entonces el ideal $q \O_K$ es primo.
+
+  \item Si $q \equiv 4 \pmod{5}$, entonces
+    $$q \O_K = \mathfrak{p}_1 \, \mathfrak{p}_2.$$
+  \end{itemize}
+
+  Ahora empiezan las cosas interesantes. La teoría de Galois implica que
+  $K$ contiene único subcampo cuadrático $F$. Gracias a la identidad
+  $$\zeta_5 - \zeta_5^2 - \zeta_5^3 + \zeta_5^4 = \sqrt{5},$$
+  se ve que $F = \QQ (\sqrt{5})$.
+
+  \[ \begin{tikzcd}
+    \O_K &[-3em] = &[-3em] \ZZ [\zeta_5] \ar[-]{d} &[-3em] \subset &[-3em] K &[-3em] = &[-3em] \QQ (\zeta_5) \ar[-]{d}{2} \\
+    \O_F & = & \ZZ \Bigl[\frac{1+\sqrt{5}}{2}\Bigr] \ar[-]{d} & \subset & F & = & \QQ (\sqrt{5}) \ar[-]{d}{2} \\
+    && \ZZ & \subset &&& \QQ
+  \end{tikzcd} \]
+
+  Consideremos un primo racional $q \ne 2,5$. Como ya vimos,
+  $$q\text{ se escinde en } \O_F \iff \legendre{5}{q} = +1.$$
+  Ahora si
+  $$q\,\O_F = \mathfrak{p} \overline{\mathfrak{p}},$$
+  donde $\mathfrak{p}$ y $\overline{\mathfrak{p}}$ son diferentes ideales
+  primos, entonces en $\O_K$ estos ideales pueden dejar de ser primos y
+  factorizarse aún más (cada uno en dos primos), pero de todos modos, $q$ se
+  escinde en $\O_K$.
+
+  Curiosamente, con un poco de trabajo y teoría de Galois, también se puede
+  establecer la otra implicación: si $q$ se escinde en $\O_K$, entonces este ya
+  se escinde en $\O_F$. Nuestra descripción nos dice que los $q$ que se escinden
+  en $\O_K$ son $q \equiv 1,4 \pmod{5}$.
+
+  Tenemos entonces
+  $$\legendre{5}{q} = +1 \iff q \equiv 1,4 \pmod{5}.$$
+  Esto demuestra un caso particular de la reciprocidad cuadrática para $p = 5$:
+  $$\legendre{5}{q} = \legendre{q}{5}.$$
+  Más adelante, en un momento adecuado, volveremos a este tema y veremos con
+  todos los detalles cómo la reciprocidad cuadrática se sigue de la
+  factorización de primos racionales en anillos cuadráticos y ciclotómicos.
+\end{ejemplo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1748,4 +2193,36 @@ para algún dominio de Dedekind $R$. Véase \cite{Claborn-1966}.
   \item[4)] Concluya que $R$ no es noetheriano y no es un dominio de
     factorización única.
   \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos el campo ciclotómico $K = \QQ (\zeta_8)$.
+
+  Más adelante veremos un modo adecuado para probar que
+  $\O_K = \ZZ[\zeta_8]$, pero por el momento se puede aceptar este resultado.
+
+  \begin{enumerate}
+  \item[1)] Usando el teorema de Kummer--Dedekind, describa las factorizaciones de
+    $p \O_K$ en ideales primos para diferentes primos racionales $p$.
+    (La respuesta depende de $p \pmod{8}$.)
+
+  \item[2)] Encuentre las subextensiones $\QQ \subset F \subset K$ y encuentre
+    las factorizaciones de $p \O_K$.
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Considerando la descomposición de primos racionales $p$ en $\O_K$, demuestre que
+  $\zeta_p \notin \QQ (\zeta_q)$ para diferentes primos impares $p \ne q$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para el campo ciclotómico $K = \QQ (\zeta_p)$ el grupo de Galois
+  $\Gal (K/\QQ)$ es cíclico, así que la teoría de Galois implica que
+  existe un subcampo cuadrático único $F \subset K$.
+  Considerando la factorización de primos racionales en $\O_F$ y $\O_K$,
+  demuestre que $F = \QQ (\sqrt{p^*})$, donde $p^* = (-1)^{(p-1)/2} p$.
+
+  \noindent (Sugerencia: si $p$ se ramifica en $\mathcal{O}_F$, entonces $p$ se
+  ramifica en $\mathcal{O}_K$.)
 \end{ejercicio}
