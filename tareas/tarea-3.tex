@@ -1,0 +1,78 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\newcounter{tarea}
+\setcounter{tarea}{3}
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}[tarea]
+\newtheorem*{ejercicio-adicional}{Ejercicio adicional}
+
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\usepackage{mathspec}
+
+\setmainfont{PT Serif}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+
+\title{Teoría de números algebraicos\\Tarea 3}
+\author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
+\date{2 de septiembre de 2020}
+
+% \def\solutions{true}
+
+\begin{document}
+
+{\sffamily\bfseries\maketitle}
+
+\noindent Fecha límite: viernes, 11 de septiembre.
+
+\ifdefined\solutions
+\else
+\thispagestyle{empty}
+\fi
+
+\vspace{1em}
+
+Consideremos el campo ciclotómico $K = \mathbb{Q} (\zeta_8)$.
+Más adelante veremos un modo adecuado para probar que
+$\mathcal{O}_K = \mathbb{Z}[\zeta_8]$, pero por el momento se puede aceptar este
+resultado.
+
+\begin{ejercicio}
+  Usando el teorema de Kummer--Dedekind, describa las factorizaciones de
+  $p \mathcal{O}_K$ en ideales primos para diferentes primos racionales $p$.
+
+  \noindent (La respuesta depende de $p$ mód $8$.)
+\end{ejercicio}
+
+\begin{ejercicio}
+  Encuentre las subextensiones
+  $\mathbb{Q} \subset F \subset \mathbb{Q} (\zeta_8)$ y las factorizaciones de
+  $p \mathcal{O}_F$ para cada una de estas.
+
+  \noindent (Para encontrar las subextensiones, use la teoría de Galois.)
+\end{ejercicio}
+
+\begin{ejercicio}
+  Considerando la descomposición de primos racionales $p$ en $\mathcal{O}_K$,
+  demuestre que $\zeta_p \notin \mathbb{Q} (\zeta_q)$ para diferentes primos
+  impares $p \ne q$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para el campo ciclotómico $K = \mathbb{Q} (\zeta_p)$ el grupo de Galois
+  $\operatorname{Gal} (K/\mathbb{Q})$ es cíclico, así que la teoría de Galois
+  implica que existe un subcampo cuadrático único $F \subset K$. Considerando
+  la factorización de primos racionales en $\mathcal{O}_F$ y $\mathcal{O}_K$,
+  demuestre que $F = \mathbb{Q} (\sqrt{p^*})$, donde $p^* = (-1)^{(p-1)/2} p$.
+
+  \noindent (Sugerencia: si $p$ se ramifica en $\mathcal{O}_F$, entonces $p$ se
+  ramifica en $\mathcal{O}_K$.)
+\end{ejercicio}
+
+\end{document}
