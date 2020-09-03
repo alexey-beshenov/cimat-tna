@@ -1645,7 +1645,7 @@ Empecemos entonces por el siguiente resultado auxiliar.
 
   \begin{proof}
     Esto se establece por inducción sobre $e$, donde el caso base es $e = 1$.
-    Consideremos una filtración de $R$ por potencias de $\mathfrak{p}$:
+    Consideremos la filtración de $R$ por potencias de $\mathfrak{p}$:
     \[ R \supsetneq \mathfrak{p} \supsetneq \mathfrak{p}^2 \supsetneq
        \mathfrak{p}^3 \supsetneq \cdots \]
     Aquí $\mathfrak{p}^{n+1} \subsetneq \mathfrak{p}^n$ son inclusiones
@@ -1707,7 +1707,7 @@ $\mathfrak{p} \subset R$.
 
 \begin{teorema}[Kummer--Dedekind]
   Sean $\alpha$ un entero algebraico y $f (x) \in \ZZ [x]$ el polinomio mínimo
-  de $\alpha$ sobre $\QQ$. Pongamos $n = \deg f = [\QQ (\alpha) : \QQ]$.
+  de $\alpha$ sobre $\QQ$. Pongamos $n = \deg (f) = [\QQ (\alpha) : \QQ]$.
 
   Para un primo racional $p$, sean $g_i (x) \in \ZZ [x]$ polinomios mónicos
   tales que
@@ -1735,8 +1735,8 @@ $\mathfrak{p} \subset R$.
     \[ \{ \text{primos }\mathfrak{p}\subset\ZZ[\alpha] \mid p\in\mathfrak{p} \}
        \longleftrightarrow
        \{ \text{primos }\mathfrak{p} \subset \ZZ[\alpha]/(p) \}. \]
-    Ahora reduciendo el isomorfismo (*) módulo $p$
-    $$\ZZ[\alpha]/(p) \cong \FF_p [x]/(\overline{f}),$$
+    Ahora reduciendo el isomorfismo (*) módulo $p$,
+    $$\ZZ[\alpha]/(p) \cong \ZZ [x] / (p,f) \cong \FF_p [x]/(\overline{f}),$$
     así que
     \[ \{ \text{primos }\mathfrak{p}\subset\ZZ[\alpha] \mid p \in \mathfrak{p} \}
        \longleftrightarrow
@@ -1747,9 +1747,9 @@ $\mathfrak{p} \subset R$.
     es un polinomio irreducible tal que $\overline{g} \mid \overline{f}$.
     Haciendo explícitas todas las biyecciones, se obtiene la parte 1).
 
-    Notamos que $\deg g_i = f_i$, donde
+    Notamos que $\deg (g_i) = f_i$, donde
     $\ZZ[\alpha]/\mathfrak{p}_i \cong \FF_{p^{f_i}}$, así que
-    $$n = \deg f = \sum_i e_i \deg g_i = \sum_i e_i f_i.$$
+    $$n = \deg (f) = \sum_i e_i \deg (g_i) = \sum_i e_i f_i.$$
 
     Ahora en 2), si multiplicamos los ideales
     $$(p, g_1 (\alpha))^{e_1}\cdots (p, g_s (\alpha))^{e_s},$$
@@ -1783,7 +1783,6 @@ $\mathfrak{p} \subset R$.
     $$\# (\ZZ [\alpha] / (p)) = p^n,$$
     dado que cómo $\ZZ$-módulo, nuestro anillo tiene forma
     $$\ZZ [\alpha] = \ZZ \oplus \alpha \ZZ \oplus \cdots \oplus \alpha^{n-1} \ZZ$$
-    This way we proved that
     Entonces, hemos probado que
     \[ [\ZZ [\alpha] : \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s}] =
        [\ZZ [\alpha] : p \ZZ [\alpha]], \]
@@ -1818,7 +1817,7 @@ Procedamos con algunos ejemplos de uso de Kummer--Dedekind.
   Módulo $2$ tenemos
   $$x^2 + 3 \equiv (x+1)^2 \pmod{2}, \quad g = x+1, ~ e = 2.$$
   Podemos concluir que
-  \[ \mathfrak{p}^2 \subset 2 \ZZ [\sqrt{-3}], \quad
+  \[ \mathfrak{p}^2 \subset 2 R, \quad
      \mathfrak{p} = (2, 1 + \sqrt{-3}). \]
   La igualdad no se cumple, pero es algo esperado, dado que $\mathfrak{p}$
   no es invertible.
@@ -1857,6 +1856,7 @@ El siguiente resultado es una aplicación inmediata de Kummer--Dedekind.
 \begin{proposicion}
   Sea $d \equiv 2,3 \pmod{4}$ libre de cuadrados y $K = \QQ (\sqrt{d})$.
 
+  Consideremos un primo impar $p$.
   \begin{itemize}
   \item Si $p \mid d$, entonces
     $$p \O_K = \mathfrak{p}^2, \quad \mathfrak{p} = (p, \sqrt{d}).$$
@@ -1910,12 +1910,10 @@ $d \pmod {8}$.
   \end{itemize}
 \end{proposicion}
 
-\subsection{Ejemplo: campos ciclotómicos $\QQ [\zeta_p]$}
+\subsection{Ejemplo: campos ciclotómicos $\QQ (\zeta_p)$}
 
 Ahora me gustaría considerar el caso de campos ciclotómicos $K = \QQ (\zeta_p)$,
-donde para simplificar la vida, $p$ es primo.
-
-Para el $p$-ésimo campo ciclotómico $K = \QQ (\zeta_p)$ tenemos
+donde para simplificar la vida, $p$ es primo. Recordemos que
 $\O_K = \ZZ [\zeta_p]$ (véase \ref{ejemplo:O_K-para-Q(zeta_p)}). El polinomio
 mínimo de $\zeta_p$ es el polinomio ciclotómico
 $$\Phi_p (x) = \frac{x^p - 1}{x-1} = x^{p-1} + x^{p-2} + \cdots + x + 1.$$
@@ -1927,9 +1925,10 @@ Primero, si $q = p$, entonces
    (x-1)^{p-1} \pmod{p}. \]
 
 Ahora supongamos que $q \ne p$. En este caso se ve que $\Phi_p (x)$ es un
-polinomio separable en $\FF_q [x]$. Para esto podemos notar que por ejemplo,
-$$\gcd (f,f') = \gcd (x^p - 1, p\,x^{p-1}) = 1,$$
-dado que $p$ es invertible en $\FF_q [x]$, y se tiene
+polinomio separable en $\FF_q [x]$. Para verlo, podemos considerar
+$f = x^p - 1 = (x-1)\,\Phi_p (x)$ y calcular que
+$$\gcd (f,f') = \gcd (x^p - 1, p\,x^{p-1}) = 1, \quad \text{en }\FF_q [x]$$
+dado que $p$ es invertible en $\FF_q [x]$ y se tiene
 $\frac{x}{p} \cdot (p x^{p-1}) - (x^p - 1) = 1$. Esto quiere decir que
 $\overline{\Phi_p} (x)$ no tendrá factores irreducibles $\overline{g}^e$ con
 $e > 1$, y también que los primos $q \ne p$ no se ramifican en $\O_K$.
@@ -1937,23 +1936,41 @@ $e > 1$, y también que los primos $q \ne p$ no se ramifican en $\O_K$.
 Pero no cualquier factorización es posible.
 
 \begin{ejemplo}
-  Aquí están factorizaciones de $\Phi_7 (x)$ módulo diferentes $q$ (calculadas
-  en PARI/GP):
+  Aquí están las factorizaciones de $\Phi_7 (x)$ módulo algunos $q$
+  (calculadas en PARI/GP):
   \begin{align*}
     q = 2\colon & (x^3 + x + 1)\,(x^3 + x^2 + 1) \\
     q = 3\colon & \text{irreducible} \\
     q = 5\colon & \text{irreducible} \\
-    q = 7\colon & (x + 6)^6 \\
-    q = 11\colon & (x^3 + 5x^2 + 4x + 10)\,(x^3 + 7x^2 + 6x + 10) \\
-    q = 13\colon & (x^2 + 3x + 1)\,(x^2 + 5x + 1)\,(x^2 + 6x + 1) \\
-    q = 17\colon & \text{irreducible} \\
-    q = 19\colon & \text{irreducible} \\
-    q = 23\colon & (x^3 + 10x^2 + 9x + 22)\,(x^3 + 14x^2 + 13x + 22) \\
-    q = 29\colon & (x + 4)\,(x + 5)\,(x + 6)\,(x + 9)\,(x + 13)\,(x + 22) \\
-    q = 31\colon & \text{irreducible} \\
-    q = 37\colon & (x^3 + 9x^2 + 8x + 36)\,(x^3 + 29x^2 + 28x + 36) \\
+    q = 7\colon & (x - 1)^6 \\
+    q = 11\colon & (x^3 + 5x^2 + 4x + 10)\,(x^3 + 7x^2 + 6x + 10) & (q \equiv 4 \pmod{7}) \\
+    q = 13\colon & (x^2 + 3x + 1)\,(x^2 + 5x + 1)\,(x^2 + 6x + 1) & (q \equiv 6 \pmod{7}) \\
+    q = 17\colon & \text{irreducible}  & (q \equiv 3 \pmod{7}) \\
+    q = 19\colon & \text{irreducible}  & (q \equiv 5 \pmod{7}) \\
+    q = 23\colon & (x^3 + 10x^2 + 9x + 22)\,(x^3 + 14x^2 + 13x + 22) & (q \equiv 2 \pmod{7}) \\
+    q = 29\colon & (x - 7)\,(x - 16)\,(x - 20)\,(x - 23)\,(x - 24)\,(x - 29) & (q \equiv 1 \pmod{7}) \\
+    q = 31\colon & \text{irreducible} & (q \equiv 3 \pmod{7}) \\
+    q = 37\colon & (x^3 + 9x^2 + 8x + 36)\,(x^3 + 29x^2 + 28x + 36) & (q \equiv 2 \pmod{7}) \\
     & \cdots
   \end{align*}
+
+  El patrón es el siguiente.
+  \begin{itemize}
+  \item Si $q \equiv 1 \pmod{7}$, entonces $\Phi_7 (x)$ es un producto de seis
+    polinomios lineales.
+
+  \item Si $q \equiv 2,4 \pmod{7}$, entonces $\Phi_7 (x)$ es un producto de dos
+    polinomios cúbicos. Notamos que $2$ y $4$ tienen orden $3$ módulo $7$:
+    \[ 2^2 = 4, ~ 2^3 \equiv 1 \pmod{7}, \quad
+       4^2 \equiv 2, ~ 4^3 \equiv 1 \pmod{7}. \]
+
+  \item Si $q \equiv 3,5 \pmod{7}$, entonces $\Phi_7 (x)$ es irreducible mód
+    $q$. Notamos que $3$ y $5$ son generadores de $\FF_7^\times$.
+
+  \item si $q \equiv 6 \pmod{7}$, entonces $\Phi_7 (x)$ es un producto de tres
+    polinomios cuadráticos. Notamos que $6$ tiene orden $2$ módulo $7$:
+    \[ 6^2 \equiv (-1)^2 \equiv 1 \pmod{7}. \qedhere \]
+  \end{itemize}
 \end{ejemplo}
 
 \begin{lema}
@@ -1962,7 +1979,7 @@ Pero no cualquier factorización es posible.
   en la factorización
   \[ \overline{\Phi_p} (x) = \overline{g_1} (x) \cdots \overline{g_s} (x)
      \quad\text{en }\FF_q [x] \]
-  tendrán el mismo grado $f$. El número de factores irreducibles será entonces
+  tienen el mismo grado $f$. El número de factores irreducibles es
   $s = (p-1)/f$.
 
   \begin{proof}
@@ -1997,7 +2014,8 @@ Aplicando Kummer--Dedekind, tenemos el siguiente resultado.
 
   Para $q \ne p$ se tiene
   $$q \O_K = \mathfrak{p}_1\cdots \mathfrak{p}_s,$$
-  donde $\mathfrak{p}_i$ son diferentes primos y $s = (p-1)/f$.
+  donde $\mathfrak{p}_i$ son diferentes primos y $s = (p-1)/f$,
+  donde $f$ es el orden de $q$ módulo $p$.
 \end{proposicion}
 
 \begin{ejemplo}
@@ -2212,7 +2230,7 @@ Aplicando Kummer--Dedekind, tenemos el siguiente resultado.
 \end{ejercicio}
 
 \begin{ejercicio}
-  Considerando la descomposición de primos racionales $p$ en $\O_K$, demuestre que
+  Considerando la descomposición de primos racionales en $\O_K$, demuestre que
   $\zeta_p \notin \QQ (\zeta_q)$ para diferentes primos impares $p \ne q$.
 \end{ejercicio}
 
