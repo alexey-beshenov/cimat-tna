@@ -18,6 +18,8 @@ dominios de valuación discreta, etc.) se encuentra en los libros de texto de
   \caption{Estampilla de la República Democrática Alemana dedicada a Dedekind}
 \end{figure}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \pdfbookmark{Clase 5 (24/08/20)}{clase-5}
 \section{Operaciones con ideales}
 \marginpar{\small Clase 5 \\ 24/08/20}
@@ -1612,7 +1614,6 @@ Uno de los resultados importantes del curso será probar que el grupo $\Cl (K)$
 es finito para cualquier campo de números $K$. También veremos cómo se
 pueden calcular $\O_K$ y $\Cl (K)$.
 
-
 La evidencia numérica \emph{sugiere que} todo grupo abeliano finito es isomorfo
 a $\Cl (K)$ para algún campo de números $K$, pero esta es una conjetura abierta.
 Sin embargo, si consideramos todos los dominios de Dedekind, un teorema
@@ -1638,50 +1639,49 @@ pequeño que no es necesariamente integralmente cerrado.
 Empecemos entonces por el siguiente resultado auxiliar.
 
 \begin{lema}
-  Sea $R$ un anillo de números, no necesariamente integralmente cerrado.
-  Entonces, para todo ideal primo invertible $\mathfrak{p} \subset R$ y
-  $e \ge 1$ se cumple
-  $$\# (R/\mathfrak{p}^e) = \# (R/\mathfrak{p})^e.$$
+  Sean $R$ un anillo de números (no necesariamente integralmente cerrado),
+  $\mathfrak{p} \subset R$ un ideal invertible y
+  $\kappa (\mathfrak{p}) = R/\mathfrak{p}$ el campo residual correspondiente.
+  Entonces, para todo $e \ge 1$ se cumple lo siguiente:
+  \begin{enumerate}
+  \item[1)] $\dim_{\kappa (\mathfrak{p})} (\mathfrak{p}^e/\mathfrak{p}^{e+1}) = 1$;
+
+  \item[2)] $\dim_{\kappa (\mathfrak{p})} (R/\mathfrak{p}^e) = e$, y en particular
+    $\# (R/\mathfrak{p}^e) = \# (R/\mathfrak{p})^e$.
+  \end{enumerate}
 
   \begin{proof}
-    Esto se establece por inducción sobre $e$, donde el caso base es $e = 1$.
-    Consideremos la filtración de $R$ por potencias de $\mathfrak{p}$:
+\marginpar{\footnotesize * cambié\\un poco\\el argumento \\ (07/09/20)}
+    Consideremos la filtración de $R$ por las potencias de $\mathfrak{p}$.
     \[ R \supsetneq \mathfrak{p} \supsetneq \mathfrak{p}^2 \supsetneq
        \mathfrak{p}^3 \supsetneq \cdots \]
-    Aquí $\mathfrak{p}^{n+1} \subsetneq \mathfrak{p}^n$ son inclusiones
-    estrictas, por ejemplo, por la invertibilidad de $\mathfrak{p}$.
-    Tenemos un isomorfismo de grupos abelianos
-    \[ \frac{R/\mathfrak{p}^e}{\mathfrak{p}^{e-1}/\mathfrak{p}^e} \cong
-       R/\mathfrak{p}^{e-1}. \]
-    Será suficiente establecer un isomorfismo de grupos abelianos
-    $$R/\mathfrak{p} \cong \mathfrak{p}^{e-1}/\mathfrak{p}^e,$$
-    y luego la inducción funcionará gracias a
-    \[ \# (R/\mathfrak{p}^e) =
-       \# (\mathfrak{p}^{e-1}/\mathfrak{p}^e) \cdot \# (R/\mathfrak{p}^{e-1}) =
-       \# (R/\mathfrak{p})\cdot \# (R/\mathfrak{p}^{e-1}). \]
+    Aquí $\mathfrak{p}^{e+1} \subsetneq \mathfrak{p}^e$ son inclusiones
+    estrictas, por ejemplo, por la invertibilidad de $\mathfrak{p}$.  Los
+    cocientes $R/\mathfrak{p}$ y $\mathfrak{p}^e/\mathfrak{p}^{e+1}$ tienen
+    estructura natural de $R$-módulos. Además, estos cocientes se aniquilan por
+    $\mathfrak{p}$, así que se trata de $R/\mathfrak{p}$-módulos; es decir,
+    espacios vectoriales sobre el campo residual $\kappa (\mathfrak{p})$.
 
-    Escojamos un elemento
-    $\alpha \in \mathfrak{p}^{e-1}\setminus\mathfrak{p}^e$.  Tenemos
-    $$\mathfrak{p}^e \subsetneq \mathfrak{p}^e + \alpha R \subseteq \mathfrak{p}^{e-1},$$
-    y gracias a la invertibilidad (!) y maximalidad de $\mathfrak{p}$
-    esto implica que
-    \[ \tag{*} \mathfrak{p}^e + \alpha R = \mathfrak{p}^{e-1}. \]
-    Consideremos el homomorfismo de grupos
-    \[ \phi\colon R \to \mathfrak{p}^{e-1}/\mathfrak{p}^e, \quad
-       x \mapsto \alpha x + \mathfrak{p}^e. \]
-    Este es sobreyectivo gracias a (*). Calculamos el núcleo
-    $$\ker \phi = \{ x \in R \mid \alpha x \in \mathfrak{p}^e \}.$$
-    Está claro que si $x \in \mathfrak{p}$, entonces
-    $\alpha x \in \mathfrak{p}^{e-1} \, \mathfrak{p} = \mathfrak{p}^e$.
-    Por otra parte, supongamos que $\alpha x \in \mathfrak{p}^e$ y
-    $x \notin \mathfrak{p}$. En este caso $x$ es invertible módulo
-    $\mathfrak{p}$: existe $y \in R$ tal que $xy - 1 \in \mathfrak{p}$. Luego,
-    \[ \underbrace{\alpha x y}_{\in \mathfrak{p}^e} - \alpha =
-       \alpha (xy - 1) \in \mathfrak{p}^e, \]
-    así que $\alpha \in \mathfrak{p}^e$, pero esto contradice nuestra elección
-    de $\alpha$. Esto demuestra que $\ker \phi = \mathfrak{p}$, y podemos
-    concluir que
-    \[ R/\mathfrak{p} \cong \mathfrak{p}^{e-1}/\mathfrak{p}^e. \qedhere \]
+    Un subespacio vectorial no nulo
+    $0 \subsetneq V \subseteq \mathfrak{p}^e/\mathfrak{p}^{e+1}$
+    corresponde a un ideal $I \subset R$ tal que
+    $\mathfrak{p}^{e+1} \subsetneq I \subseteq \mathfrak{p}^e$. Pero
+    $\mathfrak{p}$ es invertible por nuestra hipótesis, y multiplicando por
+    $\mathfrak{p}^{-e}$ se obtiene
+    $\mathfrak{p} \subsetneq I \mathfrak{p}^{-e} \subseteq R$, y luego
+    $I = \mathfrak{p}^e$ por la maximalidad de $\mathfrak{p}$. Entonces,
+    $V = \mathfrak{p}^e/\mathfrak{p}^{e+1}$, y por lo tanto
+    $\dim_{\kappa (\mathfrak{p})} (\mathfrak{p}^e/\mathfrak{p}^{e+1}) = 1$.
+    Ahora
+    \[ \frac{R/\mathfrak{p}^e}{\mathfrak{p}^{e-1}/\mathfrak{p}^e} \cong
+    R/\mathfrak{p}^{e-1}, \]
+    y en particular,
+    \[ \dim_{\kappa (\mathfrak{p})} (R/\mathfrak{p}^e) =
+       \dim_{\kappa (\mathfrak{p})} (R/\mathfrak{p}^{e-1}) +
+       \dim_{\kappa (\mathfrak{p})} (\mathfrak{p}^{e-1}/\mathfrak{p}^e) =
+       \dim_{\kappa (\mathfrak{p})} (R/\mathfrak{p}^{e-1}) + 1. \]
+    Esto implica por inducción que
+    $\dim_{\kappa (\mathfrak{p})} (R/\mathfrak{p}^e) = e$.
   \end{proof}
 \end{lema}
 
