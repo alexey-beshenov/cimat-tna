@@ -56,4 +56,35 @@ list_clgp_quadr (d0,rows,cols, im) = {
   Campos ciclotómicos
 ---------------------------------------------------------------------- */
 
-/* TODO */
+list_clgp_cycl (rows,cols) = {
+  local (N = rows*cols);
+
+  local (ns = vector(N));
+  local (i=1, n=3);
+
+  while (i <= N,
+    while (n%4 == 2, n = n + 1);
+    ns[i] = n;
+    n = n + 1;
+    i = i+1;
+  );
+
+  for (r=1, rows,
+    for (c=0, cols-1,
+      n = ns[r + rows*c];
+
+      K = bnfinit (polcyclo(n));
+
+      printf ("$\\QQ (\\zeta_");
+      if (n < 10,
+        printf ("%d", n),
+	printf ("{%d}", n)
+      );
+      printf (")$ & $%s$ ", fingp_tex(K.clgp[2]));
+
+      if (c != cols - 1, printf ("& "))
+    );
+
+    printf ("\\tabularnewline\\hline\n")
+  )
+};
