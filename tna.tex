@@ -40,6 +40,7 @@
 
 \setmathsfont(Digits){PT Serif}
 \setmathsfont(Latin){PT Serif}
+\setmathfont{PT Serif}
 \setmathrm{PT Serif}
 
 \newcommand\term\textbf
@@ -79,8 +80,11 @@
 \DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\coker}{coker}
 \DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Res}{Res}
 \DeclareMathOperator{\rk}{rk}
 \DeclareMathOperator{\Spec}{Spec}
 \DeclareMathOperator{\tr}{tr}
@@ -88,6 +92,7 @@
 \usepackage{array}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 \newcolumntype{N}{@{}m{0pt}@{}}
+\newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
 
 \usepackage[perpage,symbol]{footmisc}
 
@@ -118,8 +123,12 @@
 
 \input{2-ideales.tex}
 
+\input{3-algebra-lineal.tex}
+
 \appendix
 \input{a-polinomios-ciclotomicos.tex}
+
+\input{b-grupos-de-clase.tex}
 
 \backmatter
 

@@ -1,0 +1,533 @@
+\chapter{Álgebra \texorpdfstring{$\ZZ$}{ℤ}-lineal}
+
+Dedicamos el capítulo anterior al álgebra conmutativa, y ahora nos ocuparemos
+de\dots{} álgebra lineal. Recordemos que para una extensión finita de campos
+$L/K$, la norma y traza de un elemento $\alpha \in L$ se definen como el
+determinante y traza de la aplicación $K$-lineal $x \mapsto \alpha x$.
+Ahora vamos a explorar estas construcciones para extensiones de anillos.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Norma y traza}
+
+\begin{definicion}
+  Sea $A \subset B$ una extensión de anillos tal que $B$ es un $A$-módulo libre
+  de rango $n$ sobre $A$. Para $\beta \in B$ consideremos la aplicación
+  $A$-lineal de multiplicación por $\beta$:
+  $$\mu_\beta\colon B \to B, \quad x \mapsto \beta x.$$
+  La \textbf{norma} y \textbf{traza} de $\beta$ se definen como el determinante
+  y traza de $\mu_\beta$ respectivamente:
+  $$N_{B/A} (\beta) = \det \mu_\beta, \quad T_{B/A} (\beta) = \tr \mu_\beta.$$
+  Esto nos da aplicaciones
+  $$N_{B/A}, T_{B/A}\colon B\to A.$$
+\end{definicion}
+
+Específicamente, si $e_1, \ldots, e_n$ es una base de $B$ sobre $A$ y
+$\beta \, e_i = \sum_j m_{ij} e_j$, entonces
+$$N (\beta) = \det (m_{ij})_{i,j}, \quad T (\beta) = \sum_i m_{ii}.$$
+
+El argumento habitual demuestra que esto no depende de la elección de base:
+si $T$ es una matriz de cambio de base, entonces es invertible, y luego
+\begin{gather*}
+  \det (T M T^{-1}) = \det (T) \, \det (M) \, \det (T)^{-1} = \det (M),\\
+  \tr (T M T^{-1}) = \tr (T^{-1} T M) = \tr (M).
+\end{gather*}
+
+Vamos a denotar el polinomio característico correspondiente por
+$$f^\beta_{B/A} = \det (x I_n - M).$$
+Este es un polinomio mónico de grado $n$:
+$$f^\beta_{B/A} = x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 \in A [x].$$
+El argumento habitual demuestra que
+\begin{equation}
+  \label{eqn:norma-y-traza-coeficientes-de-polinomio-caracteristico}
+  a_0 = (-1)^n \, N_{B/A} (\beta), \quad a_{n-1} = -T_{B/A} (\beta).
+\end{equation}
+
+La norma es multiplicativa:
+$$N (\beta \beta') = N (\beta)\,N(\beta'),$$
+mientras que la traza es $A$-lineal:
+\[ T (a \beta) = a \, T (\beta), \quad
+   T (\beta+\beta') = T (\beta) + T (\beta'). \]
+Para $a \in A$ se tiene
+$$N (a) = a^n, \quad T (a) = na.$$
+
+\begin{proposicion}
+  Para un campo de números $K/\QQ$ tenemos $n = [K : \QQ]$ encajes
+  $$\sigma_1,\ldots,\sigma_n\colon K \hookrightarrow \CC,$$
+  y la norma y traza vienen dadas por
+  \[ N_{K/\QQ} (\alpha) = \sigma_1 (\alpha) \cdots \sigma_n (\alpha), \quad
+     T_{K/\QQ} (\alpha) = \sigma_1 (\alpha) + \cdots + \sigma_n (\alpha). \]
+  Aquí $\sigma_i (\alpha)$ son las raíces del polinomio característico
+  de $\alpha$ respecto a la extensión $K/\QQ$.
+
+  \begin{proof}
+    Primero, si $K = \QQ (\alpha)$, entonces un encaje
+    $\sigma\colon K \hookrightarrow \CC$ está definido por la imagen de
+    $\alpha$ y tiene que enviarlo a una raíz compleja del polinomio
+    mínimo $f_\QQ^\alpha$. De esta manera surgen los $[K (\alpha) : \QQ]$ encajes.
+    Tenemos
+    $$f_\QQ^\alpha = \prod_{\sigma\colon K\hookrightarrow \CC} (x - \sigma (\alpha)).$$
+
+    En general, tenemos $\QQ \subset \QQ (\alpha) \subset K$, y cada
+    encaje $\sigma\colon \QQ (\alpha) \hookrightarrow \CC$ admite
+    $[K : \QQ (\alpha)]$ extensiones a un encaje $K \hookrightarrow \CC$.
+    Ahora
+    \[ f^\alpha_{K/\QQ} = (f^\alpha_\QQ)^{[K : \QQ (\alpha)]} =
+       \prod_{\sigma\colon K\hookrightarrow \CC} (x - \sigma (\alpha)), \]
+    donde $f^\alpha_{K/\QQ}$ es el polinomio característico, mientras que
+    $f^\alpha_\QQ$ es el polinomio mínimo.
+    En fin, recordemos cómo la norma y traza están relacionadas con los
+    coeficientes del polinomio característico (las fórmulas
+    \eqref{eqn:norma-y-traza-coeficientes-de-polinomio-caracteristico}).
+  \end{proof}
+\end{proposicion}
+
+\begin{comentario}
+  Dado que $K/\QQ$ es una extensión algebraica, en realidad todo encaje
+  $\sigma\colon K \hookrightarrow \CC$ tiene su imagen en $\overline{\QQ}$,
+  la cerradura algebraica de $\QQ$, así que los números complejos no son
+  tan relevantes.
+
+  Si $K/\QQ$ es una extensión de Galois, entonces los encajes
+  $K \hookrightarrow \CC$ corresponden a los elementos de $\Gal (K/\QQ)$.
+  En general, puede haber más encajes que automorfismos de Galois.
+
+  Para revisar más detalles sobre la norma y traza de una extensión finita de
+  campos, el lector puede revisar, por ejemplo,
+  \cite[\S II.8]{Morandi-GTM167} o \cite[\S VI.5]{Lang-Algebra}.
+\end{comentario}
+
+\begin{proposicion}
+  Si $\alpha \in \O_K$, entonces
+  $N_{K/\QQ} (\alpha), T_{K/\QQ} (\alpha) \in \ZZ$.
+
+  \begin{proof}
+    Si $\alpha_1, \ldots, \alpha_n$ son las raíces del polinomio característico
+    de $\alpha$ sobre $\QQ$, entonces estas son también enteros algebraicos,
+    y por lo tanto $N (\alpha) = \alpha_1\cdots\alpha_n$ y
+    $T (\alpha) = \alpha_1 + \cdots + \alpha_n$ son enteros algebraicos.
+    Al mismo tiempo son números racionales, así que
+    $N (\alpha), T (\alpha) \in \ZZ$.
+  \end{proof}
+\end{proposicion}
+
+\begin{proposicion}
+  Se tiene
+  $$\O_K^\times = \{ \alpha \in \O_K \mid N (\alpha) = \pm 1 \}.$$
+
+  \begin{proof}
+    Si $\alpha \in \O_K$ tiene inverso $\alpha^{-1} \in \O_K$, entonces
+    $$N (\alpha)\, N (\alpha^{-1}) = N (\alpha\alpha^{-1}) = 1.$$
+    Pero $N (\alpha^{\pm 1}) \in \ZZ$, así que $N (\alpha) = \pm 1$.
+    Viceversa, si $\alpha \in \O_K$ y $N (\alpha) = \pm 1$, sean
+    $\alpha_1 = \alpha$, $\alpha_2$, $\ldots$, $\alpha_n$ las raíces
+    del polinomio característico de $\alpha$. Tenemos
+    $$\alpha \alpha_2 \cdots \alpha_n = \pm 1,$$
+    y luego
+    $$\alpha^{-1} = \pm (\alpha_2 \cdots \alpha_n),$$
+    donde $\alpha_i$ son enteros algebraicos, así que el producto a la derecha
+    está en $\O_K$\footnote{No estamos diciendo que cada $\alpha_i$ está en
+      $K$; esto sucede cuando $K/\QQ$ es una extensión de Galois.}.
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  Consideremos el campo cuadrático $K = \QQ (\sqrt{d})$, donde $d$ es libre de
+  cuadrados. La multiplicación por $a + b\sqrt{d}$ en la base $1, \sqrt{d}$ se
+  representa por la matriz
+  \[ \begin{pmatrix}
+    a & db \\
+    b & a
+  \end{pmatrix}. \]
+  Entonces,
+  \[ N (a + b\sqrt{d}) = a^2 - db^2, \quad
+     T (a + b\sqrt{d}) = 2a. \]
+  También calculamos
+  \[ (a + b\sqrt{d})\,(a - b\sqrt{d}) = a^2 - db^2, \quad
+     (a + b\sqrt{d}) + (a - b\sqrt{d}) = 2a. \qedhere \]
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Recordatorio de álgebra lineal}
+
+Sea $V$ un espacio vectorial de dimensión finita sobre un campo $k$.
+Consideremos una forma bilineal simétrica
+$$\langle\cdot,\cdot\rangle\colon V\times V\to k.$$
+
+Sea $e_1,\ldots,e_n$ una base de $V$. El \textbf{discriminante} de
+$\langle\cdot,\cdot\rangle$ respecto a esta base se define como
+$$\Delta (e_1,\ldots,e_n) = \det (\langle e_i,e_j\rangle)_{i,j}.$$
+
+El discriminante depende de la base. En general, si $f_1,\ldots,f_n$ son algunos
+elementos de $V$ y $f_i = \sum_j a_{ij} e_j$, entonces calculamos que
+\[ \langle f_k,f_\ell\rangle =
+   \langle \sum_i a_{ki} e_i, \sum_j a_{\ell j} e_j \rangle =
+   \sum_{i,j} a_{ki} \, \langle e_i, e_j\rangle \, a_{\ell j}. \]
+En términos de matrices,
+\[ (\langle f_i,f_j\rangle)_{i,j} =
+   (a_{ij}) \cdot (\langle e_i, e_j\rangle)_{i,j} \cdot (a_{ij})^t. \]
+Luego,
+\[ \det (\langle f_i,f_j\rangle)_{i,j} =
+   \det (a_{ij})_{i,j}^2 \cdot \det (\langle e_i, e_j\rangle)_{i,j}. \]
+También recordemos que $f_1,\ldots,f_n$ es otra base de $V$ si y solamente si
+$\det (a_{ij})_{i,j} \ne 0$.
+
+Se dice que la forma $\langle\cdot,\cdot\rangle$ es \textbf{no degenerada}
+si se cumple una de las siguientes condiciones equivalentes:
+\begin{enumerate}
+\item[1)] el discriminante de $\langle\cdot,\cdot\rangle$ respecto a alguna
+  base de $V$ no es nulo;
+\item[2)] $\langle\cdot,\cdot\rangle$ induce un isomorfismo entre $V$ y el
+  espacio dual $V^\vee = \Hom_k (V,k)$ mediante
+  \[ \phi\colon V \xrightarrow{\cong} V^\vee, \quad
+     v \mapsto (x \mapsto \langle v,x\rangle). \]
+\end{enumerate}
+
+Ahora supongamos que se cumplen estas condiciones. Recordemos que el espacio
+dual $V^\vee$ tiene base $e_1^*, \ldots, e_n^*$ definida por
+\[ e_i^* (e_j) = \delta_{ij} = \begin{cases}
+  1, & \text{si } i = j,\\
+  0, & \text{si } i \ne j.
+\end{cases} \]
+Usando el isomorfismo $\phi\colon V \cong V^\vee$ de arriba, podemos tomar
+los vectores $e_i' = \phi^{-1} (e_i^*)$, y luego $e_1', \ldots, e_n'$ cumplen
+$$\langle e_i', e_j\rangle = \delta_{ij}.$$
+Podemos decir que $e_1', \ldots, e_n'$ es la base \textbf{dual} a
+$e_1, \ldots, e_n$ respecto a la forma bilineal.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Emparejamiento de traza y discriminante}
+
+\begin{definicion}
+  Para una extensión de anillos $A \subset B$ tal que $B$ es un $A$-módulo
+  libre de rango $n$, el \textbf{emparejamiento de traza} es la forma
+  $A$-bilineal simétrica
+  \[ \langle\cdot,\cdot\rangle\colon B\times B\to A, \quad
+     (x,y) \mapsto T_{B/A} (xy). \]
+  Para una base $e_1,\ldots,e_n$ de $B$ sobre $A$, el \textbf{discriminante}
+  viene dado por
+  \[ \Delta (e_1,\ldots,e_n) =
+     \det (\langle e_i,e_j\rangle)_{i,j}. \]
+\end{definicion}
+
+Si $f_1, \ldots, f_n$ son otros elementos que se expresan en términos de los
+$e_i$ mediante $f_i = \sum_j a_{ij} e_j$, entonces los mismos cálculos que vimos
+arriba nos dan la relación
+\[ \Delta (f_1,\ldots,f_n) = \det (a_{ij})_{i,j}^2 \cdot \Delta (e_1,\ldots,e_n). \]
+Ahora $f_1,\ldots,f_n$ es una base si y solamente si $(a_{ij})_{i,j}$ es una
+matriz invertible, lo que equivale a $\det (a_{ij})_{i,j} \in A^\times$.
+Entonces, si no queremos fijar una base particular, el discriminante está bien
+definido solamente salvo un factor de $(A^\times)^2$, como un elemento de
+$A^\times/(A^\times)^2$.
+
+Sin embargo, en el caso particular cuando $A = \ZZ$, tenemos $(A^\times)^2 = 1$,
+así que el discriminante es un número entero bien definido. Vale la pena
+recordar esto como una definición. Como siempre nos interesan anillos de
+números $R \subset K$.
+
+\begin{definicion}
+  Sea $R$ un anillo de números que es finitamente generado (y luego libre) como
+  $\ZZ$-módulo. Entonces, \textbf{el~discriminante} de $R$ viene dado por
+  $$\Delta (R) = \det (\langle \alpha_i, \alpha_j\rangle)_{i,j},$$
+  donde $\alpha_1,\ldots,\alpha_n$ es alguna base de $R$ sobre $\ZZ$.
+  (Como acabamos de notar, el resultado no depende de la base.)
+\end{definicion}
+
+\begin{lema}
+  Sea $R$ un $\ZZ$-módulo libre de rango $n$ con una base
+  $\alpha_1,\ldots,\alpha_n$. Para $\beta_1,\ldots,\beta_n \in R$
+  consideremos el $\ZZ$-submódulo generado por $\beta_1,\ldots,\beta_n$:
+  $$M = \ZZ \langle\beta_1,\ldots,\beta_n\rangle.$$
+  Tenemos $\beta_i = \sum_i a_{ij} \alpha_i$ para $a_{ij} \in \ZZ$.
+  Entonces,
+  \[ [R : M] = \begin{cases}
+    \infty, & \text{si }\det (a_{ij})_{i,j} = 0, \\
+    |\det (a_{ij})_{i,j}|, & \text{si }\det (a_{ij})_{i,j} \ne 0.
+    \end{cases} \]
+
+  \begin{proof}
+    Podemos identificar $R$ con $\ZZ^n$ y el submódulo $M \subset R$
+    con la imagen de una aplicación $\ZZ$-lineal $A\colon\ZZ^n \to \ZZ^n$
+    (multiplicación por la matriz $A$).
+
+    Primero, si $\det A = 0$, esto significa que hay una dependencia
+    $\ZZ$-lineal entre los vectores de $M$, así que $\rk M < n$,
+    y el índice de $M$ es infinito.
+
+    Podemos poner $A$ en la \textbf{forma normal de Smith} (véase
+    por ejemplo \cite[Chapter 2]{Cohen-GTM138})
+    \[ B = \begin{pmatrix}
+      b_1 \\
+      & \ddots \\
+      & & b_n
+      \end{pmatrix} = U A V, \]
+    donde $B$ es una matriz diagonal y $U, V \in \GL_n (\ZZ)$.
+    Las aplicaciones $\ZZ$-lineales $U, V\colon \ZZ^n\to \ZZ^n$ son
+    isomorfismos, así que $[\ZZ^n : A (\ZZ^n)] = [\ZZ^n : B (\ZZ^n)]$.
+    Tenemos
+    $$\det B = \det (U A V) = \det (A),$$
+    y luego
+    \[ [\ZZ^n : B (\ZZ^n)] = \# (\ZZ/b_1\ZZ \times \cdots \times \ZZ/b_n\ZZ)
+       = |\det B|. \qedhere \]
+  \end{proof}
+\end{lema}
+
+\begin{ejemplo}
+  Consideremos el subgrupo de $R = \ZZ^2$ generado por los vectores
+  $\beta_1 = (2,3)$ y $\beta_2 = (-2,1)$. Estos corresponden a la matriz
+  \[ A = \begin{pmatrix}
+    2 & -2 \\
+    3 & 1
+  \end{pmatrix}. \]
+  La forma normal de Smith en este caso
+  será
+  \[ \begin{pmatrix}
+    1 & -6 \\
+    0 & 1
+  \end{pmatrix} \, \begin{pmatrix}
+    2 & -2 \\
+    3 & 1
+  \end{pmatrix} \, \begin{pmatrix}
+    1 & 1 \\
+    -3 & -2
+  \end{pmatrix} = \begin{pmatrix}
+    8 & 0 \\
+    0 & 1
+  \end{pmatrix}. \]
+  Entonces, el cociente de $\ZZ^2$ por $A (\ZZ^2)$ tiene $8$ elementos.
+  Aquí están dibujados los vectores $\beta_1$ y $\beta_2$ y ocho representantes
+  del cociente $\ZZ^2 / A (\ZZ^2)$.
+
+  \begin{center}
+    \begin{tikzpicture}[x=0.5cm,y=0.5cm]
+        \fill[blue!20] (0,0) -- (2,3) -- (0,4) -- (-2,1) -- cycle;
+
+        \foreach \i in {-5, ..., 5}
+        \draw[black!40] (-5,\i) -- (5,\i);
+        \foreach \i in {-5, ..., 5}
+        \draw[black!40] (\i,-5) -- (\i,5);
+
+        \draw[->] (-6,0) -- (6,0) node[right] {$e_1$};
+        \draw[->] (0,-6) -- (0,6) node[above] {$e_2$};
+
+        \draw[->] (0,0) -- (2,3) node [label={above right:$\beta_1$}] {};
+        \draw[->] (0,0) -- (-2,1) node [label={above left:$\beta_2$}] {};
+
+        \draw (-1,1) node[circle,fill,inner sep=1pt] {};
+        \draw (-1,2) node[circle,fill,inner sep=1pt] {};
+        \draw (0,0) node[circle,fill,inner sep=1pt] {};
+        \draw (0,1) node[circle,fill,inner sep=1pt] {};
+        \draw (0,2) node[circle,fill,inner sep=1pt] {};
+        \draw (0,3) node[circle,fill,inner sep=1pt] {};
+        \draw (1,2) node[circle,fill,inner sep=1pt] {};
+        \draw (1,3) node[circle,fill,inner sep=1pt] {};
+    \end{tikzpicture}
+  \end{center}
+\end{ejemplo}
+
+Esto nos lleva al siguiente resultado.
+
+\begin{proposicion}
+  Sea $R$ un anillo de números que es un $\ZZ$-módulo libre de rango $n$
+  y $M \subseteq R$ un submódulo de rango $n$ generado por algunos elementos
+  $\beta_1,\ldots,\beta_n$. Luego,
+  $$\Delta (M) = [R : M]^2 \cdot \Delta (R).$$
+
+  \begin{proof}
+    $\Delta (M) = \Delta (\beta_1,\ldots,\beta_n) = \det (a_{ij})_{i,j}^2 \cdot \Delta (R)$,
+    donde $|\det (a_{ij})| = [R : M]$.
+  \end{proof}
+\end{proposicion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Generación finita del anillo de enteros}
+
+Nuestro próximo objetivo es probar que para un campo de números
+el emparejamiento de traza no es degenerado y sacar algunas consecuencias
+importantes de este resultado.
+Primero necesitamos un lema bien conocido de la teoría de campos.
+
+\begin{lema}[Dedekind; independencia lineal de caracteres]
+  Dado un grupo abeliano $G$ y un campo $F$, consideremos diferentes caracteres
+  multiplicativos $\chi_1,\ldots,\chi_n\colon G\to F^\times$. Estos son
+  necesariamente linealmente independientes sobre $F$: si para algunos
+  $c_1,\ldots,c_n \in F$ se cumple
+  $$c_1 \chi_1 (g) + \cdots + \chi_n (g) = 0 \quad\text{para todo }g\in G,$$
+  entonces $c_1 = \cdots = c_n = 0$.
+
+  \begin{proof}
+    Inducción sobre $n$, el caso base siendo $n = 1$. Supongamos que
+    el resultado es válido para $n-1$ caracteres.
+    Consideremos una dependencia lineal
+    \[ \tag{*} c_1 \chi_1 (g) + \cdots + c_{n-1} \chi_{n-1} (g) + c_n \chi_n (g)
+       = 0 \quad\text{para todo }g\in G. \]
+    Dado que los caracteres son diferentes, existe $g_0 \in G$ tal que $\chi_1
+    (g_0) \ne \chi_n (g_0)$. Sustituyendo $g_0 g$ en lugar de $g$, se obtiene
+    \[ \tag{**} c_1 \chi_1 (g_0) \chi_1 (g) + \cdots +
+       c_{n-1} \chi_{n-1} (g_0) \chi_{n-1} (g) + c_n \chi_n (g_0) \chi_n (g) = 0. \]
+    Ahora si multiplicamos (*) por $\chi_n (g_0)$ y luego restamos el resultado
+    de (**), nos queda
+    \[ c_1 (\chi_1 (g_0) - \chi_n (g_0)) \chi_1 (g) + \cdots +
+       c_{n-1} (\chi_{n-1} (g_0) - \chi_n (g_0)) \chi_{n-1} (g) = 0. \]
+    Entonces, por la hipótesis de inducción,
+    $c_1 (\chi_1 (g_0) - \chi_n (g_0)) = 0$, pero dado que
+    $\chi_1 (g_0) \ne \chi_n (g_0)$, tenemos que concluir que $c_1 = 0$.
+    El mismo razonamiento nos dice que $c_2 = \cdots = c_{n-1} = 0$, pero luego
+    también $c_n = 0$.
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  Sea $K/\QQ$ un campo de números y
+  $\sigma_1,\ldots,\sigma_n\colon K \hookrightarrow \CC$ sus diferentes encajes.
+  Para una base $\alpha_1,\ldots,\alpha_n \in K$, el discriminante
+  correspondiente del emparejamiento de traza viene dado por
+  $$\Delta (\alpha_1,\ldots,\alpha_n) = \det (\sigma_i (\alpha_j))_{i,j}^2.$$
+
+  \begin{proof}
+    Cálculo directo:
+    \[ \langle\alpha_i,\alpha_j\rangle = T_{K/\QQ} (\alpha_i \alpha_j) =
+       \sum_k \sigma_k (\alpha_i)\,\sigma_k (\alpha_j). \]
+    Luego,
+    \[ (\langle\alpha_i,\alpha_j\rangle)_{i,j} =
+       (\sigma_i (\alpha_j))_{i,j}^t\,(\sigma_i (\alpha_j))_{i,j}. \]
+    Tomando los determinantes, se obtiene
+    $\Delta (\alpha_1,\ldots,\alpha_n) = \det (\sigma_i (\alpha_j))_{i,j}^2$.
+  \end{proof}
+\end{lema}
+
+\begin{proposicion}
+  Para un campo de números $K/\QQ$ el emparejamiento de traza
+  \[ \langle\cdot,\cdot\rangle\colon K\times K \to \QQ, \quad
+     (\alpha,\beta) \mapsto T_{K/\QQ} (\alpha\beta) \]
+  es no degenerado.
+
+  \begin{proof}
+    Si $\alpha_1,\ldots,\alpha_n$ es alguna base de $K$ sobre $\QQ$,
+    sería suficiente ver que
+    \[ \Delta (\alpha_1,\ldots,\alpha_n) =
+       \det (\sigma_i (\alpha_j))_{i,j}^2 \ne 0. \]
+    Esto es lo mismo que probar que los vectores de la matriz correspondiente
+    son linealmente independientes. Lo último se sigue de la independencia
+    lineal de los caracteres $\sigma_i\colon K^\times \to \CC^\times$.
+
+    A saber, una combinación lineal no trivial de las filas de
+    $(\sigma_i (\alpha_j))_{i,j}$ sería
+    $$c_1 \sigma_1 (\alpha_j) + \cdots + c_n \sigma_n (\alpha_j) = 0$$
+    para todo $j = 1,\ldots,n$. Por la linealidad, esto implica que
+    $$c_1 \sigma_1 (\alpha) + \cdots + c_n \sigma_n (\alpha) = 0$$
+    para todo $\alpha \in K^\times$, pero luego
+    $c_1 = \cdots = c_n = 0$.
+  \end{proof}
+\end{proposicion}
+
+\begin{teorema}
+  Sea $K/\QQ$ un campo de números. Entonces, el anillo de enteros $\O_K$
+  es un $\ZZ$-módulo libre de rango $n = [K : \QQ]$.
+
+  \[ \begin{tikzcd}
+    \O_K \ar[-]{d}{n} &[-3em] \subset &[-3em] K \ar[-]{d}{n} \\
+    \ZZ & \subset & \QQ
+  \end{tikzcd} \]
+
+  \begin{proof}
+    Sea $\alpha_1,\ldots,\alpha_n \in K$ una base de $K$ sobre $\QQ$.
+    Al multiplicar los $\alpha_i$ por un entero racional $N \in \ZZ$
+    suficientemente grande, podemos asumir que
+    $\alpha_1,\ldots,\alpha_n \in \O_K$ (véase \ref{lema:N-alpha-esta-en-OK}).
+    Dado que el emparejamiento de traza $\langle\cdot,\cdot\rangle$
+    es no degenerado, podemos tomar la base dual
+    $\alpha_1',\ldots,\alpha_n' \in K$ tal que
+    $$\langle \alpha_i, \alpha_j'\rangle = \delta_{ij}.$$
+    Todo $\alpha \in \O_K$ puede ser expresado como
+    $$\alpha = \sum_i a_i \alpha_i',$$
+    donde $a_i \in \QQ$. En realidad, estos coeficientes son enteros:
+    \[ a_i = \sum_j a_j \delta_{ij} =
+       \sum_j a_j \langle\alpha_i, \alpha_j'\rangle =
+       \langle\alpha_i, \sum_j a_j \alpha_j'\rangle =
+       \langle\alpha_i, \alpha\rangle \in \ZZ \]
+    (usando que $\alpha,\alpha_i \in \O_K$. Entonces, tenemos
+    \[ \alpha_1 \ZZ \oplus \cdots \oplus \alpha_n \ZZ \subseteq \O_K \subseteq
+       \alpha_1' \ZZ \oplus \cdots \oplus \alpha_n' \ZZ. \]
+    Esto demuestra que $\O_K$ está entre dos $\ZZ$-módulos libres de rango $n$,
+    y por lo tanto el mismo $\O_K$ es libre de rango $n$.
+  \end{proof}
+\end{teorema}
+
+\begin{comentario}
+  El argumento de arriba usa de manera implícita la estructura de $\ZZ$-módulos
+  finitamente generados. Si tenemos una extensión de campos de números $L/K$,
+  entonces $\O_K \subset \O_L$, pero $\O_L$ no tiene por qué ser un
+  $\O_K$-módulo libre: esto puede fallar si $\O_K$ no es un dominio de ideales
+  principales. En general, un submódulo de un módulo libre no es necesariamente
+  libre.
+\end{comentario}
+
+\begin{corolario}
+  El anillo de enteros $\O_K$ es el subanillo más grande de $K$ que es
+  finitamente generado como $\ZZ$-módulo.
+
+  \begin{proof}
+    Ya vimos que el mismo $\O_K$ es finitamente generado. Por otra parte, si
+    un subanillo $R \subset K$ es finitamente generado como $\ZZ$-módulo,
+    entonces por nuestra caracterización de integridad
+    (véase \ref{lema:caracterizacion-de-integralidad}), todos elementos de $R$
+    son enteros sobre $\ZZ$, y luego $R \subseteq \O_K$.
+  \end{proof}
+\end{corolario}
+
+Un subanillo $R \subset K$ que es finitamente generado como $\ZZ$-módulo y tiene
+rango $n = [K : \QQ]$ se llama un \textbf{orden}. El anillo de enteros $\O_K$ es
+entonces el \textbf{orden maximal}. La letra $\O$ viene del alemán
+\emph{Ordnung}.
+
+\vspace{1em}
+
+Ahora sabiendo que $\O_K$ es un $\ZZ$-módulo libre, tiene sentido dar
+la siguiente definición.
+
+\begin{definicion}
+  Dado un campo de números $K/\QQ$, su \textbf{discriminante} es el
+  discriminante del anillo de enteros $\O_K$:
+  $$\Delta_K = \Delta (\O_K).$$
+\end{definicion}
+
+\begin{ejemplo}
+  Consideremos un campo cuadrático $K = \QQ (\sqrt{d})$, donde como siempre $d$
+  es un entero libre de cuadrados. Si $d \equiv 2,3\pmod{4}$, entonces
+  $\O_K = \ZZ [\sqrt{d}]$. Tomemos $1, \sqrt{d}$ como su base sobre
+  $\ZZ$ y calculamos
+  \[ \Delta (\ZZ [\sqrt{d}]) = \det \begin{pmatrix}
+    T (1) & T (\sqrt{d}) \\
+    T (\sqrt{d}) & T (d)
+  \end{pmatrix} = \det \begin{pmatrix}
+    2 & 0 \\
+    0 & 2d
+  \end{pmatrix} = 4d. \]
+
+  Si $d \equiv 1 \pmod{4}$, entonces
+  $\O_K = \ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]$, y tomando como base
+  $1$, $\frac{1+\sqrt{d}}{2}$, calculamos
+  \[ T \left(\left(\frac{1+\sqrt{d}}{2}\right)\right) =
+     \frac{1+\sqrt{d}}{2} + \frac{1-\sqrt{d}}{2} = 1 \]
+  y
+  \[ T \left(\left(\frac{1+\sqrt{d}}{2}\right)^2\right) =
+     T \left(\frac{1 + 2\sqrt{d} + d}{4}\right) = \frac{1+d}{2}. \]
+  Se obtiene
+  \[ \Delta \Bigl(\ZZ\Bigl[\frac{1+\sqrt{d}}{2}\Bigr]\Bigr) =
+  \det \begin{pmatrix}
+    2 & 1 \\
+    1 & \frac{1+d}{2}
+  \end{pmatrix} = d. \]
+
+  Entonces, para un campo cuadrático $K = \QQ (\sqrt{d})$ se tiene
+  \[ \Delta_K = \begin{cases}
+    d, & d \equiv 1 \pmod{4}, \\
+    4d, & d \equiv 2,3 \pmod{4}.
+  \end{cases} \qedhere \]
+\end{ejemplo}
+
+\emph{Continuará\dots}

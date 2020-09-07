@@ -1,4 +1,4 @@
-Después de ver trazas y discriminantes.
+Después de ver trazas y discriminantes:
 
 * En algún momento calcular que el anillo de enteros de Q (\zeta_n)
   es Z [\zeta_n].
@@ -9,6 +9,11 @@ Después de ver trazas y discriminantes.
 * Kummer-Dedekind cuando O_K /= Z [\alpha].
 
 
-Después de ver la teoría de Galois.
+Después de ver la cota de Minkowski:
+
+* |\Delta_K| > 1, para K/=Q así que algunos primos siempre se ramifican.
+
+
+Después de ver la teoría de Galois:
 
 * Reciprocidad cuadrática mediante Q (\sqrt{p*}) \subset Q (\zeta_p).
