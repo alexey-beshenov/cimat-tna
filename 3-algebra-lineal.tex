@@ -8,7 +8,9 @@ Ahora vamos a explorar estas construcciones para extensiones de anillos.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\pdfbookmark{Clase 9 (07/09/20)}{clase-9}
 \section{Norma y traza}
+\marginpar{\small Clase 9 \\ 07/09/20}
 
 \begin{definicion}
   Sea $A \subset B$ una extensión de anillos tal que $B$ es un $A$-módulo libre
@@ -236,11 +238,12 @@ números $R \subset K$.
 \end{definicion}
 
 \begin{lema}
+  \label{lema:indice-de-Z-submodulo-como-determinante}
   Sea $R$ un $\ZZ$-módulo libre de rango $n$ con una base
   $\alpha_1,\ldots,\alpha_n$. Para $\beta_1,\ldots,\beta_n \in R$
   consideremos el $\ZZ$-submódulo generado por $\beta_1,\ldots,\beta_n$:
   $$M = \ZZ \langle\beta_1,\ldots,\beta_n\rangle.$$
-  Tenemos $\beta_i = \sum_i a_{ij} \alpha_i$ para $a_{ij} \in \ZZ$.
+  Tenemos $\beta_i = \sum_j a_{ij} \alpha_j$ para $a_{ij} \in \ZZ$.
   Entonces,
   \[ [R : M] = \begin{cases}
     \infty, & \text{si }\det (a_{ij})_{i,j} = 0, \\
@@ -330,6 +333,7 @@ números $R \subset K$.
 Esto nos lleva al siguiente resultado.
 
 \begin{proposicion}
+  \label{prop:discriminantes-e-indice}
   Sea $R$ un anillo de números que es un $\ZZ$-módulo libre de rango $n$
   y $M \subseteq R$ un submódulo de rango $n$ generado por algunos elementos
   $\beta_1,\ldots,\beta_n$. Luego,
@@ -381,6 +385,7 @@ Primero necesitamos un lema bien conocido de la teoría de campos.
 \end{lema}
 
 \begin{lema}
+  \label{lema:discriminante-en-terminos-de-encajes}
   Sea $K/\QQ$ un campo de números y
   $\sigma_1,\ldots,\sigma_n\colon K \hookrightarrow \CC$ sus diferentes encajes.
   Para una base $\alpha_1,\ldots,\alpha_n \in K$, el discriminante
@@ -530,4 +535,335 @@ la siguiente definición.
   \end{cases} \qedhere \]
 \end{ejemplo}
 
-\emph{Continuará\dots}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark{Clase 10 (09/09/20)}{clase-10}
+\section{Cálculos del discriminante y anillo de enteros}
+\marginpar{\small Clase 10 \\ 09/09/20}
+
+El discriminante puede ser calculado en términos de encajes
+$\sigma_i\colon K \hookrightarrow \CC$. Ya hicimos este cálculo en
+\ref{lema:discriminante-en-terminos-de-encajes}: sustituyendo la fórmula
+$$T_{K/\QQ} (\alpha) = \sigma_1 (\alpha) + \cdots + \sigma_n (\alpha)$$
+en la definición del discriminante, se obtiene lo siguiente.
+
+\begin{proposicion}
+  Dado un anillo de números $R \subset K$ que es un $\ZZ$-módulo de rango
+  $n = [K : \QQ]$, sea $\alpha_1, \ldots, \alpha_n$ una base de $R$ sobre
+  $\ZZ$. Entonces, el discriminante viene dado por
+  $$\Delta (R) = \det (\sigma_i (\alpha_j))_{i,j}^2.$$
+\end{proposicion}
+
+Ahora consideremos la siguiente situación particular: dado un campo de números
+$K/\QQ$, podemos escribir $K = \QQ (\alpha)$, donde $\alpha$ es un entero
+algebraico (use el teorema del elemento primitivo y el hecho de que para un
+número algebraico $\alpha$ existe un entero racional no nulo $N \in \ZZ$ tal que
+$N\alpha$ es un entero algebraico). En este caso $R = \ZZ [\alpha]$ es un
+$\ZZ$-submódulo de rango $n$ con una base $1, \alpha, \ldots, \alpha^{n-1}$.
+Si $\alpha_1, \ldots, \alpha_n$ son diferentes raíces del polinomio mínimo
+de $\alpha$ sobre $\QQ$, entonces $\sigma_i (\alpha) = \alpha_i$.
+
+Tenemos
+\[ \Delta (\ZZ [\alpha]) = \det (\sigma_i (\alpha_j))_{i,j}^2 =
+   \det \begin{pmatrix}
+     1 & \alpha_1 & \alpha_1^2 & \cdots & \alpha_1^{n-1} \\
+     1 & \alpha_2 & \alpha_2^2 & \cdots & \alpha_2^{n-1} \\
+     \vdots & \vdots & \vdots & \ddots & \vdots \\
+     1 & \alpha_n & \alpha_n^2 & \cdots & \alpha_n^{n-1} \\
+   \end{pmatrix}^2. \]
+Nos salió un determinante de Vandermonde:
+$$\Delta (\ZZ [\alpha]) = \prod_{1 \le i < j \le n} (\alpha_i - \alpha_j)^2.$$
+Esta expresión es precisamente el discriminante del polinomio mínimo de
+$\alpha$.
+
+\begin{definicion}
+  Para un polinomio mónico $f \in \QQ [x]$ con raíces complejas
+  $\alpha_1, \ldots, \alpha_n$ el \textbf{discriminante} viene dado por
+  $$\Delta (f) = \prod_{1 \le i < j \le n} (\alpha_i - \alpha_j)^2.$$
+\end{definicion}
+
+Entonces, hemos probado el siguiente resultado.
+
+\begin{proposicion}
+  Dado un anillo de números $\ZZ [\alpha] \subset K$ que es un $\ZZ$-módulo
+  de rango $n$, se tiene
+  $$\Delta (\ZZ [\alpha]) = \Delta (f^\alpha_\QQ).$$
+\end{proposicion}
+
+Aunque el discriminante de polinomio está definido en términos de sus raíces
+complejas, la expresión
+$$\Delta (f) = \prod_{1 \le i < j \le n} (\alpha_i - \alpha_j)^2.$$
+es invariante respecto a cualquier permutación de las raíces $\alpha_i$, así que
+la teoría de Galois implica que $\Delta (f) \in \QQ$. Además, los $\alpha_i$
+son enteros algebraicos si $f$ es mónico, así que $\Delta (f) \in \ZZ$.
+Hay una manera de calcular el discriminante usando álgebra lineal, sin calcular
+las raíces de $f$. Para esto se ocupa el resultante.
+
+\begin{definicion}
+  Dados dos polinomios
+  \[ f = a\,(x - \alpha_1)\cdots (x - \alpha_m), \quad
+     g = b\,(x - \beta_1)\cdots (x - \beta_n), \]
+  el \textbf{resultante} de $f$ y $g$ viene dado por una de las siguientes
+  fórmulas equivalentes:
+  \[ \Res (f,g) = a^n\,g (\alpha_1) \cdots g (\alpha_m)
+      = (-1)^{mn}\,b^m\,f (\beta_1) \cdots f (\beta_n)
+      = a^n b^m \prod_{\substack{1 \le i \le m \\ 1 \le j \le n}} (\alpha_i - \beta_j). \]
+\end{definicion}
+
+\begin{proposicion}
+  Para un poliomio mónico
+  $$f = (x - \alpha_1)\cdots (x - \alpha_n)$$
+  se tiene
+  $$\Delta (f) = (-1)^{\frac{n\,(n-1)}{2}} \, \Res (f,f').$$
+
+  \begin{proof}
+    Si $f$ tiene raíces múltiples, entonces $\Delta (f) = \Res (f,f') = 0$
+    (note que si $\alpha_i$ es una raíz múltiple, entonces esta es también una
+    raíz de $f'$). Supongamos que las raíces de $f$ son distintas. Tenemos
+    $$f' (x) = \sum_{1 \le i \le n} \prod_{j\ne i} (x - \alpha_j),$$
+    y luego
+    $$f' (\alpha_i) = \prod_{j \ne i} (\alpha_i - \alpha_j).$$
+    Ahora por la definición,
+    \[ \Res (f,f') = f' (\alpha_1) \cdots f' (\alpha_n) =
+       \prod_i \prod_{j \ne i} (\alpha_i - \alpha_j) =
+       (-1)^{n \choose 2} \prod_{1 \le i < j \le n} (\alpha_i - \alpha_j)^2 =
+       (-1)^{\frac{n\,(n-1)}{2}} \Delta (f). \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+\begin{corolario}
+  Para $K = \QQ (\alpha)$, donde $\alpha$ es un entero algebraico y
+  $f \in \ZZ [x]$ es el polinomio mínimo de $\alpha$ se tiene
+  $$\Delta (\ZZ [\alpha]) = \Delta (f) = (-1)^{\frac{n\,(n-1)}{2}}\,N_{K/\QQ} (f' (\alpha)).$$
+
+  \begin{proof}
+    Tenemos
+    $$\Res (f,f') = f' (\alpha_1) \cdots f' (\alpha_n),$$
+    donde $\alpha_1,\ldots,\alpha_n$ son las raíces de $f$. En términos de
+    encajes $\sigma_i\colon K\hookrightarrow \CC$, tenemos
+    $\alpha_i = \sigma_i (\alpha)$. Dado que $f \in \ZZ [x]$, tenemos
+    $f' \in \ZZ [x]$, y luego $f' (\sigma_i (\alpha)) = \sigma_i (f' (\alpha))$.
+    Entonces,
+    \[ \Res (f,f') = \sigma_1 (f' (\alpha)) \cdots \sigma_n (f' (\alpha)) =
+       N_{K/\QQ} (f' (\alpha)). \qedhere \]
+  \end{proof}
+\end{corolario}
+
+\begin{ejemplo}
+  \label{ejemplo:discriminante-de-Q-zeta-p}
+  Consideremos el campo ciclotómico $K = \QQ (\zeta_p)$, donde $p$ es un primo
+  impar. En este caso $\O_K = \ZZ [\zeta_p]$. El discriminante entonces viene
+  dado por
+  $$\Delta_K = (-1)^{\frac{p-1}{2}}\,N_{K/\QQ} (\Phi_p' (\zeta_p)).$$
+
+  Escribamos
+  $$x^p - 1 = (x-1)\,\Phi_p (x),$$
+  y entonces
+  $$p\,x^{p-1} = \Phi_p (x) + (x-1)\,\Phi_p' (x).$$
+  Sustituyendo $x = \zeta_p$, se obtiene
+  $$p\,\zeta_p^{p-1} = (\zeta_p - 1)\,\Phi_p' (\zeta_p).$$
+  Ahora
+  \[ N_{K/\QQ} (\Phi_p' (\zeta_p)) =
+     \frac{p^{p-1} \, N_{K/\QQ} (\zeta_p)^{p-1}}{N_{K/\QQ} (\zeta_p - 1)}. \]
+  Aquí $\zeta_p \in \O_K^\times$, y por lo tanto
+  $N_{K/\QQ} (\zeta_p)^{p-1} = (\pm 1)^{p-1} = 1$
+  (de hecho, la norma de $\zeta_p$ es igual a 1), y se ve que
+  $$N_{K/\QQ} (\zeta_p - 1) = \Phi_p (1) = p.$$
+  Entonces,
+  \[ \Delta_K = (-1)^{\frac{p-1}{2}} \, p^{p-2}. \qedhere \]
+\end{ejemplo}
+
+El resultante puede ser calculado de la siguiente manera.
+
+\begin{proposicion}
+  \label{prop:determinante-de-sylvester}
+  Dados dos polinomios
+  \[ f = a_m x^m + \cdots + a_1 x + a_0, \quad
+     g = b_n x^n + \cdots + b_1 x + b_0, \]
+  el resultante $\Res (f,g)$ es igual al determinante de la siguiente matriz
+  de $(n+m) \times (n+m)$:
+  \[ \begin{pmatrix}
+    a_m & a_{m-1} & a_{m-2} & \cdots & a_1 & a_0 & 0 & 0 & \cdots & 0 \\
+    0 & a_m & a_{m-1} & a_{m-2} & \cdots & a_1 & a_0 & 0 & \cdots & 0 \\  
+    0 & 0 & a_m & a_{m-1} & a_{m-2} & \cdots & a_1 & a_0 & \cdots & 0 \\
+    \vdots & \vdots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+    0 & 0 & \cdots & 0 & a_m & a_{m-1} & a_{m-2} & \cdots & a_1 & a_0 \\
+    b_n & b_{n-1} & \cdots & b_2 & b_1 & b_0 & 0 & 0 & \cdots & 0 \\
+    0 & b_n & b_{n-1} & \cdots & b_2 & b_1 & b_0 & 0 & \cdots & 0 \\  
+    0 & 0 & b_n & b_{n-1} & \cdots & b_2 & b_1 & b_0 & \cdots & 0 \\
+    \vdots & \vdots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \vdots \\
+    0 & 0 & \cdots & 0 & b_n & b_{n-1} & \cdots & b_2 & b_1 & b_0 \\
+  \end{pmatrix} \]
+  (esta se conoce como la \textbf{matriz de Sylvester}). Aquí los coeficientes
+  de $f$ se repiten en $n = \deg (g)$ filas y los coeficientes de $g$
+  se repiten en $m = \deg (f)$ filas.
+\end{proposicion}
+
+A continuación no vamos a usar esta interpretación del resultante y la menciono
+solo para ser completo: a veces esto aparece como la definición del resultante.
+Para una prueba, véase por ejemplo \cite[\S 3.3]{Cohen-GTM138}.
+
+\begin{ejemplo}
+  Para el polinomio $f = x^2 + bx + c$ tenemos $f' = 2x + b$, y luego
+  \[ \Delta (f) = -\det \begin{pmatrix}
+    1 & b & c \\
+    2 & b & 0 \\
+    0 & 2 & b
+  \end{pmatrix} = b^2 - 4c. \]
+  Para el polinomio cúbico $f = x^3 + ax + b$ tenemos $f' = 3x^2 + a$ y
+  \[ \Delta (f) = -\det \begin{pmatrix}
+    1 & 0 & a & b & 0 \\
+    0 & 1 & 0 & a & b \\
+    3 & 0 & a & 0 & 0 \\
+    0 & 3 & 0 & a & 0 \\
+    0 & 0 & 3 & 0 & a
+  \end{pmatrix} = \cdots = - (4a^3 + 27b^2). \qedhere \]
+\end{ejemplo}
+
+\begin{ejemplo}
+  Si $d$ es un entero libre de cuadrados, entonces
+  $$\Delta (\ZZ [\sqrt{d}]) = \Delta (x^2 - d) = 4d.$$
+  Si $d \equiv 1 \pmod{4}$, entonces
+  \[ \Delta \Bigl(\ZZ \Bigl[\frac{1 + \sqrt{d}}{2}\Bigr]\Bigr)
+   = \Delta \Bigl(x^2 - x - \frac{d-1}{4}\Bigr) = d. \qedhere \]
+\end{ejemplo}
+
+En PARI/GP, la función \texttt{poldisc($f$)} calcula el discriminante de $f$,
+y \texttt{polresultant($f$,$g$)} calcula el resultante.
+
+\vspace{1em}
+
+Como un caso particular de \ref{prop:discriminantes-e-indice} tenemos
+el siguiente resultado.
+
+\begin{proposicion}
+  \label{prop:discriminante-de-Z-alpha-en-OK}
+  Sea $K/\QQ$ un campo de números y $\alpha \in \O_K$ un entero algebraico de
+  grado $n = [K : \QQ]$. Entonces,
+  \[ \Delta (\ZZ [\alpha]) = \Delta (f^\alpha_\QQ) =
+     [\O_K : \ZZ [\alpha]]^2 \cdot \Delta_K. \]
+\end{proposicion}
+
+\begin{ejemplo}
+  Si $d$ es un entero libre de cuadrados tal que $d \equiv 1 \pmod{4}$,
+  consideremos el campo cuadrático $K = \QQ (\sqrt{d})$. En este caso
+  $$\O_K = \ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr].$$
+  Notamos que
+  $$\ZZ [\sqrt{d}] = \ZZ \oplus 2\cdot \frac{1+\sqrt{d}}{2}\ZZ,$$
+  así que
+  $$[\O_K : \ZZ [\sqrt{d}]] = 2.$$
+  Tenemos
+  \[ \underbrace{\Delta (\ZZ [\sqrt{d}])}_{= 4d} =
+  \Bigl[\ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr] : \ZZ [\sqrt{d}] \Bigr]^2 \cdot
+  \underbrace{\Delta_K}_{=d}. \qedhere \]
+\end{ejemplo}
+
+La fórmula de \ref{prop:discriminante-de-Z-alpha-en-OK} ayuda a calcular
+el anillo de enteros en ciertos casos.
+
+\begin{ejemplo}
+  Consideremos el campo de números $K = \QQ (\alpha)$, donde $\alpha$
+  es el entero algebraico tal que $\alpha^3 + \alpha - 1 = 0$. Calculamos
+  $$\Delta (\ZZ [\alpha]) = \Delta (x^3 + x - 1) = -31.$$
+  Tenemos
+  $$\Delta (\ZZ [\alpha]) = [\O_K : \ZZ [\alpha]] \cdot \Delta_K,$$
+  pero $-31$ es libre de cuadrados, y entonces $\O_K = \ZZ [\alpha]$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Calculamos que
+  $$\Delta (x^2 - x + 6) = \Delta (x^3 - x + 1) = -23.$$
+  Este número es libre de cuadrados, así que para los campos
+  $$K = \QQ [\alpha]/(\alpha^2 - \alpha + 6) \cong \QQ (\sqrt{-23})$$
+  y
+  $$K' = \QQ [\beta]/(\beta^3 - \beta + 1)$$
+  tenemos
+  \[ \O_K = \ZZ [\alpha], \quad \O_{K'} = \ZZ [\beta]. \qedhere \]
+\end{ejemplo}
+
+\begin{comentario}
+  El último ejemplo también demuestra que el discriminante de dos campos
+  de números no isomorfos puede coincidir. Obviamente, si $K \cong K'$, entonces
+  $\O_K \cong \O_{K'}$, y luego $\Delta_K = \Delta_{K'}$.
+  Sin embargo, muy a menudo sucede que $\Delta_K = \Delta_{K'}$, pero
+  $K \not\cong K'$. El discriminante no es un invariante muy fino, pero este
+  ayuda a enumerar los campos de números: más adelante veremos que hay solamente
+  un número finito de campos de números (salvo isomorfismo) tales que
+  $|\Delta_K| < C$ para alguna constante $C$.
+\end{comentario}
+
+\begin{ejemplo}[Dedekind]
+  Consideremos el campo de números $K = \QQ (\alpha)$, donde
+  \[ \tag{*} \alpha^3 + \alpha^2 - 2\alpha + 8 = 0. \]
+  Calculamos (con ayuda de computadora) que
+  $$\Delta (\ZZ [\alpha]) = \Delta (x^3 + x^2 - 2x + 8) = -2^2 \cdot 503.$$
+  Aquí el número $503$ es primo. Entonces, hay dos posibilidades: o tenemos
+  $\O_K = \ZZ [\alpha]$, o $[\O_K : \ZZ [\alpha]] = 2$.
+  En realidad, estamos en el segundo caso.
+  
+  Primero, multiplicando (*) por $(2/\alpha)^3$, se obtiene
+  $$\frac{64}{\alpha^3} - \frac{16}{\alpha^2} + \frac{8}{\alpha} + 8 = 0.$$
+  Esto significa que
+  $$\beta = \frac{4}{\alpha} = -\frac{1}{2} \alpha^2 - \frac{1}{2} \alpha + 1$$
+  es un entero algebraico. Sin embargo, $\beta \notin \ZZ [\alpha]$. Esto
+  demuestra que $\O_K \ne \ZZ [\alpha]$, pero luego tenemos
+  \[ \begin{tikzcd}
+    \O_K \ar[-]{d}\ar[-,bend left=45]{dd}{2} \\
+    \ZZ [\alpha,\beta] \ar[-]{d}{> 1} \\
+    \ZZ [\alpha]
+  \end{tikzcd} \]
+  y entonces
+  $$\O_K = \ZZ [\alpha,\beta] = \ZZ \oplus \alpha\ZZ \oplus \beta\ZZ.$$
+  En efecto, $\alpha\beta = 4$, y se calcula que
+  $$\alpha^2 = 2 - \alpha - 2\beta, \quad \beta^2 = -2 - 2\alpha + \beta.$$
+  Dejo al lector confirmar que
+  $$\Delta (\ZZ [\alpha,\beta]) = -503.$$
+
+  De hecho, se puede ver que $\O_K$ no es de la forma $\ZZ [\gamma]$ para ningún
+  entero algebraico $\gamma$. Primero, se puede ver (con ayuda de PARI/GP)
+  que en $\O_K = \ZZ [\alpha,\beta]$ se tiene factorización en ideales primos
+  $$2\O_K = \mathfrak{p}_1 \, \mathfrak{p}_2 \, \mathfrak{p}_3,$$
+  donde
+  \[ \mathfrak{p}_1 = (2 - \alpha - \beta), \quad
+     \mathfrak{p}_2 = (5 - 3\alpha - 2\beta), \quad
+     \mathfrak{p}_3 = (7 - 4\alpha - 3\beta). \]
+  Ahora supongamos que $\O_K = \ZZ [\gamma] = \ZZ [x] / (f)$ para algún
+  polinomio mónico irreducible $f$ de grado $3$. El~teorema de Kummer--Dedekind
+  (\ref{teorema:kummer-dedekind}) nos dice que para factorizar $2\O_K$ en
+  ideales primos, hay que factorizar el polinomio $f$ en $\FF_2 [x]$. Los
+  polinomios irreducibles en $\FF_2 [x]$ son los siguientes:
+  \begin{align*}
+    \deg = 1\colon & x, ~ x+1, \\
+    \deg = 2\colon & x^2 + x + 1, \\
+    \deg = 3\colon & x^2 + x + 1, ~ x^3 + x^2 + 1.
+  \end{align*}
+  Esto significa que $f$ no puede ser expresado como producto de tres diferentes
+  polinomios irreducibles. En términos de factorización del ideal $2\O_K$, esto
+  excluye la factorización de la forma
+  $2\O_K = \mathfrak{p}_1 \, \mathfrak{p}_2 \, \mathfrak{p}_3$.
+\end{ejemplo}
+
+\noindent\emph{Continuará\dots}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\phantomsection
+
+\addcontentsline{toc}{section}{Ejercicios}
+\section*{Ejercicios}
+
+\begin{ejercicio}
+  Encuentre el anillo de enteros $\O_K$ y discriminante $\Delta_K$ para
+  los campos cúbicos $\QQ (\sqrt[3]{6})$ y $\QQ (\sqrt[3]{12})$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Encuentre la fórmula para el discriminante $\Delta (x^n + ax + b)$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Encuentre el anillo de enteros $\O_K$ y discriminante $\Delta_K$ para el campo
+  $K = \QQ (\alpha)$ donde $\alpha$ cumple $\alpha^4 + \alpha + 1 = 0$.
+\end{ejercicio}
