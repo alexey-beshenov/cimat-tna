@@ -44,9 +44,22 @@ alexey.beshenov@cimat.mx
   https://youtube.com/watch?v=pEFsrF595M8
 
 * Clase 7 (31/08/20). Anillo de enteros O_K (continuación).
-Dominios de Dedekind.
+  Dominios de Dedekind.
 
   https://youtube.com/watch?v=7iGKFW5F-nI
+
+* Clase 8 (02/09/2020). Teorema de Kummer–Dedekind.
+
+  https://youtube.com/watch?v=XHb1LibRRdQ
+
+* Clase 9 (07/09/2020). Traza y norma.
+  Emparejamiento de traza. rk O_K = [K:Q]. Discriminante Δ_K.
+
+  https://youtube.com/watch?v=e7yvTn6krKs
+
+* Clase 10 (09/09/2020). Cálculos de determinantes y anillos de enteros.
+
+  https://youtube.com/watch?v=sWbX6U8_0ek
 
 
 ## Agradecimientos
