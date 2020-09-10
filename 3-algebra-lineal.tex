@@ -200,11 +200,13 @@ $e_1, \ldots, e_n$ respecto a la forma bilineal.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Emparejamiento de traza y discriminante}
+\section{Apareamiento de traza y discriminante}
 
 \begin{definicion}
-  Para una extensión de anillos $A \subset B$ tal que $B$ es un $A$-módulo
-  libre de rango $n$, el \textbf{emparejamiento de traza} es la forma
+  Para una extensión de anillos $A \subset B$ tal que $B$ es un $A$-módulo libre
+  de rango $n$, el \textbf{apareamiento de traza}\footnote{En la primera
+    versión de estos apuntes decía ``emparejamiento'' y luego me di cuenta de
+    que en México es más común el término ``apareamiento''.}  es la forma
   $A$-bilineal simétrica
   \[ \langle\cdot,\cdot\rangle\colon B\times B\to A, \quad
      (x,y) \mapsto T_{B/A} (xy). \]
@@ -350,7 +352,7 @@ Esto nos lleva al siguiente resultado.
 \section{Generación finita del anillo de enteros}
 
 Nuestro próximo objetivo es probar que para un campo de números
-el emparejamiento de traza no es degenerado y sacar algunas consecuencias
+el apareamiento de traza no es degenerado y sacar algunas consecuencias
 importantes de este resultado.
 Primero necesitamos un lema bien conocido de la teoría de campos.
 
@@ -389,7 +391,7 @@ Primero necesitamos un lema bien conocido de la teoría de campos.
   Sea $K/\QQ$ un campo de números y
   $\sigma_1,\ldots,\sigma_n\colon K \hookrightarrow \CC$ sus diferentes encajes.
   Para una base $\alpha_1,\ldots,\alpha_n \in K$, el discriminante
-  correspondiente del emparejamiento de traza viene dado por
+  correspondiente del apareamiento de traza viene dado por
   $$\Delta (\alpha_1,\ldots,\alpha_n) = \det (\sigma_i (\alpha_j))_{i,j}^2.$$
 
   \begin{proof}
@@ -405,7 +407,7 @@ Primero necesitamos un lema bien conocido de la teoría de campos.
 \end{lema}
 
 \begin{proposicion}
-  Para un campo de números $K/\QQ$ el emparejamiento de traza
+  Para un campo de números $K/\QQ$ el apareamiento de traza
   \[ \langle\cdot,\cdot\rangle\colon K\times K \to \QQ, \quad
      (\alpha,\beta) \mapsto T_{K/\QQ} (\alpha\beta) \]
   es no degenerado.
@@ -443,7 +445,7 @@ Primero necesitamos un lema bien conocido de la teoría de campos.
     Al multiplicar los $\alpha_i$ por un entero racional $N \in \ZZ$
     suficientemente grande, podemos asumir que
     $\alpha_1,\ldots,\alpha_n \in \O_K$ (véase \ref{lema:N-alpha-esta-en-OK}).
-    Dado que el emparejamiento de traza $\langle\cdot,\cdot\rangle$
+    Dado que el apareamiento de traza $\langle\cdot,\cdot\rangle$
     es no degenerado, podemos tomar la base dual
     $\alpha_1',\ldots,\alpha_n' \in K$ tal que
     $$\langle \alpha_i, \alpha_j'\rangle = \delta_{ij}.$$
