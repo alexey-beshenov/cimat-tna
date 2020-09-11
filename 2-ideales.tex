@@ -1627,6 +1627,7 @@ para algún dominio de Dedekind $R$. Véase \cite{Claborn-1966}.
 \marginpar{\small Clase 8 \\ 02/09/20}
 
 \section{Teorema de Kummer--Dedekind}
+\label{sec:kummer-dedekind}
 
 Hasta el momento, hemos introducido el anillo de enteros $\O_K$ y probamos
 mediante argumentos muy generales que todo ideal no nulo en $\O_K$ se factoriza
@@ -2019,7 +2020,80 @@ Aplicando Kummer--Dedekind, tenemos el siguiente resultado.
   $$q \O_K = \mathfrak{p}_1\cdots \mathfrak{p}_s,$$
   donde $\mathfrak{p}_i$ son diferentes primos y $s = (p-1)/f$,
   donde $f$ es el orden de $q$ módulo $p$.
+  Además, $\O_K/\mathfrak{p}_i \cong \FF_{p^f}$ para todo $i$.
 \end{proposicion}
+
+\begin{figure}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{x{1cm}x{2.5cm}x{1cm}x{1.25cm}x{1cm}x{2.5cm}x{1cm}x{1.25cm}}
+$p$ & $p\O_K$ & $f$ & $p~(7)$ & $p$ & $p\O_K$ & $f$ & $p~(7)$ \tabularnewline
+\hline
+$2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $2$ & $127$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ & $1$ \tabularnewline
+\hline
+$3$ & $\mathfrak{p}$ & $6$ & $3$ & $131$ & $\mathfrak{p}$ & $6$ & $5$ \tabularnewline
+\hline
+$5$ & $\mathfrak{p}$ & $6$ & $5$ & $137$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ \tabularnewline
+\hline
+$7$ & $\mathfrak{p}^6$ & $1$ & $0$ & $139$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ & $6$ \tabularnewline
+\hline
+$11$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ & $149$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $2$ \tabularnewline
+\hline
+$13$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ & $6$ & $151$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ \tabularnewline
+\hline
+$17$ & $\mathfrak{p}$ & $6$ & $3$ & $157$ & $\mathfrak{p}$ & $6$ & $3$ \tabularnewline
+\hline
+$19$ & $\mathfrak{p}$ & $6$ & $5$ & $163$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $2$ \tabularnewline
+\hline
+$23$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $2$ & $167$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ & $6$ \tabularnewline
+\hline
+$29$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ & $1$ & $173$ & $\mathfrak{p}$ & $6$ & $5$ \tabularnewline
+\hline
+$31$ & $\mathfrak{p}$ & $6$ & $3$ & $179$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ \tabularnewline
+\hline
+$37$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $2$ & $181$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ & $6$ \tabularnewline
+\hline
+$41$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ & $6$ & $191$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $2$ \tabularnewline
+\hline
+$43$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ & $1$ & $193$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ \tabularnewline
+\hline
+$47$ & $\mathfrak{p}$ & $6$ & $5$ & $197$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ & $1$ \tabularnewline
+\hline
+$53$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ & $199$ & $\mathfrak{p}$ & $6$ & $3$ \tabularnewline
+\hline
+$59$ & $\mathfrak{p}$ & $6$ & $3$ & $211$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ & $1$ \tabularnewline
+\hline
+$61$ & $\mathfrak{p}$ & $6$ & $5$ & $223$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ & $6$ \tabularnewline
+\hline
+$67$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ & $227$ & $\mathfrak{p}$ & $6$ & $3$ \tabularnewline
+\hline
+$71$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ & $1$ & $229$ & $\mathfrak{p}$ & $6$ & $5$ \tabularnewline
+\hline
+$73$ & $\mathfrak{p}$ & $6$ & $3$ & $233$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $2$ \tabularnewline
+\hline
+$79$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $2$ & $239$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ & $1$ \tabularnewline
+\hline
+$83$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ & $6$ & $241$ & $\mathfrak{p}$ & $6$ & $3$ \tabularnewline
+\hline
+$89$ & $\mathfrak{p}$ & $6$ & $5$ & $251$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ & $6$ \tabularnewline
+\hline
+$97$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ & $6$ & $257$ & $\mathfrak{p}$ & $6$ & $5$ \tabularnewline
+\hline
+$101$ & $\mathfrak{p}$ & $6$ & $3$ & $263$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ \tabularnewline
+\hline
+$103$ & $\mathfrak{p}$ & $6$ & $5$ & $269$ & $\mathfrak{p}$ & $6$ & $3$ \tabularnewline
+\hline
+$107$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $2$ & $271$ & $\mathfrak{p}$ & $6$ & $5$ \tabularnewline
+\hline
+$109$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ & $277$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ & $4$ \tabularnewline
+\hline
+$113$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ & $1$ & $281$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ & $1$ \tabularnewline
+\hline
+\end{tabular}
+\end{center}
+
+\caption{Factorización de $p\O_K$ para $K = \QQ (\zeta_7)$}
+\end{figure}
 
 \begin{ejemplo}
   Tenemos $K = \QQ (\sqrt{-3}) = \QQ (\zeta_3)$, así que podemos comparar
