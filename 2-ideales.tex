@@ -1987,28 +1987,55 @@ Pero no cualquier factorización es posible.
   $s = (p-1)/f$.
 
   \begin{proof}
-    Consideremos el campo finito $E = \FF_{q^f}$. El grupo multiplicativo
-    $E^\times$ es cíclico de orden $q^f - 1$, y por nuestra hipótesis
-    $p \mid (q^f - 1)$, así que $E^\times$ tiene un subgrupo de orden $p$
-    formado por las $p$-ésimas raíces de la unidad. Esto significa que $x^p - 1$
-    (y por lo tanto $\Phi_p (x)$) se descompone en factores lineales en $E$.
+    Consideremos el campo finito $\FF_{q^f}$. Dado que $p \mid (q^f - 1)$,
+    las raíces $p$-ésimas primitivas
+    $$\zeta, \zeta^2, \ldots, \zeta^{p-1}$$
+    están en $\FF_{q^f}^\times$, y allí el polinomio se factoriza como
+    \[ \overline{\Phi_p} (x) =
+       (x - \zeta)\,(x - \zeta^2)\cdots (x - \zeta^{p-1}). \]
+    El grupo de Galois $\Gal (\FF_{q^f}/\FF_q)$ es cíclico, generado por
+    el automorfismo de Frobenius $\sigma\colon x \mapsto x^q$, y luego la teoría
+    de Galois nos dice que
+    $$\FF_q = \{ a \in \FF_{q^f} \mid \sigma (a) = a \}.$$
 
-    De hecho, tenemos $E = \FF_q (\alpha)$, donde $\alpha \ne 1$ es cualquier
-    raíz de $x^p - 1$ en $E$. En efecto, supongamos que $\FF_q (\alpha) = F$
-    para algún campo intermedio
-    \[ \begin{tikzcd}
-      E \ar[-]{d} \ar[-,bend left=30]{dd}{f} \\
-      F \ar[-]{d}[swap]{n} \\
-      \FF_q
-    \end{tikzcd} \]
-    En este caso $\alpha \in F^\times$ implica que $p \mid (q^n - 1)$, pero por
-    nuestra elección de $f$, esto es posible solo cuando $n = f$ y $F = E$. Esto
-    demuestra que para toda raíz de $\Phi_n (x)$ en $E$, el polinomio mínimo
-    sobre $\FF_q$ tiene grado $f$.
+    Ahora $\Gal (\FF_{q^f}/\FF_q)$ permuta las raíces de $\overline{\Phi_p}$.
+    Notamos que $\sigma^i (\zeta) = \zeta^{q^i}$, y entonces
+    $\zeta, \zeta^q, \ldots, \zeta^{q^f}$ es una órbita de la acción. Tomando en
+    lugar de $\zeta$ cualquier otra raíz primitiva, se obtiene una órbita
+    de $f$ elementos. De esta manera las raíces $p$-ésimas primitivas se
+    descomponen en $(p-1)/f$ órbitas.
+
+    Ahora si $\alpha_1,\ldots,\alpha_f$ es una órbita de la acción del
+    Frobenius, entonces todos los polinomios simétricos elementales
+    en $\alpha_i$:
+    \[ \sum_i \alpha_i, ~
+       \sum_{i < j} \alpha_i \alpha_j, ~
+       \sum_{i < j < k} \alpha_i \alpha_j \alpha_j, ~
+       \ldots \]
+    están fijos por el Frobenius, y por lo tanto están en $\FF_q$.
+    Esto significa que al desarrollar el producto
+    $$(x - \alpha_1)\cdots (x - \alpha_f),$$
+    el polinomio correspondiente está en $\FF_q [x]$. De esta manera surge
+    la factorización en $\FF_q [x]$
+    $$\overline{\Phi_p} (x) = \overline{g_1} (x) \cdots \overline{g_s} (x),$$
+    donde cada polinomio $\overline{g_i} (x)$ viene de una órbita del Frobenius
+    y tiene grado $f$.
+    Por otra parte, cada $\overline{g_i} (x)$ es el polinomio mínimo de cada una
+    de sus raíces $\alpha$: se tiene $\FF_{q^f} = \FF_q (\alpha)$, así que los
+    factores son irreducibles.
   \end{proof}
 \end{lema}
 
-Aplicando Kummer--Dedekind, tenemos el siguiente resultado.
+\begin{figure}
+  \begin{center}
+    \includegraphics{pic/frobenius-7th-roots.pdf}
+  \end{center}
+
+  \caption{Frobenius $x \mapsto x^p$ actuando sobre las raíces séptimas primitivas en $\overline{\FF}_p$}
+  \label{fig:frobenius-sobre-septimas-raices}
+\end{figure}
+
+Aplicando el Kummer--Dedekind, tenemos el siguiente resultado.
 
 \begin{proposicion}
   Para un primo $p \ne 2$ consideremos el campo ciclotómico $K = \QQ (\zeta_p)$.
@@ -2093,7 +2120,15 @@ Aplicando Kummer--Dedekind, tenemos el siguiente resultado.
   \end{center}
 
   \caption{Factorización de $p\O_K$ para $K = \QQ (\zeta_7)$}
+  \label{fig:factorizacion-en-Q-zeta-7}
 \end{figure}
+
+\begin{ejemplo}
+  La figura \ref{fig:frobenius-sobre-septimas-raices} representa la acción
+  de $x \mapsto x^p$ sobre las séptimas raíces de la unidad y
+  \ref{fig:factorizacion-en-Q-zeta-7} representa las factorizaciones
+  correspondientes de $p \ZZ [\zeta_7]$ para diferentes primos $p$.
+\end{ejemplo}
 
 \begin{ejemplo}
   Tenemos $K = \QQ (\sqrt{-3}) = \QQ (\zeta_3)$, así que podemos comparar
