@@ -66,9 +66,10 @@ $$N (a) = a^n, \quad T (a) = na.$$
     Primero, si $K = \QQ (\alpha)$, entonces un encaje
     $\sigma\colon K \hookrightarrow \CC$ está definido por la imagen de
     $\alpha$ y tiene que enviarlo a una raíz compleja del polinomio
-    mínimo $f_\QQ^\alpha$. De esta manera surgen los $[K (\alpha) : \QQ]$ encajes.
-    Tenemos
-    $$f_\QQ^\alpha = \prod_{\sigma\colon K\hookrightarrow \CC} (x - \sigma (\alpha)).$$
+    mínimo $f_\QQ^\alpha$. De esta manera surgen los
+    $[K (\alpha) : \QQ]$ encajes. Tenemos
+    \[ f_\QQ^\alpha =
+       \prod_{\sigma\colon K\hookrightarrow \CC} (x - \sigma (\alpha)). \]
 
     En general, tenemos $\QQ \subset \QQ (\alpha) \subset K$, y cada
     encaje $\sigma\colon \QQ (\alpha) \hookrightarrow \CC$ admite
@@ -200,7 +201,7 @@ $e_1, \ldots, e_n$ respecto a la forma bilineal.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Apareamiento de traza y discriminante}
+\section{Apareamiento de traza y el discriminante}
 
 \begin{definicion}
   Para una extensión de anillos $A \subset B$ tal que $B$ es un $A$-módulo libre
@@ -219,7 +220,8 @@ $e_1, \ldots, e_n$ respecto a la forma bilineal.
 Si $f_1, \ldots, f_n$ son otros elementos que se expresan en términos de los
 $e_i$ mediante $f_i = \sum_j a_{ij} e_j$, entonces los mismos cálculos que vimos
 arriba nos dan la relación
-\[ \Delta (f_1,\ldots,f_n) = \det (a_{ij})_{i,j}^2 \cdot \Delta (e_1,\ldots,e_n). \]
+\[ \Delta (f_1,\ldots,f_n) =
+   \det (a_{ij})_{i,j}^2 \cdot \Delta (e_1,\ldots,e_n). \]
 Ahora $f_1,\ldots,f_n$ es una base si y solamente si $(a_{ij})_{i,j}$ es una
 matriz invertible, lo que equivale a $\det (a_{ij})_{i,j} \in A^\times$.
 Entonces, si no queremos fijar una base particular, el discriminante está bien
@@ -636,7 +638,8 @@ las raíces de $f$. Para esto se ocupa el resultante.
 \begin{corolario}
   Para $K = \QQ (\alpha)$, donde $\alpha$ es un entero algebraico y
   $f \in \ZZ [x]$ es el polinomio mínimo de $\alpha$ se tiene
-  $$\Delta (\ZZ [\alpha]) = \Delta (f) = (-1)^{\frac{n\,(n-1)}{2}}\,N_{K/\QQ} (f' (\alpha)).$$
+  \[ \Delta (\ZZ [\alpha]) = \Delta (f)
+     = (-1)^{\frac{n\,(n-1)}{2}}\,N_{K/\QQ} (f' (\alpha)). \]
 
   \begin{proof}
     Tenemos
@@ -656,8 +659,8 @@ las raíces de $f$. Para esto se ocupa el resultante.
   Consideremos el campo ciclotómico $K = \QQ (\zeta_p)$, donde $p$ es un primo
   impar. En este caso $\O_K = \ZZ [\zeta_p]$. El discriminante entonces viene
   dado por
-  $$\Delta_K = (-1)^{\frac{p-1}{2}}\,N_{K/\QQ} (\Phi_p' (\zeta_p)).$$
-
+  $$\Delta_K = (-1)^{{n \choose 2}}\,N_{K/\QQ} (\Phi_p' (\zeta_p)).$$
+  Aquí $n = p-1$, pero ${n \choose 2} \equiv \frac{p-1}{2} \pmod{2}$.
   Escribamos
   $$x^p - 1 = (x-1)\,\Phi_p (x),$$
   y entonces
@@ -686,12 +689,12 @@ El resultante puede ser calculado de la siguiente manera.
   de $(n+m) \times (n+m)$:
   \[ \begin{pmatrix}
     a_m & a_{m-1} & a_{m-2} & \cdots & a_1 & a_0 & 0 & 0 & \cdots & 0 \\
-    0 & a_m & a_{m-1} & a_{m-2} & \cdots & a_1 & a_0 & 0 & \cdots & 0 \\  
+    0 & a_m & a_{m-1} & a_{m-2} & \cdots & a_1 & a_0 & 0 & \cdots & 0 \\
     0 & 0 & a_m & a_{m-1} & a_{m-2} & \cdots & a_1 & a_0 & \cdots & 0 \\
     \vdots & \vdots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \vdots \\
     0 & 0 & \cdots & 0 & a_m & a_{m-1} & a_{m-2} & \cdots & a_1 & a_0 \\
     b_n & b_{n-1} & \cdots & b_2 & b_1 & b_0 & 0 & 0 & \cdots & 0 \\
-    0 & b_n & b_{n-1} & \cdots & b_2 & b_1 & b_0 & 0 & \cdots & 0 \\  
+    0 & b_n & b_{n-1} & \cdots & b_2 & b_1 & b_0 & 0 & \cdots & 0 \\
     0 & 0 & b_n & b_{n-1} & \cdots & b_2 & b_1 & b_0 & \cdots & 0 \\
     \vdots & \vdots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \ddots & \vdots \\
     0 & 0 & \cdots & 0 & b_n & b_{n-1} & \cdots & b_2 & b_1 & b_0 \\
@@ -802,7 +805,7 @@ el anillo de enteros en ciertos casos.
   Aquí el número $503$ es primo. Entonces, hay dos posibilidades: o tenemos
   $\O_K = \ZZ [\alpha]$, o $[\O_K : \ZZ [\alpha]] = 2$.
   En realidad, estamos en el segundo caso.
-  
+
   Primero, multiplicando (*) por $(2/\alpha)^3$, se obtiene
   $$\frac{64}{\alpha^3} - \frac{16}{\alpha^2} + \frac{8}{\alpha} + 8 = 0.$$
   Esto significa que
@@ -843,6 +846,575 @@ el anillo de enteros en ciertos casos.
   polinomios irreducibles. En términos de factorización del ideal $2\O_K$, esto
   excluye la factorización de la forma
   $2\O_K = \mathfrak{p}_1 \, \mathfrak{p}_2 \, \mathfrak{p}_3$.
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent\emph{Continuará\dots}
+
+\pdfbookmark{Clase 11 (14/09/20)}{clase-11}
+\marginpar{\small Clase 11 \\ 14/09/20}
+En general, para encontrar el anillo de enteros $\O_K$, puede servir
+la siguiente observación.
+
+\begin{proposicion}
+  Para un campo de números $K/\QQ$, sea $R \subset K$ un $\ZZ$-submódulo libre
+  de rango $n = [K : \QQ]$. Luego, se tiene
+  \[ R \subseteq \O_K \subseteq \frac{1}{d}\,R,
+     \quad\text{donde }d = \Delta (R). \]
+
+  \begin{proof}
+    Sea $\beta_1, \ldots, \beta_n \in R$ una base de $R$ sobre $\ZZ$.
+    Expresamos un elemento arbitrario $\alpha \in \O_K$ como
+    $$\alpha = x_1 \beta_1 + \cdots + x_n \beta_n,$$
+    donde $x_i \in \QQ$. Aplicamos a esta expresión los encajes
+    $$\sigma_1, \ldots, \sigma_n\colon K \hookrightarrow \CC.$$
+    Se obtiene un sistema de ecuaciones lineales
+    \begin{align*}
+      \sigma_1 (\alpha) & =
+      x_1 \sigma_1 (\beta_1) + \cdots + x_n \sigma_1 (\beta_n), \\
+      & \cdots \\
+      \sigma_n (\alpha) & =
+      x_1 \sigma_n (\beta_1) + \cdots + x_n \sigma_n (\beta_n).
+    \end{align*}
+    Podemos expresar los $x_i$ usando la \textbf{regla de Cramer}:
+    $$x_i = \frac{\gamma_i}{\delta},$$
+    donde
+    \[ \delta = \det \begin{pmatrix}
+      \sigma_1 (\beta_1) & \cdots & \sigma_1 (\beta_n) \\
+      \vdots & \ddots & \vdots \\
+      \sigma_n (\beta_1) & \cdots & \sigma_n (\beta_n)
+    \end{pmatrix}, \]
+    y $\gamma_i$ es el determinante de la misma matriz, donde en lugar de
+    la $i$-ésima columna está
+    $(\sigma_1 (\alpha), \ldots, \sigma_n (\alpha))^t$.
+
+    Como ya sabemos, $d = \Delta (R) = \delta^2$. Entonces, podemos escribir
+    $x_i = \frac{\gamma_i \delta}{d}$. Aquí $\gamma_i \delta = d x_i \in \QQ$,
+    pero al mismo tiempo $\gamma_i \delta$ es un entero algebraico, así que
+    $\gamma_i \delta \in \ZZ$. Entonces, hemos probado que
+    \[ \alpha \in
+       \frac{\beta_1}{d}\ZZ \oplus \cdots \oplus \frac{\beta_n}{d}\ZZ
+       = \frac{1}{d} R. \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+\begin{comentario}
+  He aquí algunas observaciones al respecto.
+
+  \begin{enumerate}
+  \item Dado que $R \subseteq \O_K$, toda clase lateral en $\frac{1}{d}R/R$
+    consiste en enteros algebraicos o no contiene ningún entero algebraico.
+
+  \item Tenemos $d = [\O_K : R]^2\cdot \Delta_K$, así que para ver cuáles
+    elementos de $\O_K$ no están en $R$, es suficiente considerar las clases
+    laterales en $\frac{1}{m}R/R$, donde $m^2 \mid d$.
+
+  \item Se tiene $[\frac{1}{d}R : R] = d^n$, y por lo tanto este método es útil
+    solo cuando el discriminante es relativamente pequeño.
+  \end{enumerate}
+
+  La proposición de arriba solo nos dice que $\O_K$ es calculable; en realidad
+  para calcular $\O_K$ se usan métodos más sofisticados. Véase por ejemplo
+  \cite[\S 6.1]{Cohen-GTM138}. También recomiendo el artículo panorámico
+  de Lenstra \cite{Lenstra-1992}.
+\end{comentario}
+
+\begin{ejemplo}
+  \label{ejemplo:raiz-cubica-de-19}
+  Consideremos el campo cúbico $K = \QQ (\sqrt[3]{19})$. Primero para
+  $\alpha = \sqrt[3]{19}$ calculamos
+  \[ \Delta (\ZZ [\alpha]) = \Delta (x^3 - 19)
+     = -27\cdot 19^2 = -3^3\cdot 19^2. \]
+  Entonces,
+  $$[\O_K : \ZZ [\alpha]] = m = 1, 3, 19, 3\cdot 19.$$
+  Vamos a ver si algunos elementos de la forma
+  $$\frac{a}{m} + \frac{b}{m}\alpha + \frac{b}{m}\alpha^2$$
+  son enteros algebraicos.
+
+\begin{shaded}
+\begin{verbatim}
+polisintegral (f) = {
+  for (i = 0, poldegree(f),
+    if (denominator (polcoef(f,i)) != 1, return (0))
+  );
+  1
+};
+
+test (m) = {
+  for (a=0,m-1,
+    for (b=0,m-1,
+      for (c=0,m-1,
+        local (elt = (a + b*x + c*x^2)/m);
+        if (polisintegral (minpoly (Mod (elt, x^3 - 19))),
+          print (elt)
+        )
+      )
+    )
+  )
+};
+
+? test(3)
+0
+1/3*x^2 + 1/3*x + 1/3
+2/3*x^2 + 2/3*x + 2/3
+
+? test(19)
+0
+
+? test(3*19)
+0
+1/3*x^2 + 1/3*x + 1/3
+2/3*x^2 + 2/3*x + 2/3
+\end{verbatim}
+\end{shaded}
+  Los únicos elementos integrales que nos salieron son
+  $$\beta = \frac{1}{3} (\alpha^2 + \alpha + 1), \quad 2\beta,$$
+  y luego $\O_K = \ZZ [\alpha,\beta]$. Tenemos
+  \[ [\O_K : \ZZ [\alpha]] = 3, \quad \Delta_K = -3\cdot 19^2. \qedhere \]
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Versión más general de Kummer--Dedekind}
+
+Hemos visto en \S\ref{sec:kummer-dedekind} que para un anillo
+$R = \ZZ [\alpha] \cong \ZZ[x]/(f)$, donde $\alpha$ es un entero algebraico,
+la factorización de un ideal $p R$ en ideales primos corresponde
+a la factorización del polinomio $f$ en $\FF_p [x]$:
+\[ p R = \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s}
+   \longleftrightarrow
+   \overline{f} = \overline{g}_1^{e_1} \cdots \overline{g}_s^{e_s}
+   \text{ en }\FF_p [x]. \]
+Pero esto funciona solamente cuando los ideales $\mathfrak{p}_i$ son
+invertibles. En particular, esto funciona si $\ZZ [\alpha] = \O_K$ es el anillo
+de enteros de $K = \QQ (\alpha)$. ¿Qué hacer si $\O_K$ no es de la forma
+$\ZZ [\alpha]$?
+
+Resulta que los primos problemáticos son solamente los que dividen al índice
+$[\O_K : \ZZ [\alpha]]$.
+
+\begin{proposicion}
+  Sea $K$ un campo de números tal que $K = \QQ (\alpha)$, donde $\alpha$ es un
+  entero algebraico. Para un primo racional $p$ tal que
+  $p \nmid [\O_K : \ZZ [\alpha]]$ el homomorfismo natural
+  $$\ZZ [\alpha]/(p) \to \O_K/(p)$$
+  inducido por la inclusión $\ZZ [\alpha] \subseteq \O_K$ es un isomorfismo.
+
+  \begin{proof}
+    Pongamos $m = [\O_K : \ZZ [\alpha]]$ y consideremos el siguiente diagrama:
+    \[ \begin{tikzcd}
+      m \O_K \ar[hookrightarrow]{r}\ar[->>]{d} & \ZZ [\alpha]\ar[->>]{d} \ar[hookrightarrow]{r} & \O_K\ar[->>]{d} \\
+      m \O_K/(p) \ar{r} & \ZZ [\alpha]/(p) \ar{r} & \O_K/(p)
+    \end{tikzcd} \]
+    Aquí el homomorfismo $m \O_K/(p) \to \O_K/(p)$ es sobreyectivo: por nuestra
+    hipótesis $m$ es invertible módulo $p$: tenemos $m m' \equiv 1 \pmod{p}$
+    para algún $m'$. Luego, dado $x + (p) \in \O_K/(p)$, podemos escribirlo
+    como
+    $$x + (p) = x m m' + (p) \in m\O_K/(p).$$
+    Entonces, $\ZZ [\alpha]/(p) \to \O_K/(p)$ es un homomorfismo sobreyectivo.
+    Pero $\ZZ [\alpha]$ y $\O_K$ son $\ZZ$-módulos libres de rango
+    $n = [K:\QQ]$, así que
+    $$\# (\ZZ [\alpha]/(p)) = \# (\O_K/(p)) = p^n,$$
+    y se trata de un isomorfismo.
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  \label{ejemplo:raiz-cubica-de-19-factorizacion}
+  Volvamos al ejemplo \ref{ejemplo:raiz-cubica-de-19}.
+  Consideremos el campo $K = \QQ (\sqrt[3]{19})$. Tenemos
+  \[ \O_K = \ZZ [\alpha,\beta], \quad
+     \alpha = \sqrt[3]{19}, \quad
+     \beta = \frac{1}{3} (\alpha^2 + \alpha + 1). \]
+  Hemos calculado que
+  \[ \Delta_K = - 3\cdot 19^2, \quad
+     \Delta (\ZZ [\alpha]) = - 3^3\cdot 19^2. \]
+  El polinomio mínimo de $\beta$ viene dado por
+  $$x^3 - x^2 - 6x - 12,$$
+  de donde se calcula
+  \[ \Delta (\ZZ [\beta]) = - 2^2 \cdot 3 \cdot 19^2. \]
+
+  \begin{shaded}
+\begin{verbatim}
+? minpoly (Mod (1/3*(x^2+x+1), x^3-19))
+% = x^3 - x^2 - 6*x - 12
+? poldisc(%)
+% = -4332
+? factor(%)
+% =
+[-1 1]
+
+[ 2 2]
+
+[ 3 1]
+
+[19 2]
+\end{verbatim}
+\end{shaded}
+
+  Tenemos entonces
+  $$[\O_K : \ZZ [\alpha]] = 3, \quad [\O_K : \ZZ [\beta]] = 2.$$
+  Esto significa que para factorizar $3\O_K$, podemos ocupar el anillo
+  $\ZZ [\beta]$. Se tiene
+  $$x^3 - x^2 - 6x - 12 = x^2\,(x - 1) \quad\text{en }\FF_3[x].$$
+
+  Para cualquier otro primo racional $p \ne 3$, podemos ocupar el anillo
+  $\ZZ [\alpha]$; es decir, factorizar el polinomio $f = x^3 - 19$.
+  Por ejemplo,
+  $$\overline{f} = (x+1)\,(x^2 + x + 1) \quad\text{en }\FF_2[x].$$
+  He aquí algunas observaciones.
+
+  \begin{itemize}
+  \item Si $p = 19$, entonces $\overline{f} = x^3$. Supongamos ahora que
+    $p \ne 19$.
+
+  \item Si $p \equiv 2 \pmod{3}$, entonces $x \mapsto x^3$ es un automorfismo de
+    $\FF_p^\times$, así que existe único $x \in \FF_p$ tal que $x^3 = 19$. Esto
+    significa que $\overline{f}$ tiene un factor lineal y otro cuadrático.
+
+  \item Si $p \equiv 1 \pmod{3}$, entonces $\FF_p^\times$ contiene un elemento
+    $\zeta \ne 1$ tal que $\zeta^3 = 1$. Hay dos posibilidades: o $19$ no es un
+    cubo módulo $p$, y en este caso $f$ es irreducible, o
+    $19 \equiv a^3 \pmod{p}$, y luego
+    $$\overline{f} = (x - a)\,(x - \zeta a)\,(x - \zeta^2 a).$$
+  \end{itemize}
+
+  Entonces, la factorización de primos racionales en $\O_K$ es la siguiente
+
+  \begin{itemize}
+  \item $3\O_K = \mathfrak{p}_1^2 \, \mathfrak{p}_2$, donde $f_1 = f_2 = 1$.
+
+  \item $19\O_K = \mathfrak{p}^3$, donde $\mathfrak{p} = \sqrt[3]{19}\O_K$ y
+    $f = 1$.
+
+  \item Si $p \equiv 2 \pmod{3}$, entonces
+    $p\O_K = \mathfrak{p}_1 \, \mathfrak{p}_2$, donde $f_1 = 1$, $f_2 = 2$.
+
+  \item Si $p \ne 19$ y $p \equiv 1 \pmod{3}$, entonces hay dos opciones.
+
+    Si $19$ no es un cubo módulo $p$, entonces $\mathfrak{p} = p\O_K$ es un
+    ideal primo.
+
+    Si $19$ es un cubo módulo $p$, entonces
+    $p\O_K = \mathfrak{p}_1 \, \mathfrak{p}_2 \, \mathfrak{p}_3$, donde
+    $f_1 = f_2 = f_3 = 1$.
+  \end{itemize}
+
+  Para ver de manera eficaz si $19$ es un cubo módulo $p \equiv 1 \pmod{3}$,
+  podemos factorizar $p = \pi \overline{\pi}$ en $\ZZ [\zeta_3]$.
+  Aquí $\ZZ [\zeta_3]/(\pi) \cong \FF_p$, así que la respuesta depende del
+  símbolo de Legendre $\legendre{19}{\pi}_3$ que puede ser calculado usando
+  la reciprocidad cúbica. Notamos que $19 = \rho\,\overline{\rho}$ en
+  $\ZZ [\zeta_3]$, donde $\rho = 3\zeta_3 + 5$ y
+  $\overline{\rho} = -3\zeta_3 + 2$.
+\end{ejemplo}
+
+\begin{figure}
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{x{1.25cm}x{1.25cm}x{1.25cm}x{1.25cm}x{1.25cm}x{1.25cm}x{1.25cm}x{1.25cm}}
+$p$ & $p\O_K$ & $f$ & $p~(3)$ & $p$ & $p\O_K$ & $f$ & $p~(3)$ \tabularnewline
+\hline
+$2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $127$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $(1,1,1)$ & $1$ \tabularnewline
+\hline
+$3$ & $\mathfrak{p}_1\,\mathfrak{p}_2^2$ & $(1,1)$ & $0$ & $131$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$5$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $137$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$7$ & $\mathfrak{p}$ & $3$ & $1$ & $139$ & $\mathfrak{p}$ & $3$ & $1$ \tabularnewline
+\hline
+$11$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $149$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$13$ & $\mathfrak{p}$ & $3$ & $1$ & $151$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $(1,1,1)$ & $1$ \tabularnewline
+\hline
+$17$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $157$ & $\mathfrak{p}$ & $3$ & $1$ \tabularnewline
+\hline
+$19$ & $\mathfrak{p}^3$ & $1$ & $1$ & $163$ & $\mathfrak{p}$ & $3$ & $1$ \tabularnewline
+\hline
+$23$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $167$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$29$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $173$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$31$ & $\mathfrak{p}$ & $3$ & $1$ & $179$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$37$ & $\mathfrak{p}$ & $3$ & $1$ & $181$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $(1,1,1)$ & $1$ \tabularnewline
+\hline
+$41$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $191$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$43$ & $\mathfrak{p}$ & $3$ & $1$ & $193$ & $\mathfrak{p}$ & $3$ & $1$ \tabularnewline
+\hline
+$47$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $197$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$53$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $199$ & $\mathfrak{p}$ & $3$ & $1$ \tabularnewline
+\hline
+$59$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $211$ & $\mathfrak{p}$ & $3$ & $1$ \tabularnewline
+\hline
+$61$ & $\mathfrak{p}$ & $3$ & $1$ & $223$ & $\mathfrak{p}$ & $3$ & $1$ \tabularnewline
+\hline
+$67$ & $\mathfrak{p}$ & $3$ & $1$ & $227$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$71$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $229$ & $\mathfrak{p}$ & $3$ & $1$ \tabularnewline
+\hline
+$73$ & $\mathfrak{p}$ & $3$ & $1$ & $233$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$79$ & $\mathfrak{p}$ & $3$ & $1$ & $239$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$83$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $241$ & $\mathfrak{p}$ & $3$ & $1$ \tabularnewline
+\hline
+$89$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $251$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$97$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $(1,1,1)$ & $1$ & $257$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$101$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $263$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$103$ & $\mathfrak{p}$ & $3$ & $1$ & $269$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+$107$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $271$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $(1,1,1)$ & $1$ \tabularnewline
+\hline
+$109$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $(1,1,1)$ & $1$ & $277$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $(1,1,1)$ & $1$ \tabularnewline
+\hline
+$113$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ & $281$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $(1,2)$ & $2$ \tabularnewline
+\hline
+\end{tabular}
+\end{center}
+
+\caption{Factorización de $p\O_K$ para $K = \QQ (\sqrt[3]{19})$}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Ramificación}
+
+\begin{definicion}
+  Sea $K/\QQ$ un campo de números. Para un primo racional $p\in\ZZ$ consideremos
+  su factorización en ideales primos en $\O_K$:
+  $$p\O_K = \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s},$$
+  donde $e_i \ge 1$. En este caso
+  $\O_K/\mathfrak{p}_i \cong \FF_{p^{f_i}}$, y los números $f_i$ se llaman los
+  \textbf{grados de campos residuales}. Los números $e_i$ se llaman
+  los \textbf{índices de ramificación}. Si $e_i > 1$ para algún $i$,
+  se dice que $p$ \textbf{se ramifica} en $K$.
+\end{definicion}
+
+\begin{teorema}
+  \label{teorema:ei-fi}
+  En la situación de arriba se tiene
+  $$\sum_i e_i f_i = [K : \QQ].$$
+\end{teorema}
+
+Antes de probar este resultado, sería oportuno introducir las normas de ideales.
+
+\begin{definicion}
+  Sea $K$ un campo de números. Para un ideal no nulo $I \subset \O_K$
+  su \textbf{norma} se define mediante
+  $$N_{K/\QQ} (I) = \# (\O_K / I).$$
+\end{definicion}
+
+\begin{lema}
+  \begin{enumerate}
+  \item[1)] La norma es multiplicativa:
+  $$N_{K/\QQ} (IJ) = N_{K/\QQ} (I)\,N_{K/\QQ} (J).$$
+
+  \item[2)] La norma de un ideal principal es el valor absoluto de la norma
+  habitual de su generador:
+  $$N_{K/\QQ} (\alpha \O_K) = |N_{K/\QQ} (\alpha)|.$$
+  \end{enumerate}
+
+  \begin{proof}
+    Todo ideal no nulo en $\O_K$ se descompone de manera única en ideales
+    primos, así que para la parte 1) basta ver que
+    \[ N (\mathfrak{p}_1^{e_1}\cdots\mathfrak{p}_s^{e_s}) =
+       N (\mathfrak{p}_1)^{e_1}\cdots N (\mathfrak{p}_s)^{e_s}. \]
+    Primero, por el teorema chino del resto se tiene
+    \[ N (\mathfrak{p}_1^{e_1}\cdots\mathfrak{p}_s^{e_s}) =
+       N (\mathfrak{p}_1^{e_1})\cdots N (\mathfrak{p}_s^{e_s}). \]
+    Luego, hemos visto en \ref{lema:R/(p-e)} que para cualquier anillo de
+    números $R$ y un ideal primo invertible $\mathfrak{p} \subset R$ se cumple
+    $$N (\mathfrak{p}^e) = N (\mathfrak{p})^e,$$
+    y en $\O_K$ todo ideal no nulo es invertible. Esto establece la parte 1).
+
+    Para la parte 2), notamos que $\alpha \O_K$ es la imagen de la aplicación
+    $\ZZ$-lineal de multiplicación por $\alpha$:
+    $$\mu_\alpha\colon \O_K \to \O_K, \quad x \mapsto \alpha x.$$
+    Entonces, como fue observado en
+    \ref{lema:indice-de-Z-submodulo-como-determinante}, se tiene
+    $$[\O_K : \alpha\O_K] = |\det (\mu_\alpha)|.$$
+    Por la definición,
+    \[ \det (\mu_\alpha)
+       = N_{\O_K/\ZZ} (\alpha) = N_{K/\QQ} (\alpha). \qedhere \]
+  \end{proof}
+\end{lema}
+
+\begin{ejemplo}
+  Consideremos el anillo $\ZZ [i]$. Para $\alpha = a + bi \in \ZZ[i]$ no es
+  difícil ver que el ideal generado por $\alpha$ está generado como $\ZZ$-módulo
+  por $a + bi$ y $a - bi$:
+  \[ \alpha\ZZ[i] = \{ (c+di)\,(a+bi) \mid c,d \in \ZZ \} =
+                    \{ c\cdot(a+bi) + d\cdot(-b + ai) \mid c,d\in \ZZ \}. \]
+  Ahora el número de elementos en el cociente de $\ZZ^2$ por el $\ZZ$-submódulo
+  generado por $(a,b)$ y $(-b,a)$ viene dado por
+  \[ \det \begin{pmatrix}
+    a & -b \\
+    b & a
+  \end{pmatrix} = a^2 + b^2 = N (a + bi). \qedhere \]
+\end{ejemplo}
+
+\begin{proof}[Demostración de \label{ref:ei-fi}]
+  Sacando las normas, tenemos
+  $$N (p\O_K) = N (\mathfrak{p}_1)^{e_1} \cdots N (\mathfrak{p}_s)^{e_s},$$
+  donde $N (p\O_K) = |N_{K/\QQ} (p)| = p^n$ y $N (\mathfrak{p}_i) = p^{f_i}$.
+\end{proof}
+
+Más adelante veremos que si $K/\QQ$ es una extensión de Galois, entonces
+$f_1 = \cdots = f_s$ y $e_1 = \cdots = e_s$.
+
+\subsection{Discrminante y ramificación}
+
+Ahora sea $\alpha$ un entero algebraico y $f \in \ZZ [x]$ su polinomio mínimo.
+Ahora si para un primo racional $p$ se tiene
+$$p \mid \Delta (f) = \prod_{1 \le i \le n} (\alpha_i - \alpha_j)^2,$$
+esto significa que el polinomio $\overline{f} \in \FF_p [x]$ tiene una raíz
+múltiple en $\overline{\FF}_p$, y por lo tanto un factor múltiple módulo $p$:
+\[ \overline{f} = \overline{g}_1^{e_1} \cdots \overline{g}_s^{e_s}
+   \quad \text{en }\FF_p[x], \]
+donde $e_i > 1$ para algún $i$. En vista del teorema de Kummer--Dedekind,
+estas consideraciones sugieren el siguiente resultado.
+
+\begin{teorema}
+  \label{thm:discriminante-y-ramificacion}
+  Para un campo de números $K/\QQ$, un primo racional $p$ se ramifica en $K$
+  si solamente si $p \mid \Delta_K$.
+\end{teorema}
+
+Sin embargo, no todos los anillos de enteros tienen forma $\ZZ [\alpha]$, así
+que necesitamos trabajar más para la prueba. Primero vamos a formular algunos
+lemas sobre discriminantes de álgebras sobre campos. En este caso el
+discriminante depende de una base particular, pero por abuso de lenguaje
+hablaremos \emph{del} discriminante, porque al final nos interesará solo si este
+es nulo o no.
+
+\begin{lema}
+  Se tiene
+  $$\Delta_K \operatorname{\text{mód}} p = \Delta (\O_K/(p)/\FF_p),$$
+  donde a la derecha está el discrimimamte de la $\FF_p$-álgebra $\O_K/(p)$.
+
+  \begin{proof}
+    La reducción módulo $p$ nos da una $\FF_p$-álgebra
+    ${\O_K/(p) \cong \O_K \otimes_\ZZ \FF_p}$. Los determinantes y trazas
+    conmutan con productos tensoriales, y en particular, el siguiente diagrama
+    conmuta:
+    \[ \begin{tikzcd}
+      \O_K \ar[->>]{r}\ar[shift right=0.25em]{d}[swap]{N}\ar[shift left=0.25em]{d}{T} & \O_K/(p) \ar[shift right=0.25em]{d}[swap]{N}\ar[shift left=0.25em]{d}{T} \\
+      \ZZ \ar[->>]{r} & \FF_p
+    \end{tikzcd} \]
+    Ahora si $\alpha_1, \ldots, \alpha_n$ es una base de $\O_K$ sobre $\ZZ$,
+    entonces $\overline{\alpha_1}, \ldots, \overline{\alpha_n}$ es una base de
+    $\O_K/(p)$ sobre $\FF_p$. Tenemos
+    $$\Delta_K = \det (T_{\O_K/\ZZ} (\alpha_i \alpha_j)),$$
+    y la reducción módulo $p$ nos da
+    \[ \overline{\Delta_K} =
+       \det (T_{\O_K/(p)/\FF_p} (\overline{\alpha_i} \overline{\alpha_j})). \]
+    Lo que está a la derecha, es el discriminante de $\O_K/(p)$ respecto
+    a la base particular $\overline{\alpha_1}, \ldots, \overline{\alpha_n}$.
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  Para un campo $k$, sean $A$ y $B$ dos $k$-álgebras de dimensión finita. Luego,
+  para el producto de $A$ y $B$ se tiene
+  $$\Delta (A\times B/k) = \Delta (A/k) \times \Delta (B/k).$$
+
+  \begin{proof}
+    Si $a_1,\ldots,a_m$ es una base de $A$ sobre $k$ y $b_1,\ldots,b_n$ es una
+    base de $B$ sobre $k$, entonces
+    $$(a_1, 0), \ldots, (a_m, 0), \quad (0, b_1), \ldots, (0, b_n)$$
+    es una base de $A\times B$. Ahora el discriminante de $A\times B$
+    respecto a esta base es
+    \[ \det \begin{pmatrix}
+      (T (a_i a_j))_{i,j} & O \\
+      O & (T (b_k b_\ell))_{k, \ell}
+    \end{pmatrix} = \Delta (A/k) \times \Delta (B/k). \qedhere \]
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  Para un ideal primo $\mathfrak{p} \subset \O_K$ se tiene
+  $\Delta (\O_K/\mathfrak{p}^e/\FF_p) = 0$ si y solamente si $e > 1$.
+
+  \begin{proof}
+    Denotemos $A = \O_K/\mathfrak{p}^e$.
+    Si $e = 1$, entonces $A \cong \FF_{p^f}$ es una extensión finita de
+    $\FF_p$. Estas extensiones son separables y tienen forma $\FF_p [x]/(g)$,
+    donde $f$ es un polinomio irreducible, y sus raíces $\alpha_i$ en la
+    cerradura algebraica $\overline{\FF_p}$ son distintas:
+    $$g = (x - \alpha_1) \cdots (x - \alpha_f), \quad \alpha_i \ne \alpha_j.$$
+    Los cálculos parecidos a los que vimos arriba\footnote{
+      Tal vez tenía que formular algunos lemas en la generalidad adecuada,
+      para extensiones separables de campos\dots} nos dicen que
+    \[ \Delta (A/\FF_p) = \Delta (g) =
+       \prod_{i < j} (\alpha_i - \alpha_j)^2 \ne 0. \]
+
+    Supongamos ahora que $e > 1$. Podemos escoger una base de $A$ que contiene
+    un elemento representado por
+    $\alpha \in \mathfrak{p}\setminus\mathfrak{p}^2$. En este caso
+    $\overline{\alpha} \ne 0$, pero $\overline{\alpha}^n = 0$, así que tenemos
+    un nilpotente. Para cualquier otro elemento $\overline{\beta} \in A$,
+    se obtiene un operador lineal nilpotente
+    $\mu_{\overline{\alpha\beta}}\colon A\to A$, y su traza es nula\footnote{
+      Ejercicio: para un operador lineal nilpotente $f\colon V\to V$ todos los
+      valores propios en $\overline{\FF_p}$ son nulos.}. Entonces,
+    $T_{A/\FF_p} (\overline{\alpha\beta}) = 0$ para todo
+    $\overline{\beta} \in A$, así que $\Delta (A/\FF_p) = 0$.
+  \end{proof}
+\end{lema}
+
+\begin{proof}[Demostración del teorema \ref{thm:discriminante-y-ramificacion}]
+  Consideremos la factorización
+  $$p\O_K = \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s}.$$
+  Ocupando el teorema chino del resto, se obtiene un isomorfismo de
+  $\FF_p$-álgebras
+  \[ \O_K/(p) \cong
+     \O_K/\mathfrak{p}_1^{e_1}\times\cdots\times\O_K/\mathfrak{p}_s^{e_s}. \]
+  Gracias a los lemas de arriba,
+  \[ \Delta_K \operatorname{\text{mód}} p =
+     \prod_i \Delta (\O_K/\mathfrak{p}_i^{e_i}/\FF_p), \]
+  y el producto es nulo si y solamente si $e_i > 1$ para algún $i$.
+\end{proof}
+
+\begin{corolario}
+  Para un campo de números $K/\QQ$ hay solamente un número finito de primos
+  $p \in \ZZ$ que se ramifican en $K$.
+\end{corolario}
+
+Más adelante también veremos que para toda extensión no trivial $K/\QQ$ se tiene
+$|\Delta_K| > 1$, así que algún primo siempre se ramifica.
+
+\begin{ejemplo}
+  Consideremos un campo cuadrático $K = \QQ (\sqrt{d})$, donde $d$ es libre de
+  cuadrados. Los primos impares que se ramifican en $K$ son precisamente
+  $p \mid d$. Además, si $d \equiv 2,3\pmod{4}$, entonces $2$ también se
+  ramifica. Si $d \equiv 1\pmod{4}$, entonces $2$ no se ramifica. Toda está
+  información está contenida en el discriminante
+  \[ \Delta_K = \begin{cases}
+    d, & d \equiv 1 \pmod{4}, \\
+    4d, & d \equiv 2,3 \pmod{4}.
+  \end{cases} \qedhere \]
+\end{ejemplo}
+
+\begin{ejemplo}
+  Para el campo ciclotómico $K = \QQ (\zeta_p)$ el único primo que se ramifica
+  es el mismo $p$ (véase \ref{prop:factorizacion-en-Q-zeta-p}). Por otra parte,
+  calculamos en \ref{ejemplo:discriminante-de-Q-zeta-p} que el discriminante
+  es igual a
+  $$\Delta_K = (-1)^{\frac{p-1}{2}}\,p^{p-2}.$$
+  Este es un número bastante grande, pero su único divisor primo es $p$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Como vimos en \ref{ejemplo:raiz-cubica-de-19-factorizacion}, para el campo
+  $K = \QQ (\sqrt[3]{19})$ tenemos $\Delta_K = -3\cdot 19^2$, y los únicos
+  primos que se ramifican en $K$ son $3$ y $19$.
 \end{ejemplo}
 
 \noindent\emph{Continuará\dots}

@@ -15,7 +15,7 @@
 
   Entonces, en Z [\alpha] pueden faltar elementos enteros de la forma
     a/m + b/m \alpha + c/m \alpha^2,
-  donde m = 3 o 19.
+  donde m = 3, 19, 3*19.
 ---------------------------------------------------------------------- */
 
 polisintegral (f) = {
@@ -46,4 +46,9 @@ test (m) = {
 
   ? test(19)
   0
+
+  ? test (3*19)
+  0
+  1/3*x^2 + 1/3*x + 1/3
+  2/3*x^2 + 2/3*x + 2/3
 ---------------------------------------------------------------------- */
