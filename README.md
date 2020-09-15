@@ -61,6 +61,11 @@ alexey.beshenov@cimat.mx
 
   https://youtube.com/watch?v=sWbX6U8_0ek
 
+* Clase 11 (14/09/2020). Cálculos de anillos de enteros (continuación).
+  Versión general de Kummer–Dedekind. Ramificación y discriminante.
+
+  https://youtube.com/watch?v=KYSi0HwAEk8
+
 
 ## Agradecimientos
 
