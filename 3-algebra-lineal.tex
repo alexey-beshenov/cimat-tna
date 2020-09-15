@@ -850,8 +850,6 @@ el anillo de enteros en ciertos casos.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\noindent\emph{Continuará\dots}
-
 \pdfbookmark{Clase 11 (14/09/20)}{clase-11}
 \marginpar{\small Clase 11 \\ 14/09/20}
 En general, para encontrar el anillo de enteros $\O_K$, puede servir
@@ -910,7 +908,7 @@ la siguiente observación.
     elementos de $\O_K$ no están en $R$, es suficiente considerar las clases
     laterales en $\frac{1}{m}R/R$, donde $m^2 \mid d$.
 
-  \item Se tiene $[\frac{1}{d}R : R] = d^n$, y por lo tanto este método es útil
+  \item Se tiene $[\frac{1}{m}R : R] = m^n$, y por lo tanto este método es útil
     solo cuando el discriminante es relativamente pequeño.
   \end{enumerate}
 
@@ -929,8 +927,8 @@ la siguiente observación.
   Entonces,
   $$[\O_K : \ZZ [\alpha]] = m = 1, 3, 19, 3\cdot 19.$$
   Vamos a ver si algunos elementos de la forma
-  $$\frac{a}{m} + \frac{b}{m}\alpha + \frac{b}{m}\alpha^2$$
-  son enteros algebraicos.
+  $$\frac{a}{m} + \frac{b}{m}\alpha + \frac{c}{m}\alpha^2,$$
+  donde $0 \le a,b,c < m$ son enteros algebraicos.
 
 \begin{shaded}
 \begin{verbatim}
@@ -969,10 +967,15 @@ test (m) = {
 \end{verbatim}
 \end{shaded}
   Los únicos elementos integrales que nos salieron son
-  $$\beta = \frac{1}{3} (\alpha^2 + \alpha + 1), \quad 2\beta,$$
-  y luego $\O_K = \ZZ [\alpha,\beta]$. Tenemos
+  $$\beta = \frac{1}{3} (1 + \alpha + \alpha^2), \quad 2\beta,$$
+  y luego $\O_K = \ZZ [\alpha,\beta]$. Tenemos entonces
   \[ [\O_K : \ZZ [\alpha]] = 3, \quad \Delta_K = -3\cdot 19^2. \qedhere \]
 \end{ejemplo}
+
+Este ejemplo solamente demuestra el procedimiento general. En realidad, si $d$
+es libre de cuadrados, no es difícil probar que para $K = \QQ (\sqrt[3]{d})$ se
+tiene $\O_K \subseteq \frac{1}{3}\ZZ [\sqrt[3]{d}]$. Véase el ejercicio
+\ref{ejerc:anillo-de-enteros-cubico}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1209,6 +1212,7 @@ Antes de probar este resultado, sería oportuno introducir las normas de ideales
   Sea $K$ un campo de números. Para un ideal no nulo $I \subset \O_K$
   su \textbf{norma} se define mediante
   $$N_{K/\QQ} (I) = \# (\O_K / I).$$
+  Para el ideal nulo, se puede poner $N_{K/\QQ} (I) = 0$.
 \end{definicion}
 
 \begin{lema}
@@ -1429,15 +1433,71 @@ $|\Delta_K| > 1$, así que algún primo siempre se ramifica.
 \section*{Ejercicios}
 
 \begin{ejercicio}
-  Encuentre el anillo de enteros $\O_K$ y discriminante $\Delta_K$ para
-  los campos cúbicos $\QQ (\sqrt[3]{6})$ y $\QQ (\sqrt[3]{12})$.
+  Encuentre la fórmula para el discriminante del polinomio $x^n + ax + b$.
 \end{ejercicio}
 
 \begin{ejercicio}
-  Encuentre la fórmula para el discriminante $\Delta (x^n + ax + b)$.
+  Para una extensión $K/\QQ$, sea $e_1,\ldots,e_n$ una base de $K$ sobre $\QQ$
+  y $e_1', \ldots, e_n'$ la base dual respecto al apareamiento de traza.
+  Demuestre que
+  $$\Delta (e_1,\ldots,e_n) \cdot \Delta (e_1', \ldots, e_n') = 1.$$
 \end{ejercicio}
 
 \begin{ejercicio}
   Encuentre el anillo de enteros $\O_K$ y discriminante $\Delta_K$ para el campo
   $K = \QQ (\alpha)$ donde $\alpha$ cumple $\alpha^4 + \alpha + 1 = 0$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $K/\QQ$ un campo de números de grado $n = [K : \QQ]$. Supongamos que para
+  algún primo racional $p < n$ se tiene factorización en $n$ diferentes primos
+  $p\O_K = \mathfrak{p}_1 \cdots \mathfrak{p}_n$. Demuestre que en este caso
+  $\O_K$ no es de la forma $\ZZ [\alpha]$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $K/\QQ$ un campo de números y $\alpha \in \O_K$ un elemento entero tal que
+  $\alpha \notin m \O_K$ para $m > 1$. Demuestre que en este caso
+  existe una base de $\O_K$ sobre $\ZZ$ que contiene $\alpha$. En particular,
+  demuestre que $\O_K$ siempre admite una base que contiene $1$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  \label{ejerc:anillo-de-enteros-cubico}
+  Sea $d$ un entero libre de cuadrados. Consideremos el campo cúbico
+  $K = \QQ (\sqrt[3]{d})$. Denotemos $\alpha = \sqrt[3]{d}$ y consideremos
+  un elemento
+  $$\beta = a + b\alpha + c\alpha^2, \quad a,b,c \in \QQ.$$
+
+  \begin{enumerate}
+  \item[1)] Calcule las trazas
+    $T_{K/\QQ} (\beta)$, $T_{K/\QQ} (\alpha\beta)$, $T_{K/\QQ} (\alpha^2\beta)$
+    y la norma $N_{K/\QQ} (\beta)$.
+
+  \item[2)] Si $\beta \in \O_K$, entonces las trazas y normas de arriba son
+    números enteros. Use esto para concluir que
+    $\O_K  \subseteq \frac{1}{3} \ZZ [\alpha]$.
+
+  \item[3)] Use estas consideraciones para calcular el anillo de enteros $\O_K$
+    y discriminante $\Delta_K$.
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Encuentre el anillo de enteros $\O_K$ y discriminante $\Delta_K$ para
+  los campos cúbicos $\QQ (\sqrt[3]{6})$ y $\QQ (\sqrt[3]{12})$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos el campo cúbico $K = \QQ (\sqrt[3]{17})$.
+
+  \begin{enumerate}
+  \item[1)] Calcule el anillo de enteros $\O_K$ y discriminante $\Delta_K$.
+  \item[2)] Describa las factorizaciones de primos racionales $p \in \ZZ$ en
+    $\O_K$.
+  \item[3)] Describa los ideales primos $\mathfrak{p} \subset \O_K$
+    tales que $N_{K/\QQ} (\mathfrak{p}) \le 30$.
+  \item[4)] Describa todos los ideales $I \subset \O_K$
+    tales que $N_{K/\QQ} (I) \le 30$.
+  \end{enumerate}
 \end{ejercicio}
