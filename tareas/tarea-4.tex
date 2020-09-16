@@ -1,0 +1,104 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+\newcounter{tarea}
+\setcounter{tarea}{4}
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}[tarea]
+
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
+
+\usepackage{mathspec}
+
+\setmainfont{PT Serif}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\QQ}{\mathbb{Q}}
+\renewcommand{\O}{\mathcal{O}}
+
+\DeclareMathOperator{\Gal}{Gal}
+
+\title{Teoría de números algebraicos\\Tarea 4}
+\author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
+\date{15 de septiembre de 2020}
+
+% \def\solutions{true}
+
+\begin{document}
+
+{\sffamily\bfseries\maketitle}
+
+\noindent Fecha límite: viernes, 25 de septiembre.
+
+\ifdefined\solutions
+\else
+\thispagestyle{empty}
+\fi
+
+\vspace{1em}
+
+\begin{ejercicio}
+  Encuentre la fórmula para el discriminante del polinomio
+  $$x^n + ax + b.$$
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $K/\QQ$ un campo de números y $\alpha \in \O_K$ un elemento entero tal que
+  $\alpha \notin m \O_K$ para $m > 1$. Demuestre que en este caso
+  existe una base de $\O_K$ sobre $\ZZ$ que contiene $\alpha$. En particular,
+  demuestre que $\O_K$ siempre admite una base que contiene $1$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $d$ un entero libre de cuadrados. Consideremos el campo cúbico
+  $K = \QQ (\sqrt[3]{d})$. Denotemos $\alpha = \sqrt[3]{d}$ y consideremos
+  un elemento
+  $$\beta = a + b\alpha + c\alpha^2, \quad a,b,c \in \QQ.$$
+
+  \begin{enumerate}
+  \item[a)] Calcule las trazas 
+    $T_{K/\QQ} (\beta)$, $T_{K/\QQ} (\alpha\beta)$, $T_{K/\QQ} (\alpha^2\beta)$
+    y la norma $N_{K/\QQ} (\beta)$.
+
+  \item[b)] Si $\beta \in \O_K$, entonces las trazas y normas de arriba son
+    números enteros. Use esto para concluir que
+    $\O_K  \subseteq \frac{1}{3} \ZZ [\alpha]$.
+
+  \item[c)] Use estas consideraciones para calcular el anillo de enteros $\O_K$
+    y discriminante $\Delta_K$ (¡la respuesta depende de $d$!).
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Encuentre el anillo de enteros $\O_K$ y discriminante $\Delta_K$ para
+  los campos cúbicos $\QQ (\sqrt[3]{6})$ y $\QQ (\sqrt[3]{12})$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos el campo cúbico $K = \QQ (\sqrt[3]{17})$.
+
+  \begin{enumerate}
+  \item[a)] Calcule el anillo de enteros $\O_K$ y discriminante $\Delta_K$.
+  \item[b)] Describa las factorizaciones de primos racionales $p \in \ZZ$ en
+    $\O_K$.
+  \item[c)] Describa los ideales primos $\mathfrak{p} \subset \O_K$
+    tales que $N_{K/\QQ} (\mathfrak{p}) \le 30$.
+  \item[d)] Describa todos los ideales $I \subset \O_K$
+    tales que $N_{K/\QQ} (I) \le 30$.
+  \end{enumerate}
+\end{ejercicio}
+
+\end{document}
