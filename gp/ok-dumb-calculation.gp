@@ -18,12 +18,7 @@
   donde m = 3, 19, 3*19.
 ---------------------------------------------------------------------- */
 
-polisintegral (f) = {
-  for (i = 0, poldegree(f),
-    if (denominator (polcoef(f,i)) != 1, return (0))
-  );
-  1
-};
+polisintegral (f) = denominator(content(f)) == 1;
 
 test (m) = {
   for (a=0,m-1,
