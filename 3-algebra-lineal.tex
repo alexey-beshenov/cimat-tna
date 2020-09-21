@@ -615,7 +615,7 @@ las raíces de $f$. Para esto se ocupa el resultante.
 \end{definicion}
 
 \begin{proposicion}
-  Para un poliomio mónico
+  Para un polinomio mónico
   $$f = (x - \alpha_1)\cdots (x - \alpha_n)$$
   se tiene
   $$\Delta (f) = (-1)^{\frac{n\,(n-1)}{2}} \, \Res (f,f').$$
@@ -856,6 +856,7 @@ En general, para encontrar el anillo de enteros $\O_K$, puede servir
 la siguiente observación.
 
 \begin{proposicion}
+  \label{prop:OK-y-orden-no-maximal}
   Para un campo de números $K/\QQ$, sea $R \subset K$ un $\ZZ$-submódulo libre
   de rango $n = [K : \QQ]$. Luego, se tiene
   \[ R \subseteq \O_K \subseteq \frac{1}{d}\,R,
@@ -932,12 +933,7 @@ la siguiente observación.
 
 \begin{shaded}
 \begin{verbatim}
-polisintegral (f) = {
-  for (i = 0, poldegree(f),
-    if (denominator (polcoef(f,i)) != 1, return (0))
-  );
-  1
-};
+polisintegral (f) = denominator(content(f)) == 1;
 
 test (m) = {
   for (a=0,m-1,
@@ -1273,7 +1269,7 @@ Antes de probar este resultado, sería oportuno introducir las normas de ideales
 Más adelante veremos que si $K/\QQ$ es una extensión de Galois, entonces
 $f_1 = \cdots = f_s$ y $e_1 = \cdots = e_s$.
 
-\subsection{Discrminante y ramificación}
+\subsection{Discriminante y ramificación}
 
 Ahora sea $\alpha$ un entero algebraico y $f \in \ZZ [x]$ su polinomio mínimo.
 Ahora si para un primo racional $p$ se tiene
@@ -1301,7 +1297,7 @@ es nulo o no.
 \begin{lema}
   Se tiene
   $$\Delta_K \operatorname{\text{mód}} p = \Delta (\O_K/(p)/\FF_p),$$
-  donde a la derecha está el discrimimamte de la $\FF_p$-álgebra $\O_K/(p)$.
+  donde a la derecha está el discriminante de la $\FF_p$-álgebra $\O_K/(p)$.
 
   \begin{proof}
     La reducción módulo $p$ nos da una $\FF_p$-álgebra
@@ -1421,6 +1417,424 @@ $|\Delta_K| > 1$, así que algún primo siempre se ramifica.
   primos que se ramifican en $K$ son $3$ y $19$.
 \end{ejemplo}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark{Clase 12 (21/09/20)}{clase-12}
+\section{Teoremas de Brill y Stickelberger}
+\marginpar{\small Clase 12 \\ 21/09/20}
+
+Hemos explicado el significado de los divisores primos del discriminante
+$\Delta_K$. El discriminante también tiene signo, y no es difícil entender su
+significado. Será oportuno primero dar una definición.
+
+\begin{definicion}
+  Para un campo de números $K/\QQ$, consideremos sus encajes
+  $$\sigma_1, \ldots, \sigma_n\colon K \hookrightarrow \QQ.$$
+  Si $\sigma_i (K) \subset \RR$, se dice que $\sigma_i$ es un encaje
+  \textbf{real}. En el caso contrario, se dice que $\sigma_i$ es un encaje
+  \textbf{complejo}. Notamos que para cada encaje complejo $\sigma_i$
+  su conjugado $\overline{\sigma_i} \ne \sigma_i$ es también un encaje.
+  Entonces, tenemos
+  $$r_1 + 2 r_2 = n = [K : \QQ],$$
+  donde $r_1$ es el número de encajes reales y $2 r_2$ es el número de encajes
+  complejos. Se dice que $(r_1, r_2)$ es la \textbf{signatura} de $K$.
+\end{definicion}
+
+En términos sencillos, si $K = \QQ (\alpha)$ y $f = f^\alpha_\QQ$ es
+el polinomio mínimo de $\alpha$, entonces $r_1$ es el número de raíces reales
+de $f$, mientras que $2 r_2$ es el número de sus raíces complejas.
+
+\begin{proposicion}[Brill\footnote{Alexander von Brill (1842--1935)}]
+  El signo de $\Delta_K$ es $(-1)^{r_2}$.
+
+  \begin{proof}
+    Escribamos $K = \QQ (\alpha)$, donde $\alpha$ es un entero algebraico,
+    $f \in \ZZ [x]$ su polinomio mínimo y $\alpha_i$ las raíces complejas
+    de $f$. Tenemos
+    $$\Delta (\ZZ [\alpha]) = [\O_K : \ZZ [\alpha]]^2 \cdot \Delta_K,$$
+    así que el signo de $\Delta_K$ coincide con el signo de
+    \[ \Delta (\ZZ [\alpha]) = \Delta (f) =
+       \prod_{1 \le i < j \le n} (\alpha_i - \alpha_j)^2, \]
+    Dejo como un ejercicio verificar que el signo de la última expresión será
+    precisamente $(-1)^{r_2}$, donde $2 r_2$ es el número de raíces complejas.
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  He aquí una pequeña lista de campos con sus signaturas y discriminantes.
+
+  \renewcommand{\arraystretch}{1.5}
+  \begin{center}
+    \begin{tabular}{cx{2cm}x{2cm}x{3cm}}
+      \hline
+      $K$ & $r_1$ & $r_2$ & $\Delta_K$ \tabularnewline
+      \hline
+      \begin{tabular}{@{}c@{}}$\QQ (\sqrt{d})$ \\ {\small donde $d > 1$}\end{tabular} & $2$ & $0$ & $d$\quad o\quad $4d$ \tabularnewline
+      \hline
+      \begin{tabular}{@{}c@{}}$\QQ (\sqrt{d})$ \\ {\small donde $d < 0$}\end{tabular} & $0$ & $1$ & $d$\quad o\quad $4d$ \tabularnewline
+      \hline
+      $\QQ (\sqrt[3]{2})$ & $1$ & $1$ & $-2^2\cdot 3^3$ \tabularnewline
+      \hline
+      \begin{tabular}{@{}c@{}}$\QQ (\alpha)$ \\ {\small donde $\alpha^3 - 3\alpha + 1 = 0$}\end{tabular} & $3$ & $0$ & $+3^4$ \tabularnewline
+      \hline
+      $\QQ (\zeta_p)$ & $0$ & $(p-1)/2$ & $(-1)^{\frac{p-1}{2}}\,p^{p-2}$ \tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+  \renewcommand{\arraystretch}{1}
+
+  En el caso de $f (x) = x^3 - 3x + 1$, notamos que el polinomio tiene tres
+  raíces reales:
+  \[ f (-2) = -1, \quad
+     f (-1) = 3, \quad
+     f (1) = -1, \quad
+     f (2) = 3. \]
+
+  \begin{center}
+    \includegraphics{pic/x3-3x+1.pdf}
+  \end{center}
+
+  Cabe mencionar que para encontrar el número de raíces reales de
+  $f^\alpha_\QQ$, y como consecuencia la signatura de $K = \QQ (\alpha)$, no hay
+  que calcular las mismas raíces; se puede usar algo como la
+  \textbf{regla de los signos de Descartes}.
+\end{ejemplo}
+
+El siguiente resultado también nos dice cuál es el resto de $\Delta_K$ módulo
+$4$.
+
+\begin{proposicion}[Stickelberger\footnote{Ludwig Stickelberger (1850--1936)}]
+  Se tiene $\Delta_K \equiv 0 \text{ o }1 \pmod{4}$.
+
+  \begin{proof}
+    Si $\alpha_1, \ldots, \alpha_n$ es una base de $\O_K$ sobre $\ZZ$
+    y $\sigma_1, \ldots, \sigma_n\colon K \hookrightarrow \CC$ son los encajes,
+    entonces
+    $$\Delta_K = \det (\sigma_i (\alpha_j))^2.$$
+    Escribamos
+    \[ \det (\sigma_i (\alpha_j)) =
+       \sum_{\rho \in S_n} \sgn (\rho)\cdot\sigma_{\rho (1)} (\alpha_1)\cdots
+                                         \sigma_{\rho (n)} (\alpha_n). \]
+    Denotemos por $P$ los términos con $\sgn (\rho) = +1$
+    y por $N$ los términos con $\sgn (\rho) = -1$. Ahora
+    $$\Delta_K = (P-N)^2 = (P+N)^2 - 4PN.$$
+    Notamos que las expresiones $P+N$ y $PN$ son invariantes respecto a
+    cualquier permutación de raíces, así que la teoría de Galois implica que son
+    números racionales. Además, son enteros algebraicos, y por lo tanto
+    $P+N, PN \in \ZZ$. Entonces, $\Delta_K$ es un cuadrado módulo $4$.
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  Consideremos un campo cuadrático $K = \QQ (\sqrt{d})$ donde $d$ es libre de
+  cuadrados. Tomamos $\ZZ [\sqrt{d}] = \ZZ \oplus \sqrt{d}\ZZ$ y calculamos
+  $$\Delta (\ZZ [\sqrt{d}]) = 4d = [\O_K : \ZZ [\sqrt{d}]]^2 \cdot \Delta_K.$$
+  Dado que $d$ es libre de cuadrados, hay solo dos opciones:
+  $\Delta_K = d$ o $4d$. Si $d \equiv 2,3 \pmod{4}$, entonces
+  Stickelberger nos dice que necesariamente $\Delta_K = 4d$, y luego
+  $\O_K = \ZZ [\sqrt{d}]$.
+
+  Si $d \equiv 1 \pmod{4}$, entonces Stickelberger no nos ayuda, pero basta
+  calcular que $\frac{1 + \sqrt{d}}{2}$ es entero y luego
+  \[ \Delta (\ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]) = d
+     = [\O_K : \ZZ [\sqrt{d}]]^2 \cdot \Delta_K, \]
+  de donde $\O_K = \ZZ [\sqrt{d}]$, dado que $d$ es libre de cuadrados.
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Campos linealmente disjuntos}
+
+Nuestro próximo objetivo será, como fue prometido, calcular que el anillo de
+enteros del $n$-ésimo campo ciclotómico $\QQ (\zeta_n)$ es
+$\ZZ [\zeta_n]$. Primero, tenemos que hacer una digresión sobre campos
+linealmente disjuntos.
+
+\begin{definicion}
+  Para dos extensiones finitas $K/\QQ$ y $K'/\QQ$ adentro de un campo común
+  (por ejemplo, adentro de una cerradura algebraica fija $\overline{\QQ}$),
+  el subcampo más pequeño que contiene a $K$ y $K'$ se llama el
+  \textbf{compositum}\footnote{En español a veces se usa el término
+    \textbf{compuesto}, pero voy a decir ``compositum''; estrictamente hablando,
+    es una palabra latín.} de $K$ y $K'$ y se denota por $K K'$.
+  \[ \begin{tikzcd}[row sep=1em,column sep=1em]
+    & \overline{\QQ}\ar[-]{d} \\
+    & KK'\ar[-]{dl}\ar[-]{dr} \\
+    K\ar[-]{dr} & & K'\ar[-]{dl} \\
+    & \QQ
+  \end{tikzcd} \]
+
+  Se dice que $K$ y $K'$ son \textbf{linealmente disjuntos} si se cumple una
+  de las siguientes condiciones equivalentes:
+  \begin{enumerate}
+  \item[a)] el homomorfismo de $k$-álgebras
+    $$K\otimes_\QQ K'\to K K', \quad (x,y) \mapsto xy$$
+    es inyectivo;
+
+  \item[b)] si $\alpha_1, \ldots, \alpha_n$ es una base de $K$ sobre $\QQ$, esta
+    es linealmente independiente sobre $K'$;
+
+  \item[c)] si $\alpha_i$ y $\alpha'_j$ son bases de $K$ y $K'$ respectivamente,
+    entonces $\alpha_i \alpha'_j$ es una base de $K K'$;
+
+  \item[d)] $[KK' : \QQ] = [K : \QQ]\cdot [K' : \QQ]$.
+  \end{enumerate}
+\end{definicion}
+
+Para más detalles, véase por ejemplo \cite[Chapter~V, \S~20]{Morandi-GTM167}.
+
+\begin{comentario}
+  Un criterio útil para ver si dos campos son linealmente disjuntos es
+  el siguiente: si $K/\QQ$ y $K'/\QQ$ son extensiones finitas de Galois y
+  $K \cap K' = \QQ$, entonces $K$ y $K'$ son linealmente disjuntos.
+  Esto se sigue del \textbf{teorema de irracionalidades naturales}
+  (véase \cite[Chapter~I, Theorem~5.5]{Morandi-GTM167}).
+\end{comentario}
+
+Para calcular el anillo de enteros del compositum de campos, ocuparemos
+el siguiente resultado.
+
+\begin{proposicion}
+  \label{prop:OK-del-compositum}
+  Sean $K$ y $K'$ dos campos de números linealmente disjuntos y sean
+  \[ \O_K = \alpha_1 \ZZ \oplus \cdots \oplus \alpha_n \ZZ, \quad
+     \O_{K'} = \alpha_1' \ZZ \oplus \cdots \oplus \alpha_{n'}' \ZZ \]
+  bases de sus anillos de enteros. Supongamos que los discriminantes $\Delta_K$
+  y $\Delta_{K'}$ son coprimos. Entonces, $\alpha_i \alpha_j'$ es una
+  $\ZZ$-base de $KK'$ y
+  $$\Delta_{KK'} = \Delta_K^{[K' : \QQ]} \cdot \Delta_{K'}^{[K : \QQ]}.$$
+
+  \begin{proof}
+    Pongamos $n = [K : \QQ]$ y $n' = [K' : \QQ]$.
+    Bajo nuestra hipótesis, $[KK' : \QQ] = nn'$, y los elementos
+    $\alpha_i \alpha_j'$ forman una base del compositum $KK'$ sobre $\QQ$.
+    \[ \begin{tikzcd}[row sep=1em,column sep=1em]
+      & KK'\ar[-]{dl}[swap]{n'} \ar[-]{dr}{n} \\
+      K\ar[-]{dr}[swap]{n} & & K'\ar[-]{dl}{n'} \\
+      & \QQ
+    \end{tikzcd} \]
+
+    Dado un elemento $\alpha \in \O_{KK'}$, escribamos
+    $$\alpha = \sum_{i,j} a_{ij} \alpha_i \alpha_j',$$
+    donde $a_{ij} \in \QQ$. Vamos a ver que en realidad $a_{ij} \in \ZZ$.
+    Pongamos
+    $$\beta_j = \sum_i a_{ij} \alpha_i.$$
+
+    Para calcular los discriminantes, consideremos los encajes
+    \[ \sigma_1, \ldots, \sigma_n\colon K \hookrightarrow \CC, \quad
+       \sigma'_1, \ldots, \sigma'_{n'}\colon K' \hookrightarrow \CC. \]
+    Denotemos por brevedad $d = \Delta_K$ y $d' = \Delta_{K'}$.
+    Recordemos que
+    \[ d = \det (X)^2, ~ d' = \det (Y)^2,
+       \quad \text{donde }
+       X = (\sigma_i (\alpha_j)), ~
+       Y = (\sigma'_k (\alpha'_\ell)). \]
+
+    Escribamos
+    \[ \vec{a} = (\sigma_1' (\alpha), \ldots, \sigma_{n'}')^t, \quad
+       \vec{b} = (\beta_1, \ldots, \beta_{n'})^t. \]
+    Se tiene
+    $$\vec{a} = Y \vec{b}.$$
+    Ahora si $Y^*$ es la matriz adjunta (compuesta por menores), entonces
+    $$Y\,Y^* = Y^*\,Y = \det (Y)\,I_{n'}.$$
+    Entonces,
+    $$\det (Y)\,\vec{b} = Y^*\,\vec{a}.$$
+    Dado que las matrices $Y$ y $Y^*$ y el vector $\vec{a}$ tienen entradas
+    enteras sobre $\ZZ$, podemos concluir que
+    $$d' \beta_j = \sum_i d' a_{ij} \alpha_i \in \O_K,$$
+    y luego $d' a_{ij} \in \ZZ$. El argumento simétrico (intercambiando
+    $\alpha_i$ con $\alpha_j'$) demuestra que $d a_{ij} \in \ZZ$. Pero
+    $d$ y $d'$ son coprimos, así que $a_{ij} \in \ZZ$. Esto
+    demuestra que $\alpha_i \alpha_j'$ es una $\ZZ$-base de $\O_{K K'}$.
+
+    Bajo nuestra hipótesis de que los campos $K$ y $K'$ son linealmente disjuntos,
+    los encajes del compositum $K K'$ vienen dados por
+    \[ \sigma_k \sigma'_\ell\colon K K' \hookrightarrow \CC, \quad
+       1 \le k \le n, ~ 1 \le \ell \le n', \]
+    y luego se puede ver que $\Delta_{K K'}$ es el discriminante de la matriz
+    de $nn'\times nn'$ que consiste en bloques
+    \[ \begin{pmatrix}
+      \sigma_1 (\alpha_1) Y & \cdots & \sigma_1 (\alpha_n) Y \\
+      \vdots & \ddots & \vdots \\
+      \sigma_n (\alpha_1) Y & \cdots & \sigma_n (\alpha_n) Y
+    \end{pmatrix}, \quad
+    Y = \begin{pmatrix}
+      \sigma'_1 (\alpha'_1) & \cdots & \sigma'_1 (\alpha'_{n'}) \\
+      \vdots & \ddots & \vdots \\
+      \sigma'_{n'} (\alpha'_1) & \cdots & \sigma'_{n'} (\alpha'_{n'})
+    \end{pmatrix}. \]
+    Este es precisamente el \textbf{producto de Kronecker} $X\otimes Y$,
+    y su determinante viene dado por
+    $$\det (X\otimes Y) = \det (X)^{n'} \cdot \det (Y)^n$$
+    (ejercicio \ref{ejerc:producto-de-kronecker}). Entonces,
+    \[ \Delta_{K K'} = \det (X \otimes Y)^2
+       = \det (X)^{2n'} \cdot \det (Y)^{2n} = d^{n'}\cdot d'^n. \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  Los campos $K = \QQ (\sqrt{3})$ y $K' = \QQ (\sqrt{5})$ son linealmente
+  disjuntos. Su compositum es $K K' = \QQ (\sqrt{3},\sqrt{5})$. Ahora
+  $\Delta_K = 12$ y $\Delta_{K'} = 5$, así que la proposición de arriba nos dice
+  que
+  \[ \O_{K K'} =
+     \ZZ \oplus \sqrt{3} \ZZ \oplus \frac{1+\sqrt{5}}{2} \ZZ \oplus \frac{\sqrt{3}+\sqrt{15}}{2} \ZZ =
+     \ZZ \Bigl[\sqrt{3}, \frac{1 + \sqrt{5}}{2}\Bigr] \]
+  y
+  $$\Delta_{K K'} = \Delta_K^2\cdot \Delta_{K'}^2 = 2^4\cdot 3^2\cdot 5^2.$$
+  Solo para ilustrar la segunda parte del argumento de arriba, tenemos
+  \[ \Delta_K = \det \begin{pmatrix}
+    1 & +\sqrt{3} \\
+    1 & -\sqrt{3}
+    \end{pmatrix}^2, \quad \Delta_{K'} = \det \begin{pmatrix}
+    1 & (1+\sqrt{5})/2 \\
+    1 & (1-\sqrt{5})/2
+    \end{pmatrix}^2, \]
+  y luego
+  \[ \Delta_{K K'} = \det \begin{pmatrix}
+    1 & +\sqrt{3} & (1+\sqrt{5})/2 & (+\sqrt{3}+\sqrt{15})/2 \\
+    1 & -\sqrt{3} & (1+\sqrt{5})/2 & (-\sqrt{3}-\sqrt{15})/2 \\
+    1 & +\sqrt{3} & (1-\sqrt{5})/2 & (+\sqrt{3}-\sqrt{15})/2 \\
+    1 & -\sqrt{3} & (1-\sqrt{5})/2 & (-\sqrt{3}+\sqrt{15})/2 \\
+  \end{pmatrix}^2 = \det \left(\begin{pmatrix}
+    1 & +\sqrt{3} \\
+    1 & -\sqrt{3}
+  \end{pmatrix}\otimes \begin{pmatrix}
+    1 & (1+\sqrt{5})/2 \\
+    1 & (1-\sqrt{5})/2
+  \end{pmatrix}\right)^2. \qedhere \]
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Anillo de enteros de \texorpdfstring{$\QQ (\zeta_n)$}{ℚ(ζₙ)}}
+
+Para el $n$-ésimo campo ciclotómico $\QQ (\zeta_n)$ podemos factorizar
+$n = p_1^{e_1} \cdots p_s^{e_s}$,
+y en este caso
+$\QQ (\zeta_n) = \QQ (\zeta_{p_1^{e_1}}) \cdots \QQ (\zeta_{p_s^{e_s}})$,
+donde los campos $\QQ (\zeta_{p_i^{e_i}})$ son linealmente disjuntos. De esta
+manera vamos a calcular el anillo de enteros de $\QQ (\zeta_n)$ mediante
+la proposición \label{prop:OK-del-compositum}, por inducción sobre el número de
+divisores primos de $n$. Primero necesitamos calcular el anillo de enteros de
+$\QQ (\zeta_{p^e})$ y ver que los discriminantes son coprimos para diferentes
+$p$.
+
+\begin{lema}
+  Consideremos el campo ciclotómico $K = \QQ (\zeta_{p^e})$.
+
+  \begin{enumerate}
+  \item[1)] Se tiene
+    \[ \Delta (\ZZ [\zeta_{p^e}]) = \pm\,p^s,
+       \quad \text{donde } s = p^{e-1}\,(pe - e - 1). \]
+
+  \item[2)] El ideal principal $\mathfrak{p} = (1 - \zeta_{p^e}) \O_K$ es primo
+    y se tiene $p \O_K = \mathfrak{p}^{\phi (p^e)}$ y
+    $\O_K/\mathfrak{p} \cong \FF_p$.
+  \end{enumerate}
+\end{lema}
+
+Note que si $e = 1$, ya sabemos que $\Delta_K = \pm\,p^{p-2}$. El signo del
+discriminante no nos interesará porque este se determina fácilmente por
+el teorema de Brill.
+
+\begin{proof}
+  El cálculo del discriminante en la parte 1) es muy similar al que hicimos en
+  \ref{ejemplo:discriminante-de-Q-zeta-p} para el caso de $e = 1$, y lo dejo
+  como un ejercicio para el lector.
+
+  Pongamos por brevedad $\zeta = \zeta_{p^e}$. Notamos que
+  $$\Phi_{p^e} (1) = \prod_{(k, p^e) = 1} (1 - \zeta^k) = p.$$
+  Aquí $1 - \zeta^k = \frac{1 - \zeta^k}{1-\zeta}\,(1-\zeta)$, donde
+  \[ N_{K/\QQ} \left(\frac{1 - \zeta^k}{1-\zeta}\right) =
+     \frac{N_{K/\QQ} (1-\zeta^k)}{N_{K/\QQ} (1-\zeta)} = \pm 1, \]
+  así que $1 - \zeta^k = \epsilon_k \, (1 - \zeta)$, donde
+  $\epsilon_k \in \O_K^\times$ es una unidad. Entonces, tenemos
+  $(1 - \zeta)^{\phi (p^e)} = \epsilon p$, donde $\epsilon \in \O_K^\times$.
+  De aquí se sigue que $p \O_K = \mathfrak{p}^{\phi (p^e)}$, donde
+  $\mathfrak{p} = (1 - \zeta) \O_K$.
+  Ahora tomando las normas de ideales,
+  \[ N_{K/\QQ} (\mathfrak{p})^{\phi (p^e)} =
+     N_{K/\QQ} (\mathfrak{p}^{\phi (p^e)}) =
+     N_{K/\QQ} (p \O_K) = p^{\phi (p^e)}, \]
+  así que $N_{K/\QQ} (\mathfrak{p}) = p$, lo que implica que
+  $\O_K/\mathfrak{p} \cong \FF_p$.
+\end{proof}
+
+\begin{proposicion}
+  Para el campo ciclotómico $K = \QQ (\zeta_{p^e})$ se tiene
+  $\O_K = \ZZ [\zeta_{p^e}]$.
+
+  \begin{proof}
+    Primero, si $d = \Delta (\ZZ [\zeta_{p^e}]) = \pm p^s$, entonces según
+    \ref{prop:OK-y-orden-no-maximal} se tiene
+    $$\ZZ [\zeta_{p^e}] \subseteq \O_K \subseteq \frac{1}{d} \ZZ [\zeta_{p^e}],$$
+    lo que podemos escribir también como
+    $$p^s \O_K \subseteq \ZZ [\zeta_{p^e}] \subseteq \O_K.$$
+    Pongamos $\mathfrak{p} = (1 - \zeta_{p^e})\O_K$. El lema anterior nos dice
+    que $\O_K/\mathfrak{p} \cong \ZZ/p\ZZ$, así que
+    $\O_K = \ZZ + \mathfrak{p}$, y luego
+    \[ \tag{*} \O_K = \ZZ [\zeta_{p^e}] + \mathfrak{p}. \]
+    Multiplicando esta identidad por $\mathfrak{p}$, se obtiene
+    $$\mathfrak{p} = \mathfrak{p}\ZZ [\zeta_{p^e}] + \mathfrak{p}^2.$$
+    Al sustituirlo a (*), tenemos
+    $$\O_K = \ZZ [\zeta_{p^e}] + \mathfrak{p}^2.$$
+    Procediendo de esta manera, tenemos
+    $$\O_K = \ZZ [\zeta_{p^e}] + \mathfrak{p}^t\quad\text{para todo }t \ge 1.$$
+    Ahora si $t = s \, \phi (p^e)$, entonces por el lema anterior,
+    $$\mathfrak{p}^t = (\mathfrak{p}^{\phi (p^e)})^s = p^s \O_K.$$
+    Pero $p^s \O_K \subseteq \ZZ [\zeta_{p^e}]$, así que
+    podemos concluir que $\O_K = \ZZ [\zeta_{p^e}]$.
+  \end{proof}
+\end{proposicion}
+
+\begin{teorema}
+  Para el campo ciclotómico $K = \QQ (\zeta_n)$ se tiene $\O_K = \ZZ [\zeta_n]$
+  y
+  $$\Delta_K = (-1)^{\phi(n)/2}\,\frac{n^{\phi (n)}}{\prod_{p\mid n} p^{\phi (n)/(p-1)}}.$$
+
+  \begin{proof}
+    Inducción sobre el número de divisores primos de $n$. Acabamos de probar
+    el caso cuando $n = p^e$. La fórmula del discriminante es también correcta:
+    calculamos que en este caso
+    $$\Delta = \pm p^s, \quad s = p^{e-1}\,(pe - e - 1).$$
+
+    Ahora para el paso inductivo, si $n = p_1^{e_1}\cdots p_s^{e_s}$,
+    consideremos los campos
+    \[ K_1 = \QQ (\zeta_{p_1^{e_1}}), ~
+       K_2 = \QQ (\zeta_{p_2^{e_2}}), \ldots,
+       K_s = \QQ (\zeta_{p_s^{e_s}}). \]
+    Tenemos
+    $$\QQ (\zeta_n) = K_1\cdots K_s.$$
+    Los campos $K_1\cdots K_{s-1}$ y $K_s$ son linealmente disjuntos y tienen
+    discriminantes coprimos, así que se aplica la proposición
+    \ref{prop:OK-del-compositum}. Por la hipótesis de inducción, tenemos
+    $$\O_{K_1\cdots K_{s-1}} = \ZZ [\zeta_{p_1^{e_1}}\cdots \zeta_{p_{s-1}^{e_{s-1}}}].$$
+    Luego, la proposición \ref{prop:OK-del-compositum} nos dice que
+    \[ \O_{K_1\cdots K_s} =
+       \ZZ [\zeta_{p_1^{e_1}}\cdots \zeta_{p_{s-1}^{e_{s-1}}}] \cdot \ZZ [\zeta_{p_s^{e_s}}] =
+       \ZZ [\zeta_n]. \]
+    El discriminante se calcula mediante
+    \[ \Delta_{K_1\cdots K_s} =
+       \Delta_{K_1\cdots K_{s-1}}^{[K_s : \QQ]} \cdot \Delta_{K_s}^{[K_1\cdots K_{s-1}:\QQ]}, \]
+    y se ve que se obtiene la fórmula enunciada. El signo del discriminante
+    viene dado por el teorema de Brill.
+  \end{proof}
+\end{teorema}
+
+\begin{ejemplo}
+  Consideremos el campo ciclotómico $K = \QQ (\zeta_{20})$. Tenemos
+  $K = K_1 K_2$, donde $K_1 = \QQ (\zeta_4) = \QQ (i)$ y $K_2 = \QQ (\zeta_5)$.
+  El teorema nos dice que $K = \ZZ [\zeta_{20}]$. Calculamos
+  $\phi (20) = \phi (4) \, \phi (5) = 8$. Una posible base de $\O_K$ es
+  \[ 1, \zeta_{20}, \zeta_{20}^2, \zeta_{20}^3,
+     \zeta_{20}^4, \zeta_{20}^5, \zeta_{20}^6, \zeta_{20}^7, \]
+  pero también podríamos tomar el producto de las bases $\{ 1, i \}$ y
+  $\{ 1, \zeta_5, \zeta_5^2, \zeta_5^3, \zeta_5^4 \}$.
+  El discriminante viene dado por
+  \[ \Delta_K = \Delta_{K_1}^4 \cdot \Delta_{K_2}^2 = 2^8\cdot 5^6. \qedhere \]
+\end{ejemplo}
+
 \noindent\emph{Continuará\dots}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1500,4 +1914,33 @@ $|\Delta_K| > 1$, así que algún primo siempre se ramifica.
   \item[4)] Describa todos los ideales $I \subset \O_K$
     tales que $N_{K/\QQ} (I) \le 30$.
   \end{enumerate}
+\end{ejercicio}
+
+% NEW EXERCISES
+
+\begin{ejercicio}
+  \label{ejerc:producto-de-kronecker}
+  Sea $X$ una matriz de $n\times n$ e $Y$ una matriz de $n'\times n'$.
+  El \textbf{producto de Kronecker} $X\otimes Y$ es la matriz de
+  $nn' \times nn'$ que consiste en bloques
+  \[ \begin{pmatrix}
+    x_{11} Y & \cdots & x_{1n} Y \\
+    \vdots & \ddots & \vdots \\
+    x_{n1} Y & \cdots & x_{nn} Y
+  \end{pmatrix}. \]
+  (El significado de esta matriz: si $X$ e $Y$ corresponden a aplicaciones
+  $R$-lineales $f\colon R^n \to R^n$ y $g\colon R^{n'}\to R^{n'}$, entonces
+  $X\otimes Y$ corresponde a $f\otimes g\colon R^{nn'} \to R^{nn'}$
+  respecto a la base estándar $e_i\otimes e_j'$.)
+
+  Demuestre que
+  $$\det (X\otimes Y) = \det (X)^{n'} \cdot \det (Y)^n.$$
+\end{ejercicio}
+
+\begin{ejercicio}
+  Calcule que
+  \[ \Delta (\ZZ [\zeta_{p^e}]) = \Delta (\Phi_{p^e}) = \pm\,p^s,
+     \quad \text{donde } s = p^{e-1}\,(pe - e - 1). \]
+  (Indicación: generalice el cálculo de
+  \ref{ejemplo:discriminante-de-Q-zeta-p}.)
 \end{ejercicio}

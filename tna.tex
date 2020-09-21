@@ -47,7 +47,10 @@
 
 \usepackage[numbers]{natbib}
 
-\usepackage[hidelinks,bookmarks=true]{hyperref}
+\author{Alexey Beshenov}
+\title{Teoría de números algebraicos}
+\usepackage[pdfusetitle,hidelinks,bookmarks=true]{hyperref}
+
 \hypersetup{
 	colorlinks,
 	linkcolor={red!60!black},
@@ -75,9 +78,11 @@
 \renewcommand\Re{\operatorname{Re}}
 \renewcommand\Im{\operatorname{Im}}
 
+\DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\coker}{coker}
 \DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Frob}{Frob}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\Hom}{Hom}
@@ -92,8 +97,11 @@
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 \newcolumntype{N}{@{}m{0pt}@{}}
 \newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
+\usepackage{diagbox}
 
 \usepackage[perpage,symbol]{footmisc}
+\renewcommand{\thefootnote}{\ifcase\value{footnote}\or(*)\or
+(**)\or(***)\or(****)\or(\#)\or(\#\#)\or(\#\#\#)\or(\#\#\#\#)\or($\infty$)\fi}
 
 \begin{document}
 
@@ -123,6 +131,8 @@
 \input{2-ideales.tex}
 
 \input{3-algebra-lineal.tex}
+
+% \input{4-galois.tex}
 
 \appendix
 \input{a-polinomios-ciclotomicos.tex}

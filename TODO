@@ -9,7 +9,7 @@ Siguiente capítulo: teoría de Galois (!)
 * Teoría de Galois, elementos de Frobenius, etc.
 * Teorema de densidad de Chebotarëv (formulación).
 * Reciprocidad cuadrática mediante Q (\sqrt{p*}) \subset Q (\zeta_p).
-* El argumento de Weyl (sic!) para la reciprocidad en este caso.
+  (cf. Neukirch, pp. 63-64.)
 * Ejemplos de campos cúbicos no-homogénicos: si p = 1 (3) y 2 es un cubo mod p,
   tomar el subcampo cúbico en Q (\zeta_p).
 
