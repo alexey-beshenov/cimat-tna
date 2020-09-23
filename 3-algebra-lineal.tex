@@ -940,7 +940,7 @@ test (m) = {
     for (b=0,m-1,
       for (c=0,m-1,
         local (elt = (a + b*x + c*x^2)/m);
-        if (polisintegral (minpoly (Mod (elt, x^3 - 19))),
+        if (polisintegral (minpoly (Mod(elt, x^3 - 19))),
           print (elt)
         )
       )
@@ -1036,7 +1036,7 @@ $[\O_K : \ZZ [\alpha]]$.
 
   \begin{shaded}
 \begin{verbatim}
-? minpoly (Mod (1/3*(x^2+x+1), x^3-19))
+? minpoly (Mod(1/3*(x^2+x+1), x^3-19))
 % = x^3 - x^2 - 6*x - 12
 ? poldisc(%)
 % = -4332
@@ -1568,7 +1568,7 @@ linealmente disjuntos.
   de las siguientes condiciones equivalentes:
   \begin{enumerate}
   \item[a)] el homomorfismo de $k$-álgebras
-    $$K\otimes_\QQ K'\to K K', \quad (x,y) \mapsto xy$$
+    $$K\otimes_\QQ K'\to K K', \quad x\otimes y \mapsto xy$$
     es inyectivo;
 
   \item[b)] si $\alpha_1, \ldots, \alpha_n$ es una base de $K$ sobre $\QQ$, esta
@@ -1835,6 +1835,710 @@ el teorema de Brill.
   \[ \Delta_K = \Delta_{K_1}^4 \cdot \Delta_{K_2}^2 = 2^8\cdot 5^6. \qedhere \]
 \end{ejemplo}
 
+\vspace{1em}
+
+\pdfbookmark{Clase 13 (23/09/20)}{clase-13}
+\marginpar{\small Clase 13 \\ 23/09/20}
+
+Ahora, dado que nos salió $\O_K = \ZZ [\zeta_n]$, no podemos resistir
+la tentación de aplicar el Kummer--Dedekind para factorizar $p \O_K$.
+Para esto tenemos que factorizar el $n$-ésimo polinomio ciclotómico
+$\Phi_n (x) \in \ZZ [x]$ módulo diferentes primos $p$.
+
+\begin{lema}
+  Factoricemos $n = \prod_p p^{v_p}$. Para un número primo $p$, sea $f$
+  el orden de $p$ módulo $n/p^{v_p}$, i.e. el número más pequeño tal que
+  $p^f \equiv 1 \pmod{n/p^{v_p}}$.
+  Luego, se tiene
+  \[ \overline{\Phi_n} (x) = (\overline{g_1} \cdots \overline{g_s})^{\phi (p^{v_p})}
+     \quad\text{en } \FF_p [x], \]
+  donde $\overline{g_1},\ldots,\overline{g_s} \in \FF_p [x]$ son distintos
+  polinomios irreducibles de grado $f$.
+
+  \begin{proof}
+    Ya hemos visto algo parecido para el caso de $n$ primo
+    (véase \ref{lema:factorizacion-de-Phi-p-mod-q}), y esta es una
+    generalización.
+
+    Primero supongamos que $p \nmid n$, así que $v_p = 0$. En este caso
+    $f = x^n - 1$ es un polinomio separable en $\FF_p [x]$, como demuestra
+    el cálculo de $\gcd (f,f') = 1$. Por nuestra elección, $f$ es el número
+    más pequeño tal que el grupo multiplicativo $\FF_{p^f}^\times$ contiene
+    elementos de orden $n$, así que $\FF_{p^f}$ es precisamente el campo de
+    descomposición del polinomio $\overline{\Phi_n} \in \FF_p [x]$.
+    La factorización en polinomios irreducibles será
+    $$\overline{\Phi_n} = \overline{g_1} \cdots \overline{g_s},$$
+    donde cada $\overline{g_i}$ es el polinomio mínimo sobre $\FF_p$ de alguna
+    raíz $n$-ésima $\zeta \in \FF_{p^f}^\times$, y como consecuencia,
+    $$\deg \overline{g_i} = [\FF_{p^f} : \FF_p] = f.$$
+    (Como fue explicado en la prueba de \ref{lema:factorizacion-de-Phi-p-mod-q},
+    es instructivo ver cómo los factores $\overline{g_i}$ vienen de las órbitas
+    del Frobenius.)
+
+    En el caso cuando $p \mid n$, escribamos $n = m\,p^e$, donde $e = v_p$
+    (y entonces $p \nmid m$). Este caso se reduce al anterior observando
+    que
+    $$\Phi_n (x) \equiv \Phi_m (x)^{\phi (p^e)} \pmod{\mathfrak{p}}.$$
+    (¡Ejercicio!)
+  \end{proof}
+\end{lema}
+
+Ahora aplicando Kummer--Dedekind, se obtiene el siguiente resultado.
+
+\begin{teorema}
+  Consideremos el campo ciclotómico $K = \QQ (\zeta_n)$. Factoricemos
+  $n = \prod_p p^{v_p}$. Para un número primo $p$, sea $f$ el orden
+  de $p$ módulo $n/p^{v_p}$. Luego, se tiene factorización
+  $$p \O_K = \mathfrak{p}_1^e \cdots \mathfrak{p}_s^e,$$
+  donde los índices de ramificación son $e = \phi (p^{v_p})$,
+  y los grados del campo residual son $f$.
+\end{teorema}
+
+En particular, los primos que se ramifican son los divisores de $n$, excepto
+el caso de $p = 2$ cuando ${v_2 (n) = 1}$. Esto no es muy interesante, dado que
+en esta situación $\QQ (\zeta_n) = \QQ (\zeta_{n/2})$. Notamos que
+la información sobre los primos que se ramifican también está en
+el discriminante que hemos calculado.
+
+\begin{ejemplo}
+  En el campo ciclotómico $K = \QQ (\zeta_{15})$ la factorización de $p \O_K$
+  depende de los restos de $p$ módulo $3$ y $5$.
+
+  Para $p = 3$ hay ramificación con $e = \phi (3) = 2$ y para $p = 5$ hay
+  ramificación con $e = \phi (5) = 4$. Para $p$ distintos de $3$ y $5$, tenemos
+  las siguientes posibilidades (véase también la figura \ref{fig:Q-zeta-15}).
+
+  \begin{center}
+    \renewcommand{\arraystretch}{2}
+    \begin{tabular}{|c|x{2.5cm}|x{2.5cm}|x{2.5cm}|x{2.5cm}|}
+      \hline
+      \backslashbox{$p$ $(3)$}{$p$ $(5)$} & $1$ & $2$ & $3$ & $4$ \tabularnewline
+      \hline
+      $1$ & $\mathfrak{p}_1 \mathfrak{p}_2\cdots \mathfrak{p}_8$ & $\mathfrak{p}_1 \mathfrak{p}_2$ & $\mathfrak{p}_1 \mathfrak{p}_2$ & $\mathfrak{p}_1 \mathfrak{p}_2 \mathfrak{p}_3 \mathfrak{p}_4$ \tabularnewline
+      \hline
+      $2$ & $\mathfrak{p}_1 \mathfrak{p}_2 \mathfrak{p}_3 \mathfrak{p}_4$ & $\mathfrak{p}_1 \mathfrak{p}_2$ & $\mathfrak{p}_1 \mathfrak{p}_2$ & $\mathfrak{p}_1 \mathfrak{p}_2 \mathfrak{p}_3 \mathfrak{p}_4$ \tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+
+  Por ejemplo, si $p \equiv 2 \pmod{3}$ y $p \equiv 2 \pmod{5}$, entonces
+  el orden de $p$ módulo $3$ es $2$ y el orden de $p$ módulo $5$ es $4$.
+  Entonces, el orden de $p$ módulo $15$ es igual a $4$. Esto nos da ideales
+  $\mathfrak{p}_i$ con el grado del campo residual $4$. Se cumple necesariamente
+  $s\cdot 4 = \phi (15) = 8$, entonces hay $s = 2$ ideales primos en
+  la factorización. Notamos que no hay primos inertes.
+\end{ejemplo}
+
+\begin{figure}
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+      \begin{tabular}{x{0.75cm}x{1.75cm}x{0.75cm}x{0.9cm}x{0.75cm}x{1.75cm}x{0.75cm}x{0.9cm}x{0.75cm}x{1.75cm}x{0.75cm}x{0.9cm}}
+      $p$ & $p\O_K$ & $f$ & $p~(15)$ & $p$ & $p\O_K$ & $f$ & $p~(15)$ & $p$ & $p\O_K$ & $f$ & $p~(15)$ \tabularnewline
+      \hline
+      $2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ & $127$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ & $283$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ \tabularnewline
+      \hline
+      $3$ & $\mathfrak{p}^2$ & $4$ & $3$ & $131$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ & $293$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ \tabularnewline
+      \hline
+      $5$ & $\mathfrak{p}^4$ & $2$ & $5$ & $137$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ & $307$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ \tabularnewline
+      \hline
+      $7$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ & $139$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ & $311$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ \tabularnewline
+      \hline
+      $11$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ & $149$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ & $313$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ \tabularnewline
+      \hline
+      $13$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ & $151$ & $\mathfrak{p}_1\,\mathfrak{p}_2\cdots\mathfrak{p}_8$ & $1$ & $1$ & $317$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ \tabularnewline
+      \hline
+      $17$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ & $157$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ & $331$ & $\mathfrak{p}_1\,\mathfrak{p}_2\cdots\mathfrak{p}_8$ & $1$ & $1$ \tabularnewline
+      \hline
+      $19$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ & $163$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ & $337$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ \tabularnewline
+      \hline
+      $23$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ & $167$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ & $347$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ \tabularnewline
+      \hline
+      $29$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ & $173$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ & $349$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ \tabularnewline
+      \hline
+      $31$ & $\mathfrak{p}_1\,\mathfrak{p}_2\cdots\mathfrak{p}_8$ & $1$ & $1$ & $179$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ & $353$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ \tabularnewline
+      \hline
+      $37$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ & $181$ & $\mathfrak{p}_1\,\mathfrak{p}_2\cdots\mathfrak{p}_8$ & $1$ & $1$ & $359$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ \tabularnewline
+      \hline
+      $41$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ & $191$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ & $367$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ \tabularnewline
+      \hline
+      $43$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ & $193$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ & $373$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ \tabularnewline
+      \hline
+      $47$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ & $197$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ & $379$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ \tabularnewline
+      \hline
+      $53$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ & $199$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ & $383$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ \tabularnewline
+      \hline
+      $59$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ & $211$ & $\mathfrak{p}_1\,\mathfrak{p}_2\cdots\mathfrak{p}_8$ & $1$ & $1$ & $389$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ \tabularnewline
+      \hline
+      $61$ & $\mathfrak{p}_1\,\mathfrak{p}_2\cdots\mathfrak{p}_8$ & $1$ & $1$ & $223$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ & $397$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ \tabularnewline
+      \hline
+      $67$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ & $227$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ & $401$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ \tabularnewline
+      \hline
+      $71$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ & $229$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ & $409$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ \tabularnewline
+      \hline
+      $73$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ & $233$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ & $419$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ \tabularnewline
+      \hline
+      $79$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ & $239$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ & $421$ & $\mathfrak{p}_1\,\mathfrak{p}_2\cdots\mathfrak{p}_8$ & $1$ & $1$ \tabularnewline
+      \hline
+      $83$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ & $241$ & $\mathfrak{p}_1\,\mathfrak{p}_2\cdots\mathfrak{p}_8$ & $1$ & $1$ & $431$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ \tabularnewline
+      \hline
+      $89$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ & $251$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ & $433$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ \tabularnewline
+      \hline
+      $97$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ & $257$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ & $439$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ \tabularnewline
+      \hline
+      $101$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ & $263$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ & $443$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ \tabularnewline
+      \hline
+      $103$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ & $269$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ & $449$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $14$ \tabularnewline
+      \hline
+      $107$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $2$ & $271$ & $\mathfrak{p}_1\,\mathfrak{p}_2\cdots\mathfrak{p}_8$ & $1$ & $1$ & $457$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ \tabularnewline
+      \hline
+      $109$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $4$ & $277$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $7$ & $461$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ \tabularnewline
+      \hline
+      $113$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $8$ & $281$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$ & $2$ & $11$ & $463$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $4$ & $13$ \tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \caption{Factorización de $p\O_K$ para $K = \QQ (\zeta_{15})$}
+  \label{fig:Q-zeta-15}
+\end{figure}
+
+\begin{ejemplo}[Kummer]
+  Consideremos el campo ciclotómico $K = \QQ (\zeta_{23})$. El primer primo
+  tal que $p\equiv 1\pmod{23}$ es $47$, lo que implica que
+  $$47 \O_K = \mathfrak{p}_1 \mathfrak{p}_2 \cdots \mathfrak{p}_{22},$$
+  donde $N_{K/\QQ} (\mathfrak{p}_i) = 47$. Los ideales primos $\mathfrak{p}_i$
+  no son principales. En efecto, si $\mathfrak{p}_i = \alpha \O_K$, entonces
+  $|N_{K/\QQ} (\alpha)| = 47$. Sin embargo, se puede ver que en $\O_K$ no hay
+  elementos de norma $47$\footnote{
+    He aquí un cálculo en PARI/GP que lo confirma:\\
+\texttt{? K = bnfinit(polcyclo(23));\\
+? bnfisintnorm(K,47)\\
+\% = []}\\
+Sin embargo, lo explicaré más tarde.}.
+
+  A saber, para $\alpha \in \O_K$ se tiene
+  $$N_{K/\QQ} (\alpha) = \prod_{\sigma \in \Gal (K/\QQ)} \sigma (\alpha).$$
+  El grupo de Galois $\Gal (K/\QQ) \cong (\ZZ/23\ZZ)^\times$ es cíclico de orden
+  $22$. Sea $\sigma$ su generador. La teoría de Galois implica que en
+  $\QQ (\zeta_{23})$ hay único subcampo cuadrático, y este es el subcampo fijo
+  por $\sigma^2$.  Por razones de ramificación (véase ejercicio
+  \ref{ejerc:subcampo-cuadratico-en-ciclotomico}) se puede deducir que este
+  subcampo cuadrático es $F = \QQ (\sqrt{-23})$.
+
+  Escribamos
+  \[ N_{K/\QQ} (\alpha) =
+     \Bigl(\alpha\,\sigma^2(\alpha)\,\sigma^4(\alpha)\cdots\sigma^{20}(\alpha)\Bigr) \,
+     \Bigl(\sigma(\alpha)\,\sigma^3(\alpha)\,\sigma^5(\alpha)\cdots\sigma^{21}(\alpha)\Bigr). \]
+  Aquí cada uno de los dos múltiplos está en $F$, y además, se ve que uno es
+  el conjugado complejo del otro: tenemos $\overline{\alpha} = \sigma^{11} (\alpha)$,
+  y de esta manera,
+  \[ \overline{\alpha\,\sigma^2(\alpha)\,\sigma^4(\alpha)\cdots\sigma^{20}(\alpha)} =
+     \sigma^{11} (\alpha)\,\sigma^{2+11}(\alpha)\,\sigma^{4+11}(\alpha)\cdots\sigma^{20+11}(\alpha) =
+     \sigma(\alpha)\,\sigma^3(\alpha)\,\sigma^5(\alpha)\cdots\sigma^{21}(\alpha). \]
+
+  Podemos entonces escribir
+  $$N_{K/\QQ} (\alpha) = (a + b\sqrt{-23})\,(a - b\sqrt{-23}) = a^2 + 23\,b^2$$
+  para algunos $a,b \in \QQ$. Dado que $\alpha$ es un elemento entero, tenemos
+  también $a + b\sqrt{-23} \in \ZZ \Bigl[\frac{1+\sqrt{-23}}{2}\Bigr]$, así que
+  $a = \frac{a'}{2}$ y $b = \frac{b'}{2}$, donde $a',b' \in \ZZ$ y $a' \equiv b'
+  \pmod{2}$. Entonces,
+  $$N_{K/\QQ} (\alpha) = \frac{a'^2 + 23\,b'^2}{4}.$$
+
+  Ahora si en $\ZZ [\zeta_{23}]$ hay un elemento de norma $47$, esto implicaría
+  que para algunos $a',b' \in \ZZ$ se cumple
+  $$a'^2 + 23b'^2 = 4\cdot 47.$$
+  Sin embargo, no es difícil ver que esto es imposible\footnote{Tenemos
+    necesariamente $23 b'^2 \le 4\cdot 47$, y luego $|b'| \le 2$. Basta
+    entonces sustituir $b' = 1,2$ y ver que la ecuación no tiene soluciones
+    enteras.}.
+
+  Podemos concluir que los ideales primos $\mathfrak{p}_i$ que están sobre $47$
+  en el campo ciclotómico $K = \QQ (\zeta_{23})$ no son principales. Como
+  consecuencia, el anillo $\O_K = \ZZ [\zeta_{23}]$ no es un dominio de
+  factorización única.
+
+  Tenemos $\legendre{-23}{47} = +1$, y entonces en el anillo
+  $\ZZ \Bigl[\frac{1 + \sqrt{-23}}{2}\Bigr]$ el ideal generado por $p = 47$
+  se factoriza como $\mathfrak{p}\,\overline{\mathfrak{p}}$, y lo que acabamos
+  de ver demuestra que estos ideales primos tampoco son principales.
+  (Al pasar a $\QQ (\zeta_{23})$, cada uno de estos ideales se escinde en $11$
+  ideales primos no principales.)
+
+  \[ \begin{tikzcd}
+    \mathfrak{p}_1 \cdots \mathfrak{p}_{22} \ar[-]{d} &[-3em] \subset &[-3em] \ZZ [\zeta_{23}]\ar[-]{d} &[-3em] \subset &[-3em] \QQ (\zeta_{23}) \ar[-]{d}{11} \\
+    \mathfrak{p} \overline{\mathfrak{p}} \ar[-]{d} & \subset & \ZZ \Bigl[\frac{1 + \sqrt{-23}}{2}\Bigr]\ar[-]{d} & \subset & \QQ (\sqrt{-23}) \ar[-]{d}{2} \\
+    47 & \subset & \ZZ & \subset & \QQ
+    \end{tikzcd} \]
+\end{ejemplo}
+
+De hecho, $K = \QQ (\zeta_n)$ para $n = 23$ es el primer campo ciclotómico
+tal que $\O_K = \ZZ [\zeta_n]$ no tiene factorización única, o de manera
+equivalente, tal que el grupo de clases $\Cl (K)$ no es trivial. Esto fue
+descubierto por Kummer.
+
+Hay una anécdota bien conocida relacionada con este resultado de Kummer.
+En 1847 el matemático francés Gabriel Lamé anunció ante la Academia de Ciencias
+de Paris una supuesta prueba del último teorema de Fermat basada en
+la factorización única en el anillo $\ZZ [\zeta_n]$. Liouville puso en duda esta
+afirmación y se comunicó con Kummer quien aparentemente ya tenía
+contraejemplos. Para los detalles históricos, véase por ejemplo
+\cite{Edwards-1975} y \cite{Edwards-1977}. El libro \cite{Edwards-1996}
+también contiene detalles sobre los cálculos de Kummer.
+
+Véase también \url{https://en.wikipedia.org/wiki/23_enigma}
+sobre la numerología detrás de 23.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+\section{Cálculos en PARI/GP}
+
+Ya he mencionado PARI/GP (\url{https://pari.math.u-bordeaux.fr/}) en varias
+ocasiones, y ahora veremos de manera un poco más sistemática cómo hacer cálculos
+con los campos de números en este programa. Si todavía no lo han descargado, es
+hora de hacerlo y probar los ejemplos de abajo.
+
+\vspace{1em}
+
+He aquí algunos comandos útiles:
+\begin{itemize}
+\item \texttt{\textbackslash{}l "log.txt"} --- guardar toda la sesión en el archivo \texttt{log.txt} (otra vez \texttt{\textbackslash{}l} deja de hacerlo),
+
+\item \texttt{?xxxxx} --- ayuda sobre \texttt{xxxxx}, por ejemplo,
+
+\begin{shaded}
+\begin{verbatim}
+? ?idealprimedec
+idealprimedec(nf,p,{f=0}): prime ideal decomposition of the prime number p
+in the number field nf as a vector of prime ideals. If f is present and
+non-zero, restrict the result to primes of residue degree <= f.
+\end{verbatim}
+\end{shaded}
+
+\item \texttt{??xxxxx} --- ayuda detallada sobre \texttt{xxxxx},
+
+\item \texttt{\%} --- el resultado del cálculo anterior:
+  
+\begin{shaded}
+\begin{verbatim}
+? 2^2
+%1 = 4
+? %^2
+%2 = 16
+? %^2
+%3 = 256
+? %1 + %2
+%4 = 20
+\end{verbatim}
+\end{shaded}
+
+\item \texttt{\textbackslash{}quit} --- salir del programa.
+\end{itemize}
+
+Cuando ocurre algún error, el programa entra en el ``ciclo break'' y nos
+recomienda escribir \texttt{break} para salir de allí. Esto sirve para encontrar
+errores en código más complejo y probablemente no será relevante para nuestros
+pequeños cálculos.
+
+\begin{shaded}
+\begin{verbatim}
+? mcd(2,3)
+  ***   at top-level: mcd(2,3)
+  ***                 ^--------
+  ***   not a function in function call
+  ***   Break loop: type 'break' to go back to GP prompt
+break> break
+
+? gcd(2,3)
+% = 1
+\end{verbatim}
+\end{shaded}
+
+\pagebreak
+
+\subsection{Polinomios}
+
+Un campo de números se especifica por un polinomio irreducible $f$ tal que $K
+\cong \QQ [x]/(f)$. Para ver si un polinomio es irreducible, sirve la función
+\texttt{polisirreducible($f$)}.
+
+\begin{shaded}
+\begin{verbatim}
+? polisirreducible(x^3 - 3*x + 1)
+% = 1
+? polisirreducible(x^3-1)
+% = 0
+\end{verbatim}
+\end{shaded}
+
+Si queremos factorizar un polinomio, podemos ocupar la función
+\texttt{factor($f$)}.
+
+\begin{shaded}
+\begin{verbatim}
+? factor (x^8-1)
+% = 
+[  x - 1 1]
+
+[  x + 1 1]
+
+[x^2 + 1 1]
+
+[x^4 + 1 1]
+\end{verbatim}
+\end{shaded}
+
+El resultado es una matriz de $s\times 2$, donde en la primera columna se
+encuentran los factores irreducibles y en la segunda columna las potencias
+correspondientes:
+\[ f = g_1^{e_1} \cdots g_s^{e_s} \longleftrightarrow
+\begin{pmatrix}
+  g_1 & e_1 \\
+  \vdots & \vdots \\
+  g_s & e_s
+  \end{pmatrix}. \]
+
+La factorización módulo $p$ (que ocupamos para el Kummer--Dedekind) puede ser
+obtenida mediante \texttt{factor($f$*Mod(1,$p$))}.
+
+\begin{shaded}
+\begin{verbatim}
+? factor (polcyclo(8)*Mod(1,2))
+% = 
+[Mod(1, 2)*x + Mod(1, 2) 4]
+
+? factor (polcyclo(8)*Mod(1,3))
+% = 
+[Mod(1, 3)*x^2 + Mod(1, 3)*x + Mod(2, 3) 1]
+[Mod(1, 3)*x^2 + Mod(2, 3)*x + Mod(2, 3) 1]
+
+? factor (polcyclo(8)*Mod(1,5))
+% = 
+[Mod(1, 5)*x^2 + Mod(2, 5) 1]
+[Mod(1, 5)*x^2 + Mod(3, 5) 1]
+\end{verbatim}
+\end{shaded}
+
+El discriminante de un polinomio se calcula mediante \texttt{poldisc($f$)}.
+
+\begin{shaded}
+\begin{verbatim}
+? poldisc (polcyclo(7))
+% = -16807
+? factor(%)
+% = 
+[-1 1]
+[ 7 5]
+\end{verbatim}
+\end{shaded}
+
+\subsection{Campos de números}
+
+Para especificar un campo de números $K = \QQ[x]/(f)$, hay que escribir
+\texttt{$K$=nfinit($f$)}. Esta función calcula los invariantes básicos de $K$.
+\begin{itemize}
+\item \texttt{$K$.pol} --- el polinomio usado para definir $K$,
+\item \texttt{$K$.zk} --- el anillo de enteros $\O_K$,
+\item \texttt{$K$.disc} --- el discriminante $\Delta_K$,
+\item \texttt{$K$.sign} --- la signatura \texttt{[$r_1$,$r_2$]},
+\item \dots
+\end{itemize}
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^3-19);
+? K.pol
+% = x^3 - 19
+? K.disc 
+% = -1083
+? factor (%)
+% = 
+[-1 1]
+[ 3 1]
+[19 2]
+
+? K.zk
+% = [1, 1/3*x^2 + 1/3*x + 1/3, x]
+? K.r1
+% = 1
+? K.r2
+% = 1
+? K.sign
+% = [1, 1]
+\end{verbatim}
+\end{shaded}
+
+Aquí escribí \texttt{$K$=nfinit(x\textasciicircum{}3-19);} con punto y coma para
+suprimir la salida. De todas maneras, el resultado será guardado en $K$. Pueden
+ejecutar el mismo comando sin punto y coma, y PARI/GP imprimirá toda
+la estructura de datos asociada con $K$.
+
+Lo que se encuentra en \texttt{$K$.zk} es una base de $\O_K$ sobre $\ZZ$ en
+términos de $x$ mód $f$. En este caso particular el resultado significa que
+para $\QQ [\alpha]/(\alpha^3 - 19)$ se tiene
+$$\O_K = \ZZ \oplus \frac{1}{3} (\alpha^2 + \alpha + 1) \ZZ \oplus \alpha \ZZ.$$
+
+Por supuesto, el mismo campo de números puede ser especificado por diferentes
+polinomios irreducibles. Para ver si dos campos de números son isomorfos, sirve
+la función \texttt{nfisisom($f$,$g$)}. Como entrada podemos especificar
+polinomios irreducibles o las estructuras \texttt{nfinit}.
+
+\begin{shaded}
+\begin{verbatim}
+? nfisisom(x^4 + 2*x^2 + 4*x + 2, polcyclo(8))
+% = [x^2 - x, x^2 + x, -x^3 - x^2, x^3 - x^2]
+
+? nfisisom(x^4 + 2, polcyclo(8))
+% = 0
+\end{verbatim}
+\end{shaded}
+
+Si la salida es \texttt{0}, esto significa que no hay isomorfismo; en el caso
+contrario, se devuelve una lista de posibles isomorfismos. En el ejemplo de
+arriba vimos entonces que
+$$\QQ [\alpha]/(\alpha^4 + 2 \alpha^2 + 4 \alpha + 2) \cong \QQ (\zeta_8),$$
+y además que uno de los isomorfismos viene dado por
+$$\alpha \mapsto \zeta_8^2 - \zeta_8.$$
+
+La función \texttt{nfisincl($f$,$g$)} verifica si $\QQ[x]/(f)$ es isomorfo a un
+subcampo de $\QQ[x]/(g)$ y encuentra los isomorfismos. He aquí un ejemplo
+particular.
+
+\begin{shaded}
+\begin{verbatim}
+? nfisincl(x^2-7, polcyclo(7))
+% = 0
+? nfisincl(x^2+7, polcyclo(7))
+% = [-2*x^4 - 2*x^2 - 2*x - 1, 2*x^4 + 2*x^2 + 2*x + 1]
+\end{verbatim}
+\end{shaded}
+
+Los resultados nos dicen que $\QQ (\sqrt{7}) \not\subset \QQ (\zeta_7)$
+y $\QQ (\sqrt{-7}) \subset \QQ (\zeta_7)$. También hay modos de encontrar todos
+los posibles subcampos, pero los veremos cuando hablaremos de la teoría de
+Galois.
+
+\vspace{1em}
+
+Una función muy útil es \texttt{polredbest($f$)}. Esta a partir de un polinomio
+$f$ nos da otro polinomio $g$ tal que $\QQ[x]/(f) \cong \QQ[x]/(g)$, pero los
+coeficientes de $g$ son relativamente pequeños. He aquí un ejemplo particular
+para qué sirve esta reducción.
+
+Para ver un ejemplo particular, supongamos que nos interesa el campo
+bicuadrático $K = \QQ (\sqrt{2},\sqrt{3})$.  Este se genera por
+$\alpha = \sqrt{2} + \sqrt{3}$, cuyo polinomio mínimo viene dado por
+$x^4 - 10 x^2 + 1$. Ahora
+$$\ZZ [\alpha] = 2^{14}\cdot 3^2, \quad \Delta_K = 2^8\cdot 3^2,$$
+lo que significa que
+$$[\O_K : \ZZ [\alpha]] = 8.$$
+
+\begin{shaded}
+\begin{verbatim}
+? f = x^4 - 10*x^2 + 1;
+? poldisc(f)
+% = 147456
+? factor(%)
+% = 
+[2 14]
+
+[3  2]
+
+? K = nfinit(f);
+? K.disc 
+% = 2304
+? factor(%)
+% = 
+[2 8]
+[3 2]
+
+? sqrtint(poldisc(f)/K.disc)
+% = 8
+\end{verbatim}
+\end{shaded}
+
+¿Podemos encontrar un mejor subanillo cuyo índice en $\O_K$ sea menor?
+Con ayuda de PARI/GP encontramos $\ZZ [\beta]$, donde
+$\beta^4 - 4\beta^2 + 1 = 0$, y resulta que $\O_K = \ZZ [\beta]$.
+De hecho, $\beta = \sqrt{2 + \sqrt{3}}$.
+
+\begin{shaded}
+\begin{verbatim}
+? g = polredbest(f)
+% = x^4 - 4*x^2 + 1
+? poldisc(g)
+% = 2304
+? % == K.disc 
+% = 1
+\end{verbatim}
+\end{shaded}
+
+Otro ejemplo parecido: para $K = \QQ (\alpha)$, donde $\alpha = \sqrt[3]{19}$
+tenemos
+$$[\O_K : \ZZ [\alpha]] = 3.$$
+Con ayuda de PARI/GP encontramos el subanillo $\ZZ [\beta]$, donde
+$\beta^3 - \beta^2 - 6\beta - 12 = 0$ y
+$$[\O_K : \ZZ [\beta]] = 2.$$
+
+\begin{shaded}
+\begin{verbatim}
+? f = x^3-19;
+? K = nfinit(f);
+? sqrtint(poldisc(f)/K.disc)
+% = 3
+? g = polredbest(f)
+% = x^3 - x^2 - 6*x - 12
+? sqrtint(poldisc(g)/K.disc)
+% = 2
+\end{verbatim}
+\end{shaded}
+
+Si queremos saber cómo $\alpha$ se expresa en términos de $\beta$ (para trabajar
+en el nuevo anillo $\ZZ [\beta]$), hay que escribir \texttt{polredbest($f$,1)}
+
+\begin{shaded}
+\begin{verbatim}
+? polredbest(f,1)
+% = [x^3 - x^2 - 6*x - 12,
+     Mod(1/2*x^2 - 1/2*x - 2, x^3 - x^2 - 6*x - 12)]
+? %[2]^3
+% = Mod(19, x^3 - x^2 - 6*x - 12)
+\end{verbatim}
+\end{shaded}
+
+La salida significa que
+$$\alpha = \frac{1}{2}\beta^2 - \frac{1}{2}\beta - 2.$$
+
+\subsection{Operaciones con elementos de $K/\QQ$}
+
+Hay varias maneras de especificar un elemento de un campo de números
+$\QQ[x]/(f)$. Podemos trabajar con elementos módulo $f$.
+
+\begin{shaded}
+\begin{verbatim}
+? a = Mod(x^4 - x^3 - x^2 + x, polcyclo(5))
+% = Mod(-2*x^3 - 2*x^2 - 1, x^4 + x^3 + x^2 + x + 1)
+? a^2
+% = Mod(5, x^4 + x^3 + x^2 + x + 1)
+\end{verbatim}
+\end{shaded}
+
+Otra opción es expresar los elementos en términos de la base de $\O_K$.
+La conversión se hace mediante \texttt{nfalgtobasis($K$,$\alpha$)}
+y \texttt{nfbasistoalg($K$,[$a_1$, \ldots, $a_n$]\textasciitilde)}.
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(polcyclo(5));
+? K.zk
+% = [1, x, x^2, x^3]
+
+? nfalgtobasis(K, -2*x^3 - 2*x^2 - 1)
+% = [-1, 0, -2, -2]~
+% = [-1, 0, -2, -2]~
+? K.zk * %
+% = -2*x^3 - 2*x^2 - 1
+
+? nfbasistoalg(K,%)
+% = Mod(-2*x^3 - 2*x^2 - 1, x^4 + x^3 + x^2 + x + 1)
+\end{verbatim}
+\end{shaded}
+
+Aquí \texttt{[-1, 0, -2, -2]\textasciitilde} representa el vector columna
+$(-1,0,-2,-2)^t$. Las funciones que trabajan con elementos de un campo de
+números empiezan por ``\texttt{nfelt}''. Por ejemplo,
+\begin{center}
+\texttt{nfeltadd($K$,$\alpha$,$\beta$)}, ~
+\texttt{nfeltmul($K$,$\alpha$,$\beta$)}, ~
+\texttt{nfeltdiv($K$,$\alpha$,$\beta$)}.
+\end{center}
+Si los números algebraicos están especificados como polinomios módulo $f$, basta
+usar los operadores habituales \texttt{+}, \texttt{-}, \texttt{*}, \texttt{/},
+etc. Otras funciones útiles son
+\begin{itemize}
+\item \texttt{nfeltnorm($K$,$\alpha$)} o \texttt{norm(Mod($g$,$f$))} --- norma;
+\item \texttt{nfelttrace($K$,$\alpha$)} o \texttt{trace(Mod($g$,$f$))} --- traza;
+\item \texttt{charpoly(Mod($g$,$f$))} --- polinomio característico;
+\item \texttt{minpoly(Mod($g$,$f$))} --- polinomio mínimo.
+\end{itemize}
+Trate de escribir \texttt{nfelt} y digitar $\boxed{\to}$ para ver la lista
+completa de funciones cuyo nombre empieza por \texttt{nfelt}.
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(polcyclo(7));
+? nfelttrace(K,x)
+% = -1
+? trace(Mod(x,K.pol))
+% = -1
+? nfeltnorm(K, 1-x)
+% = 7
+? norm(Mod(1-x, K.pol))
+% = 7
+
+? charpoly(Mod(x + x^-1, K.pol))
+% = x^6 + 2*x^5 - 3*x^4 - 6*x^3 + 2*x^2 + 4*x + 1
+? minpoly(Mod(x + x^-1, K.pol))
+% = x^3 + x^2 - 2*x - 1
+\end{verbatim}
+\end{shaded}
+
+\subsection{Extensiones de campos de números}
+
+PARI/GP también trabaja con campos de números \emph{relativos}, es decir,
+extensiones $\QQ \subset K \subset L$. Las funciones correspondientes empiezan
+por ``\texttt{rnf}'' que es una abreviación de ``\emph{relative number field}''.
+Para mayor información, les invito a consultar la documentación. He aquí un
+pequeño ejemplo donde calculamos el campo $\QQ (\sqrt[3]{2},\zeta_3)$.
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(t^3-2);
+? L = rnfinit(K, polcyclo(3));
+? L.polabs
+% = x^6 + 3*x^5 + 6*x^4 + 11*x^3 + 12*x^2 - 3*x + 1
+? rnfeltreltoabs(L,x+t)
+% = Mod(-4/9*x^5 - 14/9*x^4 - 28/9*x^3 - 52/9*x^2 - 65/9*x - 4/9,
+        x^6 + 3*x^5 + 6*x^4 + 11*x^3 + 12*x^2 - 3*x + 1)
+? minpoly(%)
+% = x^6 + 3*x^5 + 6*x^4 + 3*x^3 + 9*x + 9
+? nfisisom(%, L.polabs)
+% = [-x - 1, .....]
+\end{verbatim}
+\end{shaded}
+
+Es importante que las variables de los polinomios que definen $K$ y $L$ sean
+distintas, por esto pusimos $t^3 - 2$. El programa calculó que
+$$L \cong \QQ[x]/(x^6 + 3 x^5 + 6 x^4 + 11 x^3 + 12 x^2 - 3 x + 1)$$
+y que $\sqrt[3]{2} + \zeta_3$ tiene polinomio mínimo sobre $\QQ$
+$$x^6 + 3 x^5 + 6 x^4 + 3 x^3 + 9 x + 9.$$
+
+Aunque en este curso no vamos a hablar mucho de la situación relativa
+$L/K$\footnote{Los libros de texto avanzados empiezan en esta generalidad, pero
+  no lo hago a propósito para simplificar la exposición.}, PARI/GP sabe calcular
+varios invariantes relativos, como el discriminante $\Delta_{L/K}$ que será un
+ideal en $\O_K$, los generadores de $\O_L$ como $\O_K$-módulo, etc. Para obtener
+un campo ``absoluto'', podemos escribir \texttt{nfinit($L$)}.
+
+\begin{shaded}
+\begin{verbatim}
+? L.zk
+% = [[1, x - 1], [1, [1, 0, 1/3; 0, 1, 2/3; 0, 0, 1/3]]]
+? L.disc 
+% = [[3, 1, 2; 0, 1, 0; 0, 0, 1], -3]
+? nfinit(L).disc
+% = -34992
+
+? factor(%)
+% = 
+[-1 1]
+
+[ 2 4]
+
+[ 3 7]
+\end{verbatim}
+\end{shaded}
+
 \noindent\emph{Continuará\dots}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1916,8 +2620,6 @@ el teorema de Brill.
   \end{enumerate}
 \end{ejercicio}
 
-% NEW EXERCISES
-
 \begin{ejercicio}
   \label{ejerc:producto-de-kronecker}
   Sea $X$ una matriz de $n\times n$ e $Y$ una matriz de $n'\times n'$.
@@ -1938,9 +2640,32 @@ el teorema de Brill.
 \end{ejercicio}
 
 \begin{ejercicio}
+  Para el campo de números $K = \QQ (\sqrt{-3},\zeta_5)$ calcule
+  $\O_K$ y $\Delta_K$. ¿Cuáles primos racionales se ramifican en $K$?
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos los campos cuadráticos $K = \QQ (\sqrt{3})$ y
+  $K' = \QQ (\sqrt{5})$ y su compositum $KK' = \QQ (\sqrt{3},\sqrt{5})$.
+  Sea $\O = \ZZ \oplus \sqrt{3}\ZZ \oplus \sqrt{5}\ZZ \oplus \sqrt{15}\ZZ$.
+
+  \begin{enumerate}
+  \item[1)] Calcule el índice $[\O_K : \O]$.
+
+  \item[2)] Calcule $\O_K$.
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
   Calcule que
   \[ \Delta (\ZZ [\zeta_{p^e}]) = \Delta (\Phi_{p^e}) = \pm\,p^s,
      \quad \text{donde } s = p^{e-1}\,(pe - e - 1). \]
   (Indicación: generalice el cálculo de
   \ref{ejemplo:discriminante-de-Q-zeta-p}.)
+\end{ejercicio}
+
+\begin{ejercicio}
+  Demuestre que si $n = m p^e$, donde $p \nmid m$, entonces se cumple
+  la congruencia
+  $$\Phi_n (x) \equiv \Phi_m (x)^{\phi (p^e)} \pmod{\mathfrak{p}}.$$
 \end{ejercicio}

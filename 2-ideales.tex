@@ -111,10 +111,10 @@ particular un poco más adelante.
   Entonces, $\gcd (\alpha,\beta) = 1$ implica que $(\alpha)+(\beta) = R$.
  
   En general (si $R$ no es un dominio de ideales principales), esto es
-  falso. Por ejemplo, en el anillo de polinomios $k[x,y]$ se tiene $\gcd (x,y)
-  = 1$: los polinomios $x$ e $y$ claramente no tienen divisor en común (excepto
-  constantes $c\ne 0$). Por otra parte, $(x,y) \ne k [x,y]$; de hecho,
-  $k [x,y]/(x,y) \cong k$.
+  falso. Por ejemplo, en el anillo de polinomios $k[x,y]$ se tiene
+  $\gcd (x,y) = 1$: los polinomios $x$ e $y$ claramente no tienen divisor en
+  común (excepto constantes $c\ne 0$). Por otra parte, $(x,y) \ne k [x,y]$;
+  de hecho, $k [x,y]/(x,y) \cong k$.
 
   Otro ejemplo, más relacionado con lo que estamos estudiando: en el anillo
   $\ZZ [\sqrt{-5}]$ consideremos el ideal $(2, 1 + \sqrt{-5})$. Sus dos
@@ -1565,6 +1565,7 @@ están muy lejos de ser dominios de ideales principales: cada ideal puede ser
 generado por dos elementos.
 
 \begin{proposicion}
+  \label{prop:generacion-de-ideales-por-dos-elementos}
   Sea $R$ un dominio de Dedekind. Dado un ideal no nulo $I \subset R$ y un
   elemento no nulo $\alpha \in I$ existe $\beta \in I$ tal que
   $$(\alpha,\beta) = \alpha R + \beta R = I.$$
