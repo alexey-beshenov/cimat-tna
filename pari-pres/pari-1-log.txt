@@ -1,0 +1,266 @@
+alexey@schema:~$ gp
+Reading GPRC: /etc/gprc
+GPRC Done.
+
+       GP/PARI CALCULATOR Version 2.12.0 (alpha)
+amd64 running linux (x86-64/GMP-6.2.0 kernel) 64-bit version
+compiled: Sep  7 2020, gcc version 9.3.0 (Ubuntu 9.3.0-10ubuntu2)
+                threading engine: single
+     (readline v8.0 enabled, extended help enabled)
+
+         Copyright (C) 2000-2019 The PARI Group
+
+PARI/GP is free software, covered by the GNU General 
+Public License, and comes WITHOUT ANY WARRANTY 
+WHATSOEVER.
+
+Type ? for help, \q to quit.
+Type ?17 for how to get moral (and possibly technical) support.
+
+parisize = 8000000, primelimit = 500000
+
+? \l "pari-1-log.txt"
+   logfile = "pari-1-log.txt"
+   log = 1 (on)
+   [logfile is "pari-1-log.txt"]
+
+
+? ?idealprimedec
+idealprimedec(nf,p,{f=0}): prime ideal decomposition of 
+the prime number p in the number field nf as a vector 
+of prime ideals. If f is present and non-zero, restrict 
+the result to primes of residue degree <= f.
+
+
+? 2^2
+%1 = 4
+? %^2
+%2 = 16
+? %^2
+%3 = 256
+? %1+%2
+%4 = 20
+
+
+? mcd(2,3)
+  ***   at top-level: mcd(2,3)
+  ***                 ^--------
+  ***   not a function in function call
+  ***   Break loop: type 'break' to go back to GP 
+  ***   prompt
+break> break
+
+? gcd(2,3)
+%5 = 1
+
+
+? polisirreducible(x^3-3*x+1)
+%6 = 1
+? polisirreducible(x^4+x^3+x^2+x+1)
+%7 = 1
+? polisirreducible(x^3+x^2+x+1)
+%8 = 0
+
+
+? factor(x^8-1)
+%9 = 
+[  x - 1 1]
+
+[  x + 1 1]
+
+[x^2 + 1 1]
+
+[x^4 + 1 1]
+
+? factor(x^3+x^2-x-1)
+%10 = 
+[x - 1 1]
+
+[x + 1 2]
+
+
+? factor(polcyclo(8)*Mod(1,2))
+%11 = 
+[Mod(1, 2)*x + Mod(1, 2) 4]
+
+? factor(polcyclo(8)*Mod(1,3))
+%12 = 
+[Mod(1, 3)*x^2 + Mod(1, 3)*x + Mod(2, 3) 1]
+
+[Mod(1, 3)*x^2 + Mod(2, 3)*x + Mod(2, 3) 1]
+
+? factor(polcyclo(8)*Mod(1,5))
+%13 = 
+[Mod(1, 5)*x^2 + Mod(2, 5) 1]
+
+[Mod(1, 5)*x^2 + Mod(3, 5) 1]
+
+
+? poldisc(polcyclo(7))
+%14 = -16807
+? factor(%)
+%15 = 
+[-1 1]
+
+[ 7 5]
+
+
+? K=nfinit(x^3-19);
+? K.sign
+%17 = [1, 1]
+? K.disc
+%18 = -1083
+? factor(%)
+%19 = 
+[-1 1]
+
+[ 3 1]
+
+[19 2]
+
+? K.zk
+%20 = [1, 1/3*x^2 + 1/3*x + 1/3, x]
+
+
+? nfisisom(x^4+2*x^2+4*x+2, polcyclo(8))
+%21 = [x^2 - x, x^2 + x, -x^3 - x^2, x^3 - x^2]
+? nfisisom(x^4+2,polcyclo(8))
+%22 = 0
+
+
+? nfisincl(x^2-7,polcyclo(7))
+%23 = 0
+? nfisincl(x^2+7,polcyclo(7))
+%24 = [-2*x^4 - 2*x^2 - 2*x - 1, 2*x^4 + 2*x^2 + 2*x + 1]
+
+
+? f=x^4-10*x^2+1;
+? poldisc(f)
+%26 = 147456
+? factor(%)
+%27 = 
+[2 14]
+
+[3  2]
+
+? K=nfinit(f);
+? K.disc
+%29 = 2304
+? factor(%)
+%30 = 
+[2 8]
+
+[3 2]
+
+? sqrtint(poldisc(f)/K.disc)
+%31 = 8
+
+
+? g=polredbest(f)
+%32 = x^4 - 4*x^2 + 1
+? poldisc(g)
+%33 = 2304
+? %==K.disc
+%34 = 1
+
+
+? f=x^3-19;
+? K=nfinit(f);
+? sqrtint(poldisc(f)/K.disc)
+%37 = 3
+? polredbest(f,1)
+%38 = [x^3 - x^2 - 6*x - 12, Mod(1/2*x^2 - 1/2*x - 2, x^3 - x^2 - 6*x - 12)]
+? sqrtint(poldisc(%[1])/K.disc)
+%39 = 2
+
+
+? a=Mod(x^4-x^3-x^2+x, polcyclo(5))
+%40 = Mod(-2*x^3 - 2*x^2 - 1, x^4 + x^3 + x^2 + x + 1)
+? a^2
+%41 = Mod(5, x^4 + x^3 + x^2 + x + 1)
+
+
+? K=nfinit(x^2-5);
+? K.zk
+%43 = [1, 1/2*x - 1/2]
+? nfalgtobasis(K,2+x)
+%44 = [3, 2]~
+? K.zk*%
+%45 = x + 2
+? nfbasistoalg(K,[3,2]~)
+%46 = Mod(x + 2, x^2 - 5)
+
+
+? K=nfinit(x^2-2);
+? for(n=1,10,print(nfeltpow(K,1+x,n)))
+[1, 1]~
+[3, 2]~
+[7, 5]~
+[17, 12]~
+[41, 29]~
+[99, 70]~
+[239, 169]~
+[577, 408]~
+[1393, 985]~
+[3363, 2378]~
+
+
+? for(n=1,10,print(Mod(1+x,x^2-2)^n))
+Mod(x + 1, x^2 - 2)
+Mod(2*x + 3, x^2 - 2)
+Mod(5*x + 7, x^2 - 2)
+Mod(12*x + 17, x^2 - 2)
+Mod(29*x + 41, x^2 - 2)
+Mod(70*x + 99, x^2 - 2)
+Mod(169*x + 239, x^2 - 2)
+Mod(408*x + 577, x^2 - 2)
+Mod(985*x + 1393, x^2 - 2)
+Mod(2378*x + 3363, x^2 - 2)
+
+
+? K=nfinit(polcyclo(7));
+? nfelttrace(K,x)
+%51 = -1
+? nfeltnorm(K,1-x)
+%52 = 7
+? charpoly(Mod(x,K.pol))
+%53 = x^6 + x^5 + x^4 + x^3 + x^2 + x + 1
+? charpoly(Mod(1-x,K.pol))
+%54 = x^6 - 7*x^5 + 21*x^4 - 35*x^3 + 35*x^2 - 21*x + 7
+? charpoly(Mod(x+x^-1,K.pol))
+%55 = x^6 + 2*x^5 - 3*x^4 - 6*x^3 + 2*x^2 + 4*x + 1
+? minpoly(Mod(x+x^-1,K.pol))
+%56 = x^3 + x^2 - 2*x - 1
+
+
+? K=nfinit(t^3-2);
+? L=rnfinit(K,polcyclo(3));
+? L.polabs
+%59 = x^6 + 3*x^5 + 6*x^4 + 11*x^3 + 12*x^2 - 3*x + 1
+? rnfeltreltoabs(L,x+t)
+%60 = Mod(-4/9*x^5 - 14/9*x^4 - 28/9*x^3 - 52/9*x^2 - 65/9*x - 4/9,
+          x^6 + 3*x^5 + 6*x^4 + 11*x^3 + 12*x^2 - 3*x + 1)
+? minpoly(%)
+%61 = x^6 + 3*x^5 + 6*x^4 + 3*x^3 + 9*x + 9
+? nfisisom(%,L.polabs)
+%62 = [-x - 1, -4/9*x^5 - 14/9*x^4 - 28/9*x^3 - 52/9*x^2 - 65/9*x - 4/9,
+               -1/3*x^5 - x^4 - 2*x^3 - 10/3*x^2 - 3*x + 1,
+               1/9*x^5 + 2/9*x^4 + 4/9*x^3 + 4/9*x^2 + 8/9*x - 11/9,
+               1/9*x^5 + 5/9*x^4 + 10/9*x^3 + 22/9*x^2 + 29/9*x + 4/9,
+               5/9*x^5 + 16/9*x^4 + 32/9*x^3 + 56/9*x^2 + 64/9*x - 16/9]
+
+? L.zk
+%63 = [[1, x - 1], [1, [1, 0, 1/3; 0, 1, 2/3; 0, 0, 1/3]]]
+? L.disc
+%64 = [[3, 1, 2; 0, 1, 0; 0, 0, 1], -3]
+? nfinit(L).disc
+%65 = -34992
+? factor(%)
+%66 = 
+[-1 1]
+
+[ 2 4]
+
+[ 3 7]
+
+? \quit

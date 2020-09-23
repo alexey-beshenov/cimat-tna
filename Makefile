@@ -1,4 +1,4 @@
-all: pics hw tna.pdf
+all: pics hw tna.pdf beamer
 
 pics:
 	cd pic && $(MAKE)
@@ -12,7 +12,11 @@ tna.pdf:
 	xelatex tna
 	xelatex tna
 
+beamer:
+	cd pari-pres && $(MAKE)
+
 clean:
 	rm -f *.aux *.log *.bbl *.blg *.toc *.pdf
 	cd pic && $(MAKE) clean
 	cd tareas && $(MAKE) clean
+	cd pari-pres && $(MAKE) clean
