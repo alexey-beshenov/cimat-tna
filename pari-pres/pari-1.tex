@@ -87,7 +87,7 @@
   \frametitle{Comandos útiles}
 
   \begin{itemize}
-  \item $\boxed{\rightarrow}$ --- completación
+  \item $\boxed{\rightarrow}$ --- completar la palabra
 
   \item \texttt{\textbackslash{}l "log.txt"} --- guardar la sesión en
     \texttt{log.txt}
@@ -385,7 +385,7 @@ break> break
 
   \vspace{\fill}
 
-  * Más adelante: la teoría de Galois
+  * Más adelante: teoría de Galois
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -661,7 +661,7 @@ Mod(408*x + 577, x^2 - 2)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]
-  \frametitle{Ejemplo: $\QQ (\sqrt[2]{3},\zeta_3)$}
+  \frametitle{Ejemplo: $\QQ (\sqrt[3]{2},\zeta_3)$}
   \begin{shaded}\small
 \begin{verbatim}
 ? K = nfinit(t^3-2);
@@ -688,7 +688,7 @@ Mod(408*x + 577, x^2 - 2)
 
   \begin{itemize}
   \item \texttt{$K$ = nfinit(f(t));}
-  \item \texttt{$L$ = rnfinit(g(x));}
+  \item \texttt{$L$ = rnfinit($K$,g(x));}
   \item \texttt{$L$.polabs} = polinomio $h (x)$ tal que $L \cong \QQ[x]/(h)$
   \item Calculamos el polinomio mínimo de $\sqrt[3]{2} + \zeta_3$:
     $$x^6 + 3 x^5 + 6 x^4 + 3 x^3 + 9 x + 9.$$
