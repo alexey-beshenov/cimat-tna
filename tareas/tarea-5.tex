@@ -1,0 +1,93 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+\newcounter{tarea}
+\setcounter{tarea}{5}
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}[tarea]
+
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
+
+\usepackage{mathspec}
+
+\setmainfont{PT Serif}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\renewcommand{\O}{\mathcal{O}}
+
+\title{Teoría de números algebraicos\\Tarea 5}
+\author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
+\date{23 de septiembre de 2020}
+
+% \def\solutions{true}
+
+\begin{document}
+
+{\sffamily\bfseries\maketitle}
+
+\noindent Fecha límite: viernes, 2 de octubre.
+
+\ifdefined\solutions
+\else
+\thispagestyle{empty}
+\fi
+
+\vspace{1em}
+
+\begin{ejercicio}
+  Sea $X$ una matriz de $n\times n$ e $Y$ una matriz de $n'\times n'$.
+  El \textbf{producto de Kronecker} $X\otimes Y$ es la matriz de
+  $nn' \times nn'$ que consiste en bloques
+  \[ \begin{pmatrix}
+    x_{11} Y & \cdots & x_{1n} Y \\
+    \vdots & \ddots & \vdots \\
+    x_{n1} Y & \cdots & x_{nn} Y
+  \end{pmatrix}. \]
+
+  Demuestre que
+  $$\det (X\otimes Y) = \det (X)^{n'} \cdot \det (Y)^n.$$
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para el campo de números $K = \QQ (\sqrt{-3},\zeta_5)$ calcule
+  $\O_K$ y $\Delta_K$. ¿Cuáles primos racionales se ramifican en $K$?
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos los campos cuadráticos $K = \QQ (\sqrt{3})$ y
+  $K' = \QQ (\sqrt{5})$ y su compositum $KK' = \QQ (\sqrt{3},\sqrt{5})$.
+  Sea $\O = \ZZ \oplus \sqrt{3}\ZZ \oplus \sqrt{5}\ZZ \oplus \sqrt{15}\ZZ$.
+
+  \begin{enumerate}
+  \item[1)] Calcule el índice $[\O_K : \O]$.
+
+  \item[2)] Calcule $\O_K$ y $\Delta_K$.
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Calcule que
+  \[ \Delta (\ZZ [\zeta_{p^e}]) = \Delta (\Phi_{p^e}) = \pm\,p^s,
+     \quad \text{donde } s = p^{e-1}\,(pe - e - 1). \]
+\end{ejercicio}
+
+\begin{ejercicio}
+  Demuestre que si $n = m p^e$, donde $p \nmid m$, entonces se cumple
+  la congruencia
+  $$\Phi_n (x) \equiv \Phi_m (x)^{\phi (p^e)} \pmod{\mathfrak{p}}.$$
+\end{ejercicio}
+
+\end{document}
