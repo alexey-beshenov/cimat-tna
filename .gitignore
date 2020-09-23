@@ -5,8 +5,11 @@
 *.bbl
 *.blg
 *.log
+*.nav
 *.out
+*.snm
 *.toc
+*.vrb
 
 # LaTeX output
 *.pdf
