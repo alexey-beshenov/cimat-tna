@@ -5,6 +5,9 @@
 
 \usepackage{amsmath,amssymb,amsthm}
 
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
 \newcounter{tarea}
 \setcounter{tarea}{2}
 \theoremstyle{definition}
@@ -13,11 +16,24 @@
 
 \newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
 
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\FF}{\mathbb{F}}
+
+\DeclareMathOperator{\Pic}{Pic}
+
+\renewcommand{\gcd}{\operatorname{mcd}}
+\renewcommand{\O}{\mathcal{O}}
+
 \usepackage{mathspec}
 
 \setmainfont{PT Serif}
 \setsansfont{Montserrat}
 \setmonofont{PT Mono}
+
+\usepackage[perpage,symbol]{footmisc}
+\renewcommand{\thefootnote}{\ifcase\value{footnote}\or(*)\or
+(**)\or(***)\or(****)\or(\#)\or(\#\#)\or(\#\#\#)\or(\#\#\#\#)\or($\infty$)\fi}
 
 \title{Teoría de números algebraicos\\Tarea 2}
 \author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
@@ -40,17 +56,95 @@
   Demuestre que para $\alpha \in \mathbb{Z} [i]$ no nulo se tiene
   $$N_{\mathbb{Q} (i)/\mathbb{Q}} (\alpha) = \# (\mathbb{Z} [i]/(\alpha)).$$
 
-\noindent (Más adelante veremos un resultado general.)
+  \noindent (Más adelante veremos un resultado general.)
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Pongamos $\alpha = a + bi$. Tenemos
+    $$(\alpha) = \{(c + di)\,(a + bi) \mid c, d \in \ZZ \}.$$
+    Podemos escribir
+    $$(c + di)\,(a + bi) = c \cdot (a + bi) + d \cdot (-b + ai),$$
+    así que como $\ZZ$-módulo se tiene
+    $$(\alpha) = (a + bi) \ZZ \oplus (-b + ai) \ZZ.$$
+
+    Nos interesa el cociente de $\ZZ[i]$ por $(\alpha)$, o de manera
+    equivalente, el cociente de $\ZZ[i]$ por el subgrupo generado por $(a, b)$ y
+    $(-b, a)$. El número de elementos en el cociente será igual a\footnote{Este
+      es un caso particular del siguiente resultado general: para
+      $v_1, \ldots, v_n \in \ZZ^n$ denotemos por $A$ la matriz formada por los
+      $v_i$. Luego, si $\det A \ne 0$, entonces
+      $$[\ZZ^n : \langle v_1, \ldots , v_n\rangle] = \det A$$
+      (y si $\det A = 0$, el índice no es finito).}
+
+    \[ \det \begin{pmatrix} a & -b \\ b & a\end{pmatrix}
+       = a^2 + b^2 = N(\alpha). \]
+
+    Esta es la prueba elemental que tenía en mente. Otra opción es la
+    siguiente: para $\alpha \notin \ZZ[i]^\times$ podemos tomar la
+    factorización en primos de Gauss
+    $$\alpha \sim \pi_1^{e_1} \cdots \pi_s^{e_s}.$$
+    La multiplicatividad de la norma nos da
+    $$N(\alpha) = N (\pi_1)^{e_1} \cdots N(\pi_s)^{e_s}.$$
+    Además, por el teorema chino del resto,
+    \[ \ZZ[i]/(\alpha) \cong
+       \ZZ[i]/(\pi_1^{e_1}) \times \cdots \times \ZZ[i]/(\pi_s^{e_s}). \]
+
+    Así el problema se reduce al probar que para un primo de Gauss $\pi$ se
+    cumple $\# (\ZZ[i]/(\pi^e)) = N (\pi)^e$. Ya lo observamos para $e = 1$, y
+    por el lema que vimos al inicio de clase 8, se tiene
+    $\#(\ZZ[i]/(\pi^e)) = \#(Z[i]/(\pi))^e$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Para $R = \mathbb{Z} [\sqrt{-5}]$ encuentre todos los ideales maximales
   $\mathfrak{p} \subset R$ tales que $R/\mathfrak{p} \cong \mathbb{F}_{23}$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Hay varios modos de hacerlo.  Por ejemplo, podemos ocupar la idea de
+    Kummer–Dedekind. Si $\ZZ[\sqrt{-5}]/\mathfrak{p} \cong \FF_{23}$, entonces
+    $23 \in \mathfrak{p}$. Estos ideales corresponden a los ideales maximales en
+    el anillo cociente
+    \begin{align*}
+      \ZZ[\sqrt{-5}]/(23) & \xrightarrow{\cong} \FF_{23} [x]/(x^2 + 5),\\
+      a + b \mapsto \sqrt{-5} ~\text{mód}~ 23 & \mapsto \overline{a + bx}.
+    \end{align*}
+    De la factorización $x^2 + 5 = (x + 8)\,(x - 8)$ en $\FF_{23} [x]$ podemos
+    concluir que los ideales en cuestión son $(23, \pm 8+\sqrt{-5})$, o mejor
+    dicho, $\mathfrak{p} = (23, 8 + \sqrt{-5})$,
+    $\overline{\mathfrak{p}} = (23, 8 - \sqrt{-5})$. De hecho, estos ideales no
+    son principales.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Demuestre que el ideal $(23,x)$ no es invertible en el anillo
   $\mathbb{Z} [x]$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    El número $23$ no tiene mucho que ver con el ejercicio, podemos poner en su
+    lugar cualquier primo $p$ y considerar el ideal $\mathfrak{m} = (p, x)$.
+    $$\mathfrak{m}^{-1} = \{ f \in \QQ (x) \mid pf, xf \in \ZZ[x] \}.$$
+    La condición $pf \in \ZZ[x]$ significa que en el denominador de $f$ a lo
+    sumo puede estar $p$, mientras que la condición $xf \in \ZZ[x]$ significa
+    que en el denominador a lo sumo puede estar $x$. Todo esto implica que
+    $\mathfrak{m}^{-1} = \ZZ[x]$, y entonces
+    $\mathfrak{m} \mathfrak{m}^{-1} = \mathfrak{m} \ne \ZZ[x]$.
+
+    Otra manera de verlo sería la siguiente: notamos que
+    $\mathfrak{m}^2 = (p^2, px, x^2)$, y para el ideal $I = (p, x^2)$ se tiene
+    $\mathfrak{m}^2 \subsetneq I \subsetneq \mathfrak{m}$. Las inclusiones son
+    estrictas: por ejemplo, no es difícil comprobar que
+    $p \notin \mathfrak{m}^2$ y $x \notin I$. Si $\mathfrak{m}$ fuera
+    invertible, tendríamos
+    $\mathfrak{m} \subsetneq I \mathfrak{m}^{-1} \subsetneq \ZZ[x]$,
+    pero el ideal $\mathfrak{m}$ es maximal.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -58,11 +152,66 @@
   \[ \mathfrak{p}_2 = (2, 1 + \sqrt{5}), \quad
      \mathfrak{p}_{11} = (11, 4 + \sqrt{5}). \]
   Determine si son invertibles y encuentre $I^{-1}$ en cada caso.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    En cada caso se puede calcular $I^{-1}$ a mano y luego multiplicar
+    $II^{-1}$, pero esto es algo aburrido\dots{} Podemos notar que
+    \[ \mathfrak{p}_2^2 = (4, 2 + 2\sqrt{5}, 6 + 2\sqrt{5})
+       = (2) \cdot (2, 1 + \sqrt{5}) = 2\ZZ[\sqrt{5}] \cdot \mathfrak{p}_2. \]
+    Ahora si $\mathfrak{p}_2$ fuera invertible, esto implicaría que
+    $\mathfrak{p}_2 = 2\ZZ[ \sqrt{5}]$, pero
+    $1 + \sqrt{5} \notin 2\ZZ[\sqrt{5}]$. Entonces, el ideal no es invertible.
+  
+    Respecto al ideal $\mathfrak{p}_{11}$, en realidad este es principal:
+    $11 = (4 + \sqrt{5})\,(4 - \sqrt{5})$.  Entonces,
+    $\mathfrak{p}_{11} = (4 + \sqrt{5})$,
+    $\mathfrak{p}_{11}^{-1} = \left(\frac{1}{4 + \sqrt{5}}\right)$.
+
+    Ahora calculamos
+    \[ \mathfrak{p}_2^{-1} = \{ \alpha \in \QQ(\sqrt{5}) \mid
+       2\alpha, (1 + \sqrt{5}) \alpha \in \ZZ[\sqrt{5}] \}. \]
+
+    De la primera condición tenemos
+    $\alpha = \frac{a}{2} + \frac{b}{2}\sqrt{5}$, donde $a,b \in \ZZ$.
+    Para la segunda condición, primero calculamos
+    $(1 + \sqrt{5})\,\alpha = \frac{a + 5b}{2} + \frac{a + b}{2}\sqrt{5}$,
+    así que $a \equiv b \pmod{2}$, y luego
+    $\mathfrak{p}_2^{-1} = \ZZ\Bigl[\frac{1 + \sqrt{5}}{2}\Bigr]$.
+    Solo para comprobar otra vez más que el ideal no es invertible, podemos
+    calcular
+    \[ \mathfrak{p}_2 \mathfrak{p}_2^{-1} =
+       (2, 1 + \sqrt{5})\,\left(1, \frac{1 + \sqrt{5}}{2}\right) =
+       (2, 1 + \sqrt{5}, 3 + \sqrt{5}) =
+       \mathfrak{p}_2 \ne \ZZ[\sqrt{5}]. \qedhere \]
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Asumiendo que $\operatorname{Pic} (\mathbb{Z} [\sqrt{-37}]) \cong \mathbb{Z}/2\mathbb{Z}$,
   demuestre que la curva elíptica $y^2 = x^3 - 37$ no tiene puntos enteros.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Reduciendo la ecuación módulo $4$, notamos que $y$ debe ser par. Escribamos
+    $x^3 = (y + \sqrt{-37})\,(y - \sqrt{-37})$.  Usando que $y$ es par, podemos
+    ver que el ideal $(y + \sqrt{-37}, y - \sqrt{-37})$ contiene $2y$ e
+    \[ 37 = \left(\frac{y}{2} - \sqrt{-37}\right)\,(y + \sqrt{-37})
+            - \frac{y}{2}\,(y - \sqrt{-37}). \]
+
+    De la ecuación $y^2 = x^3 - 37$ se ve que $37 \nmid y$, así que
+    $\gcd(2y, 37) = 1$. Esto demuestra que
+    $(y + \sqrt{-37}) + (y - \sqrt{-37}) = \ZZ[\sqrt{-37}]$. Dado que los
+    ideales son coprimos, tenemos $(y + \sqrt{-37}) = I^3$ para algún ideal
+    $I$. Pero $\Pic(\ZZ[\sqrt{-37}]) = \ZZ/2\ZZ$ implica que el mismo $I$ es
+    principal. Escribamos $I = (a + b\sqrt{-37})$. Tenemos
+    $$y + \sqrt{-37} = a\,(a^2 - 111b^2 ) + b\,(3a^2 - 37b^2)\sqrt{-37}.$$
+    Se ve que la ecuación $b\,(3a^2 - 37b^2) = \pm 1$ no tiene soluciones
+    $a, b \in \ZZ$, y entonces nuestra ecuación $y^2 = x^3 - 37$ tampoco tiene
+    soluciones enteras.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio-adicional}
@@ -73,6 +222,86 @@
   directos como veremos el lunes para los campos cuadráticos; véase
   \emph{Kenneth S. Williams, Integers of biquadratic fields,
     Canad. Math. Bull. 13 (1970), 519--526}.)
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Este ejercicio no es muy instructivo porque más adelante veremos otro modo
+    mejor de hacerlo.\footnote{Respuesta breve: $K = \QQ (\sqrt{3})$ y
+      $K' = \QQ (\sqrt{5})$ son campos linealmente disjuntos con
+      $\gcd (\Delta_K,\Delta_{K'}) = 1$. Esto será explicado más adelante.}
+
+    \[ \begin{tikzcd}
+      & \QQ(\sqrt{3},\sqrt{5})\ar[-]{dl}\ar[-]{d}\ar[-]{dr} \\
+      \QQ(\sqrt{3})\ar[-]{dr} &
+      \QQ(\sqrt{5})\ar[-]{d} &
+      \QQ(\sqrt{15})\ar[-]{dl} \\
+      & \QQ
+      \end{tikzcd} \]
+    Tomemos $1, \sqrt{3}, \sqrt{5},\sqrt{15}$ como una base de $K/\QQ$ y
+    consideremos un elemento genérico $\alpha \in \O_K \setminus \QQ$ y sus
+    conjugados $\alpha',\alpha'',\alpha''' \in \O_K \setminus \QQ$:
+    \begin{align*}
+      \alpha & = a + b\sqrt{3} + c\sqrt{5} + d\sqrt{15},\\
+      \alpha' & = a - b\sqrt{3} + c\sqrt{5} - d\sqrt{15},\\
+      \alpha'' & = a + b\sqrt{3} - c\sqrt{5} - d\sqrt{15},\\
+      \alpha''' & = a - b\sqrt{3} - c\sqrt{5} + d\sqrt{15}.
+    \end{align*}
+    La integralidad de estos elementos implica que
+    \[ \alpha + \alpha'' \in \ZZ [\sqrt{3}], \quad
+       \alpha + \alpha' \in \ZZ \Bigl[\frac{1+\sqrt{5}}{2}\Bigr], \quad
+       \alpha + \alpha''' \in \ZZ [\sqrt{15}]. \]
+    Como consecuencia,
+    $$\alpha = \frac{1}{2} (a' + b'\sqrt{3} + c'\sqrt{5} + d'\sqrt{15}),$$
+    donde $a',b',c',d' \in \ZZ$.
+
+    Primero, analizando los casos cuando $\alpha$ está en uno de los tres
+    subcampos cuadráticos, notamos que necesariamente se cumple
+    \[ \tag{*} a' \equiv c', ~ b' \equiv d' \pmod{2}. \]
+
+    Ahora empieza la verdadera pesadilla: si $\alpha$ no está en los subcampos
+    cuadráticos, vamos a escribir su polinomio mínimo que coincide con el
+    polinomio característico. Lo calculé en PARI/GP.
+
+\begin{verbatim}
+? K = nfinit(t^2-3);
+? L = rnfinit(K, x^2-5);
+? u = rnfeltreltoabs(L,t);
+? v = rnfeltreltoabs(L,x);
+? f = charpoly ((a + b*u + c*v + d*u*v)/2)
+% = .....
+? r = a^2 - 15*d^2;
+? s = a^2 - 3*b^2 - 5*c^2 + 15*d^2;
+? t = 2*(a*d - b*c);
+? f == x^4 - 2*a*x^3 + (r+s/2)*x^2
++ (15*d*t - a*s)/2*x + (s^2-15*t^2)/16
+% = 1
+\end{verbatim}
+
+    El resultado es
+    \[ x^4  - 2a' x^3 + \left(r + \frac{s}{2}\right)\,x^2 +
+       \frac{15 d' t - a' s}{2}\,x + \frac{s^2 - 15\,t^2}{16}, \]
+    donde
+    \[ r = a'^2 - 15 d'^2, \quad
+       s = a'^2 - 3b'^2 - 5c'^2 + 15d'^2, \quad
+       t = 2\,(a' d' - b' c'). \]
+    Se puede ver que los coeficientes del polinomio mínimo son enteros si y
+    solamente si $s \equiv t \equiv 0 \pmod{4}$, y esto sucede si y solamente si
+    se cumple la condición (*). Entonces,
+    \begin{align*}
+      \O_K & = \Bigl\{ \frac{1}{2} (a' + b'\sqrt{3} + c'\sqrt{5} + d'\sqrt{15})
+      \Bigm| a' \equiv c', ~ b' \equiv d' ~ (2) \Bigr\} \\
+      & = \ZZ \Bigl[\sqrt{3}, \frac{1+\sqrt{5}}{2}\Bigr] \\
+      & = \ZZ \oplus \sqrt{3}\ZZ \oplus \frac{1 + \sqrt{5}}{2}\ZZ
+      \oplus \frac{\sqrt{3}+\sqrt{15}}{2}\,\ZZ.
+    \end{align*}
+    Los elementos de arriba son claramente enteros, y uno podría adivinar desde
+    el principio que la respuesta es
+    $\ZZ \Bigl[\sqrt{3}, \frac{1+\sqrt{5}}{2}\Bigr]$, pero todavía no sabríamos
+    cómo probarlo de manera lista\dots{} La moraleja de estos cálculos:
+    trabajando solamente con la definición de $\O_K$, sin usar ninguna idea
+    especial, no se puede llegar muy lejos\dots
+  \end{solucion}
+  \fi
 \end{ejercicio-adicional}
 
 \end{document}
