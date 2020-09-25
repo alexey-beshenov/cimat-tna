@@ -1107,6 +1107,76 @@ a investigar este concepto.
   \end{proof}
 \end{proposicion-definicion}
 
+\begin{comentario}
+  Tal vez la prueba con $\ZZ$-módulos finitamente generados se ve demasiado
+  abstracta, pero al final de cuentas esta se reduce a las siguientes
+  consideraciones de álgebra lineal. Dados dos números $\alpha$ y $\beta$,
+  escribamos sus polinomios mínimos sobre $\QQ$:
+  \[ f = (x - \alpha_1)\cdots (x - \alpha_m), \quad
+     g = (x - \beta_1)\cdots (x - \beta_n). \]
+  Estos son precisamente los polinomios característicos de las aplicaciones
+  $\QQ$-lineales
+  \begin{align*}
+    \mu_\alpha\colon \QQ (\alpha) & \to \QQ (\alpha), & \mu_\beta\colon \QQ (\beta) & \to \QQ (\beta),\\
+    x & \mapsto \alpha x & x & \mapsto \beta x.
+  \end{align*}
+
+  Ahora la aplicación
+  \[ \mu_\alpha\otimes\mu_\beta\colon
+     \QQ(\alpha)\otimes_\QQ \QQ(\beta) \to \QQ(\alpha)\otimes_\QQ \QQ(\beta) \]
+  tendrá como sus valores propios $\alpha_i\beta_j$, así que su polinomio
+  característico es
+  $$\prod_{i,j} (x - \alpha_i \beta_j),$$
+  mientras que el polinomio característico de la aplicación
+  \[ \mu_\alpha\otimes id + id \otimes \mu_\beta\colon
+     \QQ(\alpha)\otimes_\QQ \QQ(\beta) \to \QQ(\alpha)\otimes_\QQ \QQ(\beta). \]
+  será
+  $$\prod_{i,j} (x - (\alpha_i + \beta_j)).$$
+
+  De manera más concreta, $\mu_\alpha$ corresponde a alguna matriz
+  $A \in M_{m\times m} (\QQ)$ y $\mu_\beta$ corresponde a otra matriz
+  $B \in M_{n\times n} (\QQ)$. Escribiendo polinomios característicos de las
+  matrices $A \otimes B$ y $(A \otimes I_n) + (I_m\otimes B)$
+  de $(mn\times mn)$, se obtienen relaciones algebraicas para
+  $\alpha\beta$ y $\alpha + \beta$.
+  En fin, si $\alpha$ y $\beta$ son enteros algebraicos, entonces las matrices
+  $A$ y $B$ tendrán coeficientes enteros, o mejor dicho, en el argumento
+  de arriba se pueden reemplazar los espacios $\QQ$-vectoriales
+  $\QQ (\alpha), \QQ (\beta), \QQ (\alpha)\otimes_\QQ \QQ (\beta)$ por
+  $\ZZ$-módulos
+  $\ZZ [\alpha], \ZZ [\beta], \ZZ [\alpha]\otimes_\ZZ \ZZ [\beta]$.
+  De esta manera saldrán relaciones mónicas con coeficientes enteros.
+
+  Por ejemplo, si $\alpha = \sqrt{2}$ y $\beta = \frac{1 + \sqrt{-5}}{2}$,
+  entonces
+  \[ A = \begin{pmatrix}
+    0 & 2 \\
+    1 & 0
+  \end{pmatrix}, \quad B = \begin{pmatrix}
+    0 & 1 \\
+    1 & 1
+  \end{pmatrix}. \]
+
+  Calculemos los polinomios característicos correspondientes en PARI/GP.
+  \begin{shaded}
+\begin{verbatim}
+/* Producto de Kronecker de A y B */
+? kronprod(A,B) = matconcat(matrix(#A[,1],#A,i,j,A[i,j]*B));
+
+? A = [0,2;1,0];
+? B = [0,1;1,1];
+? charpoly (kronprod(A,B))
+% = x^4 - 6*x^2 + 4
+? charpoly (kronprod(A,matid(2)) + kronprod(matid(2),B))
+% = x^4 - 2*x^3 - 5*x^2 + 6*x - 1
+? algdep (sqrt(2)*(1+sqrt(5))/2,4)
+% = x^4 - 6*x^2 + 4
+? algdep (sqrt(2) + (1+sqrt(5))/2,4)
+% = x^4 - 2*x^3 - 5*x^2 + 6*x - 1
+\end{verbatim}
+  \end{shaded}
+\end{comentario}
+
 \pdfbookmark{Clase 7 (31/08/20)}{clase-7}
 \marginpar{\small Clase 7 \\ 31/08/20}
 
