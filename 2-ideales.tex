@@ -3,10 +3,8 @@
 La idea de Richard Dedekind consistía en remplazar las operaciones aritméticas
 con elementos $\alpha \in R$ por las operaciones con ideales $I\subseteq R$.
 Los anillos de números donde este programa funciona sin obstáculos se conocen
-como los \textbf{dominios de Dedekind}. Los vamos a definir en este capítulo.
-
-Una gran parte del material de abajo (ideales primos y maximales, localización,
-dominios de valuación discreta, etc.) se encuentra en los libros de texto de
+como \textbf{dominios de Dedekind}. Los vamos a definir en este capítulo.
+Una gran parte del material de abajo se encuentra en los libros de texto de
 álgebra conmutativa. Recomiendo consultar \cite{Atiyah-Macdonald} y
 \cite{Reid-UCA}.
 
@@ -427,6 +425,8 @@ También nos servirá la siguiente propiedad.
   \end{proof}
 \end{proposicion}
 
+\iffalse
+% Al final no usamos la localización!
 Unos de los anillos más fáciles de manejar son anillos locales; más adelante
 hablaremos de la localización, pero aquí está la definición de anillos locales.
 
@@ -458,6 +458,7 @@ hablaremos de la localización, pero aquí está la definición de anillos local
 
 Notamos que viceversa, si todos los elementos no-invertibles de $R$ forman un
 ideal, entonces este es maximal y $R$ es un anillo local.
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -789,7 +790,8 @@ de grupos abeluanos.
 \end{ejemplo}
 
 \begin{ejemplo}
-  Para todo anillo local $(R,\mathfrak{m})$ se tiene $\Pic (R) = 0$.
+  Sea $R$ un \textbf{anillo local}; es decir, un anillo con único ideal maximal
+  $\mathfrak{m}$. En este caso $\Pic (R) = 0$.
 
   \begin{proof}
     Sea $I$ un $R$-ideal fraccionario invertible. En este caso la ecuación
