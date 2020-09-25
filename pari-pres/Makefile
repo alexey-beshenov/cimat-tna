@@ -1,4 +1,6 @@
-beamer:
+beamer: pari-1.pdf
+
+pari-1.pdf:
 	xelatex pari-1
 	xelatex pari-1
 
