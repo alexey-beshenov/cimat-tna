@@ -5,9 +5,9 @@
 
 \usepackage{xcolor}
 \usepackage{framed}
-\definecolor{shadecolor}{rgb}{0.945, 0.902, 0.698}
-
-\definecolor{cover}{RGB}{218,10,10}
+\definecolor{shadecolor}{RGB}{239,219,178}
+\definecolor{cover}{RGB}{229,106,84}
+\definecolor{covertxt}{RGB}{29,31,42}
 
 \usepackage{tikz-cd}
 \usetikzlibrary{babel}
@@ -110,12 +110,13 @@
 \begin{titlepage}
 
   \begin{tikzpicture}[remember picture,overlay,background rectangle/.style={fill=cover}, show background rectangle]
-    \draw[white] (0,-2cm) node[anchor=west] {\bfseries\sffamily\Huge Teoría de};
-    \draw[white] (0,-3.5cm) node[anchor=west] {\bfseries\sffamily\Huge Números};
-    \draw[white] (0,-5cm) node[anchor=west] {\bfseries\sffamily\Huge Algebraicos};
+    \draw[covertxt] (0,-2cm) node[anchor=west] {\bfseries\sffamily\Huge Teoría de};
+    \draw[covertxt] (0,-3.5cm) node[anchor=west] {\bfseries\sffamily\Huge Números};
+    \draw[covertxt] (0,-5cm) node[anchor=west] {\bfseries\sffamily\Huge Algebraicos};
 
-    \draw[white] (0,-20cm) node[anchor=west] {\bfseries\sffamily\large CIMAT, Guanajuato};
-    \draw[white] (0,-21cm) node[anchor=west] {\bfseries\sffamily\large Otoño 2020};
+    \draw[covertxt] (0,-19cm) node[anchor=west] {\bfseries\sffamily\large Alexey Beshenov};
+    \draw[covertxt] (0,-20cm) node[anchor=west] {\bfseries\sffamily\large CIMAT, Guanajuato};
+    \draw[covertxt] (0,-21cm) node[anchor=west] {\bfseries\sffamily\large Otoño 2020};
   \end{tikzpicture}
 
 \end{titlepage}
