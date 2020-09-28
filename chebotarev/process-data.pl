@@ -11,19 +11,18 @@ my $record_count = 0;
 my @dec_types;
 
 while (<>) {
-    s/( |\n)+//g;
-
-    if (m/^#/ && !m/Q|x/) {
-	s/#//g;
-	@dec_types = split /;/;
+    if (m/^# Field:/) {
+	next;
+    }
+    if (m/^# Decomposition types: (.*)$/) {
+	@dec_types = split /;\s*/, $1;
 
 	for my $t (@dec_types) {
 	    $stats{$t} = 0;
 	}
-
 	next;
     }
-
+    
     if (m/^\d+\t(.*)$/) {
 	$stats{$1}++;
 	$prime_count++;

@@ -7,7 +7,7 @@ gp -s 64000000 -q decomp-stat.gp
 echo ""
 
 make_movie () {
-    title=$(sed -n '1 s/^#\s// p' "$1.dat")
+    title=$(sed -n '1 s/^# Field: // p' "$1.dat")
 
     ./process-data.pl "$1.dat" > "$1-hist.dat"
 

@@ -31,10 +31,9 @@ decomp_stat (K,file,title,N,{only_f=0}) = {
 
   listsort (~dec_types);
 
-  write (file, "# ", title);
+  write (file, "# Field: ", title);
 
-  write1 (file, "# ");
-
+  write1 (file, "# Decomposition types: ");
   for (i=1,#dec_types,
     write1 (file, dec_types[i]);
     write1 (file, if (i!=#dec_types, "; ", "\n\n"));
