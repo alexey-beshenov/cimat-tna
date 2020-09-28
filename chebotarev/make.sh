@@ -26,7 +26,5 @@ make_movie () {
 }
 
 for datafile in *.dat; do
-    if [[ ! $datafile =~ -hist.dat$ ]]; then
-	make_movie "${datafile%.dat}"
-    fi
+    make_movie "${datafile%.dat}"
 done
