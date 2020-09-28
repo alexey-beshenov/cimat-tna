@@ -13,7 +13,7 @@ my @dec_types;
 while (<>) {
     s/( |\n)+//g;
 
-    if (m/^#/) {
+    if (m/^#\[/) {
 	s/#//g;
 	@dec_types = split /;/;
 
