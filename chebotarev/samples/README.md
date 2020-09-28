@@ -24,10 +24,10 @@
 
   [.gif](cyclo-61.gif) [.mp4](cyclo-61.mp4)
 
-* Q(x^4-x+1), Galois closure with group S4.
+* Q(x^4-x+1), Galois closure with group S4
 
   [.gif](S4.gif) [.mp4](S4.mp4)
 
-* Q(x^5-x+1), Galois closure with group S5.
+* Q(x^5-x+1), Galois closure with group S5
 
   [.gif](S5.gif) [.mp4](S5.mp4)
