@@ -13,7 +13,7 @@ set ytics 0,0.1,1.0
 set grid ytics noxtics
 
 do for [i=1:300] {
-  set key title sprintf("%s\n%04d primes",ARG2,i*5) right at graph 1,1
+  set key title sprintf("%s\n%04d primes",ARG2,i*5) right at graph 1,0.99
 
   plot ARG1.'-hist.dat' index(i-1) using 1:3:xtic(2) with boxes notitle linecolor rgb "#003399"
 }
