@@ -1,0 +1,867 @@
+\documentclass{beamer}
+
+\usetheme{boxes}
+\definecolor{beamer@structure@color}{rgb}{0,0,0}
+
+\usecolortheme{structure}
+
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{frametitle}{\color{black}
+\def\myhrulefill{\leavevmode\leaders\hrule height 1pt\hfill\kern 0pt}
+\headingfont\insertframetitle\par\vskip-8pt\myhrulefill}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\QQ}{\mathbb{Q}}
+\renewcommand{\O}{\mathcal{O}}
+
+\usepackage{amsmath,amssymb}
+\DeclareMathOperator{\Cl}{Cl}
+
+\setbeamertemplate{navigation symbols}{}
+
+\usepackage{mathspec}
+\setmainfont{Montserrat}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+\newfontfamily\headingfont[]{Montserrat Bold}
+
+\usepackage{xcolor}
+\usepackage{framed}
+\definecolor{shadecolor}{rgb}{0.945, 0.902, 0.698}
+
+\usepackage{tikz-cd}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[noframenumbering]
+  \headingfont
+  \begin{center}
+    {\huge Teoría de números
+
+      algebraicos
+
+      en PARI/GP
+
+    }
+
+    \vspace{3em}
+
+    {\large Parte II: ideales en el anillo de enteros}
+
+    \vspace{3em}
+
+    28/09/2020
+
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge ¿Como especificar un ideal?}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ideales principales}
+
+  $\alpha\O_K$ se especifica por su generador:
+
+  \begin{itemize}
+  \item polinomio en $x$
+
+    = $\alpha$ en la base $1,x,x^2,\ldots,x^{n-1}$ de $\QQ[x]/(f)$
+
+  \item vector \texttt{[$a_1$,\ldots,$a_n$]\textasciitilde}
+
+    = $\alpha$ en la $\ZZ$-base de $\O_K$ calculada en \texttt{$K$.zk}
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ideales en general}
+
+  \begin{itemize}
+  \item $I \subseteq \O_K$ --- $\ZZ$-submódulo libre.
+
+  \item $I$ $\longleftrightarrow$ matriz de una $\ZZ$-base de $I$
+
+    en términos de la base de $\O_K$.
+
+  \item \textbf{Forma normal de Hermite} (HNF).
+
+    \texttt{mathnf($M$)} en PARI/GP.
+
+    ¡Canónica!
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Pasando a la HNF}
+
+  \begin{shaded}\small
+\begin{verbatim}
+? K = nfinit (x^2-5);
+? K.zk
+% = [1, 1/2*x - 1/2]
+? a = idealhnf(K, 4+x)
+% =
+[11 8]
+
+[ 0 1]
+\end{verbatim}
+  \end{shaded}
+
+  Interpretación:
+  \[ \O_K = \alpha_1\ZZ \oplus \alpha_2\ZZ, \quad
+     \alpha_1 = 1, \quad
+     \alpha_2 = \frac{\sqrt{5} - 1}{2}, \]
+  $$(4 + \sqrt{5})\O_K = 11\alpha_1\ZZ \oplus (8\alpha_1 + \alpha_2)\ZZ.$$
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo bien conocido}
+
+  $K = \QQ (i)$,
+
+  $\O_K = \ZZ[i]$ es un DIP.
+
+  \begin{shaded}\small
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? K.zk
+% = [1, x]
+\end{verbatim}
+  \end{shaded}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ideales en $\ZZ [i]$ como $\ZZ$-módulos}
+
+  \begin{align*}
+    (m+ni) & = \{(c + di)\,(m + ni) \mid c, d \in \ZZ \} \\
+    & = \{ c \cdot (m + ni) + d \cdot (-n + mi) \mid c, d \in \ZZ \} \\
+    & = (m + ni) \ZZ \oplus (-n + mi) \ZZ.
+  \end{align*}
+
+  \[ (m+ni) \longleftrightarrow \begin{pmatrix}
+    m & -n
+    n & m
+  \end{pmatrix} \quad \text{(¡no es HNF!)} \]
+
+  \begin{shaded}\small
+\begin{verbatim}
+? a = idealhnf(K, 2+3*x)
+% = 
+[13 5]
+[ 0 1]
+
+? mathnf ([2, -3; 3, 2])
+% = 
+[13 5]
+[ 0 1]
+\end{verbatim}
+  \end{shaded}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Igualdad de ideales}
+
+  \[ \mathfrak{a} = \mathfrak{b} \iff \text{\tt idealhnf}(K,\mathfrak{a}) = \text{\tt idealhnf}(K,\mathfrak{b}) \]
+
+  \begin{shaded}
+\begin{verbatim}
+? a = idealhnf(K, 2+3*x)
+% = 
+[13 5]
+[ 0 1]
+
+? b = idealhnf(K, -3+2*x)
+% =
+[11 8]
+[ 0 1]
+
+? Mod ((2+3*x)/(-3+2*x), K.pol)
+% = Mod(-x, x^2 + 1)
+\end{verbatim}
+  \end{shaded}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Enumeración de ideales}
+
+  \texttt{ideallist($K$,$N$)} = ideales $I \subseteq \O_K$ tales que $N_{K/\QQ} (I) \le N$
+
+
+  Salida: vector
+
+  \begin{center}
+    [ideales de norma 0,\\
+      ideales de norma 1,\\
+      $\ldots$,\\
+      ideales de norma $N$]
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo}
+
+  \begin{shaded}\small
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? L = ideallist(K,10)
+% = [[[1, 0; 0, 1]],  /* norma 1: I=O_K */
+     [[2, 1; 0, 1]],
+     [],              /* no hay de norma 3 */
+     [[2, 0; 0, 2]],
+     [[5, 3; 0, 1], [5, 2; 0, 1]],
+     [],              /* no hay de norma 6 */
+     [],              /* no hay de norma 7 */ 
+     [[4, 2; 0, 2]],
+     [[3, 0; 0, 3]],
+     [[10, 3; 0, 1], [10, 7; 0, 1]]]
+
+? vector (#L,i,#L[i])
+% = [1, 1, 0, 1, 2, 0, 0, 1, 1, 2]
+? vecsum (%)
+% = 9
+\end{verbatim}
+  \end{shaded}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Problema de la tarea}
+
+  ¿Cuántos ideales de norma $\le 10$ hay en $\O_K$ para
+  $K = \QQ (\sqrt[3]{17})$?
+
+  \begin{shaded}\small
+\begin{verbatim}
+? K = nfinit(x^3 - 17);
+? L = ideallist (K,10);
+? vector (#L,i,#L[i])
+% = [1, 1, 2, 2, 1, 2, 0, 2, 3, 1]
+? vecsum(%)
+% = 15
+\end{verbatim}
+  \end{shaded}
+
+  Ejemplo: no hay ideales de norma $7$:
+
+  $\mathfrak{p} = 7\O_K$ es primo (= $7$ es inerte).
+
+  $17 \equiv 3~(7)$; los cubos mód $7$ son $1$ y $6 \equiv (-1)^3$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Operaciones con ideales}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Operaciones aritméticas}
+
+  \begin{itemize}
+  \item \texttt{idealadd($K$,$\mathfrak{a}$,$\mathfrak{b}$)} = $\mathfrak{a}+\mathfrak{b}$
+  \item \texttt{idealmul($K$,$\mathfrak{a}$,$b$)} = $\mathfrak{a}\mathfrak{b}$
+  \item \texttt{idealpow($K$,$\mathfrak{a}$,$n$)} = $\mathfrak{a}^n$
+  \item \texttt{idealinv($K$,$\mathfrak{a}$)} = $\mathfrak{a}^{-1}$
+  \item \texttt{idealintersect($K$,$\mathfrak{a}$,$b$)} = $\mathfrak{a} \cap \mathfrak{b}$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ideal «abajo»}
+
+  \[ \begin{tikzcd}
+    \mathfrak{a} &[-3em] \subseteq &[-3em] K\ar[-]{d} & \O_K\text{-módulo} \\
+    \mathfrak{a}\cap \QQ & \subseteq & \QQ & \ZZ\text{-módulo}
+    \end{tikzcd} \]
+
+  \begin{center}
+    \texttt{idealdown($K$,$\mathfrak{a}$)} = el $\ZZ$-ideal $\mathfrak{a} \cap \QQ$
+  \end{center}
+
+  \begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? idealdown(K,1+x)
+% = 2
+? idealdown(K,3+3*x)
+% = 6
+\end{verbatim}
+  \end{shaded}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Norma}
+
+  \begin{center}
+    \texttt{idealnorm($K$,$\mathfrak{a}$)} = $N_{K/\QQ} (\mathfrak{a})$
+  \end{center}
+
+  \begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? idealnorm(K,1+x)
+% = 2
+? idealnorm(K,3)
+% = 9
+? idealnorm(K,3+3*x)
+% = 18
+\end{verbatim}
+  \end{shaded}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Maximalidad}
+
+  \begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? idealismaximal(K,1+x)
+% = [2, [1, 1]~, 2, 1, [1, -1; 1, 1]]
+? idealismaximal(K,3+3*x)
+% = 0
+
+? L = nfinit(x^3-17);
+? idealismaximal(L,7)
+% = [7, [7, 0, 0]~, 1, 3, 1]
+\end{verbatim}
+  \end{shaded}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Generación por dos elementos}
+
+  Recordatorio: todo ideal en $\O_K$ tiene forma $ (\alpha,\beta)$
+
+  \begin{shaded}\small
+\begin{verbatim}
+? K = nfinit(x^3 - 2);
+? a = [3,1,2; 0,1,0; 0,0,1]
+% = 
+[3 1 2]
+[0 1 0]
+[0 0 1]
+
+? idealtwoelt(K,a)
+% = [3, [1, 1, 0]~]
+? nfbasistoalg(K,%[2])
+% = Mod(x + 1, x^3 - 2)
+\end{verbatim}
+  \end{shaded}
+
+  Significado: $\mathfrak{a} = (3, 1 + \sqrt[3]{2})$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{¿Ideales principales?}
+
+  \begin{itemize}
+  \item $\mathfrak{a}$ principal $\iff$ $[\mathfrak{a}] = [\O_K] = 0$ en $\Cl (K)$.
+
+  \item $\O_K$ es un DFU $\iff$ $\Cl (K) = 0$.
+
+  \item Veremos después\dots
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Factorización de ideales}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Factorización}
+
+  \begin{itemize}
+  \item \texttt{idealfactor($K$,$\mathfrak{a}$)}: factorizar $\mathfrak{a} = \mathfrak{p}_1^{e_1}\cdots\mathfrak{p}_s^{e_s}$
+
+  \item \texttt{idealprimedec($K$,$p$)}: factorizar $\mathfrak{a} = p\O_K$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Factorización de primos racionales}
+
+  $$p\O_K = \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s},$$
+
+  \begin{center}
+    \texttt{idealprimedec($K$,$p$) = [$P_1$,\ldots,$P_s$]},
+  \end{center}
+
+  \begin{itemize}
+  \item \texttt{$P_i$.e} = índice de ramificación
+
+  \item \texttt{$P_i$.f} = grado del campo residual
+
+  \item \texttt{$P_i$.gen = [$p$, $\alpha$]}, donde $\mathfrak{p}_i = (p,\alpha)$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo: $K = \QQ (\sqrt{5})$}
+
+  \begin{shaded}\footnotesize
+\begin{verbatim}
+? K = nfinit(x^2 - 5);
+
+? decK = idealprimedec(K,11)
+% = [[11, [-3, 2]~, 1, 1, [5, 2; 2, 3]],
+     [11, [5, 2]~, 1, 1, [-3, 2; 2, -5]]]
+? #decK
+% 2               /* dos factores */
+
+? [decK[1].e, decK[1].f]
+% = [1, 1]
+? decK[1].gen
+% = [11, [-3, 2]~]
+? nfbasistoalg (K,%[2])
+% = Mod(x - 4, x^2 - 5)
+\end{verbatim}
+  \end{shaded}
+
+  \[ 11\O_K = \mathfrak{p}_1 \mathfrak{p}_2, \quad
+     \mathfrak{p}_1 = (11, \sqrt{5}-4), ~
+     \mathfrak{p}_2 = (11, \sqrt{5}+4), ~
+     f_1 = f_2 = 1 \]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo: $L = \QQ (\zeta_5) \supset \QQ (\sqrt{5})$}
+
+  \begin{shaded}\footnotesize
+\begin{verbatim}
+? L = nfinit(polcyclo(5));
+? decL = idealprimedec(L,11);
+? #decL
+# 4               /* 4 factores */
+? vector (#decL,i, [decL[i].e, decL[i].f])
+% = [[1, 1], [1, 1], [1, 1], [1, 1]]
+\end{verbatim}
+  \end{shaded}
+
+  \[ 11\O_L = \mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4 \]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ramificación}
+
+  \begin{shaded}\footnotesize
+\begin{verbatim}
+? idealprimedec(K,5)
+% = [[5, [1, 2]~, 2, 1, [1, 2; 2, -1]]]
+? %[1].e
+% = 2
+? idealprimedec(L,5)
+% = [[5, [-1, 1, 0, 0]~, 4, 1, [.....]]]
+? %[1].e
+% = 4
+\end{verbatim}
+  \end{shaded}
+
+  Significado: $5\O_K = \mathfrak{p}^2$, $5\O_L = \mathfrak{q}^4$
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo de Kummer}
+
+  \begin{shaded}\footnotesize
+\begin{verbatim}
+? K = nfinit(polcyclo(23));
+? dec = idealprimedec(K,47);
+? #dec
+% = 22
+\end{verbatim}
+  \end{shaded}
+
+  \[ 47 \ZZ [\zeta_{23}] = \mathfrak{p}_1\cdots \mathfrak{p}_{22} \]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge *Pausa para el café*
+
+    }
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Experimento:
+
+      Ideales de norma $\le N$
+
+    }
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Pregunta}
+
+  Cómo se comporta la función
+  $$N \mapsto \# \{ I \subseteq \O_K \mid N_{K/\QQ} (I) \le N \}$$
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo: $K = \QQ (i)$}
+
+  \begin{center}
+    \includegraphics[width=10cm]{../pic/ideal-count-Qi.pdf}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Explicación}
+
+  $$N_{K/\QQ} (\alpha\ZZ[i]) = N_{K/\QQ} ((a+bi)\ZZ[i]) = a^2 + b^2$$
+
+  $$(\alpha) = (-\alpha) = (i\alpha) = (-i\alpha)$$
+
+  \[ \#\{ I \subseteq \ZZ [i] \mid N (I) \le N \} =
+  \frac{1}{4}\cdot \# \{ (a,b) \in \ZZ^2 \mid a^2 + b^2 \le N \} \]
+
+  \begin{center}
+    \includegraphics[width=5cm]{../pic/points-in-circle.pdf}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Explicación}
+
+  \begin{center}
+    \includegraphics[width=10cm]{../pic/ideal-count-Qi.pdf}
+
+    $\# \{ \text{puntos dentro del círculo de radio }r \} \sim \pi r^2$
+
+    $\# \{ \text{ideales de norma }\le N \} \sim \frac{\pi}{4} N$
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Algunos cálculos}
+
+  \begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? L = ideallist(K,20);
+
+? vector (#L,s, sum(i=1,s,#L[i]))
+% = [1,2,2,3,5,5,5,6,7,9,9, 9,11,11,11,12,14...]
+
+? vector (20,i, ceil(Pi/4*i))
+% = [1,2,3,4,4,5,6,7,8,8,9,10,11,11,12,13,14...]
+\end{verbatim}
+  \end{shaded}
+
+  * Relacionado: \textbf{problema del círculo de Gauss}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo: $K = \QQ (\zeta_5)$, $\Cl (K) = 0$, $|\O_K^\times| = \infty$}
+
+  \begin{center}
+    \includegraphics[width=10cm]{../pic/ideal-count-zeta-5.pdf}
+
+    $\sim C\cdot N$, donde $C$ = ?????
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{$K = \QQ (\sqrt{10})$, $\Cl (K) \ne 0$, $|\O_K^\times| = \infty$}
+
+  \begin{center}
+    \includegraphics[width=10cm]{../pic/ideal-count-x2-10.pdf}
+
+    $\sim C\cdot N$, donde $C$ = ?????
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{$K = \QQ (\sqrt[3]{19})$, $\Cl (K)\ne 0$, $|\O_K^\times| = \infty$}
+
+  \begin{center}
+    \includegraphics[width=10cm]{../pic/ideal-count-x3-19.pdf}
+
+    $\sim C\cdot N$, donde $C$ = ?????
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Explicación breve:\\
+    función zeta de Dedekind}
+
+  \begin{itemize}
+  \item Función meromorfa
+    $$\zeta_K (s) = \sum_{\substack{ I \subseteq \O_K \\ I \ne 0 }} \frac{1}{N_{K/\QQ} (I)^s}$$
+    responsable por contar los ideales.
+
+  \item $C$ = residuo en el polo $s = 1$
+
+  \item $C$ trae información aritmética
+
+    (fórmula del número de clase)
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Experimento:
+
+      estadística sobre descomposiciones
+
+    }
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Pregunta}
+
+  \begin{itemize}
+  \item Si $p$ no se ramifica en $K/\QQ$:
+    $$p\O_K = \mathfrak{p}_1\cdots\mathfrak{p}_s.$$
+
+  \item Número finito de ramificaciones ($p \mid \Delta_K$).
+
+  \item $f_i = [\O_K/\mathfrak{p}_i : \FF_p]$,
+    $$f_1 + \cdots + f_s = [K : \QQ].$$
+
+  \item ¿Con qué frecuencia surgen diferentes particiones de $[K : \QQ]$?
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo: $K = \QQ (\sqrt[3]{2}, \zeta_3)$}
+
+  \begin{itemize}
+  \item $p = 2, 3$ se ramifican
+
+    (ya se ramifican en $\QQ (\sqrt[3]{2})$ y $\QQ (\zeta_3)$)
+
+  \item Algunos ejemplos
+    \begin{center}\small
+      \renewcommand{\arraystretch}{1.5}
+      \begin{tabular}{cc|cc|cc}
+        $p$ & \text{partición} & $p$ & \text{partición} & $p$ & \text{partición} \\
+        \hline
+        $5$ & $2 + 2 + 2$ & $41$ & $2 + 2 + 2$ & $83$ & $2 + 2 + 2$ \\
+        $7$ & $3 + 3$ & $43$ & $1 + \cdots + 1$ & $89$ & $2 + 2 + 2$ \\
+        $11$ & $2 + 2 + 2$ & $47$ & $2 + 2 + 2$ & $97$ & $3 + 3$ \\
+        $13$ & $3 + 3$ & $53$ & $2 + 2 + 2$ & $101$ & $2 + 2 + 2$ \\
+        $17$ & $2 + 2 + 2$ & $59$ & $2 + 2 + 2$ & $103$ & $3 + 3$ \\
+        $19$ & $3 + 3$ & $61$ & $3 + 3$ & $107$ & $2 + 2 + 2$ \\
+        $23$ & $2 + 2 + 2$ & $67$ & $3 + 3$ & $109$ & $1 + \cdots + 1$ \\
+        $29$ & $2 + 2 + 2$ & $71$ & $2 + 2 + 2$ & $113$ & $2 + 2 + 2$ \\
+        $31$ & $1 + \cdots + 1$ & $73$ & $3 + 3$ & $127$ & $1 + \cdots + 1$ \\
+        $37$ & $3 + 3$ & $79$ & $3 + 3$ & $131$ & $2 + 2 + 2$ \\
+      \end{tabular}
+    \end{center}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo: $K = \QQ (\sqrt[3]{2}, \zeta_3)$}
+
+  \begin{itemize}
+  \item Surge solo $1 + \cdots + 1$, $2 + 2 + 2$, $3 + 3$.
+
+  \item ¿Estadística para los primeros $N$ primos?
+    \begin{center}
+      \renewcommand{\arraystretch}{1.5}
+      \begin{tabular}{lx{2cm}x{2cm}x{2cm}}
+        $N$      & $1+\cdots+1$ & $2+2+2$ & $3+3$ \tabularnewline
+        \hline
+        $10$     & $0.1000$ & $0.5000$ & $0.4000$ \tabularnewline
+        $100$    & $0.1500$ & $0.5200$ & $0.3300$ \tabularnewline
+        $1000$   & $0.1570$ & $0.5080$ & $0.3350$ \tabularnewline
+        $10000$  & $0.1635$ & $0.5011$ & $0.3354$ \tabularnewline
+        $100000$ & $0.1659$ & $0.5004$ & $0.3337$ \tabularnewline
+      \end{tabular}
+    \end{center}
+
+  \item Converge a $\frac{1}{6}$, $\frac{1}{2}$, $\frac{1}{3}$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo que podemos entender: caso ciclotómico}
+
+  \begin{itemize}
+  \item Consideremos $K = \QQ (\zeta_7)$
+
+  \item Factorización depende solo de $p \pmod{7}$:
+    \begin{center}
+      \renewcommand{\arraystretch}{1.5}
+      \begin{tabular}{lx{3cm}c}
+        $p~(7)$ & \text{factorización} & \text{partición} \tabularnewline
+        \hline
+        $1$ & $\mathfrak{p}_1\cdots\mathfrak{p}_6$ & $1+\cdots+1$ \tabularnewline
+        $2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2+2+2$ \tabularnewline
+        $2,4$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3+3+3$ \tabularnewline
+        $3,5$ & $\mathfrak{p}$ & $6$ \tabularnewline
+      \end{tabular}
+    \end{center}
+
+  \item Dirichlet: $\frac{1}{6}$ primos cumplen $p \equiv a \pmod{7}$
+    para $a = 1,2,3,4,5,6$ fijo.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Estadística}
+
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{lx{2cm}x{2cm}x{2cm}x{2cm}}
+      $N$      & $1+\cdots+1$ & $2+2+2$ & $3+3$ & $6$ \tabularnewline
+      \hline
+      $10$     & $0.2000$ & $0.1000$ & $0.3000$ & $0.4000$ \tabularnewline
+      $100$    & $0.1700$ & $0.1600$ & $0.3200$ & $0.3500$ \tabularnewline
+      $1000$   & $0.1660$ & $0.1660$ & $0.3300$ & $0.3380$ \tabularnewline
+      $10000$  & $0.1662$ & $0.1663$ & $0.3324$ & $0.3351$ \tabularnewline
+      $100000$ & $0.1668$ & $0.1669$ & $0.3328$ & $0.3336$ \tabularnewline
+    \end{tabular}
+  \end{center}
+
+  Converge a $\frac{1}{6}$, $\frac{1}{6}$, $\frac{1}{3}$, $\frac{1}{3}$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Explicación muy breve}
+
+  \textbf{«Teorema de densidad de Chebotarëv»}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\large Videos:
+
+      \vspace{2em}
+
+      \href{https://cadadr.org/cimat-tna/chebotarev.html}{cadadr.org/cimat-tna/chebotarev.html}
+
+    }
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge ¡Gracias por su atención!}
+  \end{center}
+\end{frame}
+
+\end{document}
