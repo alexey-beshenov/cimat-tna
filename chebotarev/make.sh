@@ -1,6 +1,11 @@
 #!/usr/bin/bash
 
-rm -f ./*.dat
+if [ ! -f 'decomp-stat.gp' ]; then
+    echo "Can't find decomp-stat.gp"
+    exit 1
+fi
+
+# rm -f ./*.dat
 
 echo "Calculating decompositions in PARI/GP..."
 gp -s 64000000 -q decomp-stat.gp
@@ -20,6 +25,8 @@ make_movie () {
     echo ""
 }
 
-for datafile in *[^-stat].dat; do
-    make_movie "${datafile%.dat}"
+for datafile in *.dat; do
+    if [[ ! $datafile =~ -hist.dat$ ]]; then
+	make_movie "${datafile%.dat}"
+    fi
 done
