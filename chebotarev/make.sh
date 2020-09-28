@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-rm -f ./*.{dat,gif}
+rm -f ./*.dat
 
 echo "Calculating decompositions in PARI/GP..."
 gp -s 64000000 -q decomp-stat.gp
