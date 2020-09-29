@@ -1130,7 +1130,15 @@ a investigar este concepto.
   mientras que el polinomio característico de la aplicación
   \[ \mu_\alpha\otimes id + id \otimes \mu_\beta\colon
      \QQ(\alpha)\otimes_\QQ \QQ(\beta) \to \QQ(\alpha)\otimes_\QQ \QQ(\beta). \]
-  será
+     será\footnote{He aquí una prueba. Si $\alpha$ y $\beta$ son valores propios
+       de aplicaciones lineales $\phi\colon U\to U$ y $\psi\colon V\to V$, esto
+       significa que existen vectores no nulos $u\in U$, $v \in V$ tales que
+       $\phi (u) = \alpha u$, $\psi (v) = \beta v$. Luego,
+       $(\phi\otimes\psi) (u\otimes v) = \alpha\beta\,u\otimes v$ y
+       $(\phi\otimes id + id\otimes\psi) (u\otimes v) = (\alpha+\beta)\,u\otimes v$.
+       Entonces, $\alpha\beta$ es un valor propio de $\phi\otimes\psi$
+       y $\alpha + \beta$ es un valor propio de
+       $\phi\otimes id + id\otimes\psi$.}
   $$\prod_{i,j} (x - (\alpha_i + \beta_j)).$$
 
   De manera más concreta, $\mu_\alpha$ corresponde a alguna matriz
