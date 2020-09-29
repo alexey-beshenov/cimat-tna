@@ -68,7 +68,7 @@
   \headingfont
 
   \begin{center}
-    {\huge ¿Como especificar un ideal?}
+    {\huge ¿Cómo especificar un ideal?}
   \end{center}
 \end{frame}
 
@@ -211,7 +211,7 @@
   \end{align*}
 
   \[ (m+ni) \longleftrightarrow \begin{pmatrix}
-    m & -n
+    m & -n \\
     n & m
   \end{pmatrix} \quad \text{(¡no es HNF!)} \]
 
@@ -246,7 +246,7 @@
 
 ? b = idealhnf(K, -3+2*x)
 % =
-[11 8]
+[13 5]
 [ 0 1]
 
 ? Mod ((2+3*x)/(-3+2*x), K.pol)
@@ -344,10 +344,10 @@
 
   \begin{itemize}
   \item \texttt{idealadd($K$,$\mathfrak{a}$,$\mathfrak{b}$)} = $\mathfrak{a}+\mathfrak{b}$
-  \item \texttt{idealmul($K$,$\mathfrak{a}$,$b$)} = $\mathfrak{a}\mathfrak{b}$
+  \item \texttt{idealmul($K$,$\mathfrak{a}$,$\mathfrak{b}$)} = $\mathfrak{a}\mathfrak{b}$
   \item \texttt{idealpow($K$,$\mathfrak{a}$,$n$)} = $\mathfrak{a}^n$
   \item \texttt{idealinv($K$,$\mathfrak{a}$)} = $\mathfrak{a}^{-1}$
-  \item \texttt{idealintersect($K$,$\mathfrak{a}$,$b$)} = $\mathfrak{a} \cap \mathfrak{b}$
+  \item \texttt{idealintersect($K$,$\mathfrak{a}$,$\mathfrak{b}$)} = $\mathfrak{a} \cap \mathfrak{b}$
   \end{itemize}
 \end{frame}
 
@@ -844,8 +844,8 @@
         $p~(7)$ & \text{factorización} & \text{partición} \tabularnewline
         \hline
         $1$ & $\mathfrak{p}_1\cdots\mathfrak{p}_6$ & $1+\cdots+1$ \tabularnewline
-        $2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2+2+2$ \tabularnewline
-        $2,4$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3+3+3$ \tabularnewline
+        $6$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2+2+2$ \tabularnewline
+        $2,4$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3+3$ \tabularnewline
         $3,5$ & $\mathfrak{p}$ & $6$ \tabularnewline
       \end{tabular}
     \end{center}
