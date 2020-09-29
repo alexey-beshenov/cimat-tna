@@ -1,4 +1,4 @@
-/* El campo Q (2^⁽1/3), \zeta_3 */
+/* El campo Q (2^(1/3), \zeta_3 */
 K = nfinit (x^6 - 3*x^5 + 5*x^3 - 3*x + 1);
 
 stat = [0,0,0];
