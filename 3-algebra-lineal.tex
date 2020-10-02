@@ -356,37 +356,6 @@ Esto nos lleva al siguiente resultado.
 Nuestro próximo objetivo es probar que para un campo de números
 el apareamiento de traza no es degenerado y sacar algunas consecuencias
 importantes de este resultado.
-Primero necesitamos un lema bien conocido de la teoría de campos.
-
-\begin{lema}[Dedekind; independencia lineal de caracteres]
-  Dado un grupo abeliano $G$ y un campo $F$, consideremos diferentes caracteres
-  multiplicativos $\chi_1,\ldots,\chi_n\colon G\to F^\times$. Estos son
-  necesariamente linealmente independientes sobre $F$: si para algunos
-  $c_1,\ldots,c_n \in F$ se cumple
-  $$c_1 \chi_1 (g) + \cdots + \chi_n (g) = 0 \quad\text{para todo }g\in G,$$
-  entonces $c_1 = \cdots = c_n = 0$.
-
-  \begin{proof}
-    Inducción sobre $n$, el caso base siendo $n = 1$. Supongamos que
-    el resultado es válido para $n-1$ caracteres.
-    Consideremos una dependencia lineal
-    \[ \tag{*} c_1 \chi_1 (g) + \cdots + c_{n-1} \chi_{n-1} (g) + c_n \chi_n (g)
-       = 0 \quad\text{para todo }g\in G. \]
-    Dado que los caracteres son diferentes, existe $g_0 \in G$ tal que $\chi_1
-    (g_0) \ne \chi_n (g_0)$. Sustituyendo $g_0 g$ en lugar de $g$, se obtiene
-    \[ \tag{**} c_1 \chi_1 (g_0) \chi_1 (g) + \cdots +
-       c_{n-1} \chi_{n-1} (g_0) \chi_{n-1} (g) + c_n \chi_n (g_0) \chi_n (g) = 0. \]
-    Ahora si multiplicamos (*) por $\chi_n (g_0)$ y luego restamos el resultado
-    de (**), nos queda
-    \[ c_1 (\chi_1 (g_0) - \chi_n (g_0)) \chi_1 (g) + \cdots +
-       c_{n-1} (\chi_{n-1} (g_0) - \chi_n (g_0)) \chi_{n-1} (g) = 0. \]
-    Entonces, por la hipótesis de inducción,
-    $c_1 (\chi_1 (g_0) - \chi_n (g_0)) = 0$, pero dado que
-    $\chi_1 (g_0) \ne \chi_n (g_0)$, tenemos que concluir que $c_1 = 0$.
-    El mismo razonamiento nos dice que $c_2 = \cdots = c_{n-1} = 0$, pero luego
-    también $c_n = 0$.
-  \end{proof}
-\end{lema}
 
 \begin{lema}
   \label{lema:discriminante-en-terminos-de-encajes}
@@ -421,7 +390,8 @@ Primero necesitamos un lema bien conocido de la teoría de campos.
        \det (\sigma_i (\alpha_j))_{i,j}^2 \ne 0. \]
     Esto es lo mismo que probar que los vectores de la matriz correspondiente
     son linealmente independientes. Lo último se sigue de la independencia
-    lineal de los caracteres $\sigma_i\colon K^\times \to \CC^\times$.
+    lineal de los caracteres $\sigma_i\colon K^\times \to \CC^\times$
+    (el lema de Dedekind; véase \ref{lema:independencia-de-caracteres}).
 
     A saber, una combinación lineal no trivial de las filas de
     $(\sigma_i (\alpha_j))_{i,j}$ sería
@@ -429,7 +399,7 @@ Primero necesitamos un lema bien conocido de la teoría de campos.
     para todo $j = 1,\ldots,n$. Por la linealidad, esto implica que
     $$c_1 \sigma_1 (\alpha) + \cdots + c_n \sigma_n (\alpha) = 0$$
     para todo $\alpha \in K^\times$, pero luego
-    $c_1 = \cdots = c_n = 0$.
+    $c_1 = \cdots = c_n = 0$ según la independencia lineal de caracteres.
   \end{proof}
 \end{proposicion}
 
@@ -2070,7 +2040,7 @@ descubierto por Kummer.
 
 Hay una anécdota bien conocida relacionada con este resultado de Kummer.
 En 1847 el matemático francés Gabriel Lamé anunció ante la Academia de Ciencias
-de Paris una supuesta prueba del último teorema de Fermat basada en
+de París una supuesta prueba del último teorema de Fermat basada en
 la factorización única en el anillo $\ZZ [\zeta_n]$. Liouville puso en duda esta
 afirmación y se comunicó con Kummer quien aparentemente ya tenía
 contraejemplos. Para los detalles históricos, véase por ejemplo
@@ -2124,7 +2094,7 @@ non-zero, restrict the result to primes of residue degree <= f.
 \end{verbatim}
 \end{shaded}
 
-\item \texttt{\textbackslash{}quit} --- salir del programa.
+\item \texttt{quit} o \texttt{\textbackslash{}q} --- salir del programa.
 \end{itemize}
 
 Cuando ocurre algún error, el programa entra en el ``ciclo break'' y nos
@@ -2147,6 +2117,8 @@ break> break
 \end{shaded}
 
 \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Polinomios}
 
@@ -2224,10 +2196,12 @@ El discriminante de un polinomio se calcula mediante \texttt{poldisc($f$)}.
 \end{verbatim}
 \end{shaded}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Campos de números}
 
 Para especificar un campo de números $K = \QQ[x]/(f)$, hay que escribir
-\texttt{$K$=nfinit($f$)}. Esta función calcula los invariantes básicos de $K$.
+\texttt{$K$~=~nfinit($f$)}. Esta función calcula los invariantes básicos de $K$.
 \begin{itemize}
 \item \texttt{$K$.pol} --- el polinomio usado para definir $K$,
 \item \texttt{$K$.zk} --- el anillo de enteros $\O_K$,
@@ -2260,7 +2234,7 @@ Para especificar un campo de números $K = \QQ[x]/(f)$, hay que escribir
 \end{verbatim}
 \end{shaded}
 
-Aquí escribí \texttt{$K$=nfinit(x\textasciicircum{}3-19);} con punto y coma para
+Aquí escribí \texttt{$K$~=~nfinit(x\textasciicircum{}3-19);} con punto y coma para
 suprimir la salida. De todas maneras, el resultado será guardado en $K$. Pueden
 ejecutar el mismo comando sin punto y coma, y PARI/GP imprimirá toda
 la estructura de datos asociada con $K$.
@@ -2401,6 +2375,8 @@ en el nuevo anillo $\ZZ [\beta]$), hay que escribir \texttt{polredbest($f$,1)}
 La salida significa que
 $$\alpha = \frac{1}{2}\beta^2 - \frac{1}{2}\beta - 2.$$
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Operaciones con elementos de $K/\QQ$}
 
 Hay varias maneras de especificar un elemento de un campo de números
@@ -2475,6 +2451,8 @@ completa de funciones cuyo nombre empieza por \texttt{nfelt}.
 \end{verbatim}
 \end{shaded}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Extensiones de campos de números}
 
 PARI/GP también trabaja con campos de números \emph{relativos}, es decir,
@@ -2531,7 +2509,513 @@ un campo ``absoluto'', podemos escribir \texttt{nfinit($L$)}.
 \end{verbatim}
 \end{shaded}
 
-\noindent\emph{Continuará\dots}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark{Clase 14 (28/09/20)}{clase-14}
+\subsection{Operaciones con ideales}
+\marginpar{\small Clase 14 \\ 28/09/20}
+
+Para un campo de números $K$ el programa puede hacer cálculos con $\O_K$-ideales
+fraccionarios.
+
+Un ideal principal $\alpha \O_K$ puede ser especificado por su generador
+$\alpha$, que puede ser un polinomio en $x$ (en la base $1,x,x^2,\ldots,x^{n-1}$
+de $\QQ[x]/(f)$) o vector \texttt{[$a_1$,\ldots,$a_n$]\textasciitilde} (en la
+$\ZZ$-base de $\O_K$ calculada por el programa en \texttt{$K$.zk}).
+
+En general, los ideales se representarán por matrices de $n\times n$. A saber,
+las columnas de dicha matriz forman una base de $I \subseteq \O_K$ como un
+$\ZZ$-submódulo de $\O_K$ (en términos de la base de $\O_K$). En la salida de
+PARI/GP la matriz estará en la \textbf{forma normal de Hermite}, que es una
+matriz triangular superior definida \emph{de manera canónica} a partir de
+$I$ (y la base fija de $\O_K$). Para convertir un ideal en la forma normal de
+Hermite se puede usar la función \texttt{idealhnf($K$,$I$)}.
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2-5);
+? K.zk
+% = [1, 1/2*x - 1/2]
+? a = idealhnf(K, 4+x)
+% =
+[11 8]
+
+[ 0 1]
+\end{verbatim}
+\end{shaded}
+
+(Notamos que la letra \texttt{I} en PARI/GP ya está reservada para la unidad
+imaginaria $\sqrt{-1}$, así que no hay que usarla para un ideal.)
+
+Interpretación de la salida: tenemos
+\[ \O_K = \alpha_1\ZZ \oplus \alpha_2\ZZ, \quad
+   \alpha_1 = 1, \quad
+   \alpha_2 = \frac{\sqrt{5} - 1}{2}, \]
+y luego
+$$(4 + \sqrt{5})\O_K = 11\alpha_1\ZZ \oplus (8\alpha_1 + \alpha_2)\ZZ.$$
+
+Otro ejemplo más conocido: consideremos el campo $\QQ(i)$.
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? K.zk
+% = [1, x]
+\end{verbatim}
+\end{shaded}
+
+Allí todos los ideales son principales y tenemos
+\[ (m+ni) = \{(c + di)\,(m + ni) \mid c, d \in \ZZ \} =
+   \{ c \cdot (m + ni) + d \cdot (-n + mi) \mid c, d \in \ZZ \} =
+   (m + ni) \ZZ \oplus (-n + mi) \ZZ. \]
+Entonces, el ideal $(m + ni)$ se representa por la matriz
+\[ \begin{pmatrix}
+  m & -n
+  n & m
+\end{pmatrix}, \]
+que luego puede ser reducida a la forma normal de Hermite.
+
+\begin{shaded}
+\begin{verbatim}
+? a = idealhnf(K, 2+3*x)
+% = 
+[13 5]
+
+[ 0 1]
+
+? mathnf ([2, -3; 3, 2])
+% = 
+[13 5]
+
+[ 0 1]
+\end{verbatim}
+\end{shaded}
+
+Ya que la forma normal de Hermite es canónica, esta sirve para ver si dos
+ideales coinciden.
+\begin{shaded}
+\begin{verbatim}
+? a = idealhnf(K, 2+3*x)
+% = 
+[13 5]
+
+[ 0 1]
+
+? b = idealhnf(K, -3+2*x)
+% =
+[11 8]
+
+[ 0 1]
+
+? Mod ((2+3*x)/(-3+2*x), K.pol)
+% = Mod(-x, x^2 + 1)
+\end{verbatim}
+\end{shaded}
+
+La función \texttt{ideallist($K$,$N$)} devuelve todos los ideales enteros
+$I \subseteq \O_K$ tales que $N_{K/\QQ} (I) \le N$.
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? L = ideallist(K,10)
+% = [[[1, 0; 0, 1]],  /* norma 1: I=O_K */
+     [[2, 1; 0, 1]],
+     [],              /* no hay de norma 3 */
+     [[2, 0; 0, 2]],
+     [[5, 3; 0, 1], [5, 2; 0, 1]],
+     [],              /* no hay de norma 6 */
+     [],              /* no hay de norma 7 */ 
+     [[4, 2; 0, 2]],
+     [[3, 0; 0, 3]],
+     [[10, 3; 0, 1], [10, 7; 0, 1]]]
+\end{verbatim}
+\end{shaded}
+
+La salida es un vector
+\begin{center}
+[ideales de norma 0, ideales de norma 1, $\ldots$, ideales de norma $N$]
+\end{center}
+
+Por ejemplo, si queremos contar los ideales de cada norma, o ver cuántos son
+en total, podemos hacer lo siguiente:
+\begin{shaded}
+\begin{verbatim}
+? vector (#L,i,#L[i])
+% = [1, 1, 0, 1, 2, 0, 0, 1, 1, 2, 0, 0, 2, 0, 0, 1, 2, 1, 0, 2]
+? sum (i=1,#L,#L[i])
+% = 17
+\end{verbatim}
+\end{shaded}
+
+Tenemos las siguientes operaciones básicas con ideales (todas las funciones
+relevantes empiezan por ``ideal''):
+\begin{itemize}
+  \item \texttt{idealadd($K$,$a$,$b$)} --- suma $a+b$,
+  \item \texttt{idealmul($K$,$a$,$b$)} --- producto $ab$,
+  \item \texttt{idealpow($K$,$a$,$n$)} --- $a^n$,
+  \item \texttt{idealinv($K$,$a$)} --- $a^{-1}$,
+  \item \texttt{idealintersect($K$,$a$,$b$)} --- $a \cap b$.
+\end{itemize}
+Otras funciones útiles:
+\begin{itemize}
+  \item \texttt{idealdown($K$,$a$)} --- el $\ZZ$-ideal $a \cap \QQ$,
+  \item \texttt{idealnorm($K$,$a$)} --- la norma $N_{K/\QQ} (a)$,
+  \item \texttt{idealismaximal($K$,$a$)} --- verifica si el ideal es maximal.
+\end{itemize}
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? idealdown(K,1+x)
+% = 2
+? idealdown(K,3+3*x)
+% = 6
+
+? idealnorm(K,1+x)
+% = 2
+? idealnorm(K,3)
+% = 9
+? idealnorm(K,3+3*x)
+% = 18
+
+? idealismaximal(K,1+x)
+% = [2, [1, 1]~, 2, 1, [1, -1; 1, 1]]
+? idealismaximal(K,3+3*x)
+% = 0
+\end{verbatim}
+\end{shaded}
+
+Aquí \texttt{idealismaximal($K$,$a$)} devuelve \texttt{0} si el ideal no es
+maximal, y en el caso contrario, devuelve varias cosas precalculadas, cuyo
+significado será explicado abajo.
+
+Aunque la representación de ideales en PARI/GP es útil para cálculos, estamos
+más acostumbrados a representar los ideales por sus generadores. Como sabemos,
+dos generadores son siempre suficientes
+(véase \ref{prop:generacion-de-ideales-por-dos-elementos}).
+Para encontrar dos generadores, sirve la función
+\texttt{idealtwoelt($K$,$a$)}.
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^3 - 2);
+? a = [3,1,2; 0,1,0; 0,0,1]
+% = 
+[3 1 2]
+
+[0 1 0]
+
+[0 0 1]
+
+? idealtwoelt(K,a)
+% = [3, [1, 1, 0]~]
+? nfbasistoalg(K,%[2])
+% = Mod(x + 1, x^3 - 2)
+\end{verbatim}
+\end{shaded}
+
+Interpretación de la salida: $a = (3, 1 + \sqrt[3]{2})$. Por supuesto, es muy
+interesante ver si algún ideal es principal y admite un solo generador.
+Esto equivale a ver si $a$ es trivial en el grupo de clases $\Cl (K)$,
+y es más complicado computacionalmente. Veremos cómo hacerlo en PARI/GP
+en otra ocasión, cuando hablaremos del grupo de clases.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Factorización de ideales en el anillo de enteros}
+
+Para factorizar un ideal $a$ en ideales primos, se usa
+\texttt{idealfactor($K$,$a$)}. Nos va a interesar principalmente factorización
+de primos racionales $p \in \ZZ$ en $\O_K$, y para esto sirve la función
+\texttt{idealprimedec($K$,$p$)}.
+
+Antes de ver los cálculos en PARI/GP, hay que explicar el formato de la salida.
+Si la factorización tiene forma
+$$p\O_K = \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s},$$
+entonces
+\begin{center}
+\texttt{idealprimedec($K$,$p$) = [$P_1$,\ldots,$P_s$]},
+\end{center}
+donde $P_i$ corresponde al múltiplo $\mathfrak{p}_i^{e_i}$. En particular,
+$P = P_i$ contiene los siguientes datos:
+\begin{itemize}
+\item \texttt{$P$.e} = el índice de ramificación $e_i$,
+
+\item \texttt{$P$.f} = el grado del campo residual $\O_K/\mathfrak{p}_i$,
+
+\item \texttt{$P$.gen = [$p$, $\alpha$]}, donde $\mathfrak{p}_i = (p,\alpha)$.
+\end{itemize}
+
+He aquí un ejemplo particular: consideremos cómo los primos racionales se
+factorizan en el campo cuadrático $\QQ (\sqrt{5})$ y el campo ciclotómico
+$\QQ (\zeta_5)$.
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2 - 5);
+
+? decK = idealprimedec(K,11)
+% = [[11, [-3, 2]~, 1, 1, [5, 2; 2, 3]],
+     [11, [5, 2]~, 1, 1, [-3, 2; 2, -5]]]
+? #decK
+# 2               /* 2 factores */
+
+? [decK[1].e, decK[1].f]
+% = [1, 1]
+? decK[1].gen
+% = [11, [-3, 2]~]
+? nfbasistoalg (K,%[2])
+% = Mod(x - 4, x^2 - 5)
+
+? [decK[2].e, decK[2].f]
+% = [1, 1]
+? decK[2].gen
+% = [11, [5, 2]~]
+? nfbasistoalg (K,%[2])
+% = Mod(x + 4, x^2 - 5)
+\end{verbatim}
+\end{shaded}
+
+La interpretación de la salida:
+\[ 11\O_K = \mathfrak{p}_1 \mathfrak{p}_2, \quad
+   \mathfrak{p}_1 = (11, \sqrt{5}-4), ~
+   \mathfrak{p}_2 = (11, \sqrt{5}+4), ~
+   f_1 = f_2 = 1. \]
+
+Para el campo $L = \QQ (\zeta_5)$ de la misma manera encontramos que
+$$11\O_L = \mathfrak{p}_1 \mathfrak{p}_2 \mathfrak{p}_3 \mathfrak{p}_4.$$
+
+\begin{shaded}
+\begin{verbatim}
+? L = nfinit(polcyclo(5));
+? decL = idealprimedec(L,11);
+? #decL
+# 4               /* 4 factores */
+? vector (#decL,i, [decL[i].e, decL[i].f])
+% = [[1, 1], [1, 1], [1, 1], [1, 1]]
+\end{verbatim}
+\end{shaded}
+
+La única ramificación será en $p = 5$.
+
+\begin{shaded}
+\begin{verbatim}
+? idealprimedec(K,5)
+% = [[5, [1, 2]~, 2, 1, [1, 2; 2, -1]]]
+? %[1].e
+% = 2
+? idealprimedec(L,5)
+% = [[5, [-1, 1, 0, 0]~, 4, 1, [.....]]]
+? %[1].e
+% = 4
+\end{verbatim}
+\end{shaded}
+
+Notamos que $\legendre{p}{5} = \legendre{5}{p}$ para $p$ impar, así que
+la factorización depende del resto de $p$ módulo $5$.  Para ver diferentes
+casos, tomemos considerar $p = 2, 3, 5, 11, 19$. Invito al lector a hacerlo
+en PARI/GP.
+
+Terminemos por el ejemplo de Kronecker con la factorización de $p = 47$
+en $K = \QQ (\zeta_{23})$.
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(polcyclo(23));
+? dec = idealprimedec(K,47);
+? #dec
+% = 22
+\end{verbatim}
+\end{shaded}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Un par de experimentos numéricos}
+
+PARI/GP nos permite hacer varios experimentos numéricos. Me gustaría presentar
+un par de ejemplos curiosos, donde surgen ciertos fenómenos que serán explicados
+más adelante.
+
+Usando la función \texttt{ideallist}, podemos contar los ideales enteros en
+$\O_K$ de norma $\le N$ y ver cómo este número depende de $N$. Por ejemplo,
+para $K = \QQ (i)$ el resultado se ve de la siguiente manera.
+
+\begin{center}
+  \includegraphics[width=15cm]{pic/ideal-count-Qi.pdf}
+\end{center}
+
+Aquí asintóticamente, la dependencia es lineal, pero ¿cómo explicarlo?
+Todos los ideales en $\O_K = \ZZ[i]$ son principales, y tenemos
+$$N_{K/\QQ} ((a+bi)\ZZ[i]) = a^2 + b^2.$$
+Además, para todo entero de Gauss no nulo $\alpha \in \ZZ[i]$ tenemos cuatro
+diferentes enteros de Gauss $u\alpha$, donde
+$u \in \ZZ[i]^\times = \{ \pm 1, \pm i \}$, que representan en mismo ideal.
+Entonces,
+\[ \#\{ I \subseteq \ZZ [i] \mid N (I) \le N \} =
+   \frac{1}{4}\cdot \# \{ (a,b) \in \ZZ^2 \mid a^2 + b^2 \le N \}. \]
+Entonces, el número que nos interesa es $\frac{1}{4}$ de los números
+enteros que están en el círculo de radio $\sqrt{N}$, así que asintóticamente,
+\[ \#\{ I \subseteq \ZZ [i] \mid N_{K/\QQ} (I) \le N \} \sim \frac{\pi}{4}\,N. \]
+
+\begin{shaded}
+\begin{verbatim}
+? K = nfinit(x^2+1);
+? L = ideallist(K,20);
+? vector (#L,s, sum(i=1,s,#L[i]))
+% = [1, 2, 2, 3, 5, 5, 5, 6, 7, 9, 9, 9, 11, 11, 11, 12, 14, 15, 15, 17]
+? vector (20,i, ceil(Pi/4*i))
+% = [1, 2, 3, 4, 4, 5, 6, 7, 8, 8, 9, 10, 11, 11, 12, 13, 14, 15, 15, 16]
+\end{verbatim}
+\end{shaded}
+
+Podemos tomar otros campos de números, por ejemplo $K_1 = \QQ (\zeta_5)$,
+$K_2 = \QQ (\sqrt{10})$, $K_3 = \QQ (\sqrt[3]{19})$. De hecho, para $K_2$ y
+$K_3$ el anillo $\O_K$ no es un dominio de ideales principales (lo probaremos
+después), pero de la figura~\ref{fig:numero-de-ideales} se ve que la dependencia
+es siempre asintóticamente $\sim C\cdot N$. Más adelante explicaremos $C$ de dónde
+sale la constante $C$ en cada caso.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=12cm]{pic/ideal-count-zeta-5.pdf}
+
+    $K = \QQ (\zeta_5)$
+  \end{center}
+
+  \begin{center}
+    \includegraphics[width=12cm]{pic/ideal-count-x2-10.pdf}
+
+    $K = \QQ (\sqrt{10})$
+  \end{center}
+
+  \begin{center}
+    \includegraphics[width=12cm]{pic/ideal-count-x3-19.pdf}
+
+    $K = \QQ (\sqrt[3]{19})$
+  \end{center}
+
+  \caption{El número de ideales en $\O_K$ de norma $\le I$}
+  \label{fig:numero-de-ideales}
+\end{figure}
+
+Otro fenómeno curioso que podemos investigar es la estadística de
+descomposiciones de primos racionales. Para ver un ejemplo concreto,
+consideremos el campo $K = \QQ (\sqrt[3]{2}, \zeta_3)$ y veremos cómo se
+factorizan diferentes primos racionales $p$ en $\O_K$. Primero, calculamos
+que los primos que se ramifican son $2$ y $3$. Es fácil explicarlo:
+estos ya se ramifican en los subcampos $\QQ (\sqrt[3]{2})$ y $\QQ (\zeta_3)$.
+
+\begin{shaded}
+\begin{verbatim}
+? F = nfinit(t^3-2);
+? K = nfinit (rnfinit(F,polcyclo(3)));
+? K.disc 
+% = -34992
+? factor (%)
+% = 
+[-1 1]
+
+[ 2 4]
+
+[ 3 7]
+\end{verbatim}
+\end{shaded}
+
+Ahora si $p$ no se ramifica, tenemos descomposición
+\[ p\O_K = \mathfrak{p}_1\cdots\mathfrak{p}_s,
+   \quad \sum_i f_i = [K : \QQ] = 6. \]
+
+Entonces, diferentes factorizaciones corresponden a particiones de $6$.
+
+¿Será que cualquier partición puede ser realizada de esta manera?
+Al parecer, la respuesta es no: he aquí algunos ejemplos.
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{cc|cc|cc}
+    $p$ & \text{partición} & $p$ & \text{partición} & $p$ & \text{partición} \\
+    \hline
+    $5$ & $2 + 2 + 2$ & $41$ & $2 + 2 + 2$ & $83$ & $2 + 2 + 2$ \\
+    $7$ & $3 + 3$ & $43$ & $1 + 1 + 1 + 1 + 1 + 1$ & $89$ & $2 + 2 + 2$ \\
+    $11$ & $2 + 2 + 2$ & $47$ & $2 + 2 + 2$ & $97$ & $3 + 3$ \\
+    $13$ & $3 + 3$ & $53$ & $2 + 2 + 2$ & $101$ & $2 + 2 + 2$ \\
+    $17$ & $2 + 2 + 2$ & $59$ & $2 + 2 + 2$ & $103$ & $3 + 3$ \\
+    $19$ & $3 + 3$ & $61$ & $3 + 3$ & $107$ & $2 + 2 + 2$ \\
+    $23$ & $2 + 2 + 2$ & $67$ & $3 + 3$ & $109$ & $1 + 1 + 1 + 1 + 1 + 1$ \\
+    $29$ & $2 + 2 + 2$ & $71$ & $2 + 2 + 2$ & $113$ & $2 + 2 + 2$ \\
+    $31$ & $1 + 1 + 1 + 1 + 1 + 1$ & $73$ & $3 + 3$ & $127$ & $1 + 1 + 1 + 1 + 1 + 1$ \\
+    $37$ & $3 + 3$ & $79$ & $3 + 3$ & $131$ & $2 + 2 + 2$ \\
+  \end{tabular}
+\end{center}
+
+Se ve que los $f_i$ deben ser iguales, pero esto no es muy sorprendente:
+ya vimos que lo mismo pasa con los campos ciclotómicos. En el siguiente capítulo
+veremos que esto sucede porque $K/\QQ$ es una extensión de Galois.
+Además, parece que no hay primos inertes (dejo al lector pensar a qué
+se debe esto).
+
+Las cosas sorprendentes aparecen si nos preguntamos cuál es la frecuencia de
+cada tipo de partición. A saber, podemos tomar $N$ números primos, donde $N$ es
+bastante grande, y ver cuántos de estos primos corresponden a cada una de las
+tres particiones. Aquí está una pequeña tabla de frecuencias de $1+\cdots+1$,
+$2+2+2$ y $3+3$ para diferentes $N$.
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{lx{2cm}x{2cm}x{2cm}}
+    $N$      & $1+\cdots+1$ & $2+2+2$ & $3+3$ \tabularnewline
+    \hline
+    $10$     & $0.1000$ & $0.5000$ & $0.4000$ \tabularnewline
+    $100$    & $0.1500$ & $0.5200$ & $0.3300$ \tabularnewline
+    $1000$   & $0.1570$ & $0.5080$ & $0.3350$ \tabularnewline
+    $10000$  & $0.1635$ & $0.5011$ & $0.3354$ \tabularnewline
+    $100000$ & $0.1659$ & $0.5004$ & $0.3337$ \tabularnewline
+  \end{tabular}
+\end{center}
+
+Se ve que las frecuencias convergen lentamente a los números racionales
+$\frac{1}{6}$, $\frac{1}{2}$, $\frac{1}{3}$. Este fenómeno se explica por
+el \textbf{teorema de densidad de Chebotarëv} que será formulado en el siguiente
+capítulo. Para entender qué está pasando, tomemos otro campo
+$K = \QQ (\zeta_7)$. Ya sabemos factorizar los primos racionales en los campos
+ciclotómicos. En este caso las factorizaciones son las siguientes.
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{lx{3cm}c}
+    $p~(7)$ & \text{factorización} & $f$ \tabularnewline
+    \hline
+    $1$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4\,\mathfrak{p}_5\,\mathfrak{p}_6$ & $1$ \tabularnewline
+    $2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $2$ \tabularnewline
+    $2,4$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $3$ \tabularnewline
+    $3,5$ & $\mathfrak{p}$ & $6$ \tabularnewline
+  \end{tabular}
+\end{center}
+
+Y aquí están las frecuencias.
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{lx{2cm}x{2cm}x{2cm}x{2cm}}
+    $N$      & $1+\cdots+1$ & $2+2+2$ & $3+3$ & $6$ \tabularnewline
+    \hline
+    $10$     & $0.2000$ & $0.1000$ & $0.3000$ & $0.4000$ \tabularnewline
+    $100$    & $0.1700$ & $0.1600$ & $0.3200$ & $0.3500$ \tabularnewline
+    $1000$   & $0.1660$ & $0.1660$ & $0.3300$ & $0.3380$ \tabularnewline
+    $10000$  & $0.1662$ & $0.1663$ & $0.3324$ & $0.3351$ \tabularnewline
+    $100000$ & $0.1668$ & $0.1669$ & $0.3328$ & $0.3336$ \tabularnewline
+  \end{tabular}
+\end{center}
+
+Los números convergen a $\frac{1}{6}$, $\frac{1}{6}$, $\frac{1}{3}$,
+$\frac{1}{3}$, y es fácil explicarlo. En total tenemos $6$ restos no nulos
+módulo $7$. El primer caso, igual y como el segundo, corresponde a un resto.
+Por otra parte, el tercer y cuarto caso corresponden a dos restos cada uno.
+El hecho de que precisamente $\frac{1}{6}$ primos cumplen la condición
+$p \equiv a \pmod{7}$ para $a = 1,2,3,4,5,6$ es intuitivamente esperado, pero
+es el contenido del teorema de Dirichlet sobre los primos en progresiones
+aritméticas, que ya fue mencionado en este curso.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2599,11 +3083,17 @@ un campo ``absoluto'', podemos escribir \texttt{nfinit($L$)}.
 \end{ejercicio}
 
 \begin{ejercicio}
-  Demuestre que para cualquier campo de números $K/\QQ$ y $N$ fijo hay un número
-  finito de ideales $I \subseteq \O_K$ con la norma $N_{K/\QQ} (I) \le N$.
+  Sea $K/\QQ$ un campo de números y $N$ un número natural fijo.
 
-  \noindent (Indicación: use la factorización de ideales en ideales primos y
-  la multiplicatividad de la norma.)
+  \begin{enumerate}
+  \item[1)] Demuestre que hay un número finito de ideales $I \subseteq \O_K$ con
+    la norma $N_{K/\QQ} (I) \le N$.
+    \noindent (Indicación: use la factorización de ideales en ideales primos y
+    multiplicatividad de la norma.)
+
+  \item[2)] Demuestre que módulo la relación $\sim$, hay un número finito
+    de elementos $\alpha \in \O_K$, tales que $|N_{K/\QQ} (\alpha)| \le N$.
+  \end{enumerate}
 \end{ejercicio}
 
 \begin{ejercicio}

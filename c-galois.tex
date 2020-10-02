@@ -1,0 +1,1247 @@
+\chapter{Campos y la teoría de Galois básica}
+
+El propósito de este apéndice es resumir la teoría de Galois necesaria para
+nuestros propósitos. Será suficiente considerar extensiones finitas $K/F$,
+y de hecho nos interesará más que todo el caso de $F = \QQ$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extensiones de campos}
+
+\begin{definicion}
+  Si $K$ es un campo y $F \subseteq K$ es un subcampo, se dice que $K$ es una
+  \textbf{extensión} de $F$ y se escribe ``$K/F$'' o se dibuja el diagrama
+  \[ \begin{tikzcd}[row sep=1em]
+    K\ar[-]{d} \\
+    F
+  \end{tikzcd} \]
+
+  La dimensión de $K$ como un espacio vectorial sobre $F$ se llama el
+  \textbf{grado} de la extensión y se denota por $[K : F] = \dim_F (K)$.
+  Si el grado es finito, se dice que $K/F$ es una \textbf{extensión finita}.
+\end{definicion}
+
+\begin{proposicion}
+  \label{prop:base-de-una-cadena-de-extensiones}
+  Para una torre de extensiones finitas $F \subseteq K \subseteq L$ se tiene
+  $$[L : F] = [L : K] \cdot [K : F].$$
+  Específicamente, si $\alpha_1,\ldots,\alpha_m \in K$ es una base de $K$ sobre
+  $F$ y $\beta_1,\ldots,\beta_n \in L$ es una base de $L$ sobre $K$, entonces
+  los productos $\alpha_i\beta_j$ forman una base de $L$ sobre $F$.
+  \[ \begin{tikzcd}[column sep=0.2cm,row sep=1em]
+    L \ar[-]{d}[swap]{[L:K] = n} & \beta_1,\ldots,\beta_n \\
+    K \ar[-]{d}[swap]{[K:F] = m} & \alpha_1,\ldots,\alpha_m \\
+    F
+  \end{tikzcd} \]
+
+  \begin{proof}
+    Ejercicio para el lector.
+\iffalse
+    Todo elemento de $L$ puede ser escrito como $\sum_j b_j\,\beta_j$ para
+    algunos $b_1,\ldots,b_n \in K$. Luego, los coeficientes $b_j$ pueden ser
+    expresados como $b_j = \sum_i a_{ij}\,\alpha_i$ para $a_{ij} \in F$.
+    Se sigue que los productos $\alpha_i\beta_j$ generan a $L$ como un espacio
+    vectorial sobre $F$. Para ver que esta es una base, hay que ver que los
+    elementos $\alpha_i\beta_j$ son linealmente independientes.
+    Si $\sum_{i,j} a_{ij} \alpha_i \beta_j = 0$, entonces se tiene
+    $\sum_j b_j\,\beta_j = 0$, de donde $b_j = 0$ para todo $j$ por la
+    independencia lineal de los $\beta_j$. Pero la independencia lineal de los
+    $\alpha_i$ implica entonces que $a_{ij} = 0$ para todo $i$.
+\fi
+  \end{proof}
+\end{proposicion}
+
+\begin{teorema}
+  \label{thm:cociente-por-polinomio-irreducible}
+  Sea $F$ un campo y $f \in F [x]$ un polinomio irreducible de grado
+  $n$.
+  \begin{enumerate}
+  \item[1)] El anillo cociente $K = F [x]/(f)$ es un campo.
+
+  \item[2)] el homomorfismo canónico
+    $F \hookrightarrow F [x] \twoheadrightarrow F [x]/(f)$ identifica $F$ con un
+    subcampo de $K$ y entonces $F [x]$ con un subanillo de $K [x]$. Considerando
+    $f$ como un elemento de $K [x]$, se tiene $f (\alpha) = 0$.
+
+  \item[3)] si $\alpha \in K$ es la imagen de la variable $x$ en el
+    cociente, entonces $[K:F] = n$, y los elementos
+    $1,\alpha,\alpha^2,\ldots,\alpha^{n-1}$ forman una base de $K$ sobre $F$.
+  \end{enumerate}
+
+  \begin{proof}
+    El anillo de polinomios $F [x]$ es un dominio de ideales principales,
+    y entonces si $f$ es irreducible, el ideal $(f) \subset F [x]$ es maximal.
+    Esto significa que $F [x]/(f)$ es un campo.
+
+    Todo elemento de $F [x]/(f)$ puede ser representado por algún polinomio
+    $g \in F [x]$ considerado módulo $f$. La división con resto en $F [x]$ nos
+    permite concluir que podemos asumir que $\deg (g) < \deg (f)$, así que
+    $$\overline{g} = a_0 + a_1\,\alpha + \cdots + a_{n-1}\,\alpha^{n-1} \in K.$$
+    Entonces, $1,\alpha,\alpha^2,\ldots,\alpha^{n-1}$ generan a $K$ como un
+    espacio vectorial sobre $F$. Ahora si se cumple $\overline{g} = 0$, esto
+    significa que $f \mid g$, pero luego $g = 0$ y
+    $a_0 = a_1 = \cdots = a_{n-1} = 0$. Esto significa que
+    $1, \alpha, \ldots, \alpha^{n-1}$ son linealmente independientes sobre $F$.
+  \end{proof}
+\end{teorema}
+
+Hemos visto cómo añadir a un campo $F$ una raíz de un polinomio irreducible
+$f \in F [x]$ de manera formal: hay que pasar al cociente $F [x]/(f)$. En muchos
+casos estas raíces ya están en una extensión específica de $F$ y pueden ser
+añadidas en el siguiente sentido.
+
+\begin{definicion}
+  Para una extensión de campos $K/F$ y elementos
+  $\alpha_1,\alpha_2,\ldots \in K$ el subcampo mínimo de $K$ que contiene a
+  $\alpha_1,\alpha_2,\ldots$ y todos los elementos de $F$ se llama el subcampo
+  \textbf{generado} por $\alpha_1,\alpha_2,\ldots$ sobre $F$ y se denota por
+  \[ F (\alpha_1,\alpha_2,\ldots) =
+     \bigcap_{\substack{F \subseteq F' \subseteq K \\ \alpha_1,\alpha_2,\ldots \in F'}} F'. \]
+  Las extensiones de la forma $F (\alpha)/F$ para un solo elemento
+  $\alpha \in K$ se llaman las \textbf{extensiones simples} de $F$. En este caso
+  $\alpha$ se llama un \textbf{elemento primitivo} de $F (\alpha)$.
+  En general, las extensiones de la forma $F (\alpha_1,\ldots,\alpha_n)/F$ se
+  llaman las \textbf{extensiones finitamente generadas} de $F$.
+\end{definicion}
+
+No es difícil verificar que $F (\alpha,\beta) = (F (\alpha)) (\beta)$.
+
+\begin{definicion}
+  Para una extensión $K/F$ se dice que un elemento $\alpha \in K$ es
+  \textbf{algebraico} sobre $F$ si $f (\alpha) = 0$ para algún polinomio no nulo
+  $f \in F [x]$.
+
+  Se dice que $K/F$ es una extensión algebraica si todo elemento de $K$ es
+  algebraico sobre $F$.
+\end{definicion}
+
+\begin{proposicion}
+  Para una cadena de extensiones $F \subseteq K \subseteq L$, si $\alpha \in L$
+  es algebraico sobre $F$, entonces es algebraico sobre $K$.
+
+  \begin{proof}
+    Si $f (\alpha) = 0$ para algún polinomio no nulo $f \in F [x]$, en
+    particular $f \in K [x]$.
+  \end{proof}
+\end{proposicion}
+
+\begin{proposicion}
+  \label{obs:extension-finita-es-algebraica}
+  Toda extensión finita es algebraica.
+
+  \begin{proof}
+    Si $K/F$ es una extensión de grado $[K : F] = n$, entonces para cualquier
+    elemento $\alpha \in K$ hay una dependencia $F$-lineal
+    entre $1,\alpha,\alpha^2,\ldots,\alpha^n$, pero esto nos da un polinomio
+    no nulo $f \in F[x]$ tal que $f (\alpha) = 0$.
+  \end{proof}
+\end{proposicion}
+
+\begin{teorema}[Polinomio mínimo]
+  \label{thm:polinomio-minimo}
+  Sean $K/F$ una extensión de campos y $\alpha \in K$ un elemento.
+
+  \begin{enumerate}
+  \item[1)] $\alpha$ es algebraico sobre $F$ si y solamente si el homomorfismo
+    de evaluación
+    $$ev_\alpha\colon F [x] \to F (\alpha), \quad f \mapsto f (\alpha)$$
+    tiene núcleo no trivial.
+
+  \item[2)] En este caso $\ker ev_\alpha = (f^\alpha_F)$, donde
+    $f^\alpha_F \in F [x]$ es un polinomio mónico irreducible definido de modo
+    único; a saber, $f^\alpha_F$ es el polinomio mónico de grado mínimo posible
+    que tiene $\alpha$ como su raíz.
+
+  \item[3)] Hay un isomorfismo natural $F [x] / (f^\alpha_F) \cong F (\alpha)$,
+    y $[F (\alpha) : F] = \deg (f^\alpha_F)$.
+
+  \item[4)] Un polinomio $g \in F [x]$ tiene al elemento $\alpha$ como su raíz
+    si y solamente si $f^\alpha_F \mid g$. Si $g$ es irreducible, entonces
+    $F [x] / (g) \cong F (\alpha)$.
+  \end{enumerate}
+
+  \begin{proof}
+    Puesto que $F [x]$ es un dominio de ideales principales, se tiene
+    necesariamente $\ker ev_\alpha = (f)$ para algún polinomio $f \in F [x]$.
+    Si $\alpha$ no es algebraico, entonces $f = 0$. En el caso contrario,
+    al revisar la prueba de que $F [x]$ es un DIP, se ve que $f$ es un polinomio
+    del mínimo grado posible tal que $f (\alpha) = 0$. Esto en particular
+    implica que $f$ es irreducible, y luego $F [x]/(f)$ es un campo
+    (véase \ref{thm:cociente-por-polinomio-irreducible}).
+
+    Como siempre, un generador de un ideal principal está bien definido salvo
+    elementos invertibles, en este caso salvo $F [x]^\times = F^\times$.
+    Entonces, la condición de que $f$ sea mónico lo define de modo
+    único. Denotemos este polinomio mónico por $f^\alpha_F$.
+
+    Se ve que el homomorfismo $ev_\alpha$ induce un isomorfismo de campos
+    $F [x] / (f^\alpha_F) \cong F (\alpha)$, y como ya notamos en
+    \ref{thm:cociente-por-polinomio-irreducible},
+    $[F (\alpha) : F] = \deg (f^\alpha_F)$.
+
+    Ahora para cualquier otro polinomio $g \in F[x]$ tenemos
+    \[ g (\alpha) = 0 \iff g \in \ker ev_\alpha = (f^\alpha_F) \iff f^\alpha_F \mid f. \]
+
+    Si $g$ es también irreducible, entonces $(f) = (f^\alpha_F)$, y luego
+    $F [x] / (g) = F [x] / (f^\alpha_F) \cong F (\alpha)$.
+  \end{proof}
+\end{teorema}
+
+\begin{definicion}
+  Para una extensión $K/F$ y un elemento $\alpha \in K$ algebraico sobre $F$,
+  el polinomio mónico $f^\alpha_F \in F [x]$ de arriba se llama el
+  \textbf{polinomio mínimo} de $\alpha$ sobre $K$.
+\end{definicion}
+
+\begin{proposicion}
+  \label{obs:deg-F-deg-K}
+  Sea $F \subseteq K \subseteq L$ una cadena de extensiones y $\alpha \in L$ un
+  elemento algebraico sobre $F$. Entonces, en el anillo de polinomios $K [x]$ se
+  cumple $f^\alpha_K \mid f^\alpha_F$. En particular,
+  $[K (\alpha) : K] \le [F (\alpha) : F]$.
+
+  \begin{proof}
+    Tenemos $f^\alpha_F (\alpha) = 0$. Puesto que
+    $f^\alpha_F \in F [x] \subseteq K [x]$, se cumple
+    $f^\alpha_K \mid f^\alpha_F$.
+  \end{proof}
+\end{proposicion}
+
+He aquí una caracterización de los elementos algebraicos.
+
+\begin{proposicion}
+  Un elemento $\alpha \in K$ es algebraico sobre $F$ si y solo si
+  $[F (\alpha) : F] < \infty$.
+
+  \begin{proof}
+    Ya hemos visto que si $\alpha$ es algebraico, entonces existe un polinomio
+    mínimo y $[F (\alpha) : F] = \deg f^\alpha_K < \infty$. Viceversa, si
+    $[F (\alpha) : F] < \infty$, entonces la extensión $F (\alpha)/F$ es
+    algebraica, como notamos en \ref{obs:extension-finita-es-algebraica}.
+  \end{proof}
+\end{proposicion}
+
+\begin{proposicion}
+  Para elementos $\alpha,\beta\in K$ algebraicos sobre $F$ se cumple
+  $$[F (\alpha,\beta) : F] \le [F (\alpha) : F] \cdot [F (\beta) : F].$$
+
+  \begin{proof}
+    Consideremos las extensiones
+    \[ \begin{tikzcd}[row sep=1em, column sep=1em]
+      & F (\alpha,\beta)\ar[-]{dl}\ar[-]{dr} \\
+      F (\alpha)\ar[-]{dr} & & F (\beta)\ar[-]{dl} \\
+      & F
+    \end{tikzcd} \]
+    La desigualdad de \ref{obs:deg-F-deg-K} aplicada a las extensiones
+    $F \subseteq F (\alpha) \subseteq F (\alpha,\beta)$ y
+    $\beta \in F (\alpha,\beta)$ nos da
+    $$[(F (\alpha)) (\beta) : F (\alpha)] \le [F (\beta) : F],$$
+    de donde
+    \[ [F (\alpha,\beta) : F] =
+       [(F (\alpha)) (\beta) : F (\alpha)] \cdot [F (\alpha) : F] \le
+       [F (\beta) : F] \cdot [F (\alpha) : F]. \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+Por inducción se sigue que en general,
+\[ [F (\alpha_1,\ldots,\alpha_n) : F] \le
+   [F (\alpha_1) : F]\cdots [F (\alpha_n) : F]. \]
+
+Tenemos la siguiente caracterización de extensiones finitas.
+
+\begin{proposicion}
+  Una extensión $K/F$ es finita si y solo si $K = F (\alpha_1,\ldots,\alpha_n)$,
+  donde $\alpha_1,\ldots,\alpha_n \in F$ es un número finito de elementos
+  algebraicos sobre $F$.
+
+  \begin{proof}
+    Si $K/F$ es una extensión finita de grado $n$, sea
+    $\alpha_1, \ldots, \alpha_n$ una base de $K$ sobre $F$. Tenemos
+    $[F (\alpha_i) : F] \le n$, así que $\alpha_1,\ldots,\alpha_n$ son
+    algebraicos. Está claro que $K = F (\alpha_1,\ldots,\alpha_n)$.
+
+    Viceversa, si $K = F (\alpha_1,\ldots,\alpha_n)$ donde
+    $\alpha_1,\ldots,\alpha_n$ son algebraicos sobre $F$, entonces
+    $$[K : F] \le [F (\alpha_1) : F] \cdots [F (\alpha_n) : F],$$
+    así que la extensión es finita.
+  \end{proof}
+\end{proposicion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Campos de descomposición}
+
+\begin{definicion}
+  Para un polinomio $f \in F[x]$ se dice que una extensión $K/F$ es un
+  \textbf{campo de descomposición} de $f$x si se cumplen las siguientes condiciones
+
+  \begin{enumerate}
+  \item[1)] $f$ se descompone en factores lineales en $K[x]$; es decir,
+    $f = (x - \alpha_1)\cdots (x - \alpha_n)$, donde $\alpha_i \in K$,
+
+  \item[2)] ningún subcampo propio $F \subseteq K' \subsetneq K$ cumple con
+    esta propiedad o de manera equivalente,
+    $K = F (\alpha_1,\ldots,\alpha_n)$.
+  \end{enumerate}
+\end{definicion}
+
+\begin{proposicion}
+  Para un polinomio $f \in F [x]$ existe un campo de descomposición
+  $K/F$. Además, $[K : F] \le n!$ donde $n = \deg (f)$.
+
+  \begin{proof}
+    Bastaría probar que existe una extensión $K/F$ de grado $\le n!$ tal que $f$
+    se descompone en factores lineales en $K [x]$.
+
+    Procedamos por inducción sobre $n$, tomando como base el caso trivial
+    $n = 1$. Para $n > 1$, sea $g \mid f$ algún factor irreducible de
+    $f$. Consideremos el campo $K' = F [x] / (g)$. Denotemos por $\alpha$ la
+    imagen de $x$ en el cociente. Tenemos $[K' : F] = \deg (g) \le n$. Además,
+    $g (\alpha) = 0$ y por ende $f (\alpha) = 0$. Se sigue que en $K' [x]$
+    tenemos una factorización $f = (x - \alpha)\,h$ para algún polinomio
+    $h\in K' [x]$. Ahora $\deg (h) = n-1$, así que por la hipótesis de
+    inducción, existe una extensión $K / K'$ de grado $\le (n-1)!$ tal que $h$
+    (y entonces $f$) se descompone en factores lineales en $K [x]$. En fin,
+    \[ [K : F] = [K : K']\cdot [K' : F] \le (n-1)!\cdot n \le n! \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+\begin{comentario}
+  De manera similar se define un campo de descomposición para una familia de
+  polinomios $\{ f_i \}$. Para una familia finita $\{ f_1, \ldots, f_s \}$
+  el campo de descomposición coincide con el campo de descomposición del
+  producto $f_1 \cdots f_s$.
+\end{comentario}
+
+\begin{lema}
+  \label{lema:extesion-de-isomorfismos-a-F(alpha)}
+  Sean $\sigma\colon F_1\to F_2$ un isomorfismo de campos, $f_1 \in F_1 [x]$ un
+  polinomio irreducible, $\alpha_1$ una raíz de $f_1$ en alguna extensión
+  $K_1/F_1$ y $\alpha_2$ una raíz de $\sigma (f_1) \in F_2 [x]$ en alguna
+  extensión $K_2/F_2$. Luego $\sigma$ se extiende a un isomorfismo
+  $\overline{\sigma}\colon F_1 (\alpha_1) \to F_2 (\alpha_2)$ tal que
+  $\overline{\sigma} (\alpha_1) = \alpha_2$.
+
+  \begin{proof}
+    Por la hipótesis sobre $f_1$, la evaluación de polinomios en $\alpha_1$
+    induce un $F_1$-isomorfismo $F_1 [x]/(f_1) \cong F_1 (\alpha_1)$.
+    El polinomio $f_2 = \sigma (f_1) \in F_2 [x]$ será también irreducible y
+    de manera similar tenemos un $F_2$-isomorfismo
+    $F_2[x]/(f_2) \cong F_2 (\alpha_2)$.  Está claro que $\sigma$ se extiende a
+    un isomorfismo $F_1 [x]/(f_1) \cong F_2 [x]/(f_2)$.
+
+    \[ \begin{tikzcd}
+      F_1 (\alpha_1)\ar[dashed]{rrr}{\overline{\sigma}} & & & F_2 (\alpha_2) \\
+       & F_1 [x]/(f_1) \ar{r}{\cong}\ar{ul}[swap]{\cong} & F_2 [x]/(f_2)\ar{ur}{\cong} \\
+      F_1 \ar[>->]{uu}\ar[>->]{ur}\ar{rrr}{\sigma} & & & F_2\ar[>->]{uu}\ar[>->]{ul}
+    \end{tikzcd} \]
+  \end{proof}
+\end{lema}
+
+\begin{lema}[Extensión de isomorfismos]
+  \label{lema:extesion-de-isomorfismos-a-campo-de-desc}
+  Sea $\sigma\colon F_1 \xrightarrow{\cong} F_2$ un isomorfismo de campos. Sean
+  $f_1 \in F_1 [x]$ un polinomio irreducible y $f_2 \in F_2 [x]$ el polinomio
+  que corresponde a $f_1$ bajo el isomorfismo
+  $F_1 [x] \xrightarrow{\cong} F_2 [x]$ inducido por $\sigma$. Sean $K_1/F_1$ y
+  $K_2/F_2$ campos de descomposición de $f_1$ y $f_2$ respectivamente. Entonces,
+  el isomorfismo entre $F_1$ y $F_2$ se extiende a un isomorfismo entre $K_1$ y
+  $K_2$:
+  \[ \begin{tikzcd}
+    K_1\ar[-]{d} \ar[dashed]{r}{\cong} & K_2\ar[-]{d} \\
+    F_1 \ar{r}{\cong} & F_2
+  \end{tikzcd} \]
+
+  \begin{proof}
+    Procedamos por inducción sobre $n = \deg (f_1)$. Notamos que los factores
+    irreducibles de $f_1$ en $F_1 [x]$ corresponden a los factores irreducibles
+    de $f_2$ en $F_2 [x]$.
+
+    Si $n = 1$, o en general si $f_1$ se descompone en factores lineales en
+    $F_1 [x]$, se tiene $K_1 = F_1$, $K_2 = F_2$ y no hay que probar nada.
+
+    Si $n > 1$, sea $g_1 \in F_1 [x]$ un factor irreducible de $f$ y
+    $g_2 \in F_2 [x]$ el factor irreducible correspondiente de $f_2$.
+    Si $\alpha_1 \in K_1$ es una raíz de $g_1$ y $\alpha_2 \in K_2$ es una raíz
+    de $g_2$, entonces el lema anterior nos permite extender el isomorfismo
+    $F_1 \xrightarrow{\cong} F_2$ a un isomorfismo $F_1 (\alpha_1)
+    \xrightarrow{\cong} F_2 (\alpha_2)$. Ahora
+    \[ f_1 = (x - \alpha_1)\,h_1 \text{ en } F_1(\alpha_1) [x], \quad
+    f_2 = (x - \alpha_2)\,h_2 \text{ en } F_2 (\alpha_2)[x]. \]
+    Notamos que $K_1$ y $K_2$ son campos de descomposición para $h_1$ y $h_2$
+    sobre $F_1 (\alpha_1)$ y $F_2 (\alpha_2)$ respectivamente. Puesto que
+    $\deg (h_1) = \deg (h_2) = n-1$, por la hipótesis de inducción,
+    el isomorfismo $F_1 (\alpha_1) \xrightarrow{\cong} F_2 (\alpha_2)$
+    se extiende a un isomorfismo $K_1 \xrightarrow{\cong} K_2$.
+
+    \[ \begin{tikzcd}
+      K_1\ar[-]{d} \ar[dashed]{r}{\cong} & F_2\ar[-]{d} \\
+      F_1 (\alpha_1)\ar[-]{d} \ar{r}{\cong} & F_2 (\alpha_2)\ar[-]{d} \\
+      F_1 \ar{r}{\cong} & F_2
+    \end{tikzcd} \]
+  \end{proof}
+\end{lema}
+
+\begin{corolario}[Unicidad de campos de descomposición]
+  Para un polinomio $f\in F [x]$, si $K_1/F$ y $K_2/F$ son dos campos
+  de descomposición, entonces existe un isomorfismo
+  \[ \begin{tikzcd}
+    K_1 \ar{rr}{\cong} && K_2 \\
+    & F\ar[>->]{ul}\ar[>->]{ur}
+  \end{tikzcd} \]
+\end{corolario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Cerradura algebraica}
+
+\begin{proposicion-definicion}
+  Sea $K$ un campo. Se dice que $K$ es \textbf{algebraicamente cerrado}
+  si este satisface las siguientes condiciones equivalentes:
+  \begin{enumerate}
+  \item[1)] todo polinomio no constante en $K [x]$ tiene una raíz en $K$;
+
+  \item[2)] todo polinomio de grado $n > 0$ en $K [x]$ tiene $n$ raíces en $K$,
+    contándolas con multiplicidades; es decir,
+    $$f = c\,(x-\alpha_1)\cdots (x - \alpha_n)$$
+    para $\alpha_1,\ldots,\alpha_n \in K$;
+
+  \item[3)] todo polinomio irreducible en $K [x]$ es lineal;
+
+  \item[4)] $K$ no tiene extensiones algebraicas propias: si $L/K$ es una
+    extensión algebraica, entonces $L = K$.
+
+  \item[5)] $K$ no tiene extensiones finitas propias.
+  \end{enumerate}
+  
+  \begin{proof}
+    $1)\Rightarrow 2)$: si $f$ es un polinomio de grado $n > 0$ y $f$ tiene una
+    raíz $\alpha\in K$, entonces $f = (x-\alpha)\,g$, donde
+    $\deg (g) = n-1$. Luego, $g$ también debe tener una raíz,
+    etcétera. Continuando de esta manera, se obtiene una descomposición
+    $f = c\,(x-\alpha_1)\cdots (x - \alpha_n)$.
+
+    $2)\Rightarrow 3)$: está claro.
+
+    $3)\Rightarrow 4)$: si $L/K$ es una extensión algebraica, entonces para todo
+    $\alpha \in L$ el polinomio mínimo $f^\alpha_K$ debe ser lineal según 3),
+    lo que significa que $\alpha \in K$.
+
+    $4)\Rightarrow 5)$: toda extensión finita es algebraica.
+
+    $5)\Rightarrow 1)$: para un polinomio no constante $f$, escribamos $f =
+    g\,h$ donde $g$ es irreducible. Luego, $L = K [x] / (g)$ es una extensión
+    finita de grado $[L:K] = \deg (g)$, pero según 5), tenemos $L = K$, así que
+    $\deg (g) = 1$.
+  \end{proof}
+\end{proposicion-definicion}
+
+\begin{definicion}
+  Para un campo $K$, se dice que una extensión $\overline{K}/K$ es una
+  \textbf{cerradura algebraica} de $K$ si
+
+  \begin{enumerate}
+  \item[1)] $\overline{K}/K$ es una extensión algebraica;
+
+  \item[2)] el campo $\overline{K}$ es algebraicamente cerrado.
+  \end{enumerate}
+\end{definicion}
+
+\begin{teorema}
+  Para todo campo $K$ existe una cerradura algebraica $\overline{K}$.
+
+  \begin{proof}[Emil Artin]
+    Consideremos el anillo de polinomios $K [x_f]$, donde cada variable $x_f$
+    corresponde a un polinomio mónico no constante $f \in K [x]$.
+    (Este anillo es muy grande.)
+
+    Sea $I$ el ideal en $K [x_f]$ generado por los polinomios $f (x_f)$ para
+    todo polinomio mónico irreducible $f \in K [x]$. Este ideal es propio.
+    En efecto, en el caso contrario existen algunos polinomios
+    $g_1, \ldots, g_n \in K [x_f]$ y $f_1,\ldots,f_n \in K [x]$ tales que
+    $$1 = g_1 f_1 (x_{f_1}) + \cdots + g_n f_n (x_{f_n}).$$
+    Sea $L/K$ una extensión finita donde cada uno de los polinomios $f_i$ tiene
+    una raíz $\alpha_i \in L$. Consideremos el homomorfismo de evaluación
+    \begin{align*}
+      \phi\colon K [x_f] & \to L,\\
+      x_{f_i} & \mapsto \alpha_i,\text{ para }i = 1,\ldots,n,\\
+      x_f & \mapsto 0, \text{ si }f\ne f_i\text{ para }i=1,\ldots,n.
+    \end{align*}
+    Luego,
+    $$\phi \Bigl(g_1 f_1 (x_{f_1}) + \cdots + g_n f_n (x_{f_n})\Bigr) = 0,$$
+    pero esto significa que
+    $$g_1 f_1 (x_{f_1}) + \cdots + g_n f_n (x_{f_n}) \ne 1.$$
+
+    Siendo un ideal propio, $I$ está contenido en un ideal maximal
+    $\mathfrak{m} \subset K [x_f]$. Consideremos el campo
+    $K_1 = K [x_f]/\mathfrak{m}$. Por la construcción, todo polinomio no
+    constante $f \in K [x]$ tiene una raíz en $K_1$. En efecto, bastaría
+    considerar el caso cuando $f$ es mónico. Denotemos por $\alpha_f \in K_1$
+    la imagen de $x_f$ en el cociente. Entonces, $f (\alpha_f) = 0$. Notamos que
+    los elementos $\alpha_f$ son algebraicos sobre $K$, y entonces el campo
+    $K_1$, siendo generado por los $\alpha_f$, es una extensión algebraica de
+    $K$.
+
+    De la misma manera, se puede construir una extensión $K_2 / K_1$ tal que
+    todo polinomio no constante $f \in K_1 [x]$ tiene una raíz en $K_2$,
+    etcétera. Esto nos da una torre de extensiones algebraicas
+    $$K \subseteq K_1 \subseteq K_2 \subseteq K_3 \subseteq \cdots$$
+    Pongamos $\overline{K} = \bigcup_{i\ge 1} K_i$.
+    Esta es una extensión algebraica de $K$. Además, para cualquier polinomio no
+    constante $f \in \overline{K} [x]$ sus coeficientes pertenecen a algún $K_n$
+    para $n$ suficientemente grande, así que $f$ tiene una raíz en
+    $K_{n+1}$. Entonces, $\overline{K}$ es un campo algebraicamente cerrado.
+  \end{proof}
+\end{teorema}
+
+\begin{lema}
+  \label{lema:encajes-en-cerradura-algebraica}
+  Sean $\overline{K}/K$ una cerradura algebraica de $K$ y $L/K$ una extensión
+  algebraica. Entonces, existe un encaje
+  \[ \begin{tikzcd}
+    L \ar[>->]{rr}{i} && \overline{K} \\
+    & K\ar[>->]{ul}\ar[>->]{ur}
+  \end{tikzcd} \]
+\end{lema}
+
+La prueba es una aplicación típica del lema de Zorn\footnote{Nuestra
+  construcción de una cerradura algebraica también usa el lema de Zorn, pero
+  escondido en el resultado sobre la existencia de ideales maximales.}.
+
+\begin{proof}
+  Sea $\mathcal{P}$ el conjunto que consiste en pares de elementos $(L',i')$
+  donde $K \subseteq L' \subseteq L$ es una subextensión e $i'$ es un encaje de
+  $L'$ en $\overline{K}$:
+  \[ \begin{tikzcd}[row sep=1em, column sep=1em]
+    L' \ar[>->]{rr}{i'} && \overline{K} \\
+    & K\ar[>->]{ul}\ar[>->]{ur}
+  \end{tikzcd} \]
+  Este conjunto no es vacío: $(K,i) \in \mathcal{P}$. Este conjunto es
+  parcialmente ordenado por la relación
+  $$(L',i') \preceq (L'',i'') \iff L' \subseteq L'' \text{ y } \left.i''\right|_{L'} = i'.$$
+  \[ \begin{tikzcd}[row sep=1em, column sep=1em]
+    L'' \ar[>->]{rrrr}{i''} &&&& \overline{K} \\
+    & L' \ar[>->]{urrr}{i'}\ar[>->]{ul} \\
+    && K\ar[>->]{ul}\ar[>->]{uurr}
+  \end{tikzcd} \]
+  Es fácil comprobar que toda cadena ascendente en $\mathcal{P}$ tiene una cota
+  superior: para una cadena $\{ (L_\alpha,i_\alpha) \}_\alpha$ podemos tomar
+  \[ \begin{tikzcd}[row sep=1em, column sep=1em]
+    \bigcup_\alpha L_\alpha \ar[>->]{rr}{j} && \overline{K} \\
+    & K\ar[>->]{ul}\ar[>->]{ur}
+  \end{tikzcd} \]
+  donde $j (\alpha) = i_\alpha (\alpha)$ si $\alpha \in L_\alpha$.
+  Entonces, el lema de Zorn nos dice que $\mathcal{P}$ tiene un elemento maximal
+  $(F,i)$. Para concluir la prueba, vamos a ver que $F = L$. Todo elemento
+  $x \in L$ es algebraico sobre $K$, y entonces es algebraico sobre $F$. Sea
+  $f= f^x_F \in F [x]$ el polinomio mínimo de $x$ sobre $F$. Tenemos
+  $$F (x) \cong F [x] / (f).$$
+  El polinomio $f$ tiene una raíz $\alpha\in \overline{K}$. Consideremos
+  el homomorfismo
+  \begin{align*}
+    ev_\alpha\colon F [x] & \to \overline{K},\\
+    \sum_{k\ge 0} a_k\,x^k & \mapsto \sum_{k\ge 0} i (a_k)\,\alpha^k.
+  \end{align*}
+  Tenemos $f \in \ker ev_\alpha$, así que este homomorfismo induce un
+  homomorfismo
+  $$i'\colon F (x) \cong F [x]/(f) \to \overline{K}$$
+  que es necesariamente inyectivo, dado que $F (x)$ es un campo, y que extiende a $i$:
+  \[ \begin{tikzcd}[row sep=1em, column sep=1em]
+    F (x) \ar[>->]{rrrr}{i'} &&&& \overline{K} \\
+    & F \ar[>->]{urrr}{i}\ar[>->]{ul} \\
+    && K\ar[>->]{ul}\ar[>->]{uurr}
+  \end{tikzcd} \]
+  Entonces, $(F, i) \preceq (F(x), i')$. Sin embargo, la maximalidad de $(F, i)$
+  implica que $F = F (x)$. Esto se cumple para cualquier $x\in L$, así que
+  $F = L$.
+\end{proof}
+
+De este lema se deduce que las cerraduras algebraicas son isomorfas entre sí.
+
+\begin{teorema}
+  Sean $K \hookrightarrow \overline{K}_1$ y $K \hookrightarrow \overline{K}_2$
+  dos cerraduras algebraicas. Entonces, existe un isomorfismo
+  \[ \begin{tikzcd}[row sep=1em, column sep=1em]
+    \overline{K}_1 \ar{rr}{\cong} && \overline{K}_2 \\
+    & K\ar[>->]{ul}\ar[>->]{ur}
+  \end{tikzcd} \]
+
+  \begin{proof}
+    Aplicando el lema anterior a $L = \overline{K}_1$ y
+    $\overline{K} = \overline{K}_2$, se obtiene un encaje
+    \[ \begin{tikzcd}
+      \overline{K}_1 \ar[>->]{rr}{i} && \overline{K}_2 \\
+      & K\ar[>->]{ul}\ar[>->]{ur}
+    \end{tikzcd} \]
+    Sin embargo, $i$ es necesariamente sobreyectivo. En efecto, un elemento
+    $y \in \overline{K}_2$ es una raíz de algún polinomio mónico irreducible
+    $f\in K [x]$. Luego, $f$ se factoriza como $(x - x_1)\cdots (x - x_n)$ en
+    $\overline{K}_1 [x]$, así que $y = i (x_k)$ para algún $k = 1,\ldots,n$.
+  \end{proof}
+\end{teorema}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extensiones normales}
+
+\begin{proposicion-definicion}
+  Para una extensión finita $K/F$ las siguientes condiciones son equivalentes.
+
+  \begin{enumerate}
+  \item[1)] $K$ es un campo de descomposición de algún polinomio $f \in F[x]$.
+
+  \item[2)] Para una cerradura algebraica $\overline{K}/K$ y $F$-homomorfismo
+    $\sigma\colon K\to \overline{K}$ se tiene $\sigma (K) = K$.
+
+  \item[3)] Para un polinomio irreducible $f \in F[x]$, si $f$ tiene una raíz en
+    $K$, entonces $f$ se descompone en factores lineales en $K[x]$.
+  \end{enumerate}
+
+  En este caso se dice que $K/F$ es una extensión \textbf{normal}.
+
+  \begin{proof}
+    1)$\Rightarrow$2): si $K$ es un campo de descomposición de $f$, entonces
+    $\sigma (K)$ es también un campo de descomposición de $f$, y luego
+    $K = \sigma (K)$.
+
+    2)$\Rightarrow$3): si $\alpha$ es una raíz de $f$, consideremos el campo
+    $F (\alpha) \cong F[x]/(f)$. Ahora si $\beta$ es otra raíz, entonces tenemos
+    un encaje $\sigma\colon F (\alpha) \to \overline{K}$ que envía
+    $\alpha$ a $\beta$. Argumentando como en
+    \ref{lema:encajes-en-cerradura-algebraica}, podemos extenderlo a un encaje
+    $\sigma\colon K\to \overline{K}$ que envía $\alpha$ a $\beta$, pero luego
+    la condición 2) implica que $\beta \in K = \sigma (K)$.
+
+    3)$\Rightarrow$1): bajo la condición 3), $K$ es un campo de descomposición
+    de la familia de polinomios $\{ f^\alpha_F \mid \alpha \in K \}$. Dado que
+    nos interesan extensiones finitas $K/F$, podemos escribir
+    $K = F (\alpha_1,\ldots,\alpha_n)$, y luego $K$ es un campo de
+    descomposición de $f = f^{\alpha_1}_F \cdots f^{\alpha_n}_F$.
+  \end{proof}
+\end{proposicion-definicion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extensiones separables}
+
+\begin{definicion}
+  Sea $F$ un campo y $f\in F [x]$ un polinomio. En un campo de descomposición
+  $K/F$ tenemos
+  $$f = c\,(x-\alpha_1)^{e_1} \cdots (x - \alpha_s)^{e_s},$$
+  donde $\alpha_1,\ldots,\alpha_s \in K$ son diferentes elementos y
+  $e_i \ge 1$. Si $e_i = 1$, se dice que $\alpha_i$ es una \textbf{raíz simple} de
+  $f$ y si $e_i > 1$, se dice que $\alpha_i$ es una \textbf{raíz múltiple} de
+  \textbf{multiplicidad} $e_i$. Si todas las raíces de $f$ son simples, se dice
+  que $f$ es un \textbf{polinomio separable}.
+\end{definicion}
+
+Para un polinomio
+$f = a_n x^n + a_{n-1} x^{n-1} + \cdots + a_1 x + a_0 \in F [x]$
+su \textbf{derivada (formal)} viene dada por
+$f' = n\,a_n\,x^{n-1} + (n-1)\,a_{n-1}\,x^{n-2} + \cdots + a_1$.
+Es fácil comprobar que se cumplen las reglas habituales, como por ejemplo
+$(fg)' = f' g + f g'$.
+
+\begin{proposicion}
+  Un polinomio $f \in F [x]$ tiene una raíz múltiple $\alpha \in F$ si y solo si
+  $f (\alpha) = f' (\alpha) = 0$.
+
+  \begin{proof}
+    Si $\alpha$ es una raíz multiple, entonces $f = (x-\alpha)^2\,g$ para algún
+    polinomio $g\in F [x]$. Luego, tomando las derivadas, se obtiene
+    $f' = 2\,(x-\alpha)\,g + (x-\alpha)^2\,g'$, de donde $f' (\alpha) = 0$.
+
+    Viceversa, si $\alpha \in F$ es una raíz común de $f$ y $f'$, entonces
+    tenemos $f = (x-\alpha)\,g$ para algún $g \in F [x]$, y luego
+    $f' = g + (x-\alpha)\,g'$.  De aquí se sigue que $g = f' - (x-\alpha)\,g'$
+    tiene $\alpha$ como su raíz; es decir, $(x - \alpha) \mid g$. Entonces,
+    $f = (x-\alpha)^2\,h$ para algún $h\in F [x]$.
+  \end{proof}
+\end{proposicion}
+
+\begin{corolario}
+  Un polinomio $f\in F [x]$ es separable si y solo si $\gcd (f,f') = 1$.
+
+  \begin{proof}
+    Sea $K/F$ un campo de descomposición de $f$.
+ 
+    Si $\gcd (f,f') \ne 1$, entonces existe un polinomio no constante
+    $g \in F [x]$ tal que $g \mid f$ y $g \mid f'$. El polinomio $g$ tiene una
+    raíz $\alpha \in K$, y luego $f (\alpha) = f' (\alpha) = 0$, lo que
+    significa que $\alpha$ es una raíz múltiple de $f$ en $K$.
+
+    Viceversa. si $f$ no es separable, entonces existe $\alpha \in K$ tal que
+    $f (\alpha) = f' (\alpha) = 0$. Esto implica que el polinomio mínimo
+    $f^\alpha_F$ divide a $f$ y $f'$, y por ende $\gcd (f,f') \ne 1$.
+  \end{proof}
+\end{corolario}
+
+\begin{corolario}
+  \label{cor:cuando-irreducible-es-separable}
+  Sea $f \in F [x]$ un polinomio irreducible. Si $f' \ne 0$, entonces $f$ es
+  separable.
+
+  \begin{proof}
+    Si $g \mid f$ y $g \mid f'$ y $f$ es irreducible, entonces $g \in F^\times$
+    o $g \sim f$. Sin embargo, en el segundo caso tenemos $\deg (f') < \deg
+    (f)$, así que $g \nmid f'$. Se sigue que $\gcd (f,f') = 1$, y por lo tanto
+    $f$ es separable.
+  \end{proof}
+\end{corolario}
+
+\begin{definicion}
+  Para una extensión algebraica $K/F$ se dice que un elemento $\alpha \in K$ es
+  \textbf{separable} sobre $F$ si el polinomio mínimo de $\alpha$ sobre $F$ es
+  separable. Si todo elemento de $K$ es separable sobre $F$, se dice que $K/F$
+  es una \textbf{extensión separable}.
+\end{definicion}
+
+Para ciertos campos todas las extensiones algebraicas son automáticamente separables.
+
+\begin{definicion}
+  Se dice que un campo $F$ es \textbf{perfecto} si se cumple una de las siguientes
+  condiciones:
+  \begin{enumerate}
+  \item[1)] $\fchar F = 0$,
+  \item[2)] $\fchar F = p$ y todo elemento de $F$ es una $p$-ésima potencia.
+  \end{enumerate}
+\end{definicion}
+
+\begin{ejemplo}
+  Todo campo finito es perfecto. En efecto, si $F$ es finito y $\fchar F = p$,
+  entonces la aplicación $x \mapsto x^p$ es un automorfismo de $F$.
+\end{ejemplo}
+
+\begin{proposicion}
+  Si $F$ es un campo perfecto, entonces todo polinomio irreducible $f \in F [x]$
+  es separable. En particular, toda extensión finita $K/F$ es separable.
+
+  \begin{proof}
+    Gracias a \ref{cor:cuando-irreducible-es-separable}, sería suficiente probar
+    que para todo polinomio irreducible
+    $$f = a_n\,x^n + a_{n-1}\,x^{n-1} + \cdots + a_1\,x + a_0 \in F [x]$$
+    donde $a_n\ne 0$ se tiene
+    $$f' = n\,a_n\,x^{n-1} + (n-1)\,a_{n-1}\,x^{n-2} + \cdots + a_1 \ne 0.$$
+
+    Si $\fchar F = 0$, entonces $n\,a_n \ne 0$ y por ende $f' \ne 0$. Asumamos
+    que $\fchar F = p$ y todo elemento de $F$ es una $p$-ésima potencia. Notamos
+    que si $f' = 0$, entonces $i\cdot a_i = 0$ para todo $i = 1,\ldots,n$; es
+    decir, $a_i = 0$ o $p\mid i$. Esto significa que el polinomio tiene forma
+    $$f = b_m\,x^{mp} + b_{m-1}\,x^{(m-1)\,p} + \cdots + b_1\,x^p + b_0$$
+    para algunos $b_0,b_1,\ldots,b_m \in F$. Por nuestra hipótesis, todo $b_i$ es
+    una potencia $p$-ésima en $F$, así que
+    \[ f = c_m^p\,x^{mp} + c_{m-1}^p\,x^{(m-1)\,p} + \cdots + c_1^p\,x^p + c_0^p
+         = (c_m\,x^m + c_{m-1}\,x^{m-1} + \cdots + c_1\,x + c_0)^p \]
+    (usando que $\fchar F = p$). Pero esto contradice la irreducibilidad de
+    $f$. Entonces, $f'\ne 0$.
+  \end{proof}
+\end{proposicion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Teorema del elemento primitivo}
+
+\begin{teorema}
+  Sea $K/F$ una extensión finita de campos tal que
+  $K = F (\alpha_1,\ldots,\alpha_n)$, donde $\alpha_2,\ldots,\alpha_n \in K$ son
+  separables\footnote{Sic. La separabilidad de $\alpha_1$ no será necesaria en
+    la prueba.}. Luego, existe un elemento $\theta \in K$ tal que
+  $K = F (\theta)$.
+
+  \begin{proof}
+    Consideremos primero el caso de $n = 2$. Sea entonces
+    $K = F (\alpha,\beta)$, donde $\beta$ es separable sobre $F$.
+    Sea $f = f^\alpha_F$ el polinomio mínimo de $\alpha$ sobre $F$ y
+    $g = f^\beta_F$ el polinomio mínimo de $\beta$ sobre $F$. Sea $L/K$ una
+    extensión donde $f$ y $g$ se descomponen en factores lineales y sean
+    $$\alpha_1 = \alpha, \alpha_2, \ldots, \alpha_r \in L$$
+    las raíces diferentes de $f$ en $L$ y sean
+    $$\beta_1 = \beta, \beta_2, \ldots, \beta_s \in L$$
+    las raíces de $g$ (son todas diferentes, dado que $\beta$ es separable).
+
+    Notamos que sin pérdida de generalidad, se puede asumir que $F$ es un campo
+    infinito. En el caso contrario, $K$ también sería un campo finito, y luego
+    $K = F (\theta)$ donde $\theta$ es un generador del grupo cíclico
+    $K^\times$.
+
+    Notamos que $\beta_j \ne \beta_1$ para $j \ne 1$, así que la ecuación
+    $$\alpha_i + x\,\beta_j = \alpha_1 + x\,\beta_1$$
+    tiene a lo sumo una raíz $x\in F$ para cualesquiera $i = 1,\ldots,r$ y
+    $j = 2,\ldots,s$. Gracias a nuestra hipótesis de que $F$ sea infinito,
+    existe un elemento $c\in F$ que es distinto de las raíces de las ecuaciones
+    de arriba:
+    \[ \alpha_i + c\,\beta_j \ne \alpha_1 + c\,\beta_1
+       \quad\text{para }i = 1,\ldots,r, ~ j = 2,\ldots,s. \]
+    Pongamos
+    $$\theta = \alpha_1 + c\,\beta_1 = \alpha + c\,\beta.$$
+    Tenemos $\theta = F (\alpha,\beta)$. Si logramos probar que
+    $\beta \in F (\theta)$, entonces también
+    $\alpha = \theta - c\,\beta \in F (\theta)$ y
+    $F (\alpha,\beta) = F (\theta)$. Notamos que
+    $$g (\beta) = 0, \quad f (\alpha) = f (\theta - c\,\beta) = 0$$
+    y los polinomios $g \in F [x]$ y $f (\theta - c\,x) \in F (\theta) [x]$ no
+    pueden tener más de una raíz común por nuestra elección de $c$: se tiene
+    $$\theta - c\,\beta_j \ne \alpha_i\quad\text{para }i = 1,\ldots,r, ~ j = 2,\ldots,s,$$
+    así que $f (\theta - c\,\beta_j) \ne 0$ para $j \ne 1$. Calculamos
+    $$\gcd (g, f (\theta - c\,x)) = h \quad\text{en }F (\theta) [x]$$
+    para algún polinomio mónico $h \in F (\theta) [x]$. Notamos que
+    $\deg (h) > 0$: dado que $g (\beta) = f (\theta - c\,\beta) = 0$,
+    ambos polinomios $g$ y $f (\theta - c\,x)$ deben ser divisibles por el
+    polinomio mínimo $f^\beta_{F (\theta)}$. En $L [x]$ el polinomio $h$ se
+    descompone en factores lineales y toda raíz de $h$ es una raíz de $g$ y
+    $f (\theta - c\,x)$. Pero $\beta$ es la única raíz común de $g$ y
+    $f (\theta - c\,x)$ y $g$ no tiene raíces múltiples, así que necesariamente
+    $h = x - \beta$. Esto nos permite concluir que $\beta \in F (\theta)$.
+
+    Esto termina la prueba en el caso de $n = 2$. En el caso general, podemos
+    proceder por inducción sobre $n$. Asumamos que el resultado es válido para
+    $n-1$ y se tiene
+    $$F (\alpha_1,\ldots,\alpha_{n-1}) = F (\eta)$$
+    para algún $\eta \in K$. Luego,
+    $$F (\alpha_1,\ldots,\alpha_n) = F (\eta,\alpha_n) = F (\theta)$$
+    por el caso de dos generadores.
+  \end{proof}
+\end{teorema}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Lema de Dedekind}
+
+Para un grupo $G$ y un campo $K$ un \textbf{carácter} (multiplicativo) es un
+homomorfismo $\chi\colon G\to K^\times$. El siguiente resultado es bastante
+fácil de probar, pero es de mucha importancia, así que merece una sección
+separada.
+
+\begin{lema}[Dedekind; independencia lineal de caracteres]
+  \label{lema:independencia-de-caracteres}
+  Dado un grupo $G$ y un campo $K$, consideremos diferentes caracteres
+  multiplicativos $\chi_1,\ldots,\chi_n\colon G\to K^\times$. Estos son
+  necesariamente linealmente independientes sobre $K$: si para algunos
+  $c_1,\ldots,c_n \in K$ se cumple
+  $$c_1 \chi_1 (g) + \cdots + c_n \chi_n (g) = 0 \quad\text{para todo }g\in G,$$
+  entonces $c_1 = \cdots = c_n = 0$.
+
+  \begin{proof}
+    Inducción sobre $n$, el caso base siendo $n = 1$. Supongamos que
+    el resultado es válido para $n-1$ caracteres.
+    Consideremos una dependencia lineal
+    \[ \tag{*} c_1 \chi_1 (g) + \cdots + c_{n-1} \chi_{n-1} (g) + c_n \chi_n (g)
+       = 0 \quad\text{para todo }g\in G. \]
+    Dado que los caracteres son diferentes, existe $g_0 \in G$ tal que
+    $\chi_1 (g_0) \ne \chi_n (g_0)$. Sustituyendo $g_0 g$ en lugar de $g$,
+    se obtiene
+    \[ \tag{**} c_1 \chi_1 (g_0) \chi_1 (g) + \cdots +
+       c_{n-1} \chi_{n-1} (g_0) \chi_{n-1} (g) + c_n \chi_n (g_0) \chi_n (g) = 0. \]
+    Ahora si multiplicamos (*) por $\chi_n (g_0)$ y luego restamos el resultado
+    de (**), nos queda
+    \[ c_1 (\chi_1 (g_0) - \chi_n (g_0)) \chi_1 (g) + \cdots +
+       c_{n-1} (\chi_{n-1} (g_0) - \chi_n (g_0)) \chi_{n-1} (g) = 0. \]
+    Entonces, por la hipótesis de inducción,
+    $c_1 (\chi_1 (g_0) - \chi_n (g_0)) = 0$, pero dado que
+    $\chi_1 (g_0) \ne \chi_n (g_0)$, tenemos que concluir que $c_1 = 0$.
+    El mismo razonamiento nos dice que $c_2 = \cdots = c_{n-1} = 0$, pero luego
+    también $c_n = 0$.
+  \end{proof}
+\end{lema}
+
+El lema de Dedekind será útil para caracteres $\sigma\colon K^\times \to K^\times$
+que vienen de automorfismos $\sigma\colon K\to K$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Automorfismos de campos}
+
+Para una extensión de campos $K/F$ denotarémos por $\Aut (K/F)$ el grupo de
+automorfismos $\sigma\colon K\to K$ tales que
+$\left.\sigma\right|_F = id$. Estos se llaman \textbf{$F$-automorfismos} de $K$.
+\[ \begin{tikzcd}[row sep=1em, column sep=1em]
+  K \ar{rr}{\sigma} && K \\
+   & F\ar{ul}\ar{ur}
+\end{tikzcd} \]
+Todos los automorfismos de $K$ serán denotados por $\Aut (K)$.
+
+\begin{proposicion}
+  Sean $K/F$ una extensión finita de campos y $\sigma\colon K\to K$ un
+  $F$-automorfismo.
+
+  \begin{enumerate}
+  \item[1)] Si $K = F (\alpha_1,\ldots,\alpha_n)$, entonces $\sigma$ está
+    definido por las imagenes de los generadores $\alpha_i$.
+
+  \item[2)] Para $\alpha \in K$ sea $f = f^\alpha_F$ el polinomio mínimo
+    correspondiente. En este caso $f (\sigma (\alpha)) = 0$ y $f$ es también
+    el polinomio mínimo de $\sigma (\alpha)$.
+
+  \item[3)] $\Aut (K/F)$ es un grupo finito.
+  \end{enumerate}
+
+  \begin{proof}
+    Las partes 1) y 2) se siguen del hecho de que $\sigma$, siendo un
+    automorfismo, preserva sumas y productos, y entonces todos los polinomios:
+    $\sigma (f (\alpha)) = f (\sigma (\alpha))$.
+
+    En particular, la parte 2) implica que hay solamente un número finito de
+    $F$-automorfismos $\sigma\colon K\to K$.
+  \end{proof}
+\end{proposicion}
+
+La siguiente proposición relaciona subcampos de $K$ y subgrupos de $\Aut (K)$.
+
+\begin{proposicion}
+  Sea $K$ un campo.
+
+  \begin{enumerate}
+  \item[1)] Dado un subgrupo $H \subseteq \Aut (K)$, el conjunto
+    $$K^H = \{ \alpha \in K \mid \sigma (\alpha) = \alpha\text{ para todo }\sigma\in H \}$$
+    es un subcampo de $K$, llamado el \textbf{subcampo fijo} de $H$.
+
+  \item[2)] Para un subcampo $F\subseteq K$ se tiene
+    $F \subseteq K^{\Aut (K/F)}$.
+
+  \item[3)] Para un subgrupo $H \subseteq \Aut (K)$ se tiene
+    $H \subseteq \Aut (K/K^H)$.
+
+  \item[4)] Para subcampos $F_1 \subseteq F_2 \subseteq K$ se tiene
+    $\Aut (K/F_2) \subseteq \Aut (K/F_1)$.
+
+  \item[5)] Para subgrupos $H_1 \subseteq H_2 \subseteq \Aut (K)$ se tiene
+    $K^{H_2} \subseteq K^{H_1}$.
+
+  \item[6)] Si $F = K^H$ para algún subgrupo $H \subseteq \Aut (K)$, entonces
+    $F = K^{\Aut (K/F)}$.
+    
+  \item[7)] Si $H = \Gal (K/F)$ para algún subcampo $F \subseteq K$, entonces
+    $H = \Aut (K/K^H)$.
+  \end{enumerate}
+
+  \begin{proof}
+    1)--5) se deja al lector. En la parte 6), notamos que
+    $H \subseteq \Aut (K/F)$ por la parte 3), y luego
+    $K^{\Aut (K/F)} \subseteq K^H = F$. Por otra parte,
+    $F \subseteq K^{\Aut (K/F)}$ según la parte 2).
+
+    De manera similar, en 7) tenemos $F \subseteq K^{\Aut (K/F)}$, y luego
+    $\Aut (K/K^H) = \Aut (K/K^{\Aut (K/F)}) \subseteq \Aut (K/F) = H$.
+    Por otra parte, $H \subseteq \Aut (K/K^H)$ según 3).
+  \end{proof}
+\end{proposicion}
+
+\begin{proposicion}
+  \label{prop:Aut(K/F)-le-K:F}
+  Para una extensión finita $K/F$ se tiene $|\Aut (K/F)| \le [K : F]$.
+
+  \begin{proof}
+    Sean $\sigma_1, \ldots, \sigma_m$ los elementos de $\Aut (K/F)$ y
+    $\alpha_1, \ldots, \alpha_n$ una base de $K$ sobre $F$. Supongamos que
+    $n < m$. En este caso habrá dependencia $K$-lineal entre las filas de
+    la siguiente matriz de $m\times n$ con entradas en $K$:
+    \[ \begin{pmatrix}
+      \sigma_1 (\alpha_1) & \sigma_1 (\alpha_2) & \cdots & \sigma_1 (\alpha_n) \\
+      \sigma_2 (\alpha_1) & \sigma_2 (\alpha_2) & \cdots & \sigma_2 (\alpha_n) \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \sigma_m (\alpha_1) & \sigma_m (\alpha_2) & \cdots & \sigma_m (\alpha_n)
+    \end{pmatrix} \]
+    Esto significa que existen $c_i \in K$, no todos nulos, tales que
+    $$c_1 \sigma_1 (\alpha_j) + \cdots + c_n \sigma_n (\alpha_j) = 0$$
+    para todo $j = 1,\ldots,n$. Ahora para cualquier elemento $\alpha \in K$
+    podemos escribir $\alpha = \sum_j a_j \alpha_j$, y luego
+    $$\sum_i c_i \sigma_i (\alpha) = \sum_j a_j \sum_i c_i \sigma_i (\alpha_j) = 0.$$
+    Pero esto significa que los caracteres $\sigma_i\colon K^\times \to K^\times$
+    son linealmente dependientes, lo cual contradice el lema de Dedekind.
+  \end{proof}
+\end{proposicion}
+
+\begin{lema}
+  \label{lema:automorphism-group-and-degree}
+  Sean $K/F$ una extensión finita y $G \subseteq \Aut (K)$ tal que $F = K^G$.
+  En este caso $|G| = [K : F]$ y $G = \Aut (K/F)$.
+
+  \begin{proof}
+    Sea $G = \{ \sigma_1, \ldots, \sigma_m \}$ y
+    $\alpha_1, \ldots, \alpha_n \in K$ una base de $K$ sobre $F$.
+    La proposición anterior nos dice que $n \le m$. Supongamos que
+    $n < m$ y consideremos la matriz
+    \[ \begin{pmatrix}
+      \sigma_1 (\alpha_1) & \sigma_1 (\alpha_2) & \cdots & \sigma_1 (\alpha_n) \\
+      \sigma_2 (\alpha_1) & \sigma_2 (\alpha_2) & \cdots & \sigma_2 (\alpha_n) \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \sigma_m (\alpha_1) & \sigma_m (\alpha_2) & \cdots & \sigma_m (\alpha_n)
+    \end{pmatrix} \]
+    Hay una dependencia $K$-lineal entre las columnas. Sea $k$ el mínimo posible    
+    tal que algunas $k$ columnas son linealmente dependientes. Después de
+    renumerar los $\alpha_j$, podemos suponer que la dependencia lineal es entre
+    las primeras $k$ columnas:
+    \[ \tag{*} c_1\,\sigma_i (\alpha_1) + \cdots + c_k\,\sigma_i (\alpha_k) = 0 \]
+    para todo $i = 1,\ldots,m$, donde $c_1,\ldots,c_k \in K^\times$. Además, podemos
+    normalizar los coeficientes y asumir que $c_k = 1$.
+
+    Para cualquier elemento $\sigma \in G$ tenemos
+    $\{ \sigma\sigma_j \mid i = 1,\ldots,m \} = G$,
+    así que la aplicación de $\sigma$ a la ecuación (*) nos
+    permite concluir que
+    \[ \tag{**} \sigma (c_1)\,\sigma_i (\alpha_1) + \cdots + \sigma(c_k)\,\sigma_i (\alpha_k) = 0 \]
+    para todo $i$. Ahora restando (**) de (*) y tomando en cuenta que $c_k = 1$,
+    se obtiene
+    \[ (c_1 - \sigma (c_1))\,\sigma_i (\alpha_1) + \cdots + (c_{k-1} - \sigma (c_{k-1}))\,\sigma_i (\alpha_k) = 0, \]
+    y luego por la minimalidad de $k$ tenemos $c_j = \sigma (c_j)$ para todo $j$.
+
+    Este argumento es válido para todo $\sigma \in G$ y demuestra que
+    $c_1,\ldots,c_k \in K^G$. Pero por nuestra hipótesis, $K^G = F$. Entonces, usando
+    que los automorfismos $\sigma_j$ son $F$-lineales, (*) nos da
+    $$\sigma_j (c_1\,\alpha_1 + \cdots + c_k\,\alpha_k) = 0,$$
+    y luego $c_1\,\alpha_1 + \cdots + c_k\,\alpha_k = 0$, pero esto contradice
+    la independencia lineal de los $\alpha_i$.
+  \end{proof}
+\end{lema}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Extensiones de Galois}
+
+La correspondencia entre los subgrupos y subcampos funciona bien para las
+extensiones de Galois.
+
+\begin{proposicion-definicion}
+  Se dice que una extensión finita $K/F$ es una \textbf{extensión de Galois}
+  si se cumple una de las siguientes condiciones equivalentes:
+  \begin{enumerate}
+  \item[1)] $|\Aut (K/F)| = [K : F]$,
+
+  \item[2)] $F = K^{\Aut (K/F)}$,
+
+  \item[3)] $K/F$ es normal y separable,
+
+  \item[4)] $K$ es el campo de descomposición de un polinomio separable
+    $f \in F[x]$.
+  \end{enumerate}
+
+  \begin{proof}
+    Para la implicación 1)$\Rightarrow$2) supongamos que se cumple
+    $|\Aut (K/F)| = [K : F]$. En este caso el lema
+    \ref{lema:automorphism-group-and-degree} implica que
+    $|\Aut (K/K^{\Aut (K/F)})| = [K : K^{\Aut (K/F)}]$. Entonces,
+    $F \subseteq K^{\Aut (K/F)} \subseteq K$ y $[K : F] = [K : K^{\Aut (K/F)}]$,
+    así que $F = K^{\Aut (K/F)}$.
+
+    % Notamos que la implicación 2)$\Rightarrow$1) es el contenido
+    % del lema \ref{lema:automorphism-group-and-degree}.
+
+    \vspace{1em}
+
+    Para probar 2)$\Rightarrow$3), para un elemento $\alpha \in K$,
+    sean $\alpha_1, \ldots, \alpha_n$ diferentes elementos del conjunto finito
+    $\{ \sigma (\alpha) \mid \sigma \in \Aut (K/F) \}$.
+    Consideremos el polinomio
+    $$f(x) = (x - \sigma (\alpha_1))\cdots (x - \sigma (\alpha_n)) \in K[x].$$
+    Se tiene $\sigma (f) = f$, para todo $\sigma \in \Aut (K/F)$, así que los
+    coeficientes de $f$ están en $K^{\Aut (K/F)} = F$. Notamos que para todo
+    $\sigma \in \Aut (K/F)$ el elemento $\sigma (\alpha)$ es una raíz del
+    polinomio mínimo $f^\alpha_F$, y en particular $f^\alpha_F \mid f$. Se sigue
+    que $f^\alpha_F$ se descompone en diferentes factores lineales en
+    $K [x]$, así que $f^\alpha_F$ es separable.
+
+    Esto establece la separabilidad de $K/F$. Por otra parte, si
+    $K = F (\alpha_1,\ldots,\alpha_n)$, entonces nuestro argumento demuestra que
+    $K$ es el campo de descomposición del polinomio
+    $f = f^{\alpha_1}_F\cdots f^{\alpha_n}_F$, así que $K$ es normal.
+
+    \vspace{1em}
+
+    Para la implicación 3)$\Rightarrow$4), escribamos
+    $K = F (\alpha_1,\ldots,\alpha_n)$. Por la normalidad, todo polinomio mínimo
+    $f^{\alpha_i}_F$ se descompone en factores lineales en $K [x]$. Por otra parte,
+    la separabilidad significa que cada $f^{\alpha_i}_F$ no tiene raíces
+    múltiples. Podemos tomar $f = f^{\alpha_1}_F\cdots f^{\alpha_n}_F$. Puede ser que
+    $f^{\alpha_i}_F$ y $f^{\alpha_j}_F$ tienen una raíz común, pero en este caso
+    $f^{\alpha_i}_F = f^{\alpha_j}_F$. Quitando los factores repetidos, podemos
+    asegurarnos que $f$ es separable.
+
+    \vspace{1em}
+
+    Para la implicación 4)$\Rightarrow$1), sea $K$ un campo de descomposición de
+    $f \in F[x]$. Consideremos el grupo de automorfismos $G = \Aut (K/F)$. Vamos
+    a probar que $|G| = [K : F]$ por inducción sobre $[K : F]$. El caso base
+    es cuando $K = F$. Para el paso inductivo, si $[K : F] > 1$, existe una raíz
+    $\alpha \in K$ de $f$ tal que $\alpha \notin F$.  En este caso
+    $[K : F (\alpha)] < [K : F]$, así que por la hipótesis de inducción el grupo
+    de automorfismos $H = \Aut (K/F (\alpha)) \subset G$ satisface
+    $|H| = [K : F (\alpha)]$.
+
+    Sean $\alpha_1, \ldots, \alpha_s$ las raíces del polinomio mínimo
+    $f^\alpha_F$. Estas son distintas y $s = \deg (f^\alpha_F) = [F (\alpha) : F]$.
+    Notamos que para toda raíz $\alpha_i$, usando
+    \ref{lema:extesion-de-isomorfismos-a-F(alpha)} y
+    \ref{lema:extesion-de-isomorfismos-a-campo-de-desc}, se obtiene un
+    automorfismo $\sigma_i \in G$ tal que $\sigma_i (\alpha) = \alpha_i$:
+    \[ \begin{tikzcd}
+      K\ar[-]{d} \ar[dashed]{r}{\sigma_i} & K\ar[-]{d} \\
+      F (\alpha)\ar[-]{d} \ar{r}{\cong} & F (\alpha_i)\ar[-]{d} \\
+      F \ar[equals]{r} & F
+    \end{tikzcd} \]
+
+    Notamos que $\sigma_i H \ne \sigma_j H$ para $i \ne j$. En efecto,
+    si $\sigma_i H = \sigma_j H$, entonces, dado que $H = \Aut (K/F(\alpha))$,
+    esto implicaría $\sigma_i (\alpha) = \sigma_j (\alpha)$.
+    De esta manera hemos encontrado $s = [F (\alpha) : F]$ diferentes
+    elementos en el cociente $G/H$. Ahora
+    $$|G| = [G : H]\cdot |H| \ge [F (\alpha) : F]\cdot [K : F (\alpha)] = [K : F].$$
+    La otra desigualdad $|G| \le [K : F]$ se cumple en cualquier caso
+    (véase \ref{prop:Aut(K/F)-le-K:F}).
+  \end{proof}
+\end{proposicion-definicion}
+
+\begin{definicion}
+  Para una extensión de Galois $K/F$ el grupo de automorfismos $\Aut (K/F)$ se
+  conoce como el \textbf{grupo de Galois} y se denota por $\Gal (K/F)$.
+\end{definicion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Teorema fundamental de la teoría de Galois}
+
+**TODO**
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Campos finitos}
+
+Todo campo finito $F$ necesariamente tiene característica $p$, y entonces es una
+extensión del campo $\FF_p = \ZZ/p\ZZ$. Siendo un $\FF_p$-espacio vectorial,
+$F$ debe tener $p^n$ elementos.
+
+\begin{teorema}
+  Para todo primo $p$ y $n = 1,2,3,\ldots$ existe un campo finito $\FF$ de $p^n$
+  elementos; específicamente, este es un campo de descomposición del polinomio
+  separable $x^{p^n} - x \in \FF_p [x]$.
+
+  En particular, $\FF$ es único salvo isomorfismo, y $\FF/\FF_p$ es una
+  extensión de Galois.
+
+  \begin{proof}
+    Consideremos una extensión $\FF/\FF_p$. Notamos que el polinomio
+    $f = x^{p^n} - x \in \FF_p [x]$ es separable, dado que tenemos $f' = -1$,
+    y luego $\gcd (f,f') = 1$.
+
+    \begin{enumerate}
+    \item[1)] Sea $\FF/\FF_p$ un campo de descomposición de $f$. En este caso
+      $\FF$ contiene $p^n$ raíces distintas de $f$. Usando que $\fchar \FF = p$,
+      no es difícil verificar que las raíces de $f$ forman un subcampo de
+      $\FF$. Por la minimalidad de campos de descomposición, esto significa
+      que $\FF$ consiste precisamente en las raíces de $f$ y $|\FF| = p^n$.
+
+    \item[2)] Viceversa, notamos que si $\FF$ es un campo de $p^n$ elementos,
+      entonces $\FF$ tiene característica $p$ y $\FF_p \subseteq \FF$. El grupo
+      multiplicativo $\FF^\times$ tiene orden $p^n-1$, así que todo elemento
+      $\alpha\in\FF^\times$ satisface $\alpha^{p^n-1} = 1$ según el teorema de
+      Lagrange, así que $\alpha^{p^n} = \alpha$. Para $\alpha = 0$ esto también
+      trivialmente se cumple. Luego, todos los $p^n$ elementos de $\FF$ son
+      raíces del polinomio $f= x^{p^n} - x \in \FF_p [x]$ de grado $p^n$, así
+      que $\FF$ es un campo de descomposición de $f$. Este es único salvo
+      isomorfismo. \qedhere
+    \end{enumerate}
+  \end{proof}
+\end{teorema}
+
+En vista del último resultado, normalmente un campo finito de $p^n$ elementos se
+denota por $\FF_{p^n}$, siempre tomando en cuenta que este está bien definido
+salvo isomorfismo.
+
+\vspace{1em}
+
+El grupo multiplicativo de un campo finito es cíclico, lo que puede ser deducido
+de la siguiente observación general de la teoría de grupos.
+
+\begin{lema}
+  Sea $G$ un grupo de orden finito $n$. Supongamos que para todo
+  $d\mid n$ se cumple
+  \[ \tag{*} \# \{ x\in G \mid x^d = 1 \} \le d. \]
+  Entonces $G$ es cíclico.
+
+  \begin{proof}
+    Si $G$ tiene un elemento $g$ de orden $d$, entonces por el teorema de
+    Lagrange tenemos necesariamente $d \mid n$. Ahora $g$ genera el subgrupo
+    $\langle g\rangle$ que es cíclico de orden $d$. Todo elemento $h\in G$ tal
+    que $h^d = 1$ pertenece a este subgrupo gracias a la hipótesis (*), y si $h$
+    tiene orden $d$, entonces es otro generador de $\langle g\rangle$. En total
+    este subgrupo tiene $\phi (d)$ generadores. Entonces, el número de elementos
+    de orden $d$, donde $d \mid n$, es igual a $0$ o $\phi (d)$. De hecho,
+    el primer caso no es posible: la fórmula $\sum_{d\mid n} \phi (d) = n$
+    demuestra que si para algún $d\mid n$ el grupo $G$ no tiene elementos de
+    orden $d$, entonces $|G| < n$. En particular, $G$ debe tener un elemento de
+    orden $n$ y por lo tanto es cíclico.
+  \end{proof}
+\end{lema}
+
+\begin{corolario}
+  Si $K$ es un campo y $G$ un subgrupo finito del grupo multiplicativo
+  $K^\times$, entonces $G$ es cíclico. En particular, para un campo finito
+  $K$ el grupo $K^\times$ es cíclico.
+
+  \begin{proof}
+    Para un campo, la ecuación polinomial $x^d - 1 = 0$ tiene como
+    máximo $d$ soluciones. Entonces, se cumple la hipótesis
+    del lema anterior.
+  \end{proof}
+\end{corolario}
+
+En particular, si $K = \FF_{p^n}$ es un campo finito de $p^n$ elementos y
+$\alpha$ es un generador multiplicativo de $K^\times$, tenemos
+$K = \FF_p (\alpha)$. El polinomio mínimo de $\alpha$ sobre $\FF_p$
+es algún polinomio irreducible en $\FF_p [x]$ de grado $n$.
+
+\begin{teorema}
+  Para un campo finito $\FF_{p^n}$ el grupo $\Gal (\FF_{p^n}/\FF_p)$ es cíclico
+  de orden $n$, generado por el \term{automorfismo de Frobenius}
+  $F\colon x \mapsto x^p$.
+
+  \begin{proof}
+    Notamos primero que $F$ es un automorfismo. Para cualesquiera
+    $x,y\in \FF_{p^n}$ tenemos obviamente $(xy)^p = x^p\,y^p$, y para las sumas
+    se tiene $(x + y)^p = x^p + y^p$, usando que estamos en característica $p$.
+    Esto demuestra que $F\colon \FF_{p^n} \to \FF_{p^n}$ es un homomorfismo.
+    Ahora $F$ es automáticamente inyectivo, pero ya que $\FF_{p^n}$ es finito,
+    $F$ es también sobreyectivo.
+
+    El grupo multiplicativo $\FF_{p^n}^\times$ es cíclico y podemos escoger un
+    generador $\alpha \in \FF_{p^n}^\times$. Todo automorfismo
+    $\sigma \in \Gal (\FF_{p^n}/\FF_p)$ está definido por la imagen de $\alpha$,
+    y de allí es fácil ver que las potencias del automorfismo de Frobenius
+    $F^k\colon x\mapsto x^{p^k}$ son distintas para $k = 0, \ldots, n-1$.
+    Esto nos da $n$ diferentes automorfismos de $\FF_{p^n}$, pero sabemos que
+    en general $|\Gal (\FF_{p^n}/\FF_p)| = [\FF_{p^n} : \FF_p] = n$, así que
+    acabamos de describir todos los automorfismos.
+  \end{proof}
+\end{teorema}
+
+La teoría de Galois nos da la siguiente descripción de las subextensiones
+de $\FF_{p^n}/\FF_p$.
+
+\begin{corolario}
+  Los subcampos de un campo finito $\FF_{p^n}$ corresponden a los divisores de
+  $n$: son precisamente
+  $$\FF_{p^d} = \{ x\in \FF_{p^n} \mid x^{p^d} = x \}.$$
+\end{corolario}
+
+\begin{comentario}
+  Respecto a las inclusiones $\FF_{p^d} \subset \FF_{p^n}$, podemos tomar
+  $$\FF_{p^\infty} = \bigcup_{n\ge 1} \FF_{p^n}.$$
+  A saber, los elementos de $\FF_{p^\infty}$ son $x\in \FF_{p^m}$ e
+  $y \in \FF_{p^n}$, y para calcular $x\,y$ o $x\pm y$, hay que encajar $x$ e $y$
+  en $\FF_{p^{\lcm (m,n)}}$. Esto nos da una extensión infinita de $\FF_p$.
+  Todo polinomio $f \in \FF_{p^\infty} [x]$ tendrá sus coeficientes en algún campo
+  finito $\FF_{p^n}$ para $n$ suficientemente grande, y el campo de descomposición
+  de $f$, siendo una extensión finita de $\FF_{p^n}$, también será de la forma
+  $\FF_{p^N}$ y será un subcampo de $\FF_{p^\infty}$. Esto demuestra que
+  $\FF_{p^\infty}$ es un campo algebraicamente cerrado. Siendo la unión de
+  extensiones finitas de $\FF_p$, es una extensión algebraica de
+  $\FF_p$. Entonces, $\FF_{p^\infty}$ es una cerradura algebraica de $\FF_p$.
+
+  No es difícil calcular que el grupo de automorfismos $\Aut (\FF_{p^\infty})$
+  es isomorfo al grupo de enteros profinitos $\widehat{\ZZ}$.
+\end{comentario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Campos linealmente disjuntos}
+
+**TODO**
