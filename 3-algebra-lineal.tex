@@ -1529,28 +1529,32 @@ linealmente disjuntos.
   Se dice que $K$ y $K'$ son \textbf{linealmente disjuntos} si se cumple una
   de las siguientes condiciones equivalentes:
   \begin{enumerate}
-  \item[a)] el homomorfismo de $k$-álgebras
+  \item[a)] el homomorfismo de $\QQ$-álgebras
     $$K\otimes_\QQ K'\to K K', \quad x\otimes y \mapsto xy$$
-    es inyectivo;
+    es un isomorfismo;
 
-  \item[b)] si $\alpha_1, \ldots, \alpha_n$ es una base de $K$ sobre $\QQ$, esta
-    es linealmente independiente sobre $K'$;
+  \item[a${}'$)] el mismo homomorfismo de $\QQ$-álgebras es inyectivo;
 
-  \item[c)] si $\alpha_i$ y $\alpha'_j$ son bases de $K$ y $K'$ respectivamente,
-    entonces $\alpha_i \alpha'_j$ es una base de $K K'$;
+  \item[b)] si $\alpha_1, \ldots, \alpha_m$ es una base de $K$ sobre $\QQ$,
+    esta es linealmente independiente sobre $K'$;
+
+  \item[b${}'$)] si $\beta_1, \ldots, \beta_n$ es una base de $K'$ sobre $\QQ$,
+    esta es linealmente independiente sobre $K$;
+
+  \item[c)] si $\alpha_i$ y $\beta_j$ son bases de $K$ y $K'$ respectivamente,
+    entonces $\alpha_i \beta_j$ es una base de $K K'$;
 
   \item[d)] $[KK' : \QQ] = [K : \QQ]\cdot [K' : \QQ]$.
   \end{enumerate}
 \end{definicion}
 
-Para más detalles, véase por ejemplo \cite[Chapter~V, \S~20]{Morandi-GTM167}.
+Para más detalles, véase \S\ref{sec:campos-linealmente-disjuntos}.
 
 \begin{comentario}
   Un criterio útil para ver si dos campos son linealmente disjuntos es
   el siguiente: si $K/\QQ$ y $K'/\QQ$ son extensiones finitas de Galois y
   $K \cap K' = \QQ$, entonces $K$ y $K'$ son linealmente disjuntos.
-  Esto se sigue del \textbf{teorema de irracionalidades naturales}
-  (véase \cite[Chapter~I, Theorem~5.5]{Morandi-GTM167}).
+  Véase \ref{prop:irracionalidades-naturales} para la prueba.
 \end{comentario}
 
 Para calcular el anillo de enteros del compositum de campos, ocuparemos

@@ -1366,7 +1366,141 @@ de $\FF_{p^n}/\FF_p$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Campos linealmente disjuntos}
+\label{sec:campos-linealmente-disjuntos}
 
-**TODO**
+En esta sección vamos a revisar la noción de campos linealmente disjuntos. Para
+nuestros propósitos, será suficiente asumir que las extensiones son finitas.
 
-**TODO** Mencionar teorema de irracionalidades naturales.
+\begin{definicion}
+  Para dos extensiones finitas $K/F$ y $L/F$ adentro de un campo común
+  (por ejemplo, adentro de una cerradura algebraica fija $\overline{F}$),
+  el subcampo más pequeño que contiene a $K$ y $L$ se llama el
+  \textbf{compositum} de $K$ y $L$ y se denota por $KL$.
+  \[ \begin{tikzcd}[row sep=1em,column sep=1em]
+    & \overline{F}\ar[-]{d} \\
+    & KL\ar[-]{dl}\ar[-]{dr} \\
+    K\ar[-]{dr} & & L\ar[-]{dl} \\
+    & F
+  \end{tikzcd} \]
+\end{definicion}
+
+Si $K = F (\alpha_1,\ldots,\alpha_m)$ y $L = F (\beta_1,\ldots,\beta_n)$,
+está claro que $KL = F (\alpha_1,\ldots,\alpha_m,\beta_1,\ldots,\beta_n)$.
+En términos de bases sobre $F$, tenemos el siguiente resultado.
+
+\begin{lema}
+  Sean $K/F$ y $L/F$ extensiones finitas, $\alpha_1,\ldots,\alpha_n$
+  una base de $K$ sobre $F$ y $\beta_1,\ldots,\beta_m$ una base de
+  $L$ sobre $F$. Entonces, los productos $\alpha_i\beta_j$ generan
+  $KL$ como un espacio vectorial sobre $F$. En particular,
+  $$[KL : F] \le [K : F]\cdot [L : F].$$
+
+  \begin{proof}
+    Denotemos por $A$ el espacio $F$-lineal generado por los $\alpha_i\beta_j$.
+    Está claro que $A$ está cerrado respecto a sumas y productos. Además, $A$
+    tiene dimensión finita sobre $F$, así que para cualquier elemento no nulo
+    $x \in A$ tenemos $F [x] = F (x)$. En particular,
+    $x^{-1} \in F [x] \subseteq A$, lo que demuestra que $A$ está cerrado
+    respecto a inversos y es un campo. Está claro que $A = KL$.
+  \end{proof}
+\end{lema}
+
+Note que no estamos afirmando que los $\alpha_i \beta_j$ forman una \emph{base}
+de $KL$. Esto es falso en general. Por ejemplo, si $K = L$, entonces obviamente
+$KL = K$ tiene dimensión menor que $[K : F]\cdot [L : F]$. Otro ejemplo más
+interesante: para los campos $K = \QQ (\sqrt{2},\sqrt{3})$ y
+$L = \QQ (\sqrt{2},\sqrt{5})$ el compositum
+$KL = \QQ (\sqrt{2},\sqrt{3},\sqrt{5})$ tiene dimensión $8$ sobre $\QQ$.
+En el caso cuando $[KL : F] = [K : F]\cdot [L : F]$, se dice que los campos
+son linealmente disjuntos.
+
+\begin{proposicion-definicion}
+  Se dice que $K$ y $L$ son \textbf{linealmente disjuntos} si se cumple una de
+  las siguientes condiciones equivalentes:
+  \begin{enumerate}
+  \item[a)] el homomorfismo de $F$-álgebras
+    $$K\otimes_F L\to K L, \quad x\otimes y \mapsto xy$$
+    es un isomorfismo;
+
+  \item[a${}'$)] el mismo homomorfismo de $F$-álgebras es inyectivo;
+
+  \item[b)] si $\alpha_1, \ldots, \alpha_m$ es una base de $K$ sobre $F$, esta
+    es linealmente independiente sobre $L$;
+
+  \item[b${}'$)] si $\beta_1, \ldots, \beta_n$ es una base de $L$ sobre $F$,
+    esta es linealmente independiente sobre $K$;
+
+  \item[c)] si $\alpha_i$ y $\beta_j$ son bases de $K$ y $L$ respectivamente,
+    entonces $\alpha_i \beta_j$ es una base de $K L$;
+
+  \item[d)] $[KL : F] = [K : F]\cdot [L : F]$.
+  \end{enumerate}
+
+  \begin{proof}
+    El lema anterior implica que la aplicación $K\otimes_F L\to K L$ es siempre
+    sobreyectiva. Esto demuestra la equivalencia entre a) y a${}'$).
+
+    Ahora supongamos que se cumple la condición b) y $\alpha_1,\ldots,\alpha_m$
+    es una base de $K$ sobre $F$ y $\beta_1, \ldots, \beta_n$ es una base de
+    $L$ sobre $F$. En este caso $\alpha_i\otimes\beta_j$ es una base
+    de $L\otimes_F K$ sobre $F$. Si un elemento
+    $\sum_{i,j} a_{ij} \alpha_i\otimes \beta_j \in K\otimes_F L$
+    está en el núcleo de la aplicación $K\otimes_F L\to K L$, entonces
+    $\sum_{i,j} a_{ij} \alpha_i\beta_j = 0$, pero luego $a_{ij} \beta_j = 0$
+    para todo $j$ por la hipótesis b). Esto significa que el núcleo es nulo.
+
+    Viceversa, supongamos que la aplicación $K\otimes_F L\to K L$ es inyectiva.
+    Sea $\alpha_1,\ldots,\alpha_m$ una base de $K$ sobre $L$. Si tenemos
+    $\sum_i c_i \alpha_i = 0$ para algunos $c_i \in L$, entonces el elemento
+    $\sum_i \alpha_i\otimes c_i$ está en el núcleo de $K\otimes_F L\to K L$,
+    así que $\sum_i \alpha_i\otimes c_i = 0$. Esto implica que $c_i = 0$
+    para todo $i$, así que no hay $L$-dependencia no trivial entre los
+    $\alpha_i$.
+
+    Esto establece la equivalencia entre a) y b), pero luego
+    $K\otimes_F L \cong L\otimes_F K$ y $KL = LK$, así que b) es equivalente
+    a b${}'$).
+
+    La condición a) es visiblemente equivalente a c). Además, el lema anterior
+    establece la equivalencia entre c) y d).
+  \end{proof}
+\end{proposicion-definicion}
+
+\begin{proposicion}[$\approx$ teorema de irracionalidades naturales]
+  \label{prop:irracionalidades-naturales}
+  Si $K/F$ y $L/F$ son extensiones finitas de Galois, entonces son linealmente
+  disjuntas si y solamente si $K\cap L = F$.
+
+  \begin{proof}
+    El resultado se sigue de la fórmula
+    \[ \tag{*} [KL : F] = [L : F] \cdot [K : K\cap L]. \]
+
+    Primero notamos que $KL/L$ es una extensión de Galois. De hecho, si $K$ es
+    un campo de descomposición de un polinomio separable $f \in F[x]$, entonces
+    $KL$ es un campo de descomposición del mismo polinomio considerado como
+    elemento de $L [x]$.
+
+    Consideremos el homomorfismo de grupos
+    \[ \phi\colon \Gal (KL/L) \to \Gal (K/F), \quad
+       \sigma \mapsto \left.\sigma\right|_K. \]
+    Por la normalidad de $K/F$, la restricción $\left.\sigma\right|_K$
+    toma valores en $K$, así que este homomorfismo tiene sentido.
+    Notamos que el núcleo de $\phi$ consiste en los automorfismos
+    $\sigma \in \Gal (KL/L)$ tales que $\left.\sigma\right|_K = id$.
+    Entonces, para $\sigma \in \ker\phi$ el subcampo fijo $(KL)^\sigma$ contiene
+    $K$ y $L$, y por lo tanto contiene el compositum $KL$, así que $\sigma = id$.
+    Esto significa que el núcleo de $\phi$ es trivial.
+
+    La imagen de $\phi$ es un subgrupo $H \subseteq \Gal (K/F)$, y por la
+    correspondencia de Galois $H = \Gal (K/K^H)$. Vamos a probar que
+    $K^H = K\cap L$. Primero, si $\alpha \in K\cap L$, entonces $\alpha \in K^H$
+    por la definición de $\phi$. Viceversa, si $\alpha \in K^H$, entonces
+    $\sigma (\alpha) = \alpha$ para todo $\sigma \in \Gal (KL/L)$.
+    Esto implica que $\alpha \in KL^{\Gal (KL/L)} = L$.
+
+    Hemos probado entonces que la imagen de $\phi$ es $\Gal (KL/K\cap L)$,
+    así que $\phi$ induce un isomorfismo de grupos de Galois
+    $\Gal (KL/L) \cong \Gal (KL/K\cap L)$.
+    Entonces, $[KL : L] = [K : K\cap L]$, y se sigue (*).
+  \end{proof}
+\end{proposicion}
