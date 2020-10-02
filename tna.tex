@@ -10,6 +10,7 @@
 \definecolor{covertxt}{RGB}{29,31,42}
 
 \usepackage{tikz-cd}
+\usetikzlibrary{arrows}
 \usetikzlibrary{babel}
 \usetikzlibrary{calc}
 \usetikzlibrary{backgrounds}
@@ -52,10 +53,10 @@
 \usepackage[pdfusetitle,hidelinks,bookmarks=true]{hyperref}
 
 \hypersetup{
-	colorlinks,
-	linkcolor={red!60!black},
-	citecolor={blue!60!black},
-	urlcolor={blue!80!black}
+    colorlinks,
+    linkcolor={red!60!black},
+    citecolor={blue!60!black},
+    urlcolor={blue!80!black}
 }
 \usepackage{bookmark}
 
@@ -81,11 +82,13 @@
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\fchar}{char}
 \DeclareMathOperator{\Frac}{Frac}
 \DeclareMathOperator{\Frob}{Frob}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\Pic}{Pic}
 \DeclareMathOperator{\Res}{Res}
 \DeclareMathOperator{\rk}{rk}
@@ -100,8 +103,7 @@
 \usepackage{diagbox}
 
 \usepackage[perpage,symbol]{footmisc}
-\renewcommand{\thefootnote}{\ifcase\value{footnote}\or(*)\or
-(**)\or(***)\or(****)\or(\#)\or(\#\#)\or(\#\#\#)\or(\#\#\#\#)\or($\infty$)\fi}
+\renewcommand{\thefootnote}{\ifcase\value{footnote}\or{*}\or{**}\or{***}\or{****}\fi}
 
 \begin{document}
 
@@ -133,12 +135,14 @@
 
 \input{3-algebra-lineal.tex}
 
-% \input{4-galois.tex}
+\input{4-galois.tex}
 
 \appendix
-\input{a-polinomios-ciclotomicos.tex}
+\input{a-galois.tex}
 
-\input{b-grupos-de-clase.tex}
+\input{b-polinomios-ciclotomicos.tex}
+
+\input{c-grupos-de-clase.tex}
 
 \backmatter
 
