@@ -585,6 +585,7 @@ De este lema se deduce que las cerraduras algebraicas son isomorfas entre sí.
 \section{Extensiones normales}
 
 \begin{proposicion-definicion}
+  \label{prop-dfn:extensiones-normales}
   Para una extensión finita $K/F$ las siguientes condiciones son equivalentes.
 
   \begin{enumerate}
@@ -647,7 +648,7 @@ $(fg)' = f' g + f g'$.
   $f (\alpha) = f' (\alpha) = 0$.
 
   \begin{proof}
-    Si $\alpha$ es una raíz multiple, entonces $f = (x-\alpha)^2\,g$ para algún
+    Si $\alpha$ es una raíz múltiple, entonces $f = (x-\alpha)^2\,g$ para algún
     polinomio $g\in F [x]$. Luego, tomando las derivadas, se obtiene
     $f' = 2\,(x-\alpha)\,g + (x-\alpha)^2\,g'$, de donde $f' (\alpha) = 0$.
 
@@ -851,7 +852,7 @@ que vienen de automorfismos $\sigma\colon K\to K$.
 
 \section{Automorfismos de campos}
 
-Para una extensión de campos $K/F$ denotarémos por $\Aut (K/F)$ el grupo de
+Para una extensión de campos $K/F$ denotaremos por $\Aut (K/F)$ el grupo de
 automorfismos $\sigma\colon K\to K$ tales que
 $\left.\sigma\right|_F = id$. Estos se llaman \textbf{$F$-automorfismos} de $K$.
 \[ \begin{tikzcd}[row sep=1em, column sep=1em]
@@ -866,7 +867,7 @@ Todos los automorfismos de $K$ serán denotados por $\Aut (K)$.
 
   \begin{enumerate}
   \item[1)] Si $K = F (\alpha_1,\ldots,\alpha_n)$, entonces $\sigma$ está
-    definido por las imagenes de los generadores $\alpha_i$.
+    definido por las imágenes de los generadores $\alpha_i$.
 
   \item[2)] Para $\alpha \in K$ sea $f = f^\alpha_F$ el polinomio mínimo
     correspondiente. En este caso $f (\sigma (\alpha)) = 0$ y $f$ es también
@@ -885,9 +886,10 @@ Todos los automorfismos de $K$ serán denotados por $\Aut (K)$.
   \end{proof}
 \end{proposicion}
 
-La siguiente proposición relaciona subcampos de $K$ y subgrupos de $\Aut (K)$.
+El siguiente resultado relaciona subcampos de $K$ y subgrupos de $\Aut (K)$.
 
 \begin{proposicion}
+\label{prop:subcampos-y-subgrupos-de-Aut}
   Sea $K$ un campo.
 
   \begin{enumerate}
@@ -1095,19 +1097,140 @@ extensiones de Galois.
   conoce como el \textbf{grupo de Galois} y se denota por $\Gal (K/F)$.
 \end{definicion}
 
+Notamos que según lema \ref{lema:automorphism-group-and-degree}, se tiene
+$|\Gal (K/F)| = [K : F]$.
+
+\begin{lema}
+  Si $K/F$ es una extensión de Galois, entonces para cualquier subextensión
+  $F \subseteq L \subseteq K$, la extensión $K/L$ es también de Galois.
+
+  \begin{proof}
+    Si $K/F$ es separable, esto significa que para todo $\alpha \in K$ el
+    polinomio mínimo $f^\alpha_F$ es separable. Pero ahora
+    $f^\alpha_L \mid f^\alpha_F$, así que $f^\alpha_L$ es también separable.
+
+    Ahora la normalidad de $K/F$ significa que $K$ es un campo de descomposición
+    para algún polinomio $f \in F [x]$. En particular, $f \in L [x]$, así que
+    la extensión $K/L$ es también normal.
+  \end{proof}
+\end{lema}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Teorema fundamental de la teoría de Galois}
 
-**TODO**
+\begin{lema}[Extensión de automorfismos]
+  Sea $K/F$ una extensión de Galois y $F \subseteq L \subseteq K$
+  una subextensión. En este caso todo $F$-automorfismo
+  $\tau\colon L\to L$ es de la forma $\left.\sigma\right|_L$
+  para algún $\sigma \in \Gal (K/F)$.
+
+  \begin{proof}
+    Para simplificar el asunto, podemos invocar el teorema del elemento
+    primitivo y escribir $K = F (\alpha)$ para algún $\alpha \in K$. Dado que
+    $\left.\tau\right|_F = id$, los polinomios mínimos de $\alpha$ y
+    $\tau (\alpha)$ sobre $F$ coinciden, y $K$ es un campo de descomposición de
+    estos. Podemos entonces ocupar el lema
+    \ref{lema:extesion-de-isomorfismos-a-campo-de-desc}.
+  \end{proof}
+\end{lema}
+
+\begin{teorema}[Correspondencia de Galois]
+  Dada una extensión finita de Galois $K/F$, consideremos el grupo de Galois
+  $G = \Gal (K/F)$.  A una subextensión $F \subset L \subset K$ se puede
+  asociar un subgrupo $H = \Gal (K/L) \subseteq G$. Viceversa, dado un subgrupo
+  $H \subseteq G$, se obtiene una subextensión
+  $$L = K^H = \{ \alpha \in K \mid \sigma (\alpha) = \alpha \text{ para }\sigma\in H \}.$$
+  Esto nos da una biyección
+  \[ \begin{tikzcd}[column sep=4em]
+    \{ \text{ subcampos }F \subseteq L \subseteq G \}
+    \ar[shift left=0.25em]{r}{L \mapsto \Gal (K/L)} &
+    \{ \text{ subgrupos }H \subseteq G \}
+    \ar[shift left=0.25em]{l}{K^H \mapsfrom H}
+  \end{tikzcd} \]
+
+  Esta correspondencia satisface las siguientes propiedades.
+  \begin{enumerate}
+  \item[1)] La correspondencia invierte las inclusiones.
+    Si $L_1 \subseteq L_2$, entonces $\Gal (K/L_2) \subseteq \Gal (K/L_1)$.
+    Si $H_1 \subseteq H_2 \subseteq G$, entonces $K^{H_2} \subseteq K^{H_1}$.
+
+  \item[2)] $[K:L] = |H|$ y $[L:F] = [G:H]$.
+
+  \item[3)] La extensión $L/F$ es normal (y entonces Galois) si y solamente si
+    el subgrupo $H \subseteq G$ es normal. En este caso la restricción de
+    automorfismos $\Gal (K/F) \to \Gal (L/F)$ es sobreyectiva y tiene $H$ como
+    su núcleo, así que $\Gal (L/F) \cong G/H$.
+
+  \item[4)] Para dos subextensiones $L_1$ y $L_2$ hay un $F$-isomorfismo
+    $L_1\cong L_2$ si y solamente si los subgrupos correspondientes
+    $H, H' \subseteq G$ son conjugados por un elemento de $G$.
+  \end{enumerate}
+
+  \begin{proof}
+    La proposición \ref{prop:subcampos-y-subgrupos-de-Aut} nos da la biyección
+    deseada para las subextensiones de la forma $L = K^H$ para
+    $H \subseteq \Gal (K/F)$ y subgrupos $H = \Gal (K/L) \subseteq \Gal (K/F)$.
+    Entonces, tenemos que probar que en el caso de extensión de Galois todas
+    las subextensiones surgen de campos fijos por un subgrupo $H$ y que
+    todo subgrupo de $\Gal (K/F)$ tiene forma $\Gal (K/L)$.
+
+    Dada una subextensión $F \subseteq L \subseteq K$, puesto que $K/F$ es una
+    extensión de Galois, $K/L$ también lo es. Entonces, $L = K^{\Gal (K/L)}$.
+    Esto demuestra que todas las subextensiones vienen de subcampos fijos.
+    Por otra parte, para un subgrupo $H \subseteq \Gal (K/F)$, según
+    \ref{lema:automorphism-group-and-degree} se cumple $H = \Gal (K/K^H)$.
+
+    Esto establece la biyección deseada. La propiedad 1) se verifica fácilmente.
+    Para la parte 2), dado que $K/F$ y $K/L$ son extensiones de Galois, tenemos
+    $|G| = |\Gal (K/F)| = [K:F]$ y $|H| = |\Gal (K/L)| = [K:L]$. Luego,
+    $$[L : F] = \frac{[K : F]}{[K : L]} = \frac{|G|}{|H|} = [G : H].$$
+
+    Supongamos ahora que $H \subseteq G$ es un subgrupo normal y consideremos
+    el subcampo $L = K^H$. Para un elemento $\alpha \in L$ consideremos
+    el polinomio mínimo $f^\alpha_F$. Si $\beta$ es cualquier otra raíz de
+    $f^\alpha_F$, entonces existe un automorfismo $\sigma \in G$ tal que
+    $\sigma (\alpha) = \beta$. Notamos que para cualquier automorfismo
+    $\tau \in H$ se tiene
+    $\tau (\beta) = \sigma (\sigma^{-1} \tau \sigma (\alpha))$, donde
+    $\sigma^{-1} \tau \sigma \in H$ por la normalidad, y entonces
+    $\tau (\beta) = \sigma (\alpha) = \beta$. Esto demuestra que toda raíz
+    de $f^\alpha_F$ está en $K^H = L$. Entonces, si un polinomio irreducible
+    $f \in F[x]$ se descompone en factores lineales en $K [x]$, entonces
+    este ya se descompone en factores lineales en $L [x]$. Esto establece
+    la normalidad de la extensión $L/F$. Por otra parte, $L/F$ es separable,
+    puesto que $K/F$ lo es.
+
+    Viceversa, si $L/F$ es una extensión de Galois, consideremos el homomorfismo
+    $$\phi\colon \Gal (K/F) \to \Gal (L/F), \quad \sigma \mapsto \left.\sigma\right|_L.$$
+    Gracias a la normalidad de $L/F$, la restricción $\left.\sigma\right|_L$
+    tiene imagen en $L$ (véase \ref{prop-dfn:extensiones-normales}). Ahora
+    $$\ker\phi = \{ \sigma \in \Gal (K/F) \mid \left.\sigma\right|_L = id \} = \Gal (K/L).$$
+    En particular, $H = \Gal (K/L)$ es un subgrupo normal de $G = \Gal (K/F)$.
+    El homomorfismo $\phi$ es sobreyectivo: todo $F$-homomorfismo
+    $\tau\colon L \to L$ se extiende a $\sigma\colon K\to K$ gracias
+    al lema de extensión de isomorfismos
+    \ref{lema:extesion-de-isomorfismos-a-campo-de-desc}. Entonces, $\phi$ induce
+    un isomorfismo $\Gal (L/F) \cong G/H$.
+
+    En fin, para la parte 4), notamos que dos subcampos $L_1$ y $L_2$ son
+    isomorfos si y solamente si $L_2 = \sigma (L_1)$ para algún automorfismo
+    $\sigma \in \Gal (K/F)$. En una dirección esto está claro: la restricción de
+    $\sigma\colon K\to K$ a $L_1$ induce un isomorfismo
+    $L_1 \cong \sigma (L_1)$. En la otra dirección, un $F$-isomorfismo
+    $\tau\colon L_1 \to L_2$ se extiende a $\sigma\colon K \to K$,
+    y luego $L_2 = \sigma (L_1)$. Un pequeño cálculo demuestra que
+    $\Gal (K/\sigma(L_1)) = \sigma \Gal (K/L_1) \sigma^{-1}$.
+  \end{proof}
+\end{teorema}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Campos finitos}
 
 Todo campo finito $F$ necesariamente tiene característica $p$, y entonces es una
-extensión del campo $\FF_p = \ZZ/p\ZZ$. Siendo un $\FF_p$-espacio vectorial,
-$F$ debe tener $p^n$ elementos.
+extensión del campo $\FF_p = \ZZ/p\ZZ$. Siendo un $\FF_p$-espacio vectorial, $F$
+debe tener $p^n$ elementos.
 
 \begin{teorema}
   Para todo primo $p$ y $n = 1,2,3,\ldots$ existe un campo finito $\FF$ de $p^n$
@@ -1245,3 +1368,5 @@ de $\FF_{p^n}/\FF_p$.
 \section{Campos linealmente disjuntos}
 
 **TODO**
+
+**TODO** Mencionar teorema de irracionalidades naturales.
