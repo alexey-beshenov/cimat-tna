@@ -1296,9 +1296,10 @@ de la siguiente observación general de la teoría de grupos.
 \end{lema}
 
 \begin{corolario}
-  Si $K$ es un campo y $G$ un subgrupo finito del grupo multiplicativo
+  \label{cor:grupo-multiplicativo-de-campo-finito}
+  Si $K$ es cualquier campo y $G$ un subgrupo finito del grupo multiplicativo
   $K^\times$, entonces $G$ es cíclico. En particular, para un campo finito
-  $K$ el grupo $K^\times$ es cíclico.
+  $\FF_{p^n}$ el grupo $\FF_{p^n}^\times$ es cíclico.
 
   \begin{proof}
     Para un campo, la ecuación polinomial $x^d - 1 = 0$ tiene como
@@ -1313,36 +1314,37 @@ $K = \FF_p (\alpha)$. El polinomio mínimo de $\alpha$ sobre $\FF_p$
 es algún polinomio irreducible en $\FF_p [x]$ de grado $n$.
 
 \begin{teorema}
-  Para un campo finito $\FF_{p^n}$ el grupo $\Gal (\FF_{p^n}/\FF_p)$ es cíclico
-  de orden $n$, generado por el \term{automorfismo de Frobenius}
-  $F\colon x \mapsto x^p$.
+  \label{thm:grupo-de-Galois-de-campo-finito}
+  Sea $q = p^\ell$ para $p$ primo y $\ell = 1,2,3,\ldots$ Para un campo finito
+  $\FF_{q^n}$ el grupo $\Gal (\FF_{q^n}/\FF_q)$ es cíclico de orden $n$,
+  generado por el \term{automorfismo de Frobenius} $F\colon x \mapsto x^q$.
 
   \begin{proof}
     Notamos primero que $F$ es un automorfismo. Para cualesquiera
-    $x,y\in \FF_{p^n}$ tenemos obviamente $(xy)^p = x^p\,y^p$, y para las sumas
-    se tiene $(x + y)^p = x^p + y^p$, usando que estamos en característica $p$.
-    Esto demuestra que $F\colon \FF_{p^n} \to \FF_{p^n}$ es un homomorfismo.
-    Ahora $F$ es automáticamente inyectivo, pero ya que $\FF_{p^n}$ es finito,
+    $x,y\in \FF_{q^n}$ tenemos obviamente $(xy)^q = x^q\,y^q$, y para las sumas
+    se tiene $(x + y)^q = x^q + y^q$, usando que estamos en característica $p$.
+    Esto demuestra que $F\colon \FF_{q^n} \to \FF_{q^n}$ es un homomorfismo.
+    Ahora $F$ es automáticamente inyectivo, pero ya que $\FF_{q^n}$ es finito,
     $F$ es también sobreyectivo.
 
-    El grupo multiplicativo $\FF_{p^n}^\times$ es cíclico y podemos escoger un
-    generador $\alpha \in \FF_{p^n}^\times$. Todo automorfismo
-    $\sigma \in \Gal (\FF_{p^n}/\FF_p)$ está definido por la imagen de $\alpha$,
+    El grupo multiplicativo $\FF_{q^n}^\times$ es cíclico y podemos escoger un
+    generador $\alpha \in \FF_{q^n}^\times$. Todo automorfismo
+    $\sigma \in \Gal (\FF_{q^n}/\FF_q)$ está definido por la imagen de $\alpha$,
     y de allí es fácil ver que las potencias del automorfismo de Frobenius
-    $F^k\colon x\mapsto x^{p^k}$ son distintas para $k = 0, \ldots, n-1$.
-    Esto nos da $n$ diferentes automorfismos de $\FF_{p^n}$, pero sabemos que
-    en general $|\Gal (\FF_{p^n}/\FF_p)| = [\FF_{p^n} : \FF_p] = n$, así que
+    $F^k\colon x\mapsto x^{q^k}$ son distintas para $k = 0, \ldots, n-1$.
+    Esto nos da $n$ diferentes automorfismos de $\FF_{q^n}$, pero sabemos que
+    en general $|\Gal (\FF_{q^n}/\FF_q)| = [\FF_{q^n} : \FF_q] = n$, así que
     acabamos de describir todos los automorfismos.
   \end{proof}
 \end{teorema}
 
 La teoría de Galois nos da la siguiente descripción de las subextensiones
-de $\FF_{p^n}/\FF_p$.
+de $\FF_{q^n}/\FF_q$.
 
 \begin{corolario}
-  Los subcampos de un campo finito $\FF_{p^n}$ corresponden a los divisores de
-  $n$: son precisamente
-  $$\FF_{p^d} = \{ x\in \FF_{p^n} \mid x^{p^d} = x \}.$$
+  Los subcampos de un campo finito $\FF_{q^n}/\FF_q$ corresponden a los
+  divisores de $n$: son precisamente
+  $$\FF_{q^d} = \{ x\in \FF_{q^n} \mid x^{q^d} = x \}.$$
 \end{corolario}
 
 \begin{comentario}
