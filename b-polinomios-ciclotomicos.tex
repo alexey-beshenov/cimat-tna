@@ -1,4 +1,4 @@
-\chapter{Polinomios ciclotómicos}
+\chapter{Polinomios y campos ciclotómicos}
 \label{ap:polinomios-ciclotomicos}
 
 En este apéndice vamos a revisar brevemente los polinomios ciclotómicos $\Phi_n$
@@ -143,7 +143,7 @@ son números enteros.
     \Phi_3 = x^2 + x + 1, \quad \Phi_6 = x^2 - x + 1 = \Phi_3 (-x),\\
     \Phi_5 = x^4 + x^3 + x^2 + x + 1, \quad \Phi_{10} = x^4 - x^3 + x^2 - x + 1 = \Phi_5 (-x).
   \end{gather*}
-  Esto no es una coincidencia: en general, $\Phi_{2m} = \Phi_m (-x)$ para todo
+  Esta no es una coincidencia: en general, $\Phi_{2m} = \Phi_m (-x)$ para todo
   $m > 1$ impar (este es un buen ejercicio para el lector).
 \end{ejemplo}
 
@@ -351,8 +351,7 @@ Empecemos por un pequeño lema.
   La idea principal del argumento de arriba es probar que \emph{si para un
     polinomio irreducible $f \in \ZZ [x]$ se tiene $f (\zeta) = 0$ para una raíz
     $n$-ésima primitiva $\zeta$, entonces $f (\zeta^a) = 0$ para todo $a$ tal
-    que $\gcd (a,n) = 1$}. Esto precisamente significa que $\QQ (\zeta_n)/\QQ$
-  es una extensión de Galois.
+    que $\gcd (a,n) = 1$}.
 
   He aquí otro modo de establecerlo. Primero notamos que para cualquier primo
   $p$ se tiene $f (\zeta^p) \equiv f (\zeta)^p \pmod{p}$ en el anillo $\ZZ
@@ -366,3 +365,133 @@ Empecemos por un pequeño lema.
   basa en la teoría analítica de números; el lector interesado puede consultar
   \cite[Chapter~16]{Ireland-Rosen} o \cite[Chapter~7]{Apostol-analytic}.
 \end{comentario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Campos ciclotómicos}
+\label{sec:campos-ciclotomicos}
+
+\begin{definicion}
+  El $n$-ésimo campo ciclotómico es el campo $\QQ (\zeta_n)$.
+\end{definicion}
+
+De la irreducibilidad de $\Phi_n$ se sigue que $\Phi_n$ es el polinomo mínimo de
+$\zeta_n$ sobre $\QQ$, y por ende $\QQ (\zeta_n) \cong \QQ [x] / (\Phi_n)$, y en
+particular $[\QQ (\zeta_n) : \QQ] = \deg (\Phi_n) = \phi (n)$. El campo
+ciclotómico es el campo de descomposición de $\Phi_n$, así que
+$\QQ (\zeta_n)/\QQ$ es una extensión de Galois.
+
+\begin{proposicion}
+  El grupo de Galois $\Gal (\QQ(\zeta_n)/\QQ)$ consiste en automorfismos
+  $\sigma_k\colon \zeta_n \mapsto \zeta_n^k$, donde $\gcd (k,n) = 1$.
+  Hay isomorfismo $\Gal (\QQ (\zeta_n)/\QQ) \cong (\ZZ/n\ZZ)^\times$.
+
+  \begin{proof}
+    Un automorfismo $\sigma\colon \QQ(\zeta_n) \to \QQ(\zeta_n)$ debe mandar
+    $\zeta_n$ a otra raíz de $\Phi_n$, y de allí surgen todos los automorfismos
+    $\sigma_k$. La aplicación $\sigma_k \mapsto k\operatorname{~mod~}n$
+    establece el isomorfismo $\Gal (\QQ (\zeta_n)/\QQ) \cong (\ZZ/n\ZZ)^\times$.
+  \end{proof}
+\end{proposicion}
+
+Notamos que si $m \mid n$, entonces $\zeta_m = \zeta_n^{n/m} \in \QQ (\zeta_n)$,
+y luego $\QQ (\zeta_m) \subseteq \QQ (\zeta_n)$.
+
+Ahora si $m$ es un número impar, entonces $\QQ (\zeta_{2m}) = \QQ (\zeta_m)$.
+De hecho, tenemos la inclusión obvia $\zeta_m \in \QQ (\zeta_{2m})$, y por otro
+lado, escribiendo $m = 2k + 1$,
+\[ \zeta_{2m} = \zeta_{2m}^{(2k+1) - 2k}
+             = \zeta_{2m}^{m}\,(\zeta_{2m}^2)^{-k}
+             = \zeta_2\,\zeta_m^{-k}
+             = -\zeta_m^{-k} \in \QQ (\zeta_m). \]
+
+Esta propiedad se cumle por la razón banal de que
+$\zeta_2 = -1 \in \QQ$. Resulta que en otras situaciones los campos ciclotómicos
+no coinciden. Para probarlo, podemos investigar cuáles raíces de la unidad están
+en $\QQ (\zeta_m)$.
+
+\begin{lema}
+  \label{lema:phi-de-Euler}
+  Si $m$ es par y $m\mid r$, entonces $\phi (r) \le \phi (m)$ implica $r = m$.
+
+  \begin{proof}
+    Primero, notamos que para cualesquiera $a,m \ge 1$ se cumple
+    $$\phi (am) = \frac{\phi (a)\,\phi (m)\,\gcd (a,m)}{\phi (\gcd (a,m))}$$
+    ---esto se sigue de las fórmulas
+    \begin{align*}
+      \phi (a) & = a\,\prod_{p\mid a} \left(1 - \frac{1}{p}\right),\\
+      \phi (m) & = m\,\prod_{p\mid m} \left(1 - \frac{1}{p}\right),\\
+      \phi (am) & = am\,\prod_{p\mid am} \left(1 - \frac{1}{p}\right),\\
+      \phi (\gcd (a,m)) & = \gcd (a,m)\,\prod_{p \mid a, p \mid m} \left(1 - \frac{1}{p}\right).
+    \end{align*}
+    (Notamos que cuando $a$ y $m$ son coprimos, se tiene
+    $\gcd (a,m) = \phi (\gcd (a,m)) = 1$ y se recupera la fórmula conocida.)
+    Ahora para $m$ par y $m\mid r$, asumamos que $m < r$, así que $r = am$ para
+    algún $a > 1$. Tenemos
+    \[ \phi (r) = \phi (am) =
+       \frac{\phi (a)\,\phi(m)\,\gcd (a,m)}{\phi (\gcd (a,m))}. \]
+    Si $a = 2$, entonces $\phi (a) = \phi (2) = 1$ y $\gcd (a,m) = 2$. Luego,
+    \[ \frac{\phi (a)\,\phi(m)\,\gcd (a,m)}{\phi (\gcd (a,m))} =
+       2\,\phi(m) > \phi (m). \]
+    Si $a > 2$, entonces $\phi (a) \ge 2$, y luego
+    \[ \frac{\phi (a)\,\phi(m)\,\gcd (a,m)}{\phi (\gcd (a,m))} \ge
+       \phi (a)\,\phi(m) > \phi (m). \]
+    En ambos casos, $m < r$ implica $\phi (m) < \phi (r)$.
+  \end{proof}
+\end{lema}
+
+\begin{proposicion}
+  Las raíces de la unidad en el campo $\QQ (\zeta_m)$ son precisamente
+  \[ \mu_\infty (\CC) \cap \QQ (\zeta_m)^\times = \begin{cases}
+    \mu_m (\CC), & \text{si }m\text{ es par},\\
+    \mu_{2m} (\CC), & \text{si }m\text{ es impar}.
+  \end{cases} \]
+
+  \begin{proof}
+    Si $m = 2k+1$ es un número impar, entonces ya notamos que
+    $\QQ (\zeta_m) = \QQ (\zeta_{2m})$. Por esto sería suficiente considerar
+    el caso cuando $m$ es un número par.
+
+    Tenemos $\zeta_m \in \QQ (\zeta_m)$, y por ende todas las raíces $m$-ésimas
+    de la unidad, siendo potencias de $\zeta_m$, están en $\QQ (\zeta_m)$:
+    $$\mu_m (\CC) \subseteq \mu_\infty (\CC) \cap \QQ (\zeta_m)^\times.$$
+    Hay que ver que en $\QQ (\zeta_m)$ no hay raíces de la unidad de orden
+    $k\nmid m$. Bastaría considerar las raíces $k$-ésimas primitivas.
+
+    Supongamos que $\zeta_k^\ell \in \QQ (\zeta_m)$ donde $\zeta_k^\ell$ es una
+    raíz $k$-ésima primitiva; es decir, $\gcd (k,\ell) = 1$. Pongamos
+    $$r = \lcm (k,m) = \frac{km}{d}, \quad d = \gcd (k,m).$$
+    Luego,
+    $$\gcd (k,\ell m) = \gcd (k,m) = d,$$
+    lo que significa que existen $a,b \in \ZZ$ tales que
+    $$d = a k + b\ell m.$$
+    Ahora,
+    \[ \zeta_r = \zeta_{km}^d
+               = \zeta_{km}^{ak + b\ell m}
+               = \zeta_{km}^{ak}\,\zeta_{km}^{b\ell m}
+               = \zeta_m^a\,(\zeta_k^\ell)^b \in \QQ (\zeta_m) \]
+    y
+    $$\phi (r) \le \phi (m), \quad m\text{ es par}, \quad m \mid r,$$
+    así que el lema \ref{lema:phi-de-Euler} nos permite concluir que
+    $$r = \gcd (k,m) = m,$$
+    lo que significa que $k \mid m$.
+  \end{proof}
+\end{proposicion}
+
+\begin{corolario}
+  Si $\QQ (\zeta_m) = \QQ (\zeta_n)$ para $m < n$, entonces $m$ es impar y
+  $n = 2m$.
+
+  \begin{proof}
+    Si $m$ es par, entonces las raíces de la unidad en $\QQ (\zeta_m)$ son de
+    orden $m$, mientras que las raíces de la unidad en $\QQ (\zeta_n)$ son de
+    orden $n$ o $2n$, dependiendo de la paridad de $n$. Pero en ambos casos la
+    hipótesis $m < n$ nos lleva a una contradicción.
+
+    Entonces, $m$ es impar y las raíces de la unidad en $\QQ (\zeta_m)$ son de
+    orden $m$. La única posibilidad es $n = 2m$.
+  \end{proof}
+\end{corolario}
+
+Entonces, para enumerar los campos ciclotómicos sin redundancias, basta
+considerar $\QQ (\zeta_n)$ donde $n \not\equiv 2\pmod{4}$.

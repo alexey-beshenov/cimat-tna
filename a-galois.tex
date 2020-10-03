@@ -1,4 +1,5 @@
 \chapter{Campos y la teoría de Galois básica}
+\label{ap:teoria-de-Galois}
 
 El propósito de este apéndice es resumir la teoría de Galois necesaria para
 nuestros propósitos. Será suficiente considerar extensiones finitas $K/F$,
@@ -1311,7 +1312,11 @@ de la siguiente observación general de la teoría de grupos.
 En particular, si $K = \FF_{p^n}$ es un campo finito de $p^n$ elementos y
 $\alpha$ es un generador multiplicativo de $K^\times$, tenemos
 $K = \FF_p (\alpha)$. El polinomio mínimo de $\alpha$ sobre $\FF_p$
-es algún polinomio irreducible en $\FF_p [x]$ de grado $n$.
+es algún polinomio irreducible $f \in \FF_p [x]$ de grado $n$.
+Entonces, para construir un campo finito $\FF_{p^n}$, hay que encontrar
+ese polinomio y tomar el cociente $\FF_p [x] / (f)$. El campo $\FF_{p^n}$
+está bien definido solo salvo isomorfismo no único. No es difícil describir
+los automorfismos de campos finitos.
 
 \begin{teorema}
   \label{thm:grupo-de-Galois-de-campo-finito}
