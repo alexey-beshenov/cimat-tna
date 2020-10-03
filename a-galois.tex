@@ -138,6 +138,10 @@ No es difícil verificar que $F (\alpha,\beta) = (F (\alpha)) (\beta)$.
   \end{proof}
 \end{proposicion}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Polinomio mínimo}
+
 \begin{teorema}[Polinomio mínimo]
   \label{thm:polinomio-minimo}
   Sean $K/F$ una extensión de campos y $\alpha \in K$ un elemento.
@@ -181,7 +185,9 @@ No es difícil verificar que $F (\alpha,\beta) = (F (\alpha)) (\beta)$.
     $[F (\alpha) : F] = \deg (f^\alpha_F)$.
 
     Ahora para cualquier otro polinomio $g \in F[x]$ tenemos
-    \[ g (\alpha) = 0 \iff g \in \ker ev_\alpha = (f^\alpha_F) \iff f^\alpha_F \mid f. \]
+    \[ g (\alpha) = 0 \iff
+       g \in \ker ev_\alpha = (f^\alpha_F) \iff
+       f^\alpha_F \mid f. \]
 
     Si $g$ es también irreducible, entonces $(f) = (f^\alpha_F)$, y luego
     $F [x] / (g) = F [x] / (f^\alpha_F) \cong F (\alpha)$.
@@ -265,6 +271,76 @@ Tenemos la siguiente caracterización de extensiones finitas.
     $\alpha_1,\ldots,\alpha_n$ son algebraicos sobre $F$, entonces
     $$[K : F] \le [F (\alpha_1) : F] \cdots [F (\alpha_n) : F],$$
     así que la extensión es finita.
+  \end{proof}
+\end{proposicion}
+
+Hay otra noción relacionada con el polinomio mínimo que es el
+\textbf{polinomio característico}.
+
+\begin{definicion}
+  Para una extensión $K/F$ y $\alpha \in K$, el
+  \textbf{polinomio característico} $f^\alpha_{K/F}$ es el polinomio
+  característico de la aplicación $F$-lineal
+  $$\mu_\alpha\colon K \to K, \quad x\mapsto \alpha x.$$
+  En otras palabras, si $A$ es una matriz que representa a $\mu_A$ en alguna
+  base de $K$ sobre $F$, entonces $f^\alpha_{K/F} = \det (x\,I_n - A) \in F[x]$.
+\end{definicion}
+
+Según el teorema de Cayley--Hamilton, tenemos $f^\alpha_{K/F} (\alpha) = 0$,
+y en particular, el polinomio mínimo $f^\alpha_F$ siempre divide al polinomio
+característico $f^\alpha_{K/F}$. Ahora si $K = F (\alpha)$, entonces los grados
+de los dos polinomios coinciden y entonces $f^\alpha_{K/F} = f^\alpha_{K/F}$.
+En general, la relación es la siguiente.
+
+\begin{proposicion}
+  Sean $K/F$ una extensión finita y $\alpha\in K$. Luego,
+  $$f^\alpha_{K/F} = (f^\alpha_F)^{[K : F (\alpha)]}.$$
+
+  \begin{proof}
+    Pongamos $n = [K : F]$ y $d = [F (\alpha) : F]$. Consideremos las
+    extensiones
+    \[ \begin{tikzcd}
+      K\ar[-]{d}{m}\ar[bend right=50,-]{dd}[swap]{n} \\
+      F (\alpha)\ar[-]{d}{d} \\
+      F
+    \end{tikzcd} \]
+    Como una base de $F (\alpha)$ sobre $F$ podemos tomar las potencias de
+    $\alpha$:
+    $$1, \alpha, \alpha^2, \ldots, \alpha^{d-1}.$$
+    Sea
+    $$\beta_1, \beta_2, \ldots, \beta_m$$
+    una base de $K$ sobre $F (\alpha)$. Entonces, se pueden tomar como una base
+    de $K$ sobre $F$ los productos
+    $$\alpha^i\,\beta_j. \quad (0 \le i \le d-1, ~ 1 \le j \le m)$$
+    Sean $c_{ij}$ los coeficientes de la matriz que representa el endomorfismo
+    $\mu_\alpha\colon F (\alpha) \to F (\alpha)$:
+    $$\alpha\cdot \alpha^j = \sum_{0 \le i \le d-1} c_{ij}\,\alpha^i.$$
+    Tenemos entonces
+    $$f^\alpha_F = f^\alpha_{F(\alpha)/F} = \det (x\cdot I_d - A),$$
+    donde
+    \[ A = \begin{pmatrix}
+      c_{00} & c_{01} & \cdots & c_{0,d-1} \\
+      c_{10} & c_{11} & \cdots & c_{1,d-1} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      c_{d-1,0} & c_{d-1,1} & \cdots & c_{d-1,d-1} \\
+    \end{pmatrix}. \]
+    Luego,
+    $$\alpha\cdot \alpha^j\,\beta_k = \sum_{0 \le i \le d-1} c_{ij}\,\alpha^j\,\beta_k,$$
+    de donde se ve que la multiplicación por $\alpha$ sobre $K$ se representa en
+    la base $\alpha^j\,\beta_k$ por la matriz diagonal por bloques
+    \[ I_m\otimes A = \begin{pmatrix}
+      A \\
+      & A \\
+      & & \ddots \\
+      & & & A
+    \end{pmatrix}. \]
+    Su polinomio característico viene dado por
+    \[ \det \begin{pmatrix}
+      x \, I_d - A \\
+      & x \, I_d - A \\
+      & & \ddots \\
+      & & & x \, I_d - A
+    \end{pmatrix} = \det (x \, I_d - A)^m = (f^\alpha_F)^{n/d}. \qedhere \]
   \end{proof}
 \end{proposicion}
 
@@ -430,10 +506,10 @@ Tenemos la siguiente caracterización de extensiones finitas.
 
     $4)\Rightarrow 5)$: toda extensión finita es algebraica.
 
-    $5)\Rightarrow 1)$: para un polinomio no constante $f$, escribamos $f =
-    g\,h$ donde $g$ es irreducible. Luego, $L = K [x] / (g)$ es una extensión
-    finita de grado $[L:K] = \deg (g)$, pero según 5), tenemos $L = K$, así que
-    $\deg (g) = 1$.
+    $5)\Rightarrow 1)$: para un polinomio no constante $f$, escribamos
+    $f = g\,h$ donde $g$ es irreducible. Luego, $L = K [x] / (g)$ es una
+    extensión finita de grado $[L:K] = \deg (g)$, pero según 5), tenemos
+    $L = K$, así que $\deg (g) = 1$.
   \end{proof}
 \end{proposicion-definicion}
 
@@ -622,6 +698,15 @@ De este lema se deduce que las cerraduras algebraicas son isomorfas entre sí.
   \end{proof}
 \end{proposicion-definicion}
 
+Un típico ejemplo de extensión que \emph{no es} normal es
+$\QQ (\sqrt[3]{2})/\QQ$. Por ejemplo, hay tres diferentes encajes
+$\QQ (\sqrt[3]{2}) \to \overline{\QQ}$: uno real definido por
+$\sqrt[3]{2} \mapsto \sqrt[3]{2}$ y dos complejos conjugados definidos por
+$\sqrt[3]{2} \mapsto \zeta_3\sqrt[3]{2}$ y
+$\sqrt[3]{2} \mapsto \zeta_3^2\sqrt[3]{2}$. Estos encajes tienen diferente
+imagen, lo cual no pasa para una entensión normal. El campo de descomposición
+de $x^3 - 2$ es $\QQ (\sqrt[3]{2}, \zeta_3)$.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Extensiones separables}
@@ -698,7 +783,12 @@ $(fg)' = f' g + f g'$.
   es una \textbf{extensión separable}.
 \end{definicion}
 
-Para ciertos campos todas las extensiones algebraicas son automáticamente separables.
+Un ejemplo típico de extensión que \emph{no es} separable es
+$\FF_p (t)/\FF_p (t^p)$. En este caso el polinomio mínimo de
+$t$ sobre $\FF_p (t^p)$ es $x^p - t^p = (x - t)^p$, y no es separable.
+
+Para ciertos campos todas las extensiones algebraicas son automáticamente
+separables.
 
 \begin{definicion}
   Se dice que un campo $F$ es \textbf{perfecto} si se cumple una de las siguientes
@@ -716,7 +806,8 @@ Para ciertos campos todas las extensiones algebraicas son automáticamente separ
 
 \begin{proposicion}
   Si $F$ es un campo perfecto, entonces todo polinomio irreducible $f \in F [x]$
-  es separable. En particular, toda extensión finita $K/F$ es separable.
+  es separable. En particular, toda extensión algebraica (y en particular toda
+  extensión finita) $K/F$ es separable.
 
   \begin{proof}
     Gracias a \ref{cor:cuando-irreducible-es-separable}, sería suficiente probar
