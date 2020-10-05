@@ -382,7 +382,7 @@ ciclotómico es el campo de descomposición de $\Phi_n$, así que
 $\QQ (\zeta_n)/\QQ$ es una extensión de Galois.
 
 \begin{proposicion}
-  El grupo de Galois $\Gal (\QQ(\zeta_n)/\QQ)$ consiste en automorfismos
+  El grupo $\Gal (\QQ(\zeta_n)/\QQ)$ consiste en automorfismos
   $\sigma_k\colon \zeta_n \mapsto \zeta_n^k$, donde $\gcd (k,n) = 1$.
   Hay isomorfismo $\Gal (\QQ (\zeta_n)/\QQ) \cong (\ZZ/n\ZZ)^\times$.
 
@@ -395,11 +395,10 @@ $\QQ (\zeta_n)/\QQ$ es una extensión de Galois.
 \end{proposicion}
 
 Notamos que si $m \mid n$, entonces $\zeta_m = \zeta_n^{n/m} \in \QQ (\zeta_n)$,
-y luego $\QQ (\zeta_m) \subseteq \QQ (\zeta_n)$.
-
-Ahora si $m$ es un número impar, entonces $\QQ (\zeta_{2m}) = \QQ (\zeta_m)$.
-De hecho, tenemos la inclusión obvia $\zeta_m \in \QQ (\zeta_{2m})$, y por otro
-lado, escribiendo $m = 2k + 1$,
+y luego $\QQ (\zeta_m) \subseteq \QQ (\zeta_n)$. Ahora si $m$ es un número
+impar, entonces $\QQ (\zeta_{2m}) = \QQ (\zeta_m)$. De hecho, tenemos la
+inclusión obvia $\zeta_m \in \QQ (\zeta_{2m})$, y por otro lado, escribiendo
+$m = 2k + 1$,
 \[ \zeta_{2m} = \zeta_{2m}^{(2k+1) - 2k}
              = \zeta_{2m}^{m}\,(\zeta_{2m}^2)^{-k}
              = \zeta_2\,\zeta_m^{-k}
@@ -450,14 +449,12 @@ en $\QQ (\zeta_m)$.
   \begin{proof}
     Si $m = 2k+1$ es un número impar, entonces ya notamos que
     $\QQ (\zeta_m) = \QQ (\zeta_{2m})$. Por esto sería suficiente considerar
-    el caso cuando $m$ es un número par.
-
-    Tenemos $\zeta_m \in \QQ (\zeta_m)$, y por ende todas las raíces $m$-ésimas
-    de la unidad, siendo potencias de $\zeta_m$, están en $\QQ (\zeta_m)$:
+    el caso cuando $m$ es un número par.  Tenemos $\zeta_m \in \QQ (\zeta_m)$,
+    y por ende todas las raíces $m$-ésimas de la unidad, siendo potencias de
+    $\zeta_m$, están en $\QQ (\zeta_m)$:
     $$\mu_m (\CC) \subseteq \mu_\infty (\CC) \cap \QQ (\zeta_m)^\times.$$
     Hay que ver que en $\QQ (\zeta_m)$ no hay raíces de la unidad de orden
     $k\nmid m$. Bastaría considerar las raíces $k$-ésimas primitivas.
-
     Supongamos que $\zeta_k^\ell \in \QQ (\zeta_m)$ donde $\zeta_k^\ell$ es una
     raíz $k$-ésima primitiva; es decir, $\gcd (k,\ell) = 1$. Pongamos
     $$r = \lcm (k,m) = \frac{km}{d}, \quad d = \gcd (k,m).$$
@@ -486,10 +483,9 @@ en $\QQ (\zeta_m)$.
     Si $m$ es par, entonces las raíces de la unidad en $\QQ (\zeta_m)$ son de
     orden $m$, mientras que las raíces de la unidad en $\QQ (\zeta_n)$ son de
     orden $n$ o $2n$, dependiendo de la paridad de $n$. Pero en ambos casos la
-    hipótesis $m < n$ nos lleva a una contradicción.
-
-    Entonces, $m$ es impar y las raíces de la unidad en $\QQ (\zeta_m)$ son de
-    orden $m$. La única posibilidad es $n = 2m$.
+    hipótesis $m < n$ nos lleva a una contradicción. Entonces, $m$ es impar
+    y las raíces de la unidad en $\QQ (\zeta_m)$ son de orden $m$. La única
+    posibilidad es $n = 2m$.
   \end{proof}
 \end{corolario}
 

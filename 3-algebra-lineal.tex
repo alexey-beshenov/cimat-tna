@@ -2532,8 +2532,54 @@ las columnas de dicha matriz forman una base de $I \subseteq \O_K$ como un
 $\ZZ$-submódulo de $\O_K$ (en términos de la base de $\O_K$). En la salida de
 PARI/GP la matriz estará en la \textbf{forma normal de Hermite}, que es una
 matriz triangular superior definida \emph{de manera canónica} a partir de
-$I$ (y la base fija de $\O_K$). Para convertir un ideal en la forma normal de
-Hermite se puede usar la función \texttt{idealhnf($K$,$I$)}.
+$I$ (y la base fija de $\O_K$).
+
+\begin{proposicion-definicion}
+  Sea $H$ una matriz de $n\times n$ con coeficientes en $\ZZ$. Digamos que el
+  \textbf{coeficiente mayor} de cada fila es el primer coeficiente no nulo.
+  Se dice que $H$ está en la \textbf{forma normal de Hermite} si se cumplen las
+  siguientes condiciones.
+
+  \begin{itemize}
+  \item[1)] $H$ es una matriz triangular superior con elementos $\ge 0$.
+
+  \item[2)] El coeficiente mayor de cada fila está a la derecha del coeficiente
+    mayor de la fila anterior.
+
+  \item[3)] Los elementos arriba del coeficiente mayor son estrictamente menor.
+
+  \item[4)] Los elementos abajo del coeficiente mayor son nulos.
+  \end{itemize}
+
+  Para toda matriz $A \in M_{n\times n} (\ZZ)$ existe única $U \in \GL_n (\ZZ)$
+  tal que $H = UA$ está en la forma normal de Hermite. En este caso se dice que
+  $H$ es la \textbf{forma normal de Hermite} de $A$.
+
+  \begin{proof}
+    \cite[\S 2.4.2]{Cohen-GTM138}.
+  \end{proof}
+\end{proposicion-definicion}
+
+\begin{ejemplo}
+  Tenemos
+  \[ \underbrace{\begin{pmatrix}
+      0 & +1  & +1 \\
+      -1 & +1 & -1 \\
+      -1 & +1 & +2
+  \end{pmatrix}}_U \cdot \underbrace{\begin{pmatrix}
+      +3 & -2 &  0 \\
+      +4 & +3 & -3 \\
+      0 & -2 & +2
+  \end{pmatrix}}_A = \underbrace{\begin{pmatrix}
+      2 & 1 & 1 \\
+      0 & 4 & 1 \\
+      0 & 0 & 2
+  \end{pmatrix}}_H. \]
+  Aquí $H$ es la forma normal de Hermite de $A$.
+\end{ejemplo}
+
+Para convertir un ideal en la forma normal de Hermite se puede usar la función
+\texttt{idealhnf($K$,$I$)}.
 
 \begin{shaded}
 \begin{verbatim}
@@ -2550,7 +2596,6 @@ Hermite se puede usar la función \texttt{idealhnf($K$,$I$)}.
 
 (Notamos que la letra \texttt{I} en PARI/GP ya está reservada para la unidad
 imaginaria $\sqrt{-1}$, así que no hay que usarla para un ideal.)
-
 Interpretación de la salida: tenemos
 \[ \O_K = \alpha_1\ZZ \oplus \alpha_2\ZZ, \quad
    \alpha_1 = 1, \quad
@@ -2574,7 +2619,7 @@ Allí todos los ideales son principales y tenemos
    (m + ni) \ZZ \oplus (-n + mi) \ZZ. \]
 Entonces, el ideal $(m + ni)$ se representa por la matriz
 \[ \begin{pmatrix}
-  m & -n
+  m & -n \\
   n & m
 \end{pmatrix}, \]
 que luego puede ser reducida a la forma normal de Hermite.
@@ -2655,17 +2700,23 @@ en total, podemos hacer lo siguiente:
 Tenemos las siguientes operaciones básicas con ideales (todas las funciones
 relevantes empiezan por «\texttt{ideal}»):
 \begin{itemize}
-  \item \texttt{idealadd($K$,$a$,$b$)} --- suma $a+b$,
-  \item \texttt{idealmul($K$,$a$,$b$)} --- producto $ab$,
-  \item \texttt{idealpow($K$,$a$,$n$)} --- $a^n$,
-  \item \texttt{idealinv($K$,$a$)} --- $a^{-1}$,
-  \item \texttt{idealintersect($K$,$a$,$b$)} --- $a \cap b$.
+\item \texttt{idealadd($K$,$\mathfrak{a}$,$\mathfrak{b}$)} --- suma
+  $\mathfrak{a}+\mathfrak{b}$,
+  \item \texttt{idealmul($K$,$\mathfrak{a}$,$\mathfrak{b}$)} --- producto
+    $\mathfrak{ab}$,
+  \item \texttt{idealpow($K$,$\mathfrak{a}$,$n$)} --- $\mathfrak{a}^n$,
+  \item \texttt{idealinv($K$,$\mathfrak{a}$)} --- $\mathfrak{a}^{-1}$,
+  \item \texttt{idealintersect($K$,$\mathfrak{a}$,$\mathfrak{b}$)} ---
+    $\mathfrak{a} \cap \mathfrak{b}$.
 \end{itemize}
 Otras funciones útiles:
 \begin{itemize}
-  \item \texttt{idealdown($K$,$a$)} --- el $\ZZ$-ideal $a \cap \QQ$,
-  \item \texttt{idealnorm($K$,$a$)} --- la norma $N_{K/\QQ} (a)$,
-  \item \texttt{idealismaximal($K$,$a$)} --- verifica si el ideal es maximal.
+\item \texttt{idealdown($K$,$\mathfrak{a}$)} --- el $\ZZ$-ideal
+  $\mathfrak{a} \cap \QQ$,
+\item \texttt{idealnorm($K$,$\mathfrak{a}$)} --- la norma
+  $N_{K/\QQ} (\mathfrak{a})$,
+  \item \texttt{idealismaximal($K$,$\mathfrak{a}$)} --- verifica si el ideal es
+    maximal.
 \end{itemize}
 
 \begin{shaded}
@@ -2690,8 +2741,8 @@ Otras funciones útiles:
 \end{verbatim}
 \end{shaded}
 
-Aquí \texttt{idealismaximal($K$,$a$)} devuelve \texttt{0} si el ideal no es
-maximal, y en el caso contrario, devuelve varias cosas precalculadas, cuyo
+Aquí \texttt{idealismaximal($K$,$\mathfrak{a}$)} devuelve \texttt{0} si el ideal
+no es maximal, y en el caso contrario, devuelve varias cosas precalculadas, cuyo
 significado será explicado abajo.
 
 Aunque la representación de ideales en PARI/GP es útil para cálculos, estamos
@@ -2699,7 +2750,7 @@ más acostumbrados a representar los ideales por sus generadores. Como sabemos,
 dos generadores son siempre suficientes
 (véase \ref{prop:generacion-de-ideales-por-dos-elementos}).
 Para encontrar dos generadores, sirve la función
-\texttt{idealtwoelt($K$,$a$)}.
+\texttt{idealtwoelt($K$,$\mathfrak{a}$)}.
 
 \begin{shaded}
 \begin{verbatim}
@@ -2719,20 +2770,20 @@ Para encontrar dos generadores, sirve la función
 \end{verbatim}
 \end{shaded}
 
-Interpretación de la salida: $a = (3, 1 + \sqrt[3]{2})$. Por supuesto, es muy
-interesante ver si algún ideal es principal y admite un solo generador.
-Esto equivale a ver si $a$ es trivial en el grupo de clases $\Cl (K)$,
-y es más complicado computacionalmente. Veremos cómo hacerlo en PARI/GP
-en otra ocasión, cuando hablaremos del grupo de clases.
+Interpretación de la salida: $\mathfrak{a} = (3, 1 + \sqrt[3]{2})$.
+Por supuesto, es muy interesante ver si algún ideal es principal y admite un
+solo generador.  Esto equivale a ver si $\mathfrak{a}$ es trivial en el grupo de
+clases $\Cl (K)$, y es más complicado computacionalmente. Veremos cómo hacerlo
+en PARI/GP en otra ocasión, cuando hablaremos del grupo de clases.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Factorización de ideales en el anillo de enteros}
 
-Para factorizar un ideal $a$ en ideales primos, se usa
-\texttt{idealfactor($K$,$a$)}. Nos va a interesar principalmente factorización
-de primos racionales $p \in \ZZ$ en $\O_K$, y para esto sirve la función
-\texttt{idealprimedec($K$,$p$)}.
+Para factorizar un ideal $\mathfrak{a}$ en ideales primos, se usa
+\texttt{idealfactor($K$,$\mathfrak{a}$)}. Nos va a interesar principalmente
+factorización de primos racionales $p \in \ZZ$ en $\O_K$, y para esto sirve la
+función \texttt{idealprimedec($K$,$p$)}.
 
 Antes de ver los cálculos en PARI/GP, hay que explicar el formato de la salida.
 Si la factorización tiene forma

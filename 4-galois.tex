@@ -1,0 +1,686 @@
+\chapter{Teoría de Galois}
+
+Ya hemos usado ciertos argumentos de la teoría de Galois, y en este capítulo
+veremos de manera más sistemática algunas propiedades de los campos de números
+$K/\QQ$ que son extensiones de Galois.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark{Clase 15 (05/10/20)}{clase-15}
+\section{Breve recordatorio sobre la teoría de Galois}
+\marginpar{\small Clase 15 \\ 05/10/20}
+
+En esta sección vamos a revisar rápidamente la teoría de Galois. El apéndice
+\ref{ap:teoria-de-Galois} contiene la mayoría de los resultados necesarios.
+
+\vspace{1em}
+
+La teoría de Galois considera las extensiones de Galois que son extensiones
+separables y normales. En la característica nula cualquier extensión es
+separable, así que la condición que nos interesa para los campos de números es
+la normalidad.\footnote{También en este curso nos interesan extensiones finitas
+  de campos finitos, pero estas son siempre extensiones de Galois.}
+
+Dado un campo de números $K/\QQ$, gracias al teorema del elemento primitivo,
+podemos escribirlo como $K = \QQ (\alpha)$ para algún número algebraico
+$\alpha$. Sea $f = f^\alpha_\QQ$ el polinomio mínimo de $\alpha$. Consideremos
+sus raíces complejas
+$$f = (x - \alpha_1) \cdots (x - \alpha_n).$$
+Por la separabilidad, se tiene $\alpha_i \ne \alpha_j$ para $i \ne j$.
+El campo de descomposición de $f$ viene dado por
+$L = \QQ (\alpha_1, \ldots, \alpha_n)$, y esta es una extensión normal.
+El grupo
+$$G = \Gal (L/\QQ) = \Aut (L/\QQ)$$
+se llama el \textbf{grupo de Galois}. Se tiene $|G| = [L : \QQ]$.
+Hay una acción fiel y transitiva sobre las raíces
+$$G \curvearrowright \{ \alpha_1, \ldots, \alpha_n \}.$$
+Fijando una numeración de las raíces (como ya hicimos implícitamente),
+se obtiene un homomorfismo inyectivo $G \hookrightarrow S_n$. Si $K = L$,
+entonces $K/\QQ$ es una extensión de Galois. En el caso contrario, $L$ es la
+\textbf{cerradura de Galois} de $K$.
+
+\begin{ejemplo}
+  Ya hemos usado en varias ocasiones que las extensiones ciclotómicas
+  $\QQ (\zeta_n)/\QQ$ son de Galois: el polinomio mínimo de $\zeta_n$
+  es el polinomio ciclotómico $\Phi_n$ y sus raíces son las raíces
+  $n$-ésimas primitivas que están en $\QQ (\zeta_n)$.
+
+  Todo automorfismo $\sigma\colon \QQ (\zeta_n) \to \QQ (\zeta_n)$ debe mandar
+  $\zeta_n$ a otra raíz $n$-ésima primitiva, así que los automorfismos son
+  $$\sigma_a\colon \zeta_n \mapsto \zeta_n^a, \quad \gcd (a,n) = 1.$$
+  Tenemos un isomorfismo
+  \[ \Gal (\QQ (\zeta_n)/\QQ) \cong (\ZZ/n\ZZ)^\times,
+     \quad \sigma_a \mapsto \overline{a}. \]
+  Todo el trabajo duro consiste en probar que $\Phi_n$ es el polinomio mínimo
+  de $\zeta_n$; es decir, probar la irreducibilidad de $\Phi_n$. Véase el
+  apéndice \ref{ap:polinomios-ciclotomicos}.
+\end{ejemplo}
+
+\begin{ejemplo}
+  La extensión $\QQ (\sqrt[3]{2})/\QQ$ no es de Galois. Tenemos
+  \[ f = x^3 - 2 =
+     (x - \sqrt[3]{2})\,(x - \zeta_3\sqrt[3]{2})\,(x - \zeta_3^2\sqrt[3]{2}). \]
+  El campo de descomposición de $f$ es $\QQ (\sqrt[3]{2}, \zeta_3)$,
+  y su grupo de Galois es el grupo simétrico $S_3$. Específicamente, hay dos
+  automorfismos
+  \begin{alignat*}{2}
+    \sigma\colon \sqrt[3]{2} & \mapsto \zeta_3\sqrt[3]{2}, \quad & \zeta_3 & \mapsto \zeta_3,\\
+    \tau\colon \sqrt[3]{2} & \mapsto \sqrt[3]{2}, & \zeta_3 & \mapsto \zeta_3^2.
+  \end{alignat*}
+  Aquí el orden de $\sigma$ es $3$ y el orden de $\tau$ es $2$. Tenemos
+  $\sigma\tau = \tau\sigma^2 \ne \tau\sigma$. Estos dos elementos generan
+  el grupo de Galois que es isomorfo al grupo simétrico $S_3$.
+\end{ejemplo}
+
+El problema con el campo de números $K = \QQ [\alpha]/(\alpha^3 - 2)$
+es el siguiente: este tiene tres diferentes encajes $K \hookrightarrow \CC$:
+un encaje real con imagen $\QQ (\sqrt[3]{2})$ y dos encajes complejos con imagen
+$\QQ (\zeta_3\sqrt[3]{2})$ y $\QQ (\zeta_3^2\sqrt[3]{2})$. Esto no puede pasar
+con extensiones de Galois.
+
+\begin{proposicion}
+  Sea $K/\QQ$ una extensión de Galois. Entonces, todo encaje
+  $\sigma\colon K \hookrightarrow \CC$ tiene la misma imagen. Como consecuencia,
+  todos los encajes son reales ($r_1 = [K : \QQ]$) o todos los encajes son
+  complejos ($r_2 = \frac{1}{2} [K : \QQ]$).
+
+  \begin{proof}
+    En general, una extensión finita $K/F$ es normal si y solamente si para todo
+    $F$-homomorfismo $\sigma\colon K \to \overline{K}$ se cumple
+    $\sigma (K) = K$ (véase \ref{prop-dfn:extensiones-normales}).
+  \end{proof}
+\end{proposicion}
+
+Este no es un curso de la teoría de Galois, pero nuestra discusión sería
+incompleta sin el siguiente resultado.
+
+\begin{teorema}[Correspondencia de Galois]
+  Dada una extensión finita de Galois $K/\QQ$, consideremos el grupo de Galois
+  $G = \Gal (K/\QQ)$.  A una subextensión $\QQ \subseteq F \subseteq K$ se puede
+  asociar un subgrupo $H = \Gal (K/F) \subseteq G$. Viceversa, dado un subgrupo
+  $H \subseteq G$, se obtiene una subextensión
+  $$F = K^H = \{ \alpha \in K \mid \sigma (\alpha) = \alpha \text{ para }\sigma\in H \}.$$
+  Esto nos da una biyección
+  \[ \begin{tikzcd}[column sep=4em]
+    \{ \text{ subcampos }F \subseteq K \}
+    \ar[shift left=0.25em]{r}{F \mapsto \Gal (K/F)} &
+    \{ \text{ subgrupos }H \subseteq G \}
+    \ar[shift left=0.25em]{l}{K^H \mapsfrom H}
+  \end{tikzcd} \]
+
+  Esta correspondencia satisface las siguientes propiedades.
+  \begin{itemize}
+  \item La correspondencia invierte las inclusiones.
+    Si $F \subseteq F'$, entonces $\Gal (K/F') \subseteq \Gal (K/F)$.
+    Si $H \subseteq H' \subseteq G$, entonces $K^{H'} \subseteq K^H$.
+
+  \item $[K:F] = |H|$ y $[F:\QQ] = [G:H]$.
+
+  \item La extensión $F/\QQ$ es normal (y entonces Galois) si y solamente si el
+    subgrupo $H \subseteq G$ es normal. En este caso la restricción de
+    automorfismos $\Gal (K/\QQ) \to \Gal (F/\QQ)$ es sobreyectiva y tiene $H$
+    como su núcleo, así que $\Gal (F/\QQ) \cong G/H$.
+
+  \item Para dos subextensiones $F$ y $F'$ se tiene $F\cong F'$ si y solamente
+    si los subgrupos correspondientes $H, H' \subseteq G$ son conjugados por un
+    elemento de $G$.
+  \end{itemize}
+
+  \begin{proof}
+    Véase \ref{thm:correspondencia-de-Galois}.
+  \end{proof}
+\end{teorema}
+
+\begin{ejemplo}
+  En $K = \QQ (\sqrt[3]{2}, \zeta_3)$ hay un subcampo cuadrático $\QQ (\zeta_3)$
+  y tres subcampos cúbicos $\QQ(\sqrt[3]{2})$, $\QQ(\zeta_3\sqrt[3]{2})$,
+  $\QQ(\zeta_3^2\sqrt[3]{2})$ isomorfos entre sí. La correspondencia con los
+  subgrupos de $\Gal (K/\QQ) = \langle\sigma,\tau\rangle \cong S_3$ es la
+  siguiente:
+  \[ \begin{tikzcd}[row sep=1em,column sep=1em]
+    & \QQ (\sqrt[3]{2}, \zeta_3)\ar[-]{dd}[description]{2}\ar[-]{ddr}[description]{2}\ar[-]{ddrr}[description]{2}\ar[-]{dddl}[description]{3} & & & & & 1\ar[-]{dd}\ar[-]{ddr}\ar[-]{ddrr}\ar[-]{dddl} \\
+    \\
+    & \QQ (\sqrt[3]{2})\ar[-]{dd}[description]{3} & \QQ (\zeta_3\sqrt[3]{2})\ar[-]{ddl}[description]{3} & \QQ (\zeta_3^2\sqrt[3]{2})\ar[-]{ddll}[description]{3} & & & \langle\tau\rangle\ar[-]{dd} & \,\sigma\,\langle\tau\rangle\,\sigma^{-1}\ar[-]{ddl} & \sigma^2\,\langle\tau\rangle\,\sigma^{-2}\ar[-]{ddll} \\
+    \QQ (\zeta_3)\ar[-]{dr}[description]{2} & & & & & \langle\sigma\rangle\ar[-]{dr} \\
+    & \QQ & & & & & \langle\sigma,\tau\rangle
+  \end{tikzcd} \]
+\end{ejemplo}
+
+Uno de los problemas abiertos más importantes de la aritmética es el
+\textbf{problema inverso de Galois} que pregunta si todo grupo finito es
+isomorfo a $\Gal (K/\QQ)$ para alguna extensión de Galois $K/\QQ$.
+
+\begin{ejemplo}
+  Según un teorema de Selmer \cite{Selmer-1956}, el polinomio
+  $x^n - x - 1 \in \QQ [x]$ es irreducible para todo $n$. Su campo de
+  descomposición tiene $S_n$ como su grupo de Galois; véase \cite{Osada-1987}
+  o la exposición \cite{KConrad-Selmer}.
+\end{ejemplo}
+
+Para los grupos abelianos, el problema se resuelve fácilmente de la siguiente
+manera.
+
+\begin{proposicion}
+  Cualquier grupo abeliano finito puede ser realizado como un grupo de Galois.
+
+  \begin{proof}
+    Primero notamos que para todo primo $p$ la extensión ciclotómica
+    $\QQ (\zeta_p)/\QQ$ es una extensión de Galois, con el grupo de Galois
+    cíclico
+    $$\Gal (\QQ (\zeta_p)/\QQ) \xrightarrow{\cong} (\ZZ/p\ZZ)^\times$$
+    A saber, los automorfismos son
+    $$\sigma\colon \zeta_p \mapsto \zeta_p^a, ~ \gcd (a,p) = 1.$$
+
+    Todo grupo abeliano finito se expresa como producto de grupos cíclicos
+    $$C_{n_1} \times C_{n_2} \times \cdots \times C_{n_s}.$$
+    Ocupando el teorema de Dirichlet sobre las progresiones aritméticas (!),
+    podemos encontrar diferentes primos $p_1,\ldots,p_s$ tales que
+    $p_i \equiv 1 \pmod{n_i}$ (el teorema afirma que para cada $n_i$ existe un
+    número infinito de primos $p_i$ con esta propiedad).
+
+    Ahora consideremos el campo ciclotómico
+    $$K = \QQ (\zeta_{p_1\cdots p_s}).$$
+    Su grupo de Galois es un producto de grupos cíclicos
+    \[ G \cong (\ZZ/p_1\cdots p_s\ZZ)^\times
+       \cong (\ZZ/p_1\ZZ)^\times \times \cdots \times (\ZZ/p_s\ZZ)^\times. \]
+    Por nuestra elección de $p_i$, existe subgrupo
+    $H_i \subset (\ZZ/p_i\ZZ)^\times$ de índice $n_i$, y luego
+    \[ G/(H_1\times \cdots \times H_s) \cong C_{n_1} \times \cdots C_{n_s}. \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  Para hacerlo más específico, si buscamos una extensión con el grupo de Galois
+  $C_3$, podemos tomar $p = 7$. Nos interesa entonces la extensión ciclotómica
+  $\QQ (\zeta_7)/\QQ$ y el grupo de Galois
+  $$G = \Gal (\QQ (\zeta_7)/\QQ) \cong (\ZZ/7\ZZ)^\times.$$
+  La conjugación compleja $\zeta_7 \to \zeta_7^{-1}$ tiene orden $2$.
+  El subcampo cúbico real fijo por la conjugación compleja es
+  $\QQ (\zeta_7 + \zeta_7^{-1})$.
+  También hay automorfismo de orden $3$ dado por $\zeta_7 \mapsto \zeta_7^2$.
+  Este fija el subcampo cuadrático $\QQ (\sqrt{-7})$, donde
+  $$\sqrt{-7} = 1 + 2\zeta_7 + 2\zeta_7^2 + 2\zeta_7^4.$$
+
+  Hemos descrito todas las posibles subextensiones:
+  \[ \begin{tikzcd}[row sep=1em,column sep=1em]
+    & \QQ (\zeta_7)\ar[-]{dl}[description]{2}\ar[-]{ddr}[description]{3} & & & 1\ar[-]{dl}\ar[-]{ddr} \\
+    \QQ (\zeta_7 + \zeta_7^{-1})\ar[-]{ddr}[description]{3} & & & \{ 1, 6 \}\ar[-]{ddr} \\
+    & & \QQ (\sqrt{-7}) \ar[-]{dl}[description]{2} & & & \{ 1,2,4 \}\ar[-]{dl} \\
+     & \QQ & & & (\ZZ/7\ZZ)^\times
+    \end{tikzcd} \]
+\end{ejemplo}
+
+\begin{ejemplo}
+  Si queremos encontrar una extensión con el grupo abeliano $C_2\times C_2$
+  usando este método, podemos tomar el campo ciclotómico $\QQ (\zeta_{15})$
+  con el grupo de Galois
+  $$G \cong (\ZZ/15\ZZ)^\times \cong (\ZZ/3\ZZ)^\times \times (\ZZ/5\ZZ)^\times,$$
+  y tomar adentro el subgrupo
+  $$H = \{ 1, 4 \} \subset (\ZZ/15\ZZ)^\times.$$
+  Ahora el subcampo $\QQ (\zeta_{15})^H$ es el campo bicuadrático
+  $\QQ (\sqrt{-3}, \sqrt{5})$.
+  \[ \begin{tikzcd}
+    & \QQ (\zeta_{15})\ar[-]{d}[description]{2}\ar[-]{ddl}[description]{4}\ar[-]{dr}[description]{2}\ar[-]{drr}[description]{2} \\
+    & \QQ (\sqrt{-3},\sqrt{5})\ar[-]{dd}[description]{2}\ar[-]{dl}[description]{2}\ar[-]{ddr}[description]{2} & \QQ (\zeta_5) \ar[-]{dd}[description]{2} & \QQ (\zeta_{15} + \zeta_{15}^{-1}) \ar[-]{ddl}[description]{2} \\
+    \QQ (\zeta_3) \ar[equals]{d} \\
+    \QQ (\sqrt{-3})\ar[-]{ddr}[description]{2} & \QQ (\sqrt{-15})\ar[-]{dd}[description]{2} & \QQ (\sqrt{5})\ar[-]{ddl}[description]{2} \\
+    \\
+    & \QQ
+  \end{tikzcd} \]
+  El diagrama de arriba contiene todos los subcampos de $\QQ (\zeta_{15})$. Los
+  subgrupos correspondientes $H \subseteq G$ son los siguientes:
+  \[ \begin{tikzcd}
+    & 1\ar[-]{d}\ar[-]{dr}\ar[-]{ddl}\ar[-]{drr} \\
+    & \{ 1, 4 \} \ar[-]{d}\ar[-]{dl}\ar[-]{dr} & \{ 1, -4 \} \ar[-]{d} & \{ \pm 1 \}\ar[-]{dl} \\
+    \{ 1, 4, 7, 13 \}\ar[-]{ddr} & \{ 1, 2, 4, 8 \}\ar[-]{dd} & \{ \pm 1, \pm 4 \}\ar[-]{ddl} \\
+    \\
+    & (\ZZ/15\ZZ)^\times
+  \end{tikzcd} \]
+\end{ejemplo}
+
+Entonces, cualquier grupo de Galois abeliano se realiza mediante una
+subextensión de algún campo ciclotómico. Esta no es una coincidencia:
+se cumple el siguiente resultado mucho más fuerte.
+
+\begin{teorema}[Kronecker--Weber]
+  Sea $K/\QQ$ une extensión con el grupo $\Gal (K/\QQ)$ abeliano. Entonces, para
+  algún $n$ se tiene $K \subseteq \QQ (\zeta_n)$.
+
+  \begin{proof}
+    La prueba requiere bastante trabajo y nos llevaría lejos de los objetivos
+    de este curso\dots{} El lector interesado puede consultar
+    \cite[Chapter~14]{Washington-GTM83}.
+  \end{proof}
+\end{teorema}
+
+\begin{ejemplo}
+  Para un campo cuadrático $K = \QQ (\sqrt{d})$ es fácil encontrar $n$ tal que
+  $K \subset \QQ (\zeta_n)$: use que para un primo impar $p$ se tiene
+  $\sqrt{p^*} \in \QQ (\zeta_p)$, donde
+  $p^* = (-1)^{\frac{p-1}{2}}\,p$ (véase ejercicio
+  \ref{ejerc:subcampo-cuadratico-en-ciclotomico}), y que
+  $\QQ (\sqrt{-1}) = \QQ (\zeta_4)$ y
+  $\sqrt{\pm 2} \in \QQ (\zeta_8)$. Para el caso general, basta
+  factorizar $d$ en números primos. Dejo los detalles como un ejercicio.
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Acción del grupo de Galois sobre los ideales}
+
+A partir de ahora supongamos que $K/\QQ$ es una extensión finita de Galois y
+denotemos $G = \Gal (K/\QQ)$. Primero notamos que la acción de $G$ sobre $K$
+induce acción de $G$ sobre $\O_K$ y los ideales en $\O_K$.
+
+\begin{proposicion}
+  \label{prop:accion-sobre-los-ideales}
+  Consideremos un elemento $\sigma \in \Gal (K/\QQ)$.
+
+  \begin{enumerate}
+  \item[1)] Si $\alpha \in \O_K$, entonces $\sigma (\alpha) \in \O_K$.
+
+  \item[2)] Dado un ideal $I \subseteq \O_K$, el conjunto
+    $\sigma (I) = \{ \sigma (\alpha) \mid \alpha \in I \}$
+    es también un ideal en $\O_K$. En términos de generadores, si
+    $I = (\alpha_1, \ldots, \alpha_n)$, entonces
+    $\sigma (I) = (\sigma(\alpha_1), \ldots, \sigma(\alpha_n))$.
+
+  \item[3)] Hay isomorfismo natural
+    $\O_K/I \cong \O_K/\sigma(I)$.
+
+  \item[4)] Si $\mathfrak{p} \subset \O_K$ es un ideal primo, entonces
+    el ideal $\sigma (\mathfrak{p}) \subset \O_K$ es también primo.
+    Además, si $\mathfrak{p} \mid p$ para un primo racional $p \in \ZZ$,
+    entonces $\sigma(\mathfrak{p}) \mid p$, y los grados de campos residuales
+    coinciden.
+  \end{enumerate}
+
+  \begin{proof}
+    En la parte 1), si $\alpha$ es una raíz de un polinomio mónico
+    $f \in \ZZ [x]$, entonces $f (\sigma (\alpha)) = \sigma (f (\alpha)) = 0$,
+    así que $\sigma (\alpha) \in \O_K$. La parte 2) se verifica fácilmente
+    usando el hecho de que $\sigma$ preserva sumas y productos.
+
+    Para la parte 3), basta notar que el homomorfismo
+    \[ \O_K \twoheadrightarrow \O_K/\sigma(I), \quad
+       \alpha \mapsto \sigma (\alpha) + \sigma (I) \]
+    tiene $I$ como su núcleo y entonces induce el isomorfismo deseado.
+
+    En particular, $\O_K/\mathfrak{p}$ es un dominio si y solamente si
+    $\O_K/\sigma(\mathfrak{p})$ es un dominio, y esto demuestra que
+    para $\mathfrak{p}$ primo el ideal $\sigma (\mathfrak{p})$ es también
+    primo. Ahora si $p \in \mathfrak{p}$, entonces
+    $p = \sigma (p) \in \sigma (\mathfrak{p})$. En fin, el isomorfismo
+    $\O_K/\mathfrak{p} \cong \O_K/\sigma(\mathfrak{p})$ nos dice que
+    los grados del campo residual son iguales. Esto establece la parte 4).
+  \end{proof}
+\end{proposicion}
+
+Entonces, si $p\O_K = \mathfrak{p}_1^{e_1}\cdots\mathfrak{p}_s^{e_s}$,
+el grupo $G$ actúa de alguna manera sobre el conjunto
+$\{ \mathfrak{p}_1, \ldots, \mathfrak{p}_s \}$. Esta acción es el objeto
+principal de estudio del presente capítulo.
+
+\begin{ejemplo}
+  Si $K = \QQ (\sqrt{d})$ es una extensión cuadrática, entonces para
+  $\legendre{d}{p} = +1$ se obtiene
+  $$p\O_K = \mathfrak{p} \, \sigma (\mathfrak{p}),$$
+  donde $\sigma\colon \sqrt{d} \mapsto -\sqrt{d}$ es el automorfismo no trivial
+  de $K/\QQ$.
+\end{ejemplo}
+
+Consideremos alguna extensión un poco más interesante que cuadrática.
+
+\begin{ejemplo}
+  Consideremos algún campo ciclotómico, por ejemplo $K = \QQ (\zeta_5)$.
+  Tenemos $\Gal (K/\QQ) \cong (\ZZ/5\ZZ)^\times$, donde como generador se puede
+  tomar $\sigma\colon \zeta_5 \mapsto \zeta_5^2$. La descomposición de un primo
+  racional $p$ depende de su resto módulo $5$.
+
+  \begin{itemize}
+  \item Si $p \equiv 1 \pmod{5}$, entonces
+    $p\O_K = \mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$,
+    donde según Krull--Dedekind, $\mathfrak{p}_i = (p, \zeta_5 - a^i)$, y
+    $a$ es una quinta raíz primitiva de la unidad mód $p$.
+\iffalse
+    Tenemos,
+    por ejemplo,
+    $$\sigma \mathfrak{p}_1 = (p, \zeta_5^2 - a) = \mathfrak{p}_3 = (p, \zeta_5 - a^3).$$
+    De hecho,
+    $$(\zeta_5 + a^3)\,(\zeta_5 - a^3) \equiv \zeta_5^2 - a \pmod{p},$$
+    así que $\zeta_5^2 - a \in \mathfrak{p}_3$. Entonces,
+    $\sigma\mathfrak{p}_1 \subseteq \mathfrak{p}_3$, y luego
+    $\sigma\mathfrak{p}_1 = \mathfrak{p}_3$ por la maximalidad.
+    De manera similar podemos ver qué sucede con otros ideales, y concluir que
+\fi
+    Se puede calcular que la acción de $\sigma$ sobre los ideales primos viene
+    dada por
+    \[ \begin{tikzcd}
+      \mathfrak{p}_1\ar[bend left=35]{rr} & \mathfrak{p}_2\ar[bend left=35]{l} & \mathfrak{p}_3\ar[bend left=35]{r} & \mathfrak{p}_4\ar[bend left=35]{ll}
+    \end{tikzcd} \]
+    Nos conviene entonces escribir la factorización como
+    $p\O_K = \mathfrak{p}\,\sigma(\mathfrak{p})\,\sigma^2(\mathfrak{p})\,\sigma^3(\mathfrak{p})$.
+
+  \item Si $p \equiv 4 \pmod{5}$, entonces la factorización tiene forma
+    $p\O_K = \mathfrak{p}_1\,\mathfrak{p}_2$. En este caso se puede calcular
+    que $\sigma (\mathfrak{p}_1) = \mathfrak{p}_2$ y viceversa,
+    $\sigma (\mathfrak{p}_2) = \mathfrak{p}_1$. Entonces, la factorización
+    toma forma $p\O_K = \mathfrak{p}\,\sigma(\mathfrak{p})$.
+
+\iffalse
+    Esto se debe al hecho de que
+    en $\FF_p [x]$
+    $$\Phi_5 (x) = (x^2 - (a + a^4)\,x + 1)\,(x^2 - (a^2 + a^3)\,x + 1),$$
+    donde $a$ es una raíz quinta primitiva en $\FF_{p^2}$. En este caso podemos
+    ver que
+    \[ (\zeta_5^2 + (a^2 + a^3)\,\zeta_5 + 1) \,
+       (\zeta_5^2 - (a^2 + a^3)\,\zeta_5 + 1) \equiv
+       \zeta_5^4 - (a + a^4)\,\zeta_5^2 + 1 \pmod{p}, \]
+    y esto de manera similar al caso anterior implica que
+    $\sigma (\mathfrak{p}_1) = \mathfrak{p}_2$. Esto implica que
+    $\sigma (\mathfrak{p}_2) = \mathfrak{p}_1$.
+\fi
+
+  \item Si $p \equiv 2,3 \pmod{5}$, entonces $p$ es inerte: el ideal $p\O_K$
+    es primo.
+
+  \item Si $p = 5$, entonces tenemos ramificación $p\O_K = \mathfrak{p}^4$,
+    donde $\mathfrak{p} = (1 - \zeta_5)$, y no es difícil comprobar a mano que
+    $\sigma (\mathfrak{p}) = \mathfrak{p}$ (aunque ya lo sabemos: $\sigma$
+    permuta los primos $\mathfrak{p} \mid p$, y en este caso hay un solo
+    primo sobre $p$). \qedhere
+  \end{itemize}
+\end{ejemplo}
+
+Resulta que la acción de $G$ sobre los primos $\mathfrak{p} \mid p$ es siempre
+transitiva. Esto puede ser probado usando el siguiente resultado general.
+
+\begin{lema}[Tate]
+  Sean $A$ un anillo conmutativo y $G$ un grupo finito que actúa sobre $A$
+  mediante automorfismos. Consideremos los elementos fijos respecto a esta
+  acción:
+  $$A^G = \{ a \in A \mid \sigma (a) = a \text{ para todo }\sigma\in G \}.$$
+  Sean $R$ un dominio y $\phi,\psi$ dos homomorfismos
+  \[ \begin{tikzcd}
+    A^G &[-3em] \subset &[-3em] A \ar[shift left=0.25em]{r}{\phi}\ar[shift right=0.25em]{r}[swap]{\psi} & R
+  \end{tikzcd} \]
+  tales que $\left.\phi\right|_{A^G} = \left.\psi\right|_{A^G}$. Entonces,
+  $\phi = \psi\circ\sigma$ para algún $\sigma \in G$.
+\end{lema}
+
+Antes de probar el lema, vamos a sacar un corolario.
+
+\begin{corolario}
+  Para una extensión de Galois $K/\QQ$, si
+  $\mathfrak{p}_1, \mathfrak{p}_2 \subset \O_K$ son dos primos tales que
+  $\mathfrak{p}_1, \mathfrak{p}_2 \mid p$, entonces existe $\sigma \in G$
+  tal que $\sigma (\mathfrak{p}_1) = \mathfrak{p}_2$.
+
+  \begin{proof}
+    Tenemos $K^G = \QQ$, y luego $(\O_K)^G = \ZZ$. Cada $\mathfrak{p}_i$ es
+    el núcleo de algún homomorfismo $\phi_i\colon \O_K \to \overline{\FF_p}$.
+    Estamos en la siguiente situación:
+    \[ \begin{tikzcd}
+      \ZZ &[-3em] \subset &[-3em] \O_K \ar[shift left=0.25em]{r}{\phi_1}\ar[shift right=0.25em]{r}[swap]{\phi_2} & \overline{\FF_p}
+    \end{tikzcd} \]
+    Aquí $\left.\phi_1\right|_{\ZZ} = \left.\phi_2\right|_{\ZZ}$, así que
+    el lema de Tate implica que $\phi_1 = \phi_2\circ\sigma$ para algún
+    $\sigma \in G$. Ahora $\sigma (\ker (\phi_1)) = \ker (\phi_2)$.
+  \end{proof}
+\end{corolario}
+
+\begin{proof}[Demostración del lema de Tate]
+  Todo homomorfismo $\phi\colon A\to R$ se extiende a
+  $\phi\colon A[x] \to R[x]$. Tenemos
+  \[ \tag{*} \begin{tikzcd}
+    A^G [x] &[-3em] \subset &[-3em] A [x] \ar[shift left=0.25em]{r}{\phi}\ar[shift right=0.25em]{r}[swap]{\psi} & R [x]
+  \end{tikzcd} \]
+  Para un elemento $a \in A$ definamos un polinomio
+  $$f = \prod_{g\in G} (x - \sigma (a)).$$
+  Notamos que los coeficientes de este polinomio son invariantes respecto
+  a la acción de $G$, así que $f \in A^G [x]$, y por nuestra hipótesis
+  se tiene $\phi (f) = \psi (f)$ en $R [x]$. El elemento $\phi (a)$ es una raíz
+  de $\phi (f) = \psi (f)$:
+  \[ \phi (f) = \prod_{\sigma \in G} = (x - \phi \sigma (a)) =
+     \psi (f) = \prod_{\sigma \in G} = (x - \psi \sigma (a)). \]
+  En particular, $\phi (a) = \psi \sigma (a)$ para algún $\sigma \in G$.
+
+  Ahora para cada $\sigma \in G$ consideremos
+  $$A_\sigma = \{ a \in A \mid \phi (a) = \psi \sigma (a) \}.$$
+  Por lo que acabamos de probar,
+  $$A = \bigcup_{\sigma \in G} A_\sigma.$$
+  Afirmamos que se tiene $A = A_\sigma$ para algún $\sigma \in G$. Supongamos
+  que esto no es cierto y para todo $\sigma \in G$ existe $a_\sigma \in A$
+  tal que $a_\sigma \notin A_\sigma$. Consideremos el polinomio
+  $$g = \sum_{\sigma \in G} a_\sigma x^{d_\sigma} \in A [x].$$
+  donde los $d_\sigma$ son diferentes. El mismo argumento de arriba aplicado
+  a (*) demuestra que
+  \[ A [x] = \bigcup_{\sigma \in G} (A [x])_\sigma
+           = \bigcup_{\sigma \in G} A_\sigma [x]. \]
+  Tenemos $g \in A [x]$, pero $g \notin A_\sigma [x]$ para todo $\sigma$.
+  Contradicción.
+\end{proof}
+
+La transitividad de la acción del grupo de Galois sobre los primos
+$\mathfrak{p} \mid p$ tiene la siguiente consecuencia importante.
+
+\begin{proposicion}
+  Sea $K/\QQ$ una extensión finita de Galois. Para un primo racional $p$
+  consideremos la factorización
+  \[ \tag{*} p \O_K = \mathfrak{p}_1^{e_1} \cdots \mathfrak{p}_s^{e_s}. \]
+  Los grados de campos residuales e índices de ramificación coinciden:
+  $$f_1 = \cdots = f_s, \quad e_1 = \cdots = e_s.$$
+  Entonces, si $f_p$ denota los grados de campos residuales,
+  $e_p$ denota los índices de ramificación y $g_p = s$ es el número de primos,
+  se tiene
+  $$e_p\,f_p\,g_p = [K : \QQ].$$
+
+  \begin{proof}
+    Para la igualdad de los $f_i$, ya notamos que $\mathfrak{p}$ y
+    $\sigma (\mathfrak{p})$ tienen el mismo grado del campo residual,
+    y basta usar que la acción de $G$ sobre los $\mathfrak{p}_i$ es transitiva.
+    Para los índices de ramificación, aplicando $\sigma$ a la expresión (*)
+    se obtiene
+    $$p\O_K = \sigma (\mathfrak{p}_1)^{e_1} \cdots \sigma (\mathfrak{p}_s)^{e_s},$$
+    y luego $e (\mathfrak{p}) = e (\sigma (\mathfrak{p}))$ por la unicidad de
+    factorización en ideales primos. De nuevo, la transitividad de la acción
+    de $G$ sobre los $\mathfrak{p}_i$ implica que todos los $e_i$ coinciden.
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  Consideremos el campo ciclotómico $K = \QQ (\zeta_n)$, donde
+  $n = \prod_p p^{v_p}$. Hemos visto que para un primo racional $p$
+  se tiene $e_p = \phi (p^{v_p})$ y $f_p$ es el orden de $p$ módulo
+  $n/p^{v_p}$. Notamos que estos números dependen solamente del resto de $p$
+  módulo $n$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Consideremos el campo de números $K = \QQ (\sqrt[3]{19})$ y su cerradura de
+  Galois $L = \QQ (\sqrt[3]{19},\zeta_3)$. También tenemos un subcampo
+  cuadrático $F = \QQ (\zeta_3)$.
+
+  \[ \begin{tikzcd}[row sep=1em, column sep=1em]
+    & L\ar[-]{dl}[swap]{2}\ar[-]{ddr}{3} \\
+    K\ar[-]{ddr}[swap]{3} \\
+    & & F\ar[-]{dl}{2} \\
+    & \QQ
+    \end{tikzcd} \]
+
+  Las siguientes consideraciones son útiles. Para un primo racional $p$ y
+  $\mathfrak{p} \mid p$ en $\O_K$, sea $\mathfrak{q}$ un primo en $\O_L$ tal que
+  $\mathfrak{p} \subset \mathfrak{q}$. En este caso tenemos la siguiente
+  situación:
+  \[ \begin{tikzcd}
+    \mathfrak{q} &[-3em] \subset &[-3em] \O_L\ar[-]{d}\ar[->>]{r} & \O_L/\mathfrak{q}\ar[-]{d}\ar[-,bend left=45]{dd}{f (\mathfrak{q})} \\
+    \mathfrak{p} & \subset & \O_K\ar[-]{d}\ar[->>]{r} & \O_K/\mathfrak{p}\ar[-]{d}[swap]{f (\mathfrak{p})} \\
+    p & \subset & \ZZ\ar[->>]{r} & \FF_p
+  \end{tikzcd} \]
+  En particular, $f (\mathfrak{p}) \mid f (\mathfrak{q})$.
+
+  \vspace{1em}
+
+  Para analizar los primos ramificados, podemos calcular los discriminantes:
+  \[ \Delta_F = -3, \quad
+     \Delta_K = -3\cdot 19^2, \quad
+     \Delta_L = -3^3\cdot 19^4. \]
+  En particular, los primos ramificados en $\O_L$ son los mismos que en $\O_K$.
+
+  \begin{itemize}
+  \item Para $p = 3$ se tiene $p\O_F = \mathfrak{r}^2$. El ideal
+    $\mathfrak{r}\O_L$ se factoriza de alguna manera en ideales primos en
+    $\O_L$ que tal vez pueden ramificarse más, pero de todos modos, tenemos
+    $2 \mid e_3$. Por otra parte,
+    $3\O_K = \mathfrak{p}^2 \, \mathfrak{p}'$, así que $g_3 \ge 2$. Dado
+    que $e_3\,f_3\,g_3 = 6$, esto nos deja la única posibilidad
+    $(e_3,f_3,g_3) = (2,1,3)$. Entonces,
+    $$3\O_L = \mathfrak{q}^2\mathfrak{q}'^2\mathfrak{q}''^2,$$
+    donde $f_3 = 1$.
+    
+  \item Para $p = 19$ se tiene $19\O_K = \mathfrak{p}^3$. Por otra parte,
+    $19\O_F = \mathfrak{p}'\mathfrak{p}''$. Entonces, $e_p \ge 3$ y
+    $g_p \ge 2$. Pero esto nos deja con la única posibilidad
+    $e_p = 3$, $g_p = 2$, $f_{19} = 1$:
+    $$19\O_L = \mathfrak{q}^3\mathfrak{q}'^3.$$
+  \end{itemize}
+  Ahora para los primos no ramificados, recordemos que $p$ se escinde en
+  $F$ si y solamente si
+  $$\legendre{-3}{p} = +1 \iff p \equiv 1 \pmod{3}.$$
+
+  \begin{itemize}
+  \item Si $p \equiv 2 \pmod{3}$, entonces
+    \[ p\O_K = \mathfrak{p}\,\mathfrak{p}', \quad
+       f (\mathfrak{p}) = 1, ~ f (\mathfrak{p}') = 2. \]
+    Esto implica que $2 \mid f_p$ y $g_p > 1$, pero dado que $f_p\,g_p = 6$,
+    la única posibilidad es $(f_p,g_p) = (2,3)$.
+    $$p\O_L = \mathfrak{q}\,\mathfrak{q}'\,\mathfrak{q}''.$$
+
+  \item Si $p \equiv 1 \pmod{3}$ y $19$ no es un cubo módulo $p$, entonces
+    $p$ es inerte en $\O_K$, lo cuál implica que $3 \mid f_p$. Por otra parte,
+    $p$ se escinde en $F$, y luego $g_p \ge 2$. Esto nos deja la única
+    posibilidad $f_p = 3$ y $g_p = 2$:
+    $$p\O_L = \mathfrak{q}\,\mathfrak{q}'.$$
+
+  \item Si $p \equiv 1\pmod{3}$ y $19$ es un cubo módulo $p$, entonces
+    $p\O_K = \mathfrak{p} \mathfrak{p}' \mathfrak{p}''$.
+    Hay dos posibilidades:
+    $p\O_L = \mathfrak{q}_1 \mathfrak{q}_2 \mathfrak{q}_3$,
+    o
+    $p\O_L = \mathfrak{q}_1 \mathfrak{q}_2 \cdots \mathfrak{q}_6$.
+
+    Pero sabemos que
+    $$p\O_L \cap \O_F = p\O_F = \mathfrak{r}\,\sigma (\mathfrak{r}),$$
+    donde $\sigma$ es la conjugación compleja. Entonces, $\mathfrak{r}\O_L$
+    y $\sigma (\mathfrak{r})\O_L$ se factorizan de la misma manera en
+    ideales primos en $\O_L$, y la única posibilidad es
+    $$p\O_L = \mathfrak{q}_1 \mathfrak{q}_2 \cdots \mathfrak{q}_6.$$
+  \end{itemize}
+
+  La figura \ref{fig:cerradura-de-sqrt-19} demuestra las factorizaciones en
+  $\O_F$, $\O_K$ y $\O_K$. Los primeros primos $p \equiv 1 \pmod{3}$ tales que
+  $19$ es un cubo mód $p$ son
+  \[ p = 97, 109, 127, 151, 181, 271, 277, 283, 307, 313, \ldots \qedhere \]
+\end{ejemplo}
+
+Note que en el último ejemplo la factorización de $p$ no depende del resto de
+$p$ módulo algún $N$, sino de una condición misteriosa
+«$19$ es un cubo módulo $p$». Para las extensiones abelianas (con el grupo
+$\Gal (K/\QQ)$ abeliano), el comportamiento de primos sí depende del resto de
+$p$ módulo algún $N$. La razón detrás de este fenómeno es el teorema de
+Kronecker--Weber.
+
+\vspace{1em}
+
+\noindent\emph{Continuará\dots}
+
+\begin{figure}
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{x{0.75cm}x{1cm}x{1.25cm}x{2.5cm}x{0.75cm}x{0.75cm}x{1cm}x{1.25cm}x{2.5cm}x{0.75cm}}
+      $p$ & $p\O_F$ & $p\O_K$ & $p\O_L$ & $p~(3)$ & $p$ & $p\O_F$ & $p\O_K$ & $p\O_L$ & $p~(3)$ \tabularnewline
+      \hline
+      $2$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $127$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4\,\mathfrak{q}_5\,\mathfrak{q}_6$ & $1$ \tabularnewline
+      \hline
+      $3$ & $\mathfrak{r}^2$ & $\mathfrak{p}_1\,\mathfrak{p}_2^2$ & $\mathfrak{q}_1^2\,\mathfrak{q}_2^2\,\mathfrak{q}_3^2$ & $0$ & $131$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $5$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $137$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $7$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $139$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ \tabularnewline
+      \hline
+      $11$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $149$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $13$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $151$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4\,\mathfrak{q}_5\,\mathfrak{q}_6$ & $1$ \tabularnewline
+      \hline
+      $17$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $157$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ \tabularnewline
+      \hline
+      $19$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}^3$ & $\mathfrak{q}_1^3\,\mathfrak{q}_2^3$ & $1$ & $163$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ \tabularnewline
+      \hline
+      $23$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $167$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $29$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $173$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $31$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $179$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $37$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $181$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4\,\mathfrak{q}_5\,\mathfrak{q}_6$ & $1$ \tabularnewline
+      \hline
+      $41$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $191$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $43$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $193$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ \tabularnewline
+      \hline
+      $47$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $197$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $53$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $199$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ \tabularnewline
+      \hline
+      $59$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $211$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ \tabularnewline
+      \hline
+      $61$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $223$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ \tabularnewline
+      \hline
+      $67$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $227$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $71$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $229$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ \tabularnewline
+      \hline
+      $73$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $233$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $79$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $239$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $83$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $241$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ \tabularnewline
+      \hline
+      $89$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $251$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $97$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4\,\mathfrak{q}_5\,\mathfrak{q}_6$ & $1$ & $257$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $101$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $263$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $103$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $1$ & $269$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+      $107$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $271$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4\,\mathfrak{q}_5\,\mathfrak{q}_6$ & $1$ \tabularnewline
+      \hline
+      $109$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4\,\mathfrak{q}_5\,\mathfrak{q}_6$ & $1$ & $277$ & $\mathfrak{r}_1\,\mathfrak{r}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4\,\mathfrak{q}_5\,\mathfrak{q}_6$ & $1$ \tabularnewline
+      \hline
+      $113$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ & $281$ & $\mathfrak{r}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3$ & $2$ \tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \caption{Factorización de primos racionales en $F = \QQ (\zeta_3)$, $K = \QQ (\sqrt[3]{19})$ y $L = \QQ (\sqrt[3]{19}, \zeta_3)$}
+  \label{fig:cerradura-de-sqrt-19}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\phantomsection
+
+\addcontentsline{toc}{section}{Ejercicios}
+\section*{Ejercicios}
+
+\begin{ejercicio}
+  Para un campo cuadrático $\QQ (\sqrt{d})$ encuentre $n$ tal que
+  $\QQ (\sqrt{d}) \subset \QQ (\zeta_n)$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Describa los subcampos de $\QQ (\sqrt[4]{2},i)$.
+\end{ejercicio}
