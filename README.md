@@ -66,6 +66,35 @@ alexey.beshenov@cimat.mx
 
   https://youtube.com/watch?v=KYSi0HwAEk8
 
+* Clase 12 (21/09/2020). Teoremas de Brill y Stickelberger.
+  Campos linealmente disjuntos. El anillo de enteros de Q(ζn).
+
+  https://youtube.com/watch?v=aBOx3o1KVYU
+
+* Clase 13 (23/09/2020). Factorización de primos en Q(ζn).
+  Campos de números en PARI/GP.
+
+  https://youtube.com/watch?v=WoZBCfD0SvA
+
+* Clase 14 (28/09/2020). Ideales en el anillo de enteros en PARI/GP.
+  Experimentos numéricos. Teorema de densidad de Chebotarëv.
+
+  https://youtube.com/watch?v=qvBukjHYkYE
+
+  https://youtube.com/watch?v=Zi9aZF286IU
+
+* Clase 15 (05/10/2020). Breve revisión de la teoría de Galois.
+  Problema inverso de Galois para G abeliano. Teorema de Kronecker–Weber
+  (enunciado). Acción de Gal(K/Q) sobre los ideales primos.
+
+  https://youtube.com/watch?v=Dv9SHuwYmu0
+
+  https://youtube.com/watch?v=UAMHOcLTO0M
+
+* Clase 16 (07/10/2020). Teorema de Dirichlet sobre primos en progresiones
+  aritméticas (enunciado y bosquejo de la prueba).
+
+  https://youtube.com/watch?v=-I63PbpdhpQ
 
 ## Agradecimientos
 
