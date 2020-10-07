@@ -1,0 +1,441 @@
+\chapter{Teorema de Dirichlet sobre primos en progresiones aritméticas}
+
+Uno de los temas principales de nuestro curso es la descomposición de primos
+racionales $p \in \ZZ$ en ideales primos en el anillo de enteros $\O_K$ de un
+campo de números $K/\QQ$. Cuando el grupo de Galois $\Gal (K/\QQ)$ es abeliano,
+el tipo de descomposición depende del resto de $p$ módulo $m$ para cierto $m$.
+En particular, lo observamos en el caso cuando $K = \QQ (\zeta_m)$ es un campo
+ciclotómico (véase \ref{thm:descomposicion-en-campos-ciclotomicos}).
+Esto hace particularmente interesante el
+\textbf{teorema de Dirichlet sobre primos en progresiones aritméticas} que
+afirma que si $\gcd (a,m) = 1$, entonces hay un número infinito de primos tales
+que $p \equiv a \pmod{m}$. Además, en cierto sentido técnico, hay precisamente
+$1/\phi(m)$ primos con esta propiedad. Este apéndice está dedicado a un bosquejo
+de la prueba que usa ideas importantes de la teoría analítica de números.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Caso de p = 1 (m)}
+
+Primero veremos un resultado particular cuando $a = 1$. En este caso existe una
+prueba elemental basada en las propiedades de polinomios ciclotómicos.
+
+\begin{lema}
+  Todo polinomio ciclotómico $\Phi_m$ tiene término constante igual a $\pm 1$
+
+  \begin{proof}
+    El término constante es igual a $\pm\prod_{(k,m) = 1} \zeta_m^k$. Esta
+    expresión es invariante respecto a la acción de $\Gal (\QQ (\zeta_m)/\QQ)$,
+    así que es un número racional. Pero al mismo tiempo es una raíz $m$-ésima
+    de la unidad, y por lo tanto este número es igual a $\pm 1$.
+  \end{proof}
+\end{lema}
+
+(De hecho, pensándolo bien, se puede ver que el término constante es $+1$, con
+la única excepción de $\Phi_1 (x) = x - 1$.)
+
+\begin{lema}
+  Si $p$ es un primo tal que $p \nmid m$ y $p \mid \Phi_m (N)$ para algún
+  $N \in \ZZ$, entonces $p \equiv 1 \pmod{m}$.
+
+  \begin{proof}
+    Las raíces de $\Phi_m (x)$ en $\FF_p$ corresponden a los elementos de orden
+    $m$ en $\FF_p^\times$. Entonces, si $\Phi_m (N) \equiv 0 \pmod{p}$, esto
+    significa que $N$ tiene orden $m$ en $\FF_p^\times$, y luego
+    $p\equiv 1\pmod{m}$.
+  \end{proof}
+\end{lema}
+
+\begin{ejemplo}
+  Tenemos $\Phi_5 (3) = \frac{3^5 - 1}{3 - 1} = 242/2 = 121 = 11^2$.
+  Ahora $11 \equiv 1 \pmod{5}$.
+\end{ejemplo}
+
+\begin{teorema}
+  Para $m$ fijo, existe un número infinito de primos $p \equiv 1 \pmod{m}$.
+
+  \begin{proof}
+    Supongamos que $p_1,\ldots,p_s$ son los únicos primos tales que
+    $p_i\equiv 1 \pmod{m}$. Pongamos
+    $$N = C m p_1\cdots p_s,$$
+    donde $C \gg 1$ se escoge de tal manera que $\Phi_m (N) > 1$.
+    Tenemos entonces por el primer lema
+    $$\Phi_m (N) \equiv \pm 1 \pmod{m}, \quad \Phi_m (N) \equiv \pm 1 \pmod{p_i}.$$
+    Ahora si $p$ es un factor primo de $\Phi_m (N)$, entonces las congruencias
+    de arriba demuestran que $p \nmid m$ y $p \notin \{ p_1, \ldots, p_s \}$.
+    Pero luego el segundo lema implica que $p \equiv 1 \pmod{m}$. Contradicción.
+  \end{proof}
+\end{teorema}
+
+Notamos que aunque el argumento de arriba está formulado como una prueba por
+contradicción, en realidad este nos da una manera de obtener a partir de un
+primo $p \equiv 1 \pmod{m}$ un número infinito de $p$ con la misma propiedad,
+aunque estos $p$ serán bastante grandes y muy pronto el número $\Phi_m (N)$
+se volverá demasiado grande para buscar sus factores primos en práctica.
+
+\begin{ejemplo}
+  Consideremos $m = 3$. El primo $p_1 = 7$ claramente cumple la condición
+  $p_1 \equiv 1 \pmod{3}$. Luego
+  $$p_2 = \Phi_3 (3\cdot p_1) = 463$$
+  casualmente es también primo. Luego
+  $$p_3 = \Phi_3 (3\cdot p_1 p_2) = 94546453$$
+  es también primo. En fin,
+  $$\Phi_3 (3\cdot p_1 p_2 p_3) = 845066824425253137587881 = 2059573\cdot 410311663837724197$$
+  tiene dos factores primos $p_4$ y $p_5$. Todos los primos $p_i$ de arriba
+  cumplen la condición $p_i \equiv 1 \pmod{3}$.
+\end{ejemplo}
+
+El argumento con polinomios ciclotómicos funciona para $a = 1$. Nos interesa
+el caso general de $\gcd (a,m)=1$, y allí ya no existe una prueba elemental;
+todas las pruebas conocidas tienen origen analítico.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Series de Dirichlet}
+
+A partir de ahora vamos a ocupar varios resultados de la teoría analítica de
+números. Como referencia, recomiendo los apuntes \cite{Everiste-ANT}. Otro texto
+útil es \cite{Hlawka-Taschner-Schoissengeier}. Allí se encuentran demostraciones
+de todas las afirmaciones de abajo.
+
+\begin{definicion}
+  Para una función $f\colon \ZZ_{>0} \to \CC$ la \textbf{serie de Dirichlet}
+  correspondiente viene dada por
+  $$F (s) = \sum_{n\ge 1} \frac{f(n)}{n^s},$$
+  donde $s$ es una variable compleja.
+\end{definicion}
+
+Un caso muy particular de las series de Dirichlet es la
+\textbf{función zeta de Riemann}
+$$\zeta (s) = \sum_{n\ge 1} \frac{1}{n^s}.$$
+
+Las series de Dirichlet cumplen las siguientes propiedades generales.
+
+\begin{enumerate}
+\item Existe un número $-\infty \le \sigma_0 \le +\infty$, llamado
+  la \textbf{abscisa de convergencia}, tal que $F (s)$ converge para
+  $\Re s > \sigma_0$. Este es un análogo del radio de convergencia que se tiene
+  para las series de potencias habituales.
+
+\item De la misma manera, existe la \textbf{abscisa de convergencia absoluta}
+  $\sigma_a$ tal que $F (s)$ converge absolutamente para $\Re s > \sigma_a$.
+  Siempre se tiene $\sigma_0 \le \sigma_a \le \sigma_0 + 1$.
+
+\item Si existe una constante $C$ tal que
+  $\left|\sum_{1 \le n\le N}\right| \le C$ para todo $N$, entonces $F (s)$
+  converge para $\Re s > 0$.
+
+\item Si $f$ es una función multiplicativa en el sentido fuerte, es decir,
+  $f (ab) = f (a)\,f (b)$ para cualesquiera $a, b \in \ZZ_{> 0}$, entonces se
+  cumple la \textbf{fórmula del producto de Euler}
+  $$F (s) = \prod_p \frac{1}{1 - f (p)\,p^{-s}},$$
+  donde el producto es sobre todos los primos.
+
+  Esta fórmula tiene sus orígenes en el teorema fundamental de la aritmética.
+  De hecho, manipulando con las series de manera formal y ocupando
+  la multiplicatividad de $f$,
+  \[ \prod_p \frac{1}{1 - f (p)\,p^{-s}} =
+     \prod_p \sum_{e \ge 0} \frac{f (p^e)}{p^{es}} =
+     \sum_{n\ge 1} \frac{f (n)}{n^s}. \]
+\end{enumerate}
+
+Un homomorfismo $\chi\colon (\ZZ/m\ZZ)^\times \to \CC^\times$ se llama un
+\textbf{carácter de Dirichlet} mód $m$. Notamos que los valores de $\chi$
+son las raíces $m$-ésimas de la unidad. Un carácter $\chi$ se levanta a una
+función $\widetilde{\chi}\colon \ZZ \to \CC$ mediante
+\[ \widetilde{\chi} (a) = \begin{cases}
+  \chi (a), & \text{si }\gcd (a,m) = 1, \\
+  0, & \text{si }\gcd (a,m) \ne 1.
+\end{cases} \]
+A continuación vamos a escribir simplemente «$\chi$» en lugar de
+«$\widetilde{\chi}$».
+
+Los caracteres de Dirichlet mód $m$ forman un grupo abeliano respecto a
+la multiplicación punto por punto. El elemento neutro en este grupo es el
+\textbf{carácter principal} $\chi_0$ definido mediante
+\[ \chi_0 (a) = \begin{cases}
+  1, & \text{si }\gcd (a,m) = 1,\\
+  0, & \text{si }\gcd (a,m) \ne 1.
+\end{cases} \]
+
+En general, para cualquier grupo abeliano finito $G$ podemos considerar su grupo
+de caracteres $\widehat{G} = \Hom (G, \CC^\times)$, y este cumple la
+\textbf{relación de ortogonalidad}
+\[ \sum_{\chi \in \widehat{G}} \chi (g)\,\chi^{-1} (h) = \begin{cases}
+    |G|, & \text{si }g = h,\\
+    0, & \text{si }g \ne h.
+\end{cases} \]
+(Este cálculo se ve en la teoría de representación de grupos finitos.)
+En particular, para $G = (\ZZ/m\ZZ)^\times$ y $\gcd (a,m) = \gcd (b,m) = 1$ se
+cumple
+\begin{equation}
+  \label{eqn:relacion-de-ortogonalidad}
+  \sum_\chi \chi (a)\,\chi^{-1} (b) = \begin{cases}
+    \phi (m), & \text{si }a = b,\\
+    0, & \text{si }a \ne b.
+  \end{cases}
+\end{equation}
+
+\begin{definicion}
+  Dado un carácter de Dirichlet $\chi$, la \textbf{serie L} correspondiente
+  se define mediante
+  $$L (\chi, s) = \sum_{n\ge 1} \frac{\chi (n)}{n^s}.$$
+\end{definicion}
+
+La función zeta de Riemann converge para $\Re s > 1$ y también cumple la
+fórmula del producto (descubierta por Euler)
+$$\zeta (s) = \prod_p \frac{1}{1 - p^{-s}}. \quad (\Re s > 1)$$
+Notamos que $L (\chi,s)$ también converge absolutamente para $\Re s > 1$
+(los coeficientes $\chi (n)$ son nulos o cumplen con $|\chi (n)| = 1$),
+así que gracias a la multiplicatividad de $\chi$,
+$$L (\chi,s) = \prod_p \frac{1}{1 - \chi (p)\,p^{-s}}. \quad (\Re s > 1)$$
+
+Por otra parte, para $s = 1$ se obtiene la \textbf{serie armónica}
+$\sum_{n\ge 1} \frac{1}{n}$ que es divergente. No es difícil calcular que
+\begin{equation}
+  \label{eq:residuo-de-zeta-en-1}
+  \lim_{s\to 1^+} (s-1) \, \zeta (s) = 1.
+\end{equation}
+Para las series $L$, si $\chi = \chi_0$ es el carácter principal mód $m$,
+entonces se obtiene
+\[ L (\chi_0, s) = \prod_{p \nmid m} \frac{1}{1 - p^{-s}}
+   = \prod_{p \mid m} (1 - p^{-s}) \, \zeta (s). \]
+En particular, $L (\chi_0, s)$ es divergente en $s = 1$, y se tiene
+\[ \lim_{s\to 1^+} (s-1)\,L (\chi_0, s) = \prod_{p \mid m} (1 - p^{-1})
+   = \phi (m)/m. \]
+
+Por otra parte, si $\chi \ne \chi_0$ no es un carácter principal, entonces
+$\sum_{a \in (\ZZ/m\ZZ)^\times} \chi (a) = 0$, y de allí es fácil ver que
+para cualquier $N$ se cumple $\Bigl|\sum_{1 \le n \le N} \chi (n)\Bigr| < m$.
+Esto implica que $L (\chi,s)$ converge para $\Re s > 0$ en el caso cuando $\chi
+\ne \chi_0$. El resultado clave que contiene todas las dificultades técnicas de
+la prueba de Dirichlet es el siguiente.
+
+\begin{teorema}
+  \label{thm:L(chi,1)}
+  Si $\chi$ no es un carácter principal, entonces $L (\chi,1) \ne 0$.
+
+  \begin{proof}
+    Para una prueba concisa, véase por ejemplo \cite[\S 16.5]{Ireland-Rosen}.
+    En general, $L (\chi,s) \ne 0$ para $\Re s = 1$. Esto se demuestra, por
+    ejemplo, en \cite[Chapter~5]{Everiste-ANT} y
+    \cite[Chapter~6]{Hlawka-Taschner-Schoissengeier}.
+  \end{proof}
+\end{teorema}
+
+\begin{ejemplo}
+  Sea $\chi$ el carácter no trivial mód $3$. Este viene dado por
+  $\chi (1) = +1$ y $\chi (2) = -1$. Ahora
+  $$L (1,\chi) = \sum_{n \ge 1} \frac{\chi (n)}{n} = \sum_{n \ge 0} \left(\frac{1}{3n + 1} - \frac{1}{3n+2}\right) = \sum_{n \ge 0} \frac{1}{(3n+1)\,(3n+2)}.$$
+  Para evaluar la suma, notamos que
+  $$\int_0^1 t^{3n} \, (1-t) \, dt = \frac{1}{(3n+1)\,(3n+2)}.$$
+  Ahora
+  \begin{multline*}
+    \sum_{n \ge 0} \frac{1}{(3n+1)\,(3n+2)} = \sum_{n \ge 0} \int_0^1 t^{3n} \, (1-t) \, dt = \int_0^1 \left(\sum_{n \ge 0} t^{3n} \, (1-t)\right) \, dt =\\
+    \int_0^1 \frac{1-t}{1-t^3}\,dt = \int_0^1 \frac{1}{1 + t + t^2}\,dt = \frac{2}{\sqrt{3}}\,\left[\arctan \left(\frac{2t+1}{\sqrt{3}}\right)\right]_0^1 = \frac{2}{\sqrt{3}}\,\left(\frac{\pi}{3} - \frac{\pi}{6}\right) = \frac{\pi}{3\sqrt{3}}. \qedhere
+  \end{multline*}
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Densidad de primos}
+
+\begin{lema}
+  \label{lema:log-zeta-log-sm1}
+  Se tiene
+  $$\lim_{s\to 1^+} \log \zeta (s)\left/\log \frac{1}{s-1}\right. = 1.$$
+
+  \begin{proof}
+    Tenemos
+    $$\log \Bigl((s-1)\,\zeta (s)\Bigr) = \log (s-1) + \log \zeta (s).$$
+    Luego,
+    \[ \log \Bigl((s-1)\,\zeta (s)\Bigr) =
+       -1 + \log \zeta (s)\left/\log \frac{1}{s-1}\right.. \]
+    Pasando al límite $s \to 1^+$, se obtiene $0$ en la parte izquierda
+    según \eqref{eq:residuo-de-zeta-en-1}.
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  \label{lema:log-zeta}
+  Se tiene
+  $$\log \zeta (s) = \sum_p \frac{1}{p^s} + R (s),$$
+  donde la suma es sobre todos los primos, y la función $R (s)$ es acotada para
+  $s \to 1^+$.
+
+  \begin{proof}
+    La fórmula del producto nos dice que
+    $$\zeta (s) = \prod_{p \le N} \frac{1}{1 - p^{-s}}\,R_N (s),$$
+    donde $\lim_{N\to\infty} R_N (s) = 1$. Tomando el logaritmo de ambas partes,
+    se obtiene\footnote{Usando la serie del logaritmo
+      $-\log (1-x) = \sum_{n\ge 1} \frac{x^n}{n}$ para $-1 < x < 1$.}
+    \[ \log \zeta (s) = \sum_{p \le N} -\log (1 - p^{-s}) + \log R_N (s) =
+    \sum_{p\le N} \sum_{n\ge 1} \frac{p^{-ns}}{n} + \log R_N (s). \]
+    Al pasar al límite $N \to \infty$, nos queda
+    \[ \log \zeta (s) =
+       \sum_p \frac{1}{p^s} + \sum_p \sum_{n \ge 2} \frac{p^{-ns}}{n}. \]
+    Usando la fórmula de progresión aritmética, escribamos el segundo
+    término como
+    $$R (s) = \sum_p \sum_{n \ge 2} \frac{p^{-ns}}{n} = \sum_p p^{-2s}\,\frac{1}{1 - p^{-s}}.$$
+    Ahora $\frac{1}{1 - p^{-s}} \le 2$ para todo $p$ y $s > 1$, así que
+    \[ R (S) \le 2\,\sum_p \frac{1}{p^{2s}} \le 2\,\sum_{n\ge 1} \frac{1}{n^{2s}} \le 2\,\zeta (2). \qedhere \]
+  \end{proof}
+\end{lema}
+
+Notamos que lo que acabamos de probar, junto con la divergencia de $\zeta (s)$
+en $s=1$, implica que la serie $\sum_p \frac{1}{p}$ es divergente. Esto nos da
+una prueba curiosa de la infinitud de números primos.
+
+\vspace{1em}
+
+Las propiedades que acabamos de ver motivan la siguiente definición.
+
+\begin{definicion}
+  Sea $X$ un conjunto que consiste en números primos.
+  Su \textbf{densidad de Dirichlet} (o \textbf{densidad analítica})
+  viene dada por
+  $$d (X) = \lim_{s \to 1^+} \sum_{p \in X} \frac{1}{p}\left/\log \frac{1}{s-1}\right.,$$
+  si el límite correspondiente existe.
+\end{definicion}
+
+Los lemas de arriba nos dicen que la densidad cumple las siguientes propiedades.
+
+\begin{enumerate}
+\item[1)] Si $X$ es un conjunto finito, entonces $d (X) = 0$.
+
+\item[2)] Si $X$ consiste en todos los primos, salvo un número finito de ellos,
+  entonces $d (X) = 1$.
+
+\item[3)] Si $X = Y \cup Z$ es una unión disjunta y las densidades $d (Y)$ y
+  $d (Z)$ existen, entonces $d (X) = d (Y) + d (Z)$.
+\end{enumerate}
+
+Dirichlet probó lo siguiente.
+
+\begin{teorema}
+  Para $\gcd (a,m) = 1$ la densidad de primos tales que $p \equiv a \pmod{m}$
+  es igual a $1/\phi(m)$.
+\end{teorema}
+
+Notamos que puesto que la densidad no es nula, esto implica que hay un número
+infinito de primos con esta propiedad. Sin embargo, el resultado de Dirichlet
+es más fuerte: es \emph{cuantitativo}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Bosquejo de demostración del teorema de Dirichlet}
+
+Dado un carácter de Dirichlet $\chi$ mód $m$, consideremos la serie
+$$G (\chi, s) = \sum_p \sum_{k\ge 1} \frac{(\chi (p)\,p^{-s})^k}{k}.$$
+Aquí $\left|\frac{(\chi (p)\,p^{-s})^k}{k}\right| \le \frac{1}{p^{ks}}$,
+y la serie $\zeta (s)$ converge para $s > 1$ y converge uniformemente para
+$s \ge 1 + \delta$, así que $G (\chi,s)$ define una función continua para
+$s > 1$. Notamos que
+\[ \exp \left(\sum_{k\ge 1} \frac{(\chi (p)\,p^{-s})^k}{k}\right) =
+\exp (-\log (1 - \chi (p)\,p^{-s})) = \frac{1}{1 - \chi(p)\,p^{-s}}. \]
+Entonces, la fórmula del producto para las series $L$ nos dice que
+$$\exp (G (\chi,s)) = L (\chi,s) \quad\text{para }s > 1.$$
+
+\begin{proposicion}
+  Tenemos
+  \[ \lim_{s\to 1^+} G (\chi,s)\left/\log \frac{1}{s-1}\right. =
+  \begin{cases}
+    1, & \text{si } \chi = \chi_0, \\
+    0, & \text{si } \chi \ne \chi_0.
+  \end{cases} \]
+
+  \begin{proof}
+    Primero, si $\chi = \chi_0$, entonces para $s > 1$ se tiene
+    \[ G (\chi,s) = \log L (\chi,s) =
+    \sum_{p\mid m} \log (1 - p^{-s}) + \log \zeta (s), \]
+    y podemos concluir usando el lema \ref{lema:log-zeta-log-sm1}.
+
+    Por otra parte, si $\chi \ne \chi_0$, entonces, como fue mencionado en
+    \ref{thm:L(chi,1)}, tenemos $L (\chi,1) \ne 0$, y luego
+    $\lim_{s\to 1^+} G (\chi,s) = \log L (\chi,1)$. En este caso el valor
+    $L (\chi,1)$ será un número complejo, y su logaritmo está bien definido solo
+    módulo $2\pi i \ZZ$, pero de todas maneras, $G (\chi,s)$ es acotado para
+    $s \to 1^+$.
+  \end{proof}
+\end{proposicion}
+
+Argumentando como en la prueba del lema \ref{lema:log-zeta}, llegamos a la
+conclusión que
+$$G (\chi,s) = \sum_{p \nmid m} \chi (p)\,p^{-s} + R_\chi (s),$$
+donde $R_\chi (s)$ es acotado para $s \to 1^+$. Dado un número $a$ tal que
+$\gcd (a,m) = 1$, multiplicamos ambas partes de la última ecuación por
+$\chi^{-1} (a)$ y sumamos sobre todos los caracteres de Dirichlet mód $m$:
+$$\sum_\chi \chi^{-1} (a)\,G (\chi,s) = \sum_{p \nmid m} p^{-s} \sum_\chi \chi (p)\,\chi^{-1} (a) + \sum_\chi \chi^{-1} (a)\,R_\chi (s).$$
+Usando la relación de ortogonalidad \eqref{eqn:relacion-de-ortogonalidad},
+podemos escribir esta expresión como
+$$\sum_\chi \chi^{-1} (a)\,G (\chi,s) = \sum_{p \equiv a ~ (m)} p^{-s} + \sum_\chi \chi^{-1} (a)\,R_\chi (s).$$
+Al dividir esta expresión por $\log \frac{1}{s-1}$ y tomar el límite
+$s \to 1^+$, en la parte izquierda, gracias a la proposición de arriba, nos
+quedará $1$. Por otra parte, en la parte derecha estará
+$$\phi (m)\,\lim_{s\to 1^+} \sum_{p \equiv a ~ (m)} \frac{1}{p} \left/\log \frac{1}{s-1}\right. = \phi (m) \cdot d (\{ p \mid p \equiv a ~ (m) \}).$$
+Esto establece el teorema de Dirichlet. \qed
+
+\vspace{1em}
+
+Voy a reiterar que la parte clave que no fue probada es el teorema
+\ref{thm:L(chi,1)} que afirma que $L (\chi,1) \ne 0$ para $\chi \ne \chi_0$.
+De todos modos, mi intención fue presentar la estrategia general de
+la demostración; el lector interesado puede seguir las referencias mencionadas.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Densidad natural}
+
+La definición de densidad $d (X)$ parece algo rara al principio, pero después
+de ver la prueba, se entiende cuál es su propósito. Hay otra noción de densidad,
+llamada la \textbf{densidad natural}:
+$$d_{nat} (X) = \lim_{N\to\infty} \frac{\# \{ p \mid p\in X, ~ p \le N \}}{\# \{ p \mid p \le N \}}.$$
+Sería interesante investigar cuál es la densidad natural de los primos tales que
+$p \equiv a \pmod{m}$. Se puede probar que para la función
+$$\pi (a,m,N) = \# \{ p \mid p \equiv a ~ (m), ~ p \le N \}$$
+se tiene la asintótica
+$$\pi (a,m,N) \sim \frac{1}{\phi (m)}\cdot \frac{N}{\log N}.$$
+(Aquí la notación $f (N) \sim g (N)$ significa que
+$\lim_{N\to\infty} f(N)/g(N) = 1$.) Véase por ejemplo
+\cite[Chapter~7]{Everiste-ANT} o
+\cite[Chapter~6]{Hlawka-Taschner-Schoissengeier}.
+Este resultado generaliza el célebre \textbf{teorema de los números primos}
+que nos dice que
+$$\pi (N) \sim \frac{N}{\log N},$$
+donde $\pi (N)$ denota el número de primos $\le N$. Como consecuencia,
+la densidad natural de los primos $p \equiv a \pmod{m}$ es también igual a
+$1/\phi(m)$. En general, ocupando el teorema de los números primos, se puede
+probar que si un conjunto de primos $X$ tiene densidad natural $d_{nat} (X)$,
+entonces este también tiene densidad de Dirichlet $d (X)$, y las dos coinciden.
+Esto no funciona en la otra dirección: existen conjuntos que tienen densidad
+de Dirichlet, pero no tienen densidad natural. En general, es más fácil trabajar
+con la densidad de Dirichlet.
+
+También cabe mencionar que el teorema de los números primos es un resultado más
+complicado, que fue probado por Hadamard y de la Vallée Poussin en 1896,
+mientras que Dirichlet probó su teorema en 1837.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aplicación: irreducibilidad de polinomios ciclotómicos}
+
+Como una aplicación curiosa del teorema de Dirichlet, podemos probar
+la irreducibilidad de polinomios ciclotómicos $\Phi_m \in \ZZ [x]$. El argumento
+es el siguiente.
+
+Supongamos que $\Phi_m = fg$ para algunos polinomios $f,g \in \ZZ[x]$.
+Sin pérdida de generalidad, $f$ y $g$ son mónicos y $f$ es irreducible. Entonces
+alguna raíz $n$-ésima primitiva $\zeta$ es una raíz de $f$. Nos gustaría
+probar que cualquier otra raíz primitiva $\zeta^a$, donde $\gcd (a,m) = 1$ es
+una raíz de $f$, y por lo tanto $g = 1$.
+
+Si $p$ es un primo tal que $p \equiv a \pmod{m}$, entonces en el anillo
+$\ZZ [\zeta_m]$ se cumple
+$$p \mid f (\zeta^p) = f (\zeta^a).$$
+En efecto, la fórmula del binomio en característica $p$ nos dice que
+$f (\zeta^p) \equiv f (\zeta)^p \pmod{p}$.
+
+Ahora gracias al teorema de Dirichlet, existe un número infinito de primos tales
+que $p \equiv a \pmod{m}$, y que entonces dividen a $f (\zeta^a)$. Pero
+esto implica que $f (\zeta^a) = 0$: un elemento no nulo de $\ZZ [\zeta_m]$ tiene
+solo un número finito de divisores primos. \qed
