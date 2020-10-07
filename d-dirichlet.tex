@@ -1,6 +1,9 @@
 \chapter{Teorema de Dirichlet sobre primos en progresiones aritméticas}
 \label{ap:Dirichlet}
 
+\pdfbookmark{Clase 16 (07/10/20)}{clase-16}
+\marginpar{\small Clase 16 \\ 07/10/20}
+
 Uno de los temas principales de nuestro curso es la descomposición de primos
 racionales $p \in \ZZ$ en ideales primos en el anillo de enteros $\O_K$ de un
 campo de números $K/\QQ$. Cuando el grupo de Galois $\Gal (K/\QQ)$ es abeliano,
@@ -127,14 +130,14 @@ Las series de Dirichlet cumplen las siguientes propiedades generales.
   converge para $\Re s > 0$.
 
 \item Si $f$ es una función multiplicativa en el sentido fuerte, es decir,
-  $f (ab) = f (a)\,f (b)$ para cualesquiera $a, b \in \ZZ_{> 0}$, entonces se
-  cumple la \textbf{fórmula del producto de Euler}
+  $f (ab) = f (a)\,f (b)$ para cualesquiera $a, b \in \ZZ_{> 0}$, entonces
+  para $\Re s > \sigma_a$ se cumple la \textbf{fórmula del producto de Euler}
   $$F (s) = \prod_p \frac{1}{1 - f (p)\,p^{-s}},$$
   donde el producto es sobre todos los primos.
 
   Esta fórmula tiene sus orígenes en el teorema fundamental de la aritmética.
-  De hecho, manipulando con las series de manera formal y ocupando
-  la multiplicatividad de $f$,
+  De hecho, manipulando con las series de manera
+  formal\footnote{¿O informal? :-)}  y ocupando la multiplicatividad de $f$,
   \[ \prod_p \frac{1}{1 - f (p)\,p^{-s}} =
      \prod_p \sum_{e \ge 0} \frac{f (p^e)}{p^{es}} =
      \sum_{n\ge 1} \frac{f (n)}{n^s}. \]
@@ -152,8 +155,8 @@ A continuación vamos a escribir simplemente «$\chi$» en lugar de
 «$\widetilde{\chi}$».
 
 Los caracteres de Dirichlet mód $m$ forman un grupo abeliano respecto a
-la multiplicación punto por punto. El elemento neutro en este grupo es el
-\textbf{carácter principal} $\chi_0$ definido mediante
+la multiplicación punto por punto. El elemento neutro en este grupo es
+el \textbf{carácter principal} (o \textbf{trivial}) $\chi_0$ definido mediante
 \[ \chi_0 (a) = \begin{cases}
   1, & \text{si }\gcd (a,m) = 1,\\
   0, & \text{si }\gcd (a,m) \ne 1.
@@ -172,8 +175,8 @@ cumple
 \begin{equation}
   \label{eqn:relacion-de-ortogonalidad}
   \sum_\chi \chi (a)\,\chi^{-1} (b) = \begin{cases}
-    \phi (m), & \text{si }a = b,\\
-    0, & \text{si }a \ne b.
+    \phi (m), & \text{si }a \equiv b \pmod{m},\\
+    0, & \text{si }a \not\equiv b \pmod{m}.
   \end{cases}
 \end{equation}
 
@@ -295,11 +298,13 @@ Las propiedades que acabamos de ver motivan la siguiente definición.
   Sea $X$ un conjunto que consiste en números primos.
   Su \textbf{densidad de Dirichlet} (o \textbf{densidad analítica})
   viene dada por
-  $$d (X) = \lim_{s \to 1^+} \sum_{p \in X} \frac{1}{p}\left/\log \frac{1}{s-1}\right.,$$
+  $$d (X) = \lim_{s \to 1^+} \sum_{p \in X} \frac{1}{p^s}\left/\log \frac{1}{s-1}\right.,$$
   si el límite correspondiente existe.
 \end{definicion}
 
-Los lemas de arriba nos dicen que la densidad cumple las siguientes propiedades.
+Los lemas de arriba nos dicen que la densidad es una especie de medida sobre los
+conjuntos de números primos. En partucular, se cumplen las siguientes
+propiedades.
 
 \begin{enumerate}
 \item[1)] Si $X$ es un conjunto finito, entonces $d (X) = 0$.
