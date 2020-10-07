@@ -180,16 +180,16 @@ cumple
 \begin{definicion}
   Dado un carácter de Dirichlet $\chi$, la \textbf{serie L} correspondiente
   se define mediante
-  $$L (\chi, s) = \sum_{n\ge 1} \frac{\chi (n)}{n^s}.$$
+  $$L (s,\chi) = \sum_{n\ge 1} \frac{\chi (n)}{n^s}.$$
 \end{definicion}
 
 La función zeta de Riemann converge para $\Re s > 1$ y también cumple la
 fórmula del producto (descubierta por Euler)
 $$\zeta (s) = \prod_p \frac{1}{1 - p^{-s}}. \quad (\Re s > 1)$$
-Notamos que $L (\chi,s)$ también converge absolutamente para $\Re s > 1$
+Notamos que $L (s,\chi)$ también converge absolutamente para $\Re s > 1$
 (los coeficientes $\chi (n)$ son nulos o cumplen con $|\chi (n)| = 1$),
 así que gracias a la multiplicatividad de $\chi$,
-$$L (\chi,s) = \prod_p \frac{1}{1 - \chi (p)\,p^{-s}}. \quad (\Re s > 1)$$
+$$L (s,\chi) = \prod_p \frac{1}{1 - \chi (p)\,p^{-s}}. \quad (\Re s > 1)$$
 
 Por otra parte, para $s = 1$ se obtiene la \textbf{serie armónica}
 $\sum_{n\ge 1} \frac{1}{n}$ que es divergente. No es difícil calcular que
@@ -199,26 +199,26 @@ $\sum_{n\ge 1} \frac{1}{n}$ que es divergente. No es difícil calcular que
 \end{equation}
 Para las series $L$, si $\chi = \chi_0$ es el carácter principal mód $m$,
 entonces se obtiene
-\[ L (\chi_0, s) = \prod_{p \nmid m} \frac{1}{1 - p^{-s}}
+\[ L (s, \chi_0) = \prod_{p \nmid m} \frac{1}{1 - p^{-s}}
    = \prod_{p \mid m} (1 - p^{-s}) \, \zeta (s). \]
-En particular, $L (\chi_0, s)$ es divergente en $s = 1$, y se tiene
-\[ \lim_{s\to 1^+} (s-1)\,L (\chi_0, s) = \prod_{p \mid m} (1 - p^{-1})
+En particular, $L (s, \chi_0)$ es divergente en $s = 1$, y se tiene
+\[ \lim_{s\to 1^+} (s-1)\,L (s, \chi_0) = \prod_{p \mid m} (1 - p^{-1})
    = \phi (m)/m. \]
 
 Por otra parte, si $\chi \ne \chi_0$ no es un carácter principal, entonces
 $\sum_{a \in (\ZZ/m\ZZ)^\times} \chi (a) = 0$, y de allí es fácil ver que
 para cualquier $N$ se cumple $\Bigl|\sum_{1 \le n \le N} \chi (n)\Bigr| < m$.
-Esto implica que $L (\chi,s)$ converge para $\Re s > 0$ en el caso cuando $\chi
-\ne \chi_0$. El resultado clave que contiene todas las dificultades técnicas de
-la prueba de Dirichlet es el siguiente.
+Esto implica que $L (s,\chi)$ converge para $\Re s > 0$ en el caso cuando
+$\chi \ne \chi_0$. El resultado clave que contiene todas las dificultades
+técnicas de la prueba de Dirichlet es el siguiente.
 
 \begin{teorema}
-  \label{thm:L(chi,1)}
-  Si $\chi$ no es un carácter principal, entonces $L (\chi,1) \ne 0$.
+  \label{thm:L(1,chi)}
+  Si $\chi$ no es un carácter principal, entonces $L (1,\chi) \ne 0$.
 
   \begin{proof}
     Para una prueba concisa, véase por ejemplo \cite[\S 16.5]{Ireland-Rosen}.
-    En general, $L (\chi,s) \ne 0$ para $\Re s = 1$. Esto se demuestra, por
+    En general, $L (s,\chi) \ne 0$ para $\Re s = 1$. Esto se demuestra, por
     ejemplo, en \cite[Chapter~5]{Everiste-ANT} y
     \cite[Chapter~6]{Hlawka-Taschner-Schoissengeier}.
   \end{proof}
@@ -327,19 +327,19 @@ es más fuerte: es \emph{cuantitativo}.
 \section{Bosquejo de demostración del teorema de Dirichlet}
 
 Dado un carácter de Dirichlet $\chi$ mód $m$, consideremos la serie
-$$G (\chi, s) = \sum_p \sum_{k\ge 1} \frac{(\chi (p)\,p^{-s})^k}{k}.$$
+$$G (s,\chi) = \sum_p \sum_{k\ge 1} \frac{(\chi (p)\,p^{-s})^k}{k}.$$
 Aquí $\left|\frac{(\chi (p)\,p^{-s})^k}{k}\right| \le \frac{1}{p^{ks}}$,
 y la serie $\zeta (s)$ converge para $s > 1$ y converge uniformemente para
-$s \ge 1 + \delta$, así que $G (\chi,s)$ define una función continua para
+$s \ge 1 + \delta$, así que $G (s,\chi)$ define una función continua para
 $s > 1$. Notamos que
 \[ \exp \left(\sum_{k\ge 1} \frac{(\chi (p)\,p^{-s})^k}{k}\right) =
 \exp (-\log (1 - \chi (p)\,p^{-s})) = \frac{1}{1 - \chi(p)\,p^{-s}}. \]
 Entonces, la fórmula del producto para las series $L$ nos dice que
-$$\exp (G (\chi,s)) = L (\chi,s) \quad\text{para }s > 1.$$
+$$\exp (G (s,\chi)) = L (s,\chi) \quad\text{para }s > 1.$$
 
 \begin{proposicion}
   Tenemos
-  \[ \lim_{s\to 1^+} G (\chi,s)\left/\log \frac{1}{s-1}\right. =
+  \[ \lim_{s\to 1^+} G (s,\chi)\left/\log \frac{1}{s-1}\right. =
   \begin{cases}
     1, & \text{si } \chi = \chi_0, \\
     0, & \text{si } \chi \ne \chi_0.
@@ -347,29 +347,29 @@ $$\exp (G (\chi,s)) = L (\chi,s) \quad\text{para }s > 1.$$
 
   \begin{proof}
     Primero, si $\chi = \chi_0$, entonces para $s > 1$ se tiene
-    \[ G (\chi,s) = \log L (\chi,s) =
+    \[ G (s,\chi) = \log L (s,\chi) =
     \sum_{p\mid m} \log (1 - p^{-s}) + \log \zeta (s), \]
     y podemos concluir usando el lema \ref{lema:log-zeta-log-sm1}.
 
     Por otra parte, si $\chi \ne \chi_0$, entonces, como fue mencionado en
-    \ref{thm:L(chi,1)}, tenemos $L (\chi,1) \ne 0$, y luego
-    $\lim_{s\to 1^+} G (\chi,s) = \log L (\chi,1)$. En este caso el valor
-    $L (\chi,1)$ será un número complejo, y su logaritmo está bien definido solo
-    módulo $2\pi i \ZZ$, pero de todas maneras, $G (\chi,s)$ es acotado para
+    \ref{thm:L(1,chi)}, tenemos $L (1,\chi) \ne 0$, y luego
+    $\lim_{s\to 1^+} G (s,\chi) = \log L (1,\chi)$. En este caso el valor
+    $L (1,\chi)$ será un número complejo, y su logaritmo está bien definido solo
+    módulo $2\pi i \ZZ$, pero de todas maneras, $G (s,\chi)$ es acotado para
     $s \to 1^+$.
   \end{proof}
 \end{proposicion}
 
 Argumentando como en la prueba del lema \ref{lema:log-zeta}, llegamos a la
 conclusión que
-$$G (\chi,s) = \sum_{p \nmid m} \chi (p)\,p^{-s} + R_\chi (s),$$
+$$G (s,\chi) = \sum_{p \nmid m} \chi (p)\,p^{-s} + R_\chi (s),$$
 donde $R_\chi (s)$ es acotado para $s \to 1^+$. Dado un número $a$ tal que
 $\gcd (a,m) = 1$, multiplicamos ambas partes de la última ecuación por
 $\chi^{-1} (a)$ y sumamos sobre todos los caracteres de Dirichlet mód $m$:
-$$\sum_\chi \chi^{-1} (a)\,G (\chi,s) = \sum_{p \nmid m} p^{-s} \sum_\chi \chi (p)\,\chi^{-1} (a) + \sum_\chi \chi^{-1} (a)\,R_\chi (s).$$
+$$\sum_\chi \chi^{-1} (a)\,G (s,\chi) = \sum_{p \nmid m} p^{-s} \sum_\chi \chi (p)\,\chi^{-1} (a) + \sum_\chi \chi^{-1} (a)\,R_\chi (s).$$
 Usando la relación de ortogonalidad \eqref{eqn:relacion-de-ortogonalidad},
 podemos escribir esta expresión como
-$$\sum_\chi \chi^{-1} (a)\,G (\chi,s) = \sum_{p \equiv a ~ (m)} p^{-s} + \sum_\chi \chi^{-1} (a)\,R_\chi (s).$$
+$$\sum_\chi \chi^{-1} (a)\,G (s,\chi) = \sum_{p \equiv a ~ (m)} p^{-s} + \sum_\chi \chi^{-1} (a)\,R_\chi (s).$$
 Al dividir esta expresión por $\log \frac{1}{s-1}$ y tomar el límite
 $s \to 1^+$, en la parte izquierda, gracias a la proposición de arriba, nos
 quedará $1$. Por otra parte, en la parte derecha estará
@@ -379,7 +379,7 @@ Esto establece el teorema de Dirichlet. \qed
 \vspace{1em}
 
 Voy a reiterar que la parte clave que no fue probada es el teorema
-\ref{thm:L(chi,1)} que afirma que $L (\chi,1) \ne 0$ para $\chi \ne \chi_0$.
+\ref{thm:L(1,chi)} que afirma que $L (1,\chi) \ne 0$ para $\chi \ne \chi_0$.
 De todos modos, mi intención fue presentar la estrategia general de
 la demostración; el lector interesado puede seguir las referencias mencionadas.
 
