@@ -250,12 +250,12 @@ técnicas de la prueba de Dirichlet es el siguiente.
   $$\lim_{s\to 1^+} \log \zeta (s)\left/\log \frac{1}{s-1}\right. = 1.$$
 
   \begin{proof}
-    Tenemos
-    $$\log \Bigl((s-1)\,\zeta (s)\Bigr) = \log (s-1) + \log \zeta (s).$$
+    Denotemos $\psi (s) = (s-1)\,\zeta (s)$. Tenemos entonces
+    $$\log \psi (s) = \log (s-1) + \log \zeta (s).$$
     Luego,
-    \[ \log \Bigl((s-1)\,\zeta (s)\Bigr) =
-       -1 + \log \zeta (s)\left/\log \frac{1}{s-1}\right.. \]
-    Pasando al límite $s \to 1^+$, se obtiene $0$ en la parte izquierda
+    \[ \log \zeta (s)\left/\log \frac{1}{s-1}\right. =
+       1 + \log \psi (s)\left/\log \frac{1}{s-1}\right.. \]
+    Pasando al límite $s \to 1^+$, notamos que $\psi (s) \to 1$
     según \eqref{eq:residuo-de-zeta-en-1}.
   \end{proof}
 \end{lema}
