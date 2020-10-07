@@ -1852,6 +1852,7 @@ $\Phi_n (x) \in \ZZ [x]$ módulo diferentes primos $p$.
 Ahora aplicando Kummer--Dedekind, se obtiene el siguiente resultado.
 
 \begin{teorema}
+  \label{thm:descomposicion-en-campos-ciclotomicos}
   Consideremos el campo ciclotómico $K = \QQ (\zeta_n)$. Factoricemos
   $n = \prod_p p^{v_p}$. Para un número primo $p$, sea $f$ el orden
   de $p$ módulo $n/p^{v_p}$. Luego, se tiene factorización
@@ -2888,6 +2889,20 @@ en $K = \QQ (\zeta_{23})$.
 
 \section{Un par de experimentos numéricos}
 
+\epigraph{The attitude adopted in this book is that while we expect to get
+  numbers out of the machine, we also expect to take action based on them, and,
+  therefore we need to understand thoroughly what numbers may, or may not,
+  mean. To cite the author's favorite motto,
+
+  “The purpose of computing is insight, not numbers,” although some people
+  claim,
+
+  “The purpose of computing numbers is not yet in sight.”
+
+  There is an innate risk in computing because “to compute is to sample, and one
+  then enters the domain of statistics with all its uncertainties.”}
+ {Richard W. Hamming,\\\emph{Introduction to applied numerical analysis}, 1971}
+
 PARI/GP nos permite hacer varios experimentos numéricos. Me gustaría presentar
 un par de ejemplos curiosos, donde surgen ciertos fenómenos que serán explicados
 más adelante.
@@ -3069,8 +3084,8 @@ módulo $7$. El primer caso, igual y como el segundo, corresponde a un resto.
 Por otra parte, el tercer y cuarto caso corresponden a dos restos cada uno.
 El hecho de que precisamente $\frac{1}{6}$ primos cumplen la condición
 $p \equiv a \pmod{7}$ para $a = 1,2,3,4,5,6$ es intuitivamente esperado, pero
-es el contenido del teorema de Dirichlet sobre los primos en progresiones
-aritméticas, que ya fue mencionado en este curso.
+es el contenido del teorema de Dirichlet sobre primos en progresiones
+aritméticas (véase el apéndice \ref{ap:Dirichlet}).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

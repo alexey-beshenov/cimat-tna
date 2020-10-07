@@ -347,24 +347,8 @@ Empecemos por un pequeño lema.
   todas las raíces $n$-ésimas primitivas son raíces de $f$ y por ende $g = 1$.
 \end{proof}
 
-\begin{comentario}
-  La idea principal del argumento de arriba es probar que \emph{si para un
-    polinomio irreducible $f \in \ZZ [x]$ se tiene $f (\zeta) = 0$ para una raíz
-    $n$-ésima primitiva $\zeta$, entonces $f (\zeta^a) = 0$ para todo $a$ tal
-    que $\gcd (a,n) = 1$}.
-
-  He aquí otro modo de establecerlo. Primero notamos que para cualquier primo
-  $p$ se tiene $f (\zeta^p) \equiv f (\zeta)^p \pmod{p}$ en el anillo $\ZZ
-  [\zeta_n]$. Ahora, el \term{teorema de Dirichlet sobre primos en progresiones
-    aritméticas} (!) afirma que para todo $a$ tal que $\gcd (a,n) = 1$ hay un
-  número infinito de primos $p$ que cumplen $p \equiv a \pmod{n}$. Entonces,
-  $$p \mid f (\zeta^p) = f (\zeta^a) \quad \text{en }\ZZ [\zeta_n]$$
-  para un número infinito de $p$, lo que implica que $f (\zeta^a) = 0$.
-
-  Sin embargo, no es tan fácil demostrar el teorema de Dirichlet: la prueba se
-  basa en la teoría analítica de números; el lector interesado puede consultar
-  \cite[Chapter~16]{Ireland-Rosen} o \cite[Chapter~7]{Apostol-analytic}.
-\end{comentario}
+Para una prueba alternativa, basada en el teorema de Dirichlet sobre primos
+en progresiones aritméticas, véase \S\ref{sec:irreducibilidad-de-Phi-Dirichlet}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
