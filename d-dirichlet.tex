@@ -25,20 +25,6 @@ Primero veremos un resultado particular cuando $a = 1$. En este caso existe una
 prueba elemental basada en las propiedades de polinomios ciclotómicos.
 
 \begin{lema}
-  Todo polinomio ciclotómico $\Phi_m$ tiene término constante igual a $\pm 1$
-
-  \begin{proof}
-    El término constante es igual a $\pm\prod_{(k,m) = 1} \zeta_m^k$. Esta
-    expresión es invariante respecto a la acción de $\Gal (\QQ (\zeta_m)/\QQ)$,
-    así que es un número racional. Pero al mismo tiempo es una raíz $m$-ésima
-    de la unidad, y por lo tanto este número es igual a $\pm 1$.
-  \end{proof}
-\end{lema}
-
-(De hecho, pensándolo bien, se puede ver que el término constante es $+1$, con
-la única excepción de $\Phi_1 (x) = x - 1$.)
-
-\begin{lema}
   Si $p$ es un primo tal que $p \nmid m$ y $p \mid \Phi_m (N)$ para algún
   $N \in \ZZ$, entonces $p \equiv 1 \pmod{m}$.
 
@@ -63,11 +49,13 @@ la única excepción de $\Phi_1 (x) = x - 1$.)
     $p_i\equiv 1 \pmod{m}$. Pongamos
     $$N = C m p_1\cdots p_s,$$
     donde $C \gg 1$ se escoge de tal manera que $\Phi_m (N) > 1$.
-    Tenemos entonces por el primer lema
+    El término constante de cualquier polinomio ciclotómico es igual a $\pm 1$
+    (véase \eqref{eqn:termino-constante-de-Phi-n}), así que
     $$\Phi_m (N) \equiv \pm 1 \pmod{m}, \quad \Phi_m (N) \equiv \pm 1 \pmod{p_i}.$$
     Ahora si $p$ es un factor primo de $\Phi_m (N)$, entonces las congruencias
     de arriba demuestran que $p \nmid m$ y $p \notin \{ p_1, \ldots, p_s \}$.
-    Pero luego el segundo lema implica que $p \equiv 1 \pmod{m}$. Contradicción.
+    Pero luego el lema de arriba implica que
+    $p \equiv 1 \pmod{m}$. Contradicción.
   \end{proof}
 \end{teorema}
 

@@ -216,9 +216,10 @@ un libro de texto.
 Una aplicación típica del criterio de Eisenstein es la irreducibilidad de los
 polinomios ciclotómicos $\Phi_{p^k}$. Notamos que el término constante de
 cualquier polinomio ciclotómico viene dado por
-\[ \Phi_n (0) =
-   (-1)^{\phi (n)} \prod_{\substack{0 \le a < n \\ \gcd (a,n) = 1}} \zeta_n^a. \]
-
+\begin{equation}
+  \label{eqn:termino-constante-de-Phi-n}
+  \Phi_n (0) = (-1)^{\phi (n)} \prod_{\substack{0 \le a < n \\ \gcd (a,n) = 1}} \zeta_n^a.
+\end{equation}
 Excluyendo el caso excepcional de $\Phi_1 = x-1$ y $\Phi_2 = x+1$, notamos que
 para $n > 2$ el número $\phi (n)$ es par y cada $\zeta_n^a$ en el producto se
 cancela con su inverso $\zeta_n^{-a}$, así que $\Phi_n (0) = 1$.
