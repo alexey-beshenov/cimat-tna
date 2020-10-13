@@ -5,19 +5,35 @@
 
 \usepackage{amsmath,amssymb,amsthm}
 
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+
+\usepackage[normalem]{ulem}
+
 \newcounter{tarea}
 \setcounter{tarea}{3}
 \theoremstyle{definition}
 \newtheorem{ejercicio}{Ejercicio}[tarea]
-\newtheorem*{ejercicio-adicional}{Ejercicio adicional}
 
 \newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
 
 \usepackage{mathspec}
 
 \setmainfont{PT Serif}
 \setsansfont{Montserrat}
 \setmonofont{PT Mono}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\QQ}{\mathbb{Q}}
+\renewcommand{\O}{\mathcal{O}}
+
+\DeclareMathOperator{\Gal}{Gal}
 
 \title{Teoría de números algebraicos\\Tarea 3}
 \author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
@@ -29,7 +45,7 @@
 
 {\sffamily\bfseries\maketitle}
 
-\noindent Fecha límite: viernes, 11 de septiembre.
+\noindent Fecha límite: \sout{viernes, 11 de septiembre} miércoles, 15 de septiembre.
 
 \ifdefined\solutions
 \else
@@ -38,41 +54,376 @@
 
 \vspace{1em}
 
-Consideremos el campo ciclotómico $K = \mathbb{Q} (\zeta_8)$.
+Consideremos el campo ciclotómico $K = \QQ (\zeta_8)$.
 Más adelante veremos un modo adecuado para probar que
-$\mathcal{O}_K = \mathbb{Z}[\zeta_8]$, pero por el momento se puede aceptar este
+$\O_K = \ZZ[\zeta_8]$, pero por el momento se puede aceptar este
 resultado.
 
 \begin{ejercicio}
   Usando el teorema de Kummer--Dedekind, describa las factorizaciones de
-  $p \mathcal{O}_K$ en ideales primos para diferentes primos racionales $p$.
+  $p \O_K$ en ideales primos para diferentes primos racionales $p$.
 
   \noindent (La respuesta depende de $p$ mód $8$.)
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Para ocupar el Kummer--Dedekind, nos interesa cómo el octavo polinomio
+    ciclotómico ${\Phi_8 = x^4 + 1}$ se factoriza módulo diferentes primos $p$.
+
+    Primero, módulo $2$ se obtiene $(x+1)^4$. Si $p$ es un primo impar, se ve
+    que el polinomio $f = x^8 - 1$ es separable en $\FF_p [x]$: tenemos
+    $\gcd (f,f') = 1$. Esto implica que $\Phi_8$ es también separable.
+
+    Notamos que si $x^4 + 1$ tiene raíz $\zeta$ en $\FF_p$, entonces $\zeta$ es
+    un elemento de orden $8$ en el grupo cíclico $\FF_p^\times$. Esto es posible
+    si y solamente si $p \equiv 1 \pmod{8}$. En este caso $\zeta^3$, $\zeta^5$,
+    $\zeta^7$ son otras raíces de $x^4 + 1$ en $\FF_p$:
+    \[ \overline{\Phi_8} =
+       (x - \zeta) \, (x - \zeta^3) \, (x - \zeta^5) \, (x - \zeta^7). \]
+
+    Supongamos ahora que $p \equiv 3, 5, 7 \pmod{8}$. En cada uno de estos casos
+    $p^2 \equiv 1 \pmod{8}$, así que las raíces octavas primitivas
+    $\zeta, \zeta^3, \zeta^5, \zeta^8$ existen en $\FF_{p^2}^\times$. Recordemos
+    que $\Gal (\FF_{p^2}/\FF_p) = \{ 1, \sigma \}$, donde
+    $\sigma\colon x \mapsto x^p$ es el automorfismo de Frobenius, y la teoría de
+    Galois nos dice que
+    $$\FF_p = \{ a \in \FF_{p^2} \mid \sigma (a) = a \}.$$
+    Para $p \not\equiv 1 \pmod{8}$ el polinomio $\Phi_8$ no puede tener un
+    factor lineal, así que este será irreducible o producto de dos polinomios
+    cuadráticos. Curiosamente, $\Phi_8$ no será irreducible módulo ningún primo
+    $p$.
+
+    Para verlo, consideremos cómo el Frobenius permuta las raíces octavas
+    primitivas par $p \equiv 3,5,7$.
+
+    \begin{center}
+      \begin{tikzpicture}
+        \draw (-3,0) node {$p\equiv 3\pmod{8}$};
+
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z1-1) at (0,0) {$\zeta$};
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z3-1) at (1.5,0) {$\zeta^3$};
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z5-1) at (3,0) {$\zeta^5$};
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z7-1) at (4.5,0) {$\zeta^7$};
+
+        \path[->] (z1-1) edge[bend left=45] (z3-1);
+        \path[->] (z3-1) edge[bend left=45] (z1-1);
+
+        \path[->] (z5-1) edge[bend left=45] (z7-1);
+        \path[->] (z7-1) edge[bend left=45] (z5-1);
+
+        \draw (-3,-2) node {$p\equiv 5\pmod{8}$};
+
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z1-2) at (0,-2) {$\zeta$};
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z3-2) at (1.5,-2) {$\zeta^3$};
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z5-2) at (3,-2) {$\zeta^5$};
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z7-2) at (4.5,-2) {$\zeta^7$};
+
+        \path[->] (z1-2) edge[bend left=45] (z5-2);
+        \path[->] (z5-2) edge[bend left=45] (z1-2);
+
+        \path[->] (z3-2) edge[bend left=45] (z7-2);
+        \path[->] (z7-2) edge[bend left=45] (z3-2);
+
+        \draw (-3,-4) node {$p\equiv 7\pmod{8}$};
+
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z1-3) at (0,-4) {$\zeta$};
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z3-3) at (1.5,-4) {$\zeta^3$};
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z5-3) at (3,-4) {$\zeta^5$};
+        \node[circle,minimum size=0.75cm,draw,inner sep=1pt] (z7-3) at (4.5,-4) {$\zeta^7$};
+
+        \path[->] (z1-3) edge[bend left=45] (z7-3);
+        \path[->] (z7-3) edge[bend left=45] (z1-3);
+
+        \path[->] (z3-3) edge[bend left=45] (z5-3);
+        \path[->] (z5-3) edge[bend left=45] (z3-3);
+      \end{tikzpicture}
+    \end{center}
+
+    Ahora si $\{ \alpha_1, \alpha_2 \}$ y $\{ \alpha_3, \alpha_4 \}$ forman
+    órbitas respecto a la acción del Frobenius, entonces el último dejo fijo a
+    \[ \alpha_1 + \alpha_2, ~ \alpha_1 \alpha_2, ~
+       \alpha_3 + \alpha_4, ~ \alpha_3 \alpha_4, \]
+    así que estos elementos están en $\FF_p$, y por lo tanto tenemos
+    factorización en $\FF_p [x]$
+    \[ (x - \alpha_1)\,(x - \alpha_2)\,(x - \alpha_3)\,(x - \alpha_4) =
+       (x^2 - (\alpha_1 + \alpha_2)\,x + \alpha_1 \alpha_2)\cdot
+       (x^2 - (\alpha_3 + \alpha_4)\,x + \alpha_3 \alpha_4). \]
+
+    En particular,
+
+    \begin{itemize}
+    \item Si $p \equiv 3\pmod{8}$, entonces
+      \[ \Phi_8 (x) =
+         (x^2 - (\zeta + \zeta^3)\,x - 1)\,(x^2 - (\zeta^5 + \zeta^7)\,x - 1). \]
+       También podemos calcular que
+       $$(\zeta + \zeta^3)^2 = (\zeta^5 + \zeta^7)^2 = -2,$$
+       así que los coeficientes de $x$ que nos salen son las dos raíces
+       cuadradas de $-2$ módulo $p$.
+
+     \item Si $p \equiv 5 \pmod{p}$, entonces
+       $$\Phi_8 (x) = (x^2 - \zeta^2)\,(x^2 + \zeta^2).$$
+       Aquí $\pm \zeta^2$ son las raíces cuadradas de $-1$ módulo $p$.
+
+     \item Si $p \equiv 7 \pmod{p}$, entonces
+       \[ \Phi_8 (x) =
+          (x^2 - (\zeta + \zeta^7)\,x + 1)\,(x^2 - (\zeta^3 + \zeta^5)\,x + 1). \]
+       Notamos que
+       $$(\zeta + \zeta^7)^2 = (\zeta^3 + \zeta^5) = 2,$$
+       así que los coeficientes de $x$ son las raíces cuadradas de $2$ módulo
+       $p$.
+    \end{itemize}
+
+    Resumiendo todo esto y ocupando el teorema de Kummer--Dedekind, podemos
+    concluir que los primos racionales se factorizan en
+    $\ZZ [\zeta_8] = \O_K$ de la siguiente manera.
+
+    \begin{itemize}
+    \item $2 \O_K = \mathfrak{p}^4$.
+
+    \item Si $p \equiv 1 \pmod{8}$, entonces
+      $p \O_K = \mathfrak{p}_1 \mathfrak{p}_2 \mathfrak{p}_3 \mathfrak{p}_4$.
+
+    \item Si $p \equiv 3,5,7 \pmod{8}$, entonces
+      $p \O_K = \mathfrak{p}_1 \mathfrak{p}_2$.
+    \end{itemize}
+
+    Esto es algo curioso: ningún primo racional $p \in \ZZ$ es inerte en
+    $\ZZ [\zeta_8]$, lo que equivale al hecho de que $\Phi_8 = x^4 + 1$
+    es un polinomio irreducible en $\ZZ [x]$ que se vuelve reducible en
+    $\FF_p [x]$ para cualquier $p$.
+
+    Recordemos que uno de los criterios de irreducibilidad más sencillos nos
+    dice que \emph{si $f \in \ZZ [x]$ es un polinomio mónico que se vuelve
+      irreducible módulo algún $p$, entonces $f$ es irreducible en
+      $\ZZ [x]$}. Como acabamos de ver, hay polinomios irreducibles para cuales
+    este criterio no sirve.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Encuentre las subextensiones
-  $\mathbb{Q} \subset F \subset \mathbb{Q} (\zeta_8)$ y las factorizaciones de
-  $p \mathcal{O}_F$ para cada una de estas.
+  $\QQ \subset F \subset \QQ (\zeta_8)$ y las factorizaciones de
+  $p \O_F$ para cada una de estas.
 
   \noindent (Para encontrar las subextensiones, use la teoría de Galois.)
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Primero, el grupo de Galois de $\QQ (\zeta_8)/\QQ$ consiste en
+    los automorfismos
+    $$\sigma_a\colon \zeta_8 \mapsto \zeta_8^a, \quad a = 1, 3, 5, 7$$
+    Este grupo es isomorfo a $(\ZZ/8\ZZ)^\times = \{ 1, 3, 5, 7 \}$. Hay tres
+    subgrupos propios no triviales, cada uno cíclico de orden $2$. Por la teoría
+    de Galois, habrá tres suextensiones que corresponden a los subcampos fijos
+    por $\sigma_3, \sigma_5, \sigma_7$ respectivamente.
+
+    Tenemos
+    \begin{align*}
+      K^{\langle \sigma_3\rangle} & = \QQ (\zeta_8 + \zeta_8^3) = \QQ (\sqrt{-2}),\\
+      K^{\langle \sigma_5\rangle} & = \QQ (\zeta_8^2) = \QQ (i),\\
+      K^{\langle \sigma_7\rangle} & = \QQ (\zeta_8 - \zeta_8^3) = \QQ (\sqrt{2}).
+    \end{align*}
+
+    \[ \begin{tikzcd}
+      & \QQ (\zeta_8) \ar[-]{dl}\ar[-]{d}\ar[-]{dr} \\
+      \QQ (\sqrt{2})\ar[-]{dr} & \QQ (i)\ar[-]{d} & \QQ (\sqrt{-2})\ar[-]{dl} \\
+      & \QQ
+    \end{tikzcd} \]
+
+    Ya sabemos cómo se factorizan primos racionales en campos cuadráticos.
+    En todos los casos de arriba el único primo que se ramifica es
+    $2$. Ahora para $K = \QQ (\sqrt{d})$ con $d = 2, -2, -1$ y $p$ primo impar
+    tenemos dos casos:
+    \begin{itemize}
+    \item si $\legendre{d}{p} = +1$, entonces
+      $p\O_K = \mathfrak{p}_1 \mathfrak{p}_2$,
+      \item si $\legendre{d}{p} = -1$, entonces $p\O_K$ es primo.
+    \end{itemize}
+
+    También vale la pena notar que este ejercicio junto con el anterior nos dan
+    una prueba de las leyes suplementarias de reprocidad cuadrática.
+    \begin{itemize}
+    \item $\legendre{2}{p} = +1$ si y solamente si $p$ se escinde en
+      $\QQ (\sqrt{2})$. Por otra parte, las consideraciones del ejercicio
+      anterior demuestran que esto sucede si y solamente si
+      $p \equiv 1,7 \pmod{8}$.
+
+    \item De la misma manera, $\legendre{-2}{p} = +1$ si y solamente si
+      $p \equiv 1, 3\pmod{8}$.
+
+    \item $\legendre{-1}{p} = +1$ si y solamente si $p \equiv 1, 5\pmod{8}$; es decir, $p \equiv 1 \pmod{4}$.
+    \end{itemize}
+
+    Otra observación interesante: ningún primo racional $p$ queda inerte
+    en $\QQ (\zeta_8)$ porque este se descompone en uno de los subcampos
+    cuadráticos. La siguiente página contiene una tabla de descomposiciones.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{x{1cm}x{1.5cm}x{1.5cm}x{1.5cm}x{1.5cm}x{1cm}}
+  $p$ & $p\ZZ[\sqrt{2}]$ & $p\ZZ[\sqrt{-1}]$ & $p\ZZ[\sqrt{-2}]$ & $p\ZZ[\zeta_8]$ & $p~(8)$ \tabularnewline
+\hline
+$2$ & $\mathfrak{p}^2$ & $\mathfrak{p}^2$ & $\mathfrak{p}^2$ & $\mathfrak{q}^4$ & $2$ \tabularnewline
+\hline
+$3$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $3$ \tabularnewline
+\hline
+$5$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $5$ \tabularnewline
+\hline
+$7$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $7$ \tabularnewline
+\hline
+$11$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $3$ \tabularnewline
+\hline
+$13$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $5$ \tabularnewline
+\hline
+$17$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4$ & $1$ \tabularnewline
+\hline
+$19$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $3$ \tabularnewline
+\hline
+$23$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $7$ \tabularnewline
+\hline
+$29$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $5$ \tabularnewline
+\hline
+$31$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $7$ \tabularnewline
+\hline
+$37$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $5$ \tabularnewline
+\hline
+$41$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4$ & $1$ \tabularnewline
+\hline
+$43$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $3$ \tabularnewline
+\hline
+$47$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $7$ \tabularnewline
+\hline
+$53$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $5$ \tabularnewline
+\hline
+$59$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $3$ \tabularnewline
+\hline
+$61$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $5$ \tabularnewline
+\hline
+$67$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $3$ \tabularnewline
+\hline
+$71$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $7$ \tabularnewline
+\hline
+$73$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4$ & $1$ \tabularnewline
+\hline
+$79$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $7$ \tabularnewline
+\hline
+$83$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $3$ \tabularnewline
+\hline
+$89$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4$ & $1$ \tabularnewline
+\hline
+$97$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4$ & $1$ \tabularnewline
+\hline
+$101$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $5$ \tabularnewline
+\hline
+$103$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $7$ \tabularnewline
+\hline
+$107$ & $\mathfrak{p}$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $3$ \tabularnewline
+\hline
+$109$ & $\mathfrak{p}$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}$ & $\mathfrak{q}_1\,\mathfrak{q}_2$ & $5$ \tabularnewline
+\hline
+$113$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{p}_1\,\mathfrak{p}_2$ & $\mathfrak{q}_1\,\mathfrak{q}_2\,\mathfrak{q}_3\,\mathfrak{q}_4$ & $1$ \tabularnewline
+\hline
+\end{tabular}
+\end{center}
+
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
+\ifdefined\solutions
+\pagebreak
+\fi
+
 \begin{ejercicio}
-  Considerando la descomposición de primos racionales en $\mathcal{O}_K$,
-  demuestre que $\zeta_p \notin \mathbb{Q} (\zeta_q)$ para diferentes primos
+  Considerando la descomposición de primos racionales en $\O_K$,
+  demuestre que $\zeta_p \notin \QQ (\zeta_q)$ para diferentes primos
   impares $p \ne q$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Si $\zeta_p \in \QQ (\zeta_q)$, entonces tenemos la inclusión de anillos de
+    enteros $\ZZ [\zeta_p] \subset \ZZ [\zeta_q]$. Ahora $p$ se ramifica en
+    $\ZZ [\zeta_p]$:
+    $$p\ZZ [\zeta_p] = (1-\zeta_p)^{p-1}.$$
+    Al pasar a $\ZZ [\zeta_q]$, vemos que allí $p$ debe también ramificarse.
+    Sin embargo, el único primo que se ramifica en $\ZZ [\zeta_q]$ es $q$,
+    así que $p = q$.
+
+    Notamos que a priori no es completamente obvio qué
+    $\zeta_p \notin \QQ (\zeta_q)$.  Una condición necesaria sería
+    $$[\QQ (\zeta_p) : \QQ] \mid [\QQ (\zeta_q) : \QQ] \iff (p-1) \mid (q-1),$$
+    pero esto puede pasar para varios $p$ y $q$. La teoría de Galois tampoco
+    ayuda mucho: los grupos de Galois son cíclicos y $C_{p-1}$ sí se obtiene
+    como un cociente de $C_{q-1}$\dots
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
-  Para el campo ciclotómico $K = \mathbb{Q} (\zeta_p)$ el grupo de Galois
-  $\operatorname{Gal} (K/\mathbb{Q})$ es cíclico, así que la teoría de Galois
+  Para el campo ciclotómico $K = \QQ (\zeta_p)$ el grupo de Galois
+  $\Gal (K/\QQ)$ es cíclico, así que la teoría de Galois
   implica que existe un subcampo cuadrático único $F \subset K$. Considerando
-  la factorización de primos racionales en $\mathcal{O}_F$ y $\mathcal{O}_K$,
-  demuestre que $F = \mathbb{Q} (\sqrt{p^*})$, donde $p^* = (-1)^{(p-1)/2} p$.
+  la factorización de primos racionales en $\O_F$ y $\O_K$,
+  demuestre que $F = \QQ (\sqrt{p^*})$, donde $p^* = (-1)^{(p-1)/2} p$.
 
-  \noindent (Sugerencia: si $q$ se ramifica en $\mathcal{O}_F$, entonces $q$ se
-  ramifica en $\mathcal{O}_K$.)
+  \noindent (Sugerencia: si $q$ se ramifica en $\O_F$, entonces $q$ se
+  ramifica en $\O_K$.)
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Primero, el grupo de Galois es isomorfo a $(\ZZ/p\ZZ)^\times$, y allí hay un
+    solo subgrupo de orden $\frac{p-1}{2}$ que corresponde a una subextensión
+    cuadrática.
+
+    \[ \begin{tikzcd}
+      \QQ (\zeta_p) \ar[-]{d}{\frac{p-1}{2}} \\
+      F \ar[-]{d}{2} \\
+      \QQ
+    \end{tikzcd} \]
+
+    Por ejemplo, si $p = 7$, el subgrupo de $(\ZZ/7\ZZ)^\times$ generado por $2$
+    tiene $3$ elementos, y entonces $F$ es el subcampo fijo por el automorfismo
+    $\sigma\colon \zeta_7 \mapsto \zeta_7^2$, y se puede calcular que este es
+    $\QQ (\sqrt{-7})$.
+
+    Tenemos la siguiente situación:
+    \[ \begin{tikzcd}
+      \ZZ [\zeta_p]\ar[-]{d} &[-3em] \subset &[-3em] \QQ (\zeta_p)\ar[-]{d} \\
+      \O_F\ar[-]{d} & \subset & F\ar[-]{d} \\
+      \ZZ & \subset & \QQ
+    \end{tikzcd} \]
+    Si un primo racional $q \in \ZZ$ se ramifica en $\O_F$, esto significa que
+    (dado que se trata de un campo cuadrático)
+    $$q \O_F = \mathfrak{p}^2.$$
+    Ahora
+    $$q \O_K = \mathfrak{p}^2 \O_K.$$
+    El ideal $\mathfrak{p} \subset \O_L$ puede factorizarse en $\O_K$, pero de
+    todas maneras, habrá ramificación.
+
+    Ahora $K = \QQ (\zeta_p)$, así que el único primo que puede ramificarse en
+    $K$ es $p$. Por otra parte, si $F = \QQ (\sqrt{d})$, entonces todos los
+    divisores $q \mid d$ se ramifican en $F$. Esto nos dice que $d = \pm p$,
+    falta solo determinar el signo. Como vimos, si $d \equiv 2,3 \pmod{4}$,
+    entonces $2$ también se ramifica, y luego necesariamente
+    $$d = \pm p \equiv 1 \pmod{4}.$$
+    Esto nos dice que $d = (-1)^{(p-1)/2}\,p$.
+
+    Por ejemplo, si $p = 7$, entonces hay ramificación
+    \begin{align*}
+      7 \ZZ \Bigl[\frac{1+\sqrt{-7}}{2}\Bigr] & = (\sqrt{-7})^2, \\
+      7 \ZZ [\zeta_7] & = (1 - \zeta_7)^6.
+    \end{align*}
+
+    El ideal $(\sqrt{-7})$ no es primo en $\ZZ [\zeta_7]$: tenemos
+    la factorización $\sqrt{-7} \ZZ [\zeta_7] = (1-\zeta_7)^3$.
+    Usando las sumas de Gauss, se puede obtener la expresión
+    \[ \sqrt{-7} =
+       \sum_{1 \le a \le 6} \left(\frac{a}{7}\right)\,\zeta_7^a =
+       1 + 2\zeta_7 + 2\zeta_7^2 + 2\zeta_7^4, \]
+    pero ¡el punto de este ejercicio es evitar las sumas de Gauss!
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \end{document}
