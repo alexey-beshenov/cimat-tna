@@ -676,22 +676,22 @@ sugiere que es útil considerar extensiones de campos de números $L/K/\QQ$.
 Vamos a resumir brevemente qué sucede en este caso. Dado un ideal primo
 $\mathfrak{p} \subset \O_K$, tenemos su factorización en ideales primos
 $\mathfrak{q} \subset \O_L$
-$$\mathfrak{p}\O_L = \prod_{\mathfrak{q} \mid \mathfrak{p}} \mathfrak{q}^{e (\mathfrak{q} \mid \mathfrak{p})}.$$
+$$\mathfrak{p}\O_L = \prod_{\mathfrak{q} \mid \mathfrak{p}} \mathfrak{q}^{e (\mathfrak{q}|\mathfrak{p})}.$$
 Pongamos
-\[ f (\mathfrak{q} \mid \mathfrak{p})
+\[ f (\mathfrak{q}|\mathfrak{p})
    = [\O_L/\mathfrak{q} : \O_K/\mathfrak{p}]
    = [\kappa (\mathfrak{q}) : \kappa (\mathfrak{p})]. \]
 Se cumple entonces
-$$\sum_{\mathfrak{q} \mid \mathfrak{p}} e (\mathfrak{q} \mid \mathfrak{p}) \, f (\mathfrak{q} \mid \mathfrak{p}) = [L : K].$$
+$$\sum_{\mathfrak{q} \mid \mathfrak{p}} e (\mathfrak{q}|\mathfrak{p}) \, f (\mathfrak{q}|\mathfrak{p}) = [L : K].$$
 
 Ahora si $\mathfrak{p} \mid p$ para un primo racional $p$, entonces se cumple
-\[ f (\mathfrak{q} \mid p) = f (\mathfrak{q} \mid \mathfrak{p}) \cdot f (\mathfrak{p} \mid p),
+\[ f (\mathfrak{q}|p) = f (\mathfrak{q}|\mathfrak{p}) \cdot f (\mathfrak{p}|p),
    \quad
-   e (\mathfrak{q} \mid p) = e (\mathfrak{q} \mid \mathfrak{p}) \cdot e (\mathfrak{p} \mid p). \]
+   e (\mathfrak{q}|p) = e (\mathfrak{q}|\mathfrak{p}) \cdot e (\mathfrak{p}|p). \]
 
 \[ \begin{tikzcd}
-  \mathfrak{q}\ar[-]{d} &[-3em] \subset &[-3em] \O_L\ar[-]{d}\ar[->>]{r} & \kappa (\mathfrak{q}) \ar[-]{d}[swap]{f (\mathfrak{q}\mid\mathfrak{p})}\ar[-,bend left=45]{dd}{f (\mathfrak{q}\mid p)} \\
-  \mathfrak{p}\ar[-]{d} & \subset & \O_K\ar[-]{d}\ar[->>]{r} & \kappa (\mathfrak{p}) \ar[-]{d}[swap]{f (\mathfrak{p}\mid p)} \\
+  \mathfrak{q}\ar[-]{d} &[-3em] \subset &[-3em] \O_L\ar[-]{d}\ar[->>]{r} & \kappa (\mathfrak{q}) \ar[-]{d}[swap]{f (\mathfrak{q}|\mathfrak{p})}\ar[-,bend left=45]{dd}{f (\mathfrak{q}|p)} \\
+  \mathfrak{p}\ar[-]{d} & \subset & \O_K\ar[-]{d}\ar[->>]{r} & \kappa (\mathfrak{p}) \ar[-]{d}[swap]{f (\mathfrak{p}|p)} \\
   (p) & \subset & \ZZ \ar[->>]{r} & \FF_p
 \end {tikzcd} \]
 
@@ -699,22 +699,22 @@ Si $L/K$ es una extensión de Galois, el grupo $\Gal (L/K)$ induce una acción
 sobre $\O_L$, y luego para todo primo $\mathfrak{p} \subset \O_K$ una acción
 transitiva sobre los primos $\mathfrak{q} \mid \mathfrak{p}$ en $\O_L$. De la
 transitividad de esta acción se deduce que los números
-$f (\mathfrak{q} \mid \mathfrak{p})$ y $e (\mathfrak{q} \mid \mathfrak{p})$
+$f (\mathfrak{q}|\mathfrak{p})$ y $e (\mathfrak{q}|\mathfrak{p})$
 coinciden para todo $\mathfrak{q} \mid \mathfrak{p}$, y entonces si
 $g_\mathfrak{p}$ es el número de ideales primos en $\O_L$ que están sobre
 $\mathfrak{p}$, se cumple
-$$e (\mathfrak{q} \mid \mathfrak{p}) \, f (\mathfrak{q} \mid \mathfrak{p}) \, g_\mathfrak{p} = [L:K].$$
+$$e (\mathfrak{q}|\mathfrak{p}) \, f (\mathfrak{q}|\mathfrak{p}) \, g_\mathfrak{p} = [L:K].$$
 
 \begin{definicion}
   En la situación de arriba, para $\mathfrak{q} \mid \mathfrak{p}$ el
   \textbf{grupo de descomposición} es el estabilizador de $\mathfrak{q}$
   respecto a la acción de $\Gal (L/K)$ sobre los primos sobre $\mathfrak{p}$:
-  \[ D (\mathfrak{q} \mid \mathfrak{p})
+  \[ D (\mathfrak{q}|\mathfrak{p})
      = \{ \sigma \in \Gal (L/K) \mid \sigma (\mathfrak{q}) = \mathfrak{q} \}. \]
 \end{definicion}
 
 El grupo de descomposición tiene el siguiente significado: todo elemento
-$\sigma \in D (\mathfrak{q} \mid \mathfrak{p})$ induce un automorfismo
+$\sigma \in D (\mathfrak{q}|\mathfrak{p})$ induce un automorfismo
 $\overline{\sigma} \in \Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p}))$.
 \[ \begin{tikzcd}
   & \O_K \ar[->>]{dd}\ar[left hook->]{dl}\ar[right hook->]{dr} \\
@@ -723,35 +723,35 @@ $\overline{\sigma} \in \Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p}))$.
   \kappa (\mathfrak{q}) \ar{rr}{\overline{\sigma}} && \kappa (\mathfrak{q}) \\
 \end{tikzcd} \]
 De esta manera se obtiene un homomorfismo de grupos
-\[ D (\mathfrak{q} \mid \mathfrak{p}) \to \Gal (\kappa(\mathfrak{q}) / \kappa(\mathfrak{p})),
+\[ D (\mathfrak{q}|\mathfrak{p}) \to \Gal (\kappa(\mathfrak{q}) / \kappa(\mathfrak{p})),
    \quad \sigma \mapsto \overline{\sigma}. \]
 
 
 \begin{definicion}
   Para un primo $\mathfrak{q} \mid \mathfrak{p}$ el \textbf{grupo de inercia}
   viene dado por
-  \[ I (\mathfrak{q} \mid \mathfrak{p})
-  = \ker \Bigl(D (\mathfrak{q} \mid \mathfrak{p}) \to \Gal (\kappa(\mathfrak{q}) / \kappa(\mathfrak{p}))\Bigr)
+  \[ I (\mathfrak{q}|\mathfrak{p})
+  = \ker \Bigl(D (\mathfrak{q}|\mathfrak{p}) \to \Gal (\kappa(\mathfrak{q}) / \kappa(\mathfrak{p}))\Bigr)
   = \{ \sigma \in \Gal (L/K) \mid \sigma (\alpha) \equiv \alpha \pmod{\mathfrak{q}}
   \text{para todo }\alpha \in \O_L \}. \]
 \end{definicion}
 
 \noindent (Note que $\sigma (\alpha) \equiv \alpha \pmod{\mathfrak{q}}$ implica
 que $\sigma (\mathfrak{q}) = \mathfrak{q}$, así que
-$\sigma \in D (\mathfrak{q} \mid \mathfrak{p})$.)
+$\sigma \in D (\mathfrak{q}|\mathfrak{p})$.)
 
 \begin{definicion}
-  Para los grupos $D = D (\mathfrak{q}\mid\mathfrak{p})$ e
-  $I = I (\mathfrak{q}\mid\mathfrak{p})$ los campos fijos correspondientes
+  Para los grupos $D = D (\mathfrak{q}|\mathfrak{p})$ e
+  $I = I (\mathfrak{q}|\mathfrak{p})$ los campos fijos correspondientes
   $L^D$ y $L^I$ se llaman los \textbf{campos de descomposición e inercia}
   respectivamente.
 \end{definicion}
 
 Notamos que para $\sigma \in \Gal (L/K)$ se tiene
-\[ D (\sigma (\mathfrak{q}) \mid \mathfrak{p}) =
-\sigma \, D (\mathfrak{q} \mid \mathfrak{p}) \, \sigma^{-1}, \quad
-I (\sigma (\mathfrak{q}) \mid \mathfrak{p}) =
-\sigma \, I (\mathfrak{q} \mid \mathfrak{p}) \, \sigma^{-1}. \]
+\[ D (\sigma (\mathfrak{q})|\mathfrak{p}) =
+\sigma \, D (\mathfrak{q}|\mathfrak{p}) \, \sigma^{-1}, \quad
+I (\sigma (\mathfrak{q})|\mathfrak{p}) =
+\sigma \, I (\mathfrak{q}|\mathfrak{p}) \, \sigma^{-1}. \]
 Esto implica que el campo de descomposición e inercia, salvo isomorfismo,
 depende solo de $\mathfrak{p}$.
 
@@ -773,8 +773,8 @@ Tenemos entonces la siguiente situación para $\mathfrak{q} \mid \mathfrak{p}$:
 \begin{teorema}
   Para una extensión de Galois de campos de números $L/K$, sean
   $\mathfrak{p} \subset \O_K$ y $\mathfrak{q} \subset \O_K$ primos tales que
-  $\mathfrak{q}\mid\mathfrak{p}$ y $D = D (\mathfrak{q}\mid\mathfrak{p})$
-  e $I = I (\mathfrak{q} \mid \mathfrak{p})$ los grupos de descomposición
+  $\mathfrak{q}\mid\mathfrak{p}$ y $D = D (\mathfrak{q}|\mathfrak{p})$
+  e $I = I (\mathfrak{q}|\mathfrak{p})$ los grupos de descomposición
   e inercia correspondientes. Denotemos por $g_\mathfrak{p}$ el número de primos
   en $\O_L$ sobre $\mathfrak{p}$.
 
@@ -783,22 +783,22 @@ Tenemos entonces la siguiente situación para $\mathfrak{q} \mid \mathfrak{p}$:
     ramificación.
 
     \[ \begin{tikzcd}
-      L \ar[-]{d}{e (\mathfrak{q}\mid\mathfrak{p})} & \mathfrak{q} \ar[-]{d} & e (\mathfrak{q}\mid\mathfrak{q}^I) &[-3em] = &[-3em] e (\mathfrak{q}\mid\mathfrak{p}) & f (\mathfrak{q}\mid\mathfrak{q}^I) &[-3em] = &[-3em] 1 \\
-      L^I \ar[-]{d}{f (\mathfrak{q}\mid\mathfrak{p})} & \mathfrak{q}^I \ar[-]{d} & e (\mathfrak{q}^I\mid\mathfrak{q}^D) & = & 1 & f (\mathfrak{q}^I\mid\mathfrak{q}^D) & = & f (\mathfrak{q}\mid\mathfrak{p}) \\
-      L^D \ar[-]{d}{g_\mathfrak{p}} & \mathfrak{q}^D \ar[-]{d} & e (\mathfrak{q}^D\mid\mathfrak{p}) & = & 1 & f (\mathfrak{q}^D\mid\mathfrak{p}) & = & 1 \\
+      L \ar[-]{d}{e (\mathfrak{q}|\mathfrak{p})} & \mathfrak{q} \ar[-]{d} & e (\mathfrak{q}|\mathfrak{q}^I) &[-3em] = &[-3em] e (\mathfrak{q}|\mathfrak{p}) & f (\mathfrak{q}|\mathfrak{q}^I) &[-3em] = &[-3em] 1 \\
+      L^I \ar[-]{d}{f (\mathfrak{q}|\mathfrak{p})} & \mathfrak{q}^I \ar[-]{d} & e (\mathfrak{q}^I|\mathfrak{q}^D) & = & 1 & f (\mathfrak{q}^I|\mathfrak{q}^D) & = & f (\mathfrak{q}|\mathfrak{p}) \\
+      L^D \ar[-]{d}{g_\mathfrak{p}} & \mathfrak{q}^D \ar[-]{d} & e (\mathfrak{q}^D|\mathfrak{p}) & = & 1 & f (\mathfrak{q}^D|\mathfrak{p}) & = & 1 \\
       K & \mathfrak{p}
     \end{tikzcd} \]
 
   \item[2)] Se tiene $[G : D] = g_\mathfrak{p}$ e
-    $|I| = e (\mathfrak{q}\mid\mathfrak{p})$.
+    $|I| = e (\mathfrak{q}|\mathfrak{p})$.
 
   \item[3)] Tenemos una sucesión exacta corta de grupos
-    \[ 1 \to I (\mathfrak{q}\mid\mathfrak{p}) \to
-    D (\mathfrak{q}\mid\mathfrak{p}) \to
+    \[ 1 \to I (\mathfrak{q}|\mathfrak{p}) \to
+    D (\mathfrak{q}|\mathfrak{p}) \to
     \Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p})) \to 1 \]
     En particular, si $\mathfrak{p}$ no se ramifica en $L$, entonces $I = 1$
     y se tiene un isomorfismo
-    \[ D (\mathfrak{q}\mid\mathfrak{p}) \cong
+    \[ D (\mathfrak{q}|\mathfrak{p}) \cong
     \Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p})), \quad
     \sigma \mapsto \overline{\sigma}. \]
   \end{enumerate}
@@ -815,21 +815,21 @@ Tenemos entonces la siguiente situación para $\mathfrak{q} \mid \mathfrak{p}$:
         acción es transitiva, así que $[G : D] = g_\mathfrak{p}$.
 
       \item Ahora veremos que
-        $e (\mathfrak{q}^D\mid\mathfrak{p}) = f (\mathfrak{q}^D\mid\mathfrak{p}) = 1$.
+        $e (\mathfrak{q}^D|\mathfrak{p}) = f (\mathfrak{q}^D|\mathfrak{p}) = 1$.
         La acción de $\Gal (L/L^D)$ sobre los primos sobre $\mathfrak{q}^D$ es
         transitiva, pero $\Gal (L/L^D) \cong D$ deja $\mathfrak{q}$ fijo, así que
         podemos concluir que $\mathfrak{q}$ es el único primo que está sobre
         $\mathfrak{q}^D$. Como consecuencia, tenemos
-        $$[L : L^D] = e (\mathfrak{q}\mid\mathfrak{q}^D) \, f (\mathfrak{q}\mid\mathfrak{q}^D).$$
+        $$[L : L^D] = e (\mathfrak{q}|\mathfrak{q}^D) \, f (\mathfrak{q}|\mathfrak{q}^D).$$
         Ahora
-        $$[L : K] = e (\mathfrak{q}\mid\mathfrak{p}) \, f (\mathfrak{q}\mid\mathfrak{p}) \, g_\mathfrak{p}$$
+        $$[L : K] = e (\mathfrak{q}|\mathfrak{p}) \, f (\mathfrak{q}|\mathfrak{p}) \, g_\mathfrak{p}$$
         junto con $[L^D : K] = g_\mathfrak{p}$ nos da
-        \[ e (\mathfrak{q}\mid\mathfrak{q}^D) = e (\mathfrak{q}\mid\mathfrak{p}), \quad
-           f (\mathfrak{q}\mid\mathfrak{q}^D) = f (\mathfrak{q}\mid\mathfrak{p}), \]
+        \[ e (\mathfrak{q}|\mathfrak{q}^D) = e (\mathfrak{q}|\mathfrak{p}), \quad
+           f (\mathfrak{q}|\mathfrak{q}^D) = f (\mathfrak{q}|\mathfrak{p}), \]
         y luego
-        $$e (\mathfrak{q}^D\mid\mathfrak{p}) = f (\mathfrak{q}^D\mid\mathfrak{p}) = 1.$$
+        $$e (\mathfrak{q}^D|\mathfrak{p}) = f (\mathfrak{q}^D|\mathfrak{p}) = 1.$$
 
-      \item Vamos a ver que $f (\mathfrak{q}\mid\mathfrak{q}^I) = 1$. Esto
+      \item Vamos a ver que $f (\mathfrak{q}|\mathfrak{q}^I) = 1$. Esto
         equivale a probar que el grupo
         $\Gal (\kappa (\mathfrak{q})/\kappa (\mathfrak{q}^I))$ es trivial.
 
@@ -851,27 +851,27 @@ Tenemos entonces la siguiente situación para $\mathfrak{q} \mid \mathfrak{p}$:
         (\mathfrak{q})/\kappa (\mathfrak{q}^I)$ no tiene automorfismos no
         triviales.
 
-      \item De $f (\mathfrak{q}^D\mid\mathfrak{p}) = 1$ y
-        $f (\mathfrak{q}\mid\mathfrak{q}^I) = 1$ se sigue que
-        $f (\mathfrak{q}^I\mid\mathfrak{q}^D) = f (\mathfrak{q}\mid\mathfrak{p})$.
+      \item De $f (\mathfrak{q}^D|\mathfrak{p}) = 1$ y
+        $f (\mathfrak{q}|\mathfrak{q}^I) = 1$ se sigue que
+        $f (\mathfrak{q}^I|\mathfrak{q}^D) = f (\mathfrak{q}|\mathfrak{p})$.
 
       \item Tenemos $[L^I : L^D] = [D : I]$. Por una parte,
-        $[L^I : L^D] \ge f (\mathfrak{q}^I\mid\mathfrak{q}^D) = f (\mathfrak{q}\mid\mathfrak{p})$.
+        $[L^I : L^D] \ge f (\mathfrak{q}^I|\mathfrak{q}^D) = f (\mathfrak{q}|\mathfrak{p})$.
         Además, tenemos una sucesión exacta
-        \[ 1 \to I (\mathfrak{q}\mid\mathfrak{p}) \to
-        D (\mathfrak{q}\mid\mathfrak{p}) \to
+        \[ 1 \to I (\mathfrak{q}|\mathfrak{p}) \to
+        D (\mathfrak{q}|\mathfrak{p}) \to
         \Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p})), \]
         de donde
-        $[D : I] \le |\Gal (\mathfrak{q}/\mathfrak{p})| = f (\mathfrak{q}\mid\mathfrak{p})$.
+        $[D : I] \le |\Gal (\mathfrak{q}/\mathfrak{p})| = f (\mathfrak{q}|\mathfrak{p})$.
         Entonces, podemos concluir que
-        $[L^I : L^D] = [D : I] = f (\mathfrak{q}\mid\mathfrak{p})$, y además que
+        $[L^I : L^D] = [D : I] = f (\mathfrak{q}|\mathfrak{p})$, y además que
         el último homomorfismo en la sucesión exacta es sobreyectivo.
 
-        Esto también implica que $e (\mathfrak{q}^I\mid\mathfrak{q}^D) = 1$.
+        Esto también implica que $e (\mathfrak{q}^I|\mathfrak{q}^D) = 1$.
 
       \item De lo que hemos calculado se sigue que
-        $[L : L^I] = e (\mathfrak{q}\mid\mathfrak{p})$ y
-        $e (\mathfrak{q}\mid\mathfrak{q}^I) = e (\mathfrak{q}\mid\mathfrak{p})$. \qedhere
+        $[L : L^I] = e (\mathfrak{q}|\mathfrak{p})$ y
+        $e (\mathfrak{q}|\mathfrak{q}^I) = e (\mathfrak{q}|\mathfrak{p})$. \qedhere
     \end{itemize}
     \end{proof}
 \end{teorema}
@@ -880,13 +880,13 @@ El resultado que acabamos de probar explica los términos
 «campo de descomposición» y «campo de inercia».
 
 \begin{corolario}
-  Si $D = D (\mathfrak{q}\mid\mathfrak{p})$ es un subgrupo normal en
+  Si $D = D (\mathfrak{q}|\mathfrak{p})$ es un subgrupo normal en
   $G = \Gal (K/\QQ)$, entonces $\mathfrak{p}$ se descompone en $g_\mathfrak{p}$
   diferentes primos en $L^D$. Además, si
-  $I = I (\mathfrak{q}\mid\mathfrak{p})$ es también un subgrupo normal en $G$,
+  $I = I (\mathfrak{q}|\mathfrak{p})$ es también un subgrupo normal en $G$,
   entonces cada uno de esos primos es también primo en $L^I$ (es decir, inerte).
   En fin, estos primos se ramifican en $L$, volviendo
-  $e = e (\mathfrak{q}\mid\mathfrak{p})$-ésimas potencias.
+  $e = e (\mathfrak{q}|\mathfrak{p})$-ésimas potencias.
 
   \begin{proof}
     Si $D \subseteq G$ es un subgrupo normal, entonces $L^D/K$ es una extensión
@@ -897,7 +897,7 @@ El resultado que acabamos de probar explica los términos
     De la misma manera, si $I \subseteq G$ es un subgrupo normal, entonces
     $L^I/K$ es una extensión de Galois y los índices de ramificación serán
     $e = 1$ y los grados de campos residual
-    $f = f (\mathfrak{q}\mid\mathfrak{p})$, y habrá $g$ primos. La factorización
+    $f = f (\mathfrak{q}|\mathfrak{p})$, y habrá $g$ primos. La factorización
     tiene forma
     $\mathfrak{p}\,(\O_L)^I = \mathfrak{p}''_1\cdots\mathfrak{p}_g''$,
     lo que significa precisamente que los primos $\mathfrak{p}_i'$ son inertes
@@ -932,7 +932,7 @@ El resultado que acabamos de probar explica los términos
   \tau (\mathfrak{p}_2) = \mathfrak{p}_1. \]
 
   De aquí se ve que el grupo de descomposición viene dado por
-  $D (\mathfrak{p}_1\mid p) = \langle\sigma,\tau^2\rangle$.
+  $D (\mathfrak{p}_1|p) = \langle\sigma,\tau^2\rangle$.
   Aquí $\sigma$ y $\tau^2$ inducen algunos automorfismos del campo finito
   $$\ZZ [\zeta_{28}]/\mathfrak{p}_1 \cong \FF_2 [x]/(x^3 + x + 1) \cong \FF_8.$$
   Podemos notar, por ejemplo, que $\sigma$ actúa de manera trivial, dado que
@@ -941,7 +941,7 @@ El resultado que acabamos de probar explica los términos
   Por otra parte, la acción de $\overline{\tau^2}$ no es trivial y viene dada
   por $\overline{\zeta_{28}} \mapsto \overline{\zeta_{28}}^2$. (En efecto,
   $17^2 \equiv 3^2 \equiv 2 \pmod{7}$.)  De estas consideraciones se sigue que
-  $I (\mathfrak{p}_1\mid p) = \langle\sigma\rangle$.
+  $I (\mathfrak{p}_1|p) = \langle\sigma\rangle$.
 
   Ahora el campo de inercia será $K^\sigma = \QQ (\zeta_7)$, y el campo de
   descomposición es $K^{\langle\sigma,\tau^2\rangle} = \QQ (\sqrt{-7})$.
@@ -976,9 +976,9 @@ El resultado que acabamos de probar explica los términos
   Al reducir $\sigma\tau$ módulo $\mathfrak{p}_1$, se obtiene el automorfismo
   de Frobenius $x \mapsto x^3$ sobre $\kappa (\mathfrak{p}_1) \cong \FF_{3^3}$,
   y tenemos un isomorfismo
-  \[ D (\mathfrak{p}_1\mid p) = \langle\sigma\tau\rangle
+  \[ D (\mathfrak{p}_1|p) = \langle\sigma\tau\rangle
      \cong \Gal (\kappa (\mathfrak{p}_1)/\FF_p). \]
-  El grupo de inercia $I (\mathfrak{p}_1\mid p)$ será trivial, y esto sucede
+  El grupo de inercia $I (\mathfrak{p}_1|p)$ será trivial, y esto sucede
   precisamente porque $p = 3$ no se ramifica.
 \end{ejemplo}
 
@@ -1007,12 +1007,12 @@ Primero notamos el siguiente resultado.
 
     Viceversa, supongamos que el número $g$ de primos
     $\mathfrak{Q} \subset \O_L$ tales que $\mathfrak{Q} \mid q$ es par.
-    Para el grupo de descomposición $D = D (\mathfrak{Q} | q)$ se cumple
+    Para el grupo de descomposición $D = D (\mathfrak{Q}|q)$ se cumple
     $[\Gal (L/\QQ) : D] = g$. El grupo $G = \Gal (L/\QQ)$ es cíclico de orden
     $p-1$. Para subgrupo $H$ tal que $[G : H]$ se tiene $L^H = K$, pero luego,
     puesto que $[G : D]$ es par, se cumple $D \subset H$, y entonces
-    $K \subset L^D$. Ahora $f (\mathfrak{Q}^D\mid q) = 1$, y luego
-    $f (\mathfrak{Q}\cap K\mid q) = 1$. Esto significa que $q$ se
+    $K \subset L^D$. Ahora $f (\mathfrak{Q}^D|q) = 1$, y luego
+    $f (\mathfrak{Q}\cap K|q) = 1$. Esto significa que $q$ se
     escinde en $K$.
   \end{proof}
 \end{lema}
@@ -1034,6 +1034,310 @@ $$\legendre{q}{p} = \legendre{p^*}{q}.$$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\pdfbookmark{Clase 18 (14/10/20)}{clase-18}
+\section{El Frobenius}
+\marginpar{\small Clase 18 \\ 14/10/20}
+\label{sec:frobenius}
+
+\epigraph{\dots{}the Galois group $\Gal(L/K)$ contains an essential element
+  called Frobenius substitution. This element <\dots>{} governs over the
+  decomposition of $\mathfrak{p}$ in $L$: We might even claim that it has
+  “the soul of $\mathfrak{p}$”. It glimmers like a firefiy in $\Gal (L/K)$
+  for each and every prime ideal.}{\cite[p.~18]{Kato-NT-2}}
+
+Como antes, consideremos una extensión de Galois de campos de números $L/K$
+y primos $\mathfrak{p} \subset \O_K$, $\mathfrak{q} \subset \O_L$ tales que
+$\mathfrak{q}\mid\mathfrak{p}$. En este caso si $\mathfrak{p}$ no se ramifica
+en $L$, el grupo de inercia es trivial y
+tenemos un isomorfismo
+\[ D (\mathfrak{q}|\mathfrak{p}) \cong
+   \Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p})), \quad
+   \sigma \mapsto \overline{\sigma}. \]
+El grupo $\Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p}))$ es cíclico, generado
+por el automorfismo de Frobenius $x \mapsto x^{\# \kappa(\mathfrak{p})}$.
+Gracias al isomorfismo de arriba, podemos considerar el elemento correspondiente
+en el grupo de descomposición.
+
+\begin{definicion}
+  En la situación de arriba, el elemento
+  $\Frob_{\mathfrak{q}|\mathfrak{p}} \in D (\mathfrak{q}|\mathfrak{p})$
+  que se reduce mód $\mathfrak{q}$ a $x \mapsto x^{\# \kappa(\mathfrak{p})}$
+  se llama el \textbf{automorfismo de Frobenius}\footnote{Ferdinand Georg
+    Frobenius (1849--1917), matemático alemán.}, o simplemente
+  \textbf{el Frobenius}.
+\end{definicion}
+
+\begin{comentario}
+  Hagamos algunas observaciones básicas.
+
+  \begin{enumerate}
+  \item[1)] En otras palabras, $\Frob_{\mathfrak{q}|\mathfrak{p}}$ es el
+    único elemento de $\Gal (L/K)$ que cumple
+    \[ \tag{*} \Frob_{\mathfrak{q}|\mathfrak{p}} (\alpha) \equiv
+               \alpha^{\# \kappa (\mathfrak{p})} \pmod{\mathfrak{q}} \]
+    para todo $\alpha \in \O_L$. (Esta condición implica que
+    $\Frob_{\mathfrak{q}|\mathfrak{p}} \in D (\mathfrak{q}|\mathfrak{p})$.)
+
+  \item[2)] Al pasar de $\mathfrak{q}\mid\mathfrak{p}$ a otro primo
+    $\sigma(\mathfrak{q})\mid\mathfrak{p}$ se obtiene
+    $$\Frob_{\sigma(\mathfrak{q})|\mathfrak{p}} = \sigma \circ \Frob_{\mathfrak{q}|\mathfrak{p}} \circ \sigma^{-1}$$
+    (ejercicio para el lector). Entonces, la clase de conjugación del Frobenius
+    depende solo de $\mathfrak{p}$.
+
+  \item[3)] En particular, para una extensión abeliana $L/K$, el Frobenius
+    depende solo de $\mathfrak{p}$, y podemos denotarlo por
+    $\Frob_\mathfrak{p}$. En este caso la condición (*) se cumple para todo
+    $\mathfrak{q}\mid\mathfrak{p}$, y ocupando el teorema chino del resto
+    (y que $e (\mathfrak{q}|\mathfrak{p}) = 1$ por nuestra hipótesis),
+    podemos concluir que el Frobenius está definido por la condición
+    \[ \Frob_\mathfrak{p} (\alpha) \equiv
+       \alpha^{\# \kappa (\mathfrak{p})} \pmod{\mathfrak{p}\O_L}. \]
+  \end{enumerate}
+\end{comentario}
+
+\begin{ejemplo}
+  Consideremos un campo cuadrático $K = \QQ (\sqrt{d})$. Si $p$ es un primo no
+  ramificado, entonces hay dos posibilidades:
+  \begin{itemize}
+  \item $p$ se escinde en dos ideales en $K$, y luego
+    $D (\mathfrak{p}|p) = 1$, y $\Frob_p$ es el automorfismo trivial;
+
+  \item $p$ es inerte en $K$, y luego $D (\mathfrak{p}|p) = \Gal (K/\QQ)$,
+    y $\Frob_p\colon \sqrt{d}\mapsto -\sqrt{d}$ es el automorfismo no trivial.
+  \end{itemize}
+
+  Para $p$ impar tal que $p \nmid d$, podemos escribir entonces
+  $\Frob_p\colon \sqrt{d} \mapsto \legendre{d}{p}\sqrt{d}$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Consideremos un campo ciclotómico $K = \QQ (\zeta_n)$. Los primos $p \nmid n$
+  no se ramifican en $K$. En este caso
+  $\Frob_p\colon \zeta_n \mapsto \zeta_n^p$. En efecto, para un elemento
+  $\alpha \in \O_K = \ZZ [\zeta_n] = \sum_i a_i \, \zeta_n^i$, donde
+  $a_i \in \ZZ$, calculamos que
+  \[ \alpha^p \equiv \sum_i a_i^p \, \zeta_n^p \equiv
+     \sum_i a_i \, \zeta_n^p \pmod{p}. \qedhere \]
+\end{ejemplo}
+
+El orden de $\Frob_{\mathfrak{q}|\mathfrak{p}}$ es igual a
+$f (\mathfrak{q}|\mathfrak{p})$, y entonces determina el tipo de
+descomposición de $\mathfrak{p}$ en $L$: tenemos
+$\mathfrak{p} \O_L = \mathfrak{q}_1\cdots \mathfrak{q}_g$, donde $f$
+es el orden de $\Frob_{\mathfrak{q}|\mathfrak{p}}$ y $g = [L:K]/f$.
+En particular, $\mathfrak{p}$ se descompone en $[L:K]$ ideales primos
+si y solamente si $\Frob_{\mathfrak{q}|\mathfrak{p}} = 1$. En este caso se
+dice que $\mathfrak{p}$ \textbf{se escinde completamente} en $L$.
+
+\vspace{1em}
+
+El siguiente resultado forma una parte importante de la teoría de campos de
+clase y se conoce como el \textbf{teorema de densidad de Chebotarëv}.
+Solo para simplificar el enunciado, vamos a formular la versión para extensiones
+$K/\QQ$ en lugar del caso general $L/K$\footnote{Para las extensiones $L/K$ hay
+  que definir la noción de densidad para ideales primos en $\O_K$ que está
+  relacionada con la \textbf{función zeta de Dedekind} $\zeta_K (s)$ de la misma
+  manera que la densidad de primos racionales está relacionada con la función
+  zeta de Riemann $\zeta (s)$.}.
+
+\begin{teorema}
+  Para una extensión de Galois $K/\QQ$, sea $C$ una clase de conjugación en
+  el grupo $G = \Gal (K/\QQ)$. El conjunto de primos racionales
+  $X = \{ p \mid \Frob_p \in C \}$ tiene densidad $d (X) = \#C/\#G$.
+\end{teorema}
+
+En particular, el teorema nos dice que salvo conjugación, cualquier elemento del
+grupo de Galois puede ser realizado como $\Frob_p$ para un número infinito de
+$p$.
+
+Para más detalles (matemáticos e históricos), recomiendo el artículo
+\cite{Lenstra-Stevenhagen-1996}. Para la definición de densidad $d (X)$,
+véase el apéndice \ref{ap:Dirichlet}. El teorema es cierto para la densidad de
+Dirichlet (analítica) y también para la densidad natural\footnote{Véase
+  \url{https://mathoverflow.net/questions/302390/}}.
+
+\begin{corolario}
+  Hay un número infinito de primos racionales $p$ que se escinden completamente
+  en $K$, y su densidad es igual a $1/\#G$.
+\end{corolario}
+
+\begin{ejemplo}
+  Para una extensión ciclotómica $K = \QQ (\zeta_n)$ y un primo $p \nmid n$,
+  el Frobenius $\Frob_p$ está determinado por el resto de $p$ módulo $n$.
+  En este caso el teorema de densidad de Chebotarëv se reduce al teorema de
+  Dirichlet sobre los primos en progresiones aritméticas (véase el apéndice
+  \ref{ap:Dirichlet}). Se puede pensar en el teorema de Chebotarëv como una
+  generalización del teorema de Dirichlet.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Consideremos el campo $K = \QQ (\sqrt[3]{19}, \zeta_3)$. El grupo de Galois
+  es isomorfo a $S_3$, donde hay tres clases de conjugación:
+  \[ C = \{ 1 \}, \quad
+     C' = \{ (1~2), \, (1~3), \, (2~3) \}, \quad
+     C'' = \{ (1~2~3), \, (1~3~2) \}. \]
+  El teorema de Chebotarëv nos dice lo siguiente.
+  \begin{itemize}
+  \item Los primos con $\Frob_p \in C$ corresponden a las factorizaciones
+    de la forma $\mathfrak{p}_1\mathfrak{p}_2\cdots \mathfrak{p}_6$. Su densidad
+    es $\frac{1}{6}$. Estos son los primos $p \equiv 1 \pmod{3}$ tales que
+    $19$ es un cubo mód $p$.
+
+  \item Los primos con $\Frob_p \in C'$ corresponden a las factorizaciones
+    de la forma $\mathfrak{p}_1\mathfrak{p}_2\mathfrak{p}_2$.
+    Su densidad es $\frac{1}{2}$. Estos son los primos tales que
+    $p \equiv 2\pmod{3}$.
+
+  \item Los primos con $\Frob_p \in C''$ corresponden a las factorizaciones
+    de la forma $\mathfrak{p}_1\mathfrak{p}_2$. Su densidad es
+    $\frac{1}{3}$. Estos son los primos $p \equiv 1 \pmod{3}$ tales que
+    $19$ no es un cubo mód $p$.
+  \end{itemize}
+
+  La densidad de los primos $p \equiv 2\pmod{3}$ viene dada por el teorema de
+  Dirichlet sobre primos en progresiones aritméticas. Sin embargo, para
+  $p \equiv 1\pmod{3}$ la condición «$19$ es un cubo mód $p$» es más sofisticada
+  y no está claro por qué la densidad correspondiente debe ser $\frac{1}{6}$.
+
+  He aquí alguna estadística calculada con PARI/GP. En la primera columna está
+  el número de primos y en la segunda la fracción de primos que cumplen la
+  condición de que $p \equiv 1 \pmod{3}$ y $19$ es un cubo mód $p$.
+  \begin{align*}
+    10^2\colon & 0.140000000 \\
+    10^3\colon & 0.160000000 \\
+    10^4\colon & 0.163500000 \\
+    10^5\colon & 0.166410000 \\
+    10^6\colon & 0.166575000 \\
+    10^7\colon & 0.166609100 \\
+    10^8\colon & 0.166655150 \\
+    10^9\colon & 0.166663355 \qedhere
+  \end{align*}
+\end{ejemplo}
+
+Notamos que el Frobenius contiene más información que el tipo de descomposición
+de $\mathfrak{p}$: dos elementos $\sigma,\tau\in \Gal (L/K)$ pueden tener el
+mismo orden pero estar en diferentes clases de conjugación. (Por ejemplo, en el
+grupo alternante $A_4$ los $3$-ciclos $(1~2~3)$ y $(1~2~4)$ no son conjugados.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Caso de extensiones no Galois}
+
+Aunque el Frobenius fue definido para extensiones de Galois $L/K$, en general es
+posible tomar la cerradura de Galois y determinar el tipo de descomposición
+mediante el Frobenius. Consideremos una torre de campos de números
+\[ \begin{tikzcd}
+  L\ar[-]{d}[swap]{H}\ar[-,bend left=45]{dd}{G} \\
+  K\ar[-]{d} \\
+  F
+\end{tikzcd} \]
+donde $L/F$ es una extensión de Galois con $\Gal (L/F) = G$ y $K = L^H$.
+Para un primo $\mathfrak{p} \subset \O_F$ que no se ramifica en $L$, sea
+$\mathfrak{Q} \subset \O_L$ un primo tal que $\mathfrak{Q} \mid \mathfrak{p}$.
+El grupo de descomposición $D (\mathfrak{Q}|\mathfrak{p})$ actúa sobre
+las clases laterales $H\sigma$ mediante la multiplicación por la derecha.
+Puesto que $D (\mathfrak{Q}\mid\mathfrak{p})$ está generado por el Frobenius
+$\phi = \Frob_{\mathfrak{Q}|\mathfrak{p}}$, las órbitas de esta acción vienen
+dadas por
+\begin{gather*}
+  \{ H \sigma_1, H \sigma_1 \phi, H \sigma_1 \phi^2, \ldots, H \sigma_1 \phi^{n_1 - 1} \}, \\
+  \dots \\
+  \{ H \sigma_s, H \sigma_s \phi, H \sigma_s \phi^2, \ldots, H \sigma_s \phi^{n_s - 1} \},
+\end{gather*}
+donde $n_i$ es el mínimo número tal que $H \sigma_i \phi^{n_i} = H \sigma_i$.
+Lo que tenemos es una partición de las clases laterales, así que
+$\sum_i n_i = [G : H] = [K : F]$.
+
+\begin{teorema}
+  En la situación de arriba se tiene
+  $p \O_K = \mathfrak{q}_1\cdots \mathfrak{q}_s$, donde
+  $\mathfrak{q}_i = \sigma_i (\mathfrak{Q}) \cap \O_K$ y
+  $f (\mathfrak{q}_i|\mathfrak{p}) = n_i$.
+
+  \begin{proof}
+    Está claro que $\mathfrak{q}_i \mid \mathfrak{p}$. Primero vamos a probar
+    que $\mathfrak{q}_i \ne \mathfrak{q}_j$ para $i \ne j$. Supongamos que
+    $\mathfrak{q}_i = \mathfrak{q}_j$. En este caso
+    $\sigma_i (\mathfrak{Q})$ y $\sigma_j (\mathfrak{Q})$ son primos en $\O_L$
+    sobre el mismo primo en $\O_K$, y luego por la transitividad de la acción
+    de Galois sobre ideales primos, existe $\sigma \in H$ tal que
+    $\sigma_j (\mathfrak{Q}) = \tau \sigma_i (\mathfrak{Q})$. Luego tenemos
+    $\sigma_j^{-1} \tau \sigma_i \in D (\mathfrak{Q}|\mathfrak{p})$.
+    El grupo de descomposición es cíclico, generado por $\phi$, así que
+    $\sigma_j^{-1} \tau \sigma_i = \phi^k$ para algún $k$. Esto implica que
+    $H \sigma_i = H \sigma_j \phi^k$ están en la misma órbita, pero luego
+    $i = j$.
+
+    Falta ver que los $\mathfrak{q}_i$ son todos los primos en $\O_K$ tales que
+    $\mathfrak{q}_i \mid \mathfrak{p}$. Notamos que
+    $$\sum_i n_i = \sum_{\mathfrak{q}\mid\mathfrak{p}} f (\mathfrak{q}|\mathfrak{p}) = [K:F],$$
+    así que bastaría probar que para todo $i$ se tiene
+    $f (\mathfrak{q}_i|\mathfrak{p}) \ge n_i$.
+    Estamos en la siguiente situación:
+    \[ \begin{tikzcd}
+      \O_L \ar[-]{d}\ar[->>]{r} & \kappa (\sigma_i (\mathfrak{Q}))\ar[-]{d} \\
+      \O_K \ar[-]{d}\ar[->>]{r} & \kappa (\mathfrak{q}_i)\ar[-]{d} \\
+      \O_F \ar[->>]{r} & \kappa (\mathfrak{p})
+    \end{tikzcd} \]
+
+    \[ \Gal (\kappa (\sigma_i (\mathfrak{Q}))/\kappa (\mathfrak{q}_i))
+       \subseteq
+       \Gal (\kappa (\sigma_i (\mathfrak{Q}))/\kappa (\mathfrak{p})), \]
+    y se ve que
+    \[ \Frob_{\sigma_i (\mathfrak{Q}) | \mathfrak{q}_i} =
+       (\Frob_{\sigma_i (\mathfrak{Q}) | \mathfrak{q}})^{f (\mathfrak{q}_i|\mathfrak{p})} =
+       (\sigma_i\,\phi\,\sigma_i^{-1})^{f (\mathfrak{q}_i|\mathfrak{p})} =
+       \sigma_i\,\phi^{f (\mathfrak{q}_i|\mathfrak{p})}\,\sigma_i^{-1}. \]
+    Ahora $\Frob_{\sigma_i (\mathfrak{Q}) | \mathfrak{q}_i} \in H$, y entonces
+    $\sigma_i\,\phi^{f (\mathfrak{q}_i|\mathfrak{p})}\,\sigma_i^{-1} \in H$.
+    Esto implica que
+    $H \sigma_i = H \sigma_i \phi^{f (\mathfrak{q}_i|\mathfrak{p})}$,
+    de donde $f (\mathfrak{q}_i|\mathfrak{p}) \ge n_i$.
+  \end{proof}
+\end{teorema}
+
+Como mencionamos, el teorema de Kronecker--Weber nos dice que para toda
+extensión $K/\QQ$ con el grupo $\Gal (K/\QQ)$ abeliano existe $n$ tal que
+$K \subseteq \QQ (\zeta_n)$. Entonces, la descomposición de primos en $K$
+depende solamente del resto de $p$ módulo $n$. El caso de extensiones no
+abelianas es mucho más complicado.
+
+\begin{ejemplo}
+  Consideremos el campo de números $K = \QQ (\sqrt[4]{2})$. La extensión $K/\QQ$
+  no es normal, y podemos pasar a la cerradura de Galois
+  $L = \QQ (\sqrt[4]{2},i)$. Dejo al lector comprobar que el grupo de Galois de
+  $L/\QQ$ está generado por los automorfismos
+  $\sigma\colon \sqrt[4]{2} \mapsto i\sqrt[4]{2}$ de orden $4$ y
+  $\tau\colon i \mapsto -i$ de orden $2$. Se cumple
+  $\sigma\tau = \tau\sigma^3 \ne \tau\sigma$. El grupo de Galois es isomorfo al
+  grupo diédrico $D_4$ (también conocido como $D_8$):
+  \[ \Gal (L/\QQ) = \{ 1,\sigma,\sigma^2,\sigma^3,
+                       \tau,\tau\sigma,\tau\sigma^2,\tau\sigma^3 \}. \]
+  Tenemos $K = L^{\langle\tau\rangle}$, y las clases laterales de
+  $H = \langle\tau\rangle$ en $G$ son
+  $$H, H\sigma, H\sigma^2, H\sigma^3.$$
+
+  En este caso el único primo que se ramifica en $L$ es $p = 2$. (¡Ejercicio!)
+  Par $p$ impar sea $\mathfrak{p} \subset \O_L$ un primo tal que
+  $\mathfrak{p}\mid p$, y consideremos el Frobenius correspondiente
+  $\phi = \Frob_{\mathfrak{p}|p}$. Supongamos por ejemplo que $\phi = \tau$.
+  En este caso calculamos que $H\phi = H$, $H\sigma\phi = H\sigma^3$,
+  y $H\sigma^2\phi = H\sigma^2$. Esto nos da tres órbitas
+  $$\{ H \}, \quad \{ H\sigma, H\sigma^3 \}, \quad \{ H\sigma^2 \}.$$
+  Entonces, el teorema nos dice que
+  $p\O_K = \mathfrak{p}_1\mathfrak{p}_2\mathfrak{p}_3$, donde
+  $f_1 = f_2 = 1$ y $f_3 = 2$.
+
+  Un ejercicio instructivo sería determinar el tipo de factorización para
+  el resto de posibilidades para el Frobenius $\phi$, y también calcular
+  las densidades correspondientes ocupando el teorema de Chebotarëv.
+\end{ejemplo}
+
+Con esto terminamos nuestra breve investigación de la teoría de Galois para los
+campos de números.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \pagebreak
 
 \phantomsection
@@ -1051,10 +1355,32 @@ $$\legendre{q}{p} = \legendre{p^*}{q}.$$
 \end{ejercicio}
 
 \begin{ejercicio}
-  Demuestre que para $\mathfrak{q} \subset \O_L$, $\mathfrak{p} \subset \O_K$,
-  $\mathfrak{q} \mid \mathfrak{p}$ y $\sigma \in \Gal (L/K)$ se tiene
+  Demuestre que para una extensión de Galois $L/K$, primos
+  $\mathfrak{q} \subset \O_L$, $\mathfrak{p} \subset \O_K$,
+  tales que
+  $\mathfrak{q} \mid \mathfrak{p}$, y $\sigma \in \Gal (L/K)$ se tiene
   \[ D (\sigma (\mathfrak{q}) \mid \mathfrak{p}) =
   \sigma \, D (\mathfrak{q} \mid \mathfrak{p}) \, \sigma^{-1}, \quad
-  I (\sigma (\mathfrak{q}) \mid \mathfrak{p}) =
-  \sigma \, I (\mathfrak{q} \mid \mathfrak{p}) \, \sigma^{-1}. \]
+  I (\sigma (\mathfrak{q})|\mathfrak{p}) =
+  \sigma \, I (\mathfrak{q}|\mathfrak{p}) \, \sigma^{-1}. \]
+  Además, si $\mathfrak{p}$ no se ramifica, entonces el Frobenius cumple
+  \[ \Frob_{\sigma (\mathfrak{q})|\mathfrak{p}} =
+  \sigma \, \Frob_{\mathfrak{q}|\mathfrak{p}} \, \sigma^{-1}. \]
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para $K = \QQ (\sqrt[4]{2})$ consideremos la cerradura de Galois
+  $L = \QQ (\sqrt[4]{2},i)$.
+
+  \begin{enumerate}
+  \item[1)] Demuestre que el único primo racional $p$ que se ramifica en $L$ es
+    $p = 2$.
+
+  \item[2)] Para $p$ impar sea $\mathfrak{p} \subset \O_L$ un primo tal que
+    $\mathfrak{p} \mid p$. Determine cómo el tipo de factorización de $p$ en
+    $\O_K$ para toda posibilidad para $\Frob_{\mathfrak{p}|p}$.
+
+  \item[3)] Calcule las densidades correspondientes usando el teorema
+    de Chebotarëv.
+  \end{enumerate}
 \end{ejercicio}
