@@ -1,0 +1,120 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usetikzlibrary{calc}
+
+\newcounter{tarea}
+\setcounter{tarea}{7}
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}[tarea]
+
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\usepackage{framed}
+
+\usepackage{mathspec}
+
+\setmainfont{PT Serif}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Frob}{Frob}
+
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\Re}{\operatorname{Re}}
+
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+
+\title{Teoría de números algebraicos\\Tarea 7}
+\author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
+\date{14 de octubre de 2020}
+
+% \def\solutions{true}
+
+\begin{document}
+
+{\sffamily\bfseries\maketitle}
+
+\ifdefined\solutions
+\else
+\thispagestyle{empty}
+\fi
+
+\vspace{1em}
+
+\begin{ejercicio}
+  Demuestre que para una extensión de Galois $L/K$, primos
+  $\mathfrak{q} \subset \O_L$, $\mathfrak{p} \subset \O_K$,
+  tales que
+  $\mathfrak{q} \mid \mathfrak{p}$, y $\sigma \in \Gal (L/K)$ se tiene
+  \[ D (\sigma (\mathfrak{q})|\mathfrak{p}) =
+  \sigma \, D (\mathfrak{q}|\mathfrak{p}) \, \sigma^{-1}, \quad
+  I (\sigma (\mathfrak{q})|\mathfrak{p}) =
+  \sigma \, I (\mathfrak{q}|\mathfrak{p}) \, \sigma^{-1}. \]
+  Además, si $\mathfrak{p}$ no se ramifica, entonces el Frobenius cumple
+  \[ \Frob_{\sigma (\mathfrak{q})|\mathfrak{p}} =
+  \sigma \, \Frob_{\mathfrak{q}|\mathfrak{p}} \, \sigma^{-1}. \]
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $F$ un campo de números, y $L/K/F$ una torre de extensiones tal que $L/K$
+  es una extensión normal. Sean $\mathfrak{p} \subset \O_F$,
+  $\mathfrak{q} \in \O_K$, $\mathfrak{Q} \subset \O_L$ ideales primos tales que
+  $\mathfrak{Q} \mid \mathfrak{q}$ y $\mathfrak{q}\mid\mathfrak{p}$.
+
+  \begin{enumerate}
+  \item[1)] Demuestre que la restricción de automorfismos identifica
+    $D (\mathfrak{Q}|\mathfrak{q})$ con un subgrupo de
+    $D (\mathfrak{Q}|\mathfrak{p})$ e
+    $I (\mathfrak{Q}|\mathfrak{q})$ con un subgrupo de
+    $I (\mathfrak{Q}|\mathfrak{p})$.
+
+  \item[2)] Si $\mathfrak{p}$ no se ramifica en $L$, demuestre que
+    $\Frob_{\mathfrak{Q}|\mathfrak{q}} = (\Frob_{\mathfrak{Q}|\mathfrak{p}})^{f (\mathfrak{q}|\mathfrak{p})}$.
+
+  \item[3)] Si la extensión $K/F$ es normal, demuestre que
+    $\Frob_{\mathfrak{q}|\mathfrak{p}}$ es la restricción de
+    $\Frob_{\mathfrak{Q}|\mathfrak{p}}$.
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $K$ el campo de descomposición del polinomio
+  $$f = x^4 + 8x + 12.$$
+  Calcule $\Gal (K/\QQ)$, las clases de conjugación, los tipos de descomposición
+  que corresponden a cada $\Frob_{\mathfrak{p}\mid p}$, y las densidades que nos
+  da el teorema de Chebotarëv.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para $K = \QQ (\sqrt[4]{2})$ consideremos la cerradura de Galois
+  $L = \QQ (\sqrt[4]{2},i)$.
+
+  \begin{enumerate}
+  \item[1)] Demuestre que el único primo racional $p$ que se ramifica en $L$ es
+    $p = 2$.
+
+  \item[2)] Para $p$ impar sea $\mathfrak{p} \subset \O_L$ un primo tal que
+    $\mathfrak{p} \mid p$. Determine cómo el tipo de factorización de $p$ en
+    $\O_K$ para toda posibilidad para $\Frob_{\mathfrak{p}|p}$.
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para la extensión ciclotómica $L = \QQ (\zeta_n)$ determine cómo los primos
+  no ramificados $p\nmid n$ se descomponen en el subcampo
+  $K = \QQ (\zeta_n + \zeta_n^{-1})$.
+\end{ejercicio}
+
+\end{document}
