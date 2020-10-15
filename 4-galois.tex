@@ -1237,20 +1237,20 @@ $\mathfrak{Q} \subset \O_L$ un primo tal que $\mathfrak{Q} \mid \mathfrak{p}$.
 El grupo de descomposición $D (\mathfrak{Q}|\mathfrak{p})$ actúa sobre
 las clases laterales $H\sigma$ mediante la multiplicación por la derecha.
 Puesto que $D (\mathfrak{Q}\mid\mathfrak{p})$ está generado por el Frobenius
-$\phi = \Frob_{\mathfrak{Q}|\mathfrak{p}}$, las órbitas de esta acción vienen
+$F = \Frob_{\mathfrak{Q}|\mathfrak{p}}$, las órbitas de esta acción vienen
 dadas por
 \begin{gather*}
-  \{ H \sigma_1, H \sigma_1 \phi, H \sigma_1 \phi^2, \ldots, H \sigma_1 \phi^{n_1 - 1} \}, \\
+  \{ H \sigma_1, H \sigma_1 F, H \sigma_1 F^2, \ldots, H \sigma_1 F^{n_1 - 1} \}, \\
   \dots \\
-  \{ H \sigma_s, H \sigma_s \phi, H \sigma_s \phi^2, \ldots, H \sigma_s \phi^{n_s - 1} \},
+  \{ H \sigma_s, H \sigma_s F, H \sigma_s F^2, \ldots, H \sigma_s F^{n_s - 1} \},
 \end{gather*}
-donde $n_i$ es el mínimo número tal que $H \sigma_i \phi^{n_i} = H \sigma_i$.
+donde $n_i$ es el mínimo número tal que $H \sigma_i F^{n_i} = H \sigma_i$.
 Lo que tenemos es una partición de las clases laterales, así que
 $\sum_i n_i = [G : H] = [K : F]$.
 
 \begin{teorema}
   En la situación de arriba se tiene
-  $p \O_K = \mathfrak{q}_1\cdots \mathfrak{q}_s$, donde
+  $\mathfrak{p} \O_K = \mathfrak{q}_1\cdots \mathfrak{q}_s$, donde
   $\mathfrak{q}_i = \sigma_i (\mathfrak{Q}) \cap \O_K$ y
   $f (\mathfrak{q}_i|\mathfrak{p}) = n_i$.
 
@@ -1263,9 +1263,9 @@ $\sum_i n_i = [G : H] = [K : F]$.
     de Galois sobre ideales primos, existe $\sigma \in H$ tal que
     $\sigma_j (\mathfrak{Q}) = \tau \sigma_i (\mathfrak{Q})$. Luego tenemos
     $\sigma_j^{-1} \tau \sigma_i \in D (\mathfrak{Q}|\mathfrak{p})$.
-    El grupo de descomposición es cíclico, generado por $\phi$, así que
-    $\sigma_j^{-1} \tau \sigma_i = \phi^k$ para algún $k$. Esto implica que
-    $H \sigma_i = H \sigma_j \phi^k$ están en la misma órbita, pero luego
+    El grupo de descomposición es cíclico, generado por $F$, así que
+    $\sigma_j^{-1} \tau \sigma_i = F^k$ para algún $k$. Esto implica que
+    $H \sigma_i = H \sigma_j F^k$ están en la misma órbita, pero luego
     $i = j$.
 
     Falta ver que los $\mathfrak{q}_i$ son todos los primos en $\O_K$ tales que
@@ -1279,19 +1279,15 @@ $\sum_i n_i = [G : H] = [K : F]$.
       \O_K \ar[-]{d}\ar[->>]{r} & \kappa (\mathfrak{q}_i)\ar[-]{d} \\
       \O_F \ar[->>]{r} & \kappa (\mathfrak{p})
     \end{tikzcd} \]
-
-    \[ \Gal (\kappa (\sigma_i (\mathfrak{Q}))/\kappa (\mathfrak{q}_i))
-       \subseteq
-       \Gal (\kappa (\sigma_i (\mathfrak{Q}))/\kappa (\mathfrak{p})), \]
-    y se ve que
+    y se ve que (¡ejercicio!)
     \[ \Frob_{\sigma_i (\mathfrak{Q}) | \mathfrak{q}_i} =
-       (\Frob_{\sigma_i (\mathfrak{Q}) | \mathfrak{q}})^{f (\mathfrak{q}_i|\mathfrak{p})} =
-       (\sigma_i\,\phi\,\sigma_i^{-1})^{f (\mathfrak{q}_i|\mathfrak{p})} =
-       \sigma_i\,\phi^{f (\mathfrak{q}_i|\mathfrak{p})}\,\sigma_i^{-1}. \]
+       (\Frob_{\sigma_i (\mathfrak{Q}) | \mathfrak{p}})^{f (\mathfrak{q}_i|\mathfrak{p})} =
+       (\sigma_i\,F\,\sigma_i^{-1})^{f (\mathfrak{q}_i|\mathfrak{p})} =
+       \sigma_i\,F^{f (\mathfrak{q}_i|\mathfrak{p})}\,\sigma_i^{-1}. \]
     Ahora $\Frob_{\sigma_i (\mathfrak{Q}) | \mathfrak{q}_i} \in H$, y entonces
-    $\sigma_i\,\phi^{f (\mathfrak{q}_i|\mathfrak{p})}\,\sigma_i^{-1} \in H$.
+    $\sigma_i\,F^{f (\mathfrak{q}_i|\mathfrak{p})}\,\sigma_i^{-1} \in H$.
     Esto implica que
-    $H \sigma_i = H \sigma_i \phi^{f (\mathfrak{q}_i|\mathfrak{p})}$,
+    $H \sigma_i = H \sigma_i F^{f (\mathfrak{q}_i|\mathfrak{p})}$,
     de donde $f (\mathfrak{q}_i|\mathfrak{p}) \ge n_i$.
   \end{proof}
 \end{teorema}
@@ -1320,17 +1316,16 @@ abelianas es mucho más complicado.
   En este caso el único primo que se ramifica en $L$ es $p = 2$. (¡Ejercicio!)
   Par $p$ impar sea $\mathfrak{p} \subset \O_L$ un primo tal que
   $\mathfrak{p}\mid p$, y consideremos el Frobenius correspondiente
-  $\phi = \Frob_{\mathfrak{p}|p}$. Supongamos por ejemplo que $\phi = \tau$.
-  En este caso calculamos que $H\phi = H$, $H\sigma\phi = H\sigma^3$,
-  y $H\sigma^2\phi = H\sigma^2$. Esto nos da tres órbitas
+  $F = \Frob_{\mathfrak{p}|p}$. Supongamos por ejemplo que $F = \tau$.
+  En este caso calculamos que $HF = H$, $H\sigma F = H\sigma^3$,
+  y $H\sigma^2 F = H\sigma^2$. Esto nos da tres órbitas
   $$\{ H \}, \quad \{ H\sigma, H\sigma^3 \}, \quad \{ H\sigma^2 \}.$$
   Entonces, el teorema nos dice que
   $p\O_K = \mathfrak{p}_1\mathfrak{p}_2\mathfrak{p}_3$, donde
   $f_1 = f_2 = 1$ y $f_3 = 2$.
 
   Un ejercicio instructivo sería determinar el tipo de factorización para
-  el resto de posibilidades para el Frobenius $\phi$, y también calcular
-  las densidades correspondientes ocupando el teorema de Chebotarëv.
+  el resto de posibilidades para el Frobenius $F$.
 \end{ejemplo}
 
 Con esto terminamos nuestra breve investigación de la teoría de Galois para los
@@ -1359,13 +1354,42 @@ campos de números.
   $\mathfrak{q} \subset \O_L$, $\mathfrak{p} \subset \O_K$,
   tales que
   $\mathfrak{q} \mid \mathfrak{p}$, y $\sigma \in \Gal (L/K)$ se tiene
-  \[ D (\sigma (\mathfrak{q}) \mid \mathfrak{p}) =
-  \sigma \, D (\mathfrak{q} \mid \mathfrak{p}) \, \sigma^{-1}, \quad
+  \[ D (\sigma (\mathfrak{q})|\mathfrak{p}) =
+  \sigma \, D (\mathfrak{q}|\mathfrak{p}) \, \sigma^{-1}, \quad
   I (\sigma (\mathfrak{q})|\mathfrak{p}) =
   \sigma \, I (\mathfrak{q}|\mathfrak{p}) \, \sigma^{-1}. \]
   Además, si $\mathfrak{p}$ no se ramifica, entonces el Frobenius cumple
   \[ \Frob_{\sigma (\mathfrak{q})|\mathfrak{p}} =
   \sigma \, \Frob_{\mathfrak{q}|\mathfrak{p}} \, \sigma^{-1}. \]
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $F$ un campo de números, y $L/K/F$ una torre de extensiones tal que $L/K$
+  es una extensión normal. Sean $\mathfrak{p} \subset \O_F$,
+  $\mathfrak{q} \in \O_K$, $\mathfrak{Q} \subset \O_L$ ideales primos tales que
+  $\mathfrak{Q} \mid \mathfrak{q}$ y $\mathfrak{q}\mid\mathfrak{p}$.
+
+  \begin{enumerate}
+  \item[1)] Demuestre que la restricción de automorfismos identifica
+    $D (\mathfrak{Q}|\mathfrak{q})$ con un subgrupo de
+    $D (\mathfrak{Q}|\mathfrak{p})$ e
+    $I (\mathfrak{Q}|\mathfrak{q})$ con un subgrupo de
+    $I (\mathfrak{Q}|\mathfrak{p})$.
+
+  \item[2)] Si $\mathfrak{p}$ no se ramifica en $L$, demuestre que
+    $$\Frob_{\mathfrak{Q}|\mathfrak{q}} = (\Frob_{\mathfrak{Q}|\mathfrak{p}})^{f (\mathfrak{q}|\mathfrak{p})}.$$
+
+  \item[3)] Si la extensión $K/F$ es normal, demuestre que
+    $\Frob_{\mathfrak{q}|\mathfrak{p}}$ es la restricción de
+    $\Frob_{\mathfrak{Q}|\mathfrak{p}}$.
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $K$ el campo de descomposición del polinomio $f = x^4 + 8x + 12$. Calcule
+  $\Gal (K/\QQ)$, las clases de conjugación, los tipos de descomposición que
+  corresponden a cada $\Frob_{\mathfrak{p}\mid p}$, y las densidades que nos da
+  el teorema de Chebotarëv.
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -1379,8 +1403,11 @@ campos de números.
   \item[2)] Para $p$ impar sea $\mathfrak{p} \subset \O_L$ un primo tal que
     $\mathfrak{p} \mid p$. Determine cómo el tipo de factorización de $p$ en
     $\O_K$ para toda posibilidad para $\Frob_{\mathfrak{p}|p}$.
-
-  \item[3)] Calcule las densidades correspondientes usando el teorema
-    de Chebotarëv.
   \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para la extensión ciclotómica $L = \QQ (\zeta_n)$ determine cómo los primos
+  no ramificados $p\nmid n$ se descomponen en el subcampo
+  $K = \QQ (\zeta_n + \zeta_n^{-1})$.
 \end{ejercicio}
