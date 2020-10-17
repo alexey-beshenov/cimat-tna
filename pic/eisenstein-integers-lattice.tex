@@ -1,0 +1,61 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{calc}
+
+\usepackage{mathspec}
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\begin{document}
+\begin{tikzpicture}[x=1.75cm,y=1.75cm]
+\draw ({cos(0)},{sin(0)}) coordinate (x);
+\draw ({cos(60)},{sin(60)}) coordinate (y);
+
+\fill[blue!30] (0,0) -- (x) -- (y) -- ($-1*(x)+(y)$) -- cycle;
+
+\draw[black!60,dashed] ($-2*(x)+2*(y)$) -- ($2*(x)-2*(y)$);
+\draw[black!60,dashed] ($2*(y)$) -- ($-2*(y)$);
+\draw[black!60,dashed] ($2*(x)$) -- ($-2*(x)$);
+\draw[black!60,dashed] ($-2*(x)+2*(y)$) -- ($-2*(x)$);
+\draw[black!60,dashed] ($-1*(x)+2*(y)$) -- ($-1*(x) + -1*(y)$);
+\draw[black!60,dashed] ($2*(x)-2*(y)$) -- ($2*(x)$);
+\draw[black!60,dashed] ($(x)-2*(y)$) -- ($(x) + (y)$);
+\draw[black!60,dashed] ($-2*(x)+2*(y)$) -- ($2*(y)$);
+\draw[black!60,dashed] ($-2*(x)+(y)$) -- ($(x) + (y)$);
+\draw[black!60,dashed] ($-1*(x) + -1*(y)$) -- ($2*(x)-(y)$);
+\draw[black!60,dashed] ($-2*(y)$) -- ($2*(x)-2*(y)$);
+\draw[black!60,dashed] ($2*(y)$) -- ($2*(x)$);
+\draw[black!60,dashed] ($-1*(x)+2*(y)$) -- ($2*(x)-(y)$);
+\draw[black!60,dashed] ($-2*(y)$) -- ($-2*(x)$);
+\draw[black!60,dashed] ($(x)-2*(y)$) -- ($-2*(x)+(y)$);
+
+\draw (0,0) node[circle,fill,inner sep=1pt, label=above:{\small $0$}] {};
+
+\draw[->] (0,0) -- (0.95,0);
+\draw[->] (0,0) -- ($-0.95*(x)+0.95*(y)$);
+
+\draw ($0.5*(y)$) node {$\Pi$};
+
+\draw (x) node[circle,fill,inner sep=1pt, label=above:{\small $\omega_1$}] {};
+\draw (y) node[circle,fill,inner sep=1pt, label=above:{\small $\omega_1+\omega_2$}] {};
+\draw ($-1*(x)+(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $\omega_2$}] {};
+\draw ($-1*(x)$) node[circle,fill,inner sep=1pt, label=above:{\small $-\omega_1$}] {};
+\draw ($-1*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-\omega_1-\omega_2$}] {};
+\draw ($(x)-(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-\omega_2$}] {};
+
+\draw ($(x) + (y)$) node[circle,fill,inner sep=1pt, label=above:{\small $2\omega_1+\omega_2$}] {};
+\draw ($-1*(x)+2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $\omega_1+2\omega_2$}] {};
+\draw ($-2*(x)+(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-\omega_1+\omega_2$}] {};
+\draw ($-1*(x) + -1*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2\omega_1-\omega_2$}] {};
+\draw ($(x)-2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2\omega_2$}] {};
+\draw ($2*(x)-(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $\omega_1-\omega_2$}] {};
+
+\draw ($2*(x)$) node[circle,fill,inner sep=1pt, label=above:{\small $2\omega_1$}] {};
+\draw ($2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $2\omega_1+2\omega_2$}] {};
+\draw ($-2*(x)+2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $2\omega_2$}] {};
+\draw ($-2*(x)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2\omega_1$}] {};
+\draw ($-2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2\omega_1-2\omega_2$}] {};
+\draw ($2*(x)-2*(y)$) node[circle,fill,inner sep=1pt, label=above:{\small $-2\omega_2$}] {};
+\end{tikzpicture}
+
+\end{document}
