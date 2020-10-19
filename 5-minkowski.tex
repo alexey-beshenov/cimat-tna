@@ -1,0 +1,945 @@
+\chapter{Teoría de Minkowski}
+
+El objetivo de este capítulo es probar los siguientes teoremas.
+
+\begin{enumerate}
+\item[1)] Para una extensión no trivial $K/\QQ$ se tiene $|\Delta_K| > 1$.
+
+\item[2)] Dado un campo de números $K/\QQ$, el grupo de clases
+  $\Cl (K) = \Pic (\O_K)$ es finito.
+
+  Este resultado es bastante sutil y no se sigue del álgebra conmutativa:
+  si en lugar de $\O_K$ se toma otro dominio de Dedekind $R$, el grupo
+  $\Pic (R)$ ya no tiene por qué ser finito.
+
+\item[3)] \textbf{Teorema de Hermite}: para $C$ fijo, existe un número finito de
+  campos de números $K/\QQ$, salvo isomorfismo, con discriminante
+  $|\Delta_K| < C$.
+
+\item[4)] \textbf{Teorema de unidades de Dirichlet}: el grupo $\O_K^\times$ es
+  finitamente generado de rango $r_1 + r_2 - 1$, donde $r_1$ es el número de
+  encajes reales $K\hookrightarrow \RR$ y $2r_2$ es el número de encajes
+  complejos $K\hookrightarrow \CC$. En otras palabras, existen unidades
+  $\epsilon_1, \ldots, \epsilon_{r_1 + r_2 - 1} \in \O_K^\times$,
+  llamadas \textbf{unidades fundamentales}, tales que
+  $$\O_K^\times \cong \mu_K \times \langle\epsilon_1\rangle \times \cdots \times \langle\epsilon_{r_1+r_2-1}\rangle.$$
+  Aquí $\mu_K$ es el subgrupo de torsión que consiste en las raíces de unidad
+  en $K$, mientras que $\epsilon_i$ son generadores de diferentes componentes
+  cíclicas infinitas.
+\end{enumerate}
+
+La herramienta principal en las pruebas será el teorema de Minkowski sobre
+puntos de retículos en conjuntos convexos simétricos.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Retículos y el teorema de Minkowski}
+
+\begin{definicion}
+  Sea $V$ un espacio vectorial real. Un \textbf{retículo} en $V$ es un subgrupo
+  abeliano $\Lambda \subset V$ de la forma
+  $$\Lambda = \ZZ\,\omega_1 + \cdots + \ZZ\,\omega_n,$$
+  donde $\omega_1,\ldots,\omega_n \in V$ son vectores linealmente
+  independientes. En este caso se dice que $\omega_1,\ldots,\omega_n$ es una
+  \textbf{base} de $\Lambda$. Si $n = \dim_\RR V$, se dice que $\Lambda$
+  \textbf{tiene rango completo} en $V$. El conjunto
+  $$\Pi = \Bigl\{ \sum_i \lambda_i\,\omega_i \Bigm| 0 \le \lambda_i < 1 \Bigr\}$$
+  se llama un \textbf{dominio fundamental} de $\Lambda$.
+\end{definicion}
+
+\begin{ejemplo}
+  Consideremos los enteros de Eisenstein
+  $\ZZ [\zeta_3] \subset \CC$. Identificando $\CC$ con $\RR^2$ de la manera
+  habitual, podemos ver $\ZZ [\zeta_3]$ como un retículo generado por los
+  vectores $\omega_1 = (1,0)$ y
+  $\omega_2 = \left(-\frac{1}{2}, \, \frac{\sqrt{3}}{2}\right)$.
+
+  \begin{center}
+    \includegraphics{pic/eisenstein-integers-lattice.pdf}
+  \end{center}
+\end{ejemplo}
+
+\begin{ejemplo}
+  El subgrupo $\Lambda = \ZZ\cdot 1 + \ZZ\cdot \sqrt{2}$ no es un retículo en
+  $\RR$: los vectores $1$ y $\sqrt{2}$ no son linealmente independientes.
+\end{ejemplo}
+
+\begin{lema}
+  Un retículo $\Lambda \subset V$ tiene rango completo si y solamente si existe
+  un conjunto acotado $X \subseteq V$ tal que
+  \[ \tag{*} V = \bigcup_{\omega \in \Lambda} X + \omega. \]
+
+  \begin{proof}
+    Si $\Lambda = \ZZ\,\omega_1 + \cdots + \ZZ\,\omega_n$ tiene rango completo,
+    entonces podemos tomar como $X$ el dominio fundamental $\Pi$. De una vez
+    notamos que la unión $\bigcup_{\omega \in \Lambda} \Pi + \omega$ es disjunta.
+
+    Viceversa, si existe un conjunto acotado $X$ tal que se cumple
+    (*), denotemos por $V_0$ el subespacio vectorial generado por los elementos
+    de $\Lambda$. Nos gustaría ver que $V_0 = V$. Para todo $v \in V$ y
+    $k \in \NN$ podemos escribir $k v = x_k + \omega_k$ para algunos $x_k \in X$
+    y $\omega_k \in \Lambda$. Puesto que $X$ es acotado,
+    $$\lim_{k\to\infty} \frac{1}{k}\,x_k = 0.$$
+    Ahora tenemos
+    $$v = \lim_{k\to\infty} \frac{1}{k}\,\omega_k \in V_0,$$
+    usando que $V_0$ es un subespacio cerrado de $V$.
+  \end{proof}
+\end{lema}
+
+Aunque nuestra definición de retículos menciona explícitamente una $\ZZ$-base de
+$\Lambda$, hay otra caracterización más canónica.
+
+\begin{lema}
+  Un subgrupo abeliano $\Lambda \subset V$ es un retículo si y solamente
+  si $\Lambda$ es discreto.
+\end{lema}
+
+Recordemos que $\Lambda \subset V$ es un subespacio \textbf{discreto} si para
+todo $\omega \in \Lambda$ existe un entorno abierto $U \ni \omega$ en $V$ tal
+que $\Lambda \cap U = \{ \omega \}$.
+
+\begin{ejemplo}
+  Para $\Lambda = \ZZ\cdot 1 + \ZZ\cdot \sqrt{2}$, usando la irracionalidad de
+  $\sqrt{2}$, se puede ver que para cualquier $\epsilon > 0$ existe un número
+  infinito de $a + b\sqrt{2} \in \ZZ [\sqrt{2}]$ tales que
+  $|a + b\sqrt{2}| < \epsilon$.
+\end{ejemplo}
+
+\begin{proof}
+  Primero, si $\Lambda = \ZZ\,\omega_1 + \cdots + \ZZ\,\omega_n$ es un retículo en
+  $V$, entonces para todo punto $\omega = \sum_i a_i\,\omega_i \in \Lambda$
+  podemos tomar el entorno abierto
+  $$U = \Bigl\{ \sum_i \lambda_i\,\omega_i \Bigm| |a_i - \lambda_i| < 1 \Bigr\},$$
+  y se cumple $\Lambda \cap U = \{ \omega \}$.
+
+  Viceversa, supongamos que $\Lambda \subset V$ es un subgrupo discreto.
+  En general, si $G$ es un grupo topológico de Hausdorff, entonces cualquier
+  subgrupo discreto $H \subset G$ es cerrado. En nuestro caso particular,
+  $\Lambda$ será cerrado. Sea $V_0$ el subespacio de $V$ generado por los
+  elementos de $\Lambda$. Podemos entonces escoger una base de $V_0$ que
+  consiste en elementos $\omega_1,\ldots,\omega_n \in \Lambda$. Esta base nos da
+  un subretículo
+  $$\Lambda_0 = \ZZ\,\omega_1 + \cdots + \ZZ\,\omega_n \subseteq \Lambda.$$
+  Dado que $\Lambda_0$ tiene rango completo en $V_0$, tenemos
+  $$V_0 = \bigcup_{\omega \in \Lambda_0} \Pi_0 + \omega,$$
+  donde $\Pi_0$ es el dominio fundamental que corresponde a la base
+  $\omega_1,\ldots,\omega_n$. Vamos a probar que el cociente $\Lambda/\Lambda_0$
+  es finito. Sean $\omega_i \in \Lambda$ representantes de diferentes elementos
+  en $\Lambda/\Lambda_0$. Escribamos
+  $$\omega_i = x_i + \omega_{0i},$$
+  donde $x_i \in \Pi_0$ y $\omega_{0i} \in \Lambda_0$. Aquí
+  $x_i = \omega_i - \omega_{0i} \in \Lambda \cap \Pi_0$. El espacio
+  $\Lambda \cap \Pi_0$ es discreto y acotado, así que es finito. Se sigue que
+  el cociente $\Lambda/\Lambda_0$ es finito. Ahora
+  $$\Lambda_0 \subseteq \Lambda \subseteq \frac{1}{[\Lambda : \Lambda_0]}\,\Lambda_0,$$
+  y $\Lambda$ es también un grupo abeliano de rango $n$, así que admite una
+  $\ZZ$-base finita $\omega_1', \ldots, \omega_n'$. Estos vectores son
+  linealmente independientes sobre $\RR$ porque generan el espacio $V_0$ de
+  dimensión $n$.
+\end{proof}
+
+Ahora supongamos que $V$ tiene estructura de espacio euclidiano; es decir, viene
+con una forma bilineal definida positiva
+$$\langle\cdot,\cdot\rangle\colon V\times V \to \RR.$$
+
+\begin{definicion}
+  Para un retículo $\Lambda = \ZZ\,\omega_1 + \cdots + \ZZ\,\omega_n$ el
+  \textbf{covolumen} viene dado por
+  $$\covol (\Lambda) = \vol (\Pi) = |\det (\langle\omega_i,\omega_j\rangle)|^{1/2}.$$
+\end{definicion}
+
+Notamos que el covolumen no depende de una base particular: para otra base
+$\omega_1', \ldots, \omega_n'$ la matriz de cambio de base tiene determinante
+$\pm 1$ (recuerde también nuestra discusión del discriminante en el
+capítulo~\ref{ch:algebra-z-lineal}).
+
+\begin{definicion}
+  Sea $X \subseteq V$ un subconjunto.
+
+  \begin{itemize}
+  \item Se dice que $X$ es \textbf{simétrico} (respecto al origen) si para todo
+    $x \in X$ se tiene $-x \in X$.
+
+  \item Se dice que $X$ es \textbf{convexo} si para cualesquiera $x,y\in X$ la
+    recta entre $x$ e $y$ también está en $X$:
+    $$\{ \lambda\,y + (1-\lambda)\,x \mid 0 \le \lambda \le 1 \} \subseteq X.$$
+  \end{itemize}
+\end{definicion}
+
+Todo conjunto convexo simétrico no vacío $X \subseteq V$ necesariamente contiene
+el punto $0$. Ahora dado un retículo $\Lambda \subset V$, si $X$ es
+suficientemente grande, entonces $X$ contiene otro punto de $\Lambda$ a parte de
+$0$. Este es el contenido del siguiente teorema.
+
+\begin{teorema}[{Minkowski\footnote{Hermann Minkowski (1864--1909)}}]
+  Sean $\Lambda \subset V$ un retículo y $X \subseteq V$ un conjunto convexo
+  simétrico tal que
+  $$\vol X > 2^n\,\covol \Lambda.$$
+  Entonces, $X$ contiene un punto no nulo de $\Lambda$.
+\end{teorema}
+
+En algún sentido, este resultado es una versión continua del principio
+del palomar.
+
+\begin{center}
+  \includegraphics{pic/minkowski.pdf}
+\end{center}
+
+\begin{comentario}
+  Para entender el significado del múltiplo $2^n$ en la cota del teorema,
+  podemos considerar el hipercubo abierto con $2^n$ vértices en
+  $(\pm 1, \pm 1, \ldots, \pm 1)$. Consideremos el retículo
+  $\Lambda = \ZZ^n \subset \RR^n$. El volumen del cubo es
+  $2^n = \covol \Lambda$, pero el cubo no contiene ningún punto de $\Lambda$
+  salvo $0$.
+
+  \begin{center}
+    \includegraphics{pic/minkowski-2n.pdf}
+  \end{center}
+
+  Dejo como un ejercicio probar que si $X$ es compacto, entonces también
+  funcionaría la desigualdad
+  $$\vol (X) \ge 2^n \, \covol \Lambda.$$
+\end{comentario}
+
+Para demostrar el teorema, necesitamos el siguiente resultado auxiliar.
+
+\begin{lema}[{Blichfeldt\footnote{Hans Frederick Blichfeldt (1873--1945), matemático danés.}}]
+  Dado un conjunto convexo\footnote{O en general cualquier conjunto medible.}
+  $X\subset V$ tal que $\vol X > \covol \Lambda$, existen dos
+  diferentes puntos $x,x'\in X$ tales que $x-x'\in \Lambda$.
+
+  \begin{proof}
+    Puesto que
+    $$V = \bigsqcup_{\omega\in \Lambda} \Pi + \omega,$$
+    tenemos
+    $$X = \bigsqcup_{\omega\in \Lambda} X \cap (\Pi + \omega),$$
+    así que
+    $$\vol X = \sum_{\omega\in \Lambda} \vol (X \cap (\Pi + \omega)) = \sum_{\omega\in \Lambda} \vol ((X-\omega) \cap \Pi).$$
+    Por nuestra hipótesis, $\vol X > \vol \Pi$, de donde los conjuntos
+    $$(X-\omega) \cap \Pi \subseteq \Pi \quad (\omega\in\Lambda)$$
+    no pueden ser disjuntos, luego existen
+    $\omega, \omega'\in \Lambda$ tales que
+    $$(X-\omega) \cap (X-\omega') \ne \emptyset.$$
+    Tomando $y \in (X-\omega) \cap (X-\omega')$, se obtiene
+    \[ x = y + \omega, \quad x' = y + \omega' \in X, \quad
+       x - x' = \omega-\omega' \in \Lambda. \qedhere \]
+  \end{proof}
+\end{lema}
+
+Ahora estamos listos para demostrar el teorema de Minkowski. Consideremos el
+conjunto
+$$\frac{1}{2}\,X = \Bigl\{ \frac{1}{2}\,x \Bigm| x \in X \Bigr\}.$$
+Tenemos
+$$\vol \left(\frac{1}{2}\,X\right) = \frac{1}{2^n} \vol X > \covol \Lambda,$$
+así que por el lema de Blichfeldt existen dos puntos distintos
+$x,x' \in \frac{1}{2}\,X$ tales que $x-x' \in \Lambda$. Para terminar la
+demostración, sería suficiente ver que este punto pertenece a $X$. Por la
+hipótesis que $X$ es simétrico, $-x'\in \frac{1}{2}\,X$, y luego
+$$x = \frac{1}{2}\,y, \quad -x' = \frac{1}{2}\,y' \quad\text{para algunos }y,y'\in X.$$
+El punto
+$$x - x' = \frac{1}{2}\,y + \frac{1}{2}\,y'$$
+pertenece a $X$, siendo una combinación convexa de dos puntos $y,y'\in X$. \qed
+
+\vspace{1em}
+
+Notamos que el argumento no es constructivo y no nos da una manera eficaz de
+obtener un punto no nulo en $X \cap \Lambda$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aplicación: teorema de cuatro cuadrados}
+
+Prácticamente todo este capítulo será dedicado a varias aplicaciones del teorema
+de Minkowski, pero primero sería instructivo ver algún ejemplo más sencillo de
+su uso. En esta sección vamos a probar el siguiente famoso resultado, conocido
+como el \textbf{teorema de cuatro cuadrados}.
+
+\begin{teorema}[Lagrange]
+  Para todo entero $n \ge 0$ existen $a,b,c,d \in \ZZ$ tales que
+  $n = a^2 + b^2 + c^2 + d^2$.
+\end{teorema}
+
+Primero, gracias a la identidad
+\begin{multline*}
+  (a^2 + b^2 + c^2 + d^2)\cdot (x^2 + y^2 + z^2 + w^2) \\
+  = (a x - b y - c z - d w)^2 +
+    (a y + b x + c w - d z)^2 +
+    (a z - b w + c x + d y)^2 +
+    (a w + b z - c y + d x)^2,
+\end{multline*}
+descubierta por Euler, notamos que es suficiente probar el teorema para el caso
+cuando $n = p$ es un número primo.
+
+\begin{comentario}
+  He aquí una breve explicación. La identidad para las sumas de dos cuadrados
+  $$(a^2 + b^2)\,(x^2 + y^2) = (ax + by)^2 + (ay + bx)^2$$
+  se sigue de la fórmula $N (\alpha\beta) = N (\alpha)\,N (\beta)$
+  para la norma $N (\alpha) = \alpha\,\overline{\alpha}$ sobre los enteros de
+  Gauss $\ZZ [i]$.
+
+  De la misma manera, sobre el \textbf{álgebra de cuaterniones} con coeficientes
+  en $\ZZ$ podemos definir el conjugado de $\alpha = a + bi + cj + dk$
+  mediante $\overline{\alpha} = a - bi - cj - dk$, y luego
+  $\overline{\alpha\beta} = \overline{\alpha}\,\overline{\beta}$, y la norma
+  $N (\alpha) = \alpha\,\overline{\alpha} = a^2 + b^2 + c^2 + d^2$ es también
+  multiplicativa: $N (\alpha\beta) = N (\alpha) \, N (\beta)$.
+\end{comentario}
+
+\begin{lema}
+  Para todo primo $p$ existen $m,n\in\ZZ$ tales que
+  $$m^2 + n^2 + 1 \equiv 0 \pmod{p}.$$
+
+  \begin{proof}
+    Ejercicio.
+  \end{proof}
+\end{lema}
+
+Fijemos entonces $m$ y $n$ como arriba y consideremos los siguientes vectores en
+$V = \RR^4$:
+\[ \omega_1 = (1,0,m,n), \quad
+   \omega_2 = (0,1,n,-m), \quad
+   \omega_3 = (0,0,p,0), \quad
+   \omega_4 = (0,0,0,p). \]
+Consideremos el producto escalar estándar sobre $\RR^4$, y para un vector
+$v = \sum_i a_i \, e_i$ pongamos
+$\|v\| = \langle v,v\rangle = \sum_i a_i^2$. Calculando el determinante
+correspondiente, es fácil verificar que los $\omega_i$ generan un retículo de
+rango completo
+$$\Lambda = \ZZ\,\omega_1 + \ZZ\,\omega_2 + \ZZ\,\omega_3 + \ZZ\,\omega_4 \subset \RR^4,$$
+tal que
+$$\covol \Lambda = p^2.$$
+
+\begin{lema}
+  Para todo $\omega\in \Lambda$ el número $\|\omega\|^2$ es un entero
+  divisible por $p$.
+
+  \begin{proof}
+    Si
+    $$\omega = a_1\,\omega_1 + a_2\,\omega_2 + a_3\,\omega_3 + a_4\,\omega_4 = (a_1, ~ a_2, ~ a_1\,m+a_2\,n + a_3\,p, ~ a_1\,n-a_2\,m + a_4\,p),$$
+    entonces
+
+    \begin{multline*}
+      \|\omega\|^2 = a_1^2 + a_2^2 + (a_1\,m+a_2\,n + a_3\,p)^2 + (a_1\,n-a_2\,m + a_4\,p)^2 \\
+      \equiv a_1^2 + a_2^2 + (a_1\,m+a_2\,n)^2 + (a_1\,n-a_2\,m)^2 \pmod{p}.
+    \end{multline*}
+
+    Luego,
+    $$a_1^2 + a_2^2 + (a_1\,m+a_2\,n)^2 + (a_1\,n-a_2\,m)^2 = (a_1^2 + a_2^2)\,(m^2 + n^2 + 1)$$
+    y $m^2 + n^2 + 1 \equiv 0 \pmod{p}$ por nuestra elección de $m$ y $n$.
+  \end{proof}
+\end{lema}
+
+Sea $X$ la bola abierta en $\RR^4$ de radio $r = \sqrt{2p}$ centrada en el
+origen:
+$$X = \{ x \in \RR^4 \mid \|x\|^2 < 2p \}.$$
+Recordemos que en general la bola $n$-dimensional de radio $r$ tiene volumen
+$$\frac{\pi^{n/2}}{\Gamma \left(\frac{n}{2}+1\right)}\,r^n.$$
+En este caso $n = 4$ y
+$\Gamma \left(\frac{n}{2}+1\right) = \Gamma (3) = 2! = 2$. Tenemos
+$$\vol X = \frac{\pi^2 r^4}{2} = 2 \pi^2 p^2 > 2^4\,\covol \Lambda = 16\,p^2$$
+(de hecho, $2 \pi^2 = 19.73\ldots > 16$). Entonces, según el teorema de
+Minkowski, existe un punto no nulo $\omega\in \Lambda$ tal que
+$\omega \in X$. Ahora de
+$$0 < \|\omega\|^2 < 2p, \quad p \mid \|\omega\|^2$$
+podemos concluir que $\|\omega\|^2 = p$. Esto nos da una representación de $p$
+como una suma de cuatro cuadrados. \qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Anillo de enteros como un retículo}
+
+Sea $K/\QQ$ un campo de números. Este tiene $n = [K:\QQ]$ encajes
+$\tau\colon K\hookrightarrow \CC$, entre estos $r_1$ encajes reales
+$\rho\colon K\hookrightarrow \RR$ y $2 r_2$ encajes complejos
+$\sigma\colon K\hookrightarrow \CC$ tales que $\overline{\sigma}\ne\sigma$.
+Consideremos el espacio complejo $n$-dimensional
+$$K_\CC = \prod_\tau \CC$$
+y el encaje correspondiente
+\[ \Phi\colon K \hookrightarrow K_\CC, \quad
+   \alpha \mapsto (\tau (\alpha))_\tau. \]
+
+Vamos a dotar el espacio $K_\CC$ del producto hermitiano habitual
+$$\langle z,z'\rangle = \sum_\tau z_\tau \, \overline{z'_\tau}.$$
+En particular, notamos que $\langle z',z\rangle = \overline{\langle z,z'\rangle}$
+y $\langle z,z\rangle > 0$ para $z \ne 0$.
+
+El grupo $G_\RR = \Gal (\CC/\RR)$ actúa sobre $K_\CC$ mediante la conjugación
+compleja y permutación de las coordenadas $\tau \mapsto \overline{\tau}$.
+Esto nos da un automorfismo $\RR$-lineal de orden $2$
+\[ F\colon K_\CC \to K_\CC, \quad
+   (z_\tau)_\tau \mapsto (\overline{z}_{\overline{\tau}})_\tau. \]
+
+Consideremos el subespacio real fijo por la acción de $G_\RR$:
+$$K_\RR = (K_\CC)^{G_\RR} = \{ (z_\tau)_\tau \mid z_{\overline{\tau}} = \overline{z}_\tau \}.$$
+
+Dado que $\langle F z, F z'\rangle = \overline{\langle z, z'\rangle}$, el producto
+hermitiano sobre $K_\CC$ se restringe a un producto escalar
+$$\langle\cdot,\cdot\rangle\colon K_\RR\times K_\RR\to \RR.$$
+Efectivamente, para todo $x,y \in K_\RR$ se tiene
+\begin{gather*}
+  \langle x,y\rangle = \langle F x, F y\rangle = \overline{\langle x,y\rangle},\\
+  \langle y,x\rangle = \overline{\langle x,y\rangle} = \langle x,y\rangle,\\
+  \langle x,x\rangle > 0 \text{ si }x\ne 0.
+\end{gather*}
+
+Notamos que por la definición, para $\alpha \in K$ se tiene
+$\overline{\tau} (\alpha) = \overline{\tau (\alpha)}$, y entonces el encaje
+$\Phi\colon K\hookrightarrow K_\CC$ toma valores en $K_\RR$:
+\[ \begin{tikzcd}
+  K \ar[right hook->]{r}{\Phi}\ar[right hook->]{dr}{\Phi} & K_\RR\ar[right hook->]{d} \\
+  & K_\CC
+\end{tikzcd} \]
+
+\begin{comentario}
+  En términos de productos tensoriales,
+
+  \begin{itemize}
+  \item $K_\CC \cong K\otimes_\QQ \CC$,
+
+  \item el encaje $\Phi\colon K \hookrightarrow K_\CC$ se identifica con
+    $\alpha \mapsto \alpha\otimes 1$,
+
+  \item la aplicación $F\colon K_\CC \to K_\CC$ corresponde a
+    $\alpha \otimes z \mapsto \alpha \otimes \overline{z}$,
+
+  \item $K_\RR \cong K\otimes_\QQ \RR$, y la inclusión
+    $K_\RR \hookrightarrow K_\CC$ está inducida por $\RR \subset \CC$.
+  \end{itemize}
+\end{comentario}
+
+El siguiente resultado explica el significado geométrico del discriminante
+$\Delta_K$.
+
+\begin{proposicion}
+  La imagen del anillo de enteros $\Lambda = \Phi (\O_K) \subset K_\RR$ es un
+  retículo de rango completo tal que $\covol \Lambda = \sqrt{|\Delta_K|}$.
+
+  \begin{proof}
+    Si $\O_K = \ZZ\,\alpha_1 + \cdots + \ZZ\,\alpha_n$, entonces
+    $\Lambda = \ZZ\,\Phi (\alpha_1) + \cdots + \ZZ\,\Phi (\alpha_n)$.
+    Ahora si $\tau_i\colon K \hookrightarrow \CC$ son diferentes encajes,
+    recordemos que
+    $\Delta_K = \det (A)^2$, donde $A = (\tau_i \alpha_j)_{i,j}$.
+
+    Por otra parte, el covolumen de $\Lambda$ se calcula mediante la matriz
+    \[ (\langle \Phi (\alpha_i), \Phi (\alpha_j)\rangle)_{i,j} =
+    \Bigl(\sum_k \tau_k \alpha_i, \overline{\tau_k \alpha_j}\Bigr)_{i,j} =
+    A \, \overline{A}^t. \]
+
+    Ahora
+    \[ \covol \Lambda = \sqrt{|\det (A \overline{A}^t)|} = \sqrt{|\Delta_K|}. \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+\begin{corolario}
+  Para todo ideal no nulo $I \subseteq \O_K$, la imagen correspondiente
+  $\Lambda = \Phi (I)$ es un retículo de rango completo tal que
+  $\covol \Lambda = \sqrt{|\Delta_K|}\cdot N_{K/\QQ} (I)$.
+
+  \begin{proof}
+    Si $I \ne 0$, entonces el índice
+    $$N_{K/\QQ} (I) = \# (\O_K/I) = [\O_K : I]$$
+    es finito, y luego $\Lambda = \Phi (I)$ es un subretículo en
+    $\Lambda' = \Phi (\O_K)$ tal que $[\Lambda' : \Lambda] = N_{K/\QQ} (I)$.
+    Dejo como un ejercicio verificar que
+    \[ \covol \Lambda = \covol \Lambda' \cdot [\Lambda' : \Lambda]. \qedhere \]
+  \end{proof}
+\end{corolario}
+
+El último cálculo explica el significado geométrico de la norma $N_{K/\QQ} (I)$.
+
+\begin{ejemplo}
+  \label{ejemplo:encaje-de-enteros-de-Eisenstein}
+  Volvamos a los enteros de Eisenstein $\ZZ [\zeta_3] \subset \CC$.
+  Hay dos encajes complejos
+  $\sigma, \overline{\sigma}\colon \QQ (\zeta_3) \to \CC$ dados por
+  $\sigma\colon \zeta_3 \mapsto \zeta_3$ y
+  $\overline{\sigma}\colon \zeta_3 \mapsto \zeta_3^2$. En este caso particular
+  $$K_\RR = \{ (z_\sigma, z_{\overline{\sigma}}) \in K_\CC \mid z_{\overline{\sigma}} = \overline{z_\sigma} \}.$$
+  Esto nos da un isomorfismo de espacios vectoriales
+  \[ \phi\colon K_\RR \xrightarrow{\cong} \RR^2, \quad
+     (z_\sigma, z_{\overline{\sigma}}) \mapsto (x_\sigma, x_{\overline{\sigma}}) = (\Re z_\sigma, \Im z_\sigma). \]
+  Poniendo
+  $z_\sigma = x_\sigma + i y_\sigma$, $z'_\sigma = x'_\sigma + i y'_\sigma$,
+  calculamos que
+  \[ z_\sigma \, \overline{z'_\sigma} + z_{\overline{\sigma}} \, \overline{z'_{\overline{\sigma}}} =
+     z_\sigma \, \overline{z'_\sigma} + \overline{z_\sigma} \, z'_\sigma =
+     2\,(x_\sigma\,x'_\sigma + y_\sigma\,y'_\sigma) =
+     2\,(x_\sigma\,x'_\sigma + x_{\overline{\sigma}}\,x'_{\overline{\sigma}}). \]
+  Entonces, el producto escalar sobre $\RR^2$ que corresponde al producto escalar
+  sobre $K_\RR$ es
+  $$\langle x, x'\rangle = 2\,(x_\sigma\,x'_\sigma + x_{\overline{\sigma}}\,x'_{\overline{\sigma}}).$$
+  Tenemos el encaje
+  $$\Phi\colon \ZZ [\zeta_3] \hookrightarrow K_\RR \xrightarrow{\cong} \RR^2$$
+  dado por
+  \[ 1 \mapsto (1, 0), \quad
+     \zeta_3 \mapsto (\Re \zeta_3, \Im \zeta_3). \]
+
+  Ahora el volumen del retículo correspondiente será
+  \[ \left|\det \begin{pmatrix}
+    \langle \Phi (1), \Phi (1) \rangle & \langle \Phi (1), \Phi (\zeta_3) \rangle \\
+    \langle \Phi (\zeta_3), \Phi (1) \rangle & \langle \Phi (\zeta_3), \Phi (\zeta_3) \rangle \\
+  \end{pmatrix}\right|^{1/2} =
+  \left|\det \begin{pmatrix}
+    2 & 2 \Re \zeta_3 \\
+    2 \Re \zeta_3 & 2\cdot |\zeta_3|^2
+  \end{pmatrix}\right|^{1/2} = \sqrt{4 - 4\cdot \Re (\zeta_3)^2} = \sqrt{3}. \]
+  En este caso $\Delta_K = -3$.
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Cota de Minkowski}
+
+\begin{comentario}
+  Para ver el espacio $K_\RR$ de manera más explícita, sean
+  $\rho_1, \ldots, \rho_{r_1}\colon K \hookrightarrow \RR$
+  los encajes reales, y
+  $\sigma_1, \, \overline{\sigma_1}, \ldots, \sigma_{r_2}, \, \overline{\sigma_{r_2}} \colon K \hookrightarrow \CC$
+  los encajes complejos. Entonces,
+  $$K_\RR = \{ (z_\tau) \in K_\CC \mid z_\rho \in \RR, \, z_{\overline{\sigma}} = \overline{z}_\sigma \}.$$
+  Tenemos un isomorfismo de espacios $\RR$-vectoriales
+  \[ \phi\colon K_\RR \xrightarrow{\cong} \RR^{r_1 + 2 r_2}, \quad
+  (z_\tau)_\tau \mapsto (x_\tau)_\tau, \]
+  donde
+  \[ x_\rho = z_\rho, \quad
+  x_\sigma = \Re (z_\sigma), \quad
+  x_{\overline{\sigma}} = \Im (z_\sigma). \]
+
+  Un cálculo similar al de \ref{ejemplo:encaje-de-enteros-de-Eisenstein}
+  demuestra que el producto escalar correspondiente sobre $\RR^{r_1 + 2 r_2}$
+  viene dado por
+  $$\langle x,y\rangle = \sum_\tau n_\tau \, x_\tau \, y_\tau,$$
+  donde
+  \[ n_\tau = \begin{cases}
+    1, & \text{si }\tau\text{ es real},\\
+    2, & \text{si }\tau\text{ es complejo}.
+  \end{cases} \]
+  Este producto escalar define una medida sobre $\RR^{r_1 + 2r_2}$, respecto
+  a cual
+  $$\vol (X) = 2^{r_2}\cdot \vol_{Leb} (\phi (X)),$$
+  donde $\vol_{Leb}$ denota el volumen respecto a la medida de Lebesgue
+  habitual sobre $\RR^n$. A partir de ahora, cuando hablamos del volumen de un
+  subconjunto de $K_\RR$, vamos a entender esta medida inducida por el producto
+  escalar.
+\end{comentario}
+
+\begin{lema}
+  Para $t > 0$ el conjunto convexo simétrico
+  $$X_t = \{ (z_\tau) \in K_\RR \mid \sum_\tau |z_\tau| \le t \}$$
+  tiene volumen
+  $$\vol (X_t) = 2^{r_1}\,\pi^{r_2}\,\frac{t^n}{n!}.$$
+
+  \begin{proof}
+    Como vimos, tenemos $\vol (X_t) = 2^{r_2}\,\vol_{Leb} (\phi (X_t))$,
+    y el conjunto $\phi (X_t)$ en $\RR^{r_1 + 2r_2}$ con coordenadas
+    $(x_1, \ldots, x_{r_1}, \, y_1, z_1, \ldots, y_{r_2}, z_{r_2})$
+    es el conjunto definido por la desigualdad
+    $$|x_1| + \cdots + |x_{r_1}| + 2\sqrt{y_1^2 + z_1^2} + \cdots + 2\,\sqrt{y_{r_2} + z_{r_2}} \le t.$$
+    Pasando a las coordenadas polares $y_i = u_i \, \cos \theta_i$,
+    $z_i = u_i \, \sen \theta_i$, tenemos
+    $$\vol_{Leb} (\phi (X_t)) = \int u_1 \cdots u_s\,dx_1 \cdots dx_{r_1}\,du_1 \cdots du_{r_2}\,d\theta_1 \cdots d \theta_{r_2},$$
+    donde la integración es sobre el dominio
+    \[ 0 \le \theta_i \le 2\pi, \quad u_i \ge 0, \quad
+       |x_1| + \cdots + |x_{r_1}| + 2u_1 + \cdots + 2u_{r_2} \le t. \]
+    Pasando a la integral sobre $x_i \ge 0$ y $2 u_i = w_i$,
+    $$\vol_{Leb} (\phi (X_t)) = 2^{r_1}\,4^{-r_2}\,(2\pi)^{r_2}\,I_{r_1,r_2} (t),$$
+    donde
+    $$I_{r_1,r_2} (t) = \int w_1 \cdots w_{r_2} \, dx_1\cdots d x_{r_1} d w_1\cdots d w_{r_2},$$
+    y la integral es sobre
+    \[ x_i \ge 0, \quad w_i \ge 0, \quad
+       x_1 + \cdots + x_{r_1} + w_1 + \cdots + w_{r_2} \le t. \]
+
+    Tenemos
+    $$I_{r_1,r_2} (t) = t^{r_1 + 2r_2} \, I_{r_1,r_2} (1) = t^n \, I_{r_1,r_2} (1).$$
+    Reescribiendo el dominio como
+    $$x_2 + \cdots + x_{r_1} + w_1 + \cdots + w_{r_2} \le t - x_1,$$
+    tenemos por el teorema de Fubini
+    $$I_{r_1, r_2} (1) = \int_0^1 I_{r_1-1,r_2} (1 - x_1)\,dx_1 = \int_0^1 (1 - x_1)^{n-1}\,dx_1 \cdot I_{r_1-1, r_2} (1) = \frac{1}{n}\,I_{r_1-1,r_2} (1),$$
+    y entonces por inducción
+    $$I_{r_1,r_2} = \frac{1}{n\,(n-1)\cdots (n - r_1 + 1)}\,I_{0,r_2} (1).$$
+    De la misma manera
+    $$I_{0,r_2} (1) = \int_0^1 w_1 \, (1-w_1)^{2r_2 - 2} \, dw_1 \, I_{0,r_2-1} (1),$$
+    de donde por inducción
+    $$I_{0,r_2} (1) = \frac{1}{(2r_2)!} \, I_{0,0} (1) = \frac{1}{(2r_2)!}.$$
+    Entonces,
+    $$I_{r_1, r_2} (1) = \frac{1}{n!},$$
+    así que
+    \[ \vol (X_t) = 2^{r_2} \cdot 2^{r_1}\,4^{-r_2}\,(2\pi)^{r_2}\,I_{r_1,r_2} (t) =
+       2^{r_1}\,\pi^{r_2}\,\frac{t^n}{n!}. \qedhere \]
+  \end{proof}
+\end{lema}
+
+\begin{teorema}[La cota de Minkowski]
+  \label{thm:cota-de-minkowski}
+  Dado un ideal no nulo $I \subseteq \O_K$, existe un elemento no nulo
+  $\alpha \in I$, tal que
+  $$|N_{K/\QQ} (\alpha)| \le M_K\cdot N_{K/\QQ} (I),$$
+  donde
+  $$M_K = \frac{n!}{n^n} \, \left(\frac{4}{\pi}\right)^{r_2} \, \sqrt{|\Delta_K|}$$
+  es una constante que depende solamente de $K$, llamada la
+  \textbf{cota de Minkowski}.
+
+  \begin{proof}
+    Consideremos el retículo $\Lambda = \Phi (I) \subset K_\RR$, y el conjunto
+    convexo simétrico compacto $X_t \subset K_\RR$ del lema anterior, escogiendo
+    $t$ tal que
+    $$\vol (X_t) = 2^n \, \covol \Lambda;$$
+    es decir,
+    \[ 2^{r_1}\,\pi^{r_2}\,\frac{t^n}{n!} = 2^n\,\sqrt{|\Delta_K|} \cdot N_{K/\QQ} (I)
+       \iff
+       t^n = n!\,\left(\frac{4}{\pi}\right)^{r_2}\,\sqrt{|\Delta_K|}\cdot N_{K/\QQ} (I). \]
+    En este caso $X_t \cap \Phi (I) \ne \{ 0 \}$; es decir, existe un elemento
+    no nulo $\alpha \in I$ tal que $\Phi (\alpha) \in X_t$. (Basta tomar la igualdad
+    $\vol (X_t) = 2^n \, \covol \Lambda$ porque $X_t$ es compacto.) Notamos que
+    $$|N_{K/\QQ} (\alpha)| = \prod_\tau |\tau (\alpha)|,$$
+    y tenemos la desigualdad entre la media aritmética y geométrica
+    $$\frac{1}{n} \prod_\tau |\tau (\alpha)| \ge \left(\prod_\tau |\tau (\alpha)|\right)^{1/n}.$$
+
+    De aquí
+    \[ |N_{K/\QQ} (\alpha)| = \prod_\tau |\tau (\alpha)| \le \frac{1}{n^n} \sum_\tau |\tau (\alpha)| \le \frac{t^n}{n^n} = \frac{n!}{n^n}\,\left(\frac{4}{\pi}\right)^{r_2}\,\sqrt{|\Delta_K|}\cdot N_{K/\QQ} (I). \qedhere \]
+  \end{proof}
+\end{teorema}
+
+En particular, si en \ref{thm:cota-de-minkowski} tomamos $I = \O_K$, entonces se
+obtiene la desigualdad $1 \le |N_{K/\QQ} (\alpha)| \le M_K$, que puede ser
+escrita como
+\[ |\Delta_K| \ge \left(\frac{n^n}{n!}\right)^2 \, \left(\frac{\pi}{4}\right)^{2r_2}
+              \ge \left(\frac{n^n}{n!}\right)^2 \, \left(\frac{\pi}{4}\right)^n. \]
+Esta es una cota inferior para el discriminante en términos del grado de la
+extensión $n = [K : \QQ]$. No es difícil verificar que la función de $n$ que
+está a la derecha es creciente. (¡Ejercicio!) Para $n = 1$ a la derecha está
+$\frac{\pi}{4}$, y para $n = 2$ tenemos $\frac{\pi^2}{4}$ que es mayor que $1$,
+así que $|\Delta_K| > 1$ para $n > 1$.  Esto establece el siguiente resultado.
+
+\begin{teorema}[Minkowski]
+  Si $K/\QQ$ es una extensión no trivial, entonces $|\Delta_K| > 1$.
+  En particular, en $K$ necesariamente se ramifican algunos primos.
+\end{teorema}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Finitud del grupo de clases}
+
+Ocupando la cota de Minkowski \ref{thm:cota-de-minkowski}, no es difícil deducir
+la finitud del grupo de clases.
+$$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
+
+\begin{lema}
+  Para todo $C > 0$ hay un número finito de ideales $I \subseteq \O_K$ tales que
+  $N_{K/\QQ} (I) \le C$.
+
+  \begin{proof}
+    Primero, si $I = \mathfrak{p}$ es un ideal primo, entonces
+    $N_{K/\QQ} (\mathfrak{p}) = p^f$, donde $p$ es un primo tal que
+    $\mathfrak{p}\cap\ZZ = p\ZZ$. Para todo primo racional $p$ hay un número
+    finito de ideales primos $\mathfrak{p} \subset \O_K$ tales que
+    $\mathfrak{p}\cap\ZZ = p\ZZ$ (es decir, $\mathfrak{p} \mid p$), y de estas
+    consideraciones se ve que la afirmación es cierta para ideales primos.
+
+    En general, todo ideal no nulo $I \subset \O_K$ se factoriza de alguna
+    manera en ideales primos:
+    $I = \mathfrak{p}_1^{e_1}\cdots \mathfrak{p}_s^{e_s}$, y luego
+    $$N_{K/\QQ} (I) = N_{K/\QQ} (\mathfrak{p}_1)^{e_1}\cdots N_{K/\QQ} (\mathfrak{p}_s)^{e_s}.$$
+
+    De esta manera se ve que para encontrar los ideales de norma $\le C$,
+    podemos considerar los primos racionales $p \le C$ y los ideales primos
+    correspondientes $\mathfrak{p} \mid p$ con $N_{K/\QQ} (\mathfrak{p}) \le C$,
+    y luego considerar diferentes productos de estos ideales $\mathfrak{p}$.
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  Para todo elemento $[I] \in \Cl (K)$ existe un ideal entero $J \subseteq \O_K$
+  tal que $[I] = [J]$ y $N_{K/\QQ} (J) \le M_K$, donde $M_K$ es la cota de
+  Minkowski.
+
+  \begin{proof}
+    Consideremos un elemento $[I] \in \Cl (K)$ representado por un $\O_K$-ideal
+    fraccionario no nulo $I \subseteq K$. En este caso existe el ideal
+    fraccionario inverso $I^{-1}$, y para algún $\beta \in \O_K$ se tiene
+    $$\beta I^{-1} \subseteq \O_K.$$
+    Según el teorema \ref{thm:cota-de-minkowski}, existe entonces un elemento no
+    nulo $\alpha \in \beta I^{-1}$ tal que
+    $$|N_{K/\QQ} (\alpha)| \le M_K\cdot N_{K/\QQ} (\beta I^{-1}).$$
+    Notamos que
+    $\alpha \beta^{-1} I \subseteq (\beta I^{-1})\,(\beta^{-1} I) = \O_K$, así
+    que el ideal $\alpha \beta^{-1} I$ es entero. Además,
+    $[I] = [\alpha \beta^{-1} I]$ en el grupo de clases. La desigualdad de
+    arriba nos dice que
+    \[ N_{K/\QQ} (\alpha \beta^{-1} I) \le M_K. \qedhere \]
+  \end{proof}
+\end{lema}
+
+\begin{teorema}
+  El grupo $\Cl (K)$ es finito.
+
+  \begin{proof}
+    Hemos probado que cualquier elemento $[I] \in \Cl (K)$ puede ser
+    representado por un ideal entero $J \subseteq \O_K$ tal que $[J] = [I]$ y
+    $N_{K/\QQ} (J) \le M_K$. Aquí la constante $M_K$ depende solamente de $K$,
+    así que hay un número finito de ideales $J$.
+  \end{proof}
+\end{teorema}
+
+\begin{ejemplo}
+  Consideremos los campos cuadráticos imaginarios $K = \QQ (\sqrt{d})$, donde
+  $d < 0$. En este caso $n = 2$ y $r_2 = 1$, así que la cota de Minkowski será
+  $M_K = \frac{2}{\pi}\,\sqrt{|\Delta_K|}$.
+
+  \begin{center}\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rx{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}}
+      \hline
+      $d\colon$ & $-1$ & $-2$ & $-3$ & $-5$ & $-6$ & $-7$ & $-10$ & $-11$ & $-13$ & $-14$ \tabularnewline
+      \hline
+      $\Delta_{\QQ (\sqrt{d})}\colon$ & $-4$ & $-8$ & $-3$ & $-20$ & $-24$ & $-7$ & $-40$ & $-11$ & $-52$ & $-56$ \tabularnewline
+      \hline
+      $M_{\QQ (\sqrt{d})}\colon$ & $1.27$ & $1.80$ & $1.10$ & $2.85$ & $3.12$ & $1.68$ & $4.03$ & $2.11$ & $4.59$ & $4.76$ \tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \vspace{1em}
+
+  \begin{itemize}
+  \item Si $M_K < 2$, esto implica que $\Cl (K) = 0$. De esta manera sabemos que
+    los campos
+    $$\QQ (i), ~ \QQ (\sqrt{-2}), ~ \QQ (\sqrt{-3}), ~ \QQ (\sqrt{-7})$$
+    tienen el grupo de clases trivial. Esto no es algo nuevo: ya sabemos que los
+    anillos de enteros correspondientes
+    \[ \ZZ [i], ~
+       \ZZ [\sqrt{-2}], ~
+       \ZZ \Bigl[\frac{1+\sqrt{-3}}{2}\Bigr], ~
+       \ZZ \Bigl[\frac{1+\sqrt{-7}}{2}\Bigr] \]
+    son dominios euclidianos.
+
+  \item El anillo de enteros de $\QQ (\sqrt{-11})$ es
+    $\ZZ \Bigl[\frac{1+\sqrt{-11}}{2}\Bigr]$ y es también un dominio euclidiano.
+
+    La cota de Minkowski en este caso es $M_K = 2.11$. El primo $p = 2$ es
+    inerte en $\QQ (\sqrt{-11})$, así que no hay ideales de norma $2$. Esto nos
+    da otra prueba de que $\QQ (\sqrt{-11})$ tiene el grupo de clases trivial.
+
+  \item Consideremos el campo $K = \QQ (\sqrt{-5})$. En este caso $M_K = 2.85$
+    nos dice que todo elemento en $\Cl (K)$ puede ser representado por un ideal
+    entero de norma $1$ o $2$. El único ideal de norma $2$ es el ideal primo que
+    está arriba de $p = 2$:
+    $$2\O_K = \mathfrak{p}^2, \quad \mathfrak{p} = (2, 1 + \sqrt{-5}).$$
+
+    Afirmamos que el ideal $\mathfrak{p}$ no es principal: en el caso contrario
+    tendríamos $\mathfrak{p} = (\alpha)$ para algún $\alpha \in \O_K$,
+    y luego $N_{K/\QQ} (\mathfrak{p}) = |N_{K/\QQ} (\alpha)|$. Sin embargo,
+    $N_{K/\QQ} (\mathfrak{p}) = 2$, mientras que
+    $N_{K/\QQ} (\alpha) = a^2 + 5b^2 \ne 2$.
+
+    Entonces, $[\mathfrak{p}]$ es el único elemento no trivial del grupo de
+    clases, y podemos concluir que $\Cl (K) \cong \ZZ/2\ZZ$.
+
+  \item En el caso de $K = \QQ (\sqrt{-6})$ tenemos que examinar los ideales de
+    norma $2$ y $3$. Estos son
+    $$\mathfrak{p}_2 = (2, \sqrt{-6}), \quad \mathfrak{p}_3 = (3, \sqrt{-6}).$$
+    Calculamos que
+    \[ \mathfrak{p}_2^2 = 2\O_K, \quad
+       \mathfrak{p}_3^2 = 3\O_K, \quad
+       \mathfrak{p}_2\,\mathfrak{p}_3 = (\sqrt{-6}). \]
+    Esto implica que en el grupo de clases los elementos $[\mathfrak{p}_2]$
+    y $[\mathfrak{p}_3]$ tienen orden $2$, y además
+    $[\mathfrak{p}_2]\cdot [\mathfrak{p}_3] = [\O_K]$ implica que    
+    $[\mathfrak{p}_2] = [\mathfrak{p}_3]$. Un argumento similar al de arriba
+    demuestra que ideal $\mathfrak{p}_2$ no es principal, así que
+    $\Cl (K) \cong \ZZ/2\ZZ$.
+
+  \item Para los campos $K = \QQ (\sqrt{-10}), \QQ (\sqrt{-13})$ de la misma
+    manera se puede ver que $\Cl (K) \cong \ZZ/2\ZZ$. Dejo los detalles como
+    un ejercicio.
+
+  \item En fin, consideremos $K = \QQ (\sqrt{-14})$. La cota de Minkowski es
+    $M_K = 4.76\ldots$, así que basta considerar los ideales primos arriba de $2$
+    y $3$. Estos son los siguientes:
+    $$\mathfrak{p}_2 = (2, \sqrt{-14}), \quad 2\O_K = \mathfrak{p}_2^2,$$
+    y
+    \[ \mathfrak{p}_3 = (3, 1 + \sqrt{-14}), \quad
+       \overline{\mathfrak{p}_3} = (3, 1 - \sqrt{-14}), \quad
+       3\O_K = \mathfrak{p}_3\,\overline{\mathfrak{p}_3}. \]
+
+    En el anillo $\ZZ [\sqrt{-14}]$ no hay elementos de norma $2$ y $3$, así que
+    los ideales $\mathfrak{p}_2, \mathfrak{p}_3, \overline{\mathfrak{p}_3}$ no
+    son principales.
+
+    Calculamos que
+    \[ \mathfrak{p}_3^2 = (9, 3 + \sqrt{-14}, -13 + 2\sqrt{-14}) =
+       (1 - \sqrt{-14}/2) \, \mathfrak{p}_2, \]
+    así que $[\mathfrak{p}_3]^2 = [\mathfrak{p}_2]$. Por otra parte,
+    $[\mathfrak{p}_3]^4 = [\mathfrak{p}_2]^2 = [\O_K]$. Entonces,
+    $[\mathfrak{p}_3]$ tiene orden $4$. Tenemos
+    $[\overline{\mathfrak{p}_3}] = [\mathfrak{p}_3]^{-1} = [\mathfrak{p}_3]^3$.
+    Podemos concluir que $\Cl (K) \cong \ZZ/4\ZZ$. \qedhere
+  \end{itemize}
+\end{ejemplo}
+
+\begin{ejemplo}
+  Consideremos los siguientes campos cuadráticos imaginarios:
+
+  \begin{center}\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rx{2cm}x{2cm}x{2cm}x{2cm}}
+      \hline
+      $d\colon$ & $-19$ & $-43$ & $-67$ & $-163$ \tabularnewline
+      \hline
+      $\Delta_{\QQ (\sqrt{d})}\colon$ & $-19$ & $-43$ & $-67$ & $-163$ \tabularnewline
+      \hline
+      $M_{\QQ (\sqrt{d})}\colon$ & $2.77$ & $4.17$ & $5.21$ & $8.12$ \tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \begin{itemize}
+  \item En $K = \QQ (\sqrt{-19})$ el primo $p = 2$ es inerte, así que en $\O_K$
+    no hay ideales no triviales de norma $\le M_K$. Podemos concluir que
+    $\Cl (K) = 0$.
+
+  \item En $K = \QQ (\sqrt{-43})$ los primos $p = 2, 3$ son inertes, así que los
+    ideales de norma $\le M_K$ serán $I = \O_K, 2\O_K$. Son principales, así que
+    $\Cl (K) = 0$.
+
+  \item En $K = \QQ (\sqrt{-67})$ los primos $p = 2,3,5$ son inertes, y de la
+    misma manera esto implica que $\Cl (K) = 0$.
+
+  \item En $K = \QQ (\sqrt{-163})$ los ideales $p = 2,3,5,7$ son inertes,
+    de donde de nuevo se deduce que $\Cl (K) = 0$. \qedhere
+  \end{itemize}
+\end{ejemplo}
+
+\begin{comentario}
+  Los cálculos de arriba nos dicen que
+  \[ \Cl (\QQ (\sqrt{d})) = 0
+     \quad\text{para}\quad
+     d = -1, -2, -3, -7, -11, -19, -43, -67, -163.\]
+
+  De hecho, estos son los únicos campos cuadráticos imaginarios con el grupo de
+  clases trivial. Esto fue conjeturado por Gauss y probado por Kurt Heegner y
+  Harold Stark. La prueba de Heegner fue publicada en 1952, pero contenía
+  menores omisiones y no fue aceptada hasta que Stark dio una prueba completa en
+  1967. Otra prueba diferente fue publicada por Alan Baker en 1966 y reducía el
+  problema a un cálculo finito.
+
+  Heegner falleció en 1965, antes de que su trabajo fue reconocido por
+  la comunidad matemática\dots
+\end{comentario}
+
+\begin{ejemplo}
+  Consideremos el campo ciclotómico $K = \QQ (\zeta_7)$. En este caso
+  $n = 6$, $r_2 = 3$, y $\Delta_K = -7^5$, así que la cota de Minkowski
+  viene dada por
+  $$M_K = \frac{6!}{6^6} \, \left(\frac{4}{\pi}\right)^3 \, 7^{5/2} = 4.12\ldots$$
+  En este caso el orden de $p = 2$ mód $7$ es igual a $f = 3$, así que
+  $$2\O_K = \mathfrak{p}_2 \, \mathfrak{p}_2'.$$
+  Por otra parte, el orden de $p = 3$ mód $7$ es igual a $f = 6$, lo que
+  significa que $p = 3$ es inerte en $K$.
+
+  Factorizando el polinomio ciclotómico mód $2$ se obtiene
+  $$\Phi_7 \equiv (x^3 + x + 1)\,(x^3 + x^2 + 1) \pmod{2}.$$
+  Entonces,
+  \[ \mathfrak{p}_2 = (2, 1 + \zeta_7 + \zeta_7^3), \quad
+     \mathfrak{p}_2' = (2, 1 + \zeta_7^2 + \zeta_7^3). \]
+  Afirmamos que estos ideales son principales. En efecto,
+  $$(1 + \zeta_7 + \zeta_7^3)\,(1 + \zeta_7^2 + \zeta_7^3) = 2\zeta_7^3,$$
+  así que
+  \[ \mathfrak{p}_2 = (1 + \zeta_7 + \zeta_7^3), \quad
+     \mathfrak{p}_2' = (1 + \zeta_7^2 + \zeta_7^3). \]
+  Esto demuestra que $\Cl (K) = 0$.
+\end{ejemplo}
+
+\begin{comentario}
+  En general, los cálculos con la cota de Minkowski no son muy prácticos para
+  hacerlos a mano. Por ejemplo, el primer campo ciclotómico con el grupo de
+  clases no trivial es $K = \QQ (\zeta_{23})$, donde
+  $\Cl (K) \cong \ZZ/3\ZZ$. Las cotas de Minkowski para los campos ciclotómicos
+  son las siguientes.
+
+  \begin{center}\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rccccccccccc}
+      \hline
+      $K\colon$ & $\QQ (\zeta_3)$ & $\QQ (\zeta_4)$ & $\QQ (\zeta_5)$ & $\QQ (\zeta_7)$ & $\QQ (\zeta_8)$ & $\QQ (\zeta_9)$ & $\QQ (\zeta_{11})$ & $\QQ (\zeta_{12})$ & $\QQ (\zeta_{13})$ & $\cdots$ & $\QQ (\zeta_{23})$ \tabularnewline
+      \hline
+      $M_K\colon$ & $1.10$ & $1.27$ & $1.70$ & $4.13$ & $2.43$ & $4.47$ & $58.96$ & $1.82$ & $306.42$ & $\cdots$ & $9324406.48$ \tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+\end{comentario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Teorema de Hermite}
+
+**TODO**
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Ecuación de Pell}
+
+Antes de probar el teorema de unidades de Dirichlet, vamos a ver su caso
+particular relacionado con los campos cuadráticos reales.
+
+\begin{teorema}
+  \label{thm:pell-minkowski}
+  Sea $d > 1$ un entero libre de cuadrados. La ecuación
+  $$x^2 - dy^2 = 1$$
+  tiene una solución entera distinta de $(\pm 1, 0)$.
+
+  \begin{proof}
+    Consideremos el campo de números $K = \QQ (\sqrt{d})$. Nuestra ecuación
+    puede ser interpretada como
+    $$N_{K/\QQ} (x + y\sqrt{d}) = 1.$$
+    Vamos a encajar el anillo de números $\ZZ [\sqrt{d}]$ como un retículo
+    $\Lambda$ en $\RR^2$ mediante
+    $$a + b\sqrt{d} \mapsto (a + b\sqrt{d}, a - b\sqrt{d}).$$
+    Respecto a este encaje, las soluciones que nos interesan son los puntos
+    del retículo $\Lambda$ en la hipérbola $xy = 1$. Sea $X$ un conjunto
+    convexo simétrico suficientemente grande para que
+    $X \cap \Lambda \ne \{ 0 \}$. Según el teorema de Minkowski, hay que
+    tomar $X$ tal que $\vol X > 4 \covol \Lambda$.
+
+    Ahora para todo $\lambda > 0$ podemos considerar el conjunto
+    $X_\lambda = (\lambda, \lambda^{-1})\,X$. Este tiene el mismo volumen que
+    $X$, así que $X_\lambda \cap \Lambda \ne \{ 0 \}$
+    (véase la figura~\ref{fig:pell-minkowski})
+
+    De esta manera para todo $\lambda > 0$ se obtiene un elemento
+    $\alpha_\lambda \in \ZZ [\sqrt{d}]$. Los puntos que corresponden a
+    $X \cap \Lambda$ tienen norma acotada, y la transformación
+    $(\lambda, \lambda^{-1})$ preserva la cota sobre la norma. Entonces,
+    tenemos $|N_{K/\QQ} (\alpha_\lambda)| \le C$ para todo $\alpha_\lambda$.
+    Hay un número finito de ideales de norma acotada, así que existen
+    $\lambda \ne \lambda'$ tales que $(\alpha_\lambda) = (\alpha_{\lambda'})$
+    y $\alpha_\lambda \ne \pm\alpha_{\lambda'}$. En este caso
+    $u = \alpha_\lambda/\alpha_{\lambda'}$ es una unidad en el anillo
+    $\ZZ [\sqrt{d}]$ distinta de $\pm 1$. Tenemos $N_{K/\QQ} (u) = \pm 1$.
+    Si $N_{K/\QQ} (u) = -1$, entonces $N_{K/\QQ} (u^2) = +1$. De esta manera
+    se obtiene una solución no trivial de la ecuación de Pell.
+  \end{proof}
+\end{teorema}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{pic/pell-minkowski.pdf}
+  \end{center}
+
+  \caption{Argumento de \ref{thm:pell-minkowski}}
+  \label{fig:pell-minkowski}
+\end{figure}
+
+\begin{corolario}
+  El grupo de unidades $\ZZ [\sqrt{d}]^\times$ es infinito.
+
+  \begin{proof}
+    Hemos encontrado una unidad $u \in \ZZ [\sqrt{d}]^\times$ distinta de
+    $\pm 1$, y luego $u^n$ para $n \in \ZZ$ son distintas unidades.
+  \end{proof}
+\end{corolario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Teorema de unidades de Dirichlet}
+
+**TODO**

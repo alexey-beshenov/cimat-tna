@@ -1,0 +1,19 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{calc}
+
+\usepackage{mathspec}
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\begin{document}
+\begin{tikzpicture}[x=0.75cm,y=0.75cm]
+\fill[blue!30] (0,0) circle (1.6);
+
+\foreach \i in {-3, ..., 3}
+  \foreach \j in {-3, ..., 3}
+    \draw (\i,\j) node[circle,fill,inner sep=1pt] {};
+
+\draw (0,0) node[below] {$0$};
+\end{tikzpicture}
+\end{document}
