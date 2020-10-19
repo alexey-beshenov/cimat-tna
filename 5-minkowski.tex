@@ -1,5 +1,8 @@
 \chapter{Teoría de Minkowski}
 
+\pdfbookmark{Clase 19 (19/10/20)}{clase-19}
+\marginpar{\small Clase 19 \\ 19/10/20}
+
 El objetivo de este capítulo es probar los siguientes teoremas.
 
 \begin{enumerate}
@@ -29,7 +32,12 @@ El objetivo de este capítulo es probar los siguientes teoremas.
 \end{enumerate}
 
 La herramienta principal en las pruebas será el teorema de Minkowski sobre
-puntos de retículos en conjuntos convexos simétricos.
+puntos de retículos en conjuntos convexos simétricos. El término clásico para
+los resultados de Minkowski es «geometría de números»
+(\emph{Geometrie der Zahlen}), pero hoy en día el punto de vista geométrico a
+la teoría de números está contenido más bien en la teoría de esquemas (véase por
+ejemplo \cite{Eisenbud-Harris} y \cite{Gortz-Wedhorn}). Por esto un nombre más
+adecuado para este capítulo sería «teoría de Minkowski».
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -46,6 +54,20 @@ puntos de retículos en conjuntos convexos simétricos.
   $$\Pi = \Bigl\{ \sum_i \lambda_i\,\omega_i \Bigm| 0 \le \lambda_i < 1 \Bigr\}$$
   se llama un \textbf{dominio fundamental} de $\Lambda$.
 \end{definicion}
+
+\begin{comentario}
+  Si $\Lambda$ tiene rango completo, entonces $V$ puede ser recubierto por el
+  dominio fundamental $\Pi$ trasladado por los elementos de $\Lambda$:
+  $$V = \bigsqcup_{\omega \in \Lambda} \Pi + \omega.$$
+  Esta unión es disjunta. El dominio fundamental se identifica con el cociente
+  $V/\Lambda$.
+\end{comentario}
+
+\begin{comentario}
+  Vamos a considerar $V$ como un espacio vectorial topológico, dotado de la
+  topología real estándar. Para las aplicaciones que nos interesan, se puede
+  pensar que $V = \RR^n$.
+\end{comentario}
 
 \begin{ejemplo}
   Consideremos los enteros de Eisenstein
@@ -71,8 +93,7 @@ puntos de retículos en conjuntos convexos simétricos.
 
   \begin{proof}
     Si $\Lambda = \ZZ\,\omega_1 + \cdots + \ZZ\,\omega_n$ tiene rango completo,
-    entonces podemos tomar como $X$ el dominio fundamental $\Pi$. De una vez
-    notamos que la unión $\bigcup_{\omega \in \Lambda} \Pi + \omega$ es disjunta.
+    entonces podemos tomar como $X$ el dominio fundamental $\Pi$.
 
     Viceversa, si existe un conjunto acotado $X$ tal que se cumple
     (*), denotemos por $V_0$ el subespacio vectorial generado por los elementos
@@ -198,16 +219,14 @@ del palomar.
   \end{center}
 
   Dejo como un ejercicio probar que si $X$ es compacto, entonces también
-  funcionaría la desigualdad
-  $$\vol (X) \ge 2^n \, \covol \Lambda.$$
+  funcionaría $\vol (X) = 2^n \, \covol \Lambda$.
 \end{comentario}
 
 Para demostrar el teorema, necesitamos el siguiente resultado auxiliar.
 
 \begin{lema}[{Blichfeldt\footnote{Hans Frederick Blichfeldt (1873--1945), matemático danés.}}]
-  Dado un conjunto convexo\footnote{O en general cualquier conjunto medible.}
-  $X\subset V$ tal que $\vol X > \covol \Lambda$, existen dos
-  diferentes puntos $x,x'\in X$ tales que $x-x'\in \Lambda$.
+  Dado un conjunto medible $X\subset V$ tal que $\vol X > \covol \Lambda$,
+  existen dos diferentes puntos $x,x'\in X$ tales que $x-x'\in \Lambda$.
 
   \begin{proof}
     Puesto que
@@ -216,10 +235,9 @@ Para demostrar el teorema, necesitamos el siguiente resultado auxiliar.
     $$X = \bigsqcup_{\omega\in \Lambda} X \cap (\Pi + \omega),$$
     así que
     $$\vol X = \sum_{\omega\in \Lambda} \vol (X \cap (\Pi + \omega)) = \sum_{\omega\in \Lambda} \vol ((X-\omega) \cap \Pi).$$
-    Por nuestra hipótesis, $\vol X > \vol \Pi$, de donde los conjuntos
-    $$(X-\omega) \cap \Pi \subseteq \Pi \quad (\omega\in\Lambda)$$
-    no pueden ser disjuntos, luego existen
-    $\omega, \omega'\in \Lambda$ tales que
+    Aquí los conjuntos $(X-\omega) \cap \Pi$ están en el dominio fundamental
+    $\Pi$, y por nuestra hipótesis $\vol X > \vol \Pi$, así que podemos
+    deducir que existen $\omega, \omega'\in \Lambda$ tales que
     $$(X-\omega) \cap (X-\omega') \ne \emptyset.$$
     Tomando $y \in (X-\omega) \cap (X-\omega')$, se obtiene
     \[ x = y + \omega, \quad x' = y + \omega' \in X, \quad
@@ -227,8 +245,15 @@ Para demostrar el teorema, necesitamos el siguiente resultado auxiliar.
   \end{proof}
 \end{lema}
 
-Ahora estamos listos para demostrar el teorema de Minkowski. Consideremos el
-conjunto
+Notamos que en realidad el lema no usa la covexidad de $X$ y se aplica a
+cualquier conjunto medible, pero en particular, los conjuntos convexos son
+medibles.
+
+\vspace{1em}
+
+Ahora estamos listos para demostrar el teorema de Minkowski, y aquí será
+importante la hipótesis de que $X$ es convexo y simétrico. Consideremos
+el conjunto
 $$\frac{1}{2}\,X = \Bigl\{ \frac{1}{2}\,x \Bigm| x \in X \Bigr\}.$$
 Tenemos
 $$\vol \left(\frac{1}{2}\,X\right) = \frac{1}{2^n} \vol X > \covol \Lambda,$$
@@ -273,17 +298,38 @@ cuando $n = p$ es un número primo.
 
 \begin{comentario}
   He aquí una breve explicación. La identidad para las sumas de dos cuadrados
-  $$(a^2 + b^2)\,(x^2 + y^2) = (ax + by)^2 + (ay + bx)^2$$
+  $$(a^2 + b^2)\,(x^2 + y^2) = (ax - by)^2 + (ay + bx)^2$$
   se sigue de la fórmula $N (\alpha\beta) = N (\alpha)\,N (\beta)$
   para la norma $N (\alpha) = \alpha\,\overline{\alpha}$ sobre los enteros de
   Gauss $\ZZ [i]$.
 
-  De la misma manera, sobre el \textbf{álgebra de cuaterniones} con coeficientes
-  en $\ZZ$ podemos definir el conjugado de $\alpha = a + bi + cj + dk$
-  mediante $\overline{\alpha} = a - bi - cj - dk$, y luego
-  $\overline{\alpha\beta} = \overline{\alpha}\,\overline{\beta}$, y la norma
-  $N (\alpha) = \alpha\,\overline{\alpha} = a^2 + b^2 + c^2 + d^2$ es también
-  multiplicativa: $N (\alpha\beta) = N (\alpha) \, N (\beta)$.
+  De la misma manera, podemos considerar el \textbf{álgebra de cuaterniones} con
+  coeficientes en $\ZZ$:
+  $$\mathbb{H} (\ZZ) = \{ a + bi + cj + dk \mid a,b,c,d \in \ZZ \},$$
+  donde la multiplicación está definida por
+  \begin{gather*}
+    i^2 = j^2 = k^2 = -1,\\
+    ij = k, ~ ji = -k, \\
+    jk = i, ~ kj = -i, \\
+    ki = j, ~ ik = -j.
+  \end{gather*}
+  De manera más concreta, tenemos una representación fiel del álgebra de
+  cuaterniones $\mathbb{H} (\ZZ)$ por las matrices $M_2 (\ZZ [i])$ dada por
+  \[ (a + bi + cj + dk) \mapsto \begin{pmatrix}
+    a + bi & c + di \\
+    -c + di & a - bi
+  \end{pmatrix}. \]
+
+  Podemos definir el conjugado de $\alpha = a + bi + cj + dk$ mediante
+  $$\overline{\alpha} = a - bi - cj - dk.$$
+  La norma se define como
+  $$N (\alpha) = \alpha\,\overline{\alpha} = a^2 + b^2 + c^2 + d^2,$$
+  o en términos de matrices,
+  \[ \det \begin{pmatrix}
+    a + bi & c + di \\
+    -c + di & a - bi
+  \end{pmatrix} =  a^2 + b^2 + c^2 + d^2. \]
+  La norma es multiplicativa: $N (\alpha\beta) = N (\alpha) \, N (\beta)$.
 \end{comentario}
 
 \begin{lema}
@@ -303,7 +349,7 @@ $V = \RR^4$:
    \omega_4 = (0,0,0,p). \]
 Consideremos el producto escalar estándar sobre $\RR^4$, y para un vector
 $v = \sum_i a_i \, e_i$ pongamos
-$\|v\| = \langle v,v\rangle = \sum_i a_i^2$. Calculando el determinante
+$\|v\|^2 = \langle v,v\rangle = \sum_i a_i^2$. Calculando el determinante
 correspondiente, es fácil verificar que los $\omega_i$ generan un retículo de
 rango completo
 $$\Lambda = \ZZ\,\omega_1 + \ZZ\,\omega_2 + \ZZ\,\omega_3 + \ZZ\,\omega_4 \subset \RR^4,$$
@@ -345,8 +391,19 @@ $$0 < \|\omega\|^2 < 2p, \quad p \mid \|\omega\|^2$$
 podemos concluir que $\|\omega\|^2 = p$. Esto nos da una representación de $p$
 como una suma de cuatro cuadrados. \qed
 
+\vspace{1em}
+
+Cabe mencionar que la representación de números enteros por sumas de cuadrados
+es un problema clásico relacionado con mucha teoría de números profunda. Véase
+por ejemplo el libro \cite{Grosswald-1985}.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\vspace{1em}
+
+\noindent\emph{Continuará\dots}
+
+\iffalse
 \section{Anillo de enteros como un retículo}
 
 Sea $K/\QQ$ un campo de números. Este tiene $n = [K:\QQ]$ encajes
@@ -943,3 +1000,34 @@ particular relacionado con los campos cuadráticos reales.
 \section{Teorema de unidades de Dirichlet}
 
 **TODO**
+
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\phantomsection
+
+\addcontentsline{toc}{section}{Ejercicios}
+\section*{Ejercicios}
+
+\begin{ejercicio}
+  Demuestre que si $G$ es un grupo topológico Hausdorff, entonces todo subgrupo
+  discreto $H \subset G$ es cerrado.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Demuestre directamente que $\ZZ [\sqrt{2}]$ no es un subgrupo discreto de
+  $\RR$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Demuestre que si $X$ es un conjunto convexo simétrico compacto tal que
+  $\vol X = 2^n\cdot \covol \Lambda$, entonces $X \cap \Lambda \ne \{ 0 \}$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Demuestre que para todo primo $p$ existen $m,n \in \ZZ$ tales que
+  $m^2 + n^2 + 1 \equiv 0 \pmod{p}$.
+\end{ejercicio}
