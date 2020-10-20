@@ -8,16 +8,16 @@ El objetivo de este capítulo es probar los siguientes teoremas.
 \begin{enumerate}
 \item[1)] Para una extensión no trivial $K/\QQ$ se tiene $|\Delta_K| > 1$.
 
-\item[2)] Dado un campo de números $K/\QQ$, el grupo de clases
+\item[2)] \textbf{Teorema de Hermite}: para $C$ fijo, existe un número finito de
+  campos de números $K/\QQ$, salvo isomorfismo, con discriminante
+  $|\Delta_K| < C$.
+
+\item[3)] Dado un campo de números $K/\QQ$, el grupo de clases
   $\Cl (K) = \Pic (\O_K)$ es finito.
 
   Este resultado es bastante sutil y no se sigue del álgebra conmutativa:
   si en lugar de $\O_K$ se toma otro dominio de Dedekind $R$, el grupo
   $\Pic (R)$ ya no tiene por qué ser finito.
-
-\item[3)] \textbf{Teorema de Hermite}: para $C$ fijo, existe un número finito de
-  campos de números $K/\QQ$, salvo isomorfismo, con discriminante
-  $|\Delta_K| < C$.
 
 \item[4)] \textbf{Teorema de unidades de Dirichlet}: el grupo $\O_K^\times$ es
   finitamente generado de rango $r_1 + r_2 - 1$, donde $r_1$ es el número de
@@ -45,7 +45,7 @@ adecuado para este capítulo sería «teoría de Minkowski».
 
 \begin{definicion}
   Sea $V$ un espacio vectorial real. Un \textbf{retículo} en $V$ es un subgrupo
-  abeliano $\Lambda \subset V$ de la forma
+  aditivo $\Lambda \subset V$ de la forma
   $$\Lambda = \ZZ\,\omega_1 + \cdots + \ZZ\,\omega_n,$$
   donde $\omega_1,\ldots,\omega_n \in V$ son vectores linealmente
   independientes. En este caso se dice que $\omega_1,\ldots,\omega_n$ es una
@@ -111,7 +111,7 @@ Aunque nuestra definición de retículos menciona explícitamente una $\ZZ$-base
 $\Lambda$, hay otra caracterización más canónica.
 
 \begin{lema}
-  Un subgrupo abeliano $\Lambda \subset V$ es un retículo si y solamente
+  Un subgrupo aditivo $\Lambda \subset V$ es un retículo si y solamente
   si $\Lambda$ es discreto.
 \end{lema}
 
@@ -193,8 +193,8 @@ suficientemente grande, entonces $X$ contiene otro punto de $\Lambda$ a parte de
 $0$. Este es el contenido del siguiente teorema.
 
 \begin{teorema}[{Minkowski\footnote{Hermann Minkowski (1864--1909)}}]
-  Sean $\Lambda \subset V$ un retículo y $X \subseteq V$ un conjunto convexo
-  simétrico tal que
+  Sean $\Lambda \subset V$ un retículo de rango completo y $X \subseteq V$
+  un conjunto convexo simétrico tal que
   $$\vol X > 2^n\,\covol \Lambda.$$
   Entonces, $X$ contiene un punto no nulo de $\Lambda$.
 \end{teorema}
@@ -399,12 +399,9 @@ por ejemplo el libro \cite{Grosswald-1985}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\vspace{1em}
-
-\noindent\emph{Continuará\dots}
-
-\iffalse
+\pdfbookmark{Clase 20 (21/10/20)}{clase-20}
 \section{Anillo de enteros como un retículo}
+\marginpar{\small Clase 20 \\ 21/10/20}
 
 Sea $K/\QQ$ un campo de números. Este tiene $n = [K:\QQ]$ encajes
 $\tau\colon K\hookrightarrow \CC$, entre estos $r_1$ encajes reales
@@ -677,6 +674,125 @@ así que $|\Delta_K| > 1$ para $n > 1$.  Esto establece el siguiente resultado.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Teorema de Hermite}
+
+Ahora vamos a probar un teorema de Hermite que establece la finitud de campos de
+números de discriminante acotado. Empecemos por un resultado auxiliar.
+
+\begin{lema}
+  Para todo campo de números $K/\QQ$ existe $\alpha \in \O_K$ tal que
+  $K = \QQ (\alpha)$, y para cualquier encaje $\tau\colon K\hookrightarrow \CC$
+  se tiene $|\tau (\alpha)| \le C$, donde la constante $C$ depende solamente
+  del discriminante $\Delta_K$.
+
+  \begin{proof}
+    Consideremos dos casos diferentes.
+
+    \begin{enumerate}
+    \item[1)] Supongamos que $K$ tiene un encaje real
+      $\rho\colon K \hookrightarrow \RR$. En este caso para $t > 1$ definamos
+      el conjunto convexo simétrico
+      $$X_t = \{ (x_\tau)_\tau \in K_\RR \mid |x_\rho| < t, ~ |x_\tau| < 1\text{ para }\tau \ne \rho \}.$$
+
+    \item[2)] Si $K$ no tiene encajes reales, sean
+      $\sigma, \overline{\sigma}\colon K \hookrightarrow \CC$ un par de encajes
+      complejos conjugados. Definamos $X_t$ por las condiciones
+      $$x_\sigma, x_{\overline{\sigma}} \in (-1, +1) + (-t, +t)\,i \subseteq \CC$$
+      y
+      $$|x_\tau| < 1\text{ para }\tau \ne \sigma,\overline{\sigma}.$$
+    \end{enumerate}
+
+    En ambos casos, podemos tomar $t$ suficientemente grande de tal manera que
+    $\vol (X_t) > 2^n \, \sqrt{|\Delta_K|}$. El teorema de Minkowski entonces
+    implica que existe un elemento no nulo $\alpha \in \O_K$ tal que
+    $\Phi (\alpha) \in X_t$. Nos gustaría probar que $K = \QQ (\alpha)$.
+    Todo encaje $\QQ (\alpha) \hookrightarrow \CC$ se extiende a
+    $[K : \QQ (\alpha)]$ encajes $K \hookrightarrow \CC$. Entonces, sería
+    suficiente ver que para cualesquiera dos encajes
+    $\tau_1,\tau_2\colon K \hookrightarrow \CC$ se tiene
+    $\tau_1 (\alpha) \ne \tau_2 (\alpha)$. Dejo al lector revisar las
+    definiciones de $X_t$ de arriba y verificar que en cualquier caso
+    $\tau_1 (\alpha) = \tau_2 (\alpha)$ para $\tau_1 \ne \tau_2$ implicaría que
+    $|\tau (\alpha)| < 1$ para todo encaje $\tau\colon K\hookrightarrow \CC$,
+    y luego
+    $$|N_{K/\QQ} (\alpha)| = \prod_\tau |\tau (\alpha)| < 1.$$
+    Sin embargo, $|N_{K/\QQ} (\alpha)| \in \ZZ_{\ge 1}$, dado que $\alpha$ es
+    un entero algebraico no nulo.
+
+    Entonces, podemos concluir que $K = \QQ (\alpha)$. Por la defnición de
+    $X_t$, sabemos que los valores $|\tau (\alpha)|$ están acotados en términos
+    de $t$, y como consecuencia en términos de $\Delta_K$.
+  \end{proof}
+\end{lema}
+
+\begin{teorema}[Hermite]
+  Para todo $C > 0$, salvo isomorfismo, hay un número finito de campos de
+  números $K/\QQ$ con discriminante $|\Delta_K| < C$.
+
+  \begin{proof}
+    Primero, gracias a la cota de Minkowski, una cota sobre $|\Delta_K|$ implica
+    una cota sobre el grado $[K : \QQ]$. Sería suficiente entonces ver que para
+    todo grado fijo $n = [K : \QQ]$ existe un número finito de campos de números
+    de discriminante fijo $\Delta_K = \Delta$.
+
+    El lema anterior nos dice que $K = \QQ (\alpha)$, donde las raíces del
+    polinomio mínimo $f = f^\alpha_\QQ \in \ZZ [x]$ están acotadas en términos
+    de $\Delta$. Pero luego los coeficientes del polinomio mínimo pueden ser
+    acotados en términos de $\Delta$. El grado $n = \deg (f)$ está fijo, lo que
+    nos deja un número finito de posibilidades para $f$.
+  \end{proof}
+\end{teorema}
+
+Cabe mencionar que el argumento de arriba usa la teoría de Minkowski y es más
+reciente que los trabajos de Hermite. Para los detalles históricos (y qué
+exactamente fue probado por Hermite), véase
+\cite[Chapter~9]{Scharlau-Opolka-1985}.
+
+\begin{ejemplo}
+  Hay solamente dos campos cúbicos con $|\Delta_K| \le 100$. Estos están
+  definidos por los polinomios
+  \begin{center}
+    \begin{tabular}{ll}
+      $x^3 + x^2 - 2x - 1$ & ($\Delta_K = 49$) \\
+      $x^3 - 3x - 1$ & ($\Delta_K = 81$)
+    \end{tabular}
+  \end{center}
+
+  Por ejemplo, si aplicamos el lema de arriba a los campos cúbicos reales,
+  entonces
+  $$X_t = \{ (x_1,x_2,x_3) \in \RR^3 \mid |x_1| < t, \, |x_2|, |x_3| < 1 \}.$$
+  Para que se cumpla $\vol (X_t) > 2^3\cdot \sqrt{|\Delta_K|}$, basta tomar
+  $t > 80$. Tenemos entonces
+  $$f = (x - \alpha_1)\,(x - \alpha_2)\,(x - \alpha_3) \in \ZZ[x],$$
+  donde $\alpha_i$ son raíces reales con $|\alpha_i| < t$ y
+  $|\alpha_2|, |\alpha_3| < 1$. Despejando la expresión para $f$, se obtiene una
+  cota para los coeficientes. Esto reduce las consideraciones a un número finito
+  de polinomios (aunque no es un modo muy eficaz de hacer los cálculos).
+\end{ejemplo}
+
+\begin{comentario}[Densidad de discriminantes]
+  En general, si $N_n (C)$ es el número de campos de números $K/\QQ$
+  (salvo isomorfismo) de grado $n$ y $|\Delta_K| < C$, el comportamiento
+  asintótico de la «densidad» $N_n (C)/C$ con $C \to \infty$ es un objeto de
+  recientes estudios.
+
+  Por ejemplo, un teorema clásico de Davenport y Heilbronn (1971) dice que si
+  $N_n (C)/C$ tiende a $\frac{1}{12\,\zeta (3)} = 0.069325\dots$ si se
+  consideran los campos cúbicos reales ($r_1 = 3$, $r_2 = 0$, $\Delta_K > 0$)
+  y a $\frac{1}{4\,\zeta (3)} = 0.207976\dots$ si se consideran los campos
+  cúbicos complejos ($r_1 = r_2 = 1$, $\Delta_K < 0$).
+
+  El artículo \cite{Belabas-1997} está dedicado a un algoritmo eficaz para
+  enumerar los campos cúbicos de discriminante acotado; al final se encuentran
+  unas tablas de campos de discriminantes pequeños y su número para
+  $|\Delta_K| \le 10^{11}$.
+
+  Para los resultados más recientes, véanse por ejemplo los artículos
+  \cite{Bhargava-2005}, \cite{Bhargava-2010}, \cite{Belabas-Bhargava-Pomerance}.
+\end{comentario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Finitud del grupo de clases}
 
 Ocupando la cota de Minkowski \ref{thm:cota-de-minkowski}, no es difícil deducir
@@ -739,6 +855,10 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
     así que hay un número finito de ideales $J$.
   \end{proof}
 \end{teorema}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Ejemplos de cálculos del grupo de clases}
 
 \begin{ejemplo}
   Consideremos los campos cuadráticos imaginarios $K = \QQ (\sqrt{d})$, donde
@@ -835,6 +955,10 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
   \end{itemize}
 \end{ejemplo}
 
+En los cálculos de arriba la parte más complicada es verificar si algún ideal
+$\mathfrak{p} \subset \O_K$ es principal. Existe un algoritmo general para
+resolver este problema; véase por ejemplo \cite{Buchmann-Williams-1987}.
+
 \begin{ejemplo}
   Consideremos los siguientes campos cuadráticos imaginarios:
 
@@ -927,12 +1051,6 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Teorema de Hermite}
-
-**TODO**
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \section{Ecuación de Pell}
 
 Antes de probar el teorema de unidades de Dirichlet, vamos a ver su caso
@@ -1000,8 +1118,6 @@ particular relacionado con los campos cuadráticos reales.
 \section{Teorema de unidades de Dirichlet}
 
 **TODO**
-
-\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
