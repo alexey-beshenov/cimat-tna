@@ -9,6 +9,7 @@ Para el resto del curso, mis planes son más o menos los siguientes.
 * Teorema de unidades de Dirichlet: el grupo O_K^* es finitamente generado.
 
 * Cálculos de Cl (K) y O_K^* en PARI/GP.
+  Los campos de números en LMFDB.
 
 * Unidades fundamentales para los campos cuadráticos reales mediante las
   fracciones continuas (esto da un algoritmo para resolver la ecuación de Pell
