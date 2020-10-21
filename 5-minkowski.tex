@@ -399,6 +399,83 @@ por ejemplo el libro \cite{Grosswald-1985}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Aplicación: teorema de aproximación de Dirichlet}
+\marginpar{\small Lectura\\ adicional}
+
+El siguiente famoso teorema de Dirichlet es el primer resultado en la
+\textbf{aproximación diofántica}.
+
+\begin{teorema}
+  Dados números reales $\alpha$ y $N \ge 1$, existen $p,q \in \ZZ$ tales que
+  $1 \le q \le N$ y
+  $$\Bigl|\alpha - \frac{p}{q}\Bigr| < \frac{1}{qN} \le \frac{1}{q^2}.$$
+
+  \begin{proof}
+    Consideremos el conjunto convexo simétrico
+    $$X = \Bigl\{ (x,y) \in \RR^2 \Bigm| |x| \le N + \frac{1}{2}, \, |\alpha x - y| < \frac{1}{N} \Bigr\}.$$
+
+    \begin{center}
+      \includegraphics{pic/dirichlet-approximation-minkowski.pdf}
+    \end{center}
+
+    Este es un paralelogramo de área $(2N + 1)\,\frac{2}{N} > 4$, y el teorema
+    de Minkowski implica que existe un punto no nulo $(q,p) \in \ZZ^2$ tal que
+    $(q,p) \in X$. Por la simetría, podemos asumir que $q \ge 1$. Tenemos
+    entonces
+    \[ 1 \le q \le N, \quad |q \alpha - p| < \frac{1}{N}. \qedhere \]
+  \end{proof}
+\end{teorema}
+
+\begin{corolario}
+  \label{cor:aproximaciones-racionales}
+  Para $\alpha$ irracional existe un número infinito de fracciones $\frac{p}{q}$
+  tales que
+  $$\Bigl|\alpha - \frac{p}{q}\Bigr| < \frac{1}{q^2}.$$
+
+  \begin{proof}
+    Primero, el teorema de Dirichlet nos da una aproximación
+    $$\Bigl|\alpha - \frac{p}{q}\Bigr| < \frac{1}{q N} \le \frac{1}{q^2}.$$
+    Notamos que siempre podemos asumir que $\gcd (p,q) = 1$. Escojamos
+    $$N' > \cfrac{1}{\Bigl|\alpha - \cfrac{p}{q}\Bigr|}$$
+    y tomamos otra aproximación
+    $$\Bigl|\alpha - \frac{p'}{q'}\Bigr| < \frac{1}{q'\,N'} = \cfrac{\Bigl|\alpha - \cfrac{p}{q}\Bigr|}{q'} \le \Bigl|\alpha - \frac{p}{q}\Bigr|.$$
+    Aquí necesariamente $\frac{p}{q} \ne \frac{p'}{q'}$, y continuando de esta
+    manera se obtienen diferentes $\frac{p_i}{q_i}$, donde
+    $$0 < \Bigl|\alpha - \frac{p_n}{q_n}\Bigr| < \Bigl|\alpha - \frac{p_{n-1}}{q_{n-1}}\Bigr| < \cdots < \Bigl|\alpha - \frac{p_1}{q_1}\Bigr|$$
+    y $\Bigl|\alpha - \frac{p_i}{q_i}\Bigr| < \frac{1}{q_i^2}$.
+  \end{proof}
+\end{corolario}
+
+\begin{ejemplo}
+  Para $\alpha = \sqrt{2}$ las fracciones
+  $$\frac{p_n}{q_n} = \frac{1}{1}, ~ \frac{3}{2}, ~ \frac{7}{5}, ~ \frac{17}{12}, ~ \frac{41}{29}, ~ \frac{99}{70}, ~ \ldots$$
+  cumplen la condición del corolario:
+  \begin{center}\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rcccccc}
+      \hline
+      $\frac{p_n}{q_n}\colon$ & $\frac{1}{1}$ & $\frac{3}{2}$ & $\frac{7}{5}$ & $\frac{17}{12}$ & $\frac{41}{29}$ & $\frac{99}{70}$ \tabularnewline
+      \hline
+      $|\alpha - p_n/q_n|\colon$ & $0.414213$ & $0.085786$ & $0.014213$ & $0.002453$ & $0.000420$ & $0.000072$ \tabularnewline
+      \hline
+      $1/q_n^2\colon$ & $1.000000$ & $0.250000$ & $0.040000$ & $0.006944$ & $0.001189$ & $0.000204$ \tabularnewline
+      \hline
+      \end{tabular}
+  \end{center}
+
+\end{ejemplo}
+
+Las aproximaciones de \ref{cor:aproximaciones-racionales} pueden ser obtenidas
+mediante las \textbf{fracciones continuas} para $\alpha$. Vamos a revisarlas más
+adelante porque estas tendrán una relación con el grupo de unidades
+$\O_K^\times$ para $K = \QQ (\sqrt{d})$ campo cuadrático real.
+
+\vspace{1em}
+
+Para mayor información sobre la aproximación diofántica, véase por ejemplo
+\cite{Schmidt-1980}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \pdfbookmark{Clase 20 (21/10/20)}{clase-20}
 \section{Anillo de enteros como un retículo}
 \marginpar{\small Clase 20 \\ 21/10/20}
@@ -461,6 +538,8 @@ $\Phi\colon K\hookrightarrow K_\CC$ toma valores en $K_\RR$:
     $K_\RR \hookrightarrow K_\CC$ está inducida por $\RR \subset \CC$.
   \end{itemize}
 \end{comentario}
+
+\vspace{1em}
 
 El siguiente resultado explica el significado geométrico del discriminante
 $\Delta_K$.
@@ -649,10 +728,10 @@ El último cálculo explica el significado geométrico de la norma $N_{K/\QQ} (I
     $\vol (X_t) = 2^n \, \covol \Lambda$ porque $X_t$ es compacto.) Notamos que
     $$|N_{K/\QQ} (\alpha)| = \prod_\tau |\tau (\alpha)|,$$
     y tenemos la desigualdad entre la media aritmética y geométrica
-    $$\frac{1}{n} \prod_\tau |\tau (\alpha)| \ge \left(\prod_\tau |\tau (\alpha)|\right)^{1/n}.$$
+    $$\frac{1}{n} \sum_\tau |\tau (\alpha)| \ge \left(\prod_\tau |\tau (\alpha)|\right)^{1/n}.$$
 
     De aquí
-    \[ |N_{K/\QQ} (\alpha)| = \prod_\tau |\tau (\alpha)| \le \frac{1}{n^n} \sum_\tau |\tau (\alpha)| \le \frac{t^n}{n^n} = \frac{n!}{n^n}\,\left(\frac{4}{\pi}\right)^{r_2}\,\sqrt{|\Delta_K|}\cdot N_{K/\QQ} (I). \qedhere \]
+    \[ |N_{K/\QQ} (\alpha)| = \prod_\tau |\tau (\alpha)| \le \frac{1}{n^n} \Bigl(\sum_\tau |\tau (\alpha)|\Bigr)^n \le \frac{t^n}{n^n} = \frac{n!}{n^n}\,\left(\frac{4}{\pi}\right)^{r_2}\,\sqrt{|\Delta_K|}\cdot N_{K/\QQ} (I). \qedhere \]
   \end{proof}
 \end{teorema}
 
@@ -793,6 +872,7 @@ exactamente fue probado por Hermite), véase
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\iffalse
 \section{Finitud del grupo de clases}
 
 Ocupando la cota de Minkowski \ref{thm:cota-de-minkowski}, no es difícil deducir
@@ -1120,6 +1200,7 @@ particular relacionado con los campos cuadráticos reales.
 **TODO**
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
 
 \pagebreak
 
