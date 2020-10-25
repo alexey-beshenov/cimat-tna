@@ -44,8 +44,10 @@ adecuado para este capítulo sería «teoría de Minkowski».
 \section{Retículos y el teorema de Minkowski}
 
 \begin{definicion}
-  Sea $V$ un espacio vectorial real. Un \textbf{retículo} en $V$ es un subgrupo
-  aditivo $\Lambda \subset V$ de la forma
+  Sea $V$ un espacio vectorial real.
+  Un \textbf{retículo}\footnote{\emph{lattice} en inglés; no confundir con los
+    retículos que estudian lógicos y «algebristas universales».}
+  en $V$ es un subgrupo aditivo $\Lambda \subset V$ de la forma
   $$\Lambda = \ZZ\,\omega_1 + \cdots + \ZZ\,\omega_n,$$
   donde $\omega_1,\ldots,\omega_n \in V$ son vectores linealmente
   independientes. En este caso se dice que $\omega_1,\ldots,\omega_n$ es una
@@ -872,11 +874,12 @@ exactamente fue probado por Hermite), véase
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\iffalse
+\pdfbookmark{Clase 21 (26/10/20)}{clase-21}
 \section{Finitud del grupo de clases}
+\marginpar{\small Clase 21 \\ 26/10/20}
 
 Ocupando la cota de Minkowski \ref{thm:cota-de-minkowski}, no es difícil deducir
-la finitud del grupo de clases.
+la finitud del grupo de clases
 $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
 
 \begin{lema}
@@ -889,7 +892,7 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
     $\mathfrak{p}\cap\ZZ = p\ZZ$. Para todo primo racional $p$ hay un número
     finito de ideales primos $\mathfrak{p} \subset \O_K$ tales que
     $\mathfrak{p}\cap\ZZ = p\ZZ$ (es decir, $\mathfrak{p} \mid p$), y de estas
-    consideraciones se ve que la afirmación es cierta para ideales primos.
+    consideraciones se ve que la afirmación es cierta para los ideales primos.
 
     En general, todo ideal no nulo $I \subset \O_K$ se factoriza de alguna
     manera en ideales primos:
@@ -899,20 +902,19 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
     De esta manera se ve que para encontrar los ideales de norma $\le C$,
     podemos considerar los primos racionales $p \le C$ y los ideales primos
     correspondientes $\mathfrak{p} \mid p$ con $N_{K/\QQ} (\mathfrak{p}) \le C$,
-    y luego considerar diferentes productos de estos ideales $\mathfrak{p}$.
+    y luego tomar diferentes productos de estos ideales $\mathfrak{p}$.
   \end{proof}
 \end{lema}
 
 \begin{lema}
   Para todo elemento $[I] \in \Cl (K)$ existe un ideal entero $J \subseteq \O_K$
   tal que $[I] = [J]$ y $N_{K/\QQ} (J) \le M_K$, donde $M_K$ es la cota de
-  Minkowski.
+  Minkowski, definida en \ref{thm:cota-de-minkowski}.
 
   \begin{proof}
     Consideremos un elemento $[I] \in \Cl (K)$ representado por un $\O_K$-ideal
-    fraccionario no nulo $I \subseteq K$. En este caso existe el ideal
-    fraccionario inverso $I^{-1}$, y para algún $\beta \in \O_K$ se tiene
-    $$\beta I^{-1} \subseteq \O_K.$$
+    fraccionario no nulo $I \subseteq K$. En este caso para algún
+    $\beta \in \O_K$ no nulo se tiene $\beta I^{-1} \subseteq \O_K$.
     Según el teorema \ref{thm:cota-de-minkowski}, existe entonces un elemento no
     nulo $\alpha \in \beta I^{-1}$ tal que
     $$|N_{K/\QQ} (\alpha)| \le M_K\cdot N_{K/\QQ} (\beta I^{-1}).$$
@@ -936,13 +938,18 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
   \end{proof}
 \end{teorema}
 
+\begin{definicion}
+  Para un campo de números $K/\QQ$ el número $h_K = \# \Cl (K)$ se llama el
+  \textbf{número de clases} de $K$.
+\end{definicion}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Ejemplos de cálculos del grupo de clases}
+\section{Ejemplo: campos cuadráticos imaginarios}
 
 \begin{ejemplo}
-  Consideremos los campos cuadráticos imaginarios $K = \QQ (\sqrt{d})$, donde
-  $d < 0$. En este caso $n = 2$ y $r_2 = 1$, así que la cota de Minkowski será
+  Consideremos los campos cuadráticos imaginarios $K = \QQ (\sqrt{-d})$.
+  En este caso $n = 2$ y $r_2 = 1$, así que la cota de Minkowski será
   $M_K = \frac{2}{\pi}\,\sqrt{|\Delta_K|}$.
 
   \begin{center}\renewcommand{\arraystretch}{1.5}
@@ -972,16 +979,17 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
     son dominios euclidianos.
 
   \item El anillo de enteros de $\QQ (\sqrt{-11})$ es
-    $\ZZ \Bigl[\frac{1+\sqrt{-11}}{2}\Bigr]$ y es también un dominio euclidiano.
+    $\ZZ \Bigl[\frac{1+\sqrt{-11}}{2}\Bigr]$, y es también un dominio
+    euclidiano.
 
-    La cota de Minkowski en este caso es $M_K = 2.11$. El primo $p = 2$ es
+    La cota de Minkowski en este caso es $M_K \approx 2.11$. El primo $p = 2$ es
     inerte en $\QQ (\sqrt{-11})$, así que no hay ideales de norma $2$. Esto nos
     da otra prueba de que $\QQ (\sqrt{-11})$ tiene el grupo de clases trivial.
 
-  \item Consideremos el campo $K = \QQ (\sqrt{-5})$. En este caso $M_K = 2.85$
-    nos dice que todo elemento en $\Cl (K)$ puede ser representado por un ideal
-    entero de norma $1$ o $2$. El único ideal de norma $2$ es el ideal primo que
-    está arriba de $p = 2$:
+  \item Consideremos el campo $K = \QQ (\sqrt{-5})$. En este caso
+    $M_K \approx 2.85$ nos dice que todo elemento en $\Cl (K)$ puede ser
+    representado por un ideal entero de norma $1$ o $2$. El único ideal de norma
+    $2$ es el ideal primo que está arriba de $p = 2$:
     $$2\O_K = \mathfrak{p}^2, \quad \mathfrak{p} = (2, 1 + \sqrt{-5}).$$
 
     Afirmamos que el ideal $\mathfrak{p}$ no es principal: en el caso contrario
@@ -1000,7 +1008,7 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
     \[ \mathfrak{p}_2^2 = 2\O_K, \quad
        \mathfrak{p}_3^2 = 3\O_K, \quad
        \mathfrak{p}_2\,\mathfrak{p}_3 = (\sqrt{-6}). \]
-    Esto implica que en el grupo de clases los elementos $[\mathfrak{p}_2]$
+    Esto significa que en el grupo de clases los elementos $[\mathfrak{p}_2]$
     y $[\mathfrak{p}_3]$ tienen orden $2$, y además
     $[\mathfrak{p}_2]\cdot [\mathfrak{p}_3] = [\O_K]$ implica que    
     $[\mathfrak{p}_2] = [\mathfrak{p}_3]$. Un argumento similar al de arriba
@@ -1012,8 +1020,8 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
     un ejercicio.
 
   \item En fin, consideremos $K = \QQ (\sqrt{-14})$. La cota de Minkowski es
-    $M_K = 4.76\ldots$, así que basta considerar los ideales primos arriba de $2$
-    y $3$. Estos son los siguientes:
+    $M_K \approx 4.76$, así que basta considerar los ideales primos arriba de
+    $2$ y $3$. Estos son los siguientes:
     $$\mathfrak{p}_2 = (2, \sqrt{-14}), \quad 2\O_K = \mathfrak{p}_2^2,$$
     y
     \[ \mathfrak{p}_3 = (3, 1 + \sqrt{-14}), \quad
@@ -1035,71 +1043,530 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
   \end{itemize}
 \end{ejemplo}
 
-En los cálculos de arriba la parte más complicada es verificar si algún ideal
-$\mathfrak{p} \subset \O_K$ es principal. Existe un algoritmo general para
-resolver este problema; véase por ejemplo \cite{Buchmann-Williams-1987}.
+\begin{comentario}
+  En los cálculos de arriba la parte más complicada es verificar si algún ideal
+  $\mathfrak{p} \subset \O_K$ es principal, o en general si $[I] = [J]$ en el
+  grupo de clases. Esto no se ve tan difícil para los campos cuadráticos
+  imaginarios, pero también existe un algoritmo general para resolver este
+  problema; véase por ejemplo \cite{Buchmann-Williams-1987}.
+\end{comentario}
+
+Una pequeña tabla de grupos de clases $\Cl (\QQ (\sqrt{-d}))$ se encuentra en el
+apéndice \ref{ap:grupos-de-clases-cuadraticos-imaginarios}. De allí se nota que
+estos grupos \emph{no suelen} ser triviales, y es fácil explicarlo.
+Primero recordemos que
+\[ \O_K = \begin{cases}
+  \ZZ [\sqrt{-d}], & d \equiv 1,2 \pmod{4},\\
+  \ZZ \Bigl[\frac{1+\sqrt{-d}}{2}\Bigr], & d \equiv 3 \pmod{4}.
+\end{cases} \]
+Ahora la norma sobre $\ZZ [\sqrt{-d}]$ tiene forma
+$$N_{K/\QQ} (a + b\sqrt{-d}) = a^2 + d\,b^2,$$
+y la norma sobre $\ZZ \Bigl[\frac{1+\sqrt{-d}}{2}\Bigr]$ tiene forma
+$$N_{K/\QQ} \Bigl(a + b\,\frac{1+\sqrt{-d}}{2}\Bigr) = a^2 + ab + \frac{1+d}{4}\,b^2 = \frac{1}{4}\,((2a + b)^2 + db^2).$$
+De aquí se ve que en $\O_K$ no hay elementos de norma $2$, con excepción de
+$d = 1,2,7$. Entonces, si en $\O_K$ el primo $p = 2$ se ramifica o se escinde:
+\[ 2\O_K = \mathfrak{p}^2 \quad\text{o}\quad
+2\O_K = \mathfrak{p}\,\overline{\mathfrak{p}}, \]
+el ideal $\mathfrak{p} \mid 2$ no tiene chances de ser principal:
+$\mathfrak{p} = (\alpha)$ implica que
+$N_{K/\QQ} (\alpha) = N_{K/\QQ} (\mathfrak{p}) = 2$.
+Esto nos lleva al siguiente resultado.
+
+\begin{proposicion}
+  \label{prop:Cl(K)=0-d=3(8)}
+  Supongamos $d \ne 1,2,7$. Si $d \equiv 1,2 \pmod{4}$ o $d \equiv 7 \pmod{8}$,
+  entonces $\Cl (K) \ne 0$. Específicamente, en este caso un ideal
+  $\mathfrak{p} \mid 2$ representa un elemento de orden $2$ en
+  $\Cl (K)$.
+\end{proposicion}
+
+Otra observación curiosa: si $d$ no es primo, entonces $\Cl (K) \ne 0$.
+
+\begin{proposicion}
+  Si $d$ es un número compuesto y $p_i \mid d$, entonces el ideal
+  $\mathfrak{p}_i \mid p_i$ representa un elemento de orden $2$ en $\Cl (K)$.
+
+  \begin{proof}
+    Tenemos $\mathfrak{p}_i^2 = p_i \O_K$. En el caso que nos interesa $d > 3$,
+    y luego $\O_K^\times = \{ \pm 1 \}$. Si $\mathfrak{p}_i$ fuera principal,
+    tendríamos $\sqrt{\pm p_i} \in K$, pero esto implicaría
+    $K = \QQ (\sqrt{\pm p_i})$, lo cual no es cierto por nuestra hipótesis.
+  \end{proof}
+\end{proposicion}
+
+Dejo como un ejercicio probar que si $d = p_1\cdots p_s$, entonces los ideales
+correspondientes $\mathfrak{p}_1,\ldots,\mathfrak{p}_s \subset \O_K$ generan
+un subgrupo en $\Cl (K)$ isomorfo a $(\ZZ/2\ZZ)^{s-1}$.
+
+\begin{comentario}
+  Gauss probó el siguiente resultado más fuerte: para $K = \QQ (\sqrt{d})$
+  con $d < 0$ el subgrupo de $2$-torsión $\Cl (K)[2]$ es isomorfo a
+  $(\ZZ/2\ZZ)^{\omega (\Delta_K) - 1}$, donde $\omega (\Delta_K)$ es el número
+  de divisores primos del discriminante $\Delta_K$.
+
+  Por ejemplo, si $p \equiv 1 \pmod{4}$, entonces
+  $\Delta_{\QQ (\sqrt{-p})} = -4\cdot p$, y el subgrupo de $2$-torsión será
+  $\ZZ/2\ZZ$.
+
+  Otro ejemplo: para
+  $K = \QQ (\sqrt{-3\cdot 5\cdot 7\cdot 11\cdot 13\cdot 17\cdot 19})$
+  tenemos
+  $\Delta = -4\cdot 3\cdot 5\cdot 7\cdot 11\cdot 13\cdot 17\cdot 19$,
+  y el grupo de clases (calculado con la computadora) es
+  $$\Cl (K) \cong \ZZ/24\ZZ \oplus (\ZZ/2\ZZ)^6.$$
+  El rango de $2$-torsión es $7$, como nos dice el teorema de Gauss.
+
+  Para los campos cuadráticos reales, Gauss también calculó la $2$-torsión en
+  $\Cl (K)$, pero el resultado es un poco más difícil de formular, así que no
+  entraré en los detalles. De la torsión $\Cl (K) [\ell]$ con $\ell \ne 2$
+  o $[K : \QQ] > 2$, todavía no se sabe mucho, este es un tema de investigación
+  contemporánea.
+\end{comentario}
+
+De lo que hemos visto hasta el momento se sigue que si nos interesan los campos
+cuadráticos imaginarios con $\Cl (\QQ(\sqrt{-d})) = 1$, entonces $d = p$ es
+necesariamente un primo tal que $p \equiv 3 \pmod{8}$. La única excepción es
+$d = 1,2,7$.
 
 \begin{ejemplo}
-  Consideremos los siguientes campos cuadráticos imaginarios:
+  Para $p < 200$ nos interesan entonces
+  $$p = 19, \, 43, \, 59, \, 67, \, 83, \, 107, \, 131, \, 139, \, 163, \, 179.$$
+
+  Una observación útil es la siguiente: si todos los primos racionales $q < M_K$
+  son inertes en $K$, entonces $\Cl (K) = 0$. Hagamos una tabla con las cotas de
+  Minkowski y el primer primo $q$ que \emph{no es} inerte en
+  $K = \QQ (\sqrt{-p})$. Es fácil encontrarlo: este será el primer $q$ tal que
+  $\legendre{-p}{q} = +1$.
 
   \begin{center}\renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{rx{2cm}x{2cm}x{2cm}x{2cm}}
+    \begin{tabular}{rccccccccccc}
       \hline
-      $d\colon$ & $-19$ & $-43$ & $-67$ & $-163$ \tabularnewline
+      $p\colon$ & $11$ & $19$ & $43$ & $59$ & $67$ & $83$ & $107$ & $131$ & $139$ & $163$ & $179$ \\
       \hline
-      $\Delta_{\QQ (\sqrt{d})}\colon$ & $-19$ & $-43$ & $-67$ & $-163$ \tabularnewline
+      $\Delta_K\colon$ & $2.11$ & $2.77$ & $4.17$ & $4.89$ & $5.21$ & $5.80$ & $6.59$ & $7.29$ & $7.51$ & $8.13$ & $8.52$ \\
       \hline
-      $M_{\QQ (\sqrt{d})}\colon$ & $2.77$ & $4.17$ & $5.21$ & $8.12$ \tabularnewline
+      $q\colon$ & $3$ & $5$ & $11$ & $3$ & $17$ & $3$ & $3$ & $3$ & $5$ & $41$ & $3$ \\
       \hline
     \end{tabular}
   \end{center}
 
+  De esta tabla se ve que $\Cl (\QQ (\sqrt{-p})) = 0$ para
+  $p = 11, 19, 43, 67, 163$. Curiosamente, para estos primos todo $q < (p+1)/4$ es
+  inerte en $\QQ (\sqrt{-p})$. Por otra parte, para
+  $p = 59, 83, 107, 131, 139, 179$ el grupo de clases no será trivial.
+
   \begin{itemize}
-  \item En $K = \QQ (\sqrt{-19})$ el primo $p = 2$ es inerte, así que en $\O_K$
-    no hay ideales no triviales de norma $\le M_K$. Podemos concluir que
-    $\Cl (K) = 0$.
+  \item En $K = \QQ (\sqrt{-59})$ tenemos
+    $$3\O_K = \mathfrak{p}_3\,\overline{\mathfrak{p}_3},$$
+    donde $\mathfrak{p}_3$ y $\overline{\mathfrak{p}_3}$ no son ideales
+    principales: en $\O_K$ no hay elementos de norma $3$. Además,
+    \[ [\mathfrak{p}_3]^2 = [\overline{\mathfrak{p}_3}], \quad
+    [\mathfrak{p}_3]^3 = [\mathfrak{p}_3\,\overline{\mathfrak{p}_3}] = [\O_K], \]
+    así que $\Cl (K) \cong \ZZ/3\ZZ$.
 
-  \item En $K = \QQ (\sqrt{-43})$ los primos $p = 2, 3$ son inertes, así que los
-    ideales de norma $\le M_K$ serán $I = \O_K, 2\O_K$. Son principales, así que
-    $\Cl (K) = 0$.
+  \item En $K = \QQ (\sqrt{-83})$ y $\QQ (\sqrt{-107})$ el primo $q = 3$ se
+    escinde y $q = 5$ es inerte. De nuevo, en $\O_K$ no hay elementos de norma
+    $3$, y los cálculos similares demuestran que $\Cl (K) \cong \ZZ/3\ZZ$.
 
-  \item En $K = \QQ (\sqrt{-67})$ los primos $p = 2,3,5$ son inertes, y de la
-    misma manera esto implica que $\Cl (K) = 0$.
+  \item En $K = \QQ (\sqrt{-131})$ los primos $q = 3, 5, 7$ se escinden,
+    y en $\O_K$ no hay elementos de norma $3, 5, 7$. Pongamos
+    \[ 3\O_K = \mathfrak{p}_3 \, \overline{\mathfrak{p}_3}, \quad
+    5\O_K = \mathfrak{p}_5 \, \overline{\mathfrak{p}_5}, \quad
+    7\O_K = \mathfrak{p}_7 \, \overline{\mathfrak{p}_7}. \]
+    Tenemos las siguientes relaciones en el grupo de clases:
+    \[ [\mathfrak{p}_3]^2 = [\overline{\mathfrak{p}_5}] = [\overline{\mathfrak{p}_7}], \quad
+       [\mathfrak{p}_3]^3 = [\mathfrak{p}_5] = [\mathfrak{p}_7], \quad
+       [\mathfrak{p}_3]^4 = [\overline{\mathfrak{p}_3}], \quad
+       [\mathfrak{p}_3]^5 = [\O_K]. \]
+    Entonces, $\Cl (K) \cong \ZZ/5\ZZ$.
 
-  \item En $K = \QQ (\sqrt{-163})$ los ideales $p = 2,3,5,7$ son inertes,
-    de donde de nuevo se deduce que $\Cl (K) = 0$. \qedhere
+  \item En $K = \QQ (\sqrt{-139})$ los primos $q = 5, 7$ se escinden, y en
+    $\O_K$ no hay elementos de norma $5$ y $7$. Tenemos las siguientes
+    relaciones:
+    \[ [\mathfrak{p}_5] = [\overline{\mathfrak{p}_7}], \quad
+       [\mathfrak{p}_5]^2 = [\overline{\mathfrak{p}_5}] = [\overline{\mathfrak{p}_7}], \quad
+       [\mathfrak{p}_5]^3 = [\O_K]. \]
+    En este caso $\Cl (K) \cong \ZZ/3\ZZ$.
+ 
+  \item En $K = \QQ (\sqrt{-179})$ los primos $q = 3,5$ se escinden, mientras
+    que $q = 7$ es inerte. De nuevo, en $\O_K$ no hay elementos de norma
+    $3$ y $5$. Las relaciones
+    \[ [\mathfrak{p}_3]^2 = [\overline{\mathfrak{p}_5}], \quad
+       [\mathfrak{p}_3]^3 = [\mathfrak{p}_5], \quad
+       [\mathfrak{p}_3]^4 = [\overline{\mathfrak{p}_3}], \quad
+       [\mathfrak{p}_3]^5 = [\O_K] \]
+    nos permiten concluir que $\Cl (K) \cong \ZZ/5\ZZ$.
+  \end{itemize}
+
+  Invito que el lector verifique todos los detalles.
+\end{ejemplo}
+
+En el siguiente capítulo vamos a establecer la siguiente interpretación
+del número de clases de $\QQ (\sqrt{-p})$.
+
+\begin{teorema}[Dirichlet]
+  Sea $p > 3$ un primo tal que $p \equiv 3 \pmod{4}$. Consideremos el campo
+  cuadrático imaginario $K = \QQ (\sqrt{-p})$. Si $p \equiv 3 \pmod{8}$,
+  entonces
+  $$h_K = \sum_{1 \le a < p/2} \legendre{a}{p},$$
+  y si $p \equiv 7 \pmod{8}$, entonces
+  $$h_K = \frac{1}{3}\,\sum_{1 \le a < p/2} \legendre{a}{p}.$$
+\end{teorema}
+
+Estas fórmulas tienen que ver con el siguiente fenómeno: aunque en
+$\FF_p^\times$ hay el mismo número de cuadrados y no-cuadrados, resulta que
+para $p \equiv 3 \pmod{4}$ el intervalo $[1, (p-1)/2]$ contiene más residuos
+cuadráticos que no-residuos (véase \cite{Moser-1951} para una prueba
+elemental). Este «defecto» tiene que ver con el grupo de clases.
+
+En la figura~\ref{fig:numeros-de-clases-imaginarios} se encuentran los números
+de clases obtenidos mediante el último teorema.
+
+\begin{figure}
+  \begin{center}\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{x{2cm}x{1cm}x{2cm}x{1cm}x{2cm}x{1cm}x{2cm}x{1cm}}
+      \hline
+      $K$ & $h_K$ & $K$ & $h_K$ & $K$ & $h_K$ & $K$ & $h_K$ \tabularnewline\hline
+      $\QQ (\sqrt{-7})$ & $1$ & $\QQ (\sqrt{-283})$ & $3$ & $\QQ (\sqrt{-647})$ & $23$ & $\QQ (\sqrt{-1063})$ & $19$ \tabularnewline\hline
+      $\QQ (\sqrt{-11})$ & $1$ & $\QQ (\sqrt{-307})$ & $3$ & $\QQ (\sqrt{-659})$ & $11$ & $\QQ (\sqrt{-1087})$ & $9$ \tabularnewline\hline
+      $\QQ (\sqrt{-19})$ & $1$ & $\QQ (\sqrt{-311})$ & $19$ & $\QQ (\sqrt{-683})$ & $5$ & $\QQ (\sqrt{-1091})$ & $17$ \tabularnewline\hline
+      $\QQ (\sqrt{-23})$ & $3$ & $\QQ (\sqrt{-331})$ & $3$ & $\QQ (\sqrt{-691})$ & $5$ & $\QQ (\sqrt{-1103})$ & $23$ \tabularnewline\hline
+      $\QQ (\sqrt{-31})$ & $3$ & $\QQ (\sqrt{-347})$ & $5$ & $\QQ (\sqrt{-719})$ & $31$ & $\QQ (\sqrt{-1123})$ & $5$ \tabularnewline\hline
+      $\QQ (\sqrt{-43})$ & $1$ & $\QQ (\sqrt{-359})$ & $19$ & $\QQ (\sqrt{-727})$ & $13$ & $\QQ (\sqrt{-1151})$ & $41$ \tabularnewline\hline
+      $\QQ (\sqrt{-47})$ & $5$ & $\QQ (\sqrt{-367})$ & $9$ & $\QQ (\sqrt{-739})$ & $5$ & $\QQ (\sqrt{-1163})$ & $7$ \tabularnewline\hline
+      $\QQ (\sqrt{-59})$ & $3$ & $\QQ (\sqrt{-379})$ & $3$ & $\QQ (\sqrt{-743})$ & $21$ & $\QQ (\sqrt{-1171})$ & $7$ \tabularnewline\hline
+      $\QQ (\sqrt{-67})$ & $1$ & $\QQ (\sqrt{-383})$ & $17$ & $\QQ (\sqrt{-751})$ & $15$ & $\QQ (\sqrt{-1187})$ & $9$ \tabularnewline\hline
+      $\QQ (\sqrt{-71})$ & $7$ & $\QQ (\sqrt{-419})$ & $9$ & $\QQ (\sqrt{-787})$ & $5$ & $\QQ (\sqrt{-1223})$ & $35$ \tabularnewline\hline
+      $\QQ (\sqrt{-79})$ & $5$ & $\QQ (\sqrt{-431})$ & $21$ & $\QQ (\sqrt{-811})$ & $7$ & $\QQ (\sqrt{-1231})$ & $27$ \tabularnewline\hline
+      $\QQ (\sqrt{-83})$ & $3$ & $\QQ (\sqrt{-439})$ & $15$ & $\QQ (\sqrt{-823})$ & $9$ & $\QQ (\sqrt{-1259})$ & $15$ \tabularnewline\hline
+      $\QQ (\sqrt{-103})$ & $5$ & $\QQ (\sqrt{-443})$ & $5$ & $\QQ (\sqrt{-827})$ & $7$ & $\QQ (\sqrt{-1279})$ & $23$ \tabularnewline\hline
+      $\QQ (\sqrt{-107})$ & $3$ & $\QQ (\sqrt{-463})$ & $7$ & $\QQ (\sqrt{-839})$ & $33$ & $\QQ (\sqrt{-1283})$ & $11$ \tabularnewline\hline
+      $\QQ (\sqrt{-127})$ & $5$ & $\QQ (\sqrt{-467})$ & $7$ & $\QQ (\sqrt{-859})$ & $7$ & $\QQ (\sqrt{-1291})$ & $9$ \tabularnewline\hline
+      $\QQ (\sqrt{-131})$ & $5$ & $\QQ (\sqrt{-479})$ & $25$ & $\QQ (\sqrt{-863})$ & $21$ & $\QQ (\sqrt{-1303})$ & $11$ \tabularnewline\hline
+      $\QQ (\sqrt{-139})$ & $3$ & $\QQ (\sqrt{-487})$ & $7$ & $\QQ (\sqrt{-883})$ & $3$ & $\QQ (\sqrt{-1307})$ & $11$ \tabularnewline\hline
+      $\QQ (\sqrt{-151})$ & $7$ & $\QQ (\sqrt{-491})$ & $9$ & $\QQ (\sqrt{-887})$ & $29$ & $\QQ (\sqrt{-1319})$ & $45$ \tabularnewline\hline
+      $\QQ (\sqrt{-163})$ & $1$ & $\QQ (\sqrt{-499})$ & $3$ & $\QQ (\sqrt{-907})$ & $3$ & $\QQ (\sqrt{-1327})$ & $15$ \tabularnewline\hline
+      $\QQ (\sqrt{-167})$ & $11$ & $\QQ (\sqrt{-503})$ & $21$ & $\QQ (\sqrt{-911})$ & $31$ & $\QQ (\sqrt{-1367})$ & $25$ \tabularnewline\hline
+      $\QQ (\sqrt{-179})$ & $5$ & $\QQ (\sqrt{-523})$ & $5$ & $\QQ (\sqrt{-919})$ & $19$ & $\QQ (\sqrt{-1399})$ & $27$ \tabularnewline\hline
+      $\QQ (\sqrt{-191})$ & $13$ & $\QQ (\sqrt{-547})$ & $3$ & $\QQ (\sqrt{-947})$ & $5$ & $\QQ (\sqrt{-1423})$ & $9$ \tabularnewline\hline
+      $\QQ (\sqrt{-199})$ & $9$ & $\QQ (\sqrt{-563})$ & $9$ & $\QQ (\sqrt{-967})$ & $11$ & $\QQ (\sqrt{-1427})$ & $15$ \tabularnewline\hline
+      $\QQ (\sqrt{-211})$ & $3$ & $\QQ (\sqrt{-571})$ & $5$ & $\QQ (\sqrt{-971})$ & $15$ & $\QQ (\sqrt{-1439})$ & $39$ \tabularnewline\hline
+      $\QQ (\sqrt{-223})$ & $7$ & $\QQ (\sqrt{-587})$ & $7$ & $\QQ (\sqrt{-983})$ & $27$ & $\QQ (\sqrt{-1447})$ & $23$ \tabularnewline\hline
+      $\QQ (\sqrt{-227})$ & $5$ & $\QQ (\sqrt{-599})$ & $25$ & $\QQ (\sqrt{-991})$ & $17$ & $\QQ (\sqrt{-1451})$ & $13$ \tabularnewline\hline
+      $\QQ (\sqrt{-239})$ & $15$ & $\QQ (\sqrt{-607})$ & $13$ & $\QQ (\sqrt{-1019})$ & $13$ & $\QQ (\sqrt{-1459})$ & $11$ \tabularnewline\hline
+      $\QQ (\sqrt{-251})$ & $7$ & $\QQ (\sqrt{-619})$ & $5$ & $\QQ (\sqrt{-1031})$ & $35$ & $\QQ (\sqrt{-1471})$ & $23$ \tabularnewline\hline
+      $\QQ (\sqrt{-263})$ & $13$ & $\QQ (\sqrt{-631})$ & $13$ & $\QQ (\sqrt{-1039})$ & $23$ & $\QQ (\sqrt{-1483})$ & $7$ \tabularnewline\hline
+      $\QQ (\sqrt{-271})$ & $11$ & $\QQ (\sqrt{-643})$ & $3$ & $\QQ (\sqrt{-1051})$ & $5$ & $\QQ (\sqrt{-1487})$ & $37$ \tabularnewline\hline
+    \end{tabular}
+  \end{center}
+
+  \caption{Números de clases $h_{\QQ (\sqrt{-p})}$ para $p \equiv 3~(4)$}
+  \label{fig:numeros-de-clases-imaginarios}
+\end{figure}
+
+Estos cálculos sugieren que \emph{los únicos} campos cuadráticos imaginarios
+$K = \QQ (\sqrt{-d})$ con $\Cl (K) = 0$ corresponden a
+\[ d = 1, \, 2, \, 3, \, 7, \, 11, \, 19, \, 43, \, 67, \, 163. \]
+
+Esto fue conjeturado por Gauss. En 1936 Heilbronn y Linfoot probaron que a lo
+sumo existe un número más, pero en este caso $d > 10^9$.
+Kurt Heegner, Alan Baker, y Harold Stark probaron que este número no existe.
+La prueba de Heegner fue publicada en 1952, pero contenía menores omisiones y no
+fue aceptada hasta que Stark dio una prueba similar completa en 1967. Otra
+prueba totalmente diferente fue publicada por Alan Baker en 1966
+(véase \cite[Chapter~5]{Baker-1990}).
+
+Los $d$ de arriba se conocen como los \textbf{números de Heegner}.
+Lamentablemente, Heegner falleció en 1965, antes de que su trabajo fuera
+reconocido por la comunidad matemática\dots
+
+\vspace{1em}
+
+Gauss también hizo otras conjeturas:
+\begin{itemize}
+\item $h_{\QQ (\sqrt{-d})} \to \infty$ con $d \to \infty$.
+
+  Esto fue probado por Heilbronn en 1934.
+
+\item Para cualquier $h$ fijo existe un número finito de campos cuadráticos
+  imaginarios con $\# \Cl (K) = h$.
+
+  Por ejemplo, Baker y Stark demostraron en 1971 que hay exactamente $18$ campos
+  $K = \QQ (\sqrt{-d})$ con $h_K = 2$, y estos corresponden a
+  $$d = 5, \, 6, \, 10, \, 13, \, 15, \, 22, \, 35, \, 37, \, 51, \, 58, \, 91, \, 115, \, 123, \, 187, \, 235, \, 267, \, 403, \, 427.$$
+
+  Oesterlé demostró en 1985 que hay $16$ campos $K = \QQ (\sqrt{-d})$ con
+  $h_K = 3$, y estos corresponden a
+  $$d = 23, \, 31, \, 59, \, 83, \, 107, \, 139, \, 211, \, 283, \, 307, \, 331, \, 379, \, 499, \, 547, \, 643, \, 883, \, 907.$$
+
+  De los trabajos de Goldfeld, Oesterlé, Gross y Zagier se sigue una cota
+  explícita para $d$ en términos de $h_{\QQ (\sqrt{-d})}$. De esta manera el
+  problema se reduce a un cálculo finito. Los campos correspondientes para
+  pequeños valores de $h$ han sido enumerados gradualmente; por ejemplo,
+  en \cite{Watkins-2004} se encuentra una tabla para $h \le 100$.
+\end{itemize}
+
+Para la historia detrás de los campos cuadráticos imaginarios con $\Cl (K) = 0$,
+recomiendo el artículo \cite{Goldfeld-1985}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Números de la suerte de Euler}
+
+Euler descubrió\footnote{La publicación original es la carta de Euler a
+  Bernoulli \cite{E461}. Allí el polinomio es $g (x) = x^2 - x + 41$,
+  pero $g (x+1) = f (x)$.} que el polinomio $f (x) = x^2 + x + 41$ toma valores
+primos para todo $x = 0, 1, \ldots, 39$.
+
+\begin{center}\renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{rclc|crclc|crcl}
+    $f (1)$  & $=$ & $43$  & & & $f (14)$ & $=$ & $251$ & & & $f (27)$ & $=$ & $797$ \\
+    $f (2)$  & $=$ & $47$  & & & $f (15)$ & $=$ & $281$ & & & $f (28)$ & $=$ & $853$ \\
+    $f (3)$  & $=$ & $53$  & & & $f (16)$ & $=$ & $313$ & & & $f (29)$ & $=$ & $911$ \\
+    $f (4)$  & $=$ & $61$  & & & $f (17)$ & $=$ & $347$ & & & $f (30)$ & $=$ & $971$ \\
+    $f (5)$  & $=$ & $71$  & & & $f (18)$ & $=$ & $383$ & & & $f (31)$ & $=$ & $1033$ \\
+    $f (6)$  & $=$ & $83$  & & & $f (19)$ & $=$ & $421$ & & & $f (32)$ & $=$ & $1097$ \\
+    $f (7)$  & $=$ & $97$  & & & $f (20)$ & $=$ & $461$ & & & $f (33)$ & $=$ & $1163$ \\
+    $f (8)$  & $=$ & $113$ & & & $f (21)$ & $=$ & $503$ & & & $f (34)$ & $=$ & $1231$ \\
+    $f (9)$  & $=$ & $131$ & & & $f (22)$ & $=$ & $547$ & & & $f (35)$ & $=$ & $1301$ \\
+    $f (10)$ & $=$ & $151$ & & & $f (23)$ & $=$ & $593$ & & & $f (36)$ & $=$ & $1373$ \\
+    $f (11)$ & $=$ & $173$ & & & $f (24)$ & $=$ & $641$ & & & $f (37)$ & $=$ & $1447$ \\
+    $f (12)$ & $=$ & $197$ & & & $f (25)$ & $=$ & $691$ & & & $f (38)$ & $=$ & $1523$ \\
+    $f (13)$ & $=$ & $223$ & & & $f (26)$ & $=$ & $743$ & & & $f (39)$ & $=$ & $1601$ \\
+  \end{tabular}
+\end{center}
+
+Para $x = 40$ se tiene $f (x) = 41^2$, así que este valor ya no es primo.
+De todos modos, es sorprendente que hasta este punto salgan números primos.
+Este fenómeno tiene una explicación en la teoría algebraica de números.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=15cm]{pic/ulam-spiral-euler.pdf}
+  \end{center}
+
+  \caption{Los primos de la forma $x^2 + x + 41$ en la espiral de Ulam (los puntos en azul corresponden a $x = 0,1,\ldots,39$)}
+\end{figure}
+
+\begin{teorema}[{Rabinowitsch\footnote{Seudónimo de George Yuri Rainich (1886--1968). El mismo Rabinowitsch del famoso «truco de Rabinowitsch» en la prueba del Nullstellensatz.}}, 1912]
+  Sean $p$ un primo impar y $K = \QQ (\sqrt{-p})$. Si $\Cl (K) = 0$, entonces
+  el polinomio\footnote{Recuerde que en este caso $p \equiv 3 \pmod{4}$ según
+    \ref{prop:Cl(K)=0-d=3(8)}.}
+  $$f (x) = x^2 + x + \frac{p+1}{4}$$
+  toma valores primos para $0 \le x < \frac{p-3}{4}$.
+\end{teorema}
+
+Obviamente, esta observación es trivial si uno asume el teorema de
+Baker--Heegner--Stark sobre los campos $K = \QQ (\sqrt{-d})$ con $\Cl (K) = 0$,
+pero esto tampoco explicaría mucho\dots{} La prueba elemental que vamos a ver
+viene del artículo \cite{Ayoub-Chowla}. Empecemos por un par de lemas.
+
+\begin{lema}
+  \label{lema:Rabinowitsch-lema-1}
+  Si $\Cl (K) = 0$ y $q$ es un primo tal que $q < \frac{p+1}{4}$, entonces
+  $\legendre{q}{p} = -1$.
+
+  \begin{proof}
+    Como ya vimos (\ref{prop:Cl(K)=0-d=3(8)}), la hipótesis $\Cl (K) = 0$
+    implica que $p \equiv 3 \pmod{4}$, y luego
+    $\legendre{q}{p} = \legendre{-p}{q}$. Ahora si $\legendre{q}{p} = +1$,
+    entonces $q$ se escinde en $K$: tenemos
+    $$q \O_K = \mathfrak{q}\,\overline{\mathfrak{q}}.$$
+    Por nuestra hipótesis, los ideales $\mathfrak{q}$ y
+    $\overline{\mathfrak{q}}$ deben ser principales. Digamos que
+    $\mathfrak{q}$ está generado por $a + b\,\frac{1+\sqrt{-p}}{2}$. Aquí
+    necesariamente $b \ne 0$. La norma sobre $\O_K$ viene dada por
+    $$N_{K/\QQ} \Bigl(a + b\,\frac{1+\sqrt{-p}}{2}\Bigr) = \frac{1}{4}\,((2a + b)^2 + pb^2),$$
+    pero esta expresión no puede ser igual a $q$ si $q < \frac{p+1}{4}$.
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  \label{lema:Rabinowitsch-lema-2}
+  Si $\Cl (K) = 0$, entonces el número $\frac{p+1}{4}$ debe ser primo.
+
+  \begin{proof}
+    Supongamos que esto no es cierto y $q$ es un primo tal que
+    $q < \frac{1+p}{4}$ y $q \mid \frac{1+p}{4}$. Entonces
+    $\legendre{q}{p} = \legendre{-p}{q} = -1$ por el lema anterior, y luego $q$
+    es inerte en $K$. Pero ahora, usando la hipótesis $\Cl (K) = 0$, sabemos que
+    $\O_K$ es un dominio de factorización única, y entonces
+    \[ q \mid \frac{p+1}{4} = \alpha\,\overline{\alpha} \Longrightarrow
+       q \mid \alpha \text{ o } q \mid \overline{\alpha}, \]
+    donde $\alpha = \frac{1 + \sqrt{-p}}{2}$. Esto es imposible.
+  \end{proof}
+\end{lema}
+
+\begin{proof}[Demostración del teorema de Rabinowitsch]
+  Supongamos que para el polinomio $f (x)$ para algún $x < \frac{p-3}{4}$
+  el valor $f (x)$ no es primo. Sea $q$ un primo impar tal que $q \mid f (x)$
+  y $q^2 \le f (x)$. Tenemos entonces la desigualdad
+  $$4q^2 \le (2x + 1)^2 + p < \left(\frac{p+1}{2}\right)^2.$$
+
+  Por el lema \ref{lema:Rabinowitsch-lema-1}, tenemos $\legendre{q}{p} = -1$.
+  Por otra parte,
+  $$x^2 + x + \frac{p+1}{4} = aq$$
+  para algún $a \in \ZZ$, y luego
+  $$(2x + 1)^2 + p = 4aq,$$
+  de donde $\legendre{-p}{q} = +1$. Pero bajo nuestra hipótesis
+  $\legendre{-p}{q} = \legendre{q}{p}$. Contradicción.
+\end{proof}
+
+También es cierto que si para un primo $p \equiv 3 \pmod{4}$ el polinomio
+$f (x) = x^2 + x + \frac{p+1}{4}$ toma valores primos para
+$0 \le x < \frac{p-3}{4}$, entonces necesariamente
+$\Cl (\QQ (\sqrt{-p})) = 0$. Para una prueba elemental, véase por ejemplo
+\cite[Chapter~5]{Ribenboim-Friends}.
+
+\begin{ejemplo}
+  Si en lugar de $p = 163$ tomamos $p = 67$, se obtiene el polinomio
+  $f (x) = x^2 + x + 17$ que toma valores primos para
+  $x = 0,1,\ldots,15$.
+
+  \begin{center}\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rclc|crclc|crcl}
+      $f (1)$  & $=$ & $19$  & & & $f (6)$ & $=$ & $59$ & & & $f (11)$ & $=$ & $149$ \\
+      $f (2)$  & $=$ & $23$  & & & $f (7)$ & $=$ & $73$ & & & $f (12)$ & $=$ & $173$ \\
+      $f (3)$  & $=$ & $29$  & & & $f (8)$ & $=$ & $89$ & & & $f (13)$ & $=$ & $199$ \\
+      $f (4)$  & $=$ & $37$  & & & $f (9)$ & $=$ & $107$ & & & $f (14)$ & $=$ & $227$ \\
+      $f (5)$  & $=$ & $47$  & & & $f (10)$ & $=$ & $127$ & & & $f (15)$ & $=$ & $257$
+    \end{tabular}
+  \end{center}
+
+  De la misma manera, para $p = 43$ se obtiene $f (x) = x^2 + x + 11$ que toma
+  valores primos para $x = 0,1,\ldots,10$.
+\end{ejemplo}
+
+Los números $\frac{p+1}{4}$ que dan lugar a $f (x) = x^2 + x + \frac{p+1}{4}$
+que toma valores primos para $0 \le x < \frac{p-3}{4}$ se conocen como los
+\textbf{números de la suerte de Euler}\footnote{\emph{Euler's lucky
+    numbers}.}. El teorema de Baker--Heegner--Stark nos dice que hay solo un
+número finito de números de la suerte: estos se obtienen de
+$p = 3, 7, 11, 19, 43, 67, 163$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Ejemplo: campos cuadráticos reales}
+
+Ahora veamos algunos campos cuadráticos reales. En este caso la cota de
+Minkowski será $\frac{1}{2}\,\sqrt{|\Delta_K|}$.
+
+\begin{ejemplo}
+  Calculemos $M_K$ para los primeros $K = \QQ (\sqrt{d})$.
+
+  \begin{center}\renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rx{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}}
+      \hline
+      $d\colon$ & $2$ & $3$ & $5$ & $6$ & $7$ & $10$ & $11$ & $13$ & $14$ & $15$ \tabularnewline
+      \hline
+      $\Delta_{\QQ (\sqrt{d})}\colon$ & $8$ & $12$ & $5$ & $24$ & $28$ & $40$ & $44$ & $13$ & $56$ & $60$ \tabularnewline
+      \hline
+      $M_{\QQ (\sqrt{d})}\colon$ & $1.41$ & $1.73$ & $1.12$ & $2.45$ & $2.65$ & $3.16$ & $3.32$ & $1.80$ & $3.74$ & $3.87$ \tabularnewline
+      \hline
+    \end{tabular}
+  \end{center}
+
+  De aquí notamos que para $d = 2,3,5,13$ el grupo de clases es trivial. Podemos
+  ver otros casos de la tabla uno por uno.
+
+  \begin{itemize}
+  \item Para $d = 6$, el primo $2$ se ramifica en $\O_K$: para
+    $\mathfrak{p}_2 = (2, \sqrt{6})$ tenemos $\mathfrak{p}_2^2 = 6\O_K$.
+    Este ideal es principal: tenemos $\mathfrak{p}_2 = (2 + \sqrt{6})$.
+    Para verlo, basta notar que
+    $N_{K/\QQ} (2 + \sqrt{6}) = 2^2 - 6\cdot 1^2 = -2$, así que el elemento
+    $2 + \sqrt{6}$ genera un ideal primo que está sobre $p = 2$.
+
+  \item Para $d = 7$ pasa lo mismo: se puede ver que el ideal
+    $\mathfrak{p}_2 = (2, 1 + \sqrt{7})$ es principal, generado por
+    $3 + \sqrt{7}$.
+
+  \item Para $d = 10$ tenemos
+    $$2\O_K = \mathfrak{p}_2^2, \quad \mathfrak{p}_2 = (2, \sqrt{10})$$
+    y
+    $$3\O_K = \mathfrak{p}_3\,\overline{\mathfrak{p}_3}, \quad \mathfrak{p}_3 = (3, 1+\sqrt{3}).$$
+    Estos ideales no son principales. La norma es
+    $N_{K/\QQ} (a + b\sqrt{10}) = a^2 - 10\,b^2$, y esta no puede ser igual
+    a $2$ o $3$. Para verlo, basta por ejemplo reducir la norma módulo $5$.
+
+    Además, podemos calcular que
+    $$(1 - \sqrt{10}/2)\,\mathfrak{p}_2 = \mathfrak{p}_3,$$ así que
+    $[\mathfrak{p}_3] = [\mathfrak{p}_2]$ en el grupo de clases. De la misma manera
+    $[\overline{\mathfrak{p}_3}] = [\mathfrak{p}_2]$.
+    Entonces, $\Cl (K) \cong \ZZ/2\ZZ$.
+
+  \item Dejo al lector ver que para $d = 11$ y $14$ el grupo de clases será
+    trivial.
+
+  \item Para $d = 15$ tenemos
+    $$2\O_K = \mathfrak{p}_2^2, \quad \mathfrak{p}_2 = (2, 1 + \sqrt{15})$$
+    y
+    $$3\O_K = \mathfrak{p}_3^2, \quad \mathfrak{p}_3 = (3, \sqrt{15}).$$
+    De nuevo, reduciendo la norma
+    $N_{K/\QQ} (a + b\sqrt{15}) = a^2 + 15\,b^2$ módulo $5$, notamos que
+    no hay elementos de norma $2$ y $3$, así que los ideales $\mathfrak{p}_2$ y
+    $\mathfrak{p}_3$ no son principales. Por otra parte, podemos verificar que
+    $[\mathfrak{p}_2] = [\mathfrak{p}_3]$, y luego
+    $\Cl (K) \cong \ZZ/2\ZZ$. \qedhere
   \end{itemize}
 \end{ejemplo}
 
-\begin{comentario}
-  Los cálculos de arriba nos dicen que
-  \[ \Cl (\QQ (\sqrt{d})) = 0
-     \quad\text{para}\quad
-     d = -1, -2, -3, -7, -11, -19, -43, -67, -163.\]
+Una tabla de grupos de clases para los campos cuadráticos reales se encuentra
+en el apéndice \ref{ap:grupos-de-clases-cuadraticos-reales}. Aquí la situación
+es mucho más misteriosa que con los campos imaginarios. Una conjetura de Gauss,
+todavía abierta, afirma que $\Cl (\QQ (\sqrt{d})) = 0$ para un número infinito
+de $d > 1$. Cohen y Lenstra predicen que $\Cl (\QQ (\sqrt{p})) = 0$ para
+aproximadamente $75.445\%$ de los primos.  La densidad exacta (conjetural) es
+\[ \frac{1}{2\,C_\infty\,\eta_\infty (2)}, \quad \text{donde }
+   \eta_\infty (p) = \prod_{n \ge 1} \frac{1}{1 - p^{-n}}, \,
+    C_\infty = \prod_{n \ge 2} \zeta (n). \]
+Es algo que se puede verificar con la computadora, solo hay que tomar
+\emph{bastantes} primos:
+\begin{center}
+  \begin{tabular}{ll}
+    primos & $\Cl (K) = 0$ \\
+    \hline
+    $100$    & $91$ \\
+    $1000$   & $845$ \\
+    $10000$  & $7970$ \\
+    $100000$ & $77962$ \\
+    $1000000$ & $769230$
+  \end{tabular}
+\end{center}
+Cohen y Lenstra tienen otras conjeturas de este tipo sobre la estructura de
+grupos de clase; para más detalles, consulte el artículo
+\cite{Cohen-Lenstra-1984}.
 
-  De hecho, estos son los únicos campos cuadráticos imaginarios con el grupo de
-  clases trivial. Esto fue conjeturado por Gauss y probado por Kurt Heegner y
-  Harold Stark. La prueba de Heegner fue publicada en 1952, pero contenía
-  menores omisiones y no fue aceptada hasta que Stark dio una prueba completa en
-  1967. Otra prueba diferente fue publicada por Alan Baker en 1966 y reducía el
-  problema a un cálculo finito.
+\vspace{1em}
 
-  Heegner falleció en 1965, antes de que su trabajo fue reconocido por
-  la comunidad matemática\dots
-\end{comentario}
+En general, para un campo de números específico $K$, hay un algoritmo para
+calcular $\Cl (K)$. Sin embargo, si nos interesa el comportamiento de grupos de
+clases para una familia de campos de números, no se sabe mucho. Por ejemplo, no
+se conoce \emph{ninguna} familia infinita de campos de números con
+$\Cl (K) = 0$. Como mencionamos, esta es una gran conjetura para los campos
+cuadráticos reales.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Perspectiva: campos ciclotómicos}
+
+Para los campos ciclotómicos $K = \QQ (\zeta_n)$ nuestros cálculos con la cota
+de Minkowski ya no serán muy prácticos porque los discriminantes $\Delta_K$
+serán bastante grandes. He aquí un pequeño ejemplo que sí es posible hacer
+a mano.
 
 \begin{ejemplo}
   Consideremos el campo ciclotómico $K = \QQ (\zeta_7)$. En este caso
   $n = 6$, $r_2 = 3$, y $\Delta_K = -7^5$, así que la cota de Minkowski
   viene dada por
-  $$M_K = \frac{6!}{6^6} \, \left(\frac{4}{\pi}\right)^3 \, 7^{5/2} = 4.12\ldots$$
+  $$M_K = \frac{6!}{6^6} \, \left(\frac{4}{\pi}\right)^3 \, 7^{5/2} \approx 4.12.$$
   En este caso el orden de $p = 2$ mód $7$ es igual a $f = 3$, así que
   $$2\O_K = \mathfrak{p}_2 \, \mathfrak{p}_2'.$$
   Por otra parte, el orden de $p = 3$ mód $7$ es igual a $f = 6$, lo que
   significa que $p = 3$ es inerte en $K$.
 
-  Factorizando el polinomio ciclotómico mód $2$ se obtiene
-  $$\Phi_7 \equiv (x^3 + x + 1)\,(x^3 + x^2 + 1) \pmod{2}.$$
+  Factorizando el polinomio ciclotómico, se obtiene
+  $$\Phi_7 (x) \equiv (x^3 + x + 1)\,(x^3 + x^2 + 1) \pmod{2}.$$
   Entonces,
   \[ \mathfrak{p}_2 = (2, 1 + \zeta_7 + \zeta_7^3), \quad
      \mathfrak{p}_2' = (2, 1 + \zeta_7^2 + \zeta_7^3). \]
@@ -1111,23 +1578,38 @@ resolver este problema; véase por ejemplo \cite{Buchmann-Williams-1987}.
   Esto demuestra que $\Cl (K) = 0$.
 \end{ejemplo}
 
-\begin{comentario}
-  En general, los cálculos con la cota de Minkowski no son muy prácticos para
-  hacerlos a mano. Por ejemplo, el primer campo ciclotómico con el grupo de
-  clases no trivial es $K = \QQ (\zeta_{23})$, donde
-  $\Cl (K) \cong \ZZ/3\ZZ$. Las cotas de Minkowski para los campos ciclotómicos
-  son las siguientes.
+De hecho, Kummer descubrió que el primer campo ciclotómico con el grupo de
+clases no trivial es $K = \QQ (\zeta_{23})$, donde $\Cl (K) \cong \ZZ/3\ZZ$.
+Como generador, se puede tomar uno de los ideales primos sobre $p = 2$,
+o también uno de los $22$ ideales no principales sobre $p = 47$ que encontramos
+en \ref{ejemplo:Q-zeta-23-y-47}.
 
-  \begin{center}\renewcommand{\arraystretch}{1.5}
-    \begin{tabular}{rccccccccccc}
-      \hline
-      $K\colon$ & $\QQ (\zeta_3)$ & $\QQ (\zeta_4)$ & $\QQ (\zeta_5)$ & $\QQ (\zeta_7)$ & $\QQ (\zeta_8)$ & $\QQ (\zeta_9)$ & $\QQ (\zeta_{11})$ & $\QQ (\zeta_{12})$ & $\QQ (\zeta_{13})$ & $\cdots$ & $\QQ (\zeta_{23})$ \tabularnewline
-      \hline
-      $M_K\colon$ & $1.10$ & $1.27$ & $1.70$ & $4.13$ & $2.43$ & $4.47$ & $58.96$ & $1.82$ & $306.42$ & $\cdots$ & $9324406.48$ \tabularnewline
-      \hline
-    \end{tabular}
-  \end{center}
-\end{comentario}
+Las cotas de Minkowski para los campos ciclotómicos son las siguientes.
+
+\begin{center}\renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{rccccccccccc}
+    \hline
+    $K\colon$ & $\QQ (\zeta_3)$ & $\QQ (\zeta_4)$ & $\QQ (\zeta_5)$ & $\QQ (\zeta_7)$ & $\QQ (\zeta_8)$ & $\QQ (\zeta_9)$ & $\QQ (\zeta_{11})$ & $\QQ (\zeta_{12})$ & $\QQ (\zeta_{13})$ & $\cdots$ & $\QQ (\zeta_{23})$ \tabularnewline
+    \hline
+    $M_K\colon$ & $1.10$ & $1.27$ & $1.70$ & $4.13$ & $2.43$ & $4.47$ & $58.96$ & $1.82$ & $306.42$ & $\cdots$ & $9324406.48$ \tabularnewline
+    \hline
+    & & & & & & & & & & & ¡oops! \tabularnewline
+  \end{tabular}
+\end{center}
+
+En el apéndice \ref{ap:grupos-de-clases-ciclotomicos} se encuentra una pequeña
+tabla de grupos de clases para los campos ciclotómicos. Se sabe que el grupo
+$\Cl (\QQ (\zeta_n))$ es trivial precisamente para
+$$n = 1, \, 3, \, 4, \, 5, \, 7, \, 8, \, 9, \, 11, \, 12, \, 13, \, 15, \, 16, \, 17, \, 19, \, 20, \, 21, \, 24, \, 25, \, 27, \, 28, \, 32, \, 33, \, 35, \, 36, \, 40, \, 44, \, 45, \, 48, \, 60, \, 84.$$
+Aquí para evitar las redundancias, se consideran $n \not\equiv 2 \pmod{4}$
+(sino, $\QQ (\zeta_n) = \QQ (\zeta_{n/2})$ para $n \equiv 2 \pmod{4}$).
+Para la prueba véase \cite[Chapter 11]{Washington-GTM83}.
+
+\vspace{1em}
+
+La \textbf{teoría de Iwasawa} es una rama de la teoría de números que se origina
+en el estudio de grupos de clases de campos ciclotómicos. Un texto introductorio
+en español sobre el tema es \cite{Futterer-Villanueva}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1200,7 +1682,6 @@ particular relacionado con los campos cuadráticos reales.
 **TODO**
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\fi
 
 \pagebreak
 
@@ -1233,4 +1714,16 @@ particular relacionado con los campos cuadráticos reales.
   Demuestre que
   $$a_n = \left(\frac{n^n}{n!}\right)^2\,\left(\frac{\pi}{4}\right)^n$$
   crece con $n$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Supongamos que $d = p_1\cdots p_s$, donde $s > 1$ y los $p_i$ son diferentes
+  primos y consideremos el campo cuadrático imaginario $K = \QQ (\sqrt{-d})$.
+  Demuestre que los ideales correspondientes
+  $\mathfrak{p}_1,\ldots,\mathfrak{p}_s \subset \O_K$ generan un subgrupo en
+  $\Cl (K)$ isomorfo a $(\ZZ/2\ZZ)^{s-1}$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Demuestre que para $K = \QQ (\sqrt{21})$ se tiene $\Cl (K) = 0$.
 \end{ejercicio}
