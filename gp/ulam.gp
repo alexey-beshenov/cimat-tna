@@ -27,14 +27,24 @@ draw_square (p,x) = {
 
 /* ---------------------------------------------------------------------- */
 
-ulam (r) = {
+draw_line (x,y) = {
+  local (px, py);
+  printf ("  \\draw (%d+1/2,%d+1/2) -- (%d+1/2,%d+1/2);\n", real(x), imag(x), real(y), imag(y))
+};
+
+/* ---------------------------------------------------------------------- */
+
+ulam (r, {line=0}) = {
   local (dir = 1, pos, n=1);
 
   for (len = 1, r+1,
     for (i = 1,2,
       for (j = 1, len,
-      	if (isprime (n),
-	  draw_square (n,pos);
+        if (line,
+	  draw_line (pos, pos+dir),
+      	  if (isprime (n),
+	    draw_square (n,pos);
+	  );
 	);
 
         pos = pos + dir;
@@ -45,8 +55,11 @@ ulam (r) = {
   );
 
   for (j = 1, r+1,
-    if (isprime (n),
-      draw_square (n,pos);
+    if (line,
+      draw_line (pos, pos+dir),
+        if (isprime (n),
+	  draw_square (n,pos);
+	);
     );
 
     pos = pos + dir;
@@ -57,3 +70,4 @@ ulam (r) = {
 /* ---------------------------------------------------------------------- */
 
 ulam (spiral_radius);
+/* ulam (spiral_radius, 1); */
