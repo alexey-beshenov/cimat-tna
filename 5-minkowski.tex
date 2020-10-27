@@ -943,6 +943,20 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
   \textbf{número de clases} de $K$.
 \end{definicion}
 
+\begin{comentario}
+  \label{com:clases-representadas-por-ideales-primos}
+  Se puede probar que todo elemento de $\Cl (K)$ tiene forma $[\mathfrak{p}]$
+  para algún \emph{ideal primo} $\mathfrak{p} \subset \O_K$.
+
+  Este es un resultado sutil porque es cierto para $\O_K$ y no se cumple para
+  los dominios de Dedekind en general, así que no es un asunto de álgebra
+  conmutativa sino de la aritmética. Esto se sigue del teorema que afirma que
+  los ideales primos que están en una clase fija en $\Cl (K)$ tienen densidad
+  $\frac{1}{h_K}$. Como todos los teoremas densidad, esto se demuestra
+  considerando ciertas funciones $L$. Véase por ejemplo
+  \cite[\S VII.13]{Neukirch-ANT}.
+\end{comentario}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Ejemplo: campos cuadráticos imaginarios}
@@ -950,16 +964,18 @@ $$\Cl (K) = \Pic (\O_K) = \mathcal{I} (\O_K) / \mathcal{P} (\O_K).$$
 \begin{ejemplo}
   Consideremos los campos cuadráticos imaginarios $K = \QQ (\sqrt{-d})$.
   En este caso $n = 2$ y $r_2 = 1$, así que la cota de Minkowski será
-  $M_K = \frac{2}{\pi}\,\sqrt{|\Delta_K|}$.
+  $M_K = \frac{2}{\pi}\,\sqrt{|\Delta_K|}$, donde
+  \[ \Delta_K = \begin{cases}
+    -4d, & \text{si }d \equiv 1,2\pmod{4},\\
+    -d, & \text{si }d \equiv 3\pmod{4}.
+  \end{cases} \]
 
   \begin{center}\renewcommand{\arraystretch}{1.5}
     \begin{tabular}{rx{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}x{1cm}}
       \hline
-      $d\colon$ & $-1$ & $-2$ & $-3$ & $-5$ & $-6$ & $-7$ & $-10$ & $-11$ & $-13$ & $-14$ \tabularnewline
+      $d\colon$ & $1$ & $2$ & $3$ & $5$ & $6$ & $7$ & $10$ & $11$ & $13$ & $14$ \tabularnewline
       \hline
-      $\Delta_{\QQ (\sqrt{d})}\colon$ & $-4$ & $-8$ & $-3$ & $-20$ & $-24$ & $-7$ & $-40$ & $-11$ & $-52$ & $-56$ \tabularnewline
-      \hline
-      $M_{\QQ (\sqrt{d})}\colon$ & $1.27$ & $1.80$ & $1.10$ & $2.85$ & $3.12$ & $1.68$ & $4.03$ & $2.11$ & $4.59$ & $4.76$ \tabularnewline
+      $M_{\QQ (\sqrt{-d})}\colon$ & $1.27$ & $1.80$ & $1.10$ & $2.85$ & $3.12$ & $1.68$ & $4.03$ & $2.11$ & $4.59$ & $4.76$ \tabularnewline
       \hline
     \end{tabular}
   \end{center}
@@ -1083,14 +1099,14 @@ Esto nos lleva al siguiente resultado.
 Otra observación curiosa: si $d$ no es primo, entonces $\Cl (K) \ne 0$.
 
 \begin{proposicion}
-  Si $d$ es un número compuesto y $p_i \mid d$, entonces el ideal
-  $\mathfrak{p}_i \mid p_i$ representa un elemento de orden $2$ en $\Cl (K)$.
+  Si $d$ es un número compuesto y $p \mid d$, entonces el ideal
+  $\mathfrak{p} \mid p$ representa un elemento de orden $2$ en $\Cl (K)$.
 
   \begin{proof}
-    Tenemos $\mathfrak{p}_i^2 = p_i \O_K$. En el caso que nos interesa $d > 3$,
-    y luego $\O_K^\times = \{ \pm 1 \}$. Si $\mathfrak{p}_i$ fuera principal,
-    tendríamos $\sqrt{\pm p_i} \in K$, pero esto implicaría
-    $K = \QQ (\sqrt{\pm p_i})$, lo cual no es cierto por nuestra hipótesis.
+    Tenemos $\mathfrak{p}^2 = p \O_K$. En el caso que nos interesa $d > 3$,
+    y luego $\O_K^\times = \{ \pm 1 \}$. Si $\mathfrak{p}$ fuera principal,
+    tendríamos $\sqrt{\pm p} \in K$, pero esto implicaría
+    $K = \QQ (\sqrt{\pm p})$, lo cual no es cierto por nuestra hipótesis.
   \end{proof}
 \end{proposicion}
 
@@ -1111,7 +1127,7 @@ un subgrupo en $\Cl (K)$ isomorfo a $(\ZZ/2\ZZ)^{s-1}$.
   Otro ejemplo: para
   $K = \QQ (\sqrt{-3\cdot 5\cdot 7\cdot 11\cdot 13\cdot 17\cdot 19})$
   tenemos
-  $\Delta = -4\cdot 3\cdot 5\cdot 7\cdot 11\cdot 13\cdot 17\cdot 19$,
+  $\Delta_K = -4\cdot 3\cdot 5\cdot 7\cdot 11\cdot 13\cdot 17\cdot 19$,
   y el grupo de clases (calculado con la computadora) es
   $$\Cl (K) \cong \ZZ/24\ZZ \oplus (\ZZ/2\ZZ)^6.$$
   El rango de $2$-torsión es $7$, como nos dice el teorema de Gauss.
@@ -1206,12 +1222,25 @@ del número de clases de $\QQ (\sqrt{-p})$.
 
 \begin{teorema}[Dirichlet]
   Sea $p > 3$ un primo tal que $p \equiv 3 \pmod{4}$. Consideremos el campo
-  cuadrático imaginario $K = \QQ (\sqrt{-p})$. Si $p \equiv 3 \pmod{8}$,
+  cuadrático imaginario $K = \QQ (\sqrt{-p})$. Si $p \equiv 7 \pmod{8}$,
   entonces
   $$h_K = \sum_{1 \le a < p/2} \legendre{a}{p},$$
-  y si $p \equiv 7 \pmod{8}$, entonces
+  y si $p \equiv 3 \pmod{8}$, entonces
   $$h_K = \frac{1}{3}\,\sum_{1 \le a < p/2} \legendre{a}{p}.$$
 \end{teorema}
+
+\begin{ejemplo}
+  Si $p = 7$, entonces
+  $$\legendre{1}{7} + \legendre{2}{7} + \legendre{3}{7} = 1 + 1 - 1 = 1$$
+  (tenemos $3^2 \equiv 2 \pmod{7}$).
+
+  Si $p = 11$, entonces
+  $$\legendre{1}{11} + \legendre{2}{11} + \legendre{3}{11} + \legendre{4}{11} + \legendre{5}{11} = 1 - 1 + 1 + 1 + 1 = 3$$
+  (note que $5^2 \equiv 3$ y $4^2 \equiv 5 \pmod{11}$).
+
+  De estos cálculos se sigue que $\Cl (\QQ (\sqrt{-7})) = 0$ y
+  $\Cl (\QQ (\sqrt{-11})) = 0$.
+\end{ejemplo}
 
 Estas fórmulas tienen que ver con el siguiente fenómeno: aunque en
 $\FF_p^\times$ hay el mismo número de cuadrados y no-cuadrados, resulta que
@@ -1270,11 +1299,10 @@ $K = \QQ (\sqrt{-d})$ con $\Cl (K) = 0$ corresponden a
 
 Esto fue conjeturado por Gauss. En 1936 Heilbronn y Linfoot probaron que a lo
 sumo existe un número más, pero en este caso $d > 10^9$.
-Kurt Heegner, Alan Baker, y Harold Stark probaron que este número no existe.
-La prueba de Heegner fue publicada en 1952, pero contenía menores omisiones y no
-fue aceptada hasta que Stark dio una prueba similar completa en 1967. Otra
-prueba totalmente diferente fue publicada por Alan Baker en 1966
-(véase \cite[Chapter~5]{Baker-1990}).
+Heegner, Baker, y Stark probaron que este número no existe. La prueba de
+Heegner fue publicada en 1952, pero contenía menores omisiones y no fue aceptada
+hasta que Stark dio una prueba similar completa en 1967. Otra prueba totalmente
+diferente fue publicada por Baker en 1966 (véase \cite[Chapter~5]{Baker-1990}).
 
 Los $d$ de arriba se conocen como los \textbf{números de Heegner}.
 Lamentablemente, Heegner falleció en 1965, antes de que su trabajo fuera
@@ -1282,6 +1310,7 @@ reconocido por la comunidad matemática\dots
 
 \vspace{1em}
 
+\begin{samepage}
 Gauss también hizo otras conjeturas:
 \begin{itemize}
 \item $h_{\QQ (\sqrt{-d})} \to \infty$ con $d \to \infty$.
@@ -1305,6 +1334,7 @@ Gauss también hizo otras conjeturas:
   pequeños valores de $h$ han sido enumerados gradualmente; por ejemplo,
   en \cite{Watkins-2004} se encuentra una tabla para $h \le 100$.
 \end{itemize}
+\end{samepage}
 
 Para la historia detrás de los campos cuadráticos imaginarios con $\Cl (K) = 0$,
 recomiendo el artículo \cite{Goldfeld-1985}.
@@ -1336,7 +1366,7 @@ primos para todo $x = 0, 1, \ldots, 39$.
   \end{tabular}
 \end{center}
 
-Para $x = 40$ se tiene $f (x) = 41^2$, así que este valor ya no es primo.
+Para $x = 40$ se tiene $f (40) = 41^2$, así que este valor ya no es primo.
 De todos modos, es sorprendente que hasta este punto salgan números primos.
 Este fenómeno tiene una explicación en la teoría algebraica de números.
 
@@ -1359,10 +1389,10 @@ Este fenómeno tiene una explicación en la teoría algebraica de números.
 Obviamente, esta observación es trivial si uno asume el teorema de
 Baker--Heegner--Stark sobre los campos $K = \QQ (\sqrt{-d})$ con $\Cl (K) = 0$,
 pero esto tampoco explicaría mucho\dots{} La prueba elemental que vamos a ver
-viene del artículo \cite{Ayoub-Chowla}. Empecemos por un par de lemas.
+viene del artículo \cite{Ayoub-Chowla}.
 
 \begin{lema}
-  \label{lema:Rabinowitsch-lema-1}
+  \label{lema:Rabinowitsch-lema}
   Si $\Cl (K) = 0$ y $q$ es un primo tal que $q < \frac{p+1}{4}$, entonces
   $\legendre{q}{p} = -1$.
 
@@ -1375,25 +1405,25 @@ viene del artículo \cite{Ayoub-Chowla}. Empecemos por un par de lemas.
     Por nuestra hipótesis, los ideales $\mathfrak{q}$ y
     $\overline{\mathfrak{q}}$ deben ser principales. Digamos que
     $\mathfrak{q}$ está generado por $a + b\,\frac{1+\sqrt{-p}}{2}$. Aquí
-    necesariamente $b \ne 0$. La norma sobre $\O_K$ viene dada por
-    $$N_{K/\QQ} \Bigl(a + b\,\frac{1+\sqrt{-p}}{2}\Bigr) = \frac{1}{4}\,((2a + b)^2 + pb^2),$$
-    pero esta expresión no puede ser igual a $q$ si $q < \frac{p+1}{4}$.
+    necesariamente $b \ne 0$, y luego
+    \[ q = N_{K/\QQ} (\mathfrak{q}) = N_{K/\QQ} \Bigl(a + b\,\frac{1+\sqrt{-p}}{2}\Bigr) = \frac{1}{4}\,((2a + b)^2 + pb^2) \ge \frac{p+1}{4}. \qedhere \]
   \end{proof}
 \end{lema}
 
 \begin{lema}
-  \label{lema:Rabinowitsch-lema-2}
-  Si $\Cl (K) = 0$, entonces el número $\frac{p+1}{4}$ debe ser primo.
+  Si $\Cl (K) = 0$, entonces $f (0) = \frac{p+1}{4}$ es primo.
 
   \begin{proof}
-    Supongamos que esto no es cierto y $q$ es un primo tal que
-    $q < \frac{1+p}{4}$ y $q \mid \frac{1+p}{4}$. Entonces
+    Si $\Cl (K) = 0$, entonces $\O_K$ es un dominio de factorización única.
+    Supongamos que existe un primo $q$ tal que
+    $q < \frac{1+p}{4}$ y $q \mid \frac{1+p}{4}$. En este caso
     $\legendre{q}{p} = \legendre{-p}{q} = -1$ por el lema anterior, y luego $q$
-    es inerte en $K$. Pero ahora, usando la hipótesis $\Cl (K) = 0$, sabemos que
-    $\O_K$ es un dominio de factorización única, y entonces
-    \[ q \mid \frac{p+1}{4} = \alpha\,\overline{\alpha} \Longrightarrow
-       q \mid \alpha \text{ o } q \mid \overline{\alpha}, \]
-    donde $\alpha = \frac{1 + \sqrt{-p}}{2}$. Esto es imposible.
+    es inerte en $K$, y por lo tanto un elemento primo en $\O_K$. Ahora
+    \[ q \mid \frac{p+1}{4} =
+       \left(\frac{1 + \sqrt{-p}}{2}\right)\,\left(\frac{1 - \sqrt{-p}}{2}\right)
+       \Longrightarrow
+       q \mid \left(\frac{1 \pm \sqrt{-p}}{2}\right). \]
+    Esto es imposible.
   \end{proof}
 \end{lema}
 
@@ -1403,7 +1433,7 @@ viene del artículo \cite{Ayoub-Chowla}. Empecemos por un par de lemas.
   y $q^2 \le f (x)$. Tenemos entonces la desigualdad
   $$4q^2 \le (2x + 1)^2 + p < \left(\frac{p+1}{2}\right)^2.$$
 
-  Por el lema \ref{lema:Rabinowitsch-lema-1}, tenemos $\legendre{q}{p} = -1$.
+  Por el lema \ref{lema:Rabinowitsch-lema}, tenemos $\legendre{q}{p} = -1$.
   Por otra parte,
   $$x^2 + x + \frac{p+1}{4} = aq$$
   para algún $a \in \ZZ$, y luego
@@ -1411,12 +1441,6 @@ viene del artículo \cite{Ayoub-Chowla}. Empecemos por un par de lemas.
   de donde $\legendre{-p}{q} = +1$. Pero bajo nuestra hipótesis
   $\legendre{-p}{q} = \legendre{q}{p}$. Contradicción.
 \end{proof}
-
-También es cierto que si para un primo $p \equiv 3 \pmod{4}$ el polinomio
-$f (x) = x^2 + x + \frac{p+1}{4}$ toma valores primos para
-$0 \le x < \frac{p-3}{4}$, entonces necesariamente
-$\Cl (\QQ (\sqrt{-p})) = 0$. Para una prueba elemental, véase por ejemplo
-\cite[Chapter~5]{Ribenboim-Friends}.
 
 \begin{ejemplo}
   Si en lugar de $p = 163$ tomamos $p = 67$, se obtiene el polinomio
@@ -1434,15 +1458,16 @@ $\Cl (\QQ (\sqrt{-p})) = 0$. Para una prueba elemental, véase por ejemplo
   \end{center}
 
   De la misma manera, para $p = 43$ se obtiene $f (x) = x^2 + x + 11$ que toma
-  valores primos para $x = 0,1,\ldots,10$.
+  valores primos para $x = 0,1,\ldots,9$.
 \end{ejemplo}
 
-Los números $\frac{p+1}{4}$ que dan lugar a $f (x) = x^2 + x + \frac{p+1}{4}$
-que toma valores primos para $0 \le x < \frac{p-3}{4}$ se conocen como los
-\textbf{números de la suerte de Euler}\footnote{\emph{Euler's lucky
-    numbers}.}. El teorema de Baker--Heegner--Stark nos dice que hay solo un
-número finito de números de la suerte: estos se obtienen de
-$p = 3, 7, 11, 19, 43, 67, 163$.
+Los primos $q$ que dan lugar a $f (x) = x^2 + x + q$ que toma valores primos
+para $x = 0,1,\ldots,q-2$ se conocen como los \textbf{números de la suerte de
+  Euler}\footnote{\emph{Euler's lucky numbers}.}. Tampoco es difícil probar que
+en este caso necesariamente se tiene $\Cl (\QQ (\sqrt{1 - 4q})) = 0$
+(véase \cite[Chapter~5]{Ribenboim-Friends}). Entonces, el teorema de
+Baker--Heegner--Stark implica que hay solo un número finito de números
+de la suerte: estos se obtienen de $p = 7, 11, 19, 43, 67, 163$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1470,8 +1495,8 @@ Minkowski será $\frac{1}{2}\,\sqrt{|\Delta_K|}$.
   ver otros casos de la tabla uno por uno.
 
   \begin{itemize}
-  \item Para $d = 6$, el primo $2$ se ramifica en $\O_K$: para
-    $\mathfrak{p}_2 = (2, \sqrt{6})$ tenemos $\mathfrak{p}_2^2 = 6\O_K$.
+  \item Para $d = 6$, el primo $2$ se ramifica en $\O_K$: tenemos
+    $2\O_K = \mathfrak{p}_2^2$, donde $\mathfrak{p}_2 = (2, \sqrt{6})$.
     Este ideal es principal: tenemos $\mathfrak{p}_2 = (2 + \sqrt{6})$.
     Para verlo, basta notar que
     $N_{K/\QQ} (2 + \sqrt{6}) = 2^2 - 6\cdot 1^2 = -2$, así que el elemento
@@ -1484,7 +1509,7 @@ Minkowski será $\frac{1}{2}\,\sqrt{|\Delta_K|}$.
   \item Para $d = 10$ tenemos
     $$2\O_K = \mathfrak{p}_2^2, \quad \mathfrak{p}_2 = (2, \sqrt{10})$$
     y
-    $$3\O_K = \mathfrak{p}_3\,\overline{\mathfrak{p}_3}, \quad \mathfrak{p}_3 = (3, 1+\sqrt{3}).$$
+    $$3\O_K = \mathfrak{p}_3\,\overline{\mathfrak{p}_3}, \quad \mathfrak{p}_3 = (3, 1+\sqrt{10}).$$
     Estos ideales no son principales. La norma es
     $N_{K/\QQ} (a + b\sqrt{10}) = a^2 - 10\,b^2$, y esta no puede ser igual
     a $2$ o $3$. Para verlo, basta por ejemplo reducir la norma módulo $5$.
@@ -1613,6 +1638,151 @@ en español sobre el tema es \cite{Futterer-Villanueva}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Campos con número de clases 2}
+\marginpar{\small Lectura\\ adicional}
+
+Ya sabemos que el anillo de enteros $\O_K$ es un dominio de factorización única
+si y solamente si se tiene ${h_K = 1}$. Recordemos que la factorización única
+significa que para todo elemento no nulo $\alpha \in \O_K$, si hay dos
+factorizaciones
+\[ \tag{*} \alpha = \pi_1 \cdots \pi_r = \pi_1' \cdots \pi_s', \]
+donde los $\pi_i$ y $\pi_j$ son irreducibles, entonces $r = s$, y salvo una
+permutación, los factores son asociados: $\pi_i \sim \pi_i'$ (lo que equivale a
+$\pi_i \O_K = \pi_i' \O_K$). Supongamos ahora que $\O_K$ no tiene factorización
+única, pero pidamos una propiedad más débil: dada una factorización en
+elementos irreducibles (*), se tiene $r = s$. La caracterización de esta
+propiedad fue obtenida por Leonard Carlitz en un breve artículo
+\cite{Carlitz-1960}.
+
+\begin{teorema}
+  La unicidad de longitud de factorización se cumple si y solamente si
+  $h_K = 1,2$.
+\end{teorema}
+
+Ya conocemos el caso de $h_K = 1$, así que vamos a suponer que
+$h_K > 1$. Primero asumamos que $h_K = 2$. Empecemos por la siguiente
+observación.
+
+\begin{lema}
+  Sea $K/\QQ$ un campo de números con $h_K = 2$. Supongamos que $\pi \in \O_K$
+  es un elemento irreducible que no es primo. Entonces,
+  $\pi\O_K = \mathfrak{q}\,\mathfrak{q}'$, donde
+  $\mathfrak{q}$ y $\mathfrak{q}'$ son ideales primos no principales
+  (no necesariamente distintos).
+
+  \begin{proof}
+    Consideramos una factorización en ideales primos
+    $$\pi\O_K = \mathfrak{p}_1 \cdots \mathfrak{p}_r\,\mathfrak{q}_1 \cdots \mathfrak{q}_s,$$
+    donde los ideales $\mathfrak{p}_i = \pi_i \O_K$ son principales y los
+    $\mathfrak{q}_j$ no son principales. Por nuestra hipótesis de que $h_K = 2$,
+    todos $\mathfrak{q}_j$ representan el mismo elemento no trivial
+    $[\mathfrak{q}]$ en el grupo de clases. La factorización de arriba nos dice
+    que $[\mathfrak{q}]^s = [\O_K]$, y luego $s$ es necesariamente par, así
+    que la factorización tiene forma
+    $$\pi\O_K = \mathfrak{p}_1 \cdots \mathfrak{p}_r\,\mathfrak{q}_1 \mathfrak{q}_1'\, \cdots \mathfrak{q}_t \mathfrak{q}_t'$$
+    (donde $t = s/2$). Pero ahora
+    $[\mathfrak{q}_j \mathfrak{q}_j'] = [\mathfrak{q}]^2 = [\O_K]$,
+    así que los ideales $\mathfrak{q}_j \mathfrak{q}_j' = \rho_j \O_K$ son
+    principales. Entonces, se obtiene una factorización
+    $$\pi \sim \pi_1 \cdots \pi_r\,\rho_1 \cdots \rho_t.$$
+    Aquí $\pi$ es irreducible, y el ideal $\pi \O_K$ no es principal por nuestra
+    hipótesis, así que se tiene $r = 0$, $t = 1$, y $\pi \sim \rho$. Esto nos da
+    la factorización deseada $\pi \O_K = \mathfrak{q}\,\mathfrak{q}'$.
+  \end{proof}
+\end{lema}
+
+Ahora ocupando el lema, supongamos que para $\alpha \ne 0$ hay dos
+factorizaciones en elementos irreducibles
+$$\alpha = \pi_1 \cdots \pi_r \rho_1 \cdots \rho_s = \pi_1' \cdots \pi_{r'}' \rho_1' \cdots \rho_{s'},$$
+donde los $\pi_i$ son primos y $\rho_j$ no lo son. El lema nos da entonces una
+factorización en ideales primos
+$$\alpha \O_K = \mathfrak{p}_1 \cdots \mathfrak{p}_r\,\mathfrak{q}_1 \cdots \mathfrak{q}_{2s} = \mathfrak{p}_1' \cdots \mathfrak{p}_{r'}'\,\mathfrak{q}_1' \cdots \mathfrak{q}_{2s'}',$$
+donde los $\mathfrak{p}_i$ son ideales principales y $\mathfrak{q}_j$ no lo son.
+Ahora por la unicidad de factorizaciones en ideales primos, esto implica que
+$r' = r$ y $s' = s$.
+
+\vspace{1em}
+
+Esta es una de las implicaciones del teorema de Carlitz, y la otra es más
+difícil: para esto necesitamos usar que toda clase en $\Cl (K)$ puede ser
+representada por un ideal primo (véase el comentario
+\ref{com:clases-representadas-por-ideales-primos}).
+
+Nos gustaría probar que si para las factorizaciones irreducibles en $\O_K$ se
+tiene la unicidad de longitud, entonces $h_K \le 2$. Para esto asumamos que
+$h_K > 2$. Esto nos deja dos posibilidades: o en el grupo de clases existe un
+elemento de orden $> 2$, o hay por lo menos dos distintos elementos de orden $2$.
+
+Primero, supongamos que algún elemento tiene orden $n > 2$. En este caso por el
+resultado mencionado, existen ideales primos $\mathfrak{p}_1$ y
+$\mathfrak{p}_2$, donde $[\mathfrak{p}_i]$ tiene orden $n$
+y $[\mathfrak{p}_2] = [\mathfrak{p}_1]^{-1}$, así que
+$$\mathfrak{p}_1^n = \pi_1 \O_K, \quad \mathfrak{p}_2^n = \pi_2 \O_K, \quad \mathfrak{p}_1\,\mathfrak{p}_2 = \rho \O_K.$$
+Aquí los elementos $\pi_1, \pi_2, \rho$ son necesariamente irreducibles. Por
+ejemplo, si $\pi_1 = \alpha\,\beta$ con $\alpha,\beta \notin \O_K^\times$,
+entonces
+$\pi_1 \O_K = \alpha \O_K \, \beta \O_K = \mathfrak{p}_1^\ell \mathfrak{p}_1^m$,
+donde $\mathfrak{p}_1^\ell = \alpha \O_K$ y $\mathfrak{p}_1^m = \beta \O_K$,
+$\ell,m > 0$ y $\ell + m = n$. Sin embargo, esto contradice el hecho de que
+$n$ es el orden de $\mathfrak{p}_1$ en el grupo de clases. Se obtiene entonces
+$\rho^n \sim \pi\,\pi'$, y estas son dos factorizaciones en elementos
+irreducibles de diferente longitud.
+
+Supongamos ahora que en el grupo de clases hay dos elementos de orden $2$.
+En este caso tenemos tres ideales primos
+$\mathfrak{p}_1,\mathfrak{p}_2,\mathfrak{p}_3$ donde
+$[\mathfrak{p}_i]$ son diferentes elementos de orden $2$ y
+$[\mathfrak{p}_3] = [\mathfrak{p}_1\mathfrak{p}_2]$, así que
+\[ \mathfrak{p}_1^2 = \pi_1 \O_K, \quad
+   \mathfrak{p}_2^2 = \pi_2 \O_K, \quad
+   \mathfrak{p}_3^2 = \pi_3 \O_K, \quad
+   \mathfrak{p}_1\mathfrak{p}_2\mathfrak{p}_3 = \pi \O_K, \]
+donde de nuevo se puede verificar que $\pi_1, \pi_2, \pi_3$ son elementos
+irreducibles. Pero ahora $\pi^2 \sim \pi_1\pi_2\pi_3$.
+
+Esto concluye la prueba del teorema de Carlitz. \qed
+
+\begin{ejemplo}
+  El grupo de clases de $K = \QQ (\sqrt{-14})$ es isomorfo a $\ZZ/4\ZZ$,
+  y podemos tomar como el generador la clase de
+  $\mathfrak{p}_3 = (3, 1 + \sqrt{-14})$. En este caso
+  $[\mathfrak{p}_3]^{-1} = [\overline{\mathfrak{p}_3}]$, y tenemos
+  \[ \mathfrak{p}_3^4 = (5 + 2\sqrt{-14}), \quad
+     \overline{\mathfrak{p}_3}^4 = (5 - 2\sqrt{-14}), \quad
+     \mathfrak{p}_3 \mathfrak{p}_3 = 3 \O_K. \]
+  Analizando las normas, no es difícil ver directamente que los elementos $3$ y
+  $5 \pm 2\sqrt{-14}$ son irreducibles en $\O_K = \ZZ [\sqrt{-14}]$. Ahora
+  $$3^4 = (5 + 2\sqrt{-14})\,(5 - 2\sqrt{-14})$$
+  son dos factorizaciones irreducibles de diferente longitud.
+\end{ejemplo}
+
+\begin{ejemplo}
+  El grupo de clases de $K = \QQ (\sqrt{-21})$ es isomorfo a
+  $\ZZ/2\ZZ \oplus \ZZ/2\ZZ$. En este caso
+  \[ 2\O_K = \mathfrak{p}_2^2, \quad
+     3\O_K = \mathfrak{p}_3^2, \quad
+     5\O_K = \mathfrak{p}_5 \, \overline{\mathfrak{p}_5}, \]
+  y $[\mathfrak{p}_2], [\mathfrak{p}_3], [\mathfrak{p}_5]$ son diferentes clases
+  no triviales: analizando $N_{K/\QQ} (a + b\sqrt{-21}) = a^2 + 21 b^2$,
+  se ve que no hay elementos de norma $2,3,5$.
+
+  Se tiene $[\mathfrak{p}_1\,\mathfrak{p}_2] = [\mathfrak{p}_5]$.
+  Específicamente,
+  $\mathfrak{p}_2 = (2, 1 + \sqrt{-21})$,
+  $\mathfrak{p}_3 = (3, \sqrt{-21})$,
+  $\mathfrak{p}_5 = (5, 2 + \sqrt{-21})$, y calculamos que
+  \[ \mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_5 = (3 - \sqrt{-21}), \quad
+     \mathfrak{p}_5^2 = (2 + \sqrt{-21}). \]
+  Los elementos $2$, $3$, $5$, $2 + \sqrt{-21}$, $3 - \sqrt{-21}$
+  son irreducibles: esto se sigue del hecho de que en $\O_K$ no hay elementos de
+  norma $2, 3, 5, 6, 10, 15$. Tenemos entonces factorizaciones irreducibles de
+  diferente longitud
+  \[ (3 - \sqrt{-21})^2 = 2\cdot 3\cdot (-2 - \sqrt{-21}). \qedhere \]
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\iffalse
 \section{Ecuación de Pell}
 
 Antes de probar el teorema de unidades de Dirichlet, vamos a ver su caso
@@ -1680,6 +1850,7 @@ particular relacionado con los campos cuadráticos reales.
 \section{Teorema de unidades de Dirichlet}
 
 **TODO**
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1726,4 +1897,12 @@ particular relacionado con los campos cuadráticos reales.
 
 \begin{ejercicio}
   Demuestre que para $K = \QQ (\sqrt{21})$ se tiene $\Cl (K) = 0$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $K/\QQ$ un campo de números. Demuestre que para cualquier ideal
+  $I \subset \O_K$ existe una extensión finita $L/K$ tal que el ideal
+  correspondiente $I\,\O_L$ es principal.
+
+  \noindent (Use que $[I]$ tiene orden finito en $\Cl (K)$.)
 \end{ejercicio}
