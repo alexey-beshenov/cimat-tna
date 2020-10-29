@@ -1,0 +1,107 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usetikzlibrary{calc}
+
+\newcounter{tarea}
+\setcounter{tarea}{8}
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}[tarea]
+
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\usepackage{framed}
+
+\usepackage{mathspec}
+
+\setmainfont{PT Serif}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\covol}{covol}
+\DeclareMathOperator{\vol}{vol}
+
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\Re}{\operatorname{Re}}
+
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+
+\title{Teoría de números algebraicos\\Tarea 8}
+\author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
+\date{28 de octubre de 2020}
+
+% \def\solutions{true}
+
+\begin{document}
+
+{\sffamily\bfseries\maketitle}
+
+\ifdefined\solutions
+\else
+\thispagestyle{empty}
+\fi
+
+\vspace{1em}
+
+\begin{ejercicio}
+  Demuestre que si $X$ es un conjunto convexo simétrico compacto tal que
+  $\vol X = 2^n\cdot \covol \Lambda$, entonces $X \cap \Lambda \ne \{ 0 \}$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para $t > 0$ consideremos el conjunto convexo simétrico
+  $$X_t = \{ (x_\tau)_\tau \in K_\RR \mid |x_\tau| < t\text{ para todo }\tau \}.$$
+  Calcule que
+  $$\vol (X_t) = 2^{r_1}\,(2\pi)^{r_2}\,t^n.$$
+\end{ejercicio}
+
+\begin{ejercicio}
+  Supongamos que $d = p_1\cdots p_s$, donde $s > 1$ y los $p_i$ son diferentes
+  primos y consideremos el campo cuadrático imaginario $K = \QQ (\sqrt{-d})$.
+  Demuestre que los ideales correspondientes
+  $\mathfrak{p}_1,\ldots,\mathfrak{p}_s \subset \O_K$ generan un subgrupo en
+  $\Cl (K)$ isomorfo a $(\ZZ/2\ZZ)^{s-1}$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Calcule los grupos de clases de campos
+  \[ \QQ (\sqrt{-110}), \quad
+     \QQ (\sqrt{-127}), \quad
+     \QQ (\sqrt{33}), \quad
+     \QQ (\sqrt[3]{19}), \quad
+     \QQ (\sqrt{-5}, \sqrt{-11}). \]
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $K/\QQ$ un campo de números. Demuestre que para cualquier ideal
+  $I \subset \O_K$ existe una extensión finita $L/K$ tal que el ideal
+  correspondiente $I\,\O_L$ es principal.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos una sucesión exacta corta de $R$-módulos
+  $$0 \to M' \xrightarrow{i} M \xrightarrow{p} M'' \to 0$$
+
+  \begin{enumerate}
+  \item[1)] Demuestre que si $M''$ es un $R$-módulo libre, entonces
+    el homomorfismo $p$ admite una \textbf{sección} $s\colon M'' \to M$
+    tal que $p\circ s = id_{M''}$.
+
+  \item[2)] Demuestre si existe una sección $s$ como arriba, entonces
+    $M'\oplus M'' \cong M$.
+  \end{enumerate}
+\end{ejercicio}
+
+\end{document}
