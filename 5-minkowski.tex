@@ -1783,11 +1783,13 @@ Esto concluye la prueba del teorema de Carlitz. \qed
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\iffalse
+\pdfbookmark{Clase 22 (28/10/20)}{clase-22}
 \section{Ecuación de Pell}
+\marginpar{\small Clase 22 \\ 28/10/20}
 
-Antes de probar el teorema de unidades de Dirichlet, vamos a ver su caso
-particular relacionado con los campos cuadráticos reales.
+Nuestro próximo objetivo es probar el teorema de unidades de Dirichlet, pero
+primero vamos a ver su caso particular relacionado con los campos cuadráticos
+reales.
 
 \begin{teorema}
   \label{thm:pell-minkowski}
@@ -1804,14 +1806,15 @@ particular relacionado con los campos cuadráticos reales.
     $$a + b\sqrt{d} \mapsto (a + b\sqrt{d}, a - b\sqrt{d}).$$
     Respecto a este encaje, las soluciones que nos interesan son los puntos
     del retículo $\Lambda$ en la hipérbola $xy = 1$. Sea $X$ un conjunto
-    convexo simétrico suficientemente grande para que
+    convexo simétrico acotado suficientemente grande para que
     $X \cap \Lambda \ne \{ 0 \}$. Según el teorema de Minkowski, hay que
     tomar $X$ tal que $\vol X > 4 \covol \Lambda$.
 
     Ahora para todo $\lambda > 0$ podemos considerar el conjunto
-    $X_\lambda = (\lambda, \lambda^{-1})\,X$. Este tiene el mismo volumen que
-    $X$, así que $X_\lambda \cap \Lambda \ne \{ 0 \}$
-    (véase la figura~\ref{fig:pell-minkowski})
+    $$X_\lambda = (\lambda, \lambda^{-1})\,X = \{ (\lambda x, \lambda^{-1} y) \mid (x,y) \in X \}.$$
+    Este tiene el mismo volumen que $X$, así que
+    $X_\lambda \cap \Lambda \ne \{ 0 \}$ (véase la
+    figura~\ref{fig:pell-minkowski})
 
     De esta manera para todo $\lambda > 0$ se obtiene un elemento
     $\alpha_\lambda \in \ZZ [\sqrt{d}]$. Los puntos que corresponden a
@@ -1846,12 +1849,254 @@ particular relacionado con los campos cuadráticos reales.
   \end{proof}
 \end{corolario}
 
+A continuación vamos a probar un resultado más preciso y para el anillo de
+enteros $\O_K$ de cualquier campo de números $K/\QQ$.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Teorema de unidades de Dirichlet}
 
-**TODO**
-\fi
+\begin{teorema}[Teorema de unidades de Dirichlet]
+  Sea $K/\QQ$ un campo de números con $r_1$ encajes reales y $2 r_2$ encajes
+  complejos. Entonces tenemos un isomorfismo (no canónico)
+  $$\O_K^\times \cong \mu_K \times \ZZ^{r_1 + r_2 - 1},$$
+  donde $\mu_K$ es el grupo finito de las raíces de unidad que están en $K$ y
+  $\ZZ^{r_1 + r_2 - 1}$ es la parte libre (escrita en la notación aditiva).
+\end{teorema}
+
+En otras palabras, existen \textbf{unidades fundamentales}
+$u_1,\ldots,u_{r_1+r_2-1} \in \O_K^\times$ tales que
+$$\O_K^\times = \mu_K \times \langle u_1\rangle\times \cdots \langle u_{r_1+r_2-1}\rangle.$$
+
+\begin{ejemplo}
+  Si $K = \QQ (\sqrt{d})$ es un campo cuadrático, hay dos diferentes
+  posibilidades. Si $d < 0$, entonces $r_1 = 0$ y $r_2 = 2$, y luego
+  $\O_K^\times$ es un grupo finito. Para las raíces de la unidad tenemos
+  $[\QQ (\zeta_n) : \QQ] = \phi (n)$, así que necesariamente
+  $\mu_K = \mu_2 (\CC) = \{ \pm 1 \}$, o
+  $\mu_4 (\CC) = \{ \pm 1, \pm i \}$ (si $d = -1$), o $\mu_6 (\CC)$
+  (si $d = -3$). Ya lo hemos visto porque en este caso $\O_K^\times$ se calcula
+  fácilmente usando la norma.
+
+  Notamos que $r_1 + 2 r_2 = [K : \QQ]$, así que el teorema de unidades nos dice
+  que las únicas extensiones no triviales $K/\QQ$ con el grupo de unidades
+  $\O_K^\times$ finito son los campos cuadráticos imaginarios.
+
+  Por otra parte, si $d > 1$, entonces $r_1 = 2$ y $r_2 = 0$. Las raíces de la
+  unidad reales son $\{ \pm 1 \}$, y el rango libre será igual a $1$. En este
+  caso si $u$ es un generador de la parte libre, entonces $\pm u^{\pm 1}$ son
+  también generadores, y normalmente como la unidad fundamental se toma el
+  generador $u > 1$. Esto es algo especial para los campos cuadráticos reales;
+  en general no hay manera canónica de escoger las unidades fundamentales.
+\end{ejemplo}
+
+Volviendo a lo que vimos al inicio del capítulo, consideremos el encaje
+$$\Phi\colon K \hookrightarrow K_\RR, \quad \alpha \mapsto (\tau (\alpha))_\tau.$$
+Este se restringe a un encaje
+\[ \Phi\colon K^\times \hookrightarrow K_\RR^\times
+   = \{ (z_\tau)_\tau \in K_\RR \mid z_\tau \ne 0 \}. \]
+Para pasar a grupos aditivos, vamos a tomar el logaritmo
+$$\log |\cdot|\colon K_\RR^\times \to \RR^{r_1 + r_2}.$$
+Esta aplicación envía cada coordenada $z_\tau$ a $\log |z_\tau|$. Puesto que
+$|z_{\overline{\sigma}}| = |\overline{z_\sigma}| = |z_\sigma|$, las coordenadas
+que corresponden a encajes complejos conjugadas no se repiten, y por esto
+la imagen es $\RR^{r_1 + r_2}$ y no es $\RR^{r_1 + 2r_2}$.
+
+Tenemos el siguiente diagrama conmutativo de homomorfismos de grupos abelianos:
+
+\[ \begin{tikzcd}
+  \O_K^\times\ar[right hook->]{d}\ar{rr}{L} & & H\ar[right hook->]{d} \\
+  K^\times \ar[right hook->]{r}{\Phi}\ar{d}[swap]{N_{K/\QQ}} & K_\RR^\times \ar{r}{\log |\cdot|} & \RR^{r_1 + r_2} \ar{d}{\phi}\ar[right hook->]{r} & \RR^n\ar{d}{\sum} \\
+  \QQ^\times \ar{rr}{\log |\cdot|} & & \RR \ar[equals]{r} & \RR
+\end{tikzcd} \]
+
+Aquí la aplicación $\phi$ viene dada por
+\[ (x_\tau)_\tau \mapsto \sum_\tau n_\tau \, x_\tau, \quad
+n_\tau = \begin{cases}
+  1, & \text{si }\tau \text{ es real},\\
+  2, & \text{si }\tau \text{ es complejo}.
+\end{cases} \]
+Luego, $H = \ker \phi$ es un subespacio de codimensión $1$ en $\RR^{r_1 + r_2}$;
+es decir, $\dim_\RR H = r_1 + r_2 - 1$. La aplicación $L$ es la restricción
+natural: si $\alpha \in \O_K^\times$, entonces
+$$|N_{K/\QQ} (\alpha)| = \prod_\tau |\tau (\alpha)| = 1,$$
+y luego
+$$\log |\Phi (\alpha)| = \sum_\tau \log |\tau (\alpha)| = 0.$$
+En fin, el homomorfismo $\sum$ es la suma de coordenadas.
+
+Primero calculemos el núcleo de $L$. Esto es bastante fácil: tenemos
+\[ \ker L = \{ \alpha \in \O_K^\times \mid
+   |\tau (\alpha)| = 1\text{ para todo encaje }
+   \tau\colon K\hookrightarrow \CC \}. \]
+Recordemos que $\Phi (\O_K)$ es un retículo en $K_\RR$; es decir un subgrupo
+discreto. La condición $|z_\tau| = 1$ define un subconjunto acotado
+en $K_\RR$, y allí cabe solamente un número finito de elementos de
+$\Phi (\O_K^\times) \subset \Phi (\O_K)$. Esto significa que $\ker L$ es un grupo
+finito, y entonces consiste en elementos de orden finito de $\O_K^\times$.
+Por otra parte, cualquier elemento de orden finito en $\O_K^\times$ se encaja en
+$\CC$ como una raíz de la unidad $\zeta_n^k = \exp (2\pi i k/n)$, y entonces
+está en $\ker L$. Esto demuestra que
+$$\ker L = (\O_K)_{tors} = \mu_\infty (\CC) \cap K = \mu_\infty (\CC) \cap \O_K = \mu_K$$
+es el subgrupo de las raíces de la unidad en $K$.
+
+Denotemos por $\Lambda$ la imagen de $L$ en $H$. Tenemos una sucesión exacta
+corta
+$$1 \to \mu_K \to \O_K^\times \xrightarrow{L} \Lambda \to 0$$
+Aquí siendo un subgrupo de un espacio vectorial real, $\Lambda$ es libre.
+Un resultado general nos dice que el homomorfismo $L$ admite una sección
+(no canónica) $s\colon \Lambda \to \O_K^\times$ tal que $L\circ s = id_\Lambda$,
+y luego se obtiene un isomorfismo (no canónico)
+$$\O_K^\times \cong \mu_K \times \Lambda.$$
+(Estas son generalidades del álgebra homológica básica; refiero al ejercicio
+\ref{ejerc:seccion-de-sec} para los detalles.)
+
+\vspace{1em}
+
+Nuestro objetivo será probar que $\Lambda$ es un retículo de rango completo en
+$H$, así que $\rk \Lambda = r_1 + r_2 - 1$. Con esto terminaríamos la
+demostración del teorema de unidades de Dirichlet.
+
+Para ver que $\Lambda$ es un retículo, tenemos que ver que este es un subgrupo
+discreto de $H$. Esto no es difícil: si tomamos un subconjunto acotado en $H$,
+este corresponde a ciertas cotas sobre $\log |\tau (\alpha)|$ para
+$\alpha \in \O_K^\times$, y luego cotas para los coeficientes del polinomio
+característico $f^\alpha_{K/\QQ} \in \ZZ [x]$, lo que nos da un número finito de
+los $\alpha$.
+
+Para ver que $\Lambda$ tiene rango completo, hay que trabajar más y emplear
+la teoría de Minkowski. Recordemos que $\Phi (\O_K)$ es un retículo en $K_\RR$
+de volumen $\sqrt{|\Delta_K|}$. Para $t > 0$ consideremos el conjunto
+$$X_t = \{ (x_\tau)_\tau \in K_\RR \mid |x_\tau| < t\text{ para todo }\tau \}.$$
+El volumen de $X_t$ (respecto a nuestra estructura euclidiana sobre $K_\RR$)
+es $2^{r_1}\,(2\pi)^{r_2}\,t^n$. Podemos escoger $t$ suficientemente grande
+para que $\vol (X_t) > 2^n\,\sqrt{|\Delta_K|}$.
+
+Consideremos el conjunto
+$$S = \{ (x_\tau)_\tau \in K_\RR^\times \mid \Bigl|\prod_\tau x_\tau\Bigr| = 1 \} \subset K_\RR^\times.$$
+Ahora para todo $s \in S$ por el teorema de Minkowski existe un entero no nulo
+$\alpha_s \in \O_K$ tal que $\Phi (\alpha_s) \in s\,X_t$. Aquí la multiplicación
+por $s$ se entiende coordenada por coordenada, y esta no afecta el volumen de
+$X_t$. (Recuerde la sección anterior donde se consideraban los conjuntos
+$(\lambda, \lambda^{-1})\,X$.) Entonces, $s \in \Phi (\alpha_s)^{-1}\,X_t$.
+
+Tenemos
+$$S \subseteq \bigcup_{s\in S} \Phi (\alpha_s)^{-1}\,X_t.$$
+
+Notamos que $\Phi (\alpha_s) \in s\,X_t$ implica que
+$$|N_{K/\QQ} (\alpha_s)| = \prod_\tau |\tau (\alpha_s)| < t^n.$$
+Hay un número finito de ideales $(\alpha_s)$ con la norma acotada por $t^n$, así
+que salvo multiplicación por unidades $u \in \O_K^\times$, hay solo un número
+finito de elementos $\alpha_s$. Entonces, existe un subconjunto finito
+$S_0 \subset S$ tal que
+$$S \subseteq \bigcup_{s \in S_0} \Phi (\alpha_s)^{-1}\,\Phi (\O_K^\times)\,X_t.$$
+
+Ahora la imagen de $S \subset K_\RR^\times$ respecto a $\log |\cdot|$ es
+precisamente el subespacio $H$, y la fórmula de arriba nos dice que
+$$H = \bigcup_{\omega \in \Lambda} Y + \omega,$$
+donde $Y$ es el conjunto acotado. Esto precisamente significa que $\Lambda$
+es un retículo completo, y hemos terminado nuestra prueba del teorema de
+unidades. \qed
+
+\vspace{1em}
+
+Notamos que la prueba usa el teorema de Minkowski, así que no es constructiva
+y no nos da explícitamente las unidades fundamentales.
+
+\begin{comentario}
+  Si $R \subset \O_K$ es un \textbf{orden}; es decir un $\ZZ$-submódulo de rango
+  $n = [K : \QQ] = \rk \O_K$, entonces todo lo que hemos probado se generaliza a
+  la fórmula $R^\times \cong \mu_R \times \ZZ^{r_1 + r_2 - 1}$. En este caso hay
+  que notar que $\Phi (R)$ es un retículo en $K_\RR$ de volumen
+  $\sqrt{|\Delta_R|}$.
+
+  Sin embargo, si $R \subset K$ es un anillo de números que no es un orden, el
+  teorema de unidades ya no se cumple. Por ejemplo, el mismo $\QQ$ no es un
+  grupo abeliano finitamente generado.
+
+  De hecho, el mismo Dirichlet probó el teorema para los órdenes de la forma
+  $\ZZ [\alpha] \subset \O_K$, donde $\alpha$ es un entero algebraico y
+  $K = \QQ (\alpha)$. Un artículo sobre las contribuciones de Dirichlet
+  es \cite{Elstrodt-2007}.
+\end{comentario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aplicación: unidades en \texorpdfstring{$\ZZ [\zeta_p]}{ℤ[ζₚ]}$}
+
+Para ver algún ejemplo interesante de grupos de unidades mas allá de los campos
+cuadráticos, consideremos el campo ciclotómico $K = \QQ (\zeta_n)$. En este caso
+$r_1 = 0$ y $r_2 = \phi(n)/2$. Tomemos el subcampo real fijo por la conjugación
+compleja $K^+ = \QQ (\zeta_n + \zeta_n^{-1})$. Para este se tiene
+$r_1 = \phi(n)/2$ y $r_2 = 0$; este es un campo \textbf{totalmente real}.
+
+\[ \begin{tikzcd}
+  \QQ (\zeta_p) \ar[-]{d}{2} \\
+  \QQ (\zeta_p + \zeta_p^{-1}) \ar[-]{d}{\phi(n)/2} \\
+  \QQ
+\end{tikzcd} \]
+
+Entonces, los grupos de unidades $\O_K^\times$ y $\O_{K^+}^\times$ tienen el
+mismo rango, y por lo tanto el índice $[\O_K^\times : \O_{K^+}^\times]$ es
+finito. De hecho, en el caso de $n = p$ un primo impar no es difícil entender
+cuál es el índice.
+
+\begin{proposicion}
+  Consideremos los campos $K = \QQ (\zeta_p)$ y
+  $K^+ = \QQ (\zeta_p + \zeta_p^{-1})$.
+
+  Toda unidad $u \in \O_K^\times$ puede ser escrita como
+  $u = \zeta_p^a\,u'$, donde $u' \in \O_{K^+}^\times$. Como consecuencia,
+  $[\O_K^\times : \O_{K^+}^\times] = p$.
+
+  \begin{proof}
+    Dada una unidad $u \in \O_K^\times$, consideremos el número
+    $\alpha = u/\overline{u}$. Para todo encaje
+    $\tau\colon K \hookrightarrow \CC$ tenemos
+    $|\tau (\alpha)| = |\tau (u)|/|\overline{\tau (u)}| = 1$, así que
+    $\alpha \in \mu_K$. Esto significa que $\alpha = \pm\zeta_p^k$.
+
+    En realidad, el signo debe ser «$+$». Recordemos que arriba de $p$ en $K$
+    está el ideal primo $\mathfrak{p} = (\zeta_p - 1)$ y
+    $p\O_K = (\zeta_p - 1)^{p-1}$. Ahora
+    $$u = \sum_k a_k\,\zeta_p^k \equiv \sum_k a_k \pmod{\mathfrak{p}},$$
+    y de la misma manera
+    $$\overline{u} \equiv \sum_k a_k \pmod{\mathfrak{p}} \equiv u.$$
+    Si $u/\overline{u} \equiv -\zeta_p^k$, esto implicaría que
+    $1 = -1$ en $\ZZ [\zeta_p]/\mathfrak{p} \cong \FF_p$ pero $p$ es un primo
+    impar\dots{} Entonces, $u/\overline{u} = +\zeta_p^k$ para algún
+    $k$. Escojamos $a\in \ZZ$ tal que $2 a \equiv k \pmod{p}$ y pongamos $u' =
+    \zeta_p^{-a}\,u$. En este caso tenemos $u = \zeta_p^a\,u'$, y además,
+    $\overline{u'} = u'$, así que $u' \in \O_{K^+}^\times$.
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  Si $p = 5$, tenemos el campo ciclotómico $K = \QQ (\zeta_5)$ de grado $4$ y el
+  subcampo cuadrático real $K^+ = \QQ (\sqrt{5})$ con
+  $\O_{K^+}^\times = \ZZ \Bigl[\frac{1+\sqrt{5}}{2}\Bigr]$. En este caso la
+  unidad fundamental será
+  $$\phi = \frac{1+\sqrt{5}}{2} = -(\zeta_5^2 + \zeta_5^3)$$
+  (véase \S\ref{sec:ecuacion-de-Pell}). Entonces, las unidades en $\O_K$ tienen
+  forma $\pm \zeta_5\,(\zeta_5^2 + \zeta_5^3)^n$ para $n \in \ZZ$.
+  Multiplicando la unidad fundamental $\zeta_5^2 + \zeta_5^3$ por $\zeta_5^3$,
+  podemos cambiarla por otra unidad fundamental $1 + \zeta_5$. Como conclusión,
+  \[ \O_K^\times = \mu_{10} (\CC) \times \langle 1 + \zeta_5\rangle. \qedhere \]
+\end{ejemplo}
+
+Cabe mencionar que $\QQ (\zeta_n)$ es un ejemplo de algo que se llama
+\textbf{campo con multiplicación compleja} o \textbf{campo CM}. En general,
+$K/\QQ$ es un campo con multiplicación compleja si $K$ es totalmente imaginario
+($r_1 = 0$, $r_2 = [K : \QQ]/2$) y existe un subcampo $F \subset K$ tal que
+$[K : F] = 2$ y $F$ es totalmente real ($r_1 = [F : \QQ]$ y $r_2 = 0$).
+Del teorema de unidades se sigue que el índice $[\O_K^\times : \O_F^\times]$
+es finito en este caso.
+
+\vspace{1em}
+
+\noindent\emph{A continuación veremos cómo calcular $\Cl (K)$ y $\O_K^\times$ en
+  PARI/GP, y también cómo las fracciones continuas ayudan a encontrar la unidad
+  fundamental para los campos cuadráticos reales $K = \QQ (\sqrt{d})$. Estos
+  son mis planes para el resto de este capítulo.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -1889,6 +2134,13 @@ particular relacionado con los campos cuadráticos reales.
 \end{ejercicio}
 
 \begin{ejercicio}
+  Para $t > 0$ consideremos el conjunto convexo simétrico
+  $$X_t = \{ (x_\tau)_\tau \in K_\RR \mid |x_\tau| < t\text{ para todo }\tau \}.$$
+  Calcule que
+  $$\vol (X_t) = 2^{r_1}\,(2\pi)^{r_2}\,t^n.$$
+\end{ejercicio}
+
+\begin{ejercicio}
   Supongamos que $d = p_1\cdots p_s$, donde $s > 1$ y los $p_i$ son diferentes
   primos y consideremos el campo cuadrático imaginario $K = \QQ (\sqrt{-d})$.
   Demuestre que los ideales correspondientes
@@ -1897,7 +2149,12 @@ particular relacionado con los campos cuadráticos reales.
 \end{ejercicio}
 
 \begin{ejercicio}
-  Demuestre que para $K = \QQ (\sqrt{21})$ se tiene $\Cl (K) = 0$.
+  Calcule los grupos de clases de campos
+  \[ \QQ (\sqrt{-110}), \quad
+     \QQ (\sqrt{-127}), \quad
+     \QQ (\sqrt{33}), \quad
+     \QQ (\sqrt[3]{19}), \quad
+     \QQ (\sqrt{-5}, \sqrt{-11}). \]
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -1906,4 +2163,19 @@ particular relacionado con los campos cuadráticos reales.
   correspondiente $I\,\O_L$ es principal.
 
   \noindent (Use que $[I]$ tiene orden finito en $\Cl (K)$.)
+\end{ejercicio}
+
+\begin{ejercicio}
+  \label{ejerc:seccion-de-sec}
+  Consideremos una sucesión exacta corta de $R$-módulos
+  $$0 \to M' \xrightarrow{i} M \xrightarrow{p} M'' \to 0$$
+
+  \begin{enumerate}
+  \item[1)] Demuestre que si $M''$ es un $R$-módulo libre, entonces
+    el homomorfismo $p$ admite una \textbf{sección} $s\colon M'' \to M$
+    tal que $p\circ s = id_{M''}$.
+
+  \item[2)] Demuestre si existe una sección $s$ como arriba, entonces
+    $M'\oplus M'' \cong M$.
+  \end{enumerate}
 \end{ejercicio}
