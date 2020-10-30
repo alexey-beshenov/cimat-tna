@@ -2086,17 +2086,278 @@ cuál es el índice.
 Cabe mencionar que $\QQ (\zeta_n)$ es un ejemplo de algo que se llama
 \textbf{campo con multiplicación compleja} o \textbf{campo CM}. En general,
 $K/\QQ$ es un campo con multiplicación compleja si $K$ es totalmente imaginario
-($r_1 = 0$, $r_2 = [K : \QQ]/2$) y existe un subcampo $F \subset K$ tal que
-$[K : F] = 2$ y $F$ es totalmente real ($r_1 = [F : \QQ]$ y $r_2 = 0$).
-Del teorema de unidades se sigue que el índice $[\O_K^\times : \O_F^\times]$
-es finito en este caso.
+($r_1 (K) = 0$, $r_2 (K) = [K : \QQ]/2$), y existe un subcampo $F \subset K$ tal
+que $[K : F] = 2$ y $F$ es totalmente real
+($r_1 (F) = [F : \QQ]$ y $r_2 (F) = 0$). Del teorema de unidades se sigue que
+el índice $[\O_K^\times : \O_F^\times]$ es finito en este caso. Esto puede pasar
+solamente con los campos con multiplicación compleja.
 
-\vspace{1em}
+\begin{proposicion}[Einheitsdefekt]
+  Supongamos que $\QQ \subset F \subsetneq K$ son campos tales que
+  $[\O_K^\times : \O_F^\times]$ es finito. En este caso necesariamente $F$ es un
+  campo totalmente real, $K$ totalmente imaginario, y $[K : F] = 2$.
 
-\noindent\emph{A continuación veremos cómo calcular $\Cl (K)$ y $\O_K^\times$ en
-  PARI/GP, y también cómo las fracciones continuas ayudan a encontrar la unidad
-  fundamental para los campos cuadráticos reales $K = \QQ (\sqrt{d})$. Estos
-  son mis planes para el resto de este capítulo.}
+  \begin{proof}
+    Si $\rk \O_K^\times = \rk \O_F^\times$, entonces por el teorema de Dirichlet
+    $$r_1 (K) + r_2 (K) = r_1 (F) + r_2 (F).$$
+    Ahora, denotando $n = [K : F]$,
+    \[ r_1 (K) + 2\,r_2 (K) = [K : \QQ] = n\,[F : \QQ] =
+       n\,r_1 (F) + 2n\,r_2 (F). \]
+    De aquí expresamos
+    $$r_2 (K) = (n-1)\,r_1 (F) + (2n - 1)\,r_2 (F),$$
+    y luego
+    \[ r_1 (K) = r_1 (F) + r_2 (F) - r_2 (K) =
+       (2-n)\,r_1 (F) + (2 - 2n)\,r_2 (F). \]
+    Dado que $r_1, r_2 \ge 0$, esto implica que necesariamente $n = 2$
+    y $r_2 (F) = r_1 (K) = 0$.
+  \end{proof}
+\end{proposicion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pdfbookmark{Clase 23 (04/11/20)}{clase-23}
+\section{Cálculo del grupo de clases y unidades en PARI/GP}
+\marginpar{\small Clase 23 \\ 04/11/20}
+
+En esta sección explicaré brevemente cómo calcular el grupo de clases $\Cl (K)$
+y grupo de unidades $\O_K^\times$ en PARI/GP. Mientras los invariantes básicos
+como el anillo de enteros $\O_K$ y el discriminante $\Delta_K$ se calculan
+mediante la función \texttt{nfinit($f$)}, ahora necesitaremos otra función más
+poderosa \texttt{bnfinit($f$)}. Aquí «\texttt{nf}» como antes viene de
+«number field», mientras que «\texttt{b}» se debe al hecho de que los cálculos
+de $\Cl (K)$ y $\O_K^\times$ se hacen mediante un algoritmo diseñado por
+Johannes Buchmann. Todas las funciones que aceptan la estructura calculada por
+\texttt{nfinit} también aceptan la estructura de \texttt{bnfinit} que es
+más general.
+
+Ahora si \texttt{$K$ = bnfinit($f$)}, entonces los invariantes que nos interesan
+son los siguientes:
+\begin{itemize}
+\item \texttt{$K$.clgp} --- el grupo de clases,
+\item \texttt{$K$.no} --- el número de clases $h_K = \# \Cl (K)$,
+\item \texttt{$K$.cyc} --- vector \texttt{[$a_1$,\ldots,$a_n$]}, tal que
+  $\Cl (K) \cong \ZZ/a_1\ZZ \times \cdots \times \ZZ/a_n\ZZ$.
+\item \texttt{$K$.gen} --- el generador de cada componente cíclica del
+  grupo de clases, representado en la forma normal de Hermite,
+\item \texttt{$K$.tu} --- las raíces de la unidad; vector
+  \texttt{[$n$,$\zeta$]}, donde $n$ es el orden del grupo $\mu_K$ y $\zeta$
+  su generador;
+\item \texttt{$K$.fu} --- las unidades fundamentales.
+\end{itemize}
+(Aquí «\texttt{tu}» son \emph{torsion units} y «\texttt{fu}» son
+\emph{fundamental units}.)
+
+Por ejemplo, si nos interesa el campo $K = \QQ (\sqrt[3]{19})$.
+
+\begin{shaded}
+\begin{verbatim}
+? K = bnfinit(x^3-19);
+? K.no
+% = 3
+? K.cyc
+% = [3]
+? K.gen
+% = [[2, 1, 1; 0, 1, 0; 0, 0, 1]]
+? P = K.gen[1];
+? idealdown(K,P)
+% = 2
+? K.fu
+% = [Mod(-1/3*x^2 + 2/3*x + 2/3, x^3 - 19)]
+? K.tu
+% = [2, -1]
+? K.fu
+% = [Mod(-1/3*x^2 + 2/3*x + 2/3, x^3 - 19)]
+\end{verbatim}
+\end{shaded}
+
+Interpretación de la salida:
+$$\Cl (\QQ (\sqrt[3]{19})) \cong \ZZ/3\ZZ,$$
+donde como el generador se puede tomar un ideal $\mathfrak{p}$ que está arriba
+de $p = 2$. El grupo de unidades es
+\[ \O_K^\times \cong \{ \pm 1 \} \times \langle u\rangle, \quad
+   u = \frac{2}{3} + \frac{2}{3}\,19^{1/3} - \frac{1}{3}\,19^{2/3}. \]
+
+Por ejemplo, podemos compilar las listas de campos cuadráticos imaginarios con
+$h_K = 1,2,3$. Vamos a tomar $K = \QQ (\sqrt{d})$ con $d \le 10^4$. De hecho,
+estas serán las listas completas.
+
+\begin{shaded}\small
+\begin{verbatim}
+? l = vector(3,x,List())
+%65 = [List([]), List([]), List([])]
+? { for (d=1,10^4,
+      if (issquarefree(d),
+        n = bnfinit(x^2+d).no;
+        if (n <= 3, listput (l[n],d))
+      )
+) };
+
+? l[1]
+% = List([1, 2, 3, 7, 11, 19, 43, 67, 163])
+? l[2]
+% = List([5, 6, 10, 13, 15, 22, 35, 37, 51, 58, 91, 115, 123, 187, 235, 267, 403, 427])
+? #l[2]
+% = 18
+? l[3]
+% = List([23, 31, 59, 83, 107, 139, 211, 283, 307, 331, 379, 499, 547, 643, 883, 907])
+? #l[3]
+% = 16
+\end{verbatim}
+\end{shaded}
+
+Calculemos los grupos de clases de algunos campos ciclotómicos.
+
+\begin{shaded}
+\begin{verbatim}
+? for (n=3,50, if (n%4 != 2, print ([n, bnfinit(polcyclo(n)).cyc])))
+[3, []]
+[4, []]
+[5, []]
+[7, []]
+[8, []]
+[9, []]
+[11, []]
+[12, []]
+[13, []]
+[15, []]
+[16, []]
+[17, []]
+[19, []]
+[20, []]
+[21, []]
+[23, [3]]
+[24, []]
+[25, []]
+[27, []]
+[28, []]
+[29, [2, 2, 2]]
+[31, [9]]
+[32, []]
+[33, []]
+[35, []]
+[36, []]
+  ***   at top-level: ...=3,50,if(n%4!=2,print([n,
+  ***   bnfinit(polcyclo(n)).
+  ***   ^---------------------
+  *** bnfinit: the PARI stack overflows !
+  current stack size: 8000000 (7.629 Mbytes)
+  [hint] set 'parisizemax' to a nonzero value in your GPRC
+
+  ***   Break loop: type 'break' to go back to GP 
+  ***   prompt
+\end{verbatim}
+\end{shaded}
+
+Aquí PARI/GP ya no pudo calcular el grupo de clases de $\QQ (\zeta_{37})$:
+no le bastó la memoria disponible (el tamaño de la pila). Se puede aumentarlo
+ocupando el comando \texttt{default(parisizemax,\dots)}, pero hay que tomar en
+cuenta que los grupos de clases de campos ciclotómicos suelen ser bastante
+grandes, y su cálculo requiere tiempo y memoria.
+
+\begin{shaded}
+\begin{verbatim}
+? default(parisizemax,10^10)
+  ***   Warning: new maximum stack size = 10000003072 (9536.746 Mbytes).
+? #
+   timer = 1 (on)
+? bnfinit(polcyclo(37)).cyc
+  *** bnfinit: Warning: increasing stack size to 16000000.
+cpu time = 1,690 ms, real time = 1,711 ms.
+% = [37]
+? bnfinit(polcyclo(41)).cyc
+  *** bnfinit: Warning: increasing stack size to 16000000.
+  *** bnfinit: Warning: increasing stack size to 32000000.
+cpu time = 3,329 ms, real time = 3,355 ms.
+% = [11, 11]
+? bnfinit(polcyclo(43)).cyc
+  *** bnfinit: Warning: increasing stack size to 16000000.
+  *** bnfinit: Warning: increasing stack size to 32000000.
+  *** bnfinit: Warning: increasing stack size to 64000000.
+cpu time = 6,524 ms, real time = 6,646 ms.
+% = [211]
+? bnfinit(polcyclo(47)).cyc
+  *** bnfinit: Warning: increasing stack size to 16000000.
+  *** bnfinit: Warning: increasing stack size to 32000000.
+  *** bnfinit: Warning: increasing stack size to 64000000.
+  *** bnfinit: Warning: increasing stack size to 128000000.
+cpu time = 12,276 ms, real time = 12,435 ms.
+% = [695]
+\end{verbatim}
+\end{shaded}
+
+Otras funciones útiles:
+\begin{itemize}
+\item \texttt{bnfisprincipal($K$,$\mathfrak{a}$)} --- verifica si el ideal
+  $\mathfrak{a}$ es principal en $\O_K$. La salida será un vector
+  \texttt{[$e$,$t$]}, donde $e = 0$ si y solamente si $\mathfrak{a}$ es
+  principal (es decir, $[\mathfrak{a}] = [\O_K]$).
+
+\item \texttt{bnfisintnorm($K$,$n$)} --- devuelve todos los elementos
+  $\alpha \in \O_K$ con $N_{K/\QQ} (\alpha) = n$, módulo unidades
+  $u \in \O_K^\times$ con $N_{K/\QQ} (u) = +1$.
+\end{itemize}
+
+Por ejemplo, supongamos que nos interesa el grupo de clases de
+$K = \QQ (\sqrt{-6})$. Calculemos la cota de Minkowski y factorizaciones de
+ideales primos correspondientes.
+
+\begin{shaded}
+\begin{verbatim}
+? K = bnfinit(x^2+6);
+? 2/Pi * sqrt(abs(K.disc))
+% = 3.1187872049347044316234722010930270438
+? P2 = idealprimedec(K,2)[1]
+% = [2, [0, 1]~, 2, 1, [0, -6; 1, 0]]
+? P3 = idealprimedec(K,3)[1]
+% = [3, [0, 1]~, 2, 1, [0, -6; 1, 0]]
+? bnfisprincipal(K,P2)
+% = [[1]~, [-1, 0]~]
+? bnfisprincipal(K,P3)
+% = [[1]~, [0, 1/2]~]
+? bnfisintnorm(K,2)
+% = []
+? bnfisintnorm(K,3)
+% = []
+? bnfisprincipal(K,idealdiv(K,P2,P3))
+% = [[0]~, [0, -1/3]~]
+\end{verbatim}
+\end{shaded}
+
+Aquí arriba de $2$ y $3$ están ideales primos $\mathfrak{p}_2$ y
+$\mathfrak{p}_3$ respectivamente. Verificamos que estos no son principales.
+El motivo: en $\O_K$ no hay elementos de norma $2$ y $3$. Luego verificamos
+que el ideal $\mathfrak{p}_2\,\mathfrak{p}_3^{-1}$ sí es principal; es decir,
+$[\mathfrak{p}_2] = [\mathfrak{p}_3]$.
+
+Recomiendo que el lector revise la documentación para más detalles y funciones.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{LMFDB}
+
+Un recurso indispensable para la teoría de números experimental y computacional
+es \emph{{L-functions} and Modular Forms Database},
+\href{https://www.lmfdb.org/}{lmfdb.org}. Allí en particular en la sección
+«Number Fields» se pueden buscar los campos de números con los invariantes
+precalculados. Véase la página \url{https://www.lmfdb.org/NumberField/}
+
+\begin{figure}
+  \begin{center}
+    \setlength{\fboxsep}{1pt}
+    \setlength{\fboxrule}{0.5pt}
+    \fbox{\includegraphics[width=12cm]{pic/lmfdb-cubic.png}}
+  \end{center}
+  
+  \begin{center}
+    \setlength{\fboxsep}{1pt}
+    \setlength{\fboxrule}{0.5pt}
+    \fbox{\includegraphics[width=12cm]{pic/lmfdb-23.png}}
+  \end{center}
+
+  \caption{Ejemplos de búsqueda en LMFDB:
+    la lista completa de campos cúbicos con $|\Delta_K| \le 100$ y
+    algunos campos cúbicos con $\Cl (K) \cong \ZZ/23\ZZ$}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
