@@ -2370,6 +2370,459 @@ precalculados. Véase la página \url{https://www.lmfdb.org/NumberField/}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Fracciones continuas}
+
+Consideremos una sucesión de números enteros
+$$a_0, \, a_1, \, a_2, \, a_3, \, \ldots$$
+donde $a_n \ge 1$ para $n \ge 1$. Las correspondietes
+\term{fracciones continuas finitas} vienen dadas por
+\begin{align*}
+  [a_0] & = a_0, \\
+  [a_0,a_1] & = a_0 + \cfrac{1}{a_1}, \\
+  [a_0,a_1,a_2] & = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2}}, \\
+  [a_0,a_1,a_2,a_3] & = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cfrac{1}{a_3}}}, \\
+  & \ldots
+\end{align*}
+
+Por inducción,
+$$x_n = [a_0, \ldots, a_n] = a_0 + \cfrac{1}{[a_1, \ldots, a_n]}.$$
+
+\begin{ejemplo}
+  Consideremos la sucesión $a_n = 1$ para todo $n$. En este caso $x_0 = 1$ y
+  $x_n = 1 + 1/x_{n-1}$, y los primeros valores son
+  \[ x_0 = 1, \quad
+     x_1 = 2, \quad
+     x_2 = \frac{3}{2}, \quad
+     x_3 = \frac{5}{3}, \quad
+     x_4 = \frac{8}{5}, \quad
+     x_5 = \frac{13}{8}, \quad
+     x_6 = \frac{21}{13}, \quad
+     x_7 = \frac{34}{21}, \quad
+     x_8 = \frac{55}{34}, \quad
+     \ldots \]
+  Dejo al lector expresar los $x_n$ en términos de una sucesión bien conocida.
+\end{ejemplo}
+
+\begin{shaded}\small
+  En PARI/GP las fracciones $[a_0, \ldots, a_n] = p_n/q_n$ pueden ser calculadas
+  mediante \texttt{contfracpnqn([$a_0,\ldots,a_n$],$N$)}. En este caso se
+  calculan $p_n/q_n$ para $n = 0, \ldots, N$ y se devuelven como una matriz
+  $\begin{pmatrix} p_0 & p_1 & \cdots & p_N \\ q_0 & q_1 & \cdots & q_N \end{pmatrix}$.
+
+\begin{verbatim}
+? vec = vector (10,i,1)
+% = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+? contfracpnqn(vec, #vec-1)
+% = 
+[1 2 3 5 8 13 21 34 55 89]
+
+[1 1 2 3 5  8 13 21 34 55]
+\end{verbatim}
+\end{shaded}
+
+Nos gustaría asignar a la sucesión infinita $a_0,a_1,a_2,\ldots$ el valor
+$$[a_0,a_1,a_2,\ldots] = \lim_{n\to\infty} [a_0,a_1,\ldots,a_n],$$
+pero primero hay que verificar que el límite a la derecha existe.
+Por inducción definamos las sucesiones de números enteros
+\begin{gather*}
+  p_{-2} = 0, \quad p_{-1} = 1, \quad p_n = a_n \, p_{n-1} + p_{n-2}, \\
+  q_{-2} = 0, \quad q_{-1} = 0, \quad q_n = a_n \, q_{n-1} + q_{n-2}.
+\end{gather*}
+Notamos que
+$$1 = q_0 \le q_1 < q_2 < q_3 < \cdots$$
+
+Por inducción se puede ver que para cualquier número real $y > 0$ y $n \ge 1$
+se cumple
+\begin{equation}
+  \label{eqn:fraccion-finita-pn-qn}
+        [a_0, a_1, \ldots, a_{n-1}, y] = \frac{y \, p_{n-1} + p_{n-2}}{y \, q_{n-1} + q_{n-2}}.
+\end{equation}
+En particular, al sistituir $y = a_n$ nos queda
+$$x_n = [a_0, a_1, \ldots, a_n] = \frac{p_n}{q_n}.$$
+
+De nuevo, por inducción sobre $n$ es fácil deducir las identidades
+\begin{gather}
+  \label{eqn:pn-qn-identities-1} p_n \, q_{n-1} - p_{n-1} \, q_n = (-1)^{n+1},\\
+  \label{eqn:pn-qn-identities-2} x_n - x_{n-1} = \frac{(-1)^{n+1}}{q_n \, q_{n-1}},\\
+  \label{eqn:pn-qn-identities-3} p_n \, q_{n-2} - p_{n-2} \, q_n = (-1)^n \, a_n,\\
+  \label{eqn:pn-qn-identities-4} x_n - x_{n-2} = \frac{(-1)^n \, a_n}{q_n \, q_{n-2}}.
+\end{gather}
+
+Observamos que \eqref{eqn:pn-qn-identities-1} implica que
+$\gcd (p_n,q_n) = 1$. Puesto que los números $q_n$ crecen con $n$, la ecuación
+\eqref{eqn:pn-qn-identities-2} implica que
+$\lim_{n\to \infty} (x_n - x_{n-1}) = 0$. De las identidades
+\eqref{eqn:pn-qn-identities-2} y \eqref{eqn:pn-qn-identities-4} (por nuestra
+hipótesis $a_n > 0$ pra $n \ge 1$), se deduce que
+\begin{gather*}
+  x_0 < x_2 < x_4 < \cdots < x_1,\\
+  x_1 > x_3 > x_5 > \cdots > x_0.
+\end{gather*}
+En palabras: la sucesión $(x_{2n})$ es creciente y acotada superiormente por
+$x_1$, mientras que $(x_{2n+1})$ es decreciente y acotada inferiormente por
+$x_0$\footnote{En general, $x_{2m} < x_{2n+1}$ para cualesquiera $m$ y $n$.}.
+Ambas sucesiones tienen límites, y dado que
+$\lim_{n\to \infty} (x_n - x_{n-1}) = 0$, los dichos límites coinciden. Todo
+esto justifica la siguiente definición.
+
+\begin{definicion}
+  Sea $a_0,a_1,a_2,\ldots$ una sucesión de números enteros con $a_n \ge 1$
+  para $n \ge 1$. Luego, el valor que corresponde a la fracción continua
+  infinita
+  $$[a_0,a_1,a_2,\ldots] = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \cdots}}$$
+  es
+  $$\lim_{n\to\infty} [a_0,a_1,\ldots,a_n] = \lim_{n\to\infty} \frac{p_n}{q_n}.$$
+\end{definicion}
+
+Por abuso de notación, denotaremos por $[a_0,a_1,a_2,\ldots]$ el valor
+numérico que corresponde a la fracción continua infinta.
+
+\begin{ejemplo}
+  Evaluemos la fracción continua
+  $$[1,1,1,1,1,\ldots] =  1 + \cfrac{1}{1 + \cfrac{1}{1 + \cfrac{1}{1 + \cfrac{1}{1 + \cdots}}}}$$
+  Denotando su valor por $x$, se obtiene la ecuación cuadrática
+  $$x = 1 + \frac{1}{x} \iff x^2 - x - 1 = 0,$$
+  de donde (escogiendo la raíz positiva)
+  $$x = \frac{1 + \sqrt{5}}{2}$$
+  es el número áureo. La figura~\ref{fig:xn-numero-aureo} demuestra
+  la sucesión $x_0,x_1,x_2,\ldots$ en este caso.
+\end{ejemplo}
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[x=0.75cm, y=5cm]
+      \draw[thick,color=red] (0, 0) -- (0,1.000000-0.5);
+      \draw[thick,color=blue] (1, 0) -- (1,2.000000-0.5);
+      \draw[thick,color=red] (2, 0) -- (2,1.500000-0.5);
+      \draw[thick,color=blue] (3, 0) -- (3,1.666667-0.5);
+      \draw[thick,color=red] (4, 0) -- (4,1.600000-0.5);
+      \draw[thick,color=blue] (5, 0) -- (5,1.625000-0.5);
+      \draw[thick,color=red] (6, 0) -- (6,1.615385-0.5);
+      \draw[thick,color=blue] (7, 0) -- (7,1.619048-0.5);
+      \draw[thick,color=red] (8, 0) -- (8,1.617647-0.5);
+      \draw[thick,color=blue] (9, 0) -- (9,1.618182-0.5);
+      \draw[thick,color=red] (10, 0) -- (10,1.617978-0.5);
+
+      \draw[dotted,color=blue] (1,2.000000-0.5) -- (3,1.666667-0.5) -- (5,1.625000-0.5) -- (7,1.619048-0.5) -- (9,1.618182-0.5);
+
+      \draw[dotted,color=red] (0,1.000000-0.5) -- (2,1.500000-0.5) -- (4,1.600000-0.5) -- (6,1.615385-0.5) -- (8,1.617647-0.5) -- (10,1.617978-0.5);
+
+      \draw (0,0) node[below] {$x_0$};
+      \draw (1,0) node[below] {$x_1$};
+      \draw (2,0) node[below] {$x_2$};
+      \draw (3,0) node[below] {$x_3$};
+      \draw (4,0) node[below] {$x_4$};
+      \draw (5,0) node[below] {$x_5$};
+      \draw (6,0) node[below] {$x_6$};
+      \draw (7,0) node[below] {$x_7$};
+      \draw (8,0) node[below] {$x_8$};
+      \draw (9,0) node[below] {$x_9$};
+      \draw (10,0) node[below] {$x_{10}$};
+
+      \draw[dotted] (-0.5,1.618033-0.5) -- (10.5,1.618033-0.5);
+      \draw (10.5,1.618033-0.5) node[right] {$\frac{1 + \sqrt{5}}{2}$};
+    \end{tikzpicture}
+  \end{center}
+
+  \caption{Valores de $x_n = [a_0,\ldots,a_n]$ (el caso de $[1,1,1,\ldots]$)}
+  \label{fig:xn-numero-aureo}
+\end{figure}
+
+Observamos que $x_0 < x < x_1$, es decir $a_0 < x < a_0 + \frac{1}{a_1}$.
+Dado que $a_1 \ge 1$, esto implica que
+\begin{equation}
+  \label{eqn:fraccion-continua-a0}
+  a_0 = \lfloor x\rfloor.
+\end{equation}
+Además, es fácil comprobar que
+\begin{equation}
+\label{eqn:fraccion-continua-formula-recursiva-infinita}
+      [a_0,a_1,a_2,\ldots] = a_0 + \frac{1}{[a_1,a_2,\ldots]}.
+\end{equation}
+Usando \eqref{eqn:fraccion-continua-a0} y
+\eqref{eqn:fraccion-continua-formula-recursiva-infinita}, es fácil ver por
+inducción que el valor de una fracción continua define de manera única sus
+coeficientes:
+\[ [a_0,a_1,a_2,\ldots] = [b_0,b_1,b_2,\ldots] \iff
+   a_n = b_n \text{ para todo }n. \]
+
+\begin{proposicion}
+  Para una fracción continua infinita $[a_0,a_1,a_2,\ldots]$ (con $a_n \ge 1$
+  para $n \ge 1$ como siempre) el valor correspondiente es irracional.
+
+  \begin{proof}
+    Escribamos como antes
+    $$x_n = [a_0,a_1,\ldots,a_n] = \frac{p_n}{q_n}.$$
+    Si $[a_0,a_1,a_2,\ldots] = x$, entonces como hemos visto arriba,
+    $x_n < x < x_{n+1}$ para todo $n$. Ahora
+    $$0 < |x - x_n| < |x_{n+1} - x_n| = \frac{1}{q_{n+q}\,q_n}$$
+    (véase \eqref{eqn:pn-qn-identities-2}). Multiplicando todo por $q_n$,
+    se obtiene
+    $$0 < |x q_n - p_n| < \frac{1}{q_{n+1}}.$$
+    Ahora supongamos que $x = a/b$ es racional, donde $b > 0$. Se obtiene
+    la desigualdad
+    $$0 < |a q_n - b p_n| < \frac{b}{q_{n+1}}.$$
+    Pero para $n$ suficientemente grande se tiene $\frac{b}{q_{n+1}} < 1$,
+    y esto nos lleva a una contradicción.
+  \end{proof}
+\end{proposicion}
+
+Ahora sea $x$ un número irracional. Pongamos
+$$y_0 = x, \quad a_0 = \lfloor y_0\rfloor,$$
+y luego por inducción para $n \ge 1$
+$$y_n = \frac{1}{y_{n-1} - a_{n-1}}, \quad a_n = \lfloor y_n\rfloor.$$
+Por inducción se ve que los $y_n$ son números irracionales y
+$0 < y_{n-1} - a_{n-1} < 1$, así que $a_n \ge 1$ para $n \ge 1$. Esto nos da una
+fracción continua
+$$[a_0,a_1,a_2,\ldots],$$
+y de hecho su valor coincide con $x$.
+
+En efecto, se tiene para todo $n$
+$$x = [a_0, y_1] = [a_0, a_1, y_2] = \cdots = [a_0, a_1, \ldots, a_{n-1}, y_n].$$
+Usando \eqref{eqn:fraccion-finita-pn-qn}, podemos escribir
+$$x = \frac{y_n \, p_{n-1} + p_{n-2}}{y_n \, q_{n-1} + q_{n-2}}.$$
+Luego,
+\[ x - [a_0,a_1,\ldots,a_{n-1}] =
+   \frac{y_n \, p_{n-1} + p_{n-2}}{y_n \, q_{n-1} + q_{n-2}} - \frac{p_{n-1}}{q_{n-1}} =
+   \frac{-(p_{n-1}\, q_{n-2} - p_{n-2} \, q_{n-1})}{q_{n-1} \, (y_n \, q_{n-1} + q_{n-2})} =
+   \frac{(-1)^{n+1}}{q_{n-1} \, (y_n \, q_{n-1} + q_{n-2})} \xrightarrow{n\to\infty} 0. \]
+
+\begin{ejemplo}
+  Para $x = \sqrt{11}$ el algoritmo general nos da
+  \begin{align*}
+    x_0 & = \sqrt{11} = 3.31..., & a_0 & = \lfloor x_0\rfloor = 3,\\
+    x_1 & = \frac{1}{x_0 - a_0} = \frac{1}{\sqrt{11}-3} = \frac{3 + \sqrt{11}}{2} = 3.15..., & a_1 & = \lfloor x_1\rfloor = 3,\\
+    x_2 & = \frac{1}{x_1 - a_1} = \cfrac{1}{\cfrac{3 + \sqrt{11}}{2} - 3} = 3 + \sqrt{11} = 6.31..., & a_2 & = \lfloor x_2\rfloor = 6,\\
+    x_3 & = \frac{1}{x_2 - a_2} = \cfrac{1}{\sqrt{11} - 3} = x_1, & a_3 & = a_1.
+  \end{align*}
+  Se ve que los cálculos se vuelven periódicos y el resultado es
+  $$\sqrt{11} = [3, \, 3,6, 3,6, \ldots] = 3 + \cfrac{1}{3 + \cfrac{1}{6 + \cfrac{1}{3 + \cfrac{1}{6 + \cdots}}}}$$
+
+  Las aproximaciones correspondientes son
+
+  \begin{align*}
+              [3,3] & = 3.33333333...\\
+            [3,3,6] & = 3.31578947...\\
+          [3,3,6,3] & = 3.31666666...\\
+        [3,3,6,3,6] & = 3.31662269...\\
+      [3,3,6,3,6,3] & = 3.31662489...\\
+                    & \cdots \\  
+          \sqrt{11} & = 3.31662479... \qedhere
+  \end{align*}
+\end{ejemplo}
+
+\begin{ejemplo}
+  Para $x = \pi$ el algoritmo general nos da
+  \begin{align*}
+    x_0 & = \pi = 3.14..., & a_0 & = \lfloor x_0\rfloor = 3,\\
+    x_1 & = \frac{1}{x_0 - a_0} = \frac{1}{\pi-3} = 7.06..., & a_1 & = \lfloor x_1\rfloor = 7,\\
+    x_2 & = \frac{1}{x_1 - a_1} =  15.99..., & a_2 & = \lfloor x_2\rfloor = 15,\\
+    x_3 & = \frac{1}{x_2 - a_2} =  1.003..., & a_3 & = \lfloor x_3\rfloor = 1.
+  \end{align*}
+  Luego,
+  $$\pi = [3,7,15,1,\ldots].$$
+  Las primeras aproximaciones son
+  \begin{align*}
+    3 + \frac{1}{7}                                 = \frac{22}{7}    & = 3.1428571\ldots,\\
+    3 + \cfrac{1}{7 + \cfrac{1}{15}}                = \frac{333}{106} & = 3.1415094\ldots,\\
+    3 + \cfrac{1}{7 + \cfrac{1}{15 + \cfrac{1}{1}}} = \frac{355}{113} & = 3.1415929\ldots
+  \end{align*}
+  La aproximación $\frac{22}{7}$ era conocida a Arquímedes, mientras que
+  $\frac{355}{113}$ fue descubierta por los matemáticos
+  chinos\footnote{\url{https://en.wikipedia.org/wiki/Milü}}.
+\end{ejemplo}
+
+Para resumir, hemos obteindo una biyección
+\[ \{ \text{fracciones continuas infinitas }[a_0,a_1,a_2,\ldots] \}
+   \leftrightarrow
+   \{ \text{números irracionales} \}. \]
+
+\begin{comentario}
+  Podríamos también tomar en cuenta los números racionales que corresponderían
+  a fracciones continuas finitas, como por ejemplo
+  \[ \cfrac{23}{17} = 1 + \left(\cfrac{17}{6}\right)^{-1} =
+     1 + \cfrac{1}{2 + \left(\cfrac{6}{5}\right)^{-1}} =
+     1 + \cfrac{1}{2 + \cfrac{1}{1 + \cfrac{1}{5}}} = [1,2,1,5]. \]
+  De hecho, funcionaría el mismo algoritmo que describimos para $x$ irracional,
+  solo hay que pararlo cuando $y_n$ se vuelve entero.
+\end{comentario}
+
+\begin{shaded}\small
+  En PARI/GP la función \texttt{contfrac($x$)} calcula la fracción continua para
+  $x$. Por ejemplo,
+\begin{verbatim}
+? contfrac (23/17)
+% = [1, 2, 1, 5]
+
+? contfrac (sqrt(11))
+% = [3, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3,
+     6, 3, 6, 3, 6, 3, 6, 3]
+
+? contfracpnqn(%)
+% = 
+[15778745887395759850 4995942108667810017]
+
+[ 4757470888259553597 1506333222617099059]
+
+? %[1,2]/%[2,2] * 1.0
+% = 3.3166247903553998491149327366706866838
+? sqrt (11)
+% = 3.3166247903553998491149327366706866839
+
+? contfrac (exp(1))
+% = [2, 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1, 10, 1, 1, 12, 1, 1, 14,
+     1, 1, 16, 1, 1, 18, 1, 1, 20, 1, 1, 22, 1, 1, 24, 1, 1, 26, 2]
+\end{verbatim}
+
+  La fórmula curiosa
+  $$e = [2, 1, 2, 1, 1, 4, 1, 1, 6, 1, 1, 8, 1, 1, 10, \ldots]$$
+  fue descubierta por Euler. Véase \cite{Olds-1970} y \cite{Cohn-2006}.
+\end{shaded}
+
+\begin{ejemplo}
+  Evaluemos la fracción periódica $[\overline{1,2,3}]$. La periodicidad nos da
+  la relación
+  $$x = 1 + \cfrac{1}{2 + \cfrac{1}{3 + \cfrac{1}{x}}}.$$
+  Esta relación corresponde a la ecuación cuadrática
+  $$7 x^2 - 8x - 3 = 0,$$
+  de donde se obtiene
+  \[ x = \frac{4 + \sqrt{37}}{7}. \qedhere \]
+\end{ejemplo}
+
+\begin{figure}
+  \begin{multicols}{2}
+    \begin{align*}
+      \sqrt{2} & = [1,\overline{2}] \\
+      \sqrt{3} & = [1,\overline{1,2}] \\
+      \sqrt{5} & = [2,\overline{4}] \\
+      \sqrt{6} & = [2,\overline{2,4}] \\
+      \sqrt{7} & = [2,\overline{1,1,1,4}] \\
+      \sqrt{10} & = [3,\overline{6}] \\
+      \sqrt{11} & = [3,\overline{3,6}] \\
+      \sqrt{13} & = [3,\overline{1,1,1,1,6}] \\
+      \sqrt{14} & = [3,\overline{1,2,1,6}] \\
+      \sqrt{15} & = [3,\overline{1,6}] \\
+      \sqrt{17} & = [4,\overline{8}] \\
+      \sqrt{19} & = [4,\overline{2,1,3,1,2,8}] \\
+      \sqrt{21} & = [4,\overline{1,1,2,1,1,8}] \\
+      \sqrt{22} & = [4,\overline{1,2,4,2,1,8}] \\
+      \sqrt{23} & = [4,\overline{1,3,1,8}] \\
+      \sqrt{26} & = [5,\overline{10}] \\
+      \sqrt{29} & = [5,\overline{2,1,1,2,10}] \\
+      \sqrt{30} & = [5,\overline{2,10}] \\
+      \sqrt{31} & = [5,\overline{1,1,3,5,3,1,1,10}] \\
+      \sqrt{33} & = [5,\overline{1,2,1,10}] \\
+      \sqrt{34} & = [5,\overline{1,4,1,10}] \\
+      \sqrt{35} & = [5,\overline{1,10}] \\
+      \sqrt{37} & = [6,\overline{12}] \\
+      \sqrt{38} & = [6,\overline{6,12}] \\
+      \sqrt{39} & = [6,\overline{4,12}] \\
+      \sqrt{41} & = [6,\overline{2,2,12}] \\
+      \sqrt{42} & = [6,\overline{2,12}] \\
+      \sqrt{43} & = [6,\overline{1,1,3,1,5,1,3,1,1,12}] \\
+      \sqrt{46} & = [6,\overline{1,3,1,1,2,6,2,1,1,3,1,12}] \\
+      \sqrt{47} & = [6,\overline{1,5,1,12}]
+    \end{align*}
+
+    \begin{align*}
+      \sqrt{51} & = [7,\overline{7,14}] \\
+      \sqrt{53} & = [7,\overline{3,1,1,3,14}] \\
+      \sqrt{55} & = [7,\overline{2,2,2,14}] \\
+      \sqrt{57} & = [7,\overline{1,1,4,1,1,14}] \\
+      \sqrt{58} & = [7,\overline{1,1,1,1,1,1,14}] \\
+      \sqrt{59} & = [7,\overline{1,2,7,2,1,14}] \\
+      \sqrt{61} & = [7,\overline{1,4,3,1,2,2,1,3,4,1,14}] \\
+      \sqrt{62} & = [7,\overline{1,6,1,14}] \\
+      \sqrt{65} & = [8,\overline{16}] \\
+      \sqrt{66} & = [8,\overline{8,16}] \\
+      \sqrt{67} & = [8,\overline{5,2,1,1,7,1,1,2,5,16}] \\
+      \sqrt{69} & = [8,\overline{3,3,1,4,1,3,3,16}] \\
+      \sqrt{70} & = [8,\overline{2,1,2,1,2,16}] \\
+      \sqrt{71} & = [8,\overline{2,2,1,7,1,2,2,16}] \\
+      \sqrt{73} & = [8,\overline{1,1,5,5,1,1,16}] \\
+      \sqrt{74} & = [8,\overline{1,1,1,1,16}] \\
+      \sqrt{77} & = [8,\overline{1,3,2,3,1,16}] \\
+      \sqrt{78} & = [8,\overline{1,4,1,16}] \\
+      \sqrt{79} & = [8,\overline{1,7,1,16}] \\
+      \sqrt{82} & = [9,\overline{18}] \\
+      \sqrt{83} & = [9,\overline{9,18}] \\
+      \sqrt{85} & = [9,\overline{4,1,1,4,18}] \\
+      \sqrt{86} & = [9,\overline{3,1,1,1,8,1,1,1,3,18}] \\
+      \sqrt{87} & = [9,\overline{3,18}] \\
+      \sqrt{89} & = [9,\overline{2,3,3,2,18}] \\
+      \sqrt{91} & = [9,\overline{1,1,5,1,5,1,1,18}] \\
+      \sqrt{93} & = [9,\overline{1,1,1,4,6,4,1,1,1,18}] \\
+      \sqrt{94} & = [9,\overline{1,2,3,1,1,5,1,8,1,5,1,1,3,2,1,18}] \\
+      \sqrt{95} & = [9,\overline{1,2,1,18}] \\
+      \sqrt{97} & = [9,\overline{1,5,1,1,1,1,1,1,5,1,18}]
+    \end{align*}
+  \end{multicols}
+
+  \caption{Fracciones continuas para $\sqrt{d}$, donde $d < 100$ es libre de cuadrados}
+\end{figure}
+
+\begin{ejemplo}
+  Consideremos $d = \sqrt{46}$. Se tiene
+  $$\sqrt{46} = [a_0, \overline{a_1,\ldots,a_n}] = [6,\overline{1,3,1,1,2,6,2,1,1,3,1,12}].$$
+  En este caso $p_{n-1}/q_{n-1} = 24335/3588$, como se puede calcular usando
+  PARI/GP.
+\begin{verbatim}
+? contfracpnqn([6,1,3,1,1,2,6,2,1,1,3,1,12])
+% = 
+[311058 24335]
+
+[ 45863  3588]
+\end{verbatim}
+  Luego,
+  $$u = 24335 + 3588 \sqrt{46}.$$
+\end{ejemplo}
+
+\begin{center}
+  \bgroup
+  \def\arraystretch{1.65}
+  \begin{tabular}{M{0.5cm}M{4cm}M{0.7cm}|M{0.5cm}M{4cm}M{0.7cm}}
+    \hline
+    $d$ & $u$ & $N (u)$ & $d$ & $u$ & $N (u)$ \\
+    \hline
+    $2$ & $1 + \sqrt{2}$ & $-1$ & $51$ & $50 + 7\sqrt{51}$ & $+1$ \\
+    $3$ & $2 + \sqrt{3}$ & $+1$ & $53$ & $3 + \frac{1+\sqrt{53}}{2}$ & $-1$ \\
+    $5$ & $\frac{1+\sqrt{5}}{2}$ & $-1$ & $55$ & $89 + 12\sqrt{55}$ & $+1$ \\
+    $6$ & $5 + 2\sqrt{6}$ & $+1$ & $57$ & $131 + 40\,\frac{1+\sqrt{57}}{2}$ & $+1$ \\
+    $7$ & $8 + 3\sqrt{7}$ & $+1$ & $58$ & $99 + 13\sqrt{58}$ & $-1$ \\
+    $10$ & $3 + \sqrt{10}$ & $-1$ & $59$ & $530 + 69\sqrt{59}$ & $+1$ \\
+    $11$ & $10 + 3\sqrt{11}$ & $+1$ & $61$ & $17 + 5\,\frac{1+\sqrt{61}}{2}$ & $-1$ \\
+    $13$ & $1 + \frac{1+\sqrt{13}}{2}$ & $-1$ & $62$ & $63 + 8\sqrt{62}$ & $+1$ \\
+    $14$ & $15 + 4\sqrt{14}$ & $+1$ & $65$ & $7 + 2\,\frac{1+\sqrt{65}}{2}$ & $-1$ \\
+    $15$ & $4 + \sqrt{15}$ & $+1$ & $66$ & $65 + 8\sqrt{66}$ & $+1$ \\
+    $17$ & $3 + 2\,\frac{1+\sqrt{17}}{2}$ & $-1$ & $67$ & $48842 + 5967\sqrt{67}$ & $+1$ \\
+    $19$ & $170 + 39\sqrt{19}$ & $+1$ & $69$ & $11 + 3\,\frac{1+\sqrt{69}}{2}$ & $+1$ \\
+    $21$ & $2 + \frac{1+\sqrt{21}}{2}$ & $+1$ & $70$ & $251 + 30\sqrt{70}$ & $+1$ \\
+    $22$ & $197 + 42\sqrt{22}$ & $+1$ & $71$ & $3480 + 413\sqrt{71}$ & $+1$ \\
+    $23$ & $24 + 5\sqrt{23}$ & $+1$ & $73$ & $943 + 250\,\frac{1+\sqrt{73}}{2}$ & $-1$ \\
+    $26$ & $5 + \sqrt{26}$ & $-1$ & $74$ & $43 + 5\sqrt{74}$ & $-1$ \\
+    $29$ & $2 + \frac{1+\sqrt{29}}{2}$ & $-1$ & $77$ & $4 + \frac{1+\sqrt{77}}{2}$ & $+1$ \\
+    $30$ & $11 + 2\sqrt{30}$ & $+1$ & $78$ & $53 + 6\sqrt{78}$ & $+1$ \\
+    $31$ & $1520 + 273\sqrt{31}$ & $+1$ & $79$ & $80 + 9\sqrt{79}$ & $+1$ \\
+    $33$ & $19 + 8\,\frac{1+\sqrt{33}}{2}$ & $+1$ & $82$ & $9 + \sqrt{82}$ & $-1$ \\
+    $34$ & $35 + 6\sqrt{34}$ & $+1$ & $83$ & $82 + 9\sqrt{83}$ & $+1$ \\
+    $35$ & $6 + \sqrt{35}$ & $+1$ & $85$ & $4 + \frac{1+\sqrt{85}}{2}$ & $-1$ \\
+    $37$ & $5 + 2\,\frac{1+\sqrt{37}}{2}$ & $-1$ & $86$ & $10405 + 1122\sqrt{86}$ & $+1$ \\
+    $38$ & $37 + 6\sqrt{38}$ & $+1$ & $87$ & $28 + 3\sqrt{87}$ & $+1$ \\
+    $39$ & $25 + 4\sqrt{39}$ & $+1$ & $89$ & $447 + 106\,\frac{1+\sqrt{89}}{2}$ & $-1$ \\
+    $41$ & $27 + 10\,\frac{1+\sqrt{41}}{2}$ & $-1$ & $91$ & $1574 + 165\sqrt{91}$ & $+1$ \\
+    $42$ & $13 + 2\sqrt{42}$ & $+1$ & $93$ & $13 + 3\,\frac{1+\sqrt{93}}{2}$ & $+1$ \\
+    $43$ & $3482 + 531\sqrt{43}$ & $+1$ & $94$ & $2143295 + 221064\sqrt{94}$ & $+1$ \\
+    $46$ & $24335 + 3588\sqrt{46}$ & $+1$ & $95$ & $39 + 4\sqrt{95}$ & $+1$ \\
+    $47$ & $48 + 7\sqrt{47}$ & $+1$ & $97$ & $5035 + 1138\frac{1+\sqrt{97}}{2}$ & $-1$ \\
+  \end{tabular}
+  \egroup
+\end{center}
+
+**TODO** \cite{Steinig-1992}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \pagebreak
 
 \phantomsection
