@@ -2128,12 +2128,13 @@ solamente con los campos con multiplicación compleja.
 \section{Fracciones continuas}
 \marginpar{\small Clase 23 \\ 04/11/20}
 
+En esta sección vamos a revisar la teoría de fracciones continuas necesaria para
+encontrar la unidad fundamental para un campo cuadrático real. Este material es
+elemental y no usa la teoría algebraica desarrollada en el curso.
+
 \subsection{Valor de una fracción continua infinita}
 
-Consideremos una sucesión de números enteros
-$$a_0, \, a_1, \, a_2, \, a_3, \, \ldots$$
-donde $a_n \ge 1$ para $n \ge 1$. Las correspondientes
-\term{fracciones continuas finitas} vienen dadas por
+Las \term{fracciones continuas finitas} vienen dadas por
 \begin{align*}
   [a_0] & = a_0, \\
   [a_0,a_1] & = a_0 + \cfrac{1}{a_1}, \\
@@ -2144,6 +2145,10 @@ donde $a_n \ge 1$ para $n \ge 1$. Las correspondientes
 
 Por inducción, podemos definirlas mediante
 $$[a_0, \ldots, a_n] = a_0 + \cfrac{1}{[a_1, \ldots, a_n]}.$$
+
+Estas expresiones finitas pueden ser consideradas de manera formal, pero a
+continuación nos interesará el caso particular cuando $a_n \in \ZZ$ y
+$a_n \ge 1$ para $n \ge 1$.
 
 \begin{definicion}
   Sea $a_0,a_1,a_2,\ldots$ una sucesión de números enteros con $a_n \ge 1$
@@ -2161,7 +2166,7 @@ Hay que verificar que el límite existe. Esto se hace de la siguiente manera.
   números enteros
   \begin{gather*}
     p_{-2} = 0, \quad p_{-1} = 1, \quad p_n = a_n \, p_{n-1} + p_{n-2}, \\
-    q_{-2} = 0, \quad q_{-1} = 0, \quad q_n = a_n \, q_{n-1} + q_{n-2}.
+    q_{-2} = 1, \quad q_{-1} = 0, \quad q_n = a_n \, q_{n-1} + q_{n-2}.
   \end{gather*}
 
   \begin{enumerate}
@@ -2204,7 +2209,9 @@ $x_1$, mientras que $(x_{2n+1})$ es decreciente y acotada inferiormente por
 $x_0$\footnote{En general, $x_{2m} < x_{2n+1}$ para cualesquiera $m$ y $n$.}.
 Ambas sucesiones $(x_{2n})$ y $(x_{2n+1})$ tienen límites, y dado que
 $\lim_{n\to \infty} (x_n - x_{n-1}) = 0$, los dichos límites coinciden con
-$\lim_{n\to \infty} x_n$.
+$\lim_{n\to \infty} x_n$. De esta manera se obtienen intervalos
+$$(x_0, x_1) \supset (x_2,x_3) \supset (x_4,x_5) \supset \cdots$$
+tales que $\alpha \in (x_{2n}, x_{2n+1})$.
 
 \begin{ejemplo}
   Evaluemos la fracción continua
@@ -2310,9 +2317,9 @@ $\lim_{n\to \infty} x_n$.
             [a_0,a_1,a_2,\ldots] = a_0 + \frac{1}{[a_1,a_2,\ldots]}.
     \end{equation}
     Usando \eqref{eqn:fraccion-continua-a0} y
-    \eqref{eqn:fraccion-continua-formula-recursiva-infinita}, es fácil ver por
-    inducción que el valor de una fracción continua define de manera única sus
-    coeficientes:
+    \eqref{eqn:fraccion-continua-formula-recursiva-infinita}, se ve por
+    inducción sobre $n$ que el valor de una fracción continua define de manera
+    única sus coeficientes:
     \[ [a_0,a_1,a_2,\ldots] = [b_0,b_1,b_2,\ldots] \iff
        a_n = b_n \text{ para todo }n. \]
 
@@ -2354,6 +2361,11 @@ Luego,
    \frac{\alpha_n \, p_{n-1} + p_{n-2}}{\alpha_n \, q_{n-1} + q_{n-2}} - \frac{p_{n-1}}{q_{n-1}} =
    \frac{-(p_{n-1}\, q_{n-2} - p_{n-2} \, q_{n-1})}{q_{n-1} \, (\alpha_n \, q_{n-1} + q_{n-2})} =
    \frac{(-1)^{n+1}}{q_{n-1} \, (\alpha_n \, q_{n-1} + q_{n-2})} \xrightarrow{n\to\infty} 0. \]
+
+Para resumir, hemos obtenido una biyección
+\[ \{ \text{fracciones continuas infinitas }[a_0,a_1,a_2,\ldots] \}
+   \leftrightarrow
+   \{ \text{números reales irracionales} \}. \]
 
 \begin{ejemplo}
   Para $\alpha = \pi$ el algoritmo general nos da
@@ -2408,10 +2420,72 @@ Luego,
   La fracción continua para $\pi$ no cumple ningún patrón aparente.
 \end{shaded}
 
-Para resumir, hemos obtenido una biyección
-\[ \{ \text{fracciones continuas infinitas }[a_0,a_1,a_2,\ldots] \}
-   \leftrightarrow
-   \{ \text{números reales irracionales} \}. \]
+Las aproximaciones $\frac{p_n}{q_n}$ que salen de la fracción continua son las
+mejores posibles en cierto sentido. A saber, si tenemos
+$$\Bigl|\alpha - \frac{a}{b}\Bigr| < \Bigl|\alpha - \frac{p_n}{q_n}\Bigr|,$$
+entonces $b > q_n$. Esto se deduce del siguiente resultado
+(recuerde que $q_{n+1} > q_n$).
+
+\begin{proposicion}
+  Si $|\alpha b - a| < |\alpha q_n - p_n|$, entonces $b \ge q_{n+1}$.
+
+  \begin{proof}
+    Supongamos que $b < q_{n+1}$. Consideremos el sistema de ecuaciones
+    lineales
+    \[ \left\{\begin{array}{rcl}
+      x q_n + y q_{n+1} & = & b, \\
+      x p_n + y p_{n+1} & = & a.
+    \end{array}\right. \]
+    Aquí $\det \begin{pmatrix}
+      q_n & q_{n+1} \\
+      p_n & p_{n+1}
+    \end{pmatrix} = \pm 1$, así que existe una solución única
+    $x,y\in \ZZ$, donde $(x,y) \ne (0,0)$. De hecho, bajo nuestras hipótesis,
+    $x\ne 0$ e $y \ne 0$. Efectivamente, si $x = 0$, entonces nos queda
+    $b = y q_{n+1} \ge q_{n+1}$, que no es el caso. Por otra parte, si $y = 0$,
+    entonces $x \ne 0$, y se tiene
+    $$|\alpha b - a| = |x|\cdot |\alpha q_n - p_n| \ge |\alpha q_n - p_n|.$$
+
+    Notamos que $x$ e $y$ necesariamente tienen diferentes signos: si $y < 0$,
+    entonces $x = \frac{b - y q_{n+1}}{q_n} > 0$. De manera similar, si $y > 0$,
+    entonces $x < 0$ por nuestra hipótesis de que $b < q_{n+1}$. Los números
+    $\alpha q_n - p_n$ y $\alpha q_{n+1} - p_{n+1}$ también tienen diferentes
+    signos: si $n$ es par, entonces
+    $\frac{p_n}{q_n} < \alpha < \frac{p_{n+1}}{q_{n+1}}$,
+    y si $n$ es impar, entonces
+    $\frac{p_{n+1}}{q_{n+1}} < \alpha < \frac{p_n}{q_n}$.
+
+    Esto implica que $x\,(\alpha q_n - p_n)$ e
+    $y\,(\alpha q_{n+1} - p_{n+1})$ tienen el mismo signo, y luego
+    \[ |\alpha b - a| =
+       |x|\cdot |\alpha q_n - p_n| + |y|\cdot |\alpha q_{n+1} - p_n| >
+       |\alpha q_n - p_n|. \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+\begin{corolario}
+  Si $\Bigl|\alpha - \frac{a}{b}\Bigr| < \frac{1}{2b^2}$, entonces
+  $\frac{a}{b} = \frac{p_n}{q_n}$ para algún $n$.
+
+  \begin{proof}
+    La sucesión $(q_n)$ es creciente, así que para algún $n$ se tiene
+    $q_n \le b < q_{n+1}$. Según la proposición anterior, tenemos entonces
+    $$|\alpha q_n - p_n| \le |\alpha b - a| < \frac{1}{2b},$$
+    y luego
+    $$\Bigl|\alpha - \frac{p_n}{q_n}\Bigr| < \frac{1}{2b q_n}.$$
+
+    Ahora ocupando la desigualdad triangular,
+    \[ \Bigl|\frac{a}{b} - \frac{p_n}{q_n}\Bigr| \le
+       \Bigl|\alpha - \frac{a}{b}\Bigr| + \Bigl|\alpha - \frac{p_n}{q_n}\Bigr|
+       < \frac{1}{2b^2} + \frac{1}{2b q_n}. \]
+    Por otra parte, si $\frac{a}{b} \ne \frac{p_n}{q_n}$, entonces
+    \[ \Bigl|\frac{a}{b} - \frac{p_n}{q_n}\Bigr| =
+       \frac{|a q_n - b p_n|}{b q_n} \ge \frac{1}{b q_n}. \]
+    Todo esto nos lleva a la desigualdad
+    $$\frac{1}{b q_n} < \frac{1}{2b^2} + \frac{1}{2b q_n},$$
+    de donde $b < q_n$, pero esto contradice nuestra hipótesis.
+  \end{proof}
+\end{corolario}
 
 \subsection{Fracciones continuas periódicas}
 
@@ -2484,54 +2558,60 @@ Veamos primero un ejemplo.
 \begin{teorema}[Lagrange]
   La fracción continua de $\alpha$ es periódica si y solamente si
   $[\QQ (\alpha) : \QQ] = 2$.
-
-  \begin{proof}[Demostración (\cite{Steinig-1992})]
-    Ya lo probamos en una dirección. Ahora para un número cuadrático $\alpha$
-    hay que ver que la fracción correspondiente es continua. Esto equivale a
-    tener $\alpha_m = \alpha_n$ para algunos $m \ne n$.
-
-    Por la hipótesis sobre $\alpha$, su polinomio mínimo
-    $$f (x) = A\,x^2 + B\,x + C$$
-    tiene discriminante
-    $$\Delta = \Delta (f) = B^2 - 4 A C,$$
-    donde $\Delta > 0$ (porque $\alpha$ es real) y $\Delta$ no es un cuadrado.
-
-    Por inducción podemos definir una sucesión de polinomios cuadráticos
-    $$f_n (x) = A_n\,x^2 + B_n\,x + C_n \in \ZZ [x]$$
-    que cumplen
-    $$f_n (\alpha_n) = 0, \quad \Delta (f_n) = \Delta.$$
-    Para $n = 0$ tomamos $f_0 = f$. Para el paso inductivo, no es difícil
-    comprobar que
-    $$\alpha_{n+1}^2 \, f_n \Bigl(a_n + \frac{1}{\alpha_{n+1}}\Bigr) = \alpha_{n+1}^2 \, f_n (\alpha_n) = 0$$
-    corresponde a la ecuación cuadrática
-    \[ f_{n+1} (\alpha_{n+1}) = 0, \quad
-       f_{n+1} (x) = A_{n+1}\,x^2 + B_{n+1}\,x + C_{n+1}, \]
-    donde
-    \begin{equation}
-      \label{eqn:Lagrange-An-Bn-Cn}
-      A_{n+1} = a_n^2\,A_n + a_n\,B_n + C_n, \quad
-      B_{n+1} = 2\,a_n\,A_n + B_n, \quad
-      C_{n+1} = A_n.
-    \end{equation}
-    Un cálculo directo demuestra que
-    $$\Delta (f_{n+1}) = \Delta (f_n).$$
-
-    Notamos que la sucesión $(A_n)$ cambia su signo un número infinito de
-    veces. Por ejemplo, si $A_n > 0$ para $n$ suficientemente grande, entonces
-    de \eqref{eqn:Lagrange-An-Bn-Cn} se ve que también $B_n, C_n > 0$ para $n$
-    suficientemente grande. Pero $\alpha_n > 0$ para $n \ge 1$, y en este caso
-    tendríamos
-    $$f_n (\alpha_n) = A_n\,\alpha_n^2 + B_n\,\alpha_n + C_n > 0.$$
-
-    Entonces, para un número infinito de $n$ se tiene
-    $A_n\,A_{n-1} = A_n\,C_n < 0$, y en este caso el discriminante
-    $$\Delta (f_n) = \Delta = B_n^2 - 4\,A_n\,C_n$$
-    nos da la cota
-    $$|B_n| < \sqrt{\Delta}, \quad |A_n|, |C_n| \le \frac{1}{4}\,\Delta.$$
-    Puesto que esto se cumple para un número infinito de $n$, habrá $m\ne n$
-    tales que $f_m = f_n$ y $\alpha_m = \alpha_n$.
-  \end{proof}
 \end{teorema}
+
+\vspace{1em}
+
+\noindent\emph{Lo vamos a probar el lunes\dots}
+
+\iffalse
+
+\begin{proof}[Demostración (\cite{Steinig-1992})]
+  Ya lo probamos en una dirección. Ahora para un número cuadrático $\alpha$
+  hay que ver que la fracción correspondiente es continua. Esto equivale a
+  tener $\alpha_m = \alpha_n$ para algunos $m \ne n$.
+
+  Por la hipótesis sobre $\alpha$, su polinomio mínimo
+  $$f (x) = A\,x^2 + B\,x + C$$
+  tiene discriminante
+  $$\Delta = \Delta (f) = B^2 - 4 A C,$$
+  donde $\Delta > 0$ (porque $\alpha$ es real) y $\Delta$ no es un cuadrado.
+
+  Por inducción podemos definir una sucesión de polinomios cuadráticos
+  $$f_n (x) = A_n\,x^2 + B_n\,x + C_n \in \ZZ [x]$$
+  que cumplen
+  $$f_n (\alpha_n) = 0, \quad \Delta (f_n) = \Delta.$$
+  Para $n = 0$ tomamos $f_0 = f$. Para el paso inductivo, no es difícil
+  comprobar que
+  $$\alpha_{n+1}^2 \, f_n \Bigl(a_n + \frac{1}{\alpha_{n+1}}\Bigr) = \alpha_{n+1}^2 \, f_n (\alpha_n) = 0$$
+  corresponde a la ecuación cuadrática
+  \[ f_{n+1} (\alpha_{n+1}) = 0, \quad
+     f_{n+1} (x) = A_{n+1}\,x^2 + B_{n+1}\,x + C_{n+1}, \]
+  donde
+  \begin{equation}
+    \label{eqn:Lagrange-An-Bn-Cn}
+    A_{n+1} = a_n^2\,A_n + a_n\,B_n + C_n, \quad
+    B_{n+1} = 2\,a_n\,A_n + B_n, \quad
+    C_{n+1} = A_n.
+  \end{equation}
+  Un cálculo directo demuestra que
+  $$\Delta (f_{n+1}) = \Delta (f_n).$$
+
+  Notamos que la sucesión $(A_n)$ cambia su signo un número infinito de
+  veces. Por ejemplo, si $A_n > 0$ para $n$ suficientemente grande, entonces
+  de \eqref{eqn:Lagrange-An-Bn-Cn} se ve que también $B_n, C_n > 0$ para $n$
+  suficientemente grande. Pero $\alpha_n > 0$ para $n \ge 1$, y en este caso
+  tendríamos
+  $$f_n (\alpha_n) = A_n\,\alpha_n^2 + B_n\,\alpha_n + C_n > 0.$$
+
+  Entonces, para un número infinito de $n$ se tiene
+  $A_n\,A_{n-1} = A_n\,C_n < 0$, y en este caso el discriminante
+  $$\Delta (f_n) = \Delta = B_n^2 - 4\,A_n\,C_n$$
+  nos da la cota
+  $$|B_n| < \sqrt{\Delta}, \quad |A_n|, |C_n| \le \frac{1}{4}\,\Delta.$$
+  Puesto que esto se cumple para un número infinito de $n$, habrá $m\ne n$
+  tales que $f_m = f_n$ y $\alpha_m = \alpha_n$.
+\end{proof}
 
 También sería interesante investigar cuándo la fracción continua es
 \emph{puramente} periódica. La caracterización es la siguiente.
@@ -2683,9 +2763,114 @@ fracciones continuas para algunos números $\sqrt{d}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Volviendo a la ecuación de Pell}
+
+\begin{lema}
+  Consideremos la fracción continua para $\alpha = \sqrt{d}$. Como antes,
+  consideremos $\alpha_0 = \alpha$ y
+  \[ a_n = \lfloor\alpha_n\rfloor, \quad
+     \alpha_{n+1} = \frac{1}{\alpha_n - a_n}. \]
+
+  \begin{enumerate}
+  \item[1)] Se tiene
+    $$\alpha_n = \frac{A_n + \sqrt{d}}{B_n},$$
+    donde $A_0 = 0$, $B_0 = 1$, y
+    \[ A_{n+1} = a_n\,B_n - A_n, \quad
+       B_{n+1} = \frac{d - A_{n+1}^2}{B_n} \in \ZZ. \]
+
+  \item[2)] Si $k$ es el periodo de la fracción continua para $\sqrt{d}$;
+    es decir, $\sqrt{d} = [a_0, \overline{a_1,\ldots,a_k}]$, entonces
+    $B_n = 1$ si y solamente si $k \mid n$.
+
+  \item[3)] Por otra parte, $B_n \ne -1$ para ningún $n$.
+  \end{enumerate}
+
+  \begin{proof}
+    La parte 1) se deja como un ejercicio.
+
+    En la parte 2), primero consideremos $B_k$, donde $k$ es el periodo.
+    Tenemos $\alpha_{k+1} = \alpha_1$, y luego
+    $$A_{k+1} = A_1 = \lfloor\sqrt{d}\rfloor$$
+    y
+    $$B_{k+1} = \frac{d - A_{k+1}^2}{B_k} = B_1 = d - \lfloor\sqrt{d}\rfloor^2.$$
+    Esto implica que $B_k = 1$. Viceversa, si $B_n = 1$ para algún $n$, entonces
+    $\alpha_n = A_n + \sqrt{d}$. Tenemos
+    $\alpha = [a_0,a_1,\ldots,a_{n-1},\alpha_n]$, y el número $\alpha_n$ tiene
+    fracción continua puramente periódica, y por lo tanto $-1 <
+    \overline{\alpha_n} < 0$. Esto implica que $\sqrt{d} - 1 < A_n < \sqrt{d}$,
+    y luego $A_n = \lfloor\sqrt{d}\rfloor$.  Ahora
+    $\alpha_n = \sqrt{d} + \lfloor\sqrt{d}\rfloor = \alpha_1$, y esto es posible
+    precisamente si $k \mid n$.
+
+    En fin, en la parte 3) de manera similar, si $B_n = -1$, entonces
+    $\alpha_n = -A_n - \sqrt{d}$ tiene fracción continua puramente periódica,
+    y luego $\alpha_n > 1$ y $-1 < \overline{\alpha_n} < 0$. Tenemos
+    desigualdades $-A_n - \sqrt{d} > 1$ y $-1 < -A_n + \sqrt{d} < 0$,
+    pero estas implican que $\sqrt{d} < A_n < -\sqrt{d} - 1$. Contradicción.
+  \end{proof}
+\end{lema}
+
+La relación con la ecuación de Pell surge de la siguiente manera.
+
+\begin{proposicion}
+  Con la notación de arriba, para todo $n \ge -1$ se tiene
+  $$p_n^2 - d\,q_n^2 = (-1)^{n+1}\,B_{n+1}.$$
+  En particular, si $k$ es el periodo de la fracción continua para $\sqrt{d}$,
+  entonces $B_{kn} = 1$, y luego
+  $$p_{kn - 1}^2 - d\,q_{kn-1}^2 = (-1)^{kn}.$$
+
+  \begin{proof}
+    Escribamos
+    \[ \sqrt{d} = \alpha =
+       \frac{\alpha_{n+1}\,p_n + p_{n-1}}{\alpha_{n+1}\,q_n + q_{n-1}} =
+       \frac{(A_{n+1} + \sqrt{d})\,p_n + B_{n+1}\,p_{n-1}}{(A_{n+1} + \sqrt{d})\,q_n + B_{n+1}\,q_{n-1}}. \]
+    Dejo al lector analizar la ecuación correspondiente en $\QQ (\sqrt{d})$,
+    expresar de allí $A_{n+1}$ en términos de $B_{n+1}$ y verificar que lo que
+    nos queda es
+    \[ p_n^2 - d\,q_n^2 =
+       (p_n\,q_{n-1} - p_{n-1}\,q_n)\,B_{n+1} = (-1)^{n+1}\,B_{n+1}. \qedhere. \]
+  \end{proof}
+\end{proposicion}
+
+Con esto ya tenemos un número infinito de soluciones de la ecuación de Pell
+$x^2 - d\,y^2 = \pm 1$, y nuestro objetivo será probar que todas las soluciones
+vienen de la fracción continua para $\sqrt{d}$ de esta manera.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Unidades fundamentales en campos cuadráticos reales}
 
-**TODO**
+Consideremos un campo cuadrático real $K = \QQ (\sqrt{d})$. En este caso el
+teorema de unidades nos dice que
+$$\O_K^\times = \{ \pm 1 \} \times \langle u\rangle,$$
+donde $u$ es la unidad fundamental. Nuestro objetivo será encontrarla de manera
+explícita.
+
+Si $d \equiv 1 \pmod{4}$, entonces
+$\O_K = \ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]$. Para una unidad
+$u = a + b\,\frac{1+\sqrt{d}}{2} \in \O_K^\times$ tenemos
+$$N_{K/\QQ} (u) = a^2 + ab + \frac{1 - d}{4}\,b^2 = \pm 1.$$
+Si $d \equiv 1 \pmod{8}$, entonces considerando diferentes opciones mód $8$,
+se ve que $b$ tiene que ser par en cualquier caso, así que
+$u \in \ZZ [\sqrt{d}]^\times$. Por otra parte, si $d \equiv 5 \pmod{8}$, un
+cálculo directo y tedioso demuestra que $u^3 \in \ZZ [\sqrt{d}]^\times$.
+
+Todo esto significa que
+\begin{itemize}
+\item si $d \equiv 2,3 \pmod{4}$ o $d \equiv 1 \pmod{8}$, entonces
+  $\O_K^\times = \ZZ [\sqrt{d}]^\times$,
+
+\item si $d \equiv 5 \pmod{8}$, entonces
+  $[\O_K^\times : \ZZ [\sqrt{d}]^\times] = 1\text{ o }3$.
+  Si $v$ es una unidad fundamental de $\ZZ [\sqrt{d}]$, entonces para encontrar
+  la unidad fundamental de $\O_K$, basta resolver la ecuación $u^3 = v$, lo que
+  no es muy difícil.
+\end{itemize}
+En cualquier caso, para encontrar las unidades en $\O_K$, bastará conocer las
+unidades
+$$\ZZ [\sqrt{d}]^\times = \{ a + b\sqrt{d} \mid a^2 - db^2 = \pm 1 \}.$$
+
+**TODO** Niven--Zuckerman, pp. 351--355.
 
 \begin{ejemplo}
   Consideremos $d = \sqrt{46}$. Se tiene
@@ -2987,6 +3172,7 @@ precalculados. Véase la página \url{https://www.lmfdb.org/NumberField/}
     la lista completa de campos cúbicos con $|\Delta_K| \le 100$ y
     algunos campos cúbicos con $\Cl (K) \cong \ZZ/23\ZZ$}
 \end{figure}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -3071,5 +3257,19 @@ precalculados. Véase la página \url{https://www.lmfdb.org/NumberField/}
 \end{ejercicio}
 
 \begin{ejercicio}
-  Encuentre la fracción continua para $\sqrt{n\,(n+1)}$.
+  Encuentre el número cuadrático $\alpha$ tal que
+  $\alpha = [3, \overline{2,1}]$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Demuestre que si $\alpha = [a_0,a_1,a_2,\ldots]$, entonces
+  $\frac{1}{\alpha} = [0,a_0,a_1,a_2,\ldots]$. Concluya que si las fracciones
+  parciales para $\alpha$ y $\frac{1}{\alpha}$ son $\frac{p_n}{q_n}$ y
+  $\frac{p_n'}{q_n'}$ respectivamente, entonces
+  $\frac{p_n'}{q_n'} = \frac{q_{n-1}}{p_{n-1}}$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Encuentre las fracciones continuas para $\sqrt{n^2+1}$, $\sqrt{n\,(n+1)}$,
+  $\sqrt{m^2\,n^2 + n}$.
 \end{ejercicio}
