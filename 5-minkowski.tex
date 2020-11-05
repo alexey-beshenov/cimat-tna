@@ -2129,7 +2129,7 @@ solamente con los campos con multiplicación compleja.
 \marginpar{\small Clase 23 \\ 04/11/20}
 
 En esta sección vamos a revisar la teoría de fracciones continuas necesaria para
-encontrar la unidad fundamental para un campo cuadrático real. Este material es
+encontrar la unidad fundamental de un campo cuadrático real. Este material es
 elemental y no usa la teoría algebraica desarrollada en el curso.
 Una buena referencia sobre el tema es \cite{Khinchin-1997}.
 
@@ -2465,6 +2465,7 @@ entonces $b > q_n$. Esto se deduce del siguiente resultado
 \end{proposicion}
 
 \begin{corolario}
+  \label{cor:mejor-aproximacion-por-pn/qn}
   Si $\Bigl|\alpha - \frac{a}{b}\Bigr| < \frac{1}{2b^2}$, entonces
   $\frac{a}{b} = \frac{p_n}{q_n}$ para algún $n$.
 
@@ -2544,7 +2545,6 @@ Veamos primero un ejemplo.
   $$\sqrt{11} = [3, \, \overline{3,6}] = 3 + \cfrac{1}{3 + \cfrac{1}{6 + \cfrac{1}{3 + \cfrac{1}{6 + \cdots}}}}$$
 
   Las aproximaciones correspondientes son
-
   \begin{align*}
               [3,3] & = 3.33333333\ldots\\
             [3,3,6] & = 3.31578947\ldots\\
@@ -2556,63 +2556,59 @@ Veamos primero un ejemplo.
   \end{align*}
 \end{ejemplo}
 
+\pdfbookmark{Clase 24 (09/11/20)}{clase-24}
+\marginpar{\small Clase 24 \\ 09/11/20}
 \begin{teorema}[Lagrange]
   La fracción continua de $\alpha$ es periódica si y solamente si
   $[\QQ (\alpha) : \QQ] = 2$.
+
+  \begin{proof}[Demostración (\cite{Steinig-1992})]
+    Ya lo probamos en una dirección. Ahora para un número cuadrático $\alpha$
+    hay que ver que la fracción correspondiente es continua. Esto equivale a
+    tener $\alpha_m = \alpha_n$ para algunos $m \ne n$.
+
+    Por la hipótesis sobre $\alpha$, su polinomio mínimo
+    $$f (x) = A\,x^2 + B\,x + C$$
+    tiene discriminante
+    $$\Delta = \Delta (f) = B^2 - 4 A C,$$
+    donde $\Delta > 0$ (porque $\alpha$ es real) y $\Delta$ no es un cuadrado.
+
+    Por inducción podemos definir una sucesión de polinomios cuadráticos
+    $$f_n (x) = A_n\,x^2 + B_n\,x + C_n \in \ZZ [x]$$
+    que cumplen
+    $$f_n (\alpha_n) = 0, \quad \Delta (f_n) = \Delta.$$
+    Para $n = 0$ tomamos $f_0 = f$. Para el paso inductivo, no es difícil
+    comprobar que
+    $$\alpha_{n+1}^2 \, f_n \Bigl(a_n + \frac{1}{\alpha_{n+1}}\Bigr) = \alpha_{n+1}^2 \, f_n (\alpha_n) = 0$$
+    corresponde a la ecuación cuadrática
+    \[ f_{n+1} (\alpha_{n+1}) = 0, \quad
+       f_{n+1} (x) = A_{n+1}\,x^2 + B_{n+1}\,x + C_{n+1}, \]
+    donde
+    \begin{equation}
+      \label{eqn:Lagrange-An-Bn-Cn}
+      A_{n+1} = a_n^2\,A_n + a_n\,B_n + C_n, \quad
+      B_{n+1} = 2\,a_n\,A_n + B_n, \quad
+      C_{n+1} = A_n.
+    \end{equation}
+    Un cálculo directo demuestra que
+    $$\Delta (f_{n+1}) = \Delta (f_n).$$
+
+    Notamos que la sucesión $(A_n)$ cambia su signo un número infinito de
+    veces. Por ejemplo, si $A_n > 0$ para $n$ suficientemente grande, entonces
+    de \eqref{eqn:Lagrange-An-Bn-Cn} se ve que también $B_n, C_n > 0$ para $n$
+    suficientemente grande. Pero $\alpha_n > 0$ para $n \ge 1$, y en este caso
+    tendríamos
+    $$f_n (\alpha_n) = A_n\,\alpha_n^2 + B_n\,\alpha_n + C_n > 0.$$
+
+    Entonces, para un número infinito de $n$ se tiene
+    $A_n\,A_{n-1} = A_n\,C_n < 0$, y en este caso el discriminante
+    $$\Delta (f_n) = \Delta = B_n^2 - 4\,A_n\,C_n$$
+    nos da la cota
+    $$|B_n| < \sqrt{\Delta}, \quad |A_n|, |C_n| \le \frac{1}{4}\,\Delta.$$
+    Puesto que esto se cumple para un número infinito de $n$, habrá $m\ne n$
+    tales que $f_m = f_n$ y $\alpha_m = \alpha_n$.
+  \end{proof}
 \end{teorema}
-
-\vspace{1em}
-
-\noindent\emph{Lo vamos a probar el lunes\dots}
-
-\iffalse
-
-\begin{proof}[Demostración (\cite{Steinig-1992})]
-  Ya lo probamos en una dirección. Ahora para un número cuadrático $\alpha$
-  hay que ver que la fracción correspondiente es continua. Esto equivale a
-  tener $\alpha_m = \alpha_n$ para algunos $m \ne n$.
-
-  Por la hipótesis sobre $\alpha$, su polinomio mínimo
-  $$f (x) = A\,x^2 + B\,x + C$$
-  tiene discriminante
-  $$\Delta = \Delta (f) = B^2 - 4 A C,$$
-  donde $\Delta > 0$ (porque $\alpha$ es real) y $\Delta$ no es un cuadrado.
-
-  Por inducción podemos definir una sucesión de polinomios cuadráticos
-  $$f_n (x) = A_n\,x^2 + B_n\,x + C_n \in \ZZ [x]$$
-  que cumplen
-  $$f_n (\alpha_n) = 0, \quad \Delta (f_n) = \Delta.$$
-  Para $n = 0$ tomamos $f_0 = f$. Para el paso inductivo, no es difícil
-  comprobar que
-  $$\alpha_{n+1}^2 \, f_n \Bigl(a_n + \frac{1}{\alpha_{n+1}}\Bigr) = \alpha_{n+1}^2 \, f_n (\alpha_n) = 0$$
-  corresponde a la ecuación cuadrática
-  \[ f_{n+1} (\alpha_{n+1}) = 0, \quad
-     f_{n+1} (x) = A_{n+1}\,x^2 + B_{n+1}\,x + C_{n+1}, \]
-  donde
-  \begin{equation}
-    \label{eqn:Lagrange-An-Bn-Cn}
-    A_{n+1} = a_n^2\,A_n + a_n\,B_n + C_n, \quad
-    B_{n+1} = 2\,a_n\,A_n + B_n, \quad
-    C_{n+1} = A_n.
-  \end{equation}
-  Un cálculo directo demuestra que
-  $$\Delta (f_{n+1}) = \Delta (f_n).$$
-
-  Notamos que la sucesión $(A_n)$ cambia su signo un número infinito de
-  veces. Por ejemplo, si $A_n > 0$ para $n$ suficientemente grande, entonces
-  de \eqref{eqn:Lagrange-An-Bn-Cn} se ve que también $B_n, C_n > 0$ para $n$
-  suficientemente grande. Pero $\alpha_n > 0$ para $n \ge 1$, y en este caso
-  tendríamos
-  $$f_n (\alpha_n) = A_n\,\alpha_n^2 + B_n\,\alpha_n + C_n > 0.$$
-
-  Entonces, para un número infinito de $n$ se tiene
-  $A_n\,A_{n-1} = A_n\,C_n < 0$, y en este caso el discriminante
-  $$\Delta (f_n) = \Delta = B_n^2 - 4\,A_n\,C_n$$
-  nos da la cota
-  $$|B_n| < \sqrt{\Delta}, \quad |A_n|, |C_n| \le \frac{1}{4}\,\Delta.$$
-  Puesto que esto se cumple para un número infinito de $n$, habrá $m\ne n$
-  tales que $f_m = f_n$ y $\alpha_m = \alpha_n$.
-\end{proof}
 
 También sería interesante investigar cuándo la fracción continua es
 \emph{puramente} periódica. La caracterización es la siguiente.
@@ -2620,7 +2616,6 @@ También sería interesante investigar cuándo la fracción continua es
 \begin{teorema}
   Sea $\alpha \in \QQ (\sqrt{d})$ un número real cuadrático. Denotemos por
   $\overline{\cdot}$ el automorfismo no trivial $\sqrt{d} \mapsto -\sqrt{d}$.
-
   La fracción continua para $\alpha$ es puramente periódica si y solamente si
   $\alpha > 1$ y $-1 < \overline{\alpha} < 0$.
 
@@ -2628,7 +2623,7 @@ También sería interesante investigar cuándo la fracción continua es
     Supongamos primero que la fracción continua para $\alpha$ es puramente
     periódica y $\alpha = [\overline{a_0,a_1,\ldots,a_{k-1}}]$. En todo caso se
     cumple $q_n \ge 1$, y luego, $a_0 = a_k \ge 1$ implica por inducción que
-    también $p_n = a_n\,p_{n-1} + p_{n-2} \ge 1$ para todo $n$. Entonces,
+    también ${p_n = a_n\,p_{n-1} + p_{n-2} \ge 1}$ para todo $n$. Entonces,
     $\alpha = \lim_{n\to\infty} \frac{p_n}{q_n} > 1$.
 
     Como ya notamos en \ref{prop:fraccion-periodica=>cuadratico}, $\alpha$,
@@ -2681,13 +2676,13 @@ También sería interesante investigar cuándo la fracción continua es
 \begin{comentario}
   El número más pequeño $k$ tal que
   $\sqrt{d} = [\lfloor\sqrt{d}\rfloor, \overline{a_1,\ldots,a_k}]$ se llama la
-  \textbf{longitud del periodo}. El mismo Lagrange obtuvo una cota $< 2d$,
-  pero los cálculos sugieren que la cota es $O (\sqrt{d})$. Véase
-  \url{https://oeis.org/A003285} para las referencias.
+  \textbf{longitud del período}. El mismo Lagrange obtuvo una cota $< 2d$,
+  pero los cálculos sugieren la cota $O (\sqrt{d})$. Véase las referencias en
+  \url{https://oeis.org/A003285} para más detalles.
 \end{comentario}
 
 En la figura \ref{fig:fracciones-continuas-para-sqrt-d} se encuentran las
-fracciones continuas para algunos números $\sqrt{d}$.
+fracciones continuas para $\sqrt{d}$, donde $d < 100$.
 
 \begin{figure}
   \begin{multicols}{2}
@@ -2758,7 +2753,7 @@ fracciones continuas para algunos números $\sqrt{d}$.
     \end{align*}
   \end{multicols}
 
-  \caption{Fracciones continuas para $\sqrt{d}$, donde $d < 100$ es libre de cuadrados}
+  \caption{Fracciones continuas para $\sqrt{d}$, donde $d < 100$}
   \label{fig:fracciones-continuas-para-sqrt-d}
 \end{figure}
 
@@ -2779,7 +2774,7 @@ fracciones continuas para algunos números $\sqrt{d}$.
     \[ A_{n+1} = a_n\,B_n - A_n, \quad
        B_{n+1} = \frac{d - A_{n+1}^2}{B_n} \in \ZZ. \]
 
-  \item[2)] Si $k$ es el periodo de la fracción continua para $\sqrt{d}$;
+  \item[2)] Si $k$ es el período de la fracción continua para $\sqrt{d}$;
     es decir, $\sqrt{d} = [a_0, \overline{a_1,\ldots,a_k}]$, entonces
     $B_n = 1$ si y solamente si $k \mid n$.
 
@@ -2789,34 +2784,36 @@ fracciones continuas para algunos números $\sqrt{d}$.
   \begin{proof}
     La parte 1) se deja como un ejercicio.
 
-    En la parte 2), primero consideremos $B_k$, donde $k$ es el periodo.
+    En la parte 2), primero consideremos $B_k$, donde $k$ es el período.
     Tenemos $\alpha_{k+1} = \alpha_1$, y luego
     $$A_{k+1} = A_1 = \lfloor\sqrt{d}\rfloor$$
     y
     $$B_{k+1} = \frac{d - A_{k+1}^2}{B_k} = B_1 = d - \lfloor\sqrt{d}\rfloor^2.$$
     Esto implica que $B_k = 1$. Viceversa, si $B_n = 1$ para algún $n$, entonces
-    $\alpha_n = A_n + \sqrt{d}$. Tenemos
-    $\alpha = [a_0,a_1,\ldots,a_{n-1},\alpha_n]$, y el número $\alpha_n$ tiene
-    fracción continua puramente periódica, y por lo tanto $-1 <
-    \overline{\alpha_n} < 0$. Esto implica que $\sqrt{d} - 1 < A_n < \sqrt{d}$,
-    y luego $A_n = \lfloor\sqrt{d}\rfloor$.  Ahora
-    $\alpha_n = \sqrt{d} + \lfloor\sqrt{d}\rfloor = \alpha_1$, y esto es posible
-    precisamente si $k \mid n$.
+    $\alpha_n = A_n + \sqrt{d}$, y podemos escribir
+    ${\alpha = [a_0,a_1,\ldots,a_{n-1},\alpha_n]}$, donde el número $\alpha_n$
+    tiene fracción continua puramente periódica, y por lo tanto
+    ${-1 < \overline{\alpha_n} < 0}$. Esto implica que
+    ${\sqrt{d} - 1 < A_n < \sqrt{d}}$, y luego $A_n = \lfloor\sqrt{d}\rfloor$.
+    Ahora ${\alpha_n = \sqrt{d} + \lfloor\sqrt{d}\rfloor = \alpha_1}$, y esto es
+    posible precisamente si $k \mid n$.
 
     En fin, en la parte 3) de manera similar, si $B_n = -1$, entonces
-    $\alpha_n = -A_n - \sqrt{d}$ tiene fracción continua puramente periódica,
-    y luego $\alpha_n > 1$ y $-1 < \overline{\alpha_n} < 0$. Tenemos
-    desigualdades $-A_n - \sqrt{d} > 1$ y $-1 < -A_n + \sqrt{d} < 0$,
-    pero estas implican que $\sqrt{d} < A_n < -\sqrt{d} - 1$. Contradicción.
+    ${\alpha_n = -A_n - \sqrt{d}}$ tiene fracción continua puramente periódica,
+    y luego
+    \[ \alpha_n > 1, ~ -1 < \overline{\alpha_n} < 0
+       \iff
+       -A_n - \sqrt{d} > 1, ~ -1 < -A_n + \sqrt{d} < 0, \]
+    pero estas implican que ${\sqrt{d} < A_n < -\sqrt{d} - 1}$. Contradicción.
   \end{proof}
 \end{lema}
 
 La relación con la ecuación de Pell surge de la siguiente manera.
 
 \begin{proposicion}
-  Con la notación de arriba, para todo $n \ge -1$ se tiene
+  Con la notación de arriba, para todo $n$ se tiene
   $$p_n^2 - d\,q_n^2 = (-1)^{n+1}\,B_{n+1}.$$
-  En particular, si $k$ es el periodo de la fracción continua para $\sqrt{d}$,
+  En particular, si $k$ es el período de la fracción continua para $\sqrt{d}$,
   entonces $B_{kn} = 1$, y luego
   $$p_{kn - 1}^2 - d\,q_{kn-1}^2 = (-1)^{kn}.$$
 
@@ -2837,6 +2834,61 @@ Con esto ya tenemos un número infinito de soluciones de la ecuación de Pell
 $x^2 - d\,y^2 = \pm 1$, y nuestro objetivo será probar que todas las soluciones
 vienen de la fracción continua para $\sqrt{d}$ de esta manera.
 
+\begin{proposicion}
+  Toda solución entera con $x,y > 0$ de la ecuación $x^2 + dy^2 = \pm 1$ tiene
+  forma $(x,y) = (p_n,q_n)$ para algún $n$, donde los $\frac{p_n}{q_n}$ vienen
+  de la fracción continua para $\sqrt{d}$.
+
+  \begin{proof}
+    De manera un poco más general, sean $x,y$ enteros positivos tales que
+    $\gcd (x,y) = 1$ y $s,t$ números reales tales que
+    \[ x^2 - ry^2 = s, \quad
+       0 < s < \sqrt{r}, \quad
+       \sqrt{r}\text{ es irracional}. \]
+
+    Escribiendo $(x - y\sqrt{r})\,(x + y\sqrt{r}) = s$, se obtiene
+    la desigualdad
+    \[ \frac{x}{y} - \sqrt{r} = \frac{s}{y\,(x + y\sqrt{r})} <
+    \frac{\sqrt{r}}{y\,(x + y\sqrt{r})} =
+    \cfrac{1}{y^2\,\Bigl(\cfrac{x}{y\sqrt{r}} + 1\Bigr)} <
+    \frac{1}{2y^2}, \]
+    usando que $\frac{x}{y\sqrt{r}} > 1$, como consecuencia de
+    $\frac{x}{y} - \sqrt{r} > 0$. Ahora, dado que
+    $$\Bigl|\frac{x}{y} - \sqrt{r}\Bigr| < \frac{1}{2y^2},$$
+    el resultado de \ref{cor:mejor-aproximacion-por-pn/qn} nos dice que
+    $\frac{x}{y} = \frac{p_n}{q_n}$ para algún $n$, donde los $\frac{p_n}{q_n}$
+    salen de la fracción continua para $\sqrt{r}$.
+
+    Si nos interesa la ecuación $x^2 - dy^2 = +1$, basta aplicar nuestro
+    argumento a $r = d$ y $s = 1$. Por otra parte, si la ecuación es
+    $x^2 - dy^2 = -1$, entonces podemos tomar $r = s = \frac{1}{d}$. En este
+    caso la ecuación será
+    $$x^2 - \frac{1}{d}\,y^2 = \frac{1}{d} \iff y^2 - dx^2 = -1.$$
+    Tenemos $\frac{x}{y} = \frac{p_n'}{q_n'}$ para algún $n$, donde los
+    $\frac{p_n'}{q_n'}$ salen de la fracción continua para $\frac{1}{\sqrt{d}}$.
+    Pero no es difícil verificar que
+    $\frac{p_n'}{q_n'} = \frac{q_{n-1}}{p_{n-1}}$, donde las fracciones
+    $\frac{p_n}{q_n}$ vienen de $\sqrt{d}$ (¡ejercicio!).
+  \end{proof}
+\end{proposicion}
+
+Combinando los últimos dos resultados, se obtiene el siguiente.
+
+\begin{teorema}
+  Para un entero libre de cuadrados $d$ consideremos la fracción continua para
+  $\sqrt{d}$. Si $k$ es el período, entonces las soluciones enteras positivas
+  de la ecuación $x^2 - dy^2 = \pm 1$ tienen forma $(x,y) = (p_{kn-1}, q_{kn-1})$,
+  donde $n = 1,2,3,\ldots$
+\end{teorema}
+
+\begin{ejemplo}
+  Consideremos la ecuación $x^2 - 41\,y^2 = \pm 1$. En este caso primero
+  calculamos la fracción continua $\sqrt{41} = [6, \overline{2,2,12}]$.
+  Las soluciones no triviales son $(x,y) = (p_{3n-1}, q_{3n-1})$. En particular,
+  la solución más pequeña será $(x,y) = (p_2,q_2) = (32,5)$.
+  Efectivamente, verificamos que $32^2 - 41\cdot 5^2 = -1$.
+\end{ejemplo}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Unidades fundamentales en campos cuadráticos reales}
@@ -2849,13 +2901,12 @@ explícita.
 
 Si $d \equiv 1 \pmod{4}$, entonces
 $\O_K = \ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]$. Para una unidad
-$u = a + b\,\frac{1+\sqrt{d}}{2} \in \O_K^\times$ tenemos
-$$N_{K/\QQ} (u) = a^2 + ab + \frac{1 - d}{4}\,b^2 = \pm 1.$$
+$v = a + b\,\frac{1+\sqrt{d}}{2} \in \O_K^\times$ tenemos
+$$N_{K/\QQ} (v) = a^2 + ab + \frac{1 - d}{4}\,b^2 = \pm 1.$$
 Si $d \equiv 1 \pmod{8}$, entonces considerando diferentes opciones mód $8$,
 se ve que $b$ tiene que ser par en cualquier caso, así que
-$u \in \ZZ [\sqrt{d}]^\times$. Por otra parte, si $d \equiv 5 \pmod{8}$, un
-cálculo directo y tedioso demuestra que $u^3 \in \ZZ [\sqrt{d}]^\times$.
-
+$v \in \ZZ [\sqrt{d}]^\times$. Por otra parte, si $d \equiv 5 \pmod{8}$, un
+cálculo directo y tedioso demuestra que $v^3 \in \ZZ [\sqrt{d}]^\times$.
 Todo esto significa que
 \begin{itemize}
 \item si $d \equiv 2,3 \pmod{4}$ o $d \equiv 1 \pmod{8}$, entonces
@@ -2863,72 +2914,117 @@ Todo esto significa que
 
 \item si $d \equiv 5 \pmod{8}$, entonces
   $[\O_K^\times : \ZZ [\sqrt{d}]^\times] = 1\text{ o }3$.
-  Si $v$ es una unidad fundamental de $\ZZ [\sqrt{d}]$, entonces para encontrar
-  la unidad fundamental de $\O_K$, basta resolver la ecuación $u^3 = v$, lo que
-  no es muy difícil.
+  Si $u$ es una unidad fundamental de $\ZZ [\sqrt{d}]^\times$, entonces para
+  encontrar la unidad fundamental de $\O_K^\times$, basta resolver la ecuación
+  $u^3 = v$ en $\O_K$. Si esta no tiene soluciones, entonces
+  $\O_K^\times = \ZZ [\sqrt{d}]^\times$.
 \end{itemize}
 En cualquier caso, para encontrar las unidades en $\O_K$, bastará conocer las
-unidades
-$$\ZZ [\sqrt{d}]^\times = \{ a + b\sqrt{d} \mid a^2 - db^2 = \pm 1 \}.$$
-
-**TODO** Niven--Zuckerman, pp. 351--355.
+unidades en $\ZZ [\sqrt{d}]$. Tenemos
+\[ \{ x + y\sqrt{d} \mid x,y > 0, ~ x^2 - dy^2 = \pm 1 \} =
+\{ u^n \mid n = 1,2,3,\ldots \}, \]
+donde $u$ es la unidad fundamental de $\ZZ [\sqrt{d}]$, definida como la unidad
+más pequeña tal que $u > 1$. Por otra parte, sabemos que las unidades de arriba
+tienen forma $p_{kn-1} + q_{kn-1}\sqrt{d}$, donde $k$ es el período de la fracción
+continua para $\sqrt{d}$. La más pequeña entre estas corresponde a $n = 1$, así
+que
+$$u = p_{k-1} + q_{k-1}\sqrt{d}.$$
 
 \begin{ejemplo}
-  Consideremos $d = \sqrt{46}$. Se tiene
-  $$\sqrt{46} = [a_0, \overline{a_1,\ldots,a_n}] = [6,\overline{1,3,1,1,2,6,2,1,1,3,1,12}].$$
-  En este caso $p_{n-1}/q_{n-1} = 24335/3588$, como se puede calcular usando
-  PARI/GP.
-\begin{verbatim}
-? contfracpnqn([6,1,3,1,1,2,6,2,1,1,3,1,12])
-% = 
-[311058 24335]
-
-[ 45863  3588]
-\end{verbatim}
-  Luego,
-  $$u = 24335 + 3588 \sqrt{46}.$$
+  Para $K = \QQ (\sqrt{2})$, empezamos por la fracción continua
+  $\sqrt{2} = [1,\overline{2}]$. En este caso nos interesan $p_0 = 1$
+  y $q_0 = 1$. Entonces, la unidad fundamental es $u = 1 + \sqrt{2}$.
 \end{ejemplo}
 
-\begin{center}
-  \bgroup
-  \def\arraystretch{1.65}
-  \begin{tabular}{M{0.5cm}M{4cm}M{0.7cm}|M{0.5cm}M{4cm}M{0.7cm}}
-    \hline
-    $d$ & $u$ & $N (u)$ & $d$ & $u$ & $N (u)$ \\
-    \hline
-    $2$ & $1 + \sqrt{2}$ & $-1$ & $51$ & $50 + 7\sqrt{51}$ & $+1$ \\
-    $3$ & $2 + \sqrt{3}$ & $+1$ & $53$ & $3 + \frac{1+\sqrt{53}}{2}$ & $-1$ \\
-    $5$ & $\frac{1+\sqrt{5}}{2}$ & $-1$ & $55$ & $89 + 12\sqrt{55}$ & $+1$ \\
-    $6$ & $5 + 2\sqrt{6}$ & $+1$ & $57$ & $131 + 40\,\frac{1+\sqrt{57}}{2}$ & $+1$ \\
-    $7$ & $8 + 3\sqrt{7}$ & $+1$ & $58$ & $99 + 13\sqrt{58}$ & $-1$ \\
-    $10$ & $3 + \sqrt{10}$ & $-1$ & $59$ & $530 + 69\sqrt{59}$ & $+1$ \\
-    $11$ & $10 + 3\sqrt{11}$ & $+1$ & $61$ & $17 + 5\,\frac{1+\sqrt{61}}{2}$ & $-1$ \\
-    $13$ & $1 + \frac{1+\sqrt{13}}{2}$ & $-1$ & $62$ & $63 + 8\sqrt{62}$ & $+1$ \\
-    $14$ & $15 + 4\sqrt{14}$ & $+1$ & $65$ & $7 + 2\,\frac{1+\sqrt{65}}{2}$ & $-1$ \\
-    $15$ & $4 + \sqrt{15}$ & $+1$ & $66$ & $65 + 8\sqrt{66}$ & $+1$ \\
-    $17$ & $3 + 2\,\frac{1+\sqrt{17}}{2}$ & $-1$ & $67$ & $48842 + 5967\sqrt{67}$ & $+1$ \\
-    $19$ & $170 + 39\sqrt{19}$ & $+1$ & $69$ & $11 + 3\,\frac{1+\sqrt{69}}{2}$ & $+1$ \\
-    $21$ & $2 + \frac{1+\sqrt{21}}{2}$ & $+1$ & $70$ & $251 + 30\sqrt{70}$ & $+1$ \\
-    $22$ & $197 + 42\sqrt{22}$ & $+1$ & $71$ & $3480 + 413\sqrt{71}$ & $+1$ \\
-    $23$ & $24 + 5\sqrt{23}$ & $+1$ & $73$ & $943 + 250\,\frac{1+\sqrt{73}}{2}$ & $-1$ \\
-    $26$ & $5 + \sqrt{26}$ & $-1$ & $74$ & $43 + 5\sqrt{74}$ & $-1$ \\
-    $29$ & $2 + \frac{1+\sqrt{29}}{2}$ & $-1$ & $77$ & $4 + \frac{1+\sqrt{77}}{2}$ & $+1$ \\
-    $30$ & $11 + 2\sqrt{30}$ & $+1$ & $78$ & $53 + 6\sqrt{78}$ & $+1$ \\
-    $31$ & $1520 + 273\sqrt{31}$ & $+1$ & $79$ & $80 + 9\sqrt{79}$ & $+1$ \\
-    $33$ & $19 + 8\,\frac{1+\sqrt{33}}{2}$ & $+1$ & $82$ & $9 + \sqrt{82}$ & $-1$ \\
-    $34$ & $35 + 6\sqrt{34}$ & $+1$ & $83$ & $82 + 9\sqrt{83}$ & $+1$ \\
-    $35$ & $6 + \sqrt{35}$ & $+1$ & $85$ & $4 + \frac{1+\sqrt{85}}{2}$ & $-1$ \\
-    $37$ & $5 + 2\,\frac{1+\sqrt{37}}{2}$ & $-1$ & $86$ & $10405 + 1122\sqrt{86}$ & $+1$ \\
-    $38$ & $37 + 6\sqrt{38}$ & $+1$ & $87$ & $28 + 3\sqrt{87}$ & $+1$ \\
-    $39$ & $25 + 4\sqrt{39}$ & $+1$ & $89$ & $447 + 106\,\frac{1+\sqrt{89}}{2}$ & $-1$ \\
-    $41$ & $27 + 10\,\frac{1+\sqrt{41}}{2}$ & $-1$ & $91$ & $1574 + 165\sqrt{91}$ & $+1$ \\
-    $42$ & $13 + 2\sqrt{42}$ & $+1$ & $93$ & $13 + 3\,\frac{1+\sqrt{93}}{2}$ & $+1$ \\
-    $43$ & $3482 + 531\sqrt{43}$ & $+1$ & $94$ & $2143295 + 221064\sqrt{94}$ & $+1$ \\
-    $46$ & $24335 + 3588\sqrt{46}$ & $+1$ & $95$ & $39 + 4\sqrt{95}$ & $+1$ \\
-    $47$ & $48 + 7\sqrt{47}$ & $+1$ & $97$ & $5035 + 1138\frac{1+\sqrt{97}}{2}$ & $-1$ \\
-  \end{tabular}
-  \egroup
-\end{center}
+\begin{ejemplo}
+  Para $K = \QQ (\sqrt{5})$ tenemos $\sqrt{5} = [2,\overline{4}]$.
+  En este caso $p_0 = 2$, $q_0 = 1$, así que la unidad fundamental de
+  $\ZZ [\sqrt{5}]^\times$ es $u = 2 + \sqrt{5}$. El anillo de enteros
+  es $\O_K = \ZZ \Bigl[\frac{1+\sqrt{5}}{2}\Bigr]$. Para
+  $v = A + B\frac{1+\sqrt{5}}{2}$ consideremos la ecuación $v^3 = u$.
+  Esta nos da
+  \[ \left\{\begin{array}{rcl}
+  A^3 + \frac{3}{2}\,A^2 B + \frac{9}{2}\,A B^2 + 2\,B^3 & = & 2,\\
+  \frac{3}{2}\,A^2 B + \frac{3}{2}\,A B^2 + B^2 & = & 1.
+  \end{array}\right. \]
+  Se ve que $A = 0$, $B = 1$ nos da una solución, así que la unidad fundamental
+  de $\O_K^\times$ es $v = \frac{1+\sqrt{5}}{2}$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Consideremos $K = \QQ (\sqrt{13})$. En este caso
+  $\sqrt{13} = [3, \overline{1,1,1,1,6}]$, y la unidad fundamental de
+  $\ZZ [\sqrt{13}]^\times$ es $u = p_4 + q_4\sqrt{13} = 18 + 5\sqrt{13}$.
+  Luego resolviendo la ecuación $v^3 = u$ en
+  $\ZZ \Bigl[\frac{1+\sqrt{13}}{2}\Bigr]$ se obtiene
+  la unidad fundamental $v = 1 + \frac{1 + \sqrt{13}}{2}$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Consideremos $K = \QQ (\sqrt{37})$. Tenemos $\sqrt{37} = [6,\overline{12}]$,
+  y entonces la unidad fundamental de $\ZZ [\sqrt{37}]^\times$ será
+  $u = p_0 + q_0\sqrt{37} = 6 + \sqrt{37}$. Ahora la ecuación $v^3 = u$ en
+  $\ZZ \Bigl[\frac{1+\sqrt{37}}{2}\Bigr]$ corresponde a
+  \[ \left\{\begin{array}{rcl}
+  A^3 + \frac{3}{2}\,A^2\,B + \frac{57}{2}\,A\,B^2 + 14\,B^3 & = & 6,\\
+  \frac{3}{2}\,A^2\,B + \frac{3}{2}\,A B^2 + 5\,B^3 & = & 1.
+  \end{array}\right. \]
+
+  Escribamos la segunda ecuación como
+  $$B\,(3\,A^2 + 3\,AB + 10\,B^2) = 2.$$
+  De aquí se sigue que $B = \pm 1$ o $\pm 2$. Sustituyendo estos valores,
+  se obtiene una ecuación cuadrática en $A$ que no tiene soluciones enteras.
+  Entonces, $v^3 = u$ no tiene solución. Esto significa que
+  $\O_K^\times = \ZZ [\sqrt{37}]^\times$, y la unidad fundamental es la misma
+  $u$.
+\end{ejemplo}
+
+En la figura \ref{fig:unidades-fundamentales-cuadraticas} se encuentran las
+unidades fundamentales en $\ZZ [\sqrt{d}]^\times$ y
+$\ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]^\times$ para $d < 100$.
+
+\begin{figure}
+  \begin{center}\def\arraystretch{1.65}\small
+    \begin{tabular}{M{0.3cm}M{0.4cm}M{2.5cm}M{2.1cm}M{0.7cm}|M{0.3cm}M{0.4cm}M{3.3cm}M{2.4cm}M{0.7cm}}
+      \hline
+      $d$ & $d~(8)$ & $u \in \ZZ [\sqrt{d}]^\times$ & $v \in \ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]^\times$ & $N (u)$ & $d$ & $d~(8)$ & $u \in \ZZ [\sqrt{d}]^\times$ & $v \in \ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]^\times$ & $N (u)$ \\
+      \hline
+      $2$ & $2$ & $1 + \sqrt{2}$ & & $-1$ & $51$ & $3$ & $50 + 7\sqrt{51}$ & & $+1$ \\
+      $3$ & $3$ & $2 + \sqrt{3}$ & & $+1$ & $53$ & $5$ & $182 + 25\sqrt{53}$ & $3 + \frac{1+\sqrt{53}}{2}$ & $-1$ \\
+      $5$ & $5$ & $2 + \sqrt{5}$ & $\frac{1+\sqrt{5}}{2}$ & $-1$ & $55$ & $7$ & $89 + 12\sqrt{55}$ & & $+1$ \\
+      $6$ & $6$ & $5 + 2\sqrt{6}$ & & $+1$ & $57$ & $1$ & $152 + 20\sqrt{57}$ & $152 + 20\sqrt{57}$ & $+1$ \\
+      $7$ & $7$ & $8 + 3\sqrt{7}$ & & $+1$ & $58$ & $2$ & $99 + 13\sqrt{58}$ & & $-1$ \\
+      $10$ & $2$ & $3 + \sqrt{10}$ & & $-1$ & $59$ & $3$ & $530 + 69\sqrt{59}$ & & $+1$ \\
+      $11$ & $3$ & $10 + 3\sqrt{11}$ & & $+1$ & $61$ & $5$ & $29718 + 3805\sqrt{61}$ & $17 + 5\,\frac{1+\sqrt{61}}{2}$ & $-1$ \\
+      $13$ & $5$ & $18 + 5\sqrt{13}$ & $1 + \frac{1+\sqrt{13}}{2}$ & $-1$ & $62$ & $6$ & $63 + 8\sqrt{62}$ & & $+1$ \\
+      $14$ & $6$ & $15 + 4\sqrt{14}$ & & $+1$ & $65$ & $1$ & $8 + \sqrt{65}$ & $8 + \sqrt{65}$ & $-1$ \\
+      $15$ & $7$ & $4 + \sqrt{15}$ & & $+1$ & $66$ & $2$ & $65 + 8\sqrt{66}$ & & $+1$ \\
+      $17$ & $1$ & $4 + \sqrt{17}$ & $4 + \sqrt{17}$ & $-1$ & $67$ & $3$ & $48842 + 5967\sqrt{67}$ & & $+1$ \\
+      $19$ & $3$ & $170 + 39\sqrt{19}$ & & $+1$ & $69$ & $5$ & $7775 + 936\sqrt{69}$ & $11 + 3\,\frac{1+\sqrt{69}}{2}$ & $+1$ \\
+      $21$ & $5$ & $55 + 12\sqrt{21}$ & $2 + \frac{1+\sqrt{21}}{2}$ & $+1$ & $70$ & $6$ & $251 + 30\sqrt{70}$ & & $+1$ \\
+      $22$ & $6$ & $197 + 42\sqrt{22}$ & & $+1$ & $71$ & $7$ & $3480 + 413\sqrt{71}$ & & $+1$ \\
+      $23$ & $7$ & $24 + 5\sqrt{23}$ & & $+1$ & $73$ & $1$ & $1068 + 125\sqrt{73}$ & $1068 + 125\sqrt{73}$ & $-1$ \\
+      $26$ & $2$ & $5 + \sqrt{26}$ & & $-1$ & $74$ & $2$ & $43 + 5\sqrt{74}$ & & $-1$ \\
+      $29$ & $5$ & $70 + 13\sqrt{29}$ & $2 + \frac{1+\sqrt{29}}{2}$ & $-1$ & $77$ & $5$ & $351 + 40\sqrt{77}$ & $4 + \frac{1+\sqrt{77}}{2}$ & $+1$ \\
+      $30$ & $6$ & $11 + 2\sqrt{30}$ & & $+1$ & $78$ & $6$ & $53 + 6\sqrt{78}$ & & $+1$ \\
+      $31$ & $7$ & $1520 + 273\sqrt{31}$ & & $+1$ & $79$ & $7$ & $80 + 9\sqrt{79}$ & & $+1$ \\
+      $33$ & $1$ & $23 + 4\sqrt{33}$ & $23 + 4\sqrt{33}$ & $+1$ & $82$ & $2$ & $9 + \sqrt{82}$ & & $-1$ \\
+      $34$ & $2$ & $35 + 6\sqrt{34}$ & & $+1$ & $83$ & $3$ & $82 + 9\sqrt{83}$ & & $+1$ \\
+      $35$ & $3$ & $6 + \sqrt{35}$ & & $+1$ & $85$ & $5$ & $378 + 41\sqrt{85}$ & $4 + \frac{1+\sqrt{85}}{2}$ & $-1$ \\
+      $37$ & $5$ & $6 + \sqrt{37}$ & $6 + \sqrt{37}$ & $-1$ & $86$ & $6$ & $10405 + 1122\sqrt{86}$ & & $+1$ \\
+      $38$ & $6$ & $37 + 6\sqrt{38}$ & & $+1$ & $87$ & $7$ & $28 + 3\sqrt{87}$ & & $+1$ \\
+      $39$ & $7$ & $25 + 4\sqrt{39}$ & & $+1$ & $89$ & $1$ & $500 + 53\sqrt{89}$ & $500 + 53\sqrt{89}$ & $-1$ \\
+      $41$ & $1$ & $32 + 5\sqrt{41}$ & $32 + 5\sqrt{41}$ & $-1$ & $91$ & $3$ & $1574 + 165\sqrt{91}$ & & $+1$ \\
+      $42$ & $2$ & $13 + 2\sqrt{42}$ & & $+1$ & $93$ & $5$ & $12151 + 1260\sqrt{93}$ & $13 + 3\,\frac{1+\sqrt{93}}{2}$ & $+1$ \\
+      $43$ & $3$ & $3482 + 531\sqrt{43}$ & & $+1$ & $94$ & $6$ & $2143295 + 221064\sqrt{94}$ & & $+1$ \\
+      $46$ & $6$ & $24335 + 3588\sqrt{46}$ & & $+1$ & $95$ & $7$ & $39 + 4\sqrt{95}$ & & $+1$ \\
+      $47$ & $7$ & $48 + 7\sqrt{47}$ & & $+1$ & $97$ & $1$ & $5604 + 569\sqrt{97}$ & $5604 + 569\sqrt{97}$ & $-1$ \\
+    \end{tabular}
+  \end{center}
+
+  \caption{Unidades fundamentales en $\ZZ [\sqrt{d}]^\times$ y $\ZZ \Bigl[\frac{1+\sqrt{d}}{2}\Bigr]^\times$, donde $d < 100$}
+  \label{fig:unidades-fundamentales-cuadraticas}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2948,10 +3044,10 @@ más general.
 Ahora si \texttt{$K$ = bnfinit($f$)}, entonces los invariantes que nos interesan
 son los siguientes:
 \begin{itemize}
-\item \texttt{$K$.clgp} --- el grupo de clases,
-\item \texttt{$K$.no} --- el número de clases $h_K = \# \Cl (K)$,
+\item \texttt{$K$.clgp} --- el grupo de clases;
+\item \texttt{$K$.no} --- el número de clases $h_K = \# \Cl (K)$;
 \item \texttt{$K$.cyc} --- vector \texttt{[$a_1$,\ldots,$a_n$]}, tal que
-  $\Cl (K) \cong \ZZ/a_1\ZZ \times \cdots \times \ZZ/a_n\ZZ$.
+  $\Cl (K) \cong \ZZ/a_1\ZZ \times \cdots \times \ZZ/a_n\ZZ$;
 \item \texttt{$K$.gen} --- el generador de cada componente cíclica del
   grupo de clases, representado en la forma normal de Hermite,
 \item \texttt{$K$.tu} --- las raíces de la unidad; vector
@@ -2962,9 +3058,10 @@ son los siguientes:
 (Aquí «\texttt{tu}» son \emph{torsion units} y «\texttt{fu}» son
 \emph{fundamental units}.)
 
-Por ejemplo, si nos interesa el campo $K = \QQ (\sqrt[3]{19})$.
+\begin{ejemplo}
+  Si nos interesa el campo $K = \QQ (\sqrt[3]{19})$.
 
-\begin{shaded}
+  \begin{shaded}
 \begin{verbatim}
 ? K = bnfinit(x^3-19);
 ? K.no
@@ -2983,20 +3080,22 @@ Por ejemplo, si nos interesa el campo $K = \QQ (\sqrt[3]{19})$.
 ? K.fu
 % = [Mod(-1/3*x^2 + 2/3*x + 2/3, x^3 - 19)]
 \end{verbatim}
-\end{shaded}
+  \end{shaded}
 
-Interpretación de la salida:
-$$\Cl (\QQ (\sqrt[3]{19})) \cong \ZZ/3\ZZ,$$
-donde como el generador se puede tomar un ideal $\mathfrak{p}$ que está arriba
-de $p = 2$. El grupo de unidades es
-\[ \O_K^\times \cong \{ \pm 1 \} \times \langle u\rangle, \quad
-   u = \frac{2}{3} + \frac{2}{3}\,19^{1/3} - \frac{1}{3}\,19^{2/3}. \]
+  Interpretación de la salida:
+  $$\Cl (\QQ (\sqrt[3]{19})) \cong \ZZ/3\ZZ,$$
+  donde como el generador se puede tomar un ideal $\mathfrak{p}$ que está arriba
+  de $p = 2$. El grupo de unidades es
+  \[ \O_K^\times \cong \{ \pm 1 \} \times \langle u\rangle, \quad
+      u = \frac{2}{3} + \frac{2}{3}\,19^{1/3} - \frac{1}{3}\,19^{2/3}. \qedhere \]
+\end{ejemplo}
 
-Por ejemplo, podemos compilar las listas de campos cuadráticos imaginarios con
-$h_K = 1,2,3$. Vamos a tomar $K = \QQ (\sqrt{d})$ con $d \le 10^4$. De hecho,
-estas serán las listas completas.
+\begin{ejemplo}
+  Podemos compilar las listas de campos cuadráticos imaginarios con
+  $h_K = 1,2,3$. Vamos a tomar $K = \QQ (\sqrt{d})$ con $d \le 10^4$. De hecho,
+  estas serán las listas completas.
 
-\begin{shaded}\small
+  \begin{shaded}\small
 \begin{verbatim}
 ? l = vector(3,x,List())
 %65 = [List([]), List([]), List([])]
@@ -3018,11 +3117,13 @@ estas serán las listas completas.
 ? #l[3]
 % = 16
 \end{verbatim}
-\end{shaded}
+  \end{shaded}
+\end{ejemplo}
 
-Calculemos los grupos de clases de algunos campos ciclotómicos.
+\begin{ejemplo}
+  Calculemos los grupos de clases de algunos campos ciclotómicos.
 
-\begin{shaded}
+  \begin{shaded}
 \begin{verbatim}
 ? for (n=3,50, if (n%4 != 2, print ([n, bnfinit(polcyclo(n)).cyc])))
 [3, []]
@@ -3061,15 +3162,16 @@ Calculemos los grupos de clases de algunos campos ciclotómicos.
   ***   Break loop: type 'break' to go back to GP 
   ***   prompt
 \end{verbatim}
-\end{shaded}
+  \end{shaded}
 
-Aquí PARI/GP ya no pudo calcular el grupo de clases de $\QQ (\zeta_{37})$:
-no le bastó la memoria disponible (el tamaño de la pila). Se puede aumentarlo
-ocupando el comando \texttt{default(parisizemax,\dots)}, pero hay que tomar en
-cuenta que los grupos de clases de campos ciclotómicos suelen ser bastante
-grandes, y su cálculo requiere tiempo y memoria.
+  Aquí PARI/GP ya no pudo calcular el grupo de clases de $\QQ (\zeta_{37})$:
+  no le bastó la memoria disponible (el tamaño de la
+  pila\footnote{\emph{stack}}). Se puede aumentarlo ocupando el comando
+  \texttt{default(parisizemax,\dots)}, pero hay que tomar en cuenta que los
+  grupos de clases de campos ciclotómicos suelen ser bastante grandes, y su
+  cálculo requiere tiempo y memoria.
 
-\begin{shaded}
+  \begin{shaded}
 \begin{verbatim}
 ? default(parisizemax,10^10)
   ***   Warning: new maximum stack size = 10000003072 (9536.746 Mbytes).
@@ -3098,7 +3200,8 @@ cpu time = 6,524 ms, real time = 6,646 ms.
 cpu time = 12,276 ms, real time = 12,435 ms.
 % = [695]
 \end{verbatim}
-\end{shaded}
+  \end{shaded}
+\end{ejemplo}
 
 Otras funciones útiles:
 \begin{itemize}
@@ -3112,11 +3215,12 @@ Otras funciones útiles:
   $u \in \O_K^\times$ con $N_{K/\QQ} (u) = +1$.
 \end{itemize}
 
-Por ejemplo, supongamos que nos interesa el grupo de clases de
-$K = \QQ (\sqrt{-6})$. Calculemos la cota de Minkowski y factorizaciones de
-ideales primos correspondientes.
+\begin{ejemplo}
+  Supongamos que nos interesa el grupo de clases de
+  $K = \QQ (\sqrt{-6})$. Calculemos la cota de Minkowski y factorizaciones de
+  ideales primos correspondientes.
 
-\begin{shaded}
+  \begin{shaded}
 \begin{verbatim}
 ? K = bnfinit(x^2+6);
 ? 2/Pi * sqrt(abs(K.disc))
@@ -3136,15 +3240,17 @@ ideales primos correspondientes.
 ? bnfisprincipal(K,idealdiv(K,P2,P3))
 % = [[0]~, [0, -1/3]~]
 \end{verbatim}
-\end{shaded}
+  \end{shaded}
 
-Aquí arriba de $2$ y $3$ están ideales primos $\mathfrak{p}_2$ y
-$\mathfrak{p}_3$ respectivamente. Verificamos que estos no son principales.
-El motivo: en $\O_K$ no hay elementos de norma $2$ y $3$. Luego verificamos
-que el ideal $\mathfrak{p}_2\,\mathfrak{p}_3^{-1}$ sí es principal; es decir,
-$[\mathfrak{p}_2] = [\mathfrak{p}_3]$.
+  Aquí arriba de $2$ y $3$ están ideales primos $\mathfrak{p}_2$ y
+  $\mathfrak{p}_3$ respectivamente. Verificamos que estos no son principales.
+  El motivo: en $\O_K$ no hay elementos de norma $2$ y $3$. Luego verificamos
+  que el ideal $\mathfrak{p}_2\,\mathfrak{p}_3^{-1}$ sí es principal; es decir,
+  $[\mathfrak{p}_2] = [\mathfrak{p}_3]$.
+\end{ejemplo}
 
-Recomiendo que el lector revise la documentación para más detalles y funciones.
+Recomiendo que el lector revise la documentación para más detalles y otras
+funciones.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -3173,7 +3279,25 @@ precalculados. Véase la página \url{https://www.lmfdb.org/NumberField/}
     la lista completa de campos cúbicos con $|\Delta_K| \le 100$ y
     algunos campos cúbicos con $\Cl (K) \cong \ZZ/23\ZZ$}
 \end{figure}
-\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\phantomsection
+
+\addcontentsline{toc}{section}{Conclusión}
+\section*{Conclusión}
+
+En este capítulo investigamos los invariantes más importantes de un campo de
+números $K/\QQ$: el grupo de clases $\Cl (K)$ y el grupo de unidades
+$\O_K^\times$. Probamos que $\Cl (K)$ es un grupo finito, mientras que
+$\O_K^\times$ es finitamente generado de rango $r_1 + r_2 - 1$. En general,
+no es fácil encontrar generadores explícitos para $\O_K^\times$, pero vimos cómo
+hacerlo en el caso especial cuando $K = \QQ (\sqrt{d})$ es un campo cuadrático
+real. El siguiente capítulo será dedicado a los métodos analíticos,
+en particular la \textbf{función zeta de Dedekind} $\zeta_K (s)$. La última
+nos ayudará a relacionar $\Cl (K)$ con $\O_K^\times$, mediante la
+\textbf{fórmula analítica del número de clases} que es otro resultado
+fundamental descubierto por Dirichlet.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -3273,4 +3397,9 @@ precalculados. Véase la página \url{https://www.lmfdb.org/NumberField/}
 \begin{ejercicio}
   Encuentre las fracciones continuas para $\sqrt{n^2+1}$, $\sqrt{n\,(n+1)}$,
   $\sqrt{m^2\,n^2 + n}$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Describa el grupo de unidades $\O_K^\times$ para $K = \QQ (\sqrt{29})$
+  (justifique todos los cálculos sin usar las tablas).
 \end{ejercicio}

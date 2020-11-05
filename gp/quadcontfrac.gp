@@ -18,9 +18,20 @@ quadcontfrac(d) = {
       listput (an,a);
 
       if (B == 1,
-        return (an)  /* ¡Período! */
+        return (Vec(an))  /* ¡Período! */
       )
    );
+};
+
+/* ----------------------------------------------------------------- */
+/* Unidad fundamental de Z [\sqrt{d}]                                */
+/* ----------------------------------------------------------------- */
+
+funit (d) = {
+  local (cfrac = quadcontfrac(d), M, s);
+  M = contfracpnqn (cfrac, #cfrac-2);
+  s = matsize(M)[2];
+  M[1,s] + M[2,s]*x;
 };
 
 /* ----------------------------------------------------------------- */
