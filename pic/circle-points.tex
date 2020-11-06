@@ -1,0 +1,35 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\usepackage{amsmath}
+
+\usepackage{mathspec}
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\begin{document}
+\begin{tikzpicture}[x=0.5cm, y=0.5cm]
+  \foreach \i in {-8, ..., 8}
+  \draw[black!40] (-8,\i) -- (8,\i);
+  \foreach \i in {-8, ..., 8}
+  \draw[black!40] (\i,-8) -- (\i,8);
+
+  \draw (0,0) circle (5);
+
+  \draw (-5,0) node[circle,fill,inner sep=1pt] {};
+  \draw (-4,-3) node[circle,fill,inner sep=1pt] {};
+  \draw (-4,3) node[circle,fill,inner sep=1pt] {};
+  \draw (-3,-4) node[circle,fill,inner sep=1pt] {};
+  \draw (-3,4) node[circle,fill,inner sep=1pt] {};
+  \draw (0,-5) node[circle,fill,inner sep=1pt] {};
+  \draw (0,5) node[circle,fill,inner sep=1pt] {};
+  \draw (3,-4) node[circle,fill,inner sep=1pt] {};
+  \draw (3,4) node[circle,fill,inner sep=1pt] {};
+  \draw (4,-3) node[circle,fill,inner sep=1pt] {};
+  \draw (4,3) node[circle,fill,inner sep=1pt] {};
+  \draw (5,0) node[circle,fill,inner sep=1pt] {};
+\end{tikzpicture}
+\end{document}

@@ -1,3 +1,426 @@
 \chapter{Función zeta de Dedekind}
 
-\emph{Continuará\dots}
+Para un campo de números $K/\QQ$, la \textbf{función zeta de Dedekind}
+correspondiente es una especie de serie generatriz definida por la serie
+$$\zeta_K (s) = \sum_{I \ne 0} \frac{1}{N_{K/\QQ} (I)^s},$$
+donde la suma se toma sobre los ideales enteros no nulos $I \subseteq \O_K$.
+Resulta que la función zeta de Dedekind codifica mucha información aritmética
+sobre $K$. Nos interesará $\zeta_K (s)$ como un objeto analítico, y en
+particular hay que ver la convergencia de la serie.
+
+Primero notamos que si $K = \QQ$, entonces los ideales no nulos en $\O_K = \ZZ$
+tienen forma $n\ZZ$ para $n = 1,2,3,\ldots$, así que $\zeta_\QQ (s) = \zeta (s)$
+es la función zeta de Riemann.
+
+\begin{lema}
+  La serie $\zeta (s) = \sum_{n\ge 1} \frac{1}{n^s}$ converge absolutamente para
+  $\Re s > 1$, y se tiene
+  $$\lim_{s \to 1^+} (s - 1)\,\zeta (s) = 1.$$
+
+  \begin{proof}
+    Primero, notamos que $|1/n^s| = 1/n^{\Re s}$, así que será suficiente
+    establecer la convergencia para $s > 1$ real. Tenemos
+    $$\int_n^{n+1} \frac{dx}{x^s} \le \frac{1}{n^s} \le \int_{n-1}^n \frac{dx}{x^s},$$
+    donde la primera desigualdad se cumple para $n \ge 1$ y la segunda para
+    $n \ge 2$. Tomando la suma sobre $n \ge 1$, nos sale la desigualdad
+    $$\int_1^\infty \frac{dx}{x^s} \le \zeta (s) \le 1 + \int_1^\infty \frac{dx}{x^s}.$$
+    Ahora, dado que $\int_1^\infty \frac{dx}{x^s} = \frac{1}{s - 1}$, tenemos
+    $$\frac{1}{s - 1} \le \zeta (s) \le \frac{s}{s - 1},$$
+    y luego
+    $$1 \le (s-1)\,\zeta (s) \le s.$$
+    Esto establece la convergencia y también calcula $(s-1)\,\zeta (s)$ para
+    $s \to 1^+$.
+  \end{proof}
+\end{lema}
+
+Ahora podemos probar la convergencia de $\zeta_K (s)$.
+
+\begin{proposicion}
+  La serie $\zeta_K (s) = \sum_{I \ne 0} \frac{1}{N_{K/\QQ} (I)^s}$ converge
+  absolutamente para $\Re s > 1$. Además, se cumple la
+  \textbf{fórmula del producto de Euler}
+  \[ \sum_{I \ne 0} \frac{1}{N_{K/\QQ} (I)^s} =
+     \prod_{\mathfrak{p}} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p})^{-s}}, \]
+  donde el producto es sobre todos los ideales primos
+  $\mathfrak{p} \subset \O_K$.
+
+  \begin{proof}
+    De nuevo, la convergencia absoluta para $\Re s > 1$ se sigue de la
+    convergencia para $s > 1$ real. Será suficiente probar la convergencia
+    absoluta del producto de Euler
+    $$\prod_{\mathfrak{p}} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p})^{-s}},$$
+    y luego,
+    \[ \prod_{\mathfrak{p}} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p})^{-s}} =
+       \prod_{\mathfrak{p}} \sum_{e \ge 1} \frac{1}{N_{K/\QQ} (\mathfrak{p}^e)^s} =
+       \sum_{I\ne 0} \frac{1}{N_{K/\QQ} (I)^s}. \]
+    Aquí hemos usado la serie geométrica, la multiplicatividad de la norma, y
+    que todo ideal entero no nulo $I \subseteq \O_K$ tiene factorización única
+    en ideales primos $I = \mathfrak{p}_1^{e_1}\cdots \mathfrak{p}_s^{e_s}$.
+
+    Un producto $\prod_{n\ge 1} (1 + |x_n|)$ converge si y solamente si la serie
+    $\sum_{n\ge 1} |x_n|$ converge. Entonces, la convergencia del producto de
+    Euler se sigue de la convergencia de
+    $\prod_{\mathfrak{p}} (1 - N_{K/\QQ} (\mathfrak{p})^{-s})$, y luego de
+    $\sum_{\mathfrak{p}} \frac{1}{N_{K/\QQ} (\mathfrak{p})^s}$.
+
+    Recordemos que para todo primo racional $p$, existen $\le [K:\QQ]$ ideales
+    primos $\mathfrak{p} \mid p$, y luego para cada uno de estos se tiene
+    $N_{K/\QQ} (\mathfrak{p}) = p^f \ge p$. Entonces,
+    \[ \sum_{\mathfrak{p}} \frac{1}{N_{K/\QQ} (\mathfrak{p})^s} =
+       \sum_p \sum_{\mathfrak{p} \mid p} \frac{1}{N_{K/\QQ} (\mathfrak{p})^s} \le
+       \sum_p \frac{[K:\QQ]}{p^s} < [K : \QQ]\,\zeta (s). \]
+    Aquí hemos usado la convergencia de la función zeta de Riemann.
+  \end{proof}
+\end{proposicion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Ejemplo: la función zeta de \texorpdfstring{$\QQ (i)$}{ℚ(i)}}
+\label{sec:funcion-zeta-de-Q(i)}
+
+Tomemos $K = \QQ (i)$. Para entender cómo se ve la función zeta correspondiente
+$\zeta_K (s)$, sería más fácil trabajar con el producto de Euler
+$$\prod_{\mathfrak{p}} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p})^{-s}}.$$
+Los primos en $\O_K = \ZZ[i]$ son los siguientes.
+\begin{itemize}
+\item Al primo ramificado $p = 2$ corresponde un ideal primo $\mathfrak{p}_2$
+  de norma $2$.
+
+\item Si $p \equiv 1 \pmod{4}$, entonces $p$ se escinde en dos ideales primos
+  $\mathfrak{p}$ y $\overline{\mathfrak{p}}$, cada uno de norma $p$.
+
+\item Si $p \equiv 3 \pmod{4}$, entonces $p$ es inerte y corresponde a un ideal
+  primo $\mathfrak{p}$ de norma $p^2$.
+\end{itemize}
+
+Entonces,
+\[ \zeta_K (s) =
+   \frac{1}{1 - 2^{-s}} \,
+   \prod_{p \equiv 1 ~ (4)} \frac{1}{(1 - p^{-s})^2} \,
+   \prod_{p \equiv 1 ~ (4)} \frac{1}{1 - p^{-2s}}. \]
+Notamos que $\frac{1}{1 - p^{-2s}} = \frac{1}{1 - p^{-s}}\,\frac{1}{1 + p^{-s}}$,
+así que
+$$\zeta_K (s) = \prod_p \frac{1}{1 - p^{-s}}\,\prod_p \frac{1}{1 - \chi(p)\,p^{-s}},$$
+donde
+\[ \chi(p) = \begin{cases}
+  +1, & p \equiv 1 \pmod{4},\\
+  -1, & p \equiv 3 \pmod{4}.
+\end{cases} \]
+Este es un \textbf{carácter de Dirichlet} mód $4$, y a este se asocia la
+\textbf{serie L de Dirichlet} correspondiente
+\[ L (s,\chi) = \prod_p \frac{1}{1 - \chi(p)\,p^{-s}} =
+   \sum_{n\ge 1} \frac{\chi (s)}{n^s}. \]
+Entonces, se tiene
+$$\zeta_K (s) = \zeta (s) \, L (s,\chi).$$
+Invito que el lector revise el apéndice~\ref{ap:Dirichlet} para más detalles.
+
+Recordamos que $\O_K = \ZZ [i]$ es un dominio de ideales principales y
+$\O_K^\times = \{ \pm 1, \pm i \}$. Como consecuencia, todo ideal tiene forma
+$I = (\alpha)$, y para $I \ne 0$ hay precisamente cuatro maneras de escoger un
+generador $\alpha$. Si $\alpha = x + yi$, entonces $N_{K/\QQ} (I) = x^2 + y^2$.
+Pongamos
+$$C (n) = \# \{ (x,y) \in \ZZ^2 \mid x,y > 0, ~ x^2 + y^2 = n \}.$$
+Esta función es responsable por contar los puntos enteros en el círculo de radio
+$\sqrt{n}$.
+
+Tenemos entonces una identidad con series de Dirichlet
+\[ \zeta_K (s) = \sum_{n\ge 0} \frac{C (n)}{n^s} =
+\Bigl(\sum_{n\ge 1} \frac{1}{n^s}\Bigr)\,\Bigl(\sum_{n\ge 1} \frac{\chi (n)}{n^s}\Bigr). \]
+Comparando los coeficientes, nos sale
+$$C (n) = \sum_{d \mid n} \chi (d).$$
+De la multiplicatividad del carácter $\chi$ se sigue también que
+$C (mn) = C (m)\,C (n)$ si $m$ y $n$ son coprimos. Calculando ahora $C (n)$ para
+$n = p^e$, se obtiene el siguiente curioso resultado.
+
+\begin{teorema}
+  Supongamos que $n = p_1^{e_1}\cdots p_k^{e_k}$, donde los $p_i$ son diferentes
+  primos.
+  \begin{itemize}
+  \item Si $p_i \equiv 3 \pmod{4}$ para algún $i$ y $e_i$ es impar, entonces
+    el círculo de radio $\sqrt{n}$ no contiene ningún punto entero.
+
+  \item En el caso contrario, el número de puntos enteros en el círculo será
+    $4\,C (n)$, donde
+    $$C (n) = \prod_{p_i \equiv 1~(4)} (e_i + 1).$$
+  \end{itemize}
+\end{teorema}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{pic/circle-points.pdf}
+  \end{center}
+
+  \caption{$12$ puntos enteros en el círculo de radio $5$}
+\end{figure}
+
+\begin{comentario}
+  En general, para cualquier extensión finita abeliana $K/\QQ$ se cumple
+  la descomposición en ciertas series L de Dirichlet
+  $$\zeta_K (s) = \prod_\chi L (s,\chi).$$
+  En particular, para el carácter trivial sale el factor $\zeta (s)$.
+
+  Véase por ejemplo \cite[Chapter~4]{Washington-GTM83}.
+\end{comentario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Fórmula analítica del número de clases}
+
+Aunque no lo vamos a probar, la función $\zeta_K (s)$ admite una
+\textbf{prolongación meromorfa} a todo $s \in \CC$, con el único polo en
+$s = 1$. Nos interesará más que todo el residuo en $s = 1$.
+
+Nuestro próximo gran objetivo será probar que
+\[ \lim_{s \to 1^+} (s - 1)\,\zeta_K (s) =
+   \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}}. \]
+Esta fórmula contiene todos los invariantes básicos de $K$ que hemos
+considerado:
+\begin{itemize}
+\item el número de encajes reales y complejos,
+\item el número de clases $h_K = \# \Cl (K)$,
+\item el discriminante $\Delta_K$,
+\item el número de las raíces de la unidad $\# \mu_K = \# (\O_K^\times)_{tors}$,
+\item el \textbf{regulador} $\Delta_K$ que es el covolumen del retículo
+  $\Lambda = L (\O_K^\times) \subset H$. En términos específicos, si
+  $u_1, \ldots, u_{r_1 + r_2 - 1}$ son unidades fundamentales de $\O_K^\times$,
+  entonces
+  $$\Reg_K = |\det (n_i\,\log |\tau_i (u_j)|)_{i,j = 1,\ldots,r_1+r_2-1}|.$$
+  Aquí $\tau_1,\tau_2,\ldots,\tau_{r_1+r_2-1}$ son los encajes no conjugados
+  $K \hookrightarrow \CC$, con un encaje quitado, dado que
+  $\prod_\tau \tau (u_j) = 1$. El coeficiente $n_i$ viene dado por
+  \[ n_i = \begin{cases}
+    1, & \text{si }\tau_i\text{ es real},\\
+    2, & \text{si }\tau_i\text{ es complejo}.
+  \end{cases} \]
+\end{itemize}
+
+La fórmula del número de clases fue descubierta por Dirichlet para el caso de
+campos cuadráticos, y la versión general es de Dedekind.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Ejemplos de uso de la fórmula del número de clases}
+
+Antes de probar la fórmula, podemos ver algunos ejemplos de su uso. Consideremos
+el campo cuadrático real $K = \QQ (\sqrt{5})$. Argumentando de la misma manera
+que en \S\ref{sec:funcion-zeta-de-Q(i)}, se demuestra la identidad
+$$\zeta_K (s) = \zeta (s) \, L (s,\chi),$$
+donde $\chi (n) = \legendre{n}{5}$.
+Ahora $L (s,\chi)$ converge en $s = 1$ a un valor no nulo, mientras que
+$\lim_{s\to 1^+} (s - 1)\,\zeta (s) = 1$, así que
+$$\lim_{s \to 1^+} (s - 1)\,\zeta_K (s) = L (1,\chi).$$
+
+En general, para el carácter cuadrático $\chi (n) = \legendre{n}{p}$ mód $p$
+se tiene
+$$\exp (g (\chi)\,L (1,\chi)) = \prod_n (1 - \zeta_p^n)\,\prod_r (1 - \zeta_p)^{-1},$$
+donde
+$$g (\chi) = \sum_{1 \le a \le p-1} \chi (a)\,\zeta_p^a$$
+es la \textbf{suma de Gauss}, y los productos son sobre los no-residuos y
+residuos cuadráticos mód $p$ respectivamente. Para la prueba, véase
+el ejercicio~\ref{ejerc:L-series-caracter-cuadratico-mod-p}.
+
+En nuestro caso calculamos que
+$$g (\chi) = \zeta_5 - \zeta_5^2 - \zeta_5^3 + \zeta_5^4 = \sqrt{5}$$
+y
+$$(1 - \zeta_p^2)\,(1 - \zeta_5^3)\,(1 - \zeta_5)^{-1}\,(1 - \zeta_5^4)^{-1} = \frac{3 + \sqrt{5}}{2}.$$
+Entonces,
+\begin{equation}
+  \label{eq:formula-de-clases-sqrt5-1}
+  \lim_{s \to 1^+} (s - 1)\,\zeta_K (s) =
+  L (1, \chi) = \frac{1}{\sqrt{5}}\,\log\frac{3 + \sqrt{5}}{2}.
+\end{equation}
+
+El regulador en este caso será igual a $\log u$, donde
+$u = \frac{1+\sqrt{5}}{2}$ es la unidad fundamental de $\O_K^\times$.
+Tenemos $r_1 = 2$, $r_2 = 0$ y $\mu_K = \{ \pm 1 \}$, $\Delta_K = 5$, y la
+fórmula del número de clases nos da entonces
+\begin{equation}
+  \label{eq:formula-de-clases-sqrt5-2}
+  \lim_{s \to 1^+} (s - 1)\,\zeta_K (s) =
+  \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}} =
+  \frac{1}{\sqrt{5}}\,h_K\cdot 2\,\log \frac{1+\sqrt{5}}{2}.
+\end{equation}
+En fin,
+\[ 2\,\log \frac{1+\sqrt{5}}{2} =
+   \log \left(\frac{1+\sqrt{5}}{2}\right)^2 =
+   \log \frac{3+\sqrt{5}}{2}. \]
+Comparando \eqref{eq:formula-de-clases-sqrt5-1} y
+\eqref{eq:formula-de-clases-sqrt5-2}, podemos concluir que $h_K = 1$.
+
+\vspace{1em}
+
+Si $K = \QQ[x]/(f)$, entonces para calcular el residuo de $\zeta_K (s)$ en
+$s = 1$ en PARI/GP, basta digitar \texttt{lfun($f$, 1)}. Calculamos el residuo
+para $K = \QQ (\sqrt{10})$.
+\begin{shaded}
+\begin{verbatim}
+? lfun (x^2 - 10, 1)
+% = 1.1500865228483708943221826442284221318*x^-1 + O(x^0)
+\end{verbatim}
+\end{shaded}
+
+La unidad fundamental en este caso es $u = 3 + \sqrt{10}$, el discriminante
+es $\Delta_K = 40$, así que
+\[ \lim_{s \to 1^+} (s - 1)\,\zeta_K (s) =
+   \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}} =
+   \frac{2}{\sqrt{40}}\,\log (3 + \sqrt{10})\cdot h_K. \]
+\begin{shaded}
+\begin{verbatim}
+? 2 / sqrt (40) * log (3 + sqrt(10))
+% = 0.57504326142418544716109132211421106589
+? polcoef (lfun (x^2 - 10, 1), -1) / %
+% = 2.0000000000000000000000000000000000000
+\end{verbatim}
+\end{shaded}
+Esto nos permite concluir que $h_K = 2$.
+
+De hecho, en este caso también se puede ocupar una descomposición
+$\zeta_K (s) = \zeta (s) \, L (s,\chi)$ para cierto carácter de Dirichlet $\chi$
+y luego obtener el valor de $L (1,\chi)$, pero no quiero entrar en los detalles
+de este cálculo.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Número de clases de \texorpdfstring{$\QQ (\sqrt{-p})$}{ℚ(√−p)}}
+
+Ahora vamos a aplicar la fórmula del número de clases a campos cuadráticos
+imaginarios $K = \QQ (\sqrt{-d})$. En particular, tomemos $d = p$ primo, $p > 3$
+y $p \equiv 3 \pmod{4}$. En este caso $\Delta_K = -p$, $\O_K^\times = \mu_K = \{ \pm 1 \}$,
+y $Reg_K = 1$. Tenemos entonces
+\[ \lim_{s \to 1^+} (s - 1)\,\zeta_K (s) =
+   \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}} =
+   \frac{\pi}{\sqrt{p}}\,h_K. \]
+
+Notamos que bajo nuestra hipótesis de que $p \equiv 3\pmod{4}$, la factorización
+de un primo racional $q$ en $\O_K$ depende del símbolo de Legendre
+$\legendre{q}{p}$, y como en \S\ref{sec:funcion-zeta-de-Q(i)} se demuestra la
+identidad
+$$\zeta_K (s) = \zeta (s)\,L (s,\chi),$$
+donde $\chi (n) = \legendre{n}{p}$. Esto implica que
+$$\lim_{s \to 1^+} (s - 1)\,\zeta_K (s) = L (1,\chi),$$
+y luego
+$$h_K = \frac{\sqrt{p}}{\pi}\,L (1,\chi).$$
+
+Podemos de nuevo ocupar la fórmula
+$$\exp (g (\chi)\,L(1,\chi)) = \prod_n (1 - \zeta_p^n)\,\prod_r (1 - \zeta_p)^{-1}.$$
+
+El famoso cálculo de Gauss nos dice que
+\[ g (\chi) = \begin{cases}
+  \sqrt{p}, & p \equiv 1 \pmod{4},\\
+  i\sqrt{p}, & p \equiv 3 \pmod{4}
+\end{cases} \]
+(véase \cite[Chapter~6]{Ireland-Rosen}).
+
+Tomando los logaritmos, se obtiene (módulo $2\pi i\ZZ$)
+$$L(1,\chi) = -\frac{1}{i\sqrt{p}}\,\sum_{1 \le a \le p-1} \chi (a)\,\log (1 - \zeta_p^a).$$
+Nos interesa la suma
+$$S_\chi = -\sum_{1 \le a \le p-1} \chi (a)\,\log (1 - \zeta_p^a).$$
+Notamos que $\chi (-1) = -1$, así que podemos escribir
+\[ 2 S_\chi = \sum_{1 \le a \le p-1} \chi (a)\,\Bigl(\log (1 - \zeta_p^{-a}) - \log (1 - \zeta_p^a)\Bigr) =
+   \sum_{1 \le a \le p-1} \chi (a)\,\log \frac{1 - \zeta_p^{-a}}{1 - \zeta_p^a}. \]
+Aquí
+\[ \log \frac{1 - \zeta_p^{-a}}{1 - \zeta_p^a} =
+   \log (-\zeta_p^{-a}) =
+   \log \exp \left(\pi i - \frac{2\pi i a}{p}\right) =
+   2\pi i\,\left(\frac{1}{2} - \frac{a}{p}\right). \]
+Entonces,
+$$S_\chi = -\frac{\pi i}{p}\,\sum_{1 \le a \le p-1} \chi (a)\,a,$$
+y luego
+\[ h_K = \frac{\sqrt{p}}{\pi}\,L(1,\chi) =
+   \frac{\sqrt{p}}{\pi}\,\frac{1}{i\sqrt{p}}\,S_\chi =
+   -\frac{1}{p}\,\sum_{1 \le a \le p-1} \chi (a)\,a. \]
+
+Podemos escribir (recordamos que $p \equiv 3 \pmod{4}$, así que
+$\chi (-1) = -1$)
+\begin{multline}
+  \label{eq:suma-de-caracteres-chi(a)-a-1}
+  p h_K = -\sum_{1 \le a \le p-1} \chi (a)\,a =
+  -\sum_{1 \le a < p/2} \chi (a)\,a - \sum_{1 \le a < p/2} \chi (p-a)\,(p-a) \\
+  = -2\sum_{1 \le a < p/2} \chi (a)\,a + p\sum_{1 \le a < p/2} \chi (a).
+\end{multline}
+Por otra parte,
+\begin{multline*}
+  p h_K = -\sum_{1 \le a \le p-1} \chi (a)\,a =
+  -\sum_{\substack{1 \le a \le p-1 \\ a \text{ par}}} \chi (a)\,a - \sum_{\substack{1 \le a \le p-1 \\ a \text{ par}}} \chi (p-a)\,(p-a) \\
+= -4\,\chi(2)\,\sum_{1 \le a < p/2} \chi (a)\,a + p\,\chi(2)\,\sum_{1 \le a < p/2} \chi (a),
+\end{multline*}
+así que
+\begin{equation}
+  \label{eq:suma-de-caracteres-chi(a)-a-2}
+  p\chi(2)\,h_K = -4\,\sum_{1 \le a < p/2} \chi (a)\,a + p\,\sum_{1 \le a < p/2} \chi (a),
+\end{equation}
+
+Ahora comparando \eqref{eq:suma-de-caracteres-chi(a)-a-1}
+y \eqref{eq:suma-de-caracteres-chi(a)-a-2}, nos sale
+$$h_K\,(2 - \chi (2)) = \sum_{1 \le a < p/2} \chi (a).$$
+Recordamos que
+\[ \chi (2) = \begin{cases}
+  +1, & p \equiv 7 \pmod{8},\\
+  -1, & p \equiv 3 \pmod{8}.
+\end{cases} \]
+
+Nuestros cálculos nos llevan entonces al siguiente resultado
+(que ya fue mencionado en \S\ref{sec:campos-cuadraticos-imaginarios}).
+
+\begin{teorema}[Dirichlet]
+  Sea $p > 3$ un primo tal que $p \equiv 3 \pmod{4}$. Consideremos el campo
+  cuadrático imaginario $K = \QQ (\sqrt{-p})$. Si $p \equiv 7 \pmod{8}$,
+  entonces
+  $$h_K = \sum_{1 \le a < p/2} \legendre{a}{p},$$
+  y si $p \equiv 3 \pmod{8}$, entonces
+  $$h_K = \frac{1}{3}\,\sum_{1 \le a < p/2} \legendre{a}{p}.$$
+\end{teorema}
+
+\begin{corolario}
+  Si $p \equiv 3 \pmod{4}$, entonces el intervalo $[1, (p-1)/2]$ contiene más
+  residuos que no-residuos cuadráticos.
+\end{corolario}
+
+\begin{comentario}
+  En general, para \emph{cualquier} campo cuadrático $K = \QQ (\sqrt{d})$
+  (imaginario o real) se puede definir un carácter $\chi$ módulo $|\Delta_K|$
+  que gobierna la factorización de primos en $\O_K$ y nos lleva a la fórmula
+  $$\zeta_K (s) = \zeta (s) \, L (s,\chi).$$
+  Luego los métodos parecidos a los de arriba nos permiten calcular $h_K$
+  en términos de $L (1,\chi)$. Para los detalles, véase
+  \cite[Chapter~5]{Borevich-Shafarevich}.
+\end{comentario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Demostración de la fórmula del número de clases}
+
+**TODO**
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagebreak
+
+\phantomsection
+
+\addcontentsline{toc}{section}{Ejercicios}
+\section*{Ejercicios}
+
+\begin{ejercicio}
+  ¿Cuántos puntos enteros están en la elipse $x^2 - xy + y^2 = n$?
+
+  \noindent (Considere la función zeta de $\QQ (\zeta_3)$.)
+\end{ejercicio}
+
+\begin{ejercicio}
+  \label{ejerc:L-series-caracter-cuadratico-mod-p}
+  Sea $p$ un número primo y $\chi$ el carácter de Dirichlet de orden $2$ mód
+  $p$, definido por el símbolo de Legendre $\chi (n) = \legendre{n}{p}$.
+
+  \begin{enumerate}
+  \item[1)] Demuestre que
+    $$\exp (g (\chi)\,L (1,\chi)) = \prod_n (1 - \zeta_p^n)\,\prod_r (1 - \zeta_p^r)^{-1},$$
+    donde $g (\chi) = \sum_{1 \le a
+      \le p-1} \chi (a)\,\zeta_p^a$, y los productos son sobre los no-residuos y
+    residuos cuadráticos mód $p$ respectivamente.
+
+  \item[2)] Use la parte anterior para calcular $L (1,\chi)$, donde $\chi$ es el
+    carácter de orden $2$ mód $5$.  (Para el valor numérico en PARI/GP, basta
+    digitar \texttt{lfun(5,1)})
+  \end{enumerate}
+\end{ejercicio}
