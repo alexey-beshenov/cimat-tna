@@ -276,8 +276,8 @@ Esto nos permite concluir que $h_K = 2$.
 
 De hecho, en este caso también se puede ocupar una descomposición
 $\zeta_K (s) = \zeta (s) \, L (s,\chi)$ para cierto carácter de Dirichlet $\chi$
-y luego obtener el valor de $L (1,\chi)$, pero no quiero entrar en los detalles
-de este cálculo.
+(véase ejercicio~\ref{ejerc:caracter-para-campo-cuadratico}), y luego obtener
+el valor de $L (1,\chi)$, pero no quiero entrar en los detalles de este cálculo.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -380,7 +380,9 @@ Nuestros cálculos nos llevan entonces al siguiente resultado
   En general, para \emph{cualquier} campo cuadrático $K = \QQ (\sqrt{d})$
   (imaginario o real) se puede definir un carácter $\chi$ módulo $|\Delta_K|$
   que gobierna la factorización de primos en $\O_K$ y nos lleva a la fórmula
-  $$\zeta_K (s) = \zeta (s) \, L (s,\chi).$$
+  $$\zeta_K (s) = \zeta (s) \, L (s,\chi)$$
+  ---véase ejercicio~\ref{ejerc:caracter-para-campo-cuadratico}.
+
   Luego los métodos parecidos a los de arriba nos permiten calcular $h_K$
   en términos de $L (1,\chi)$. Para los detalles, véase
   \cite[Chapter~5]{Borevich-Shafarevich}.
@@ -405,6 +407,32 @@ Nuestros cálculos nos llevan entonces al siguiente resultado
   ¿Cuántos puntos enteros están en la elipse $x^2 - xy + y^2 = n$?
 
   \noindent (Considere la función zeta de $\QQ (\zeta_3)$.)
+\end{ejercicio}
+
+\begin{ejercicio}
+  \label{ejerc:caracter-para-campo-cuadratico}
+  Sea $K = \QQ (\sqrt{d})$ un campo cuadrático. Para $n$ coprimo con $\Delta_K$
+  definamos mediante el \textbf{símbolo de Jacobi} $\legendre{n}{m}$
+  \[ \chi (n) = \begin{cases}
+    \legendre{n}{|d|}, & \text{si }d \equiv 1 \pmod{4},\\
+    (-1)^{\frac{n-1}{2}}\,\legendre{n}{|d|}, & \text{si }d \equiv 3 \pmod{4},\\
+    (-1)^{\frac{n^2-1}{8} + \frac{n-1}{2}\,\frac{d'-1}{2}}\,\legendre{n}{|d'|}, & \text{si }d = 2d'.
+  \end{cases} \]
+  Si $\gcd (n,\Delta_K) \ne 1$, pongamos $\chi (n) = 0$.
+
+  \begin{enumerate}
+  \item[1)] Demuestre que $\chi$ es un carácter de Dirichlet mód $|\Delta_K|$.
+
+  \item[2)] Demuestre que $\chi$ determina la factorización de primos
+    racionales en $\O_K$:
+    \[ p\O_K = \begin{cases}
+      \mathfrak{p}\,\overline{\mathfrak{p}}, & \text{si } \chi (p) = +1,\\
+      \mathfrak{p}, & \text{si } \chi (p) = -1,\\
+      \mathfrak{p}^2, & \text{si } \chi (p) = 0.
+    \end{cases} \]
+
+  \item[3)] Demuestre que $\zeta_K (s) = \zeta (s) \, L (s,\chi)$.
+  \end{enumerate}
 \end{ejercicio}
 
 \begin{ejercicio}
