@@ -1,19 +1,11 @@
 Para el resto del curso, mis planes son más o menos los siguientes.
 
-* Probar la finitud de Cl (K) y ver algunos cálculos.
-
-* Una curiosa aplicación: Euler descubrió que el polinomio f (x) = x^2 + x + 41
-  toma valores primos en x = 1, 2, ..., 39. ¿Qué tiene que ver esto con los
-  grupos de clase?
-
-* Teorema de unidades de Dirichlet: el grupo O_K^* es finitamente generado.
-
-* Cálculos de Cl (K) y O_K^* en PARI/GP.
-  Los campos de números en LMFDB.
-
 * Unidades fundamentales para los campos cuadráticos reales mediante las
   fracciones continuas (esto da un algoritmo para resolver la ecuación de Pell
   x^2 - dy^2 = 1).
+
+* Cálculos de Cl (K) y O_K^* en PARI/GP.
+  Los campos de números en LMFDB.
 
 * Función zeta de Dedekind zeta_K (s) y la fórmula analítica del número de
   clases (tal vez con un bosquejo de la prueba, tal vez no; ya lo veremos...)
@@ -21,9 +13,6 @@ Para el resto del curso, mis planes son más o menos los siguientes.
 * Aplicación de la fórmula del número de clases a los campos cuadráticos
   (y/o ciclotómicos): cómo calcular |Cl (K)| de manera analítica.
 
-** Otro tema muy clásico es el siguiente: el grupo de clases para los campos
-   cuadráticos fue descubierto por Gauss, pero en lugar de los ideales en O_K,
-   Gauss trabajaba con las formas cuadráticas binarias (En esos tiempos no
-   existían nociones de anillos e ideales y ni siquiera de grupos
-   abelianos.). Tal vez sería interesante ver la teoría de Gauss, si nos queda
-   tiempo.
+* Equivalencia aritmética (el artículo de Perlis).
+
+* Teoría de campos de clases y reciprocidad de Artin.
