@@ -2566,15 +2566,12 @@ Veamos primero un ejemplo.
 
   \begin{proof}[Demostración (\cite{Steinig-1992})]
     Ya lo probamos en una dirección. Ahora para un número cuadrático $\alpha$
-    hay que ver que la fracción correspondiente es continua. Esto equivale a
-    tener $\alpha_m = \alpha_n$ para algunos $m \ne n$.
-
-    Por la hipótesis sobre $\alpha$, su polinomio mínimo
+    hay que ver que $\alpha_m = \alpha_n$ para algunos $m \ne n$. Por la
+    hipótesis sobre $\alpha$, su polinomio mínimo
     $$f (x) = A\,x^2 + B\,x + C$$
     tiene discriminante
     $$\Delta = \Delta (f) = B^2 - 4 A C,$$
     donde $\Delta > 0$ (porque $\alpha$ es real) y $\Delta$ no es un cuadrado.
-
     Por inducción podemos definir una sucesión de polinomios cuadráticos
     $$f_n (x) = A_n\,x^2 + B_n\,x + C_n \in \ZZ [x]$$
     que cumplen
@@ -2596,10 +2593,10 @@ Veamos primero un ejemplo.
     $$\Delta (f_{n+1}) = \Delta (f_n).$$
 
     Notamos que la sucesión $(A_n)$ cambia su signo un número infinito de
-    veces. Por ejemplo, si $A_n > 0$ para $n$ suficientemente grande, entonces
-    de \eqref{eqn:Lagrange-An-Bn-Cn} se ve que también $B_n, C_n > 0$ para $n$
-    suficientemente grande. Pero $\alpha_n > 0$ para $n \ge 1$, y en este caso
-    tendríamos
+    veces. Por ejemplo, si $A_n > 0$ para todo $n$ suficientemente grande,
+    entonces de \eqref{eqn:Lagrange-An-Bn-Cn} se ve que también $B_n, C_n > 0$
+    para $n$ suficientemente grande. Pero $\alpha_n > 0$ para $n \ge 1$, y en
+    este caso tendríamos
     $$f_n (\alpha_n) = A_n\,\alpha_n^2 + B_n\,\alpha_n + C_n > 0.$$
 
     Entonces, para un número infinito de $n$ se tiene
@@ -2626,10 +2623,9 @@ También sería interesante investigar cuándo la fracción continua es
     periódica y $\alpha = [\overline{a_0,a_1,\ldots,a_{k-1}}]$. En todo caso se
     cumple $q_n \ge 1$, y luego, $a_0 = a_k \ge 1$ implica por inducción que
     también ${p_n = a_n\,p_{n-1} + p_{n-2} \ge 1}$ para todo $n$. Entonces,
-    $\alpha = \lim_{n\to\infty} \frac{p_n}{q_n} > 1$.
-
-    Como ya notamos en \ref{prop:fraccion-periodica=>cuadratico}, $\alpha$,
-    y luego $\overline{\alpha}$, es una raíz del polinomio cuadrático
+    $\alpha = \lim_{n\to\infty} \frac{p_n}{q_n} > 1$. Como ya notamos en
+    \ref{prop:fraccion-periodica=>cuadratico}, $\alpha$, y luego
+    $\overline{\alpha}$, es una raíz del polinomio cuadrático
     $$f (x) = q_{k-1}\,\alpha^2 + (q_{k-2} - p_{k-1})\,\alpha - p_{k-2} = 0.$$
     Es fácil verificar que $f (0) < 0$ y $f (-1) > 0$, así que $f$ tiene una raíz
     entre $-1$ y $0$, y luego $-1 < \overline{\alpha} < 0$.
@@ -2677,9 +2673,9 @@ También sería interesante investigar cuándo la fracción continua es
 
 \begin{comentario}
   El número más pequeño $k$ tal que
-  $\sqrt{d} = [\lfloor\sqrt{d}\rfloor, \overline{a_1,\ldots,a_k}]$ se llama la
-  \textbf{longitud del período}. El mismo Lagrange obtuvo una cota $< 2d$,
-  pero los cálculos sugieren la cota $O (\sqrt{d})$. Véase las referencias en
+  $\sqrt{d} = [\lfloor\sqrt{d}\rfloor, \overline{a_1,\ldots,a_k}]$ se llama el
+  \textbf{período}. El mismo Lagrange obtuvo una cota $< 2d$, pero los cálculos
+  sugieren la cota $O (\sqrt{d})$. Véase las referencias en
   \url{https://oeis.org/A003285} para más detalles.
 \end{comentario}
 
@@ -2763,78 +2759,8 @@ fracciones continuas para $\sqrt{d}$, donde $d < 100$.
 
 \section{Volviendo a la ecuación de Pell}
 
-\begin{lema}
-  Consideremos la fracción continua para $\alpha = \sqrt{d}$. Como antes,
-  consideremos $\alpha_0 = \alpha$ y
-  \[ a_n = \lfloor\alpha_n\rfloor, \quad
-     \alpha_{n+1} = \frac{1}{\alpha_n - a_n}. \]
-
-  \begin{enumerate}
-  \item[1)] Se tiene
-    $$\alpha_n = \frac{A_n + \sqrt{d}}{B_n},$$
-    donde $A_0 = 0$, $B_0 = 1$, y
-    \[ A_{n+1} = a_n\,B_n - A_n, \quad
-       B_{n+1} = \frac{d - A_{n+1}^2}{B_n} \in \ZZ. \]
-
-  \item[2)] Si $k$ es el período de la fracción continua para $\sqrt{d}$;
-    es decir, $\sqrt{d} = [a_0, \overline{a_1,\ldots,a_k}]$, entonces
-    $B_n = 1$ si y solamente si $k \mid n$.
-
-  \item[3)] Por otra parte, $B_n \ne -1$ para ningún $n$.
-  \end{enumerate}
-
-  \begin{proof}
-    La parte 1) se deja como un ejercicio.
-
-    En la parte 2), primero consideremos $B_k$, donde $k$ es el período.
-    Tenemos $\alpha_{k+1} = \alpha_1$, y luego
-    $$A_{k+1} = A_1 = \lfloor\sqrt{d}\rfloor$$
-    y
-    $$B_{k+1} = \frac{d - A_{k+1}^2}{B_k} = B_1 = d - \lfloor\sqrt{d}\rfloor^2.$$
-    Esto implica que $B_k = 1$. Viceversa, si $B_n = 1$ para algún $n$, entonces
-    $\alpha_n = A_n + \sqrt{d}$, y podemos escribir
-    ${\alpha = [a_0,a_1,\ldots,a_{n-1},\alpha_n]}$, donde el número $\alpha_n$
-    tiene fracción continua puramente periódica, y por lo tanto
-    ${-1 < \overline{\alpha_n} < 0}$. Esto implica que
-    ${\sqrt{d} - 1 < A_n < \sqrt{d}}$, y luego $A_n = \lfloor\sqrt{d}\rfloor$.
-    Ahora ${\alpha_n = \sqrt{d} + \lfloor\sqrt{d}\rfloor = \alpha_1}$, y esto es
-    posible precisamente si $k \mid n$.
-
-    En fin, en la parte 3) de manera similar, si $B_n = -1$, entonces
-    ${\alpha_n = -A_n - \sqrt{d}}$ tiene fracción continua puramente periódica,
-    y luego
-    \[ \alpha_n > 1, ~ -1 < \overline{\alpha_n} < 0
-       \iff
-       -A_n - \sqrt{d} > 1, ~ -1 < -A_n + \sqrt{d} < 0, \]
-    pero estas implican que ${\sqrt{d} < A_n < -\sqrt{d} - 1}$. Contradicción.
-  \end{proof}
-\end{lema}
-
-La relación con la ecuación de Pell surge de la siguiente manera.
-
-\begin{proposicion}
-  Con la notación de arriba, para todo $n$ se tiene
-  $$p_n^2 - d\,q_n^2 = (-1)^{n+1}\,B_{n+1}.$$
-  En particular, si $k$ es el período de la fracción continua para $\sqrt{d}$,
-  entonces $B_{kn} = 1$, y luego
-  $$p_{kn - 1}^2 - d\,q_{kn-1}^2 = (-1)^{kn}.$$
-
-  \begin{proof}
-    Escribamos
-    \[ \sqrt{d} = \alpha =
-       \frac{\alpha_{n+1}\,p_n + p_{n-1}}{\alpha_{n+1}\,q_n + q_{n-1}} =
-       \frac{(A_{n+1} + \sqrt{d})\,p_n + B_{n+1}\,p_{n-1}}{(A_{n+1} + \sqrt{d})\,q_n + B_{n+1}\,q_{n-1}}. \]
-    Dejo al lector analizar la ecuación correspondiente en $\QQ (\sqrt{d})$,
-    expresar de allí $A_{n+1}$ en términos de $B_{n+1}$ y verificar que lo que
-    nos queda es
-    \[ p_n^2 - d\,q_n^2 =
-       (p_n\,q_{n-1} - p_{n-1}\,q_n)\,B_{n+1} = (-1)^{n+1}\,B_{n+1}. \qedhere. \]
-  \end{proof}
-\end{proposicion}
-
-Con esto ya tenemos un número infinito de soluciones de la ecuación de Pell
-$x^2 - d\,y^2 = \pm 1$, y nuestro objetivo será probar que todas las soluciones
-vienen de la fracción continua para $\sqrt{d}$ de esta manera.
+La ecuación de Pell $x^2 - dy^2 = \pm 1$ está relacionada con la fracción
+continua de $\sqrt{d}$ de la siguiente manera.
 
 \begin{proposicion}
   Toda solución entera con $x,y > 0$ de la ecuación $x^2 + dy^2 = \pm 1$ tiene
@@ -2874,7 +2800,74 @@ vienen de la fracción continua para $\sqrt{d}$ de esta manera.
   \end{proof}
 \end{proposicion}
 
-Combinando los últimos dos resultados, se obtiene el siguiente.
+Ahora la pregunta es cuándo $\frac{p_n}{q_n}$ nos da una solución de la ecuación
+de Pell. Para verlo, nos conviene describir la fracción continua de $\sqrt{d}$
+de manera más explícita.
+
+\begin{proposicion}
+  Consideremos la fracción continua
+  $$\sqrt{d} = [a_0, \overline{a_1,\ldots,a_k}],$$
+  donde $k$ es el periodo. Como antes, consideremos $\alpha_0 = \alpha$ y
+  \[ a_n = \lfloor\alpha_n\rfloor, \quad
+     \alpha_{n+1} = \frac{1}{\alpha_n - a_n}. \]
+
+  \begin{enumerate}
+  \item[1)] Se tiene $\alpha_n = \frac{A_n + \sqrt{d}}{B_n}$, donde
+    $A_0 = 0$, $B_0 = 1$, y
+    \begin{equation}
+      \label{eq:An-Bn-para-sqrt-d}
+      A_{n+1} = a_n\,B_n - A_n, \quad
+      B_{n+1} = \frac{d - A_{n+1}^2}{B_n} \in \ZZ.
+    \end{equation}
+
+  \item[2)] $B_n = +1$ si y solamente si $k \mid n$.
+
+  \item[3)] $B_n \ne -1$ para ningún $n$.
+
+  \item[4)] Para todo $n$ se tiene $p_n^2 - d\,q_n^2 = (-1)^{n+1}\,B_{n+1}$.
+  \end{enumerate}
+
+  \begin{proof}
+    La parte 1) se deja como un ejercicio.
+
+    En la parte 2), primero consideremos $B_k$, donde $k$ es el período.
+    Tenemos $\alpha_{k+1} = \alpha_1$, y luego
+    \[ A_{k+1} = A_1 = \lfloor\sqrt{d}\rfloor, \quad
+       B_{k+1} = \frac{d - A_{k+1}^2}{B_k} = B_1 = d - \lfloor\sqrt{d}\rfloor^2. \]
+    Esto implica que $B_k = 1$. Viceversa, si $B_n = 1$ para algún $n$, entonces
+    $\alpha_n = A_n + \sqrt{d}$, y podemos escribir
+    ${\alpha = [a_0,a_1,\ldots,a_{n-1},\alpha_n]}$, donde el número $\alpha_n$
+    tiene fracción continua puramente periódica, y por lo tanto
+    ${-1 < \overline{\alpha_n} < 0}$. Esto implica que
+    ${\sqrt{d} - 1 < A_n < \sqrt{d}}$, y luego $A_n = \lfloor\sqrt{d}\rfloor$.
+    Ahora ${\alpha_n = \sqrt{d} + \lfloor\sqrt{d}\rfloor = \alpha_1}$, y esto es
+    posible precisamente si $k \mid n$.
+
+    En la parte 3) de manera similar, si $B_n = -1$, entonces
+    ${\alpha_n = -A_n - \sqrt{d}}$ tiene fracción continua puramente periódica,
+    y luego
+    \[ \alpha_n > 1, ~ -1 < \overline{\alpha_n} < 0
+       \iff
+       -A_n - \sqrt{d} > 1, ~ -1 < -A_n + \sqrt{d} < 0, \]
+    pero estas desigualdades implican que
+    ${\sqrt{d} < A_n < -\sqrt{d} - 1}$. Contradicción.
+
+    En fin, en 4) escribamos
+    \[ \sqrt{d} = \alpha =
+       \frac{\alpha_{n+1}\,p_n + p_{n-1}}{\alpha_{n+1}\,q_n + q_{n-1}} =
+       \frac{(A_{n+1} + \sqrt{d})\,p_n + B_{n+1}\,p_{n-1}}{(A_{n+1} + \sqrt{d})\,q_n + B_{n+1}\,q_{n-1}}. \]
+    Dejo al lector analizar la ecuación correspondiente en $\QQ (\sqrt{d})$,
+    expresar de allí $A_{n+1}$ en términos de $B_{n+1}$ y verificar que nos
+    queda
+    \[ p_n^2 - d\,q_n^2 =
+       (p_n\,q_{n-1} - p_{n-1}\,q_n)\,B_{n+1} = (-1)^{n+1}\,B_{n+1}. \qedhere. \]
+  \end{proof}
+\end{proposicion}
+
+Entonces, hemos probado que las soluciones de la ecuación de Pell son
+$(p_n,q_n)$ para algún $n$, y además que
+$p_n^2 - d\,q_n^2 = (-1)^{n+1}\,B_{n+1}$. Aquí $B_{n+1} \ne -1$ y $B_{n+1} = +1$
+si y solamente si $k \mid (n+1)$. Esto nos lleva al siguiente resultado.
 
 \begin{teorema}
   Para un entero libre de cuadrados $d$ consideremos la fracción continua para
@@ -2889,6 +2882,31 @@ Combinando los últimos dos resultados, se obtiene el siguiente.
   Las soluciones no triviales son $(x,y) = (p_{3n-1}, q_{3n-1})$. En particular,
   la solución más pequeña será $(x,y) = (p_2,q_2) = (32,5)$.
   Efectivamente, verificamos que $32^2 - 41\cdot 5^2 = -1$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Las soluciones de la ecuación de Pell suelen ser bastante grandes, pero
+  tenemos un algoritmo eficaz de entontrarlas. Por ejemplo, para la ecuación
+  $x^2 - 151\,y^2 = \pm 1$, primero calculamos la fracción continua
+  $$\sqrt{151} = [12, \overline{3, 2, 7, 1, 3, 4, 1, 1, 1, 11, 1, 1, 1, 4, 3, 1, 7, 2, 3, 24}]$$
+  (no es difícil hacerlo con la computadora ocupando las fórmulas
+  \eqref{eq:An-Bn-para-sqrt-d}).  Aquí el periodo es igual a $21$, y luego
+  la solución más pequeña será $(p_{20},q_{20})$. Calculámosla con PARI/GP:
+\begin{shaded}
+\begin{verbatim}
+? fr = [12,3,2,7,1,3,4,1,1,1,11,1,1,1,4,3,1,7,2,3,24];
+? contfracpnqn(fr)
+% = 
+[41973615123 1728148040]
+
+[ 3415764356  140634693]
+
+? [p,q] = [%[1,2], %[2,2]]
+% = [1728148040, 140634693]
+? p^2 - 151*q^2
+% = 1
+\end{verbatim}
+\end{shaded}
 \end{ejemplo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2909,14 +2927,14 @@ Si $d \equiv 1 \pmod{8}$, entonces considerando diferentes opciones mód $8$,
 se ve que $b$ tiene que ser par en cualquier caso, así que
 $v \in \ZZ [\sqrt{d}]^\times$. Por otra parte, si $d \equiv 5 \pmod{8}$, un
 cálculo directo y tedioso demuestra que $v^3 \in \ZZ [\sqrt{d}]^\times$.
-Todo esto significa que
+Todo esto significa lo siguiente.
 \begin{itemize}
-\item si $d \equiv 2,3 \pmod{4}$ o $d \equiv 1 \pmod{8}$, entonces
-  $\O_K^\times = \ZZ [\sqrt{d}]^\times$,
+\item Si $d \equiv 2,3 \pmod{4}$ o $d \equiv 1 \pmod{8}$, entonces
+  $\O_K^\times = \ZZ [\sqrt{d}]^\times$.
 
 \item si $d \equiv 5 \pmod{8}$, entonces
   $[\O_K^\times : \ZZ [\sqrt{d}]^\times] = 1\text{ o }3$.
-  Si $u$ es una unidad fundamental de $\ZZ [\sqrt{d}]^\times$, entonces para
+  Si $u$ es la unidad fundamental de $\ZZ [\sqrt{d}]^\times$, entonces para
   encontrar la unidad fundamental de $\O_K^\times$, basta resolver la ecuación
   $u^3 = v$ en $\O_K$. Si esta no tiene soluciones, entonces
   $\O_K^\times = \ZZ [\sqrt{d}]^\times$.
@@ -3298,8 +3316,9 @@ hacerlo en el caso especial cuando $K = \QQ (\sqrt{d})$ es un campo cuadrático
 real. El siguiente capítulo será dedicado a los métodos analíticos,
 en particular la \textbf{función zeta de Dedekind} $\zeta_K (s)$. La última
 nos ayudará a relacionar $\Cl (K)$ con $\O_K^\times$, mediante la
-\textbf{fórmula analítica del número de clases} que es otro resultado
-fundamental descubierto por Dirichlet.
+\textbf{fórmula analítica del número de clases}, que es otro resultado
+fundamental descubierto por Dirichlet (en el caso de campos cuadráticos,
+y luego generalizado a todo $K/\QQ$ por Dedekind).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
