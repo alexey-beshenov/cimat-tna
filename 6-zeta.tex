@@ -396,11 +396,399 @@ Nuestros cálculos nos llevan entonces al siguiente resultado
 
 \section{Demostración de la fórmula del número de clases}
 
+El objetivo de esta sección será probar la fórmula analítica de clases
+\[ \lim_{s \to 1^+} (s - 1)\,\zeta_K (s) =
+   \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}}. \]
+La prueba es algo larga y técnica, así que al principio voy a explicar
+la estrategia general. Mi referencia es \cite{Borevich-Shafarevich}.
+Primero vamos a partir $\zeta_K (s)$ en $h_K$ series
+$$\zeta_K (s) = \sum_{I\ne 0} \frac{1}{N_{K/\QQ} (I)^s} = \sum_{n\in \Cl (K)} \zeta_c (s),$$
+donde
+$$\zeta_c (s) = \sum_{[I] \in c} \frac{1}{N_{K/\QQ} (I)^s}.$$
+A continuación veremos que para todo $c \in \Cl (K)$ se cumple
+\[ \lim_{s \to 1^+} (s - 1)\,\zeta_c (s) =
+   \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{\#\mu_K\,\sqrt{|\Delta_K|}}. \]
+Esto claramente implica la fórmula del número de clases.
+
+\vspace{1em}
+
+Para cada clase $c \in \Cl (K)$ fijemos un ideal entero $I' \subseteq \O_K$
+tal que $[I'] = c^{-1}$. Ahora para todo ideal entero $I \subseteq \O_K$ tal que
+$[I] = c$ se tiene $I I' = \alpha \O_K$ para algún $\alpha \in \O_K$ no nulo.
+Esto nos da una biyección
+\[ \{ I \subseteq \O_K \mid [I] = c \} \leftrightarrow
+\{ \text{ideales principales } \alpha\O_K \mid \alpha \in I' \}. \]
+Tenemos $N_{K/\QQ} (I) \, N_{K/\QQ} (I') = |N_{K/\QQ} (\alpha)|$, y entonces
+$$\zeta_c (s) = N_{K/\QQ} (I')^s \sum_{\substack{0 \ne (\alpha) \subseteq \O_K \\ \alpha \in I'}} \frac{1}{|N_{K/\QQ} (\alpha)|^s}.$$
+La suma es sobre todos los ideales principales generados por los elementos
+$\alpha \in I'$, que es lo mismo que la suma sobre $\alpha \in I'$ considerados
+módulo la relación $\sim$.
+
+\vspace{1em}
+
+Recordemos nuestra prueba del teorema de unidades en
+\S\ref{sec:teorema-de-unidades} con el encaje logarítmico de $\O_K^\times$.
+Será conveniente numerar diferentes encajes $K\hookrightarrow \CC$ por
+$$\sigma_1,\ldots,\sigma_{r_1},\sigma_{r_1+1},\overline{\sigma_{r_1+1}},\ldots,\sigma_{r_1+r_2},\overline{\sigma_{r_1+r_2}},$$
+donde los primeros $r_1$ encajes son reales y el resto son complejos.
+
+Tenemos la aplicación
+\[ \Phi\colon K^\times \hookrightarrow K_\RR^\times, \quad
+   \alpha \mapsto (\sigma (\alpha))_\sigma, \]
+y el encaje logarítmico
+\[ \log |\cdot|\colon K_\RR^\times \to \RR^{r_1+r_2}, \quad
+(x_\sigma) \mapsto (\log |\sigma (\alpha)|)_\sigma, \]
+donde para evitar repeticiones, entre $\sigma_{r_1+i}$ y
+$\overline{\sigma_{r_1 + i}}$ se toma solo un encaje (la conjugación no afecta
+el valor absoluto). Por este motivo la imagen está en $\RR^{r_1+r_2}$.
+
+Consideramos la aplicación lineal
+\[ \phi\colon \RR^{r_1+r_2} \to \RR, \quad
+   x \mapsto \sum_i n_i x_i, \]
+donde
+\[ n_i = \begin{cases}
+  1, & \text{si }1 \le i \le r_1,\\
+  2, & \text{si }r_1+1 \le i \le r_1 + r_2.
+\end{cases} \]
+
+\[ \begin{tikzcd}
+  \O_K^\times\ar[right hook->]{d}\ar{rr}{L} & & H\ar[right hook->]{d} \\
+  K^\times \ar[right hook->]{r}{\Phi}\ar{d}[swap]{N_{K/\QQ}} & K_\RR^\times \ar{r}{\log |\cdot|} & \RR^{r_1 + r_2} \ar{d}{\phi}\ar[right hook->]{r} & \RR^n\ar{d}{\sum} \\
+  \QQ^\times \ar{rr}{\log |\cdot|} & & \RR \ar[equals]{r} & \RR
+\end{tikzcd} \]
+
+Hemos probado que la aplicación $L$ realiza $\O_K^\times$ como un retículo de
+rango completo $r = r_1 + r_2 - 1$ en el subespacio $H = \ker\phi$.
+Consideremos unidades fundamentales $u_1, \ldots, u_r \in \O_K^\times$. Entonces
+los vectores $L (u_1), \ldots, L (u_r)$ forman una base de $H$. Por otra parte,
+el vector $\ell = (1,\ldots,1)$ no está en $H$, así que los $L (u_i)$ junto con
+$\ell$ forman una base de $\RR^{r_1+r_2}$: todo $x \in \RR^{r_1+r_2}$ puede ser
+expresado como
+\begin{equation}
+  \label{eqn:base-de-Rr1+r2}
+  \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell
+\end{equation}
+para algunos $\lambda_1,\ldots,\lambda_r,\lambda \in \RR$.
+
+El grupo de unidades $\O_K^\times$ actúa sobre el espacio $K_\RR^\times$ mediante
+$$u \cdot x = \Phi (u)\,x$$
+(multiplicación de dos vectores en $K_\RR^\times$ punto por punto). El dominio
+fundamental de esta acción tiene una buena descripción.
+
+A partir de ahora vamos a denotar por $m = \# \mu_K$ el número de las raíces de
+la unidad en $K$.
+
+\begin{teorema}
+  \label{thm:X-dominio-fundamental-de-OK*}
+  Consideremos el subconjunto $X \subset K_\RR^\times$ que satisface las
+  siguientes condiciones.
+  \begin{enumerate}
+  \item[a)] Para todo $x \in X$ en la expresión de $\log |x|$ en la base
+    \eqref{eqn:base-de-Rr1+r2} se tiene $0 \le \lambda_i < 1$ para
+    $i = 1,\ldots,r$.
+
+  \item[b)] Se tiene $0 \le \arg x_1 < \frac{2\pi}{m}$.
+  \end{enumerate}
+
+  Entonces,
+  \begin{enumerate}
+  \item[1)] $X$ es un \textbf{cono}: si $x \in X$, entonces $\lambda x \in X$
+    para todo $\lambda > 0$.
+
+  \item[2)] $X$ es un dominio fundamental de la acción de $\O_K^\times$ sobre
+    $K_\RR^\times$: para todo punto $y \in K_\RR^\times$ existen únicos
+    $u \in \O_K^\times$ y $x \in X$ tales que $y = \Phi (u)\,x$.
+  \end{enumerate}
+\end{teorema}
+
+La condición b) del teorema merece alguna explicación. Si $K$ tiene un encaje
+real, entonces $\mu_K = \{ \pm 1 \}$ (otras raíces de la unidad no se encajan en
+$\RR$), así que $m = 2$ y la condición b) nos dice simplemente que $x_1 > 0$.
+Más adelante también vamos a dibujar $X$ en el caso de $[K : \QQ] = 2$ para
+entender mejor qué está pasando.
+
+Del último teorema se deduce fácilmente el siguiente resultado.
+
+\begin{corolario}
+  Para todo $\alpha \in \O_K$ no nulo existe único $\beta \sim \alpha$ tal que
+  $\Phi (\beta) \in X$.
+
+  \begin{proof}
+    Primero, dado $\alpha \ne 0$, entonces para $\Phi (\alpha) \in K_\RR^\times$
+    existen únicos $u \in \O_K^\times$ y $x \in X$ tales que
+    $\Phi (\alpha) = \Phi (u)\,x$. Ahora $\Phi (u^{-1}\,\alpha) \in X$ y
+    $\alpha \sim u^{-1}\,\alpha$.
+
+    Para la unicidad, si $\alpha \sim \beta$ y $\Phi (\beta) \in X$, escribamos
+    $\alpha = u\beta$ para $u \in \O_K^\times$. Tenemos
+    $\Phi (\alpha) = \Phi (u)\,\Phi (\beta)$, pero el teorema dice que la unidad
+    $u$ está definida de manera única.
+  \end{proof}
+\end{corolario}
+
+Volvamos a nuestra expresión
+$$\zeta_c (s) = N_{K/\QQ} (I')^s \sum_{\substack{0 \ne (\alpha) \subseteq \O_K \\ \alpha \in I'}} \frac{1}{|N_{K/\QQ} (\alpha)|^s}.$$
+Denotemos por $\Lambda$ el retículo $\Phi (I') \subset K_\RR$. Denotemos por
+$N\colon K_\RR \to \RR$ el producto de coordenadas $x \mapsto \prod_i x_i$.
+En este caso $N_{K/\QQ} (\alpha) = N (\Phi (\alpha))$. Ocupando el último
+corolario, podemos escribir entonces
+$$\zeta_c (s) = N_{K/\QQ} (I')^s \sum_{\omega \in \Lambda \cap X} \frac{1}{|N (\omega)|^s}.$$
+
+Para calcular esta serie, vamos a formular el siguiente teorema general.
+
+\begin{teorema}
+  \label{thm:residuo-de-Z(s)}
+  Sean $X$ un cono en $\RR^n$ sin origen, $F\colon X\to \RR_{>0}$ una función
+  positiva, y $\Lambda \subset X$ un retículo de rango completo. Supongamos que
+  se cumplen las siguientes condiciones.
+  \begin{enumerate}
+  \item[a)] Para cualesquiera $x \in X$ y $\lambda > 0$ se cumple
+    $F (\lambda x) = \lambda^n\,F (x)$.
+
+  \item[b)] El subconjunto $T \subset X$ que consiste en los puntos $x \in X$
+    con $F (x) \le 1$ es acotado y tiene volumen no nulo.
+  \end{enumerate}
+  Entonces, la serie
+  $$Z (s) = \sum_{\omega \in \Lambda \cap X} \frac{1}{F (x)^s}$$
+  converge para $s > 1$ y se tiene
+  $$\lim_{s \to 1^+} (s-1)\,Z (s) = \frac{\vol T}{\covol \Lambda}.$$
+\end{teorema}
+
+En nuestra situación, aplicaremos el teorema a la función
+$F\colon x \mapsto |N (x)|$ sobre $X \subset K_\RR$. Para el conjunto
+$$T = \{ x \in X \mid |N (x)| \le 1 \}$$
+vamos a calcular que
+\begin{equation}
+  \label{eq:vol-T}
+  \vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m}.
+\end{equation}
+Por otra parte, como ya sabemos,
+$$\covol \Lambda = \sqrt{|\Delta_K|}\,N_{K/\QQ} (I').$$
+Esto nos permite concluir que
+$$\lim_{s\to 1^+} (s-1)\,\zeta_c (s) = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m\,\sqrt{|\Delta_K|}}.$$
+
+Entonces, para terminar la prueba, nos falta lo siguiente:
+\begin{itemize}
+\item demostrar el teorema \ref{thm:X-dominio-fundamental-de-OK*} que nos da
+  un dominio fundamental de la acción de $\O_K^\times$ sobre $K_\RR$,
+\item demostrar el teorema \ref{thm:residuo-de-Z(s)} sobre el residuo de
+  $Z (s) = \sum_{\omega \in \Lambda \cap X} \frac{1}{F (x)^s}$ en $s = 1$,
+\item calcular el volumen \eqref{eq:vol-T}.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Dominio fundamental de la acción de unidades sobre \texorpdfstring{$K_\RR^\times$}{Kℝ*}}
+
+Ahora vamos a demostrar el teorema \ref{thm:X-dominio-fundamental-de-OK*}.
+Nos interesa el subconjunto $X \subset K_\RR^\times$ que satisface las
+siguientes condiciones.
+\begin{enumerate}
+\item[a)] Para todo $x \in X$ en la expresión
+  $$\log |x| = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell$$
+  se tiene $0 \le \lambda_i < 1$ para $i = 1,\ldots,r$.
+
+\item[b)] Se tiene $0 \le \arg x_1 < \frac{2\pi}{m}$.
+\end{enumerate}
+
+Primero vamos a verificar que $X$ es un cono. Para $x \in X$ y $\lambda > 0$
+tenemos
+$$\log |\lambda x| = \log|\lambda|\,\ell + \log |x|,$$
+y esto no afecta los coeficientes $\lambda_1,\ldots,\lambda_r$, así que la
+condición a) se preserva. Por otra parte, $\arg (\lambda x_1) = \arg x_1$,
+así que b) se preserva también. Notamos que $X \ne \emptyset$: por ejemplo,
+el punto $\Phi (1)$ está en $X$.
+
+Ahora nos gustaría probar que para todo $y \in K_\RR^\times$ existen únicos
+$u \in \O_K^\times$ y $x \in X$ tales que $y = \Phi (u)\,x$.
+
+Primero para la existencia, escribamos $\log |y|$ en términos de nuestra base
+de $\RR^{r_1+r_2}$:
+$$\log |y| = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell.$$
+Para $i = 1,\ldots,r$ pongamos
+$$\lambda_i = a_i + \mu_i,$$
+donde
+$$a_i \in \ZZ, \quad 0 \le \mu_i < 1.$$
+Consideremos la unidad $v = u_1^{a_1}\cdots u_r^{a_r}$ y el punto
+$z = \Phi (v^{-1})\,y$. Ahora
+\[ \log |z| = L (v^{-1}) + \log |y| =
+   - a_1\,L (u_1) - \cdots - a_r\,L(u_r)
+   + \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell =
+   \mu_1 \, L (u_1) + \cdots + \mu_r \, L (u_r) + \lambda \ell. \]
+Esto nos asegura la condición a) de la definición de $X$, y falta analizar
+la condición b). Si $\arg z_1 = \phi$, entonces para algún $k$ se tiene
+$$\frac{2\pi k}{m} \le \phi < \frac{2\pi {k+1}}{m}.$$
+Sea $\zeta \in \mu_K$ la $m$-ésima raíz de la unidad tal que
+$\sigma_1 (\zeta) = \exp \Bigl(\frac{2\pi i}{m}\Bigr)$. En este caso el punto
+$x = \Phi (\zeta^{-k})\,z$ está en $X$: primero tenemos
+$$\log |x| = L (\zeta^{-k}) + \log |z| = \log |z|,$$
+dado que $\mu_K = \ker L$, así que la condición a) se preserva. Por otra parte,
+$$\arg x_1 = \arg z_1 - \frac{2\pi k}{m} = \phi - \frac{2\pi k}{m},$$
+y luego
+$$0 \le \arg x_1 < \frac{2\pi}{m}.$$
+Entonces,
+$$y = \Phi (v)\,z = \Phi (\zeta^k v)\,x$$
+es la representación que estábamos buscando.
+
+Ahora para ver que la representación es única, supongamos que
+$$y = \Phi (u)\,x = \Phi (u')\,x'$$
+para algunos $u,u' \in \O_K^\times$, $x,x' \in X$. Tomando los logaritmos, se
+obtiene
+$$L (u) + \log |x| = L (u') + \log |x'|.$$
+Aquí por nuestra hipótesis
+\begin{align*}
+  \log |x| & = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell, \\
+  \log |x'| & = \lambda_1' \, L (u_1) + \cdots + \lambda_r' \, L (u_r) + \lambda' \ell,
+\end{align*}
+donde $0 \le \lambda_i, \lambda_i' < 1$. Por otra parte,
+\begin{align*}
+  L (u) & = a_1 \, L (u_1) + \cdots + a_r \, L (u_r), \\
+  L (u') & = a_1' \, L (u_1) + \cdots + a_r' \, L (u_r),
+\end{align*}
+donde $a_i,a_i' \in \ZZ$. Esto nos permite concluir que $L (u) = L (u')$, así
+que $u' = \zeta u$ para alguna raíz de la unidad $\zeta \in \mu_K = \ker L$.
+Ahora $\Phi (u') = \Phi (\zeta)\,\Phi (u)$, y entonces
+$x = \Phi (\zeta)\,x'$, y en particular $x_1 = \sigma_1 (\zeta)\,x_1'$.
+La condición b) nos dice que
+$$0 \le \arg x_1, \arg x_1' < \frac{2\pi}{m}.$$
+Tenemos
+$$0 \le |\sigma_1 (\zeta)| < \frac{2\pi}{m},$$
+pero $\sigma_1 (\zeta)$ es una raíz $m$-ésima compleja, así que la única opción
+es $\sigma_1 (\zeta) = 1$, y luego $\zeta = 1$. Podemos concluir que $u = u'$ y
+$x = x'$. \qed
+
+\vspace{1em}
+
+\begin{ejemplo}
+  Consideremos un campo cuadrático imaginario, por ejemplo
+  $K = \QQ (\sqrt{-3})$.
+
+  **TODO** draw pictures for $X$ and $T$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Consideremos el campo cuadrático real $K = \QQ (\sqrt{3})$.
+
+  **TODO** draw pictures for $X$ and $T$.
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Conos, retículos y residuo en $s = 1$}
+
+Ahora continuando con nuestro programa, vamos a probar el
+teorema~\ref{thm:residuo-de-Z(s)}. Tenemos un retículo de rango completo
+$\Lambda \in \RR^n$ y un cono sin origen $X \subset \RR^n$ junto con una función
+$F\colon X\to \RR_{>0}$ que es homogénea en el sentido de que
+$$F (\lambda x) = \lambda^n\,F (x).$$
+Consideremos el conjunto
+$$T = \{ x \in X \mid F (x) \le 1 \}$$
+que es acotado y de volumen finito no nulo. Nos interesa probar que la serie
+$$Z (s) = \sum_{\omega \in \Lambda \cap X} \frac{1}{F (x)^s}$$
+converge para $s > 1$ y tiene residuo $\frac{\vol T}{\covol \Lambda}$ en
+$s = 1$.
+
+\vspace{1em}
+
+Recordamos que a fin de cuentas, nos interesa un cono en el espacio $K_\RR$ que
+no es precisamente $\RR^n$, sino fue tiene estructura euclidiana ligeramente
+distinta, respecto a cual $\vol = 2^{r_2}\,\vol_{Leb.}$, pero esto será
+irrelevante en la prueba porque nos interesa el cociente de dos volúmenes.
+
+\vspace{1em}
+
+El punto clave es una interpretación de volúmenes en términos del conteo de
+puntos en retículos. Para un parámetro $r > 0$ vamos a considerar el retículo
+$\frac{1}{r}\Lambda$. Notamos que
+$\covol\Bigl(\frac{1}{r}\Lambda\Bigr) = \frac{1}{r^n}\,\covol (\Lambda)$.
+Definamos
+\[ C (r) = \# \{ \omega \in \frac{1}{r}\Lambda \mid \omega \in T \}
+         = \# \{ \omega \in \Lambda \mid \omega \in rT \}
+         = \# \{ \omega \in \Lambda \cap X \mid F (\omega) \le r^n \}. \]
+Tenemos entonces
+\[ \vol T = \lim_{r\to\infty} C (r) \, \covol \Bigl(\frac{1}{r}\,\Lambda\Bigr)
+          = \covol \Lambda \, \lim_{r\to\infty} \frac{C(r)}{r^n}. \]
+Podemos ordenar los puntos $\omega \in \Lambda \cap X$ de tal manera que
+$$0 < F (\omega_1) \le F (\omega_2) \le F (\omega_3) \le \cdots$$
+
+Pongamos $r_k = \sqrt[n]{F (\omega_k)}$. Tenemos
+$\{ \omega_1, \ldots, \omega_k \} \subseteq r_k\,T$, así que $C (r_k) \ge k$.
+Por otra parte, para todo $\epsilon > 0$ se tiene
+$x_k \notin (r_k - \epsilon)\,T$, así que $C (r_k - \epsilon) < k$. Esto nos
+da la desigualdad
+$$C (r_k - \epsilon) < k \le C (r_k),$$
+y luego
+$$\frac{C (r_k - \epsilon)}{(r_k-\epsilon)^n}\,\frac{(r_k - \epsilon)^n}{r_k^n} < \frac{k}{r_k^n} \le \frac{C (r_k)}{r_k^n}.$$
+Pasando al límite $k \to \infty$, tenemos $r_k \to \infty$, y luego
+$$\lim_{k\to\infty} \frac{k}{F (\omega_k)} = \frac{\vol T}{\covol \Lambda}.$$
+Esto significa que para todo $\epsilon > 0$ se tiene
+\[ \Bigl(\frac{\vol T}{\covol \Lambda} - \epsilon\Bigr)\frac{1}{k}
+   < \frac{1}{F (\omega_k)}
+   < \Bigl(\frac{\vol T}{\covol \Lambda} + \epsilon\Bigr)\frac{1}{k} \]
+para todo $k$ suficientemente grande, digamos $k \ge k_0$. Elevando todo a $s > 1$
+y sumando sobre $k\ge k_0$, tenemos
+\[ \Bigl(\frac{\vol T}{\covol \Lambda} - \epsilon\Bigr)^s\,\sum_{k\ge k_0} \frac{1}{k^s}
+   < \sum_{k\ge k_0} \frac{1}{F (\omega_k)^s}
+   < \Bigl(\frac{\vol T}{\covol \Lambda} + \epsilon\Bigr)^s\,\sum_{k\ge k_0} \frac{1}{k^s}. \]
+Aquí
+$$\sum_{k\ge k_0} \frac{1}{k^s} = \zeta (s) - \sum_{1\le k < k_0} \frac{1}{k^s},$$
+donde $\zeta (s)$ converge para $s > 1$. Por otra parte, nuestra serie es
+$$Z (s) = \sum_{k\ge 1} \frac{1}{F (\omega_k)^s}.$$
+Las desigualdades de arriba que se cumplen para todo $\epsilon > 0$ establecen
+la convergencia de $Z (s)$ para $s > 1$.
+
+Ahora multiplicando la desigualdad por $(s - 1)$ y pasando al límite
+$s \to 1^+$, en vista de la fórmula
+$$\lim_{s\to 1^+} (s-1)\,\sum_{k\ge k_0} \frac{1}{k^s} = \lim_{s\to 1^+} (s-1)\,\zeta(s) = 1,$$
+se obtiene
+\[ \frac{\vol T}{\covol \Lambda} - \epsilon
+   < \liminf_{s\to 1^+} (s-1)\,Z(s) \le \limsup_{s\to 1^+} (s-1)\,Z(s)
+   < \frac{\vol T}{\covol \Lambda} + \epsilon. \]
+Esto se cumple para todo $\epsilon > 0$, así que podemos concluir que
+$$\lim_{s\to 1^+} (s-1)\,Z (s) = \frac{\vol T}{\covol \Lambda}.$$
+Hemos entonces probado el teorema~\ref{thm:residuo-de-Z(s)}.
+
+\subsection{Cálculo del volumen de T}
+
+Para terminar la prueba de la fórmula del número de clases, tenemos que ver que
+$$T = \{ x \in X \mid |N (x)| \le 1 \}$$
+es un conjunto acotado y calcular su volumen
+\begin{equation}
+  \label{eq:vol-T}
+  \vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m}.
+\end{equation}
+El cálculo esencialmente consiste en una reducción a ciertas integrales
+iteradas, lo que no suena muy interesante. Sin embargo, este es precisamente
+el punto donde aparece el regulador y $m = \# \mu_K$.
+
 **TODO**
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Perspectiva: Prolongación analítica}
+
+**TODO** STATE WITHOUT PROOFS FOR $\zeta (s)$, $\zeta_K (s)$, $L (s,\chi)$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Perspectiva: Valores especiales}
+
+**TODO**
+stuff like
+the case of $\zeta (s)$ and $B_n$ (with proofs),
+$\zeta (2k+1)$ (no proofs :-)
+Siegel--Klingen (without proof),
+calculations for the quadratic case via $L (s,\chi)$ and $B_{n,\chi}$ (with proofs),
+etc.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Equivalencia aritmética}
+
+Hemos visto hasta el momento que la función zeta $\zeta_K (s)$ trae mucha
+información aritmética sobre el campo de números $K$. Sin embargo, $\zeta_K (s)$
+no sabe \emph{todo} de $K$: podemos tener $\zeta_K (s) = \zeta_{K'} (s)$ para
+dos campos no isomorfos $K \not\cong K'$.
 
 **TODO** \cite{Perlis-1977}.
 
