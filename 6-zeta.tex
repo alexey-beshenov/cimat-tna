@@ -120,8 +120,6 @@ $I = (\alpha)$, y para $I \ne 0$ hay precisamente cuatro maneras de escoger un
 generador $\alpha$. Si $\alpha = x + yi$, entonces $N_{K/\QQ} (I) = x^2 + y^2$.
 Pongamos
 $$C (n) = \# \{ (x,y) \in \ZZ^2 \mid x,y > 0, ~ x^2 + y^2 = n \}.$$
-Esta función es responsable por contar los puntos enteros en el círculo de radio
-$\sqrt{n}$.
 
 Tenemos entonces una identidad con series de Dirichlet
 \[ \zeta_K (s) = \sum_{n\ge 0} \frac{C (n)}{n^s} =
@@ -130,18 +128,20 @@ Comparando los coeficientes, nos sale
 $$C (n) = \sum_{d \mid n} \chi (d).$$
 De la multiplicatividad del carácter $\chi$ se sigue también que
 $C (mn) = C (m)\,C (n)$ si $m$ y $n$ son coprimos. Calculando ahora $C (n)$ para
-$n = p^e$, se obtiene el siguiente curioso resultado.
+$n = p^e$, se obtiene el siguiente curioso resultado que generaliza el teorema
+de Fermat sobre los primos de la forma $x^2 + y^2$.
 
 \begin{teorema}
   Supongamos que $n = p_1^{e_1}\cdots p_k^{e_k}$, donde los $p_i$ son diferentes
   primos.
   \begin{itemize}
   \item Si $p_i \equiv 3 \pmod{4}$ para algún $i$ y $e_i$ es impar, entonces
-    el círculo de radio $\sqrt{n}$ no contiene ningún punto entero.
+    $n$ no es una suma de dos cuadrados.
 
-  \item En el caso contrario, el número de puntos enteros en el círculo será
-    $4\,C (n)$, donde
-    $$C (n) = \prod_{p_i \equiv 1~(4)} (e_i + 1).$$
+  \item En el caso contrario, hay precisamente
+    $$C (n) = \prod_{p_i \equiv 1~(4)} (e_i + 1)$$
+    representaciones de $n$ como una suma de dos cuadrados $x^2 + y^2$ con
+    $x,y \in \NN$ (o $4\,C(n)$ si contamos $x,y\in \ZZ$ con diferentes signos).
   \end{itemize}
 \end{teorema}
 
@@ -952,7 +952,8 @@ dos campos no isomorfos $K \not\cong K'$.
 \section*{Ejercicios}
 
 \begin{ejercicio}
-  ¿Cuántos puntos enteros están en la elipse $x^2 - xy + y^2 = n$?
+  Dado un número natural $n$, calcule el número de representaciones
+  $n = x^2 - xy + y^2$ con $x,y \in \ZZ$.
 
   \noindent (Considere la función zeta de $\QQ (\zeta_3)$.)
 \end{ejercicio}
