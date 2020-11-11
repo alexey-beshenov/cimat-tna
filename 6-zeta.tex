@@ -1,5 +1,8 @@
 \chapter{Función zeta de Dedekind}
 
+\pdfbookmark{Clase 25 (11/11/20)}{clase-25}
+\marginpar{\small Clase 25 \\ 11/11/20}
+
 Para un campo de números $K/\QQ$, la \textbf{función zeta de Dedekind}
 correspondiente es una especie de función generatriz definida por la serie
 $$\zeta_K (s) = \sum_{I \ne 0} \frac{1}{N_{K/\QQ} (I)^s},$$
@@ -41,7 +44,7 @@ Ahora podemos probar la convergencia de $\zeta_K (s)$.
   \textbf{fórmula del producto de Euler}
   \[ \sum_{I \ne 0} \frac{1}{N_{K/\QQ} (I)^s} =
      \prod_{\mathfrak{p}} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p})^{-s}}, \]
-  donde el producto es sobre todos los ideales primos
+  donde el producto es sobre todos los ideales primos (no nulos)
   $\mathfrak{p} \subset \O_K$.
 
   \begin{proof}
@@ -122,16 +125,24 @@ Pongamos
 $$C (n) = \# \{ (x,y) \in \ZZ^2 \mid x,y > 0, ~ x^2 + y^2 = n \}.$$
 
 Tenemos entonces una identidad con series de Dirichlet
-\[ \zeta_K (s) = \sum_{n\ge 0} \frac{C (n)}{n^s} =
+\[ \zeta_K (s) = \sum_{n\ge 1} \frac{C (n)}{n^s} =
 \Bigl(\sum_{n\ge 1} \frac{1}{n^s}\Bigr)\,\Bigl(\sum_{n\ge 1} \frac{\chi (n)}{n^s}\Bigr). \]
 Comparando los coeficientes, nos sale
 $$C (n) = \sum_{d \mid n} \chi (d).$$
 De la multiplicatividad del carácter $\chi$ se sigue también que
-$C (mn) = C (m)\,C (n)$ si $m$ y $n$ son coprimos. Calculando ahora $C (n)$ para
-$n = p^e$, se obtiene el siguiente curioso resultado que generaliza el teorema
-de Fermat sobre los primos de la forma $x^2 + y^2$.
+$C (mn) = C (m)\,C (n)$ si $m$ y $n$ son coprimos. Calculando ahora
+\[ C (p^e) = \begin{cases}
+  1, & \text{si } p = 2,\\
+  e+1, & \text{si } p \equiv 1~(4),\\
+  0, & \text{si } p \equiv 3~(4), ~ e\text{ impar},\\
+  1, & \text{si } p \equiv 3~(4), ~ e\text{ par},\\
+\end{cases} \]
+se obtiene el siguiente curioso resultado que generaliza el teorema
+de Fermat sobre los primos de la forma $x^2 + y^2$
+(véase \ref{prop:fermat-primos-x2+y2}).
 
 \begin{teorema}
+  \label{thm:n-x2-y2}
   Supongamos que $n = p_1^{e_1}\cdots p_k^{e_k}$, donde los $p_i$ son diferentes
   primos.
   \begin{itemize}
@@ -242,7 +253,7 @@ arriba, la longitud de $L$ es $1$. Esto significa que el covolumen de
 $L (\O_K^\times)$ en $H$ es igual al volumen del paralelepípedo en
 $\RR^{r_1+r_2}$ generado por los vectores $L, L (u_1), \ldots, L (u_r)$; es
 decir,
-\[ \Reg_K = \covol L (\O_K^\times) = \pm \det \begin{pmatrix}
+\[ \covol L (\O_K^\times) = \pm \det \begin{pmatrix}
   L_1 & L_1 (u_1) & L_1 (u_2) & \cdots & L_1 (u_{r_1+r_2-1}) \\
   L_2 & L_2 (u_1) & L_2 (u_1) & \cdots & L_2 (u_{r_1+r_2-1}) \\
   \vdots & \vdots & \vdots & \ddots & \vdots \\ 
@@ -250,16 +261,18 @@ decir,
 \end{pmatrix} \]
 Ahora podemos sumar a la $i$-ésima fila de la matriz de arriba todas las filas.
 Como resultado, en la $i$-ésima fila estará el vector
-$$(1/\sqrt{r_1 + r_2}, 0, \ldots, 0).$$
+$$(\sqrt{r_1 + r_2}, 0, \ldots, 0)$$
+---puesto que $L (u_j) \in H$, se tiene $\sum_i L_i (u_j) = 0$.
 Esto nos lleva al siguiente resultado.
 
 \begin{proposicion-definicion}
   El covolumen del retículo $L (\O_K^\times)$ en $H$ es igual a
-  $$\frac{1}{\sqrt{r_1 + r_2}} \, \Reg_K,$$
+  $$\sqrt{r_1 + r_2} \, \Reg_K,$$
   donde $\Reg_K$ es el valor absoluto del determinante de cualquier menor
   de rango $r_1 + r_2 - 1$ de la matriz
   \[ (L_i (u_j))_{\substack{1 \le i \le r_1 + r_2 \\ 1 \le j \le r_1 + r_2 - 1}} =
      (n_i \log |\sigma_i (u_j)|)_{\substack{1 \le i \le r_1 + r_2 \\ 1 \le j \le r_1 + r_2 - 1}}. \]
+  El número $\Reg_K > 0$ se llama el \textbf{regulador} de $K$.
 \end{proposicion-definicion}
 
 Si $\O_K^\times = \mu_K$ es un grupo finito (lo que puede pasar solo si
@@ -289,6 +302,7 @@ entonces se pone $\Reg_K = 1$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\iffalse
 \section{Ejemplos de uso de la fórmula del número de clases}
 
 Antes de probar la fórmula, podemos ver algunos ejemplos de su uso. Consideremos
@@ -483,7 +497,7 @@ Nuestros cálculos nos llevan entonces al siguiente resultado
 \end{corolario}
 
 La fórmula de arriba implica una cota lineal sobre $h_K$ en términos de $p$.
-De hecho, para las sumas de carácteres existen cotas mejores, no triviales.
+De hecho, para las sumas de caracteres existen cotas mejores, no triviales.
 
 \begin{proposicion}[Pólya--Vinogradov]
   Para el carácter $\chi = \legendre{\cdot}{p}$ tenemos
@@ -518,7 +532,7 @@ De hecho, para las sumas de carácteres existen cotas mejores, no triviales.
     \[ \Bigl|\sum_{m \le t \le m+k} g_t (\chi)\Bigr| \le
        \sum_{1 \le a \le p-1} \left|\frac{1}{\sin \left(\frac{a\pi}{p}\right)}\right| =
        2\,\sum_{1 \le a \le \frac{p-1}{2}} \left|\frac{1}{\sin \left(\frac{a\pi}{p}\right)}\right|. \]
-    Usando la desigualdad $\sin x \ge \frac{2}{\pi}\,x$ para un angulo agudo
+    Usando la desigualdad $\sin x \ge \frac{2}{\pi}\,x$ para un ángulo agudo
     $x$, obtenemos la cota
     \[ \Bigl|\sum_{m \le t \le m+k} g_t (\chi)\Bigr| \le
        2\sum_{1 \le a \le \frac{p-1}{2}} \frac{1}{\frac{2}{\pi}\,\frac{a \pi}{p}} =
@@ -534,7 +548,7 @@ De hecho, para las sumas de carácteres existen cotas mejores, no triviales.
 
 \begin{comentario}
   En general, para cualquier carácter de Dirichlet $\chi$ mód $N$ la suma de
-  carácterres puede ser acotada como $O (\sqrt{N}\,\log N)$. Bajo la hipótesis
+  caracteres puede ser acotada como $O (\sqrt{N}\,\log N)$. Bajo la hipótesis
   de Riemann generalizada, esta cota se generaliza a
   $O (\sqrt{N}\,\log\log N)$.
 \end{comentario}
@@ -955,6 +969,8 @@ dos campos no isomorfos $K \not\cong K'$.
 **TODO** \cite{Perlis-1977}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\fi
 
 \pagebreak
 
