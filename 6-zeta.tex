@@ -705,15 +705,38 @@ $x = x'$. \qed
 
 \begin{ejemplo}
   Consideremos un campo cuadrático imaginario, por ejemplo
-  $K = \QQ (\sqrt{-3})$.
+  $K = \QQ (\sqrt{-3})$. Tenemos un isomorfismo
+  \[ K_\RR \cong \RR^2, \quad
+     (z_\sigma, z_{\overline{\sigma}}) \mapsto (\Re z_\sigma, \Im z_\sigma). \]
+  El grupo de unidades es $\O_K^\times = \mu_6 (\CC)$. La condición a) en la
+  definición de $X$ es vacía porque $r_1 + r_2 - 1 = 0$, y no hay unidades
+  fundamentales, mientras que la condición b) dice que nos interesan los puntos
+  de $\CC \cong \RR^2$ tales que $0 \le \arg z < \frac{\pi}{3}$. El conjunto $T$
+  es la intersección de $X$ con el círculo definido por $|z| = 1$.
 
-  **TODO** draw pictures for $X$ and $T$.
+  \begin{center}
+    \includegraphics{pic/X-T-sqrt-minus-3.pdf}
+  \end{center}
 \end{ejemplo}
 
 \begin{ejemplo}
-  Consideremos el campo cuadrático real $K = \QQ (\sqrt{3})$.
+  Consideremos el campo cuadrático real $K = \QQ (\sqrt{3})$. En este caso
+  $K_\RR = \RR^2$, y la unidad fundamental es $u = 2 + \sqrt{3}$. Entonces,
+  la condición a) significa que $X$ consiste en los puntos $(x,y) \in \RR^2$
+  tales que
+  \begin{align*}
+    \log |x| & = \lambda_1\,\log (2 + \sqrt{3}) + \lambda,\\
+    \log |y| & = \lambda_1\,\log (2 - \sqrt{3}) + \lambda,
+  \end{align*}
+  donde $0 \le \lambda_1 < 1$, mientras que la condición b) nos dice que
+  $x > 1$. De aquí es fácil ver que $X$ será la unión de dos conos: uno generado
+  por los vectores $v_1 = (1,1)$, $v_2 = (2 + \sqrt{3}, 2 - \sqrt{3})$,
+  y el otro generado por $v_1 = (1,-1)$ y $v_2 = (2 + \sqrt{3}, -2 + \sqrt{3})$.
+  El conjunto $T$ está acotado por la curva $xy = \pm 1$.
 
-  **TODO** draw pictures for $X$ and $T$.
+  \begin{center}
+    \includegraphics{pic/X-T-sqrt-plus-3.pdf}
+  \end{center}
 \end{ejemplo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,24 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{calc}
+
+\usepackage{amsmath}
+\usepackage{mathspec}
+\setmathsfont(Digits){PT Serif}
+\setmathsfont(Latin){PT Serif}
+\setmathrm{PT Serif}
+
+\begin{document}
+\begin{tikzpicture}[x=1.5cm, y=1.5cm]
+  \fill[blue!20] (0,0) -- (2,0) -- (2,2) -- ({2/tan(60)},2) -- cycle;
+  \fill[blue!40] (0,0) -- (1,0) arc (0:60:1) -- cycle;
+
+  \draw (0,0) circle (1);
+  \draw[dashed] (0,0) -- ({2/tan(60)},2);
+
+  \draw (30:0.5) node {$T$};
+  \draw (30:1.5) node {$X$};
+
+  \draw[->] (-2,0) -- (2,0) node[right] {$\operatorname{Re}$};
+  \draw[->] (0,-2) -- (0,2) node[above] {$\operatorname{Im}$};
+\end{tikzpicture}
+\end{document}
