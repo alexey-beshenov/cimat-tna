@@ -390,12 +390,15 @@ $$h_K = \frac{\sqrt{p}}{\pi}\,L (1,\chi).$$
 Podemos de nuevo ocupar la fórmula
 $$\exp (g (\chi)\,L(1,\chi)) = \prod_n (1 - \zeta_p^n)\,\prod_r (1 - \zeta_p)^{-1}.$$
 
-El famoso cálculo de Gauss nos dice que
+Usando el lema~\ref{lema:QR-3} sobre las sumas cuadráticas de Gauss, tenemos
 \[ g (\chi) = \begin{cases}
-  \sqrt{p}, & p \equiv 1 \pmod{4},\\
-  i\sqrt{p}, & p \equiv 3 \pmod{4}
+  \pm\sqrt{p}, & p \equiv 1 \pmod{4},\\
+  \pm i\sqrt{p}, & p \equiv 3 \pmod{4}.
 \end{cases} \]
-(véase \cite[Chapter~6]{Ireland-Rosen}).
+De hecho, el famoso cálculo de Gauss dice que el signo es $+1$ en ambos
+casos. Para la prueba, véase por ejemplo \cite[Chapter~6]{Ireland-Rosen}.
+De todos modos, estamos calculando $h_K$ que es un número positivo, así que
+el signo no es tan relevante y podríamos determinarlo al final del cálculo.
 
 Tomando los logaritmos, se obtiene (módulo $2\pi i\ZZ$)
 $$L(1,\chi) = -\frac{1}{i\sqrt{p}}\,\sum_{1 \le a \le p-1} \chi (a)\,\log (1 - \zeta_p^a).$$
@@ -416,35 +419,47 @@ y luego
 \[ h_K = \frac{\sqrt{p}}{\pi}\,L(1,\chi) =
    \frac{\sqrt{p}}{\pi}\,\frac{1}{i\sqrt{p}}\,S_\chi =
    -\frac{1}{p}\,\sum_{1 \le a \le p-1} \chi (a)\,a. \]
+Esta expresión todavía puede ser simplificada.
 
-Podemos escribir (recordamos que $p \equiv 3 \pmod{4}$, así que
-$\chi (-1) = -1$)
-\begin{multline}
-  \label{eq:suma-de-caracteres-chi(a)-a-1}
-  p h_K = -\sum_{1 \le a \le p-1} \chi (a)\,a =
-  -\sum_{1 \le a < p/2} \chi (a)\,a - \sum_{1 \le a < p/2} \chi (p-a)\,(p-a) \\
-  = -2\sum_{1 \le a < p/2} \chi (a)\,a + p\sum_{1 \le a < p/2} \chi (a).
-\end{multline}
-Por otra parte,
-\begin{multline*}
-  p h_K = -\sum_{1 \le a \le p-1} \chi (a)\,a =
-  -\sum_{\substack{1 \le a \le p-1 \\ a \text{ par}}} \chi (a)\,a - \sum_{\substack{1 \le a \le p-1 \\ a \text{ par}}} \chi (p-a)\,(p-a) \\
-= -4\,\chi(2)\,\sum_{1 \le a < p/2} \chi (a)\,a + p\,\chi(2)\,\sum_{1 \le a < p/2} \chi (a),
-\end{multline*}
-así que
-\begin{equation}
-  \label{eq:suma-de-caracteres-chi(a)-a-2}
-  p\chi(2)\,h_K = -4\,\sum_{1 \le a < p/2} \chi (a)\,a + p\,\sum_{1 \le a < p/2} \chi (a),
-\end{equation}
+\begin{lema}
+  Sea $p$ un primo, $p > 3$ tal que $p \equiv 3 \pmod{4}$. Entonces, para el
+  carácter $\chi (a) = \legendre{a}{p}$ se tiene
+  \[ \frac{1}{p}\sum_{1 \le a \le p-1} \chi (a)\,a =
+  \begin{cases}
+    -\frac{1}{3}\sum\limits_{1 \le a < p/2} \chi (a), & \text{si }p\equiv 3\pmod{8},\\
+    -\sum\limits_{1 \le a < p/2} \chi (a), & \text{si }p\equiv 7\pmod{8}
+  \end{cases} \]
 
-Ahora comparando \eqref{eq:suma-de-caracteres-chi(a)-a-1}
-y \eqref{eq:suma-de-caracteres-chi(a)-a-2}, nos sale
-$$h_K\,(2 - \chi (2)) = \sum_{1 \le a < p/2} \chi (a).$$
-Recordamos que
-\[ \chi (2) = \begin{cases}
-  +1, & p \equiv 7 \pmod{8},\\
-  -1, & p \equiv 3 \pmod{8}.
-\end{cases} \]
+  \begin{proof}
+    Pongamos
+    $$C = \frac{1}{p}\sum_{1 \le a \le p-1} \chi (a)\,a.$$
+    Podemos escribir (recordamos que $p \equiv 3 \pmod{4}$, así que
+    $\chi (-1) = -1$)
+    \begin{multline}
+      \label{eq:suma-de-caracteres-chi(a)-a-1}
+      p C = \sum_{1 \le a \le p-1} \chi (a)\,a =
+      \sum_{1 \le a < p/2} \chi (a)\,a + \sum_{1 \le a < p/2} \chi (p-a)\,(p-a) \\
+      = 2\sum_{1 \le a < p/2} \chi (a)\,a - p\sum_{1 \le a < p/2} \chi (a).
+    \end{multline}
+    Por otra parte,
+    \begin{multline}
+      \label{eq:suma-de-caracteres-chi(a)-a-2}
+      p C = \sum_{1 \le a \le p-1} \chi (a)\,a =
+      \sum_{\substack{1 \le a \le p-1 \\ a \text{ par}}} \chi (a)\,a + \sum_{\substack{1 \le a \le p-1 \\ a \text{ par}}} \chi (p-a)\,(p-a) = \\
+      \sum_{1 \le a < p/2} \chi (2a)\,2a + \sum_{1 \le a < p/2} \chi (p-2a)\,(p-2a) = \\
+      = 4\,\chi(2)\,\sum_{1 \le a < p/2} \chi (a)\,a - p\,\chi(2)\,\sum_{1 \le a < p/2} \chi (a).
+    \end{multline}
+
+    Ahora comparando \eqref{eq:suma-de-caracteres-chi(a)-a-1}
+    y \eqref{eq:suma-de-caracteres-chi(a)-a-2}, nos sale
+    \[ C \, (2\chi (2) - 1) = -\chi(2)\sum_{1 \le a < p/2} \chi (a). \]
+    Recordamos que
+    \[ \chi (2) = \begin{cases}
+      -1, & p \equiv 3 \pmod{8},\\
+      +1, & p \equiv 7 \pmod{8}.
+    \end{cases} \qedhere \]
+  \end{proof}
+\end{lema}
 
 Nuestros cálculos nos llevan entonces al siguiente resultado
 (que ya fue mencionado en \S\ref{sec:campos-cuadraticos-imaginarios}).
@@ -462,6 +477,63 @@ Nuestros cálculos nos llevan entonces al siguiente resultado
   Si $p \equiv 3 \pmod{4}$, entonces el intervalo $[1, (p-1)/2]$ contiene más
   residuos que no-residuos cuadráticos.
 \end{corolario}
+
+La fórmula de arriba implica una cota lineal sobre $h_K$ en términos de $p$.
+De hecho, para las sumas de carácteres existen cotas mejores, no triviales.
+
+\begin{proposicion}[Pólya--Vinogradov]
+  Para el carácter $\chi = \legendre{\cdot}{p}$ tenemos
+  $$\Bigl|\sum_{m \le t \le n} \chi (t)\Bigr| < \sqrt{p}\,\log p$$
+  para cualesquiera $m$ y $n$.
+
+  \begin{proof}
+    Según el lema~\ref{lema:QR-2} se cumple
+    $$\chi (t) \, g (\chi) = g_t (\chi),$$
+    donde
+    $$g_a (\chi) = \sum_{1 \le t \le p-1} \chi(t)\,\zeta_p^{at},$$
+    y en particular $g (\chi) = g_1 (\chi)$. Ahora
+    \[ \sum_{m \le t \le n} \chi(t) =
+       \frac{1}{g (\chi)}\,\sum_{m \le t \le n} g_t (\chi) =
+       \frac{1}{g (\chi)}\,\sum_{m \le t \le m+k} g_t (\chi), \]
+    donde $k \le p$ (usando que $\sum_{1 \le t \le p-1} \chi(t) = 0$).
+    Vamos a analizar la expresión
+    \[ \Bigl|\sum_{m \le t \le m+k} g_t (\chi)\Bigr| =
+       \Bigl|\sum_{m \le t \le m+k} \sum_{1 \le a \le p-1} \chi(a) \zeta_p^{at}\Bigr| =
+       \Bigl|\sum_{1 \le a \le p-1} \chi(a) \sum_{m \le t \le m+k} \zeta_p^{at}\Bigr| =
+       \left|\sum_{1 \le a \le p-1} \chi(a) \zeta_p^{am}\,\frac{\zeta_p^{a\,(k+1)} - 1}{\zeta_p^a - 1}\right|. \]
+    Ocuparemos la cota
+    \[ \Bigl|\sum_{m \le t \le m+k} g_t (\chi)\Bigr| \le
+       \sum_{1 \le a \le p-1} \left|\frac{\zeta_p^{a\,(k+1)} - 1}{\zeta_p^a - 1}\right|. \]
+    Notamos que
+    \[ |\zeta_p^{a\,(k+1)} - 1| \le 2, \quad
+       |\zeta_p^a - 1| = 2\,\left|\sin \left(\frac{a\pi}{p}\right)\right|. \]
+    Además,
+    \[ \left|\sin \left(\frac{a\pi}{p}\right)\right| =
+       \left|\sin \left(\frac{(p-a)\,\pi}{p}\right)\right|. \]
+    Juntando todo esto, se obtiene
+    \[ \Bigl|\sum_{m \le t \le m+k} g_t (\chi)\Bigr| \le
+       \sum_{1 \le a \le p-1} \left|\frac{1}{\sin \left(\frac{a\pi}{p}\right)}\right| =
+       2\,\sum_{1 \le a \le \frac{p-1}{2}} \left|\frac{1}{\sin \left(\frac{a\pi}{p}\right)}\right|. \]
+    Usando la desigualdad $\sin x \ge \frac{2}{\pi}\,x$ para un angulo agudo
+    $x$, obtenemos la cota
+    \[ \Bigl|\sum_{m \le t \le m+k} g_t (\chi)\Bigr| \le
+       2\sum_{1 \le a \le \frac{p-1}{2}} \frac{1}{\frac{2}{\pi}\,\frac{a \pi}{p}} =
+       p\sum_{1 \le a \le \frac{p-1}{2}} \frac{1}{a} \le p\,\log p. \]
+    Aquí la última desigualdad viene de $\log p = \int_1^p \frac{dx}{x}$.
+    En fin,
+    \[ \Bigl|\sum_{m \le t \le n} \chi (t)\Bigr| =
+       \frac{1}{|g (\chi)|}\,\Bigl|\sum_{m \le t \le m+k} g_t (\chi)\Bigr| \le
+       \frac{1}{\sqrt{p}}\,p\,\log p =
+       \sqrt{p}\,\log p. \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+\begin{comentario}
+  En general, para cualquier carácter de Dirichlet $\chi$ mód $N$ la suma de
+  carácterres puede ser acotada como $O (\sqrt{N}\,\log N)$. Bajo la hipótesis
+  de Riemann generalizada, esta cota se generaliza a
+  $O (\sqrt{N}\,\log\log N)$.
+\end{comentario}
 
 \begin{comentario}
   En general, para \emph{cualquier} campo cuadrático $K = \QQ (\sqrt{d})$
