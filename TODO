@@ -1,12 +1,5 @@
 Para el resto del curso, mis planes son más o menos los siguientes.
 
-* Unidades fundamentales para los campos cuadráticos reales mediante las
-  fracciones continuas (esto da un algoritmo para resolver la ecuación de Pell
-  x^2 - dy^2 = 1).
-
-* Cálculos de Cl (K) y O_K^* en PARI/GP.
-  Los campos de números en LMFDB.
-
 * Función zeta de Dedekind zeta_K (s) y la fórmula analítica del número de
   clases (tal vez con un bosquejo de la prueba, tal vez no; ya lo veremos...)
 
