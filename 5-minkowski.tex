@@ -1897,34 +1897,32 @@ $$\Phi\colon K \hookrightarrow K_\RR, \quad \alpha \mapsto (\tau (\alpha))_\tau.
 Este se restringe a un encaje
 \[ \Phi\colon K^\times \hookrightarrow K_\RR^\times
    = \{ (z_\tau)_\tau \in K_\RR \mid z_\tau \ne 0 \}. \]
-Para pasar a grupos aditivos, vamos a tomar el logaritmo
-$$\log |\cdot|\colon K_\RR^\times \to \RR^{r_1 + r_2}.$$
-Esta aplicación envía cada coordenada $z_\tau$ a $\log |z_\tau|$. Puesto que
-$|z_{\overline{\sigma}}| = |\overline{z_\sigma}| = |z_\sigma|$, las coordenadas
-que corresponden a encajes complejos conjugadas no se repiten, y por esto
-la imagen es $\RR^{r_1 + r_2}$ y no es $\RR^{r_1 + 2r_2}$.
-
-Tenemos el siguiente diagrama conmutativo de homomorfismos de grupos abelianos:
-
+Para pasar a grupos aditivos, vamos a tomar los logaritmos
+\[ \ell\colon K_\RR^\times \to \RR^{r_1 + r_2}, \quad
+   (z_\tau) \mapsto (n_\tau\,\log |z_\tau|)_\tau, \]
+donde
+\[ n_\tau = \begin{cases}
+  1, & \text{si }\tau\text{ es }real,\\
+  2, & \text{si }\tau\text{ es }complejo.
+  \end{cases} \]
+Puesto que $|z_{\overline{\sigma}}| = |\overline{z_\sigma}| = |z_\sigma|$, las
+coordenadas que corresponden a encajes complejos conjugadas no se repiten, pero
+los contamos dos veces con coeficiente $n_\sigma = 2$. Por esto la imagen es
+$\RR^{r_1 + r_2}$ y no es $\RR^{r_1 + 2r_2}$. Tenemos el siguiente diagrama
+conmutativo de homomorfismos de grupos abelianos:
 \[ \begin{tikzcd}
   \O_K^\times\ar[right hook->]{d}\ar{rr}{L} & & H\ar[right hook->]{d} \\
-  K^\times \ar[right hook->]{r}{\Phi}\ar{d}[swap]{N_{K/\QQ}} & K_\RR^\times \ar{r}{\log |\cdot|} & \RR^{r_1 + r_2} \ar{d}{\phi}\ar[right hook->]{r} & \RR^n\ar{d}{\sum} \\
-  \QQ^\times \ar{rr}{\log |\cdot|} & & \RR \ar[equals]{r} & \RR
+  K^\times \ar[right hook->]{r}{\Phi}\ar{d}[swap]{N_{K/\QQ}} & K_\RR^\times \ar{r}{\ell} & \RR^{r_1 + r_2} \ar{d}{\sum} \\
+  \QQ^\times \ar{rr}{\log |\cdot|} & & \RR
 \end{tikzcd} \]
 
-Aquí la aplicación $\phi$ viene dada por
-\[ (x_\tau)_\tau \mapsto \sum_\tau n_\tau \, x_\tau, \quad
-n_\tau = \begin{cases}
-  1, & \text{si }\tau \text{ es real},\\
-  2, & \text{si }\tau \text{ es complejo}.
-\end{cases} \]
-Luego, $H = \ker \phi$ es un subespacio de codimensión $1$ en $\RR^{r_1 + r_2}$;
-es decir, $\dim_\RR H = r_1 + r_2 - 1$. La aplicación $L$ es la restricción
+El homomorfismo $\sum$ es la suma de coordenadas y $H$ es su núcleo:
+$$H = \{ x \in \RR^{r_1 + r_2} \mid \sum_i x_i = 0 \}.$$
+Tenemos $\dim_\RR H = r_1 + r_2 - 1$. La aplicación $L$ es la restricción
 natural: si $\alpha \in \O_K^\times$, entonces
 $$|N_{K/\QQ} (\alpha)| = \prod_\tau |\tau (\alpha)| = 1,$$
 y luego
-$$\log |\Phi (\alpha)| = \sum_\tau \log |\tau (\alpha)| = 0.$$
-En fin, el homomorfismo $\sum$ es la suma de coordenadas.
+$$\sum_\tau \log |\tau (\alpha)| = 0.$$
 
 Primero calculemos el núcleo de $L$. Esto es bastante fácil: tenemos
 \[ \ker L = \{ \alpha \in \O_K^\times \mid
@@ -1992,8 +1990,8 @@ finito de elementos $\alpha_s$. Entonces, existe un subconjunto finito
 $S_0 \subset S$ tal que
 $$S \subseteq \bigcup_{s \in S_0} \Phi (\alpha_s)^{-1}\,\Phi (\O_K^\times)\,X_t.$$
 
-Ahora la imagen de $S \subset K_\RR^\times$ respecto a $\log |\cdot|$ es
-precisamente el subespacio $H$, y la fórmula de arriba nos dice que
+Ahora la imagen de $S \subset K_\RR^\times$ respecto a $\ell$
+es precisamente el subespacio $H$, y la fórmula de arriba nos dice que
 $$H = \bigcup_{\omega \in \Lambda} Y + \omega,$$
 donde $Y$ es el conjunto acotado. Esto precisamente significa que $\Lambda$
 es un retículo completo, y hemos terminado nuestra prueba del teorema de
