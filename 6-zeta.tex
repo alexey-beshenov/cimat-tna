@@ -1,7 +1,7 @@
 \chapter{Función zeta de Dedekind}
 
 Para un campo de números $K/\QQ$, la \textbf{función zeta de Dedekind}
-correspondiente es una especie de serie generatriz definida por la serie
+correspondiente es una especie de función generatriz definida por la serie
 $$\zeta_K (s) = \sum_{I \ne 0} \frac{1}{N_{K/\QQ} (I)^s},$$
 donde la suma se toma sobre los ideales enteros no nulos $I \subseteq \O_K$.
 Resulta que la función zeta de Dedekind codifica mucha información aritmética
@@ -170,36 +170,113 @@ $n = p^e$, se obtiene el siguiente curioso resultado.
 
 \section{Fórmula analítica del número de clases}
 
-Aunque no lo vamos a probar, la función $\zeta_K (s)$ admite una
-\textbf{prolongación meromorfa} a todo $s \in \CC$, con el único polo en
-$s = 1$. Nos interesará más que todo el residuo en $s = 1$.
-
-Nuestro próximo gran objetivo será probar que
+Nuestro próximo gran objetivo será calcular el residuo en $s = 1$:
 \[ \lim_{s \to 1^+} (s - 1)\,\zeta_K (s) =
    \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}}. \]
 Esta fórmula contiene todos los invariantes básicos de $K$ que hemos
-considerado:
+considerado.
 \begin{itemize}
-\item el número de encajes reales y complejos,
-\item el número de clases $h_K = \# \Cl (K)$,
-\item el discriminante $\Delta_K$,
-\item el número de las raíces de la unidad $\# \mu_K = \# (\O_K^\times)_{tors}$,
-\item el \textbf{regulador} $\Delta_K$ que es el covolumen del retículo
-  $\Lambda = L (\O_K^\times) \subset H$. En términos específicos, si
-  $u_1, \ldots, u_{r_1 + r_2 - 1}$ son unidades fundamentales de $\O_K^\times$,
-  entonces
-  $$\Reg_K = |\det (n_i\,\log |\tau_i (u_j)|)_{i,j = 1,\ldots,r_1+r_2-1}|.$$
-  Aquí $\tau_1,\tau_2,\ldots,\tau_{r_1+r_2-1}$ son los encajes no conjugados
-  $K \hookrightarrow \CC$, con un encaje quitado, dado que
-  $\prod_\tau \tau (u_j) = 1$. El coeficiente $n_i$ viene dado por
-  \[ n_i = \begin{cases}
-    1, & \text{si }\tau_i\text{ es real},\\
-    2, & \text{si }\tau_i\text{ es complejo}.
-  \end{cases} \]
+\item El número de encajes reales $r_1$ y el número de pares de encajes
+  complejos $r_2$.
+
+\item El número de clases $h_K = \# \Cl (K)$.
+
+\item El número de las raíces de la unidad $\# \mu_K = \# (\O_K^\times)_{tors}$.
+
+\item El discriminante $\Delta_K$. Específicamente, aparece $\sqrt{|\Delta_K|}$
+  que es el covolumen de $\O_K$ realizado como un retículo en el espacio
+  $K_\RR$.
+
+\item En fin, $\Reg_K$ es el \textbf{regulador} que, salvo una normalización,
+  corresponde al covolumen de la parte libre del grupo de unidades
+  $\O_K^\times$, realizada como un retículo en el espacio $H$ de dimensión
+  $r_1 + r_2 - 1$. En la siguiente sección vamos a dar una definición más
+  precisa.
 \end{itemize}
 
 La fórmula del número de clases fue descubierta por Dirichlet para el caso de
 campos cuadráticos, y la versión general es de Dedekind.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Regulador}
+
+Vamos a ver con más detalle qué es el regulador y cómo calcularlo.
+Recordemos nuestra prueba del teorema de unidades en
+\S\ref{sec:teorema-de-unidades} con el encaje logarítmico de $\O_K^\times$.
+Será conveniente numerar diferentes encajes $K\hookrightarrow \CC$ por
+$$\sigma_1,\ldots,\sigma_{r_1},\sigma_{r_1+1},\overline{\sigma_{r_1+1}},\ldots,\sigma_{r_1+r_2},\overline{\sigma_{r_1+r_2}},$$
+donde los primeros $r_1$ encajes son reales y el resto son complejos.
+
+Tenemos la aplicación
+\[ \Phi\colon K^\times \hookrightarrow K_\RR^\times, \quad
+   \alpha \mapsto (\sigma_i (\alpha))_i, \]
+y el encaje logarítmico
+\[ \ell\colon K_\RR^\times \to \RR^{r_1 + r_2}, \quad
+   (z_{\sigma_i}) \mapsto (n_i\,\log |z_{\sigma_i}|)_i, \]
+donde
+\[ n_i = \begin{cases}
+  1, & \text{si }1 \le i \le r_1,\\
+  2, & \text{si }r_1 < i \le r_1 + r_2.
+  \end{cases} \]
+Esto nos da el diagrama conmutativo
+\[ \begin{tikzcd}
+  \O_K^\times\ar[right hook->]{d}\ar{rr}{L} & & H\ar[right hook->]{d} \\
+  K^\times \ar[right hook->]{r}{\Phi}\ar{d}[swap]{N_{K/\QQ}} & K_\RR^\times \ar{r}{\ell} & \RR^{r_1 + r_2} \ar{d}{\sum} \\
+  \QQ^\times \ar{rr}{\log |\cdot|} & & \RR
+\end{tikzcd} \]
+
+Hemos probado que la aplicación $L$ realiza la parte libre de $\O_K^\times$ como
+un retículo de rango completo $r = r_1 + r_2 - 1$ en el subespacio
+$$H = \{ x \in \RR^{r_1 + r_2} \mid \sum_i x_i = 0 \}.$$
+Como consecuencia, $L (u_1), \ldots, L (u_r)$ forman una base
+de $H$, y podemos completarla a una base de $\RR^{r_1+r_2}$ añadiendo el vector
+$$L = \frac{1}{\sqrt{r_1 + r_2}} \, (1,\ldots,1) \in \RR^{r_1 + r_2}.$$
+El vector $(1,\ldots,1)$ es ortogonal a $H$, y con la normalización de
+arriba, la longitud de $L$ es $1$. Esto significa que el covolumen de
+$L (\O_K^\times)$ en $H$ es igual al volumen del paralelepípedo en
+$\RR^{r_1+r_2}$ generado por los vectores $L, L (u_1), \ldots, L (u_r)$; es
+decir,
+\[ \Reg_K = \covol L (\O_K^\times) = \pm \det \begin{pmatrix}
+  L_1 & L_1 (u_1) & L_1 (u_2) & \cdots & L_1 (u_{r_1+r_2-1}) \\
+  L_2 & L_2 (u_1) & L_2 (u_1) & \cdots & L_2 (u_{r_1+r_2-1}) \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\ 
+  L_{r_1 + r_2} & L_{r_1 + r_2} (u_1) & L_{r_1+r_2} (u_2) & \cdots & L_{r_1+r_2-1} (u_{r_1+r_2-1})
+\end{pmatrix} \]
+Ahora podemos sumar a la $i$-ésima fila de la matriz de arriba todas las filas.
+Como resultado, en la $i$-ésima fila estará el vector
+$$(1/\sqrt{r_1 + r_2}, 0, \ldots, 0).$$
+Esto nos lleva al siguiente resultado.
+
+\begin{proposicion-definicion}
+  El covolumen del retículo $L (\O_K^\times)$ en $H$ es igual a
+  $$\frac{1}{\sqrt{r_1 + r_2}} \, \Reg_K,$$
+  donde $\Reg_K$ es el valor absoluto del determinante de cualquier menor
+  de rango $r_1 + r_2 - 1$ de la matriz
+  \[ (L_i (u_j))_{\substack{1 \le i \le r_1 + r_2 \\ 1 \le j \le r_1 + r_2 - 1}} =
+     (n_i \log |\sigma_i (u_j)|)_{\substack{1 \le i \le r_1 + r_2 \\ 1 \le j \le r_1 + r_2 - 1}}. \]
+\end{proposicion-definicion}
+
+\begin{ejemplo}
+  Si $K = \QQ (\sqrt{d})$ es un campo cuadrático real, entonces su regulador
+  será $\log |u|$, donde $u$ es la unidad fundamental de $\O_K^\times$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Para el campo $K = \QQ (\zeta_7)$ podemos calcular con ayuda de computadora
+  que como unidades fundamentales, se pueden tomar
+  $$u_1 = 1 + \zeta_7, \quad u_2 = \zeta_7 + \zeta_7^4.$$
+  En este caso $r_1 = 0$ y $r_2 = 3$. Los encajes complejos, salvo conjugación,
+  serán
+  \[ \sigma_1\colon \zeta_7 \mapsto \zeta_7, \quad
+     \sigma_2\colon \zeta_7 \mapsto \zeta_7^2, \quad
+     \sigma_3\colon \zeta_7 \mapsto \zeta_7^3. \]
+  Tenemos entonces
+  \[ \Reg_K = \pm\det\begin{pmatrix}
+    2\,\log |1 + \zeta_7| & 2\,\log |\zeta_7 + \zeta_7^4| \\
+    2\,\log |1 + \zeta_7^2| & 2\,\log |\zeta_7^2 + \zeta_7| \\
+  \end{pmatrix} = 2.101818\ldots \qedhere \]
+\end{ejemplo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -319,7 +396,8 @@ Tomando los logaritmos, se obtiene (módulo $2\pi i\ZZ$)
 $$L(1,\chi) = -\frac{1}{i\sqrt{p}}\,\sum_{1 \le a \le p-1} \chi (a)\,\log (1 - \zeta_p^a).$$
 Nos interesa la suma
 $$S_\chi = -\sum_{1 \le a \le p-1} \chi (a)\,\log (1 - \zeta_p^a).$$
-Notamos que $\chi (-1) = -1$, así que podemos escribir
+Notamos que $\chi (-1) = -1$ (usando la hipótesis $p \equiv 3 \pmod{4}$),
+así que podemos escribir
 \[ 2 S_\chi = \sum_{1 \le a \le p-1} \chi (a)\,\Bigl(\log (1 - \zeta_p^{-a}) - \log (1 - \zeta_p^a)\Bigr) =
    \sum_{1 \le a \le p-1} \chi (a)\,\log \frac{1 - \zeta_p^{-a}}{1 - \zeta_p^a}. \]
 Aquí
@@ -426,55 +504,21 @@ módulo la relación $\sim$.
 
 \vspace{1em}
 
-Recordemos nuestra prueba del teorema de unidades en
-\S\ref{sec:teorema-de-unidades} con el encaje logarítmico de $\O_K^\times$.
-Será conveniente numerar diferentes encajes $K\hookrightarrow \CC$ por
-$$\sigma_1,\ldots,\sigma_{r_1},\sigma_{r_1+1},\overline{\sigma_{r_1+1}},\ldots,\sigma_{r_1+r_2},\overline{\sigma_{r_1+r_2}},$$
-donde los primeros $r_1$ encajes son reales y el resto son complejos.
-
-Tenemos la aplicación
-\[ \Phi\colon K^\times \hookrightarrow K_\RR^\times, \quad
-   \alpha \mapsto (\sigma (\alpha))_\sigma, \]
-y el encaje logarítmico
-\[ \log |\cdot|\colon K_\RR^\times \to \RR^{r_1+r_2}, \quad
-(x_\sigma) \mapsto (\log |\sigma (\alpha)|)_\sigma, \]
-donde para evitar repeticiones, entre $\sigma_{r_1+i}$ y
-$\overline{\sigma_{r_1 + i}}$ se toma solo un encaje (la conjugación no afecta
-el valor absoluto). Por este motivo la imagen está en $\RR^{r_1+r_2}$.
-
-Consideramos la aplicación lineal
-\[ \phi\colon \RR^{r_1+r_2} \to \RR, \quad
-   x \mapsto \sum_i n_i x_i, \]
-donde
-\[ n_i = \begin{cases}
-  1, & \text{si }1 \le i \le r_1,\\
-  2, & \text{si }r_1+1 \le i \le r_1 + r_2.
-\end{cases} \]
-
-\[ \begin{tikzcd}
-  \O_K^\times\ar[right hook->]{d}\ar{rr}{L} & & H\ar[right hook->]{d} \\
-  K^\times \ar[right hook->]{r}{\Phi}\ar{d}[swap]{N_{K/\QQ}} & K_\RR^\times \ar{r}{\log |\cdot|} & \RR^{r_1 + r_2} \ar{d}{\phi}\ar[right hook->]{r} & \RR^n\ar{d}{\sum} \\
-  \QQ^\times \ar{rr}{\log |\cdot|} & & \RR \ar[equals]{r} & \RR
-\end{tikzcd} \]
-
-Hemos probado que la aplicación $L$ realiza $\O_K^\times$ como un retículo de
-rango completo $r = r_1 + r_2 - 1$ en el subespacio $H = \ker\phi$.
 Consideremos unidades fundamentales $u_1, \ldots, u_r \in \O_K^\times$. Entonces
-los vectores $L (u_1), \ldots, L (u_r)$ forman una base de $H$. Por otra parte,
-el vector $\ell = (1,\ldots,1)$ no está en $H$, así que los $L (u_i)$ junto con
-$\ell$ forman una base de $\RR^{r_1+r_2}$: todo $x \in \RR^{r_1+r_2}$ puede ser
-expresado como
+los vectores $L (u_1), \ldots, L (u_r)$ forman una base del espacio
+$H \subset \RR^{r_1+r_2}$. Por otra parte, el vector
+$$L = (\underbrace{1,\ldots,1}_{r_1}, \underbrace{2,\ldots,2}_{r_2})$$
+no está en $H$, así que los $L (u_i)$ junto con $L$ forman una base de
+$\RR^{r_1+r_2}$: todo $x \in \RR^{r_1+r_2}$ puede ser expresado como
 \begin{equation}
   \label{eqn:base-de-Rr1+r2}
-  \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell
+  \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L
 \end{equation}
 para algunos $\lambda_1,\ldots,\lambda_r,\lambda \in \RR$.
-
 El grupo de unidades $\O_K^\times$ actúa sobre el espacio $K_\RR^\times$ mediante
 $$u \cdot x = \Phi (u)\,x$$
 (multiplicación de dos vectores en $K_\RR^\times$ punto por punto). El dominio
 fundamental de esta acción tiene una buena descripción.
-
 A partir de ahora vamos a denotar por $m = \# \mu_K$ el número de las raíces de
 la unidad en $K$.
 
@@ -483,7 +527,7 @@ la unidad en $K$.
   Consideremos el subconjunto $X \subset K_\RR^\times$ que satisface las
   siguientes condiciones.
   \begin{enumerate}
-  \item[a)] Para todo $x \in X$ en la expresión de $\log |x|$ en la base
+  \item[a)] Para todo $x \in X$ en la expresión de $\ell (x)$ en la base
     \eqref{eqn:base-de-Rr1+r2} se tiene $0 \le \lambda_i < 1$ para
     $i = 1,\ldots,r$.
 
@@ -585,7 +629,7 @@ Nos interesa el subconjunto $X \subset K_\RR^\times$ que satisface las
 siguientes condiciones.
 \begin{enumerate}
 \item[a)] Para todo $x \in X$ en la expresión
-  $$\log |x| = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell$$
+  $$\ell (x) = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L$$
   se tiene $0 \le \lambda_i < 1$ para $i = 1,\ldots,r$.
 
 \item[b)] Se tiene $0 \le \arg x_1 < \frac{2\pi}{m}$.
@@ -593,7 +637,7 @@ siguientes condiciones.
 
 Primero vamos a verificar que $X$ es un cono. Para $x \in X$ y $\lambda > 0$
 tenemos
-$$\log |\lambda x| = \log|\lambda|\,\ell + \log |x|,$$
+$$\ell (\lambda x) = \log |\lambda|\,L + \ell (x),$$
 y esto no afecta los coeficientes $\lambda_1,\ldots,\lambda_r$, así que la
 condición a) se preserva. Por otra parte, $\arg (\lambda x_1) = \arg x_1$,
 así que b) se preserva también. Notamos que $X \ne \emptyset$: por ejemplo,
@@ -602,26 +646,26 @@ el punto $\Phi (1)$ está en $X$.
 Ahora nos gustaría probar que para todo $y \in K_\RR^\times$ existen únicos
 $u \in \O_K^\times$ y $x \in X$ tales que $y = \Phi (u)\,x$.
 
-Primero para la existencia, escribamos $\log |y|$ en términos de nuestra base
+Primero para la existencia, escribamos $\ell (y)$ en términos de nuestra base
 de $\RR^{r_1+r_2}$:
-$$\log |y| = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell.$$
+$$\ell (y) = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L.$$
 Para $i = 1,\ldots,r$ pongamos
 $$\lambda_i = a_i + \mu_i,$$
 donde
 $$a_i \in \ZZ, \quad 0 \le \mu_i < 1.$$
 Consideremos la unidad $v = u_1^{a_1}\cdots u_r^{a_r}$ y el punto
 $z = \Phi (v^{-1})\,y$. Ahora
-\[ \log |z| = L (v^{-1}) + \log |y| =
+\[ \ell (z) = L (v^{-1}) + \ell (y) =
    - a_1\,L (u_1) - \cdots - a_r\,L(u_r)
-   + \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell =
-   \mu_1 \, L (u_1) + \cdots + \mu_r \, L (u_r) + \lambda \ell. \]
+   + \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L =
+   \mu_1 \, L (u_1) + \cdots + \mu_r \, L (u_r) + \lambda L. \]
 Esto nos asegura la condición a) de la definición de $X$, y falta analizar
 la condición b). Si $\arg z_1 = \phi$, entonces para algún $k$ se tiene
 $$\frac{2\pi k}{m} \le \phi < \frac{2\pi {k+1}}{m}.$$
 Sea $\zeta \in \mu_K$ la $m$-ésima raíz de la unidad tal que
 $\sigma_1 (\zeta) = \exp \Bigl(\frac{2\pi i}{m}\Bigr)$. En este caso el punto
 $x = \Phi (\zeta^{-k})\,z$ está en $X$: primero tenemos
-$$\log |x| = L (\zeta^{-k}) + \log |z| = \log |z|,$$
+$$\ell (x) = L (\zeta^{-k}) + \ell (z) = \ell (z),$$
 dado que $\mu_K = \ker L$, así que la condición a) se preserva. Por otra parte,
 $$\arg x_1 = \arg z_1 - \frac{2\pi k}{m} = \phi - \frac{2\pi k}{m},$$
 y luego
@@ -634,11 +678,11 @@ Ahora para ver que la representación es única, supongamos que
 $$y = \Phi (u)\,x = \Phi (u')\,x'$$
 para algunos $u,u' \in \O_K^\times$, $x,x' \in X$. Tomando los logaritmos, se
 obtiene
-$$L (u) + \log |x| = L (u') + \log |x'|.$$
+$$L (u) + \ell (x) = L (u') + \ell (x').$$
 Aquí por nuestra hipótesis
 \begin{align*}
-  \log |x| & = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda \ell, \\
-  \log |x'| & = \lambda_1' \, L (u_1) + \cdots + \lambda_r' \, L (u_r) + \lambda' \ell,
+  \ell (x) & = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L, \\
+  \ell (x') & = \lambda_1' \, L (u_1) + \cdots + \lambda_r' \, L (u_r) + \lambda' L,
 \end{align*}
 donde $0 \le \lambda_i, \lambda_i' < 1$. Por otra parte,
 \begin{align*}
