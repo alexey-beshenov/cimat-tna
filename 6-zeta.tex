@@ -16,6 +16,7 @@ tienen forma $n\ZZ$ para $n = 1,2,3,\ldots$, así que $\zeta_\QQ (s) = \zeta (s)
 es la función zeta de Riemann.
 
 \begin{lema}
+  \label{lema:convergencia-y-residuo-de-zeta-de-Riemann}
   La serie $\zeta (s) = \sum_{n\ge 1} \frac{1}{n^s}$ converge absolutamente para
   $\Re s > 1$, y se tiene
   $$\lim_{s \to 1^+} (s - 1)\,\zeta (s) = 1.$$
@@ -25,7 +26,9 @@ es la función zeta de Riemann.
     establecer la convergencia para $s > 1$ real. Tenemos
     $$\int_n^{n+1} \frac{dx}{x^s} \le \frac{1}{n^s} \le \int_{n-1}^n \frac{dx}{x^s},$$
     donde la primera desigualdad se cumple para $n \ge 1$ y la segunda para
-    $n \ge 2$. Tomando la suma sobre $n \ge 1$, nos sale la desigualdad
+    $n \ge 2$
+    (véase la figura~\ref{fig:convergencia-y-residuo-de-zeta-de-Riemann}).
+    Tomando la suma sobre $n \ge 1$, nos sale la desigualdad
     $$\int_1^\infty \frac{dx}{x^s} \le \zeta (s) \le 1 + \int_1^\infty \frac{dx}{x^s}.$$
     Ahora, dado que $\int_1^\infty \frac{dx}{x^s} = \frac{1}{s - 1}$, tenemos
     $$\frac{1}{s - 1} \le \zeta (s) \le \frac{s}{s - 1},$$
@@ -35,6 +38,19 @@ es la función zeta de Riemann.
     $s \to 1^+$.
   \end{proof}
 \end{lema}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{pic/xs-bounds.pdf}
+  \end{center}
+
+  \begin{center}
+    \includegraphics{pic/riemann-zeta-bounds.pdf}
+  \end{center}
+
+  \caption{Demostración de \ref{lema:convergencia-y-residuo-de-zeta-de-Riemann}}
+  \label{fig:convergencia-y-residuo-de-zeta-de-Riemann}
+\end{figure}
 
 Ahora podemos probar la convergencia de $\zeta_K (s)$.
 
@@ -54,7 +70,7 @@ Ahora podemos probar la convergencia de $\zeta_K (s)$.
     $$\prod_{\mathfrak{p}} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p})^{-s}},$$
     y luego,
     \[ \prod_{\mathfrak{p}} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p})^{-s}} =
-       \prod_{\mathfrak{p}} \sum_{e \ge 1} \frac{1}{N_{K/\QQ} (\mathfrak{p}^e)^s} =
+       \prod_{\mathfrak{p}} \sum_{e \ge 0} \frac{1}{N_{K/\QQ} (\mathfrak{p}^e)^s} =
        \sum_{I\ne 0} \frac{1}{N_{K/\QQ} (I)^s}. \]
     Aquí hemos usado la serie geométrica, la multiplicatividad de la norma, y
     que todo ideal entero no nulo $I \subseteq \O_K$ tiene factorización única
@@ -112,7 +128,7 @@ donde
 Este es un \textbf{carácter de Dirichlet} mód $4$, y a este se asocia la
 \textbf{serie L de Dirichlet} correspondiente
 \[ L (s,\chi) = \prod_p \frac{1}{1 - \chi(p)\,p^{-s}} =
-   \sum_{n\ge 1} \frac{\chi (s)}{n^s}. \]
+   \sum_{n\ge 1} \frac{\chi (n)}{n^s}. \]
 Entonces, se tiene
 $$\zeta_K (s) = \zeta (s) \, L (s,\chi).$$
 Invito que el lector revise el apéndice~\ref{ap:Dirichlet} para más detalles.
@@ -122,7 +138,7 @@ $\O_K^\times = \{ \pm 1, \pm i \}$. Como consecuencia, todo ideal tiene forma
 $I = (\alpha)$, y para $I \ne 0$ hay precisamente cuatro maneras de escoger un
 generador $\alpha$. Si $\alpha = x + yi$, entonces $N_{K/\QQ} (I) = x^2 + y^2$.
 Pongamos
-$$C (n) = \# \{ (x,y) \in \ZZ^2 \mid x,y > 0, ~ x^2 + y^2 = n \}.$$
+$$C (n) = \# \{ (x,y) \in \ZZ^2 \mid x,y \ge 0, ~ x^2 + y^2 = n \}.$$
 
 Tenemos entonces una identidad con series de Dirichlet
 \[ \zeta_K (s) = \sum_{n\ge 1} \frac{C (n)}{n^s} =
