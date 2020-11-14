@@ -3,8 +3,8 @@
 /* ----------------------------------------------------------------- */
 
 quadcontfrac(d) = {
-    if (type(d) != "t_INT" || d <= 1 || !issquarefree(d),
-        error ("Esperando un entero d > 1 libre de cuadrados"));
+    if (type(d) != "t_INT" || d <= 1 || issquare(d),
+        error ("Esperando un no-cuadrado d > 1"));
 
     local (an = List(), A = 0, B = 1, a = floor(sqrt(d)));
 
