@@ -1,11 +1,16 @@
 Para el resto del curso, mis planes son más o menos los siguientes.
 
-* Función zeta de Dedekind zeta_K (s) y la fórmula analítica del número de
-  clases (tal vez con un bosquejo de la prueba, tal vez no; ya lo veremos...)
+1. Aplicaciones de la fórmula analítica del número de clases a los campos
+   Q (\sqrt{-p}) con p = 3 (4).
 
-* Aplicación de la fórmula del número de clases a los campos cuadráticos
-  (y/o ciclotómicos): cómo calcular |Cl (K)| de manera analítica.
+2. Bosquejo de demostración de la fórmula del número de clases
+   (estrategia general; detalles en mis notas).
 
-* Equivalencia aritmética (el artículo de Perlis).
+3. Factorización de \zeta_K (s) en L (s,\chi) para extensiones abelianas
+   K/Q.
 
-* Teoría de campos de clases y reciprocidad de Artin.
+4. Valores especiales de \zeta_K (s). Teorema de Siegel-Klingen (enunciado).
+   Valores de L (s,\chi) en términos de sumas de caracteres y números de
+   Bernoulli B_{n,\chi}. Aplicación para extensión K/Q abeliana real.
+
+5. Equivalencia aritmética (el primer teorema del artículo de Perlis).
