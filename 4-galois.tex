@@ -771,6 +771,7 @@ Tenemos entonces la siguiente situación para $\mathfrak{q} \mid \mathfrak{p}$:
 \end{tikzcd} \]
 
 \begin{teorema}
+  \label{thm:campo-de-descomposicion-e-inercia}
   Para una extensión de Galois de campos de números $L/K$, sean
   $\mathfrak{p} \subset \O_K$ y $\mathfrak{q} \subset \O_K$ primos tales que
   $\mathfrak{q}\mid\mathfrak{p}$ y $D = D (\mathfrak{q}|\mathfrak{p})$
@@ -904,6 +905,85 @@ El resultado que acabamos de probar explica los términos
     en $L^I$.
   \end{proof}
 \end{corolario}
+
+Los cálculos de \ref{thm:campo-de-descomposicion-e-inercia} de hecho
+caracterizan el campo de descomposición e inercia. Usando la misma notación,
+consideremos un subcampo $K \subseteq K' \subseteq L$ y un primo
+$\mathfrak{p} = \mathfrak{q} \cap \O_{K'}$. Tenemos $K' = L^H$ para algún
+subgrupo $H \subseteq \Gal (L/K)$, y la extensión $L/K'$ es Galois.
+Notamos que $\mathfrak{p}' \mid \mathfrak{p}$. De las definiciones del grupo
+de descomposición e inercia se ve que
+\[ D (\mathfrak{q}|\mathfrak{p}') = D\cap H, \quad
+   I (\mathfrak{q}|\mathfrak{p}') = I\cap H, \]
+y los campos de descomposición e inercia correspondientes son los compositums
+\[ L^{D (\mathfrak{q}|\mathfrak{p}')} = L^D\,K', \quad
+   L^{I (\mathfrak{q}|\mathfrak{p}')} = L^I\,K'. \]
+El teorema \ref{thm:campo-de-descomposicion-e-inercia} nos da el siguiente
+diagrama de extensiones
+
+\[ \begin{tikzcd}[row sep=1em, column sep=1em]
+  & L\ar[-]{dddl}[swap]{e (\mathfrak{q}|\mathfrak{p})}\ar[-]{ddr}{e (\mathfrak{q}|\mathfrak{p}')} \\
+  \\
+  & & L^I\,K'\ar[-]{dll}\ar[-]{dd}{f (\mathfrak{q}|\mathfrak{p}')} \\
+  L^I\ar[-]{dd}{f (\mathfrak{q}|\mathfrak{p})} \\
+  & & L^D\,K'\ar[-]{dll}\ar[-]{dd}{g_{\mathfrak{p}'}}\\
+  L^D\ar[-]{dd}{g_\mathfrak{p}} \\
+  & & K'\ar[-]{dll}\\
+  K
+\end{tikzcd} \]
+
+\marginpar{\footnotesize Añadí este\\resultado\\después}
+
+\begin{proposicion}
+  \label{prop:caracterizacion-de-campo-de-descomposicion-e-inercia}
+  En la situación de \ref{thm:campo-de-descomposicion-e-inercia}, consideremos
+  un subcampo $K \subseteq K' \subseteq L$. El campo de descomposición $L^D$
+  e inercia $L^I$ se caracterizan por las siguientes propiedades.
+
+  \begin{enumerate}
+  \item[a)] $L^D$ es el $K'$ más grande tal que
+    $e (\mathfrak{p}'|\mathfrak{p}) = f (\mathfrak{p}'|\mathfrak{p}) = 1$.
+
+  \item[b)] $L^D$ es el $K'$ más pequeño tal que $g_{\mathfrak{p}'} = 1$
+    (es decir, $\mathfrak{q}$ es el único primo en $\O_L$ tal que
+    $\mathfrak{q} \mid \mathfrak{p}'$).
+
+  \item[c)] $L^I$ es el $K'$ más grande tal que
+    $e (\mathfrak{p}'|\mathfrak{p}) = 1$.
+
+  \item[d)] $L^I$ es el $K'$ más pequeño tal que
+    $e (\mathfrak{q}|\mathfrak{p}') = [L : K']$.
+  \end{enumerate}
+
+  \begin{proof}
+    Primero observamos que \ref{thm:campo-de-descomposicion-e-inercia}
+    nos dice que $L^D$ y $L^I$ cumplen las propiedades deseadas.
+
+    En a), si tenemos
+    $e (\mathfrak{p}'|\mathfrak{p}) = f (\mathfrak{p}'|\mathfrak{p}) = 1$,
+    entonces del diagrama de arriba se deduce que
+    \[ [L : L^D\,K'] =
+       e (\mathfrak{q}|\mathfrak{p}')\,f (\mathfrak{q}|\mathfrak{p}') =
+       e (\mathfrak{q}|\mathfrak{p}')\,e (\mathfrak{p}'|\mathfrak{p})\,
+       f (\mathfrak{q}|\mathfrak{p}')\,f (\mathfrak{p}'|\mathfrak{p}) =
+       e (\mathfrak{q}|\mathfrak{p})\,f (\mathfrak{q}|\mathfrak{p}) =
+       [L : L^D]. \]
+    Entonces, $L^D\,K' = L^D$, y por lo tanto $K' \subseteq L^D$.
+
+    En b), si $g_{\mathfrak{p}'} = [L^D\,K' : K'] = 1$, entonces
+    $L^D\,K' = K'$, y por ende $L^D \subseteq K'$.
+
+    En c), si $e (\mathfrak{p}'|\mathfrak{p}) = 1$, entonces de la misma manera
+    calculamos
+    \[ [L : L^I\,K'] = e (\mathfrak{q}|\mathfrak{p}') =
+       e (\mathfrak{q}|\mathfrak{p}')\,e (\mathfrak{p}'|\mathfrak{p}) =
+       e (\mathfrak{q}|\mathfrak{p}) = [L : L^I], \]
+    y entonces $K' \subseteq L^I$.
+
+    En fin, en d), si $e (\mathfrak{q}|\mathfrak{p}') = [L:K']$, entonces del
+    diagrama se ve que $L^I\,K' = K'$, y luego $L^I \subseteq K'$.
+  \end{proof}
+\end{proposicion}
 
 \begin{ejemplo}
   Consideremos el campo ciclotómico $K = \QQ (\zeta_{28})$.
