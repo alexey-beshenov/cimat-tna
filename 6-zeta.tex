@@ -181,16 +181,14 @@ de Fermat sobre los primos de la forma $x^2 + y^2$
 \end{figure}
 
 \begin{comentario}
-  En general, para cualquier extensión finita abeliana $K/\QQ$ se cumple
-  una descomposición en ciertas series L de Dirichlet
+  Más adelante veremos que para cualquier extensión finita abeliana $K/\QQ$ se
+  tiene una descomposición en ciertas series L de Dirichlet
   $$\zeta_K (s) = \prod_\chi L (s,\chi).$$
   En particular, para el carácter trivial sale el factor $\zeta (s)$.
   Más adelante veremos que $\zeta_K (s)$ determina la factorización de primos
   racionales en $\O_K$. La fórmula de arriba significa que
   \emph{en el caso abeliano} la factorización depende de $p$ mód $N$ para algún
   $N$. El caso no-abeliano es más complicado.
-
-  Véase por ejemplo \cite[Chapter~4]{Washington-GTM83}.
 \end{comentario}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -318,8 +316,9 @@ entonces se pone $\Reg_K = 1$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\iffalse
+\pdfbookmark{Clase 26 (18/11/20)}{clase-26}
 \section{Ejemplos de uso de la fórmula del número de clases}
+\marginpar{\small Clase 26 \\ 18/11/20}
 
 Antes de probar la fórmula, podemos ver algunos ejemplos de su uso. Consideremos
 el campo cuadrático real $K = \QQ (\sqrt{5})$. Argumentando de la misma manera
@@ -575,7 +574,6 @@ De hecho, para las sumas de caracteres existen cotas mejores, no triviales.
   que gobierna la factorización de primos en $\O_K$ y nos lleva a la fórmula
   $$\zeta_K (s) = \zeta (s) \, L (s,\chi)$$
   ---véase ejercicio~\ref{ejerc:caracter-para-campo-cuadratico}.
-
   Luego los métodos parecidos a los de arriba nos permiten calcular $h_K$
   en términos de $L (1,\chi)$. Para los detalles, véase
   \cite[Chapter~5]{Borevich-Shafarevich}.
@@ -957,21 +955,1233 @@ el punto donde aparece el regulador y $m = \# \mu_K$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\section{Función zeta y series L}
+
+En esta sección me gustaría explicar cómo la función zeta se factoriza en
+ciertas series $L$ de Dirichlet
+$$\zeta_K (s) = \prod_\chi L(s,\chi),$$
+en el caso cuando $K/\QQ$ es una extensión abeliana. Aquí voy a seguir la
+exposición de \cite{Washington-GTM83}.
+
+La idea es bastante sencilla: recordemos que un carácter de Dirichlet mód $m$
+es un homomorfismo multiplicativo
+$\chi\colon (\ZZ/m\ZZ)^\times \to \CC^\times$. Dado que para un campo ciclotómico
+$\QQ (\zeta_m)$ se tiene $\Gal (\QQ(\zeta_m)/\QQ) \cong (\ZZ/m\ZZ)^\times$,
+es útil considerar los caracteres de Dirichlet como caracteres de Galois
+$\chi\colon \Gal (\QQ(\zeta_m)/\QQ) \to \CC^\times$. Ahora los subgrupos
+$H \subseteq \Gal (\QQ(\zeta_m)/\QQ$ corresponden a subcampos
+$K \subseteq \QQ (\zeta_m)$. Como ya mencionamos en el capítulo
+\ref{cap:teoria-de-galois}, el \textbf{teorema de Kronecker--Weber} afirma que
+cualquier extensión abeliana $K/\QQ$ puede ser realizada como una subextensión
+de $\QQ (\zeta_m)/\QQ$ para algún $m$.
+
+Ahora para el grupo de caracteres
+$\widehat{(\ZZ/m\ZZ)^\times} \cong \widehat{\Gal (\QQ(\zeta_m)/\QQ)}$ se tiene
+$\widehat{(\ZZ/m\ZZ)^\times} \cong (\ZZ/m\ZZ)^\times$, así que los subcampos
+de $\QQ (\zeta_m)$ están en correspondencia con grupos de caracteres de
+Dirichlet mód $m$. Sin embargo, aquí el isomorfismo
+$\widehat{(\ZZ/m\ZZ)^\times} \cong (\ZZ/m\ZZ)^\times$ no es canónico, así que
+hay que proceder con cuidado. Por esto vamos a empezar por una revisión más
+sistemática de los caracteres de grupos abelianos finitos.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Caracteres de grupos abelianos finitos}
+
+Sea $G$ un grupo abeliano finito. Vamos a usar la notación multiplicativa.
+Un \textbf{carácter} de $G$ es un homomorfismo $\chi\colon G\to \CC^\times$.
+Los caracteres forman un grupo respecto a la multiplicación punto por punto
+que será denotado por $\widehat{G}$. Esta construcción es contravariante:
+un homomorfismo de grupos $G\to H$ induce un homomorfismo de grupos de
+caracteres $\widehat{H} \to \widehat{G}$.
+
+Notamos que
+$$\widehat{G\times H} \cong \widehat{G}\times\widehat{H}.$$
+
+\begin{lema}
+  Hay un isomorfismo no canónico $\widehat{G} \cong G$. En particular,
+  $\#\widehat{G} = \# G$.
+
+  \begin{proof}
+    Primero, si $G = C_n$ es un grupo cíclico finito, entonces
+    \[ \widehat{C_n} = \Hom (C_n, \CC^\times) = \Hom (C_n, \mu_n (\CC)) \cong
+    \Hom (C_n,C_n) \cong C_n. \]
+    En general, tenemos un isomorfismo no canónico
+    $G \cong C_{n_1}\times C_{n_s}$, y luego
+    \[ \widehat{G} \cong \widehat{C_{n_1}}\times \widehat{C_{n_s}} \cong
+       C_{n_1}\times C_{n_s} \cong G. \qedhere \]
+  \end{proof}
+\end{lema}
+
+Las siguientes propiedades es un caso muy particular de la
+\textbf{dualidad Pontriaguin} que funciona para los grupos abelianos localmente
+compactos. En este caso el \textbf{grupo dual} $\widehat{G}$ se define como el
+grupo de homomorfismos continuos $\chi\colon G\to \TT$, donde
+$\TT = \{ z \in \CC \mid |z| = 1 \}$. En el caso cuando $G$ es finito, es
+trivialmente compacto, y todo homomorfismo $\chi\colon G\to \CC^\times$ toma
+valores en las raíces $n$-ésimas de la unidad $\mu_n (\CC) \subset \TT$,
+donde $n = \# G$. En general las pruebas de la dualidad de Pontriaguin
+son bastante complicadas, pero para $G$ finito podemos usar
+la observación de arriba de que $\#\widehat{G} = \# G$ y ocupar el conteo
+de elementos.
+
+\begin{proposicion}
+  Sean $G$ un grupo abeliano finito y $\widehat{G}$ su grupo de caracteres.
+
+  \begin{enumerate}
+  \item[a)] Hay isomorfismo canónico $G \cong \widehat{\widehat{G}}$.
+
+  \item[b)] Tenemos un apareamiento no degenerado
+    \[ G\times \widehat{G} \to \CC^\times, \quad
+       (g,\chi) \mapsto \chi (g). \]
+
+  \item[c)] Dado un subgrupo $H \subset G$, consideremos el subgrupo ortogonal
+    respecto al apareamiento de arriba:
+    $$H^\perp = \{ \chi \in \widehat{G} \mid \chi (h) = 1 \text{ para todo } h\in H \}.$$
+    Tenemos isomorfismos naturales
+    \[ H^\perp \cong \widehat{G/H}, \quad \widehat{H} \cong \widehat{G}/H^\perp. \]
+
+  \item[d)] Bajo la identificación de $\widehat{\widehat{G}}$ con $G$, se tiene
+    $(H^\perp)^\perp = H$.
+  \end{enumerate}
+
+  \begin{proof}
+    Consideremos el homomorfismo de evaluación
+    \[ ev\colon G \to \widehat{\widehat{G}}, \quad
+    g \mapsto (\chi \mapsto \chi (g)). \]
+    Este es inyectivo: si tenemos $\chi (g) = 1$ para todo carácter
+    $\chi\colon G \to \CC^\times$, entonces todo $\chi$ se factoriza de manera
+    única por el cociente $G/\langle g\rangle$, y luego
+    $\widehat{G} = \widehat{G/\langle g\rangle}$. Sin embargo,
+    $\#\widehat{G} = \# G$ y
+    $\#\widehat{G/\langle g\rangle} = G/\langle g\rangle$, así que
+    necesariamente $g = 1$.
+
+    Por otra parte, el homomorfismo es sobreyectivo, dado que
+    $\# G = \# \widehat{G} = \# \widehat{\widehat{G}}$. Esto establece la parte
+    a). Notamos que el argumento es similar a la prueba del isomorfismo canónico
+    $V \cong (V^\vee)^\vee$ para un espacio vectorial de dimensión finita $V$.
+
+    La parte b) es una consecuencia inmediata de lo que acabamos de ver.
+
+    En c), observamos que si $H \subset \ker \chi$, entonces $\chi$ se factoriza
+    de manera única por el cociente $G/H$, así que $H^\perp \cong \widehat{G/H}$.
+    Además, la inclusión $H \hookrightarrow G$ induce la restricción de
+    caracteres $\widehat{G} \to \widehat{H}$, y por la definición
+    $H^\perp$ es el núcleo. Esto nos da un homomorfismo inyectivo
+    $\widehat{G}/H^\perp \hookrightarrow \widehat{H}$. Para la sobreyectividad,
+    calculamos que
+    \[ \# (\widehat{G}/H^\perp) = \frac{\# G}{\# H^\perp} =
+    \frac{\# G}{\# \widehat{G/H}} = \frac{\# G}{\# (G/H)} =
+    \# H = \# \widehat{H}. \]
+
+    En fin, en la parte d), primero tenemos por la definición
+    $H \subseteq (H^\perp)^\perp$, y luego
+    \[ \# (H^\perp)^\perp = \# (\widehat{G/H})^\perp =
+       \# \left(\frac{\widehat{G}}{\widehat{G/H}}\right) = \# H. \qedhere \]
+  \end{proof}
+\end{proposicion}
+
+\subsection{Caracteres de Dirichlet}
+
+\begin{definicion}
+  Un carácter de Dirichlet mód $m$ es un homomorfismo
+  $\chi\colon (\ZZ/m\ZZ)^\times \to \CC^\times$.
+\end{definicion}
+
+Notamos que si $m \mid m'$, entonces $\chi$ induce un carácter
+\[ (\ZZ/m'\ZZ)^\times \to (\ZZ/m\ZZ)^\times \xrightarrow{\chi} \CC^\times. \]
+
+\begin{definicion}
+  El $m$ más pequeño tal que $\chi$ puede ser considerado como un carácter mód
+  $m$ se llama el \textbf{conductor} de $\chi$ y se denota por
+  $f_\chi$.\footnote{Nota políticamente incorrecta: aquí «$f$» viene del alemán
+    \emph{Führer}, lo que literalmente significa líder o conductor.}  Cuando
+  $\chi$ se considera como un carácter mód $f_\chi$, se dice que $\chi$ es
+  \textbf{primitivo}.
+\end{definicion}
+
+\begin{ejemplo}
+  Consideremos el homomorfismo $\chi\colon (\ZZ/6\ZZ)^\times \to \CC^\times$
+  definido por $1 \mapsto 1$ y $5 \mapsto -1$. En realidad este $\chi$ se induce
+  por el homomorfismo no trivial $\chi'\colon (\ZZ/3\ZZ)^\times \to \CC^\times$
+  definido por $1 \mapsto 1$, $2 \mapsto -1$:
+  $$\chi\colon (\ZZ/6\ZZ)^\times \to (\ZZ/3\ZZ)^\times \xrightarrow{\chi'} \CC^\times.$$
+  Entonces $\chi$ tiene conductor $f_\chi = 3$ y no es primitivo.
+\end{ejemplo}
+
+\begin{definicion}
+  Si $\chi (-1) = +1$, se dice que $\chi$ es \textbf{par} y si
+  $\chi (-1) = -1$, se dice que $\chi$ es \textbf{impar}.
+\end{definicion}
+
+Un carácter de Dirichlet $\chi\colon (\ZZ/m\ZZ)^\times \to \CC^\times$ se extiende
+a una aplicación $\chi\colon \ZZ\to \CC$ poniendo
+$$\chi (n) = 0, \text{ si }\gcd (n,f_\chi) \ne 1.$$
+
+Si $\chi$ y $\chi'$ son caracteres primitivos, entonces su producto punto por
+punto se define como un carácter
+$$\chi\chi'\colon (\ZZ/\lcm (f_\chi,f_{\chi'})\ZZ)^\times \to \CC^\times,$$
+y es también primitivo. Si $\gcd (f_\chi,f_{\chi'}) = 1$, entonces
+$f_{\chi\chi'} = f_\chi\,f_{\chi'}$.
+
+\subsection{Caracteres de Dirichlet y subcampos de $\QQ (\zeta_m)$}
+
+Bajo la identificación $G = \Gal (\QQ (\zeta_m)/\QQ) \cong (\ZZ/m\ZZ)^\times$,
+un carácter de Dirichlet mód $m$ corresponde a un carácter de Galois
+$\chi\colon \Gal (\QQ (\zeta_m)/\QQ) \to \CC^\times$. Ahora si $H = \ker\chi$,
+podemos considerar el subcampo fijo $K = \QQ (\zeta_m)^H$, y luego $\chi$
+se factoriza como $\chi\colon G/H = \Gal (K/\QQ) \to \CC^\times$. Si $m$ es el
+mínimo posible tal que $K \subseteq \QQ (\zeta_m)$, entonces $f_\chi = m$.
+
+En general, sea $X$ un grupo finito de caracteres de Dirichlet y sea $m$ el
+mínimo común múltiplo de los conductores $f_\chi$ para
+$\chi \in X$. Consideremos el subgrupo de $G = \Gal (\QQ (\zeta_m)/\QQ)$ que
+corresponde a
+$$H = \bigcap_{\chi \in X} \ker \chi$$
+y sea $K = \QQ (\zeta_m)^H$ el subcampo fijo correspondiente. Por la definición
+de $H$, todo elemento $\chi\in X$ se factoriza de manera única por el cociente
+$G/H$, y entonces puede ser visto como un carácter de Galois
+$\chi\colon \Gal (K/\QQ) \to \CC^\times$. Esto nos da la identificación entre
+$X$ y $\widehat{\Gal (K/\QQ)}$, y tenemos entonces un apareamiento
+$$\Gal (K/\QQ) \times X \to \CC^\times.$$
+
+A un subcampo $F\subseteq K$ podemos asociar el subgrupo de $X$ dado por
+$$Y = \Gal (K/F)^\perp = \{ \chi \in X \mid \chi (g) = 1 \text{ para todo } g \in \Gal (K/F) \}.$$
+Notamos que
+$$Y = \Gal (K/F)^\perp \cong (G/\Gal (K/F)){\hat{~}} = \widehat{\Gal (F/\QQ)}.$$
+
+Viceversa, dado un subgrupo $Y \subseteq X$, tomamos el subcampo fijo
+$F = K^{Y^\perp}$. En este caso $Y^\perp \cong \Gal (K/F)$, y tenemos
+$$Y \cong (Y^\perp)^\perp \cong \Gal (K/F)^\perp \cong \widehat{\Gal (F/\QQ)}.$$
+
+De esta manera se obtiene la siguiente versión de la correspondencia de Galois
+para $K/\QQ$.
+
+\begin{teorema}
+  Dado un grupo finito de caracteres de Dirichlet $X$, sea
+  $K \subseteq \QQ (\zeta_n)$ el campo correspondiente. Tenemos una biyección
+  \[ \begin{tikzcd}[column sep=5em]
+    \{ \text{subgrupos }Y \subseteq X \} \ar[shift left=0.25em]{r}{Y \mapsto K^{(Y^\perp)}} &
+    \{ \text{subcampos }F \subseteq K \} \ar[shift left=0.25em]{l}{\Gal (K/F)^\perp \mapsfrom F}
+  \end{tikzcd} \]
+  Esta correspondencia cumple con las siguientes propiedades:
+  \begin{enumerate}
+  \item[a)] Se tiene $F_1 \subseteq F_2$ si y solamente si $Y_1 \subseteq Y_2$.
+
+  \item[b)] Al subgrupo generado por los elementos $Y_1$ e $Y_2$ corresponde
+    el compositum $F_1 F_2$.
+  \end{enumerate}
+
+  En particular, hay una biyección
+  \[ \begin{tikzcd}
+    \{ \text{subgrupos }X \subseteq \widehat{(\ZZ/m\ZZ)^\times} \} \ar[shift left=0.25em]{r} &
+    \{ \text{subcampos }K \subseteq \QQ (\zeta_m) \} \ar[shift left=0.25em]{l}
+  \end{tikzcd} \]
+\end{teorema}
+
+Ahora el teorema de Kronecker--Weber nos dice que para toda extensión abeliana
+$K/\QQ$ existe $m$ tal que $K \subseteq \QQ (\zeta_m)$. El mínimo posible $m$
+con esta propiedad se llama el \textbf{conductor} de $K$. El teorema de arriba
+nos dice cómo a $K$ se asigna un grupo $X$ formado por ciertos caracteres
+de Dirichlet mód $m$.
+
+\subsection{Caracteres de Dirichlet y ramificación}
+
+Ahora si $m = \prod_p p^k$, entonces
+$(\ZZ/m\ZZ)^\times \cong \prod_p (\ZZ/p^k\ZZ)^\times$, y luego
+$\widehat{(\ZZ/m\ZZ)^\times} \cong \prod_p \widehat{(\ZZ/p^k\ZZ)^\times}$.
+De esta manera todo carácter de Dirichlet $\chi$ mód $m$ se descompone como
+$\chi = \prod_p \chi_p$, donde $\chi_p$ es un carácter mód $p^k$. Dado un grupo
+de caracteres de Dirichlet $X$, pongamos
+$$X_p = \{ \chi_p \mid \chi \in X \}.$$
+
+\begin{teorema}
+  Sean $X$ un grupo de caracteres de Dirichlet y $K$ el subcampo correspondiente
+  de $\QQ (\zeta_m)$ (donde $m$ es el mcm de $f_\chi$ para $\chi \in X$).
+  Para un primo racional $p$ el índice de ramificación en $K$ es $e_p = \# X_p$.
+
+  \begin{proof}
+    Escribamos $m = p^k\,m'$, donde $p \nmid m'$. Consideremos el campo
+    $L = K\,\QQ (\zeta_{m'})$. Bajo nuestra correspondencia, a $L$ corresponde
+    el grupo de caracteres de Dirichlet generado por $X$ y
+    $\widehat{(\ZZ/m'\ZZ)^\times}$. Los caracteres mód $m'$ son precisamente los
+    caracteres mód $m$ de conductor $f_\chi$ tal que $p \nmid f_\chi$. Entonces,
+    $L$ corresponde al producto directo
+    $X_p \times \widehat{(\ZZ/m'\ZZ)^\times}$, y por ende $L = F\,\QQ (\zeta_n)$,
+    donde $F$ es el subcampo de $\QQ (\zeta_{p^k})$ que corresponde a $X_p$.
+
+    Tenemos el siguiente diagrama, donde está marcada la ramificación de $p$
+    en las extensiones.
+
+    \[ \begin{tikzcd}[row sep=1em, column sep=1em]
+       & & & L\ar[-]{ddll}[description]{nr}\ar[-]{dd}[description]{nr}\ar[-]{ddrr} \\
+      \QQ (\zeta_{p^k})\ar[-]{dr} \\
+      & F\ar[-]{ddrr} & & K\ar[-]{dd} & & \QQ (\zeta_{m'})\ar[-]{ddll}[description]{nr} \\
+      \\
+       & & & \QQ
+    \end{tikzcd} \]
+
+    Aquí $p$ no se ramifica en la extensión $\QQ (\zeta_{m'})/\QQ$, así que el
+    índice de ramificación de $p$ en $K/\QQ$ es el mismo que en la extensión
+    $L/\QQ$. En la extensión $L/F$ el primo $p$ tampoco se ramifica, así que
+    el índice de ramificación es el mismo que en $F/\QQ$, donde
+    $e = [F:\QQ] = \# X_p$.
+  \end{proof}
+\end{teorema}
+
+Esto nos lleva a la siguiente caracterización de ramificación.
+
+\begin{corolario}
+  Sean $X$ un grupo finito de caracteres de Dirichlet y $K$ el campo
+  correspondiente. Un primo $p$ no se ramifica en $K$ si y solamente si
+  $\chi (p) \ne 0$ para todo $\chi \in X$ (lo que equivale a
+  $p \nmid f_\chi$).
+
+  \begin{proof}
+    Según el teorema, $p$ se ramifica en $K/\QQ$ si y solamente si
+    $\# X_p \ne 1$. Esto es equivalente a tener un carácter no trivial
+    $\chi \in X$ tal que $\chi_p \ne 1$; es decir, $p \mid f_\chi$;
+    es decir, $\chi (p) \ne 0$.
+  \end{proof}
+\end{corolario}
+
+\begin{teorema}
+  \label{thm:caracteres-de-Dirichlet-descomposicion-e-inercia}
+  Sean $X$ un grupo finito de caracteres de Dirichlet y $K$ el campo
+  correspondiente. Para un primo racional $p$ consideremos los subgrupos de $X$
+  dados por
+  \[ Y = \{ \chi\in X \mid \chi (p) \ne 0 \}, \quad
+     Z = \{ \chi\in X\mid \chi (p) = 1 \}. \]
+  En este caso el grupo $Y/Z$ es cíclico y se tiene
+  \[ e_p = [X:Y], \quad
+     f_p = [Y:Z], \quad
+     g_p = \# Z. \]
+  \begin{proof}
+    Recordamos que
+    $$e_p\,f_p\,g_p = [K : \QQ] = \# X.$$
+    Entonces, bastará verificar que $e_p = [X:Y]$ y $f_p = [Y:Z]$, y luego
+    $$g_p = \frac{\# X}{[X:Y]\cdot [Y:Z]} = \# Z.$$
+
+    Sea $F$ el subcampo de $K$ que corresponde al subgrupo
+    $Y \subseteq X$. Entonces, $\QQ \subseteq F \subseteq K$ es la subextensión
+    más grande donde $p$ no se ramifica. Esto significa que $F$ es precisamente
+    el campo de inercia de $p$ (véase
+    \ref{prop:caracterizacion-de-campo-de-descomposicion-e-inercia}).  Tenemos
+    entonces $F = K^{I (\mathfrak{p}|p)} = K^{\Gal (K/F)}$, así que
+    $I (\mathfrak{p}|p) = \Gal (K/F)$. Tenemos entonces
+    $e_p = \# I (\mathfrak{p}|p) = \# \Gal (K/F)$ (véase
+    \ref{thm:campo-de-descomposicion-e-inercia}).
+
+    Recordemos que bajo el apareamiento $\Gal (K/\QQ) \times X \to \CC^\times$
+    se tiene $Y = \Gal (K/F)^\perp$, así que
+    \[ X/Y = \widehat{\Gal (K/\QQ)}/\Gal (K/F)^\perp \cong \widehat{\Gal (K/F)}. \]
+    Entonces, $e_p = \# \Gal (K/F) = \# \widehat{\Gal (K/F)} = [X : Y]$.
+
+    Ahora nos vamos a fijar en la extensión $F/\QQ$ donde $p$ no se ramifica.
+    En este caso el grupo de descomposición correspondiente es cíclico, generado
+    por el automorfismo de Frobenius $\Frob_p \in \Gal (F/\QQ)$, y se tiene
+    $f_p = \# \langle \Frob_p\rangle$.
+
+    Sea $m$ el mcm de los conductores $f_\chi$ para $\chi \in Y$. En este caso
+    $F \subseteq \QQ (\zeta_m)$, donde $p \nmid m$, y $p$ tampoco se ramifica
+    en la extensión $\QQ (\zeta_m)/\QQ$. Recordemos que el grupo de
+    descomposición de $p$ respecto a $\QQ (\zeta_m)/\QQ$ es cíclico, generado
+    por el automorfismo de Frobenius $\zeta_m \mapsto \zeta_m^p$.
+
+    El grupo $\Gal (F/\QQ)$ es el cociente de
+    $\Gal (\zeta_m)/\QQ \cong (\ZZ/m\ZZ)^\times$ por $\Gal (\QQ (\zeta_m)/F)$,
+    y el automorfismo $\Frob_p$ es precisamente la clase lateral de
+    $p \in (\ZZ/m\ZZ)^\times$. Ahora si $\chi \in Y$, entonces se tiene
+    $\Gal (\QQ (\zeta_m)/F) \subseteq \ker \chi$, así que
+    $\chi (\Frob_p) = \chi (p)$. En particular, tenemos
+    $\chi (\Frob_p) = 1$ si y solamente si $\chi (p) = 1$. Esto significa
+    que respecto al apareamiento $\Gal (F/\QQ) \times Y \to \CC^\times$,
+    tenemos precisamente $Z = \langle \Frob_p\rangle^\perp$. Ahora
+    $$Y/Z \cong \widehat{\langle\Frob_p\rangle},$$
+    y luego
+    $[Y:Z] = \#\widehat{\langle\Frob_p\rangle} = \#\widehat{\langle\Frob_p\rangle} = f_p$.
+  \end{proof}
+\end{teorema}
+
+\subsection{Factorización de la función zeta en series L de Dirichlet}
+
+Recordemos que a un carácter de Dirichlet $\chi$ se asocia la serie $L$
+correspondiente
+\[ L (s,\chi) = \sum_{n\ge 1} \frac{\chi(n)}{n^s} =
+   \prod_p \frac{1}{1 - \chi(p)\,p^{-s}}. \]
+Aquí para levantar $\chi$ a una aplicación $\chi\colon \ZZ\to \CC$, vamos a
+usar nuestra convención de que $\chi$ se considera módulo su conductor $f_\chi$.
+
+\begin{teorema}
+  Sean $X$ un grupo finito de caracteres de Dirichlet y $K$ el subcampo de
+  $\QQ (\zeta_m)$ correspondiente. Se tiene
+  $$\zeta_K (s) = \prod_{\chi\in X} L (s,\chi).$$
+
+  \begin{proof}
+    Escribamos la función zeta como el producto de Euler
+    $$\zeta_K (s) = \prod_p \prod_{\mathfrak{p}\mid p} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p})^{-s}}.$$
+    Pongamos
+    $$p\O_K = (\mathfrak{p}_1\cdots\mathfrak{p}_g)^e,$$
+    donde $N_{K/\QQ} (\mathfrak{p}_i) = p^f$. El factor de Euler que corresponde
+    a $p$ será entonces
+    $$\prod_{1 \le i \le g} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p}_i)^{-s}} = \prod_p \frac{1}{(1 - p^{-f \,s})^g}.$$
+
+    Por otra parte, en el producto $\prod_{\chi\in X} L (s,\chi)$ el factor que
+    corresponde a $p$ será
+    \[ \prod_{\chi\in X} \frac{1}{1 - \chi (p)\,p^{-s}} =
+       \prod_{\chi\in Y} \frac{1}{1 - \chi (p)\,p^{-s}}, \]
+    donde
+    $$Y = \{ \chi \in X \mid \chi (p) \ne 0 \}.$$
+    Hemos pasado al producto sobre $\chi \in Y$ porque los términos con
+    $\chi (p) = 0$ no contribuyen nada en el producto. Recordemos
+    de \ref{thm:caracteres-de-Dirichlet-descomposicion-e-inercia} que para
+    el subgrupo
+    $$Z = \{ \chi \in X \mid \chi (p) = 1 \}$$
+    el cociente $Y/Z$ es cíclico de orden $f$ y $\# Z = g$. Entonces,
+    para los $\chi$ que están en una clase lateral de $Y$ por $Z$ los valores
+    $\chi (p)$ son precisamente las raíces $f$-ésimas de la unidad, y cada
+    clase lateral contribuye
+    $$\prod_{0 \le k \le f-1} \frac{1}{1 - \zeta_f^k\,p^{-s}} = \frac{1}{1 - p^{-fs}}.$$
+    Esto nos dice que
+    \[ \prod_{\chi\in Y} \frac{1}{1 - \chi (p)\,p^{-s}} =
+       \frac{1}{(1 - \chi (p)\,p^{-fs})^g}. \qedhere \]
+  \end{proof}
+\end{teorema}
+
+Como consecuencia, se obtiene el siguiente resultado que es el punto clave en
+la prueba del teorema de Dirichlet sobre primos en progresiones aritméticas
+(véase el apéndice~\ref{ap:Dirichlet}).
+
+\begin{corolario}
+  \label{cor:L(1,chi)-ne-0}
+  Para $\chi \ne 1$ se tiene $L (1,\chi) \ne 0$.
+
+  \begin{proof}
+    Consideremos el grupo de caracteres de Dirichlet $X = \langle\chi\rangle$
+    y el campo correspondiente $K$. Sea $n = \# X$. El teorema anterior nos da
+    \[ \zeta_K (s) = \prod_{0 \le k \le n-1} L (s,\chi^k) =
+       \zeta (s) \, \prod_{1 \le k \le n-1} L (s,\chi^k). \]
+    Sabemos que las funciones $\zeta_K (s)$ y $\zeta (s)$ tienen un polo simple
+    en $s = 1$, y esto implica que ninguno de los factores $L (s,\chi^k)$
+    se anulan en $s = 1$.
+  \end{proof}
+\end{corolario}
+
+\begin{ejemplo}
+  \label{ej:sqrt-2-sqrt-3-zeta-descomp}
+  Consideremos el campo $K = \QQ (\sqrt{2},\sqrt{3})$. La extensión $K/\QQ$
+  es abeliana, y para descomponer la función $\zeta_K (s)$ en series de
+  Dirichlet, primero tenemos que encajar $K$ en un campo ciclotómico
+  $\QQ (\zeta_m)$. El $m$ más pequeño posible es $24$. Notamos que
+  $\sqrt{2} = \zeta_8 + \zeta_8^{-1} \in \QQ (\zeta_8)$ y
+  $\sqrt{-3} \in \QQ (\zeta_3)$, así que
+  $\sqrt{3} = i\sqrt{-3} \in \QQ (\zeta_{12})$.
+
+  Cada uno de los campos $F_1 = \QQ (\sqrt{2})$ y $F_2 = \QQ (\sqrt{3})$ debe
+  corresponder a cierto carácter cuadrático de Dirichlet. Para los campos
+  cuadráticos la respuesta viene dada por el
+  ejercicio~\ref{ejerc:caracter-para-campo-cuadratico}. Tenemos
+  \[ \chi_1\colon (\ZZ/8\ZZ)^\times \to \CC^\times, \quad
+     \chi_2\colon (\ZZ/12\ZZ)^\times \to \CC^\times, \]
+  donde
+  \[ \chi_1\colon 1 \mapsto +1, \quad
+     3\mapsto -1, \quad
+     5\mapsto -1, \quad
+     7\mapsto +1 \]
+  y
+  \[ \chi_2\colon 1 \mapsto +1, \quad
+     5\mapsto -1, \quad
+     7\mapsto -1, \quad
+     11\mapsto +1. \]
+  El grupo de caracteres que corresponde a $K = F_1 F_2$ será
+  $$X = \{ 1, \chi_1, \chi_2, \chi_1\chi_2 \}.$$
+  Entonces,
+  \[ \zeta_K (s) = \zeta (s)\,\zeta (s,\chi_1)\,\zeta (s,\chi_2)\,\zeta (s,\chi_1)\,\zeta (s,\chi_1\chi_2). \qedhere \]
+\end{ejemplo}
+
+\begin{ejemplo}
+  \label{ej:Q-zeta-7-real-zeta-descomp}
+  En el campo ciclotómico $\QQ (\zeta_7)$ consideremos el subcampo cúbico real
+  $K = \QQ (\zeta_7 + \zeta_7^{-1})$. Este es el subcampo fijo por el único
+  subgrupo de índice $2$
+  $$H = \{ 1, 2, 4 \} \subset (\ZZ/7\ZZ)^\times.$$
+  En términos de caracteres de Dirichlet, a $K$ debe corresponder un grupo
+  $X$ formado por ciertos caracteres mód $7$. En este caso el grupo de
+  caracteres $\widehat{(\ZZ/7\ZZ)^\times}$ contiene único subgrupo de índice $2$,
+  así que basta fijarnos en cualquier carácter cúbico. Por ejemplo, $3$ es un
+  generador de $(\ZZ/7\ZZ)^\times$, y lo podemos mandar a $\zeta_3$. Esto
+  determina de manera única otros valores:
+  \[ \chi\colon 1\mapsto 1, \quad
+  2 \mapsto \zeta_3^2, \quad
+  3 \mapsto \zeta_3, \quad
+  4 \mapsto \zeta_3, \quad
+  5 \mapsto \zeta_3^2, \quad
+  6 \mapsto 1. \]
+  Entonces,
+  $$X = \{ 1, \chi, \chi^2 \},$$
+  y la descomposición es
+  \[ \zeta_K (s) = \zeta (s) \, L (s,\chi) \, L (s,\chi^2). \qedhere \]
+\end{ejemplo}
+
+\begin{comentario}
+  Todo lo que hemos hecho en esta sección funciona para extensiones abelianas
+  $K/\QQ$. Para factorizar la función $\zeta_K (s)$ en el caso no abeliano,
+  Artin introdujo funciones $L (s,\rho)$, donde $\rho$ es una representación
+  lineal del grupo $\Gal (K/\QQ)$; es decir, un homomorfismo
+  $\rho\colon \Gal (K/\QQ) \to \GL_n (\CC)$. Aquí $n$ es la dimensión de
+  la representación. El resultado general es la factorización
+  $$\zeta_K (s) = \prod_\rho L (s,\rho),$$
+  donde el producto es sobre todas las representaciones irreducibles del grupo
+  de Galois.
+
+  Cuando $G = \Gal (K/\QQ)$ es un grupo abeliano, un resultado básico de
+  la teoría de representación (véase por ejemplo \cite{Serre-RLGF}) nos dice que
+  todas las representaciones irreducibles de $G$ son unidimensionales, y
+  entonces corresponden a los caracteres
+  $\chi\colon G \to \GL_1 (\CC) = \CC^\times$. En este caso las funciones $L$
+  de Artin correspondientes serán las series $L$ de Dirichlet.
+
+  El caso no abeliano es más complicado y de este se origina una gran parte de
+  las matemáticas contemporáneas.
+\end{comentario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Perspectiva: Prolongación analítica}
 
-**TODO** STATE WITHOUT PROOFS FOR $\zeta (s)$, $\zeta_K (s)$, $L (s,\chi)$
+En muchos casos una función de variable compleja definida por una serie sobre
+el dominio de convergencia (como la función $\zeta_K (s)$ que al principio se
+define para $\Re s > 1$) puede ser extendida a una función meromorfa sobre todo
+$s \in \CC$. Este es el caso con la función zeta de Dedekind.
+
+\begin{teorema}
+  La función zeta de Dedekind admite prolongación analítica a todo plano
+  complejo con el único polo en $s = 1$ de residuo dado por la fórmula del
+  número de clases. Se cumple la ecuación funcional
+  $$\zeta_K (1-s) = A(s)\,\zeta_K (s),$$
+  donde
+  $$A (s) = |\Delta_K|^{s - 1/2}\,\left(\cos\frac{\pi s}{2}\right)^{r_1+r_2}\,\left(\sin\frac{\pi s}{2}\right)^{r_2}\,\left(2\,(2\pi)^{-s}\,\Gamma (s)\right)^n.$$
+
+  \begin{proof}
+    Véase \cite[\S VII.5]{Neukirch-ANT}.
+  \end{proof}
+\end{teorema}
+
+Aquí
+$$\Gamma (s) = \int_0^\infty e^{-t}\,t^{s-1}\,dt, \quad \Re s > 0$$
+es la \textbf{función Gamma}. En particular, $\Gamma (k) = (k-1)!$ para $k = 1,2,3,\ldots$
+
+Tomando $K = \QQ$, se obtiene la ecuación funcional para la función zeta de
+Riemann
+$$\zeta (1-s) = \left(\cos\frac{\pi s}{2}\right)\,2\,(2\pi)^{-s}\,\Gamma (s)\,\zeta (s).$$
+
+Sustituyendo $s = 1$ en la ecuación funcional, notamos que el término
+$\left(\cos\frac{\pi s}{2}\right)^{r_1+r_2}$ tiene cero de orden $r_1 + r_2$,
+mientras que $\zeta_K (s)$ tiene polo de orden $1$. Esto nos permite concluir
+que $\zeta_K (s)$ tiene cero en $s = 0$ de orden $r_1 + r_2 - 1$. Curiosamente,
+este es también el rango del grupo de unidades $\O_K^\times$. Dejo al lector
+calcular que el residuo correspondiente será
+$$\zeta_K^* (0) = \lim_{s \to 0} s^{-(r_1 + r_2 - 1)}\,\zeta_K (s) = -\frac{\Reg_K\,h_k}{\# \mu_K}.$$
+En particular,
+$$\zeta (0) = -\frac{1}{2}.$$
+
+La ecuación funcional nos da los \textbf{ceros triviales} de la función
+$\zeta_K (s)$ que aparecen para $s = 0,-1,-2,-3,\ldots$ gracias a los términos
+$\cos \frac{\pi s}{2}$ y $\sin \frac{\pi s}{2}$. Aquí están los ordenes de estos
+ceros.
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{rcccccccccccc}
+    \hline
+    $s\colon$ & $0$ & $-1$ & $-2$ & $-3$ & $-4$ & $-5$ & $-6$ & $-7$ & $-8$ & $-9$ & $-10$ & $\cdots$ \\
+    \hline
+    $\text{ord}\colon$ & $r_1 + r_2 - 1$ & $r_2$ & $r_1 + r_2$ & $r_2$ & $r_1 + r_2$ & $r_2$ & $r_1 + r_2$ & $r_2$ & $r_1 + r_2$ & $r_2$ & $r_1 + r_2$ & $\cdots$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+La \textbf{hipótesis de Riemann extendida} afirma que todos los ceros
+\emph{no triviales} de $\zeta_K (s)$ tienen $\Re s = \frac{1}{2}$. El mismo
+Riemann formuló su conjetura para el caso de $K = \QQ$, y este es uno de los
+problemas abiertos más importantes en matemáticas.
+
+\vspace{1em}
+
+Las series L de Dirichlet también admiten prolongación a todo el plano complejo.
+
+\begin{teorema}
+  Sea $\chi$ un carácter de Dirichlet primitivo mód $m$. La serie $L (s,\chi)$
+  admite prolongación analítica a todo plano complejo que satisface la ecuación
+  funcional
+  $$L (1-s,\chi) = A(s) \, L (s,\overline{\chi}),$$
+  donde
+  $$A (s) = \frac{m^{s-1}\,\Gamma (s)}{(2\pi)^s} \, \left(e^{-\pi i s/2} + \chi (-1)\,e^{\pi i s/2}\right)\,g (\chi)$$
+  y
+  $$g (\chi) = \sum_{1 \le a \le m-1} \chi (a) \, \zeta_m^a.$$
+
+  \begin{proof}
+    Véase \cite[\S VII.2]{Neukirch-ANT} o \cite[Chapter~12]{Apostol-analytic}.
+  \end{proof}
+\end{teorema}
+
+Más adelante veremos que $g (\chi) \ne 0$. Además, de la fórmula del producto de
+Euler se ve que $L (s,\overline{\chi}) \ne 0$ para $s > 1$. Entonces, los ceros
+triviales de $L (s,\chi)$ en $s = 0,-1,-2,-3,\ldots$ vienen del término
+\[ e^{-\pi i s/2} + \chi (-1)\,e^{\pi i s/2} = \begin{cases}
+  2 \, \cos \left(\frac{\pi s}{2}\right), & \text{si }\chi (-1) = +1,\\
+  -2i \, \sin \left(\frac{\pi s}{2}\right), & \text{si }\chi (-1) = -1.
+\end{cases} \]
+Podemos concluir que si $\chi (-1) = +1$, entonces $L (s,\chi)$ tiene ceros
+simples en $s = 0, -2, -4, -6, \ldots$, y si $\chi (-1) = -1$, entonces
+$L (s,\chi)$ tiene ceros simples en $s = -1, -3, -5, \ldots$
+La \textbf{hipótesis de Riemann generalizada} afirma que los ceros
+\emph{no triviales} de $L (s,\chi)$ tienen $\Re s = \frac{1}{2}$.
+
+Nuestro próximo objetivo será calcular los valores $L (s,\chi)$ para
+$s = 0,-1,-2,-3,\ldots$ de manera explícita.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Perspectiva: Valores especiales}
 
-**TODO**
-stuff like
-the case of $\zeta (s)$ and $B_n$ (with proofs),
-$\zeta (2k+1)$ (no proofs :-)
-Siegel--Klingen (without proof),
-calculations for the quadratic case via $L (s,\chi)$ and $B_{n,\chi}$ (with proofs),
-etc.
+Los valores de la función zeta $\zeta_K (s)$ en enteros $s = n \in \ZZ$ se
+conocen como los \textbf{valores especiales}. Como vimos, la función zeta suele
+tener ceros en $s = n$ negativos, así que normalmente por el valor especial se
+entiende más bien el residuo correspondiente
+$$\zeta_K^* (n) = \lim_{s \to n} (s-n)^{-d_n}\,\zeta_K (s),$$
+donde $d_n$ denota el orden de cero en $s = n$ (para el polo en $s = 1$ tenemos
+$d_1 = -1$).
+
+Un ejemplo primordial de valores especiales es
+\[ \zeta_K^* (0) = \lim_{s \to 0} s^{-(r_1 + r_2 - 1)}\,\zeta_K (s) = -\frac{\Reg_K\,h_k}{\# \mu_K}
+   \longleftrightarrow
+   \zeta_K^* (1) = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}}. \]
+
+Hay varias identidades (en gran parte conjeturales) que generalizan estas
+fórmulas a todo $s = n \in \ZZ$. La idea general es definir
+\emph{ciertos invariantes algebraicos} análogos a $\Cl (K)$ y $\O_K^\times$;
+estos deben ser algunos grupos abelianos finitamente generados. De sus partes de
+torsión vendrá algún número racional, similar a $\frac{h_K}{\# \mu_K}$.
+Por otra parte, debería haber ciertos «reguladores superiores» $\Reg_{K,n}$
+responsables por la parte trascendente del valor especial. Estos reguladores
+superiores también serán covolúmenes de algunos retículos, pero son más
+difíciles de definir.
+
+Las construcciones técnicas necesarias para escribir estas fórmulas para los
+valores especiales nos llevarían demasiado lejos. El lector interesado en los
+resultados y conjeturas contemporáneos acerca de los valores especiales puede
+empezar por el artículo de Kontsevich y Zagier sobre períodos
+\cite{Kontsevich-Zagier}, y también ver el artículo de Nekov\'a\v{r} sobre las
+conjeturas de Beilinson en \cite{Motives-I}, y el libro
+\cite{Bloch-Kato-for-riemann-zeta} sobre las conjeturas de Bloch--Kato para la
+función zeta de Riemann. Aquí me gustaría explicar un resultado clásico.
+
+\begin{teorema}[Siegel--Klingen]
+  Para un campo totalmente real $K/\QQ$ los valores $\zeta_n (-n)$ para
+  $n = 0,1,2,\ldots$ son números racionales.
+\end{teorema}
+
+Aquí se trata literalmente de valores $\zeta_K (-n)$, no de residuos
+$\zeta_K^* (-n)$. Hemos calculado arriba los ordenes de ceros triviales
+$\zeta_K (-n)$, y estos son $r_2$ o $r_1 + r_2$, dependiendo de la paridad de
+$n$. En particular, si $K$ no es totalmente real y $r_2 > 0$, entonces
+$\zeta_K (-n) = 0$ para todo $n \le 0$, y el teorema no es muy interesante.
+Por esto la hipótesis dice que $K/\QQ$ es totalmente real.
+
+Para la prueba completa del teorema véase \cite[\S VII.9]{Neukirch-ANT}.
+A continuación veremos una prueba para $K/\QQ$ una extensión abeliana. En este
+caso, como ya vimos, se tiene $\zeta_K (s) = \prod_\chi L (s,\chi)$ para ciertos
+caracteres de Dirichlet $\chi$, y bastaría saber calcular los valores de
+$L (s,\chi)$ en $s = n \le 0$.  Estos cálculos son muy clásicos.
+
+\subsection{Números y polinomios de Bernoulli}
+
+Hay diferentes definiciones equivalentes de los números y polinomios de
+Bernoulli. Nos conviene usar las funciones generatrices exponenciales.
+
+\begin{definicion}
+  Los \textbf{números de Bernoulli} $B_k \in \QQ$ se definen mediante
+  $$\frac{t\,e^t}{e^t - 1} = \sum_{k\ge 0} \frac{B_k}{k!}\,t^k,$$
+  y los \textbf{polinomios de Bernoulli} $B_k (x) \in \QQ [x]$ se definen
+  mediante
+  $$\frac{t\,e^{tx}}{e^t-1} = \sum_{k \ge 0} B_k (x)\,\frac{t^k}{k!}.$$
+\end{definicion}
+
+No es difícil verificar que la función generatriz para $B_k$ es equivalente a
+la recurrencia
+$$\sum_{0 \le i \le k} {k+1 \choose i}\,B_i = k+1.$$
+
+\begin{proposicion}
+  Los números y polinomios de Bernoulli cumplen las siguientes propiedades.
+
+  \begin{enumerate}
+  \item[a)] $B_k (1) = B_k$.
+
+  \item[b)] $B_k (x+1) - B_k (x) = k\,x^{k-1}$.
+
+    En particular, para $x = 0$ se obtiene $B_k (0) = B_k$ para $k \ne 1$.
+
+  \item[c)] $B_k (1-x) = (-1)^k\,B_k (x)$.
+
+    En particular, para $x = 0$, se obtiene que $B_k = 0$ para $k \ge 3$ impar.
+
+  \item[d)] Para todo $k \ge 1$ se tiene
+    $B_k' (x) = k\,B_{k-1} (x)$ y $\int_0^1 B_k (x)\,dx = 0$.
+  \end{enumerate}
+
+  \begin{proof}
+    La propiedad a) se sigue de las funciones generatrices para $B_k$ y $B_k (x)$,
+    y la propiedad b) se sigue de la identidad
+    \[ \sum_{k\ge 0} (B_k (x+1) - B_k (x))\,\frac{t^k}{k!} =
+       \frac{t\,e^{(x+1)\,t}}{e^t-1} - \frac{t\,e^{t\,x}}{e^t-1} =
+       t\,e^{t\,x} = \sum_{k \ge 0} \frac{x^k}{k!}\,t^{k+1}. \]
+    De manera similar, c) se sigue de
+    \[ \sum_{k\ge 0} B_k (1-x)\,\frac{t^k}{k!} =
+       \frac{t\,e^{(1-x)\,t}}{e^t - 1} =
+       \frac{(-t)\,e^{x\,(-t)}}{e^{-t} - 1} =
+       \sum_{k\ge 0} (-1)^k\,B_k (x)\,\frac{t^k}{k!}. \]
+    En fin, para d), tomando as derivadas formales de la identidad
+    $\frac{t\,e^{tx}}{e^t - 1} = \sum_{k \ge 0} B_k (x) \, \frac{t^k}{k!}$
+    respecto a $x$, se obtiene
+    \[ \frac{\partial}{\partial x} \left(\frac{t\,e^{tx}}{e^t - 1}\right) =
+       \frac{t\cdot t\,e^{tx}}{e^t - 1} =
+       t\,\sum_{k \ge 0} B_k (x) \, \frac{t^k}{k!} =
+       \sum_{k \ge 1} B_{k-1} (x) \, \frac{t^k}{(k-1)!} =
+       \sum_{k \ge 0} B_k' (x) \, \frac{t^k}{k!}. \]
+    Se tiene $\int B_k (x)\,dx = \frac{1}{k+1}\,B_{k+1} (x) + C$, donde $B_{k+1}
+    (0) = B_{k+1} (1)$, y luego $\int_0^1 B_k (x)\,dx = 0$.
+  \end{proof}
+\end{proposicion}
+
+De hecho, la última propiedad \emph{caracteriza} los polinomios de Bernoulli:
+estos se definen de manera única por las condiciones
+\[ B_0 (x) = 1, \quad
+   B_k' (x) = k\,B_{k-1} (x), \quad
+   \int_0^1 B_k (x) \, dx = 0\text{ para }k \ge 1. \]
+(La identidad $B_k' (x) = k\,B_{k-1} (x)$ define $B_k (x)$ salvo el término
+constante que luego se recupera de la condición $\int_0^1 B_k (x) \, dx = 0$.)
+
+\begin{figure}
+  \begin{center}
+    \renewcommand{\arraystretch}{1.75}
+    \begin{tabular}{clc}
+      \hline
+      $k$ & $B_k (x)$ & $B_k$ \\
+      \hline
+      $0$ & $1$ & $1$ \\
+      \hline
+      $1$ & $x - \frac{1}{2}$ & $\frac{1}{2}$ \\
+      \hline
+      $2$ & $x^2 - x + \frac{1}{6}$ & $\frac{1}{6}$ \\
+      \hline
+      $3$ & $x^3 - \frac{3}{2}\,x^2 + \frac{1}{2}\,x$ & $0$ \\
+      \hline
+      $4$ & $x^4 - 2\,x^3 + x^2 - \frac{1}{30}$ & $-\frac{1}{30}$ \\
+      \hline
+      $5$ & $x^5 - \frac{5}{2}\,x^4 + \frac{5}{3}\,x^3 - \frac{1}{6}\,x$ & $0$ \\
+      \hline
+      $6$ & $x^6 - 3\,x^5 + \frac{5}{2}\,x^4 - \frac{1}{2}\,x^2 + \frac{1}{42}$ & $\frac{1}{42}$ \\
+      \hline
+      $7$ & $x^7 - \frac{7}{2}\,x^6 + \frac{7}{2}\,x^5 - \frac{7}{6}\,x^3 + \frac{1}{6}\,x$ & $0$ \\
+      \hline
+      $8$ & $x^8 - 4\,x^7 + \frac{14}{3}\,x^6 - \frac{7}{3}\,x^4 + \frac{2}{3}\,x^2 - \frac{1}{30}$ & $-\frac{1}{30}$ \\
+      \hline
+      $9$ & $x^9 - \frac{9}{2}\,x^8 + 6\,x^7 - \frac{21}{5}\,x^5 + 2\,x^3 - \frac{3}{10}\,x$ & $0$ \\
+      \hline
+      $10$ & $x^{10} - 5\,x^9 + \frac{15}{2}\,x^8 - 7\,x^6 + 5\,x^4 - \frac{3}{2}\,x^2 + \frac{5}{66}$ & $\frac{5}{66}$ \\
+      \hline
+      $11$ & $x^{11} - \frac{11}{2}\,x^{10} + \frac{55}{6}\,x^9 - 11\,x^7 + 11\,x^5 - \frac{11}{2}\,x^3 + \frac{5}{6}\,x$ & $0$ \\
+      \hline
+      $12$ & $x^{12} - 6\,x^{11} + 11\,x^{10} - \frac{33}{2}\,x^8 + 22\,x^6 - \frac{33}{2}\,x^4 + 5\,x^2 - \frac{691}{2730}$ & $-\frac{691}{2730}$ \\
+      \hline
+      $13$ & $x^{13} - \frac{13}{2}\,x^{12} + 13\,x^{11} - \frac{143}{6}\,x^9 + \frac{286}{7}\,x^7 - \frac{429}{10}\,x^5 + \frac{65}{3}\,x^3 - \frac{691}{210}\,x$ & $0$ \\
+      \hline
+      $14$ & $x^{14} - 7\,x^{13} + \frac{91}{6}\,x^{12} - \frac{1001}{30}\,x^{10} + \frac{143}{2}\,x^8 - \frac{1001}{10}\,x^6 + \frac{455}{6}\,x^4 - \frac{691}{30}\,x^2 + \frac{7}{6}$ & $\frac{7}{6}$ \\
+      \hline
+      $15$ & $x^{15} - \frac{15}{2}\,x^{14} + \frac{35}{2}\,x^{13} - \frac{91}{2}\,x^{11} + \frac{715}{6}\,x^9 - \frac{429}{2}\,x^7 + \frac{455}{2}\,x^5 - \frac{691}{6}\,x^3 + \frac{35}{2}\,x$ & $0$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \caption{Polinomios y números de Bernoulli}
+\end{figure}
+
+A continuación nos servirá el siguiente caso particular de series de Fourier.
+Sea $f\colon \mathbb{R} \to \mathbb{R}$ una función continua por trozos y
+periódica tal que $f (x+1) = f (x)$. Luego, para todo $x_0\in \mathbb{R}$ donde
+$f$ es continua y las derivadas izquierda y derecha de $f$ existen, se cumple
+\[ f (x_0) = \sum_{n\in\mathbb{Z}} \widehat{f} (n) \, e^{2\pi i n x_0},
+   \quad\text{donde }
+   \widehat{f} (n) = \int_0^1 e^{-2\pi i n x} \, f(x) \, dx. \]
+
+\begin{proposicion}
+  Tenemos la serie de Fourier
+  \begin{equation}
+    \label{eq:serie-de-Fourier-polinomios-de-Bernoulli}
+    B_k (x - \lfloor x\rfloor) = -\frac{k!}{(2\pi i)^k}\sum_{\substack{n\in \mathbb{Z} \\ n \ne 0}} \frac{e^{2\pi i n x}}{n^k}.
+  \end{equation}
+
+  \begin{proof}
+    Necesitamos calcular los coeficientes de Fourier de la función
+    $f (x) = B_k (x - \lfloor x\rfloor)$. Para $n = 0$ tenemos
+    $$\widehat{f} (0) = \int_0^1 B_k (x)\,dx = 0.$$
+    Para $n \ne 0$ y $k = 1$ usamos la integración por partes
+    ($\int_a^b f'(x)\,g(x)\,dx = \left[f(x)\,g(x)\right]_a^b - \int_a^b f(x) \, g'(x)\,dx$):
+    \begin{align*}
+      \int_0^1 e^{-2\pi i n x}\,\left(x - \frac{1}{2}\right)\,dx & = -\frac{1}{2\pi i n} \int_0^1 \left(e^{-2\pi i n x}\right)' \, \left(x - \frac{1}{2}\right)\,dx \\
+      & = -\frac{1}{2\pi i n} \, \left( \left[e^{-2\pi i n x}\,\left(x - \frac{1}{2}\right)\right]^1_0 - \underbrace{\int_0^1 e^{-2\pi i n x}\,dx}_{=0} \right) = -\frac{1}{2\pi i n}.
+    \end{align*}
+
+    Para $k > 1$ la integración por partes junto con la identidad
+    $B_k' (x) = k\,B_{k-1} (x)$ nos da
+    \begin{align*}
+      \widehat{f} (n) & = \int_0^1 e^{-2\pi i n x} \, B_k (x)\,dx \\
+      & = -\frac{1}{2\pi i n}\,\int_0^1 (e^{-2\pi i n x})' \, B_k (x)\,dx \\
+      & = -\frac{1}{2\pi i n}\,\left(\left[e^{-2\pi i n x}\,B_k (x)\right]_0^1 - k\,\int_0^1 e^{-2\pi i n x} \, B_{k-1} (x)\,dx\right) \\
+      & = \frac{k}{2\pi i n} \, \int_0^1 e^{-2\pi i n x}\,B_{k-1} (x)\,dx \\
+      & = \frac{k\,(k-1)}{(2\pi i n)^2} \int_0^1 e^{-2\pi i n x}\,B_{k-2} (x)\,dx \\
+      & = \cdots \\
+      & = \frac{k!}{(2\pi i n)^{k-1}} \int_0^1 e^{-2\pi i n x}\,\left(x - \frac{1}{2}\right)\,dx \\
+      & = \frac{k!}{(2\pi i n)^{k-1}} \cdot \left(-\frac{1}{2\pi i n}\right) = -\frac{k!}{(2\pi i n)^k}. \qedhere
+    \end{align*}
+  \end{proof}
+\end{proposicion}
+
+La serie de Fourier \eqref{eq:serie-de-Fourier-polinomios-de-Bernoulli} nos
+lleva al siguiente famoso resultado.
+
+\begin{teorema}[Euler]
+  Para todo $k\ge 1$ se tiene
+  $$\zeta (2k) = (-1)^{k+1} \, B_{2k}\,\frac{2^{2k-1}}{(2k)!}\,\pi^{2k}.$$
+
+  \begin{proof}
+    Sustituyendo $x = 0$ en \eqref{eq:serie-de-Fourier-polinomios-de-Bernoulli}
+    y $2k$ en lugar de $k$, se obtiene
+    \[ B_{2k} = B_{2k} (0) =
+       -\frac{(2k)!}{(-1)^k\,(2\pi)^{2k}} \, 2\,\sum_{n \ge 1} \frac{1}{n^{2k}} =
+       (-1)^{k+1}\frac{(2k)!}{2^{2k-1}\,\pi^{2k}}\,\zeta (2k). \qedhere \]
+    \end{proof}
+\end{teorema}
+
+\begin{ejemplo}
+  Los primeros valores $\zeta (2k)$ son
+  \begin{align*}
+    \zeta (2) & = \frac{\pi^2}{6} \approx 1.644934\ldots, \\
+    \zeta (4) & = \frac{\pi^4}{90} \approx 1.082323\ldots, \\
+    \zeta (6) & = \frac{\pi^6}{945}  \approx 1.017343\ldots, \\
+    \zeta (8) & = \frac{\pi^8}{9450} \approx 1.004077\ldots, \\
+    \zeta (10) & = \frac{\pi^{10}}{93\,555} \approx 1.000994\ldots, \\
+    \zeta (12) & = \frac{691\,\pi^{12}}{638\,512\,875} \approx 1.000246\ldots \qedhere
+  \end{align*}
+\end{ejemplo}
+
+\begin{comentario}
+  Los valores $\zeta (3), \zeta (5), \zeta (7), \ldots$ son más misteriosos.
+  \emph{Al parecer}, son números trascendentes. Por supuesto, los números
+  $$\zeta (2k) = (-1)^{k+1} \, B_{2k}\,\frac{2^{2k-1}}{(2k)!}\,\pi^{2k}$$
+  son también trascendentes, ya que $\pi$ es trascendente. Los valores $\zeta
+  (2k+1)$ deberían de ser trascendentes por alguna razón más sofisticada, y se
+  supone que entre $\zeta (2k+1)$ distintos no hay ninguna relación algebraica.
+  Sin embargo, todavía no hay demostraciones ni siquiera de que los $\zeta
+  (2k+1)$ sean irracionales. En 1977 el matemático francés Roger Apéry demostró
+  que el número
+  $$\zeta (3) \approx 1.20205690315959428539973816\ldots$$
+  es irracional. La tumba de Apéry en París lleva la inscripción
+  \begin{center}
+    \noindent\textsc{Roger APÉRY}
+    \noindent\textsc{1916--1994}
+
+    \vspace{0.7em}
+
+    \noindent\rule{1cm}{0.4mm}
+
+    \vspace{1em}
+
+    \noindent$1 + \frac{1}{8} + \frac{1}{27} + \frac{1}{64} + \cdots \ne \frac{p}{q}$
+  \end{center}
+  \noindent Para más información sobre el teorema de Apéry, véase el artículo
+  \cite{van-der-Poorten-1978}.
+  Los métodos de Apéry no se generalizan para demostrar que $\zeta (5)$ es
+  irracional. Hay pocos resultados en esta dirección. Rivoal demostró en 2000
+  que entre los números $\zeta (3), \zeta (7), \zeta (9), \ldots$ hay una
+  infinidad de irracionales \cite{Rivoal-2000}, mientras que Zudilin demostró
+  que por lo menos un número entre $\zeta(5)$, $\zeta(7)$, $\zeta(9)$ y
+  $\zeta(11)$ es irracional \cite{Zudilin-2004}.
+\end{comentario}
+
+\begin{corolario}
+  $(-1)^{k+1}\,B_{2k} > 0$ para $k \ge 1$. Es decir, $B_{2k} \ne 0$, y los
+  signos son alternantes.
+
+  \begin{proof}
+    Se sigue inmediatamente de la fórmula
+    $(-1)^{k+1}\, B_{2k} = \frac{(2k)!}{2^{2k-1}\,\pi^{2k}} \, \zeta (2k)$.
+    Esto también puede ser deducido directamente de la definición de $B_{2k}$,
+    pero la fórmula para $\zeta (2k)$ nos da mejor explicación.
+  \end{proof}
+\end{corolario}
+
+\begin{corolario}
+  Se tiene $|B_{2k+2}| > |B_{2k}|$ para $k \ge 3$.
+
+  \begin{proof}
+    Basta aplicar la fórmula
+    $$|B_{2k}| = \frac{2\cdot (2k)!}{(2\pi)^{2k}}\,\zeta (2k),$$
+    y notar que la función $\zeta (s+c)/\zeta (s)$ crece para todo $c > 0$
+    (por ejemplo, calcule que $\frac{d}{ds} \log \zeta (s+c)/\zeta (s) > 0$,
+    usando la fórmula del producto).
+  \end{proof}
+\end{corolario}
+
+\begin{corolario}
+  Para $n = 0,1,2,3,\ldots$ se tiene
+  $$\zeta (-n) = -\frac{B_{n+1}}{n+1}.$$
+
+  \begin{proof}
+    De la ecuación funcional se ve que $\zeta (-2k) = 0$ (se anula
+    $\sin (-\pi k/2)$). Esto coincide con el hecho de que $B_n = 0$ para $n > 1$
+    impar. Por otra parte, para $s = -(2k+1)$ impar la fórmula de Euler se
+    simplifica a $\zeta (-(2k+1)) = -\frac{B_{2k+2}}{2k+2}$. En fin, de la
+    ecuación funcional se deduce que $\zeta (0) = -\frac{1}{2} = -B_1$.
+  \end{proof}
+\end{corolario}
+
+\subsection{Números de Bernoulli torcidos por un carácter de Dirichlet}
+
+Recordemos que la función zeta de Riemann es un caso particular de las series L
+de Dirichlet $L (s,\chi)$ cuando $\chi = 1$. A continuación nos gustaría
+generalizar la fórmula $\zeta (-n) = -\frac{B_{n+1}}{n+1}$ a
+$L (-n,\chi) = -\frac{B_{\chi,n+1}}{n+1}$, donde $B_{\chi,n+1}$ son números
+racionales que generalizan los números de Bernoulli.
+
+\begin{definicion}
+  Dado un carácter de Dirichlet $\chi$ mód $m$, los
+  \textbf{números de Bernoulli generalizados} («torcidos» por $\chi$) se definen
+  mediante la función generatriz
+  $$\sum_{k\ge 0} B_{k,\chi}\,\frac{t^k}{k!} = \sum_a \frac{\chi (a)\,t\,e^{at}}{e^{mt} - 1},$$
+  donde la suma es sobre $1 \le a \le m-1$. A partir de ahora estas sumas serán
+  denotadas simplemente por $\sum\limits_a$.
+\end{definicion}
+
+Notamos que $B_{k,\chi} \in \QQ (\zeta_m)$.
+
+\begin{proposicion}
+  \begin{enumerate}
+  \item[a)] Para $\chi \ne 1$ se tiene $B_{k,\chi} = 0$ si
+    $\chi (-1) = (-1)^{k+1}$.
+
+  \item[b)] Los números de Bernoulli $B_{k,\chi}$ están relacionados con los
+    polinomios de Bernoulli mediante la fórmula
+    $$B_{k,\chi} = m^{k-1} \, \sum_a \chi (a)\,B_k (a/m).$$
+  \end{enumerate}
+
+  \begin{proof}
+    Para la propiedad a), basta notar que para la función generatriz
+    $f (t) = \sum_a \frac{\chi (a)\,t\,e^{at}}{e^{mt}-1}$
+    se tiene $f (t) = \chi (-1) \, f (-t)$. Entonces, $f (t)$ es una función par
+    o impar, dependiendo de la paridad de $\chi$.
+
+    Para la propiedad b), podemos considerar la función generatriz para los
+    polinomios de Bernoulli
+    $$\sum_{k \ge 0} B_k (x) \, \frac{t^k}{k!} = \frac{t\,e^{tx}}{e^t - 1}.$$
+    Al sustituir $x = a/m$ y remplazar $t$ por $mt$, nos queda
+    \[ \sum_{k \ge 0} \sum_a \chi (a)\,B_k (a/m) \, \frac{(mt)^k}{k!} =
+       \sum_a \frac{\chi(a)\,mt\,e^{t\,a}}{e^{mt}-1} =
+       m\,\sum_{k\ge 0} B_{k,\chi}\,\frac{t^k}{k!}. \]
+    Basta comparar los coeficientes.
+  \end{proof}
+\end{proposicion}
+
+\begin{ejemplo}
+  Un carácter no trivial mód $4$ viene dado por
+  $$\chi\colon 1 \mapsto +1, \quad 3 \mapsto -1.$$
+  Entonces, los números de Bernoulli correspondientes se definen por por
+  la función generatriz
+  \[ \sum_{k\ge 0} B_{k,\chi}\,\frac{t^k}{k!} =
+     t\,\frac{e^t - e^{3t}}{e^{4t}-1}
+     = -\frac{te^t}{e^{2t}+1}. \]
+  El carácter $\chi$ es impar, así que $B_{k,\chi} = 0$ para los $k$ pares. Para
+  los impares, calculamos los siguientes valores.
+
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rcccccccc}
+      \hline
+      $k\colon$ & $1$ & $3$ & $5$ & $7$ & $9$ & $11$ & $13$ & $15$ \\
+      \hline
+      $B_{k,\chi}\colon$ & $-\frac{1}{2}$ & $+\frac{3}{2}$ & $-\frac{25}{2}$ & $+\frac{427}{2}$ & $-\frac{12465}{2}$ & $+\frac{555731}{2}$ & $-\frac{35135945}{2}$ & $+\frac{2990414715}{2}$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+\begin{shaded}\small
+\begin{verbatim}
+? default(seriesprecision,16);
+? f = -t*exp(t)/(exp(2*t)+1);
+? vector (8,k, (2*k-1)!*polcoeff(f,2*k-1))
+% = [-1/2, 3/2, -25/2, 427/2, -12465/2, 555731/2, -35135945/2, 2990414715/2]
+\end{verbatim}
+\end{shaded}
+\end{ejemplo}
+
+\subsection{Sumas de Gauss para caracteres de Dirichlet}
+
+\begin{definicion}
+  Sea $\chi$ un carácter de Dirichlet primitivo mód $m$.
+  La \textbf{suma de Gauss} correspondiente viene dada por
+  $$g (\chi) = \sum_a \chi (a) \, \zeta_m^a,$$
+  donde $\zeta_m = e^{2\pi i/m}$. En general, para todo entero $n$ pongamos
+  $$g_n (\chi) = \sum_a \chi (a) \, \zeta_m^{an}.$$
+\end{definicion}
+
+Vamos a necesitar un par de propiedades básicas de sumas de Gauss. El caso de
+$m = p$ primo ya fue considerado en nuestra prueba de la reciprocidad cuadrática
+en \S\ref{sec:reciprocidad-cuadratica}.
+
+\begin{lema}
+  \label{lema:sumas-de-Gauss-1}
+  Para todo $n \in \mathbb{Z}$ se tiene
+  $$\overline{\chi (n)} \, g (\chi) = g_n (\chi).$$
+  En particular (tomando $n = -1$ y los conjugados),
+  $$\overline{g (\chi)} = \chi (-1)\,g (\overline{\chi}).$$
+
+  \begin{proof}
+    Si $\gcd (n,m) = 1$, entonces la multiplicación por $n$ nos da
+    un automorfismo de $(\mathbb{Z}/m\mathbb{Z})^\times$, y luego
+    \begin{align*}
+      \overline{\chi (n)} \, g (\chi) & = \overline{\chi (n)}\,\sum_a \chi (a) \, \zeta_m^a\\
+      & = \chi (n)^{-1}\,\sum_a \chi (an) \, \zeta_m^{an}\\
+      & = \sum_a \chi (a) \, \zeta_m^{an} \\
+      & = g_n (\chi).
+    \end{align*}
+    Por otra parte, si $\gcd (n,m) \ne 1$, entonces $\chi (n) = 0$,
+    y afirmamos que
+    $$g_n (\chi) = \sum_a \chi (a) \, \zeta_m^{an} = 0.$$
+    Para esto escribamos $d = \gcd (n,m)$. Notamos que $\zeta_m^{an}$ depende
+    de $a$ mód $m/d$, y los elementos que satisfacen $\gcd (a,m/d) = 1$ forman
+    un subgrupo de $(\mathbb{Z}/m\mathbb{Z})^\times$, que es el núcleo del
+    homomorfismo canónico sobreyectivo
+    $(\mathbb{Z}/m\mathbb{Z})^\times \to (\mathbb{Z}/\frac{m}{d}\mathbb{Z})^\times$.
+    Ahora
+    $$\sum_{a \in (\mathbb{Z}/m\mathbb{Z})^\times} \chi (a) \, \zeta_m^{an} = \sum_{b \in (\mathbb{Z}/\frac{m}{d}\mathbb{Z})^\times} \left(\sum_{a \equiv b ~ (m/d)} \chi (a)\right)\,\zeta_m^{an},$$
+    donde
+    $$\sum_{a \equiv b ~ (m/d)} \chi (a) = \chi (b) \, \sum_{a \equiv 1 ~ (m/d)} \chi (a) = 0.$$
+    En efecto, aquí $\chi$ es un carácter no trivial, así que siempre existe
+    algún $c \in (\mathbb{Z}/m\mathbb{Z})^\times$ tal que
+    $\chi (c) \ne 1$. Luego,
+    $$\sum_{a \equiv 1 ~ (m/d)} \chi (a) = \sum_{a \equiv 1 ~ (m/d)} \chi (ac) = \chi (c)\,\sum_{a \equiv 1 ~ (m/d)} \chi (a),$$
+    lo que implica que la suma es nula.
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  \label{lema:sumas-de-Gauss-2}
+  $$|g (\chi)|^2 = g (\chi)\,\overline{g (\chi)} = m.$$
+  En particular (usando \ref{lema:sumas-de-Gauss-1}),
+  $$g (\chi)^{-1} = \frac{1}{m}\,\chi (-1)\,g (\overline{\chi}).$$
+
+  \begin{proof}
+    Según el lema anterior, para todo $n$ se cumple
+    $$|\chi(n)|^2\,|g (\chi)|^2 = |g_n (\chi)|^2.$$
+    Aquí
+    \[ |\chi (n)| = \begin{cases}
+      1, & \gcd (n,m) = 1,\\
+      0, & \gcd (n,m) \ne 1.
+    \end{cases} \]
+    Calculamos que
+    $$\phi (m)\,|g (\chi)|^2 = \sum_{1 \le n \le m-1} |\chi (n)|^2\,|g (\chi)|^2 = \sum_{1 \le n \le m-1} |g_n (\chi)|^2.$$
+    Por otra parte, la última suma es
+    \begin{align*}
+      \sum_{1 \le n \le m-1} |g_n (\chi)|^2 & = \sum_{1 \le n \le m-1} g_n (\chi) \, \overline{g_n (\chi)} \\
+      & = \sum_{1 \le a,b \le m-1} \chi (a)\,\overline{\chi (b)}\, \sum_{1 \le n \le m-1} \zeta_m^{(a-b)\,n}, \\
+      & = \phi (m)\,m,
+    \end{align*}
+    usando
+    \[ \sum_{1 \le n \le m-1} \zeta_m^{(a-b)\,n} = \begin{cases}
+      0, & a \ne b,\\
+      m, & a = b.
+    \end{cases} \]
+    Esto concluye la prueba.
+  \end{proof}
+\end{lema}
+
+\subsection{Valores especiales de las series L de Dirichlet}
+
+Estamos listos para formular y probar el resultado principal de esta sección.
+
+\begin{teorema}
+  Sean $\chi$ un carácter de Dirichlet primitivo mód $m$ y $k > 1$ un número
+  natural tal que $\chi (-1) = (-1)^k$. Entonces,
+  $$L (k,\chi) = (-1)^{k+1} \, \frac{(2\pi i)^k}{2\cdot k! \, m^k}\,g (\chi)\,B_{k,\overline{\chi}}.$$
+\end{teorema}
+
+Esto nos da \emph{la mitad} de los valores especiales: $L (k,\chi)$,
+donde la paridad de $k$ corresponde a la paridad del carácter.
+
+\begin{proof}
+  La fórmula del lema~\ref{lema:sumas-de-Gauss-1} nos da para todo
+  $n \in \mathbb{Z}$
+  \[ \chi (n)\,g (\overline{\chi}) =
+     \sum_a \overline{\chi (a)}\,\zeta^{an}_m. \]
+  Gracias a esto, podemos escribir
+  \[ L (k,\chi)\,g (\overline{\chi}) =
+     \sum_a \overline{\chi (a)} \, \sum_{n\ge 1} \frac{\zeta_m^{an}}{n^k}. \]
+  Puesto que $\chi (-1) = (-1)^k$, tenemos
+  \[ L (k,\chi)\,g (\overline{\chi}) =
+     \frac{1}{2} \sum_a \overline{\chi (a)} \sum_{\substack{n \in \mathbb{Z} \\ n \ne 0}} \frac{\zeta_m^{an}}{n^k}. \]
+
+  Recordemos la serie de Fourier para los polinomios de Bernoulli:
+  \[ B_k (x - \lfloor x\rfloor) =
+     -\frac{k!}{(2\pi i)^k} \, \sum_{\substack{n \in \mathbb{Z} \\ n \ne 0}} \frac{e^{2\pi i n x}}{n^k}. \]
+  En particular, sustituyendo $x = a/m$, se obtiene
+  \[ \sum_{\substack{n \in \mathbb{Z} \\ n \ne 0}} \frac{\zeta_m^{an}}{n^k} =
+     -\frac{(2\pi i)^k}{k!}\,B_k (a/m). \]
+  Y usando la expresión para $B_{k,\chi}$ en términos de $B_k (x)$,
+  \[ L (k,\chi)\,g (\overline{\chi}) =
+     -\frac{(2\pi i)^k}{2\cdot k!} \sum_a \overline{\chi (a)} B_k (a/m) =
+     -\frac{(2\pi i)^k}{2\cdot k!\,m^{k-1}}\,B_{k,\overline{\chi}}. \]
+  En fin, dado que
+  \[ g (\overline{\chi})^{-1} =
+     \frac{1}{m}\,\chi (-1)\,g (\chi) =
+     \frac{1}{m}\,(-1)^k\,g (\chi)\]
+  por el lema~\ref{lema:sumas-de-Gauss-2}, llegamos a la fórmula deseada
+  \[ L (k,\chi) = (-1)^{k+1}\,\frac{(2\pi i)^k}{2\cdot k!\,m^k}\,g (\chi)\,B_{k,\overline{\chi}}. \qedhere \]
+\end{proof}
+
+\begin{corolario}
+  Si $\chi (-1) = (-1)^k$ para $k > 1$, entonces $B_{k,\chi} \ne 0$.
+
+  \begin{proof}
+    La fórmula del producto de Euler
+    $L (s,\chi) = \prod_p \frac{1}{1 - \chi (p)\,p^{-s}}$
+    implica que $L (s,\chi) \ne 0$ para ${s > 1}$.
+  \end{proof}
+\end{corolario}
+
+\begin{corolario}
+  Para todo $n = 0,1,2,3,\ldots$ se tiene
+  $$L (-n,\chi) = -\frac{B_{n+1,\chi}}{n+1}.$$
+
+  \begin{proof}
+    Se sigue de la ecuación funcional para $L (s,\chi)$. Los detalles se dejan
+    como un ejercicio.
+  \end{proof}
+\end{corolario}
+
+\subsection{Ejemplo: Campos reales abelianos}
+
+Si $K/\QQ$ es un campo real abeliano, entonces tenemos la descomposición
+$$\zeta_K (s) = \prod_\chi L (s,\chi),$$
+y ya sabemos calcular los valores especiales de $\prod_\chi L (s,\chi)$.
+Veamos un par de ejemplos particulares.
+
+\begin{ejemplo}
+  En \ref{ej:sqrt-2-sqrt-3-zeta-descomp} notamos que para
+  $K = \QQ (\sqrt{2},\sqrt{3})$ se tiene
+  $$\zeta_K (s) = \zeta (s)\,\zeta (s,\chi_1)\,\zeta (s,\chi_2)\,\zeta (s,\chi_1)\,\zeta (s,\chi_1\chi_2),$$
+  donde $\chi_1$ y $\chi_2$ son ciertos caracteres mód $8$ y mód $12$
+  respectivamente. Calculamos los números de Bernoulli correspondientes.
+
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rcccccccccc}
+      \hline
+      $k\colon$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ \\
+      \hline
+      $B_k\colon$ & $\frac{1}{2}$ & $\frac{1}{6}$ & $0$ & $-\frac{1}{30}$ & $0$ & $\frac{1}{42}$ & $0$ & $-\frac{1}{30}$ & $0$ & $\frac{5}{66}$ \\
+      \hline
+      $B_{k,\chi_1}\colon$ & $0$ & $2$ & $0$ & $-44$ & $0$ & $2166$ & $0$ & $-196888$ & $0$ & $28730410$ \\
+      \hline
+      $B_{k,\chi_2}\colon$ & $0$ & $4$ & $0$ & $-184$ & $0$ & $20172$ & $0$ & $-4120688$ & $0$ & $1352745620$ \\
+      \hline
+      $B_{k,\chi_1 \chi_2}\colon$ & $0$ & $12$ & $0$ & $-2088$ & $0$ & $912996$ & $0$ & $-745928016$ & $0$ & $979492656060$ \\
+      \hline
+      $\zeta_K (1-k)\colon$ & $0$ & $1$ & $0$ & $\frac{22011}{10}$ & $0$ & $\frac{2198584943}{3}$ & $0$ & $\frac{98499651123679091}{20}$ & $0$ & $\frac{3172326639386146564271121}{11}$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  Por ejemplo,
+  $$\zeta_K (-1) = \frac{B_2}{2}\,\frac{B_{2,\chi_1}}{2}\,\frac{B_{2,\chi_2}}{2}\,\frac{B_{2,\chi_1\chi_2}}{2} = 1.$$
+
+  \begin{shaded}
+\begin{verbatim}
+? f = x^4 - 10*x^2 + 1;
+? for (k=0,9, print ([-k, bestappr (lfun(f,-k))]))
+[0, 0]
+[-1, 1]
+[-2, 0]
+[-3, 22011/10]
+[-4, 0]
+[-5, 2198584943/3]
+[-6, 0]
+[-7, 98499651123679091/20]
+[-8, 0]
+[-9, 26096408689669293746412345882494627023907453563824990777421065 /
+     90488946510851474588918352998651662532]
+
+? bestappr (lfun (f,-9), 11)
+% = 3172326639386146564271121/11
+
+? default(realprecision, 100)
+? bestappr (lfun (f,-9))
+% = 3172326639386146564271121/11
+\end{verbatim}
+\end{shaded}
+
+  Aquí la primera aproximación racional a $\zeta_K (-9)$ es equivocada porque
+  con la precisión por defecto, PARI/GP obtiene el valor aproximado
+  $288393330853286051297374.63636363636364$, y aquí hay muy pocos dígitos
+  después de la coma flotante. Para el valor correcto, se puede especificar
+  que nos interesa aproximación con el denominador $\le 11$, o aumentar
+  la precisión.
+\end{ejemplo}
+
+\begin{ejemplo}
+  En el ejemplo \ref{ej:Q-zeta-7-real-zeta-descomp} hemos calculado que si $K$
+  es el subcampo cúbico real en $\QQ (\zeta_7)$, entonces
+  $$\zeta_K (s) = \zeta (s) \, L (s,\chi) \, L (s,\chi^2),$$
+  donde $\chi$ es el carácter cúbico mód $7$. Calculamos los números de
+  Bernoulli correspondientes. Notamos que
+  $B_{k,\chi^2} = B_{k,\overline{\chi}} = \overline{B_{k,\chi}}$, así que
+  $B_{k,\chi}\,B_{k,\chi^2} = |B_{k,\chi}|^2$.
+
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rcccccccccc}
+      \hline
+      $k\colon$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ \\
+      \hline
+      $B_k\colon$ & $\frac{1}{2}$ & $\frac{1}{6}$ & $0$ & $-\frac{1}{30}$ & $0$ & $\frac{1}{42}$ & $0$ & $-\frac{1}{30}$ & $0$ & $\frac{5}{66}$ \\
+      \hline
+      $B_{k,\chi}\colon$ & $0$ & $\frac{8-4\,\zeta_3}{7}$ & $0$ & $\frac{-128 + 88\,\zeta_3}{7}$ & $0$ & $672 - 516\,\zeta_3$ & $0$ & $\frac{-324736 + 257456\,\zeta_3}{7}$ & $0$ & $\frac{36199840 - 28945220\,\zeta_3}{7}$ \\
+      \hline
+      $B_{k,\chi}\,B_{k,\chi^2}\colon$ & $0$ & $\frac{16}{7}$ & $0$ & $\frac{5056}{7}$ & $0$ & $1064592$ & $0$ & $\frac{36477470464}{7}$ & $0$ & $\frac{456580929948400}{7}$ \\
+      \hline
+      $\zeta_K (1-k)\colon$ & $0$ & $-\frac{1}{21}$ & $0$ & $\frac{79}{210}$ & $0$ & $-\frac{7393}{63}$ & $0$ & $\frac{142490119}{420}$ & $0$ & $-\frac{1141452324871}{231}$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \begin{shaded}
+\begin{verbatim}
+? f = x^3 + x^2 - 2*x - 1;
+? for (k=1,10, print ([-k, bestappr (lfun(f,-k))]))
+[-1, -1/21]
+[-2, 0]
+[-3, 79/210]
+[-4, 0]
+[-5, -7393/63]
+[-6, 0]
+[-7, 142490119/420]
+[-8, 0]
+[-9, -1141452324871/231]
+[-10, 0]
+\end{verbatim}
+\end{shaded}
+\end{ejemplo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -985,8 +2195,6 @@ dos campos no isomorfos $K \not\cong K'$.
 **TODO** \cite{Perlis-1977}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\fi
 
 \pagebreak
 
@@ -1043,5 +2251,50 @@ dos campos no isomorfos $K \not\cong K'$.
   \item[2)] Use la parte anterior para calcular $L (1,\chi)$, donde $\chi$ es el
     carácter de orden $2$ mód $5$.  (Para el valor numérico en PARI/GP, basta
     digitar \texttt{lfun(5,1)})
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sean $X$ un grupo de caracteres de Dirichlet y $K$ un subcampo de
+  $\QQ (\zeta_m)$ correspondiente. Demuestre que $K$ es un campo real si y
+  solamente si todos los caracteres $\chi \in X$ son pares (satisfacen
+  $\chi (-1) = +1$).
+\end{ejercicio}
+
+\begin{ejercicio}
+  Los números y polinomios de Bernoulli tienen parientes muy cercanos:
+  los \textbf{números y polinomios de Euler}. Estos se definen por las funciones
+  generatrices
+  \[ \frac{2}{e^t + e^{-t}} = \sum_{k \ge 0} \frac{E_k}{k!} \, t^k, \quad
+     \frac{2 e^{xt}}{e^t + 1} = \sum_{k \ge 0} E_k (x)\,\frac{t^k}{k!}. \]
+  Demuestre las identidades.
+  \[ E_k = 2^k \, E_k \left(\frac{1}{2}\right), \quad
+     E_k (x+1) + E_k (x) = 2\,x^k, \quad
+     E_k (1-x) = (-1)^k\,E_k (x), \quad
+     E_k' (x) = k\,E_{k-1} (x). \]
+\end{ejercicio}
+
+\begin{ejercicio}[Continuación]
+  Consideremos la función periódica $f (x) = E_k (x - \lfloor x\rfloor)$.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que la serie de Fourier para $f (x)$ viene dada por
+    $$f (x) = \frac{2\cdot k!}{(\pi i)^{k+1}}\,\sum_{n\in \mathbb{Z}} \frac{e^{(2n+1)\pi i x}}{(2n+1)^{k+1}}.$$
+  \item[b)] Deduzca que para la \textbf{función beta}
+    $\beta (s) = \sum_{n \ge 0} \frac{(-1)^n}{(2n+1)^s}$ se tiene
+    $$\beta (2k+1) = (-1)^k\,\frac{E_{2k}}{4^{k+1}\,(2k)!}\,\pi^{2k+1}.$$
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}[Continuación]
+  Sea $\chi$ el carácter de Dirichlet no trivial mód $4$.
+
+  \begin{enumerate}
+  \item[a)] Demuestre que $\beta (s) = L (s,\chi)$.
+
+  \item[b)] Exprese los valores especiales $\beta (2k+1)$ en términos de
+    $B_{2k+1,\chi}$.
+
+  \item[c)] Demuestre que $E_k = -\frac{2B_{k+1,\chi}}{k+1}$.
   \end{enumerate}
 \end{ejercicio}
