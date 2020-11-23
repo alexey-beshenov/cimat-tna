@@ -599,7 +599,7 @@ $\zeta_K (s)$ en $h_K$ series
 \[ \zeta_K (s) = \sum_{I\ne 0} \frac{1}{N_{K/\QQ} (I)^s} =
    \sum_{c\in \Cl (K)} \zeta_c (s),
    \quad\text{donde }
-   \zeta_c (s) = \sum_{[I] \in c} \frac{1}{N_{K/\QQ} (I)^s}. \]
+   \zeta_c (s) = \sum_{[I] = c} \frac{1}{N_{K/\QQ} (I)^s}. \]
 A continuación veremos que cada una de estas series tiene el mismo residuo
 \[ \lim_{s \to 1^+} (s - 1)\,\zeta_c (s) =
    \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{\#\mu_K\,\sqrt{|\Delta_K|}}. \]
@@ -653,10 +653,12 @@ y la conclusión será la siguiente.
 \end{teorema}
 
 Para la construcción de $X$, véase \S\ref{sec:dominio-fundamental-X}, y para el
-cálculo de $\vol T$, refiero a \S\ref{sec:vol-T}. Por el momento propongo ver un
-par de ejemplos particulares cuando $K = \QQ (\sqrt{d})$ es un campo cuadrático.
+cálculo de $\vol T$, refiero a \S\ref{sec:vol-T}. Por el momento propongo
+considerar un par de ejemplos particulares cuando $K = \QQ (\sqrt{d})$ es un
+campo cuadrático.
 
 \begin{ejemplo}
+  \label{ejemplo:conjunto-X-Q(sqrt-3)}
   Consideremos el campo cuadrático imaginario $K = \QQ (\sqrt{-3})$.
   Tenemos un isomorfismo
   \[ K_\RR \cong \RR^2, \quad
@@ -680,6 +682,7 @@ par de ejemplos particulares cuando $K = \QQ (\sqrt{d})$ es un campo cuadrático
 \end{ejemplo}
 
 \begin{ejemplo}
+  \label{ejemplo:conjunto-X-Q(sqrt3)}
   Consideremos el campo cuadrático real $K = \QQ (\sqrt{3})$. En este caso
   $K_\RR \cong \RR^2$. El grupo de unidades será
   $$\O_K^\times = \{ \pm u^n \mid n \in \ZZ \},$$
@@ -721,17 +724,15 @@ par de ejemplos particulares cuando $K = \QQ (\sqrt{d})$ es un campo cuadrático
     \ell (x,y) & = \lambda\,L (u) + \mu\,(1,1), \\
     \ell (x', y') & = \lambda'\,L (u) + \mu'\,(1,1),
   \end{align*}
-  con $0 \le \lambda,\lambda' \le 1$, y supongamos que para algunos
-  $n,n' \in \ZZ$ se tiene
-  $$\Phi (u^n)\,(x,y) = \Phi (u^{n'})\,(x',y').$$
+  con $0 \le \lambda,\lambda' \le 1$, y supongamos que para algún
+  $n \in \ZZ$ se tiene
+  $$\Phi (u^n)\,(x,y) = (x',y').$$
   Aplicando el encaje logarítmico $\ell$, se obtiene
-  $$n\,L(u) + \ell (x,y) = n'\,L (u) + \ell (x',y'),$$
-  lo que puede ser escrito como
-  $$(\lambda + n)\,L(u) + \mu\,(1,1) = (\lambda' + n')\,L (u) + \mu'\,(1,1).$$
-  Entonces,
-  $$\lambda + n = \lambda' + n', \quad \mu + \mu'.$$
+  $$(\lambda + n)\,L(u) + \ell (x,y) = \lambda'\,L (u) + \ell (x',y'),$$
+  y entonces
+  $$\lambda + n = \lambda', \quad \mu + \mu'.$$
   Dado que $0 \le \lambda,\lambda' \le 1$, esto es posible si y solamente si
-  $n = n'$, pero luego $(x,y) = (x',y')$.
+  $n = 0$, pero luego $(x,y) = (x',y')$.
 
   \vspace{1em}
 
@@ -741,7 +742,7 @@ par de ejemplos particulares cuando $K = \QQ (\sqrt{d})$ es un campo cuadrático
     \log |x| & = \lambda\,\log (2 + \sqrt{3}) + \mu,\\
     \log |y| & = \lambda\,\log (2 - \sqrt{3}) + \mu,
   \end{align*}
-  donde $0 \le \lambda < 1$ y $x > 1$. De aquí es fácil ver que $X$ será la
+  donde $0 \le \lambda < 1$ y $x > 0$. De aquí es fácil ver que $X$ será la
   unión de dos conos
   \[ C_1 = \langle (1,+1), \, (2 + \sqrt{3}, +2 - \sqrt{3}) \rangle, \quad
      C_2 = \langle (1,-1), \, (2 + \sqrt{3}, -2 + \sqrt{3}) \rangle. \]
@@ -751,7 +752,7 @@ par de ejemplos particulares cuando $K = \QQ (\sqrt{d})$ es un campo cuadrático
     \includegraphics{pic/X-T-sqrt-plus-3.pdf}
   \end{center}
 
-  No es difícil ver que el área de $T$ es
+  No es difícil calcular que el área de $T$ es
   $$2\int_1^{2 + \sqrt{3}} \frac{dx}{x} = 2\log (2 + \sqrt{3}),$$
   lo que corresponde a la fórmula
   $\vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{\#\mu_K}$.
@@ -765,15 +766,8 @@ fácilmente el siguiente resultado.
   $\Phi (\beta) \in X$.
 
   \begin{proof}
-    Primero, dado $\alpha \ne 0$, entonces para $\Phi (\alpha) \in K_\RR^\times$
-    existen únicos $u \in \O_K^\times$ y $x \in X$ tales que
-    $\Phi (\alpha) = \Phi (u)\,x$. Ahora $\Phi (u^{-1}\,\alpha) \in X$ y
-    $\alpha \sim u^{-1}\,\alpha$.
-
-    Para la unicidad, si $\alpha \sim \beta$ y $\Phi (\beta) \in X$, escribamos
-    $\alpha = u\beta$ para $u \in \O_K^\times$. Tenemos
-    $\Phi (\alpha) = \Phi (u)\,\Phi (\beta)$, pero el teorema dice que la unidad
-    $u$ está definida de manera única.
+    La acción de $\O_K^\times$ sobre $K_\RR^\times$ se restringe a una acción
+    sobre $\Lambda\setminus \{ 0 \} = \Phi (\O_K \setminus \{ 0 \})$.
   \end{proof}
 \end{corolario}
 
@@ -790,15 +784,15 @@ teorema general.
 
 \begin{teorema}
   \label{thm:residuo-de-Z(s)}
-  Sean $X$ un cono en $\RR^n$ sin origen, $F\colon X\to \RR_{>0}$ una función
+  Sean $X$ un cono en $(\RR^\times)^n$, $F\colon X\to \RR_{>0}$ una función
   positiva, y $\Lambda \subset X$ un retículo de rango completo. Supongamos que
   se cumplen las siguientes condiciones.
   \begin{enumerate}
   \item[a)] Para cualesquiera $x \in X$ y $\lambda > 0$ se cumple
     $F (\lambda x) = \lambda^n\,F (x)$.
 
-  \item[b)] El subconjunto $T \subset X$ que consiste en los puntos $x \in X$
-    con $F (x) \le 1$ es acotado y tiene volumen no nulo.
+  \item[b)] El subconjunto $T = \{ x\in X \mid F (x) \le 1 \}$ es acotado
+    y tiene volumen no nulo.
   \end{enumerate}
   Entonces, la serie
   $$Z (s) = \sum_{\omega \in \Lambda \cap X} \frac{1}{F (x)^s}$$
@@ -808,7 +802,7 @@ teorema general.
 
 Veremos la prueba en \S\ref{sec:conos-reticulos-y-residuo-en-s=1}.
 En nuestra situación, podemos aplicar el teorema a la función
-$F\colon x \mapsto |N (x)|$ sobre $X \subset K_\RR$,
+$F\colon x \mapsto |N (x)|$ sobre $X \subset K_\RR^\times$,
 y el subconjunto $T \subset X$. Recordamos que el espacio $K_\RR$ no es
 precisamente $\RR^n$, sino tiene estructura euclidiana ligeramente distinta,
 respecto a cual $\vol = 2^{r_2}\,\vol_{Leb.}$, pero esto será irrelevante porque
@@ -835,8 +829,8 @@ Entonces, para terminar la prueba, nos falta lo siguiente:
 \label{sec:conos-reticulos-y-residuo-en-s=1}
 
 Primero vamos a probar el teorema~\ref{thm:residuo-de-Z(s)}.
-Tenemos un retículo de rango completo $\Lambda \subset \RR^n$ y un cono sin
-origen $X \subset \RR^n$ junto con una función $F\colon X\to \RR_{>0}$ que es
+Tenemos un retículo de rango completo $\Lambda \subset \RR^n$ y un cono
+$X \subset (\RR^\times)^n$ junto con una función $F\colon X\to \RR_{>0}$ que es
 homogénea en el sentido de que
 $$F (\lambda x) = \lambda^n\,F (x).$$
 Consideremos el conjunto
@@ -938,7 +932,11 @@ la unidad en $K$.
 
 La condición b) merece alguna explicación. Si $K$ tiene un encaje real, entonces
 $\mu_K = \{ \pm 1 \}$ (otras raíces de la unidad no se encajan en $\RR$), así
-que $m = 2$ y la condición b) nos dice simplemente que $x_1 > 0$.
+que $m = 2$ y la condición b) nos dice simplemente que $x_1 > 0$. En general,
+la condición b) sirve para tomar en cuenta la acción de
+$\mu_K = (\O_K^\times)_{tors}$ como en
+el ejemplo~\ref{ejemplo:conjunto-X-Q(sqrt-3)}. La condición a) es similar a
+lo que vimos en el ejemplo~\ref{ejemplo:conjunto-X-Q(sqrt3)}.
 
 \begin{proposicion}
   $X$ es un \textbf{cono}: si $x \in X$, entonces $\lambda x \in X$
@@ -1046,7 +1044,7 @@ el punto donde aparece el regulador y $m = \# \mu_K$.
     \[ \ell (x) = (n_i\,\log |x_i|)_i =
        \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L. \]
     Calculando la suma de coordenadas de los vectores en la parte derecha
-    e isquierda, nos sale
+    e izquierda, nos sale
     $\log |N (x)| = n\,(r_1 + 2r_2) = n\lambda$,
     usando que $L (u_i) \in H$.
     Podemos entonces escribir
@@ -1215,6 +1213,9 @@ Tenemos entonces
     \end{align*}
   \end{proof}
 \end{proposicion}
+
+Con esto ya tenemos todos los detalles de nuestra prueba de la fórmula de
+clases.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
