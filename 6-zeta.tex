@@ -523,7 +523,7 @@ De hecho, para las sumas de caracteres existen cotas mejores, no triviales.
     Según el lema~\ref{lema:QR-2} se cumple
     $$\chi (t) \, g (\chi) = g_t (\chi),$$
     donde
-    $$g_a (\chi) = \sum_{1 \le t \le p-1} \chi(t)\,\zeta_p^{at},$$
+    $$g_t (\chi) = \sum_{1 \le a \le p-1} \chi(t)\,\zeta_p^{at},$$
     y en particular $g (\chi) = g_1 (\chi)$. Ahora
     \[ \sum_{m \le t \le n} \chi(t) =
        \frac{1}{g (\chi)}\,\sum_{m \le t \le n} g_t (\chi) =
@@ -575,27 +575,35 @@ De hecho, para las sumas de caracteres existen cotas mejores, no triviales.
   $$\zeta_K (s) = \zeta (s) \, L (s,\chi)$$
   ---véase ejercicio~\ref{ejerc:caracter-para-campo-cuadratico}.
   Luego los métodos parecidos a los de arriba nos permiten calcular $h_K$
-  en términos de $L (1,\chi)$. Para los detalles, véase
+  en términos de $L (1,\chi)$ (y $\log u$ para la unidad fundamental $u$ en el
+  caso de campos reales). Para los detalles, véase
   \cite[Chapter~5]{Borevich-Shafarevich}.
 \end{comentario}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\pdfbookmark{Clase 27 (23/11/20)}{clase-27}
 \section{Demostración de la fórmula del número de clases}
+\marginpar{\small Clase 27 \\ 23/11/20}
 
-El objetivo de esta sección será probar la fórmula analítica de clases
+El objetivo de esta sección será probar la fórmula analítica del número de
+clases
 \[ \lim_{s \to 1^+} (s - 1)\,\zeta_K (s) =
    \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}}. \]
-La prueba es algo larga y técnica, así que al principio voy a explicar
-la estrategia general. Mi referencia es \cite{Borevich-Shafarevich}.
-Primero vamos a partir $\zeta_K (s)$ en $h_K$ series
-$$\zeta_K (s) = \sum_{I\ne 0} \frac{1}{N_{K/\QQ} (I)^s} = \sum_{n\in \Cl (K)} \zeta_c (s),$$
-donde
-$$\zeta_c (s) = \sum_{[I] \in c} \frac{1}{N_{K/\QQ} (I)^s}.$$
-A continuación veremos que para todo $c \in \Cl (K)$ se cumple
+La prueba es algo larga y técnica, así que al principio explicaré la estrategia
+general, omitiendo algunos detalles técnicos. Mi referencia es
+\cite{Borevich-Shafarevich}.
+
+Primero vamos a partir
+$\zeta_K (s)$ en $h_K$ series
+\[ \zeta_K (s) = \sum_{I\ne 0} \frac{1}{N_{K/\QQ} (I)^s} =
+   \sum_{c\in \Cl (K)} \zeta_c (s),
+   \quad\text{donde }
+   \zeta_c (s) = \sum_{[I] \in c} \frac{1}{N_{K/\QQ} (I)^s}. \]
+A continuación veremos que cada una de estas series tiene el mismo residuo
 \[ \lim_{s \to 1^+} (s - 1)\,\zeta_c (s) =
    \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{\#\mu_K\,\sqrt{|\Delta_K|}}. \]
-Esto claramente implica la fórmula del número de clases.
+Esto claramente implicaría la fórmula del número de clases.
 
 \vspace{1em}
 
@@ -608,48 +616,25 @@ Esto nos da una biyección
 Tenemos $N_{K/\QQ} (I) \, N_{K/\QQ} (I') = |N_{K/\QQ} (\alpha)|$, y entonces
 $$\zeta_c (s) = N_{K/\QQ} (I')^s \sum_{\substack{0 \ne (\alpha) \subseteq \O_K \\ \alpha \in I'}} \frac{1}{|N_{K/\QQ} (\alpha)|^s}.$$
 La suma es sobre todos los ideales principales generados por los elementos
-$\alpha \in I'$, que es lo mismo que la suma sobre $\alpha \in I'$ considerados
+$\alpha \in I'$, que es lo mismo que la suma sobre los $\alpha \in I'$ considerados
 módulo la relación $\sim$.
 
 \vspace{1em}
 
-Consideremos unidades fundamentales $u_1, \ldots, u_r \in \O_K^\times$. Entonces
-los vectores $L (u_1), \ldots, L (u_r)$ forman una base del espacio
-$H \subset \RR^{r_1+r_2}$. Por otra parte, el vector
-$$L = (\underbrace{1,\ldots,1}_{r_1}, \underbrace{2,\ldots,2}_{r_2})$$
-no está en $H$, así que los $L (u_i)$ junto con $L$ forman una base de
-$\RR^{r_1+r_2}$: todo $x \in \RR^{r_1+r_2}$ puede ser expresado como
-\begin{equation}
-  \label{eqn:base-de-Rr1+r2}
-  \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L
-\end{equation}
-para algunos $\lambda_1,\ldots,\lambda_r,\lambda \in \RR$.
-El grupo de unidades $\O_K^\times$ actúa sobre el espacio $K_\RR^\times$ mediante
-$$u \cdot x = \Phi (u)\,x.$$
-Esta es la multiplicación de dos vectores en $K_\RR^\times$ punto por punto.
-No olvidemos que $K_\RR^\times$ es un subconjunto de $K_\RR$, que a su vez está
-en el espacio complejo $K_\CC$. Entonces, aunque $K_\RR$ es un espacio
-vectorial \emph{real} de dimensión $n = [K : \QQ]$, aquí es importante
-interpretar sus elementos como números complejos, y la multiplicación es
-la multiplicación compleja.
-
-El dominio fundamental de esta acción tiene una buena descripción.  A partir de
-ahora vamos a denotar por $m = \# \mu_K$ el número de las raíces de la unidad en
-$K$.
+El grupo de unidades $\O_K^\times$ actúa sobre el espacio complejo $K_\CC$
+mediante la multiplicación punto por punto
+$$u \cdot x = \Phi (u)\,x,$$
+y no es difícil ver que esta acción se restringe al subconjunto
+$K_\RR^\times$. Para esta acción se puede obtener una construcción explícita de
+un dominio fundamental $X \subset K_\RR^\times$ en términos de las raíces de
+la unidad $\mu_K$ y las unidades fundamentales
+$u_1,\ldots,u_{r_1+r_2-1} \in \O_K^\times$. La daremos más adelante,
+y la conclusión será la siguiente.
 
 \begin{teorema}
   \label{thm:X-dominio-fundamental-de-OK*}
-  Consideremos el subconjunto $X \subset K_\RR^\times$ que satisface las
-  siguientes condiciones.
-  \begin{enumerate}
-  \item[a)] Para todo $x \in X$ en la expresión de $\ell (x)$ en la base
-    \eqref{eqn:base-de-Rr1+r2} se tiene $0 \le \lambda_i < 1$ para
-    $i = 1,\ldots,r$.
-
-  \item[b)] Se tiene $0 \le \arg x_1 < \frac{2\pi}{m}$.
-  \end{enumerate}
-
-  Entonces,
+  Existe un subconjunto $X \subset K_\RR^\times$ que satisface las siguientes
+  condiciones.
   \begin{enumerate}
   \item[1)] $X$ es un \textbf{cono}: si $x \in X$, entonces $\lambda x \in X$
     para todo $\lambda > 0$.
@@ -657,16 +642,123 @@ $K$.
   \item[2)] $X$ es un dominio fundamental de la acción de $\O_K^\times$ sobre
     $K_\RR^\times$: para todo punto $y \in K_\RR^\times$ existen únicos
     $u \in \O_K^\times$ y $x \in X$ tales que $y = \Phi (u)\,x$.
+
+  \item[3)] El subconjunto $T = \{ x \in X \mid \prod_i |x_i| \le 1 \}$
+    es acotado y se tiene
+    \begin{equation}
+      \label{eq:vol-T}
+      \vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{\# \mu_K}.
+    \end{equation}
   \end{enumerate}
 \end{teorema}
 
-La condición b) del teorema merece alguna explicación. Si $K$ tiene un encaje
-real, entonces $\mu_K = \{ \pm 1 \}$ (otras raíces de la unidad no se encajan en
-$\RR$), así que $m = 2$ y la condición b) nos dice simplemente que $x_1 > 0$.
-Más adelante también vamos a dibujar $X$ en el caso de $[K : \QQ] = 2$ para
-entender mejor qué está pasando.
+Para la construcción de $X$, véase \S\ref{sec:dominio-fundamental-X}, y para el
+cálculo de $\vol T$, refiero a \S\ref{sec:vol-T}. Por el momento propongo ver un
+par de ejemplos particulares cuando $K = \QQ (\sqrt{d})$ es un campo cuadrático.
 
-Del último teorema se deduce fácilmente el siguiente resultado.
+\begin{ejemplo}
+  Consideremos el campo cuadrático imaginario $K = \QQ (\sqrt{-3})$.
+  Tenemos un isomorfismo
+  \[ K_\RR \cong \RR^2, \quad
+     (z_\sigma, z_{\overline{\sigma}}) \mapsto (\Re z_\sigma, \Im z_\sigma). \]
+  El grupo de unidades es $\O_K^\times = \mu_6 (\CC)$. La multiplicación por
+  $\sigma (\zeta_6) = \exp \Bigl(\frac{2\pi i}{6}\Bigr)$ corresponde a
+  la rotación del plano complejo respecto al origen por el ángulo $\pi/3$,
+  y entonces como un dominio fundamental podemos tomar
+  $$X = \{ z \in \CC \mid 0 \le \arg z < \frac{\pi}{3} \}.$$
+  El conjunto $T$ es la intersección de $X$ con el círculo definido por
+  $|z| = 1$.
+
+  \begin{center}
+    \includegraphics{pic/X-T-sqrt-minus-3.pdf}
+  \end{center}
+
+  El área de $T$ es
+  $$\vol (T) = 2^{r_2}\,\vol_{Leb.} (T) = \frac{\pi}{3}.$$
+  Esto corresponde a la fórmula general
+  $\vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{\#\mu_K}$.
+\end{ejemplo}
+
+\begin{ejemplo}
+  Consideremos el campo cuadrático real $K = \QQ (\sqrt{3})$. En este caso
+  $K_\RR \cong \RR^2$. El grupo de unidades será
+  $$\O_K^\times = \{ \pm u^n \mid n \in \ZZ \},$$
+  donde $u = 2 + \sqrt{3}$ es la unidad fundamental.
+
+  Primero podemos ponernos de acuerdo que para $(x,y) \in X$ se tiene
+  $x > 0$. De esta manera se escogen representantes únicos respecto a la acción
+  de $\mu_K = \{ \pm 1 \}$, y nos queda ver qué sucede con la acción de la parte
+  libre $\langle u\rangle$.  Esta viene dada por
+  $$\Phi (u^n)\cdot (x,y) = ((2 + \sqrt{3})^n\,x, (2 - \sqrt{3})^n\,y).$$
+  Consideremos el encaje logarítmico
+  \[ \ell\colon K_\RR^\times = (\RR^\times)^2 \to \RR^2, \quad
+     (x,y) \mapsto (\log |x|, \log |y|). \]
+  Como una base del subespacio
+  $$H = \{ (x,y) \in \RR^2 \mid x+y = 0 \}$$
+  se puede tomar el vector
+  $$L (u) = (\log (2 + \sqrt{3}), \log (2 - \sqrt{3})).$$
+  Podemos completarlo a una base de $\RR^2$ con el vector
+  $(1,1)$. Todo elemento de $\RR^2$ se expresa entonces de manera única como
+  $$\lambda\,L (u) + \mu\,(1,1)$$
+  para algunos $\lambda, \mu \in \RR$. En particular, para todo
+  $(x,y) \in K_\RR^\times$
+  \begin{equation}
+    \tag{*} \ell (x,y) = (\log |x|, \log |y|) = \lambda\,L (u) + \mu\,(1,1).
+  \end{equation}
+
+  Afirmamos que como dominio fundamental $X$ se pueden tomar
+  los $(x,y) \in K_\RR^\times$ tales que $0 \le \lambda < 1$ en la expresión de
+  arriba. En efecto, si $(x,y) \in K_\RR^\times$ es cualquier punto tal que
+  $\ell (x,y)$ tiene coordenadas $\lambda$ y $\mu$ en (*), entonces tomamos
+  $n = \lfloor\lambda\rfloor$, y luego
+  \[ \ell (\Phi (u^{-n})\,(x,y)) = L (u^{-n}) + \ell (x,y) =
+     (\underbrace{\lambda - n}_{< 1})\,L(u) + \mu\,(1,1). \]
+  Entonces, cualquier punto de $K_\RR^\times$ puede ser enviado al dominio
+  fundamental $X$ actuando por alguna unidad en $\O_K^\times$. Por otra parte,
+  podemos ver que los elementos de $X$ no pueden ser identificados por una
+  acción de $\O_K^\times$. Consideremos dos puntos $(x,y)$, $(x',y') \in X$:
+  \begin{align*}
+    \ell (x,y) & = \lambda\,L (u) + \mu\,(1,1), \\
+    \ell (x', y') & = \lambda'\,L (u) + \mu'\,(1,1),
+  \end{align*}
+  con $0 \le \lambda,\lambda' \le 1$, y supongamos que para algunos
+  $n,n' \in \ZZ$ se tiene
+  $$\Phi (u^n)\,(x,y) = \Phi (u^{n'})\,(x',y').$$
+  Aplicando el encaje logarítmico $\ell$, se obtiene
+  $$n\,L(u) + \ell (x,y) = n'\,L (u) + \ell (x',y'),$$
+  lo que puede ser escrito como
+  $$(\lambda + n)\,L(u) + \mu\,(1,1) = (\lambda' + n')\,L (u) + \mu'\,(1,1).$$
+  Entonces,
+  $$\lambda + n = \lambda' + n', \quad \mu + \mu'.$$
+  Dado que $0 \le \lambda,\lambda' \le 1$, esto es posible si y solamente si
+  $n = n'$, pero luego $(x,y) = (x',y')$.
+
+  \vspace{1em}
+
+  Llegamos a la conclusión que $X$ consiste en los puntos
+  $(x,y) \in K_\RR^\times = (\RR^\times)^2$ tales que
+  \begin{align*}
+    \log |x| & = \lambda\,\log (2 + \sqrt{3}) + \mu,\\
+    \log |y| & = \lambda\,\log (2 - \sqrt{3}) + \mu,
+  \end{align*}
+  donde $0 \le \lambda < 1$ y $x > 1$. De aquí es fácil ver que $X$ será la
+  unión de dos conos
+  \[ C_1 = \langle (1,+1), \, (2 + \sqrt{3}, +2 - \sqrt{3}) \rangle, \quad
+     C_2 = \langle (1,-1), \, (2 + \sqrt{3}, -2 + \sqrt{3}) \rangle. \]
+  El subconjunto $T \subset X$ está acotado por la curva $xy = \pm 1$.
+
+  \begin{center}
+    \includegraphics{pic/X-T-sqrt-plus-3.pdf}
+  \end{center}
+
+  No es difícil ver que el área de $T$ es
+  $$2\int_1^{2 + \sqrt{3}} \frac{dx}{x} = 2\log (2 + \sqrt{3}),$$
+  lo que corresponde a la fórmula
+  $\vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{\#\mu_K}$.
+\end{ejemplo}
+
+De la parte 2) del teorema \ref{thm:X-dominio-fundamental-de-OK*} se deduce
+fácilmente el siguiente resultado.
 
 \begin{corolario}
   Para todo $\alpha \in \O_K$ no nulo existe único $\beta \sim \alpha$ tal que
@@ -693,7 +785,8 @@ En este caso $N_{K/\QQ} (\alpha) = N (\Phi (\alpha))$. Ocupando el último
 corolario, podemos escribir entonces
 $$\zeta_c (s) = N_{K/\QQ} (I')^s \sum_{\omega \in \Lambda \cap X} \frac{1}{|N (\omega)|^s}.$$
 
-Para calcular esta serie, vamos a formular el siguiente teorema general.
+Para calcular el residuo de esta serie en $s = 1$, vamos a formular el siguiente
+teorema general.
 
 \begin{teorema}
   \label{thm:residuo-de-Z(s)}
@@ -709,167 +802,42 @@ Para calcular esta serie, vamos a formular el siguiente teorema general.
   \end{enumerate}
   Entonces, la serie
   $$Z (s) = \sum_{\omega \in \Lambda \cap X} \frac{1}{F (x)^s}$$
-  converge para $s > 1$ y se tiene
+  converge para $s > 1$, y se tiene
   $$\lim_{s \to 1^+} (s-1)\,Z (s) = \frac{\vol T}{\covol \Lambda}.$$
 \end{teorema}
 
-En nuestra situación, aplicaremos el teorema a la función
-$F\colon x \mapsto |N (x)|$ sobre $X \subset K_\RR$. Para el conjunto
-$$T = \{ x \in X \mid |N (x)| \le 1 \}$$
-vamos a calcular que
-\begin{equation}
-  \label{eq:vol-T}
-  \vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m}.
-\end{equation}
-Por otra parte, como ya sabemos,
-$$\covol \Lambda = \sqrt{|\Delta_K|}\,N_{K/\QQ} (I').$$
-Esto nos permite concluir que
-$$\lim_{s\to 1^+} (s-1)\,\zeta_c (s) = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m\,\sqrt{|\Delta_K|}}.$$
+Veremos la prueba en \S\ref{sec:conos-reticulos-y-residuo-en-s=1}.
+En nuestra situación, podemos aplicar el teorema a la función
+$F\colon x \mapsto |N (x)|$ sobre $X \subset K_\RR$,
+y el subconjunto $T \subset X$. Recordamos que el espacio $K_\RR$ no es
+precisamente $\RR^n$, sino tiene estructura euclidiana ligeramente distinta,
+respecto a cual $\vol = 2^{r_2}\,\vol_{Leb.}$, pero esto será irrelevante porque
+nos sale el cociente de dos volúmenes.
+
+Como ya sabemos,
+$$\covol \Lambda = \sqrt{|\Delta_K|}\,N_{K/\QQ} (I'),$$
+y por otra parte, calcularemos que el volumen de $T$ viene dado por
+\eqref{eq:vol-T}. Esto nos permite concluir que
+$$\lim_{s\to 1^+} (s-1)\,\zeta_c (s) = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{\#\mu_K\,\sqrt{|\Delta_K|}}.$$
 
 Entonces, para terminar la prueba, nos falta lo siguiente:
 \begin{itemize}
-\item demostrar el teorema \ref{thm:X-dominio-fundamental-de-OK*} que nos da
-  un dominio fundamental de la acción de $\O_K^\times$ sobre $K_\RR$,
-\item demostrar el teorema \ref{thm:residuo-de-Z(s)} sobre el residuo de
-  $Z (s) = \sum_{\omega \in \Lambda \cap X} \frac{1}{F (x)^s}$ en $s = 1$,
-\item calcular el volumen \eqref{eq:vol-T}.
+\item[1)] demostrar el teorema \ref{thm:residuo-de-Z(s)} sobre el residuo de
+  $Z (s) = \sum_{\omega \in \Lambda \cap X} \frac{1}{F (x)^s}$ en $s = 1$;
+\item[2)] obtener una buena descripción para un dominio fundamental
+  $X \subset K_\RR^\times$ de la acción de $\O_K^\times$;
+\item[3)] calcular el volumen \eqref{eq:vol-T} del subconjunto $T \subset X$.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Dominio fundamental de la acción de unidades sobre \texorpdfstring{$K_\RR^\times$}{Kℝ*}}
-
-Ahora vamos a demostrar el teorema \ref{thm:X-dominio-fundamental-de-OK*}.
-Nos interesa el subconjunto $X \subset K_\RR^\times$ que satisface las
-siguientes condiciones.
-\begin{enumerate}
-\item[a)] Para todo $x \in X$ en la expresión
-  $$\ell (x) = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L$$
-  se tiene $0 \le \lambda_i < 1$ para $i = 1,\ldots,r$.
-
-\item[b)] Se tiene $0 \le \arg x_1 < \frac{2\pi}{m}$.
-\end{enumerate}
-
-Primero vamos a verificar que $X$ es un cono. Para $x \in X$ y $\lambda > 0$
-tenemos
-$$\ell (\lambda x) = \log |\lambda|\,L + \ell (x),$$
-y esto no afecta los coeficientes $\lambda_1,\ldots,\lambda_r$, así que la
-condición a) se preserva. Por otra parte, $\arg (\lambda x_1) = \arg x_1$,
-así que b) se preserva también. Notamos que $X \ne \emptyset$: por ejemplo,
-el punto $\Phi (1)$ está en $X$.
-
-Ahora nos gustaría probar que para todo $y \in K_\RR^\times$ existen únicos
-$u \in \O_K^\times$ y $x \in X$ tales que $y = \Phi (u)\,x$.
-
-Primero para la existencia, escribamos $\ell (y)$ en términos de nuestra base
-de $\RR^{r_1+r_2}$:
-$$\ell (y) = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L.$$
-Para $i = 1,\ldots,r$ pongamos
-$$\lambda_i = a_i + \mu_i,$$
-donde
-$$a_i \in \ZZ, \quad 0 \le \mu_i < 1.$$
-Consideremos la unidad $v = u_1^{a_1}\cdots u_r^{a_r}$ y el punto
-$z = \Phi (v^{-1})\,y$. Ahora
-\[ \ell (z) = L (v^{-1}) + \ell (y) =
-   - a_1\,L (u_1) - \cdots - a_r\,L(u_r)
-   + \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L =
-   \mu_1 \, L (u_1) + \cdots + \mu_r \, L (u_r) + \lambda L. \]
-Esto nos asegura la condición a) de la definición de $X$, y falta analizar
-la condición b). Si $\arg z_1 = \phi$, entonces para algún $k$ se tiene
-$$\frac{2\pi k}{m} \le \phi < \frac{2\pi {k+1}}{m}.$$
-Sea $\zeta \in \mu_K$ la $m$-ésima raíz de la unidad tal que
-$\sigma_1 (\zeta) = \exp \Bigl(\frac{2\pi i}{m}\Bigr)$. En este caso el punto
-$x = \Phi (\zeta^{-k})\,z$ está en $X$: primero tenemos
-$$\ell (x) = L (\zeta^{-k}) + \ell (z) = \ell (z),$$
-dado que $\mu_K = \ker L$, así que la condición a) se preserva. Por otra parte,
-$$\arg x_1 = \arg z_1 - \frac{2\pi k}{m} = \phi - \frac{2\pi k}{m},$$
-y luego
-$$0 \le \arg x_1 < \frac{2\pi}{m}.$$
-Entonces,
-$$y = \Phi (v)\,z = \Phi (\zeta^k v)\,x$$
-es la representación que estábamos buscando.
-
-Ahora para ver que la representación es única, supongamos que
-$$y = \Phi (u)\,x = \Phi (u')\,x'$$
-para algunos $u,u' \in \O_K^\times$, $x,x' \in X$. Tomando los logaritmos, se
-obtiene
-$$L (u) + \ell (x) = L (u') + \ell (x').$$
-Aquí por nuestra hipótesis
-\begin{align*}
-  \ell (x) & = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L, \\
-  \ell (x') & = \lambda_1' \, L (u_1) + \cdots + \lambda_r' \, L (u_r) + \lambda' L,
-\end{align*}
-donde $0 \le \lambda_i, \lambda_i' < 1$. Por otra parte,
-\begin{align*}
-  L (u) & = a_1 \, L (u_1) + \cdots + a_r \, L (u_r), \\
-  L (u') & = a_1' \, L (u_1) + \cdots + a_r' \, L (u_r),
-\end{align*}
-donde $a_i,a_i' \in \ZZ$. Esto nos permite concluir que $L (u) = L (u')$, así
-que $u' = \zeta u$ para alguna raíz de la unidad $\zeta \in \mu_K = \ker L$.
-Ahora $\Phi (u') = \Phi (\zeta)\,\Phi (u)$, y entonces
-$x = \Phi (\zeta)\,x'$, y en particular $x_1 = \sigma_1 (\zeta)\,x_1'$.
-La condición b) nos dice que
-$$0 \le \arg x_1, \arg x_1' < \frac{2\pi}{m}.$$
-Tenemos
-$$0 \le |\sigma_1 (\zeta)| < \frac{2\pi}{m},$$
-pero $\sigma_1 (\zeta)$ es una raíz $m$-ésima compleja, así que la única opción
-es $\sigma_1 (\zeta) = 1$, y luego $\zeta = 1$. Podemos concluir que $u = u'$ y
-$x = x'$. \qed
-
-\vspace{1em}
-
-\begin{ejemplo}
-  Consideremos un campo cuadrático imaginario, por ejemplo
-  $K = \QQ (\sqrt{-3})$. Tenemos un isomorfismo
-  \[ K_\RR \cong \RR^2, \quad
-     (z_\sigma, z_{\overline{\sigma}}) \mapsto (\Re z_\sigma, \Im z_\sigma). \]
-  El grupo de unidades es $\O_K^\times = \mu_6 (\CC)$. La condición a) en la
-  definición de $X$ es vacía porque $r_1 + r_2 - 1 = 0$, y no hay unidades
-  fundamentales, mientras que la condición b) dice que nos interesan los puntos
-  de $\CC \cong \RR^2$ tales que $0 \le \arg z < \frac{\pi}{3}$. El conjunto $T$
-  es la intersección de $X$ con el círculo definido por $|z| = 1$.
-
-  \begin{center}
-    \includegraphics{pic/X-T-sqrt-minus-3.pdf}
-  \end{center}
-
-  Notamos que el área de $T$ es $\pi/6$, o para ser más precisos $\pi/3$,
-  si tomamos en cuenta nuestra medida sobre $K_\RR$, lo que corresponde
-  a la fórmula general $\vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m}$.
-\end{ejemplo}
-
-\begin{ejemplo}
-  Consideremos el campo cuadrático real $K = \QQ (\sqrt{3})$. En este caso
-  $K_\RR = \RR^2$, y la unidad fundamental es $u = 2 + \sqrt{3}$. Entonces,
-  la condición a) significa que $X$ consiste en los puntos $(x,y) \in \RR^2$
-  tales que
-  \begin{align*}
-    \log |x| & = \lambda_1\,\log (2 + \sqrt{3}) + \lambda,\\
-    \log |y| & = \lambda_1\,\log (2 - \sqrt{3}) + \lambda,
-  \end{align*}
-  donde $0 \le \lambda_1 < 1$, mientras que la condición b) nos dice que
-  $x > 1$. De aquí es fácil ver que $X$ será la unión de dos conos: uno generado
-  por los vectores $v_1 = (1,1)$, $v_2 = (2 + \sqrt{3}, 2 - \sqrt{3})$,
-  y el otro generado por $v_1 = (1,-1)$ y $v_2 = (2 + \sqrt{3}, -2 + \sqrt{3})$.
-  El conjunto $T$ está acotado por la curva $xy = \pm 1$.
-
-  \begin{center}
-    \includegraphics{pic/X-T-sqrt-plus-3.pdf}
-  \end{center}
-
-  No es difícil ver que el área de $T$ es
-  $2\int_1^{2 + \sqrt{3}} \frac{dx}{x} = 2\log (2 + \sqrt{3})$, lo que
-  corresponde a la fórmula $\vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m}$.
-\end{ejemplo}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \subsection{Conos, retículos y residuo en $s = 1$}
+\label{sec:conos-reticulos-y-residuo-en-s=1}
 
-Ahora continuando con nuestro programa, vamos a probar el
-teorema~\ref{thm:residuo-de-Z(s)}. Tenemos un retículo de rango completo
-$\Lambda \in \RR^n$ y un cono sin origen $X \subset \RR^n$ junto con una función
-$F\colon X\to \RR_{>0}$ que es homogénea en el sentido de que
+Primero vamos a probar el teorema~\ref{thm:residuo-de-Z(s)}.
+Tenemos un retículo de rango completo $\Lambda \subset \RR^n$ y un cono sin
+origen $X \subset \RR^n$ junto con una función $F\colon X\to \RR_{>0}$ que es
+homogénea en el sentido de que
 $$F (\lambda x) = \lambda^n\,F (x).$$
 Consideremos el conjunto
 $$T = \{ x \in X \mid F (x) \le 1 \}$$
@@ -877,13 +845,6 @@ que es acotado y de volumen finito no nulo. Nos interesa probar que la serie
 $$Z (s) = \sum_{\omega \in \Lambda \cap X} \frac{1}{F (x)^s}$$
 converge para $s > 1$ y tiene residuo $\frac{\vol T}{\covol \Lambda}$ en
 $s = 1$.
-
-\vspace{1em}
-
-Recordamos que a fin de cuentas, nos interesa un cono en el espacio $K_\RR$ que
-no es precisamente $\RR^n$, sino fue tiene estructura euclidiana ligeramente
-distinta, respecto a cual $\vol = 2^{r_2}\,\vol_{Leb.}$, pero esto será
-irrelevante en la prueba porque nos interesa el cociente de dos volúmenes.
 
 \vspace{1em}
 
@@ -936,25 +897,328 @@ se obtiene
    < \frac{\vol T}{\covol \Lambda} + \epsilon. \]
 Esto se cumple para todo $\epsilon > 0$, así que podemos concluir que
 $$\lim_{s\to 1^+} (s-1)\,Z (s) = \frac{\vol T}{\covol \Lambda}.$$
-Hemos entonces probado el teorema~\ref{thm:residuo-de-Z(s)}.
+Hemos entonces probado el teorema~\ref{thm:residuo-de-Z(s)}. \qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Dominio fundamental $X$ de la acción de unidades sobre \texorpdfstring{$K_\RR^\times$}{Kℝ*}}
+\label{sec:dominio-fundamental-X}
+
+Ahora vamos a probar la primera mitad del teorema
+\ref{thm:X-dominio-fundamental-de-OK*} que nos da un cono
+$X \subset K_\RR^\times$ que es un dominio fundamental de la acción
+de $\O_K^\times$.
+
+Consideremos unidades fundamentales $u_1, \ldots, u_r \in \O_K^\times$. Entonces
+los vectores $L (u_1), \ldots, L (u_r)$ forman una base del espacio $H \subset
+\RR^{r_1+r_2}$. Por otra parte, el vector
+$$L = (\underbrace{1,\ldots,1}_{r_1}, \underbrace{2,\ldots,2}_{r_2})$$
+no está en $H$, así que los $L (u_i)$ junto con $L$ forman una base de
+$\RR^{r_1+r_2}$: todo $x \in \RR^{r_1+r_2}$ puede ser expresado como
+\begin{equation}
+  \label{eqn:base-de-Rr1+r2}
+  \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L
+\end{equation}
+para algunos $\lambda_1,\ldots,\lambda_r,\lambda \in \RR$.
+
+A partir de ahora vamos a denotar por $m = \# \mu_K$ el número de las raíces de
+la unidad en $K$.
+
+\begin{definicion}
+  Sea $X \subset K_\RR^\times$ el subconjunto definido por las siguientes
+  condiciones.
+  \begin{enumerate}
+  \item[a)] Para todo $x \in X$ en la expresión de $\ell (x)$ en la base
+    \eqref{eqn:base-de-Rr1+r2} se tiene $0 \le \lambda_i < 1$ para
+    $i = 1,\ldots,r$.
+
+  \item[b)] Se tiene $0 \le \arg x_1 < \frac{2\pi}{m}$.
+  \end{enumerate}
+\end{definicion}
+
+La condición b) merece alguna explicación. Si $K$ tiene un encaje real, entonces
+$\mu_K = \{ \pm 1 \}$ (otras raíces de la unidad no se encajan en $\RR$), así
+que $m = 2$ y la condición b) nos dice simplemente que $x_1 > 0$.
+
+\begin{proposicion}
+  $X$ es un \textbf{cono}: si $x \in X$, entonces $\lambda x \in X$
+  para todo $\lambda > 0$.
+
+  \begin{proof}
+    Para $x \in X$ y $\lambda > 0$ tenemos
+    $$\ell (\lambda x) = \log |\lambda|\,L + \ell (x),$$
+    y esto no afecta los coeficientes $\lambda_1,\ldots,\lambda_r$, así que la
+    condición a) se preserva. Por otra parte, $\arg (\lambda x_1) = \arg x_1$,
+    así que b) se preserva también. Notamos que $X \ne \emptyset$: por ejemplo,
+    el punto $\Phi (1)$ está en $X$.
+  \end{proof}
+\end{proposicion}
+
+
+\begin{proposicion}
+  $X$ es un dominio fundamental de la acción de $\O_K^\times$ sobre
+  $K_\RR^\times$: para todo punto $y \in K_\RR^\times$ existen únicos
+  $u \in \O_K^\times$ y $x \in X$ tales que $y = \Phi (u)\,x$.
+
+  \begin{proof}
+    Primero para la existencia, escribamos $\ell (y)$ en términos de nuestra
+    base de $\RR^{r_1+r_2}$:
+    $$\ell (y) = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L.$$
+    Para $i = 1,\ldots,r$ pongamos
+    $$\lambda_i = a_i + \mu_i,$$
+    donde
+    $$a_i \in \ZZ, \quad 0 \le \mu_i < 1.$$
+    Consideremos la unidad $v = u_1^{a_1}\cdots u_r^{a_r}$ y el punto
+    $z = \Phi (v^{-1})\,y$. Ahora
+    \[ \ell (z) = L (v^{-1}) + \ell (y) =
+       - a_1\,L (u_1) - \cdots - a_r\,L(u_r)
+       + \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L =
+       \mu_1 \, L (u_1) + \cdots + \mu_r \, L (u_r) + \lambda L. \]
+
+    Esto nos asegura la condición a) de la definición de $X$, y falta analizar
+    la condición b). Si $\arg z_1 = \phi$, entonces para algún $k$ se tiene
+    $$\frac{2\pi k}{m} \le \phi < \frac{2\pi {k+1}}{m}.$$
+    Sea $\zeta \in \mu_K$ la $m$-ésima raíz de la unidad tal que
+    $\sigma_1 (\zeta) = \exp \Bigl(\frac{2\pi i}{m}\Bigr)$. En este caso
+    el punto $x = \Phi (\zeta^{-k})\,z$ está en $X$: primero tenemos
+    $$\ell (x) = L (\zeta^{-k}) + \ell (z) = \ell (z),$$
+    dado que $\mu_K = \ker L$, así que la condición a) se preserva. Por otra
+    parte,
+    $$\arg x_1 = \arg z_1 - \frac{2\pi k}{m} = \phi - \frac{2\pi k}{m},$$
+    y luego
+    $$0 \le \arg x_1 < \frac{2\pi}{m}.$$
+    Entonces,
+    $$y = \Phi (v)\,z = \Phi (\zeta^k v)\,x$$
+    es la representación que estábamos buscando.
+
+    Ahora para ver que la representación es única, supongamos que
+    $$y = \Phi (u)\,x = \Phi (u')\,x'$$
+    para algunos $u,u' \in \O_K^\times$, $x,x' \in X$. Tomando los logaritmos,
+    se obtiene
+    $$L (u) + \ell (x) = L (u') + \ell (x').$$
+    Aquí por nuestra hipótesis
+    \begin{align*}
+      \ell (x) & = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L, \\
+      \ell (x') & = \lambda_1' \, L (u_1) + \cdots + \lambda_r' \, L (u_r) + \lambda' L,
+    \end{align*}
+    donde $0 \le \lambda_i, \lambda_i' < 1$. Por otra parte,
+    \begin{align*}
+      L (u) & = a_1 \, L (u_1) + \cdots + a_r \, L (u_r), \\
+      L (u') & = a_1' \, L (u_1) + \cdots + a_r' \, L (u_r),
+    \end{align*}
+    donde $a_i,a_i' \in \ZZ$. Esto nos permite concluir que $L (u) = L (u')$,
+    así que $u' = \zeta u$ para alguna raíz de la unidad
+    $\zeta \in \mu_K = \ker L$. Ahora $\Phi (u') = \Phi (\zeta)\,\Phi (u)$,
+    y entonces $x = \Phi (\zeta)\,x'$, y en particular $x_1 = \sigma_1
+    (\zeta)\,x_1'$.  La condición b) nos dice que
+    $$0 \le \arg x_1, \arg x_1' < \frac{2\pi}{m}.$$
+    Tenemos
+    $$0 \le |\sigma_1 (\zeta)| < \frac{2\pi}{m},$$
+    pero $\sigma_1 (\zeta)$ es una raíz $m$-ésima compleja, así que la única
+    opción es $\sigma_1 (\zeta) = 1$, y luego $\zeta = 1$. Podemos concluir que
+    $u = u'$ y $x = x'$.
+  \end{proof}
+\end{proposicion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Cálculo del volumen de T}
+\label{sec:vol-T}
 
 Para terminar la prueba de la fórmula del número de clases, tenemos que ver que
 $$T = \{ x \in X \mid |N (x)| \le 1 \}$$
 es un conjunto acotado y calcular su volumen
-\begin{equation}
-  \label{eq:vol-T}
-  \vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m}.
-\end{equation}
+$$\vol T = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m}.$$
 El cálculo esencialmente consiste en una reducción a ciertas integrales
 iteradas, lo que no suena muy interesante. Sin embargo, este es precisamente
 el punto donde aparece el regulador y $m = \# \mu_K$.
 
-**TODO**
+\begin{lema}
+  $T \subset X$ es un conjunto acotado.
+
+  \begin{proof}
+    Recordemos que $X \subset K_\RR^\times$ es un cono. Todo rayo en $X$ que
+    sale del origen contiene único punto $x\in X$ tal que $|N (x)| = 1$.
+    Ahora si $S$ es el conjunto de tales puntos, entonces
+    $T = \bigcup_{0 < \lambda \le 1} \lambda S$.
+
+    Para todo punto $x \in K_\RR^\times$ consideremos
+    \[ \ell (x) = (n_i\,\log |x_i|)_i =
+       \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \lambda L. \]
+    Calculando la suma de coordenadas de los vectores en la parte derecha
+    e isquierda, nos sale
+    $\log |N (x)| = n\,(r_1 + 2r_2) = n\lambda$,
+    usando que $L (u_i) \in H$.
+    Podemos entonces escribir
+    \[ \ell (x) =
+       \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) +
+       \frac{1}{n}\,\log |N (x)|\,L. \]
+    Ahora si $x \in S$, entonces $\log |N (x)| = 1$, y nos queda
+    \[ \ell (x) = (n_i\,\log |x_i|)_i
+       = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r), \]
+    donde $0 \le \lambda_1 < 1$, puesto que $x \in S \subset X$. Esto nos
+    da una cota sobre los $\log |x_i|$, y luego sobre los $x_i$. Esto significa
+    que $S$ es acotado, y por ende $T$ también lo es.
+  \end{proof}
+\end{lema}
+
+\begin{lema}
+  Para toda unidad $u \in \O_K^\times$ la transformación
+  $x \mapsto \Phi (u)\cdot x$ sobre $K_\RR^\times$ preserva el volumen.
+
+  \begin{proof}
+    El determinante de esta transformación será
+    $N (\Phi (u)) = K_{K/\QQ} (u) = \pm 1$.
+  \end{proof}
+\end{lema}
+
+En particular, sea $\zeta \in \mu_K$ una raíz de la unidad tal que
+$$\sigma_1 (\zeta) = \exp \Bigl(\frac{2\pi i}{m}\Bigr).$$
+Para $k = 0,1,\ldots,m-1$ consideremos los conjuntos
+$$T_k = \Phi (\zeta^k)\cdot T.$$
+Tenemos entonces $\vol (T_k) = \vol (T)$. Ahora
+\begin{gather*}
+  |N (\Phi (\zeta^k)\cdot x)| = |N (x)|,\\
+  \ell (\Phi (\zeta^k)\cdot x) = \ell (x),\\
+  \arg (\Phi (\zeta^k)\cdot x)_1 = \arg x_1 + \frac{2\pi k}{m}.
+\end{gather*}
+Entonces, cada conjunto $T_k$ está definido por las condiciones
+\begin{enumerate}
+\item[1)] $0 < |N (x)| \le 1$;
+
+\item[2)] $\ell (x) = \lambda_1 \, L (u_1) + \cdots + \lambda_r \, L (u_r) + \frac{1}{n}\,\log |N (x)|\,L$,
+  donde $0 \le \lambda_i < 1$.
+
+\item[3)] $\frac{2\pi k}{m} \le \arg x_1 < \frac{2\pi\,(k+1)}{m}$.
+\end{enumerate}
+
+De la condición 3) se ve que los $T_k$ son disjuntos y su unión
+$\bigcup_{0 \le k \le m-1} T_k$ está definida por las condiciones 1) y 2).
+Sea $\overline{T}$ el subconjunto de la unión tal que $x_1,\ldots,x_{r_1} > 0$.
+Tenemos entonces
+\[ \vol (T) = \frac{2^{r_1}}{m}\,\vol (\overline{T}) =
+\frac{2^{r_1+r_2}}{m} \, \vol_{Leb.} (\overline{T}). \]
+
+\begin{proposicion}
+  Se tiene $\vol_{Leb.} (\overline{T}) = \pi^{r_2}\,\Reg_K$, y por lo tanto
+  $\vol (T) = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K}{m}$.
+
+  \begin{proof}
+    Para $x \in \overline{T}$ se tiene
+    \[ \ell (x)_i =\sum_{1 \le k \le r} \lambda_k\,L (u_k) +
+    \frac{n_i}{n}\,\log |N (x)|, \]
+    donde $n_i = 1$ para las coordenadas que corresponden a encajes reales
+    (es decir, $1 \le i \le r_1$)
+    y $n_i = 2$ para las coordenadas que corresponden a encajes complejos
+    (es decir, $r_1 + 1 \le i \le r_1 + r_2$).
+
+    Escribamos las coordenadas de $K_\RR \cong \RR^{r_1 + 2r_2}$ como
+    $$(x_1,\ldots,x_r, y_1, z_1, \ldots, y_{r_2}, z_{r_2}).$$
+    Hagamos un cambio de variables
+    \[ x_i = \rho_i, \quad
+      y_j = \rho_{r_1 + j}\,\cos\phi_j, \quad
+      z_j = \rho_{r_1 + j}\,\sin\phi_j, \]
+    donde $1 \le i \le r_1$ y $1 \le j \le r_2$.
+    El jacobiano correspondiente será
+    \[ \def\arraystretch{2.25}
+    \left(\begin{array}{ccc|ccccc}
+      \frac{\partial x_1}{\partial \rho_1} & \cdots & \frac{\partial x_1}{\partial \rho_{r_1}} & \frac{\partial x_1}{\partial \rho_{r_1+1}} & \frac{\partial x_1}{\partial \phi_1} & \cdots & \frac{\partial x_1}{\partial \rho_{r_1 + r_2}} & \frac{\partial x_1}{\partial \phi_{r_2}} \\
+      \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+      \frac{\partial x_{r_1}}{\partial \rho_1} & \cdots & \frac{\partial x_{r_1}}{\partial \rho_{r_1}} & \frac{\partial x_{r_1}}{\partial \rho_{r_1+1}} & \frac{\partial x_{r_1}}{\partial \phi_1} & \cdots & \frac{\partial x_{r_1}}{\partial \rho_{r_1 + r_2}} & \frac{\partial x_{r_1}}{\partial \phi_{r_2}} \\
+      \hline
+      \frac{\partial y_1}{\partial \rho_1} & \cdots & \frac{\partial y_1}{\partial \rho_{r_1}} & \frac{\partial y_1}{\partial \rho_{r_1+1}} & \frac{\partial y_1}{\partial \phi_1} & \cdots & \frac{\partial y_1}{\partial \rho_{r_1 + r_2}} & \frac{\partial y_1}{\partial \phi_{r_2}} \\
+      \frac{\partial z_1}{\partial \rho_1} & \cdots & \frac{\partial z_1}{\partial \rho_{r_1}} & \frac{\partial z_1}{\partial \rho_{r_1+1}} & \frac{\partial z_1}{\partial \phi_1} & \cdots & \frac{\partial z_1}{\partial \rho_{r_1 + r_2}} & \frac{\partial z_1}{\partial \phi_{r_2}} \\
+      \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+      \frac{\partial y_{r_2}}{\partial \rho_1} & \cdots & \frac{\partial y_{r_2}}{\partial \rho_{r_1}} & \frac{\partial y_{r_2}}{\partial \rho_{r_1+1}} & \frac{\partial y_{r_2}}{\partial \phi_1} & \cdots & \frac{\partial y_{r_2}}{\partial \rho_{r_1 + r_2}} & \frac{\partial y_{r_2}}{\partial \phi_{r_2}} \\
+      \frac{\partial z_{r_2}}{\partial \rho_1} & \cdots & \frac{\partial z_{r_2}}{\partial \rho_{r_1}} & \frac{\partial z_{r_2}}{\partial \rho_{r_1+1}} & \frac{\partial z_{r_2}}{\partial \phi_1} & \cdots & \frac{\partial z_{r_2}}{\partial \rho_{r_1 + r_2}} & \frac{\partial z_{r_2}}{\partial \phi_{r_2}} \\
+    \end{array}\right). \]
+    Calculándolo con cuidado, nos sale la matriz
+    \[ \left(\begin{array}{ccc|ccccc}
+      1 & \cdots & 0 & 0 & 0 & \cdots & 0 & 0 \\
+      \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+      0 & \cdots & 1 & 0 & 0 & \cdots & 0 & 0 \\
+      \hline
+      0 & \cdots & 0 & \cos \phi_1 & -\rho_{r_1+1}\,\sin (\phi_1) & \cdots & 0 & 0 \\
+      0 & \cdots & 0 & \sen \phi_1 & +\rho_{r_1+1}\,\cos (\phi_1) & \cdots & 0 & 0 \\
+      \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+      0 & \cdots & 0 & 0 & 0 & \cdots & \cos \phi_{r_2} & -\rho_{r_1+r_2}\,\sen (\phi_{r_2}) \\
+      0 & \cdots & 0 & 0 & 0 & \cdots & \sin \phi_{r_2} & +\rho_{r_1+r_2}\,\cos (\phi_{r_2}) \\
+    \end{array}\right). \]
+    de determinante $\rho_{r_1 + 1} \cdots \rho_{r_1 + r_2}$.
+
+    \vspace{1em}
+
+    En términos de nuevas coordenadas, el conjunto
+    $\overline{T} \subset \RR^{r_1 + 2r_2}$ viene dado por
+    \begin{enumerate}
+    \item[1)] $\rho_1, \ldots, \rho_{r_1 + r_2} > 0$,
+      $\prod\limits_{1 \le i \le r_1 + r_2} \rho_i^{e_i} \le 1$;
+
+    \item[2)] $\log \rho_j^{e_j} = \sum\limits_{1 \le k \le r} \lambda_k \, (L (u_k))_j + \frac{e_j}{n}\,\log \prod\limits_{1 \le i \le r_1 + r_2} \rho_i^{e_i}$,
+      donde $0 \le \lambda_k < 1$;
+
+    \item[3)] $0 \le \phi_j < 2\pi$.
+    \end{enumerate}
+
+    Ahora pasemos a otras coordenadas $\lambda_1,\ldots,\lambda_r,\lambda$,
+    definidas por
+    $$\log \rho_j^{e_j} = \sum_{1 \le k \le r} \lambda_k\,L(u_k)_j + \frac{e_j}{n}\,\log \lambda.$$
+    Sumando estas ecuaciones para $j = 1, \ldots, r_1 + r_2$ y notando que
+    $\sum_j e_j = n$ y $\sum_j L (u_k)_j = 0$, se obtiene
+    $$\lambda = \prod_{1 \le j \le r_2 + r_2} \rho_j^{e_j}.$$
+    Entonces, el conjunto $\overline{T}$ está definido por las condiciones
+    $$0 \le \lambda_k < 1, \quad 0 < \lambda \le 1$$
+    para $k = 1, \ldots, r$. Calculamos el jacobiano
+    \[ \def\arraystretch{2.25}
+    J = \left(\begin{array}{c|ccc}
+      \frac{\partial \rho_1}{\partial\lambda} & \frac{\partial \rho_1}{\partial\lambda_1} & \cdots & \frac{\partial \rho_1}{\partial\lambda_r} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \frac{\partial \rho_{r_1}}{\partial\lambda} & \frac{\partial \rho_{r_1}}{\partial\lambda_1} & \cdots & \frac{\partial \rho_{r_1}}{\partial\lambda_r} \\
+      \hline
+      \frac{\partial \rho_{r_1+1}}{\partial\lambda} & \frac{\partial \rho_{r_1+1}}{\partial\lambda_1} & \cdots & \frac{\partial \rho_{r_1+1}}{\partial\lambda_r} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \frac{\partial \rho_{r_1+r_2}}{\partial\lambda} & \frac{\partial \rho_{r_1+r_2}}{\partial\lambda_1} & \cdots & \frac{\partial \rho_{r_1+r_2}}{\partial\lambda_r} \\
+    \end{array}\right) =
+    \left(\begin{array}{c|ccc}
+      \frac{\rho_1}{n \lambda} & \frac{\rho_1}{e_1}\,L (u_1)_1 & \cdots & \frac{\rho_1}{e_1}\,L (u_r)_1 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \frac{\rho_{r_1}}{n \lambda} & \frac{\rho_{r_1}}{e_{r_1}}\,L (u_1)_{r_1} & \cdots & \frac{\rho_{r_1}}{e_{r_1}}\,L (u_r)_{r_1} \\
+      \hline
+      \frac{\rho_{r_1+1}}{n \lambda} & \frac{\rho_{r_1+1}}{e_{r_1+1}}\,L (u_1)_{r_1+1} & \cdots & \frac{\rho_{r_1+1}}{e_{r_1+1}}\,L (u_r)_{r_1+1} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \frac{\rho_{r_1+r_2}}{n \lambda} & \frac{\rho_{r_1+r_2}}{e_{r_1+r_2}}\,L (u_1)_{r_1+r_2} & \cdots & \frac{\rho_{r_1+r_2}}{e_{r_1+r_2}}\,L (u_r)_{r_1+r_2} \\
+    \end{array}\right). \]
+    El determinante correspondiente será
+    \[ |\det J| = \def\arraystretch{1.75}
+    \frac{\rho_1\cdots\rho_{r_1+r_2}}{n\lambda\,2^{r_2}}\,
+    \det \left(\begin{array}{c|ccc}
+      1 & L (u_1)_1 & \cdots & L (u_r)_1 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      1 & L (u_1)_{r_1} & \cdots & L (u_r)_{r_1} \\
+      \hline
+      2 & L (u_1)_{r_1+1} & \cdots & L (u_r)_{r_1+1} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      2 & L (u_1)_{r_1+r_2} & \cdots & L (u_r)_{r_1+r_2} \\
+    \end{array}\right). \]
+    Sumando todas las filas a la primera, allí nos quedará el vector
+    $(n,0,\ldots,0)$. Recordando la definición del regulador,
+    \[ \det |J| = \frac{\rho_1\cdots\rho_{r_1+r_2}}{\lambda\,2^{r_2}}\,\Reg_K =
+    \frac{1}{\rho_{r_1+1}\cdots\rho_{r_1+r_2}\,2^{r_2}}\,\Reg_K. \]
+
+    Juntando todos los cálculos de arriba,
+    \begin{align*}
+      \vol_{Leb.} (\overline{T}) & = \int\cdots\int d x_1\cdots d x_{r_1}\,d y_1\,dz_1\cdots d y_{r_2} d z_{r_2} \\
+      & = \int\cdots\int \rho_{r_1+1}\cdots\rho_{r_1+r_2}\,d\rho_1\cdots d\rho_{r_1+r_2}\,d \phi_1\cdots d\phi_{r_2} \\
+      & = \int_0^{2\pi} d\phi_1 \cdots\int_0^{2\pi} d\phi_{r_2} \int\cdots\int\rho_{r_1+1}\cdots\rho_{r_1+r_2}\,d\rho_1\cdots d\rho_{r_1+r_2} \\
+      & = (2\pi)^{r_2}\,\int\cdots\int \det |J|\,\rho_{r_1+1}\cdots\rho_{r_1+r_2}\,d\lambda_1\cdots d\lambda_r\,d\lambda \\
+      & = \pi^{r_2}\,\Reg_K\,\int_0^1 d\lambda_1 \cdots \int_0^1 d\lambda_r \, \int_0^1 d\lambda = \pi^{r_2}\,\Reg_K. \qedhere
+    \end{align*}
+  \end{proof}
+\end{proposicion}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\iffalse
 \section{Función zeta y series L}
 
 En esta sección me gustaría explicar cómo la función zeta se factoriza en
@@ -2193,6 +2457,7 @@ no sabe \emph{todo} de $K$: podemos tener $\zeta_K (s) = \zeta_{K'} (s)$ para
 dos campos no isomorfos $K \not\cong K'$.
 
 **TODO** \cite{Perlis-1977}.
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2210,16 +2475,33 @@ dos campos no isomorfos $K \not\cong K'$.
   \noindent (Considere la función zeta de $\QQ (\zeta_3)$.)
 \end{ejercicio}
 
+\begin{ejercicio}[Símbolo de Kronecker]
+  Para $a \in \ZZ$ libre de cuadrados, $a \equiv 0 \pmod{4}$, definamos el
+  \textbf{símbolo de Kronecker} $\chi_a$ de la siguiente manera.
+  \begin{itemize}
+  \item Si $p \mid a$, entonces $\chi_a (p) = 0$.
+  \item Si $p \nmid a$ es un primo impar, entonces $\chi_a (p) = \legendre{a}{p}$
+    es el símbolo de Legendre.
+  \item $\chi_a (2) = +1$ si $a \equiv 1 \pmod{8}$ y $\chi_a (2) = -1$ si
+    $a \equiv 5 \pmod{8}$.
+  \item En geleral, si $\pm b = p_1 \cdots p_s$, entonces
+    $\chi_a (n) = \chi_a (p_1) \cdots \chi_a (p_s)$.
+  \end{itemize}
+
+  Demuestre las siguientes propiedades.
+  \begin{enumerate}
+  \item[1)] $\chi_d (n) = \legendre{n}{d}$ es el símbolo de Jacobi para $n$
+    impar.
+  \item[2)] Si $n > 0$, $\gcd (a,n) = 1$, $a = 2^t\,c$ con $c$ impar, entonces
+    $$\chi_a (n) = (-1)^{\frac{c-1}{2}\,\frac{n-1}{2}}\,\chi_2 (n)^t \, \chi_n (c).$$
+  \item[3)] $\chi_a (m) = \chi_a (n)$ si $m \equiv n \pmod{a}$.
+  \end{enumerate}
+\end{ejercicio}
+
 \begin{ejercicio}
   \label{ejerc:caracter-para-campo-cuadratico}
-  Sea $K = \QQ (\sqrt{d})$ un campo cuadrático. Para $n$ coprimo con $\Delta_K$
-  definamos mediante el \textbf{símbolo de Jacobi} $\legendre{n}{m}$
-  \[ \chi (n) = \begin{cases}
-    \legendre{n}{|d|}, & \text{si }d \equiv 1 \pmod{4},\\
-    (-1)^{\frac{n-1}{2}}\,\legendre{n}{|d|}, & \text{si }d \equiv 3 \pmod{4},\\
-    (-1)^{\frac{n^2-1}{8} + \frac{n-1}{2}\,\frac{d'-1}{2}}\,\legendre{n}{|d'|}, & \text{si }d = 2d'.
-  \end{cases} \]
-  Si $\gcd (n,\Delta_K) \ne 1$, pongamos $\chi (n) = 0$.
+  Para un campo cuadrático $K = \QQ (\sqrt{d})$ consideremos el símbolo de
+  Kronecker $\chi = \chi_{\Delta_K}$.
 
   \begin{enumerate}
   \item[1)] Demuestre que $\chi$ es un carácter de Dirichlet mód $|\Delta_K|$.
@@ -2254,6 +2536,7 @@ dos campos no isomorfos $K \not\cong K'$.
   \end{enumerate}
 \end{ejercicio}
 
+\iffalse
 \begin{ejercicio}
   Sean $X$ un grupo de caracteres de Dirichlet y $K$ un subcampo de
   $\QQ (\zeta_m)$ correspondiente. Demuestre que $K$ es un campo real si y
@@ -2298,3 +2581,4 @@ dos campos no isomorfos $K \not\cong K'$.
   \item[c)] Demuestre que $E_k = -\frac{2B_{k+1,\chi}}{k+1}$.
   \end{enumerate}
 \end{ejercicio}
+\fi
