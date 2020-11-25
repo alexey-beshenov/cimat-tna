@@ -101,5 +101,5 @@ alexey.beshenov@cimat.mx
 Agradezco a CIMAT por la oportunidad de dar este curso, y en particular
 al Dr. Xavier Gómez Mont y Dr. Pedro Luis del Ángel.
 
-Pavel Solomatin y Dmitry Shvetsov han echo varias observaciones útiles acerca de
-una versión preliminar de mis notas.
+Pavel Solomatin y Dmitry Shvetsov han hecho varias observaciones útiles acerca
+de una versión preliminar de mis notas.
