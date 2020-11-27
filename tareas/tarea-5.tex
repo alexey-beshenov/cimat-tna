@@ -15,8 +15,7 @@
 
 \newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
 
-\usepackage{array}
-\newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
+\usepackage{framed}
 
 \usepackage{mathspec}
 
@@ -26,7 +25,10 @@
 
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\CC}{\mathbb{C}}
 \renewcommand{\O}{\mathcal{O}}
+
+\DeclareMathOperator{\Res}{Res}
 
 \title{Teoría de números algebraicos\\Tarea 5}
 \author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
@@ -56,38 +58,267 @@
     \vdots & \ddots & \vdots \\
     x_{n1} Y & \cdots & x_{nn} Y
   \end{pmatrix}. \]
-
   Demuestre que
   $$\det (X\otimes Y) = \det (X)^{n'} \cdot \det (Y)^n.$$
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Hay varios modos de verlo. Por ejemplo, si se trata de matrices complejas,
+    recordamos que $X$ es diagonalizable si y solamente si el polinomio
+    característico $p_X$ no tiene raíces múltiples. Esta condición corresponde
+    a $\Delta (p_X) \ne 0$, donde $\Delta (p_X)$ es el discriminante, que será
+    un polinomio en los coeficientes de $p_X$ (ocupando la fórmula
+    $\Delta (f) = \pm\Res (f,f') = \det (\cdots)$), y entonces un polinomio
+    en los coeficientes de $x_{ij}$. Entonces, el conjunto de matrices
+    diagonalizables en $M_n (\CC)$ corresponde a la condición
+    $\Delta (p_x)\ne 0$, y este conjunto es denso en $M_n (\CC)$. Entonces,
+    bastaría probar la identidad
+    $\det (X\otimes Y) = \det (X)^{n'} \cdot \det (Y)^n$ para las matrices
+    diagonalizables.
+
+    Ahora recordemos que los valores propios de $X\otimes Y$ son de la forma
+    $\alpha\beta$, donde $\alpha$ es un valor propio de $X$ y $\beta$ es un
+    valor propio de $Y$. De hecho, para los vectores propios correspondientes
+    se tiene $X u = \alpha u$ e $Y v = \beta v$. Luego,
+    $(X\otimes Y) (u\otimes v) = \alpha\beta\,u\otimes v$.
+
+    Una vez sabemos esto, no hay que probar mucho. Al diagonalizar $X$ e $Y$,
+    vemos que
+    $$\det (X\otimes Y) = \prod_{i,j} \alpha_i \, \beta_j,$$
+    donde $\alpha_i$ son los valores propios de $X$ y $\beta_j$ son los valores
+    propios de $Y$. Ahora el último producto es precisamente
+    \[ \Bigl(\prod_i \alpha_i\Bigr)^{n'} \cdot \Bigl(\prod_j \beta_j\Bigr)^n
+    = \det (X)^{n'} \cdot \det (Y)^n. \]
+
+    En general, la identidad se cumplirá para matrices con coeficientes en
+    cualquier anillo conmutativo $R$ por la siguiente razón. Acabamos de probar
+    que es cierta para $R = \CC$, pero luego es cierta para $R = \ZZ$, y podemos
+    tratarla como una identidad de polinomios con coeficientes enteros en las
+    variables $x_{ij}$ e $y_{k\ell}$. Tomando el cambio de base de $\ZZ$ a $R$,
+    se concluye que la misma identidad se cumple para los polinomios con
+    coeficientes en $R$.
+
+    \vspace{1em}
+
+    También podemos ocupar un cálculo directo. Notamos que la matriz
+    $X\otimes Y$ es igual al producto
+    $(X\otimes I_{n'})\,(I_n\otimes Y)$. Aquí la matriz $(I_n\otimes Y)$
+    tiene forma
+    \[ \begin{pmatrix}
+      Y \\
+      & \ddots \\
+      & & Y
+    \end{pmatrix} \]
+    Además, después de un cambio de base, $X\otimes I_{n'}$ tiene la misma forma:
+    si $e_1,\ldots,e_n$ es la base estándar de $R^n$
+    y $f_1,\ldots,f_{n'}$ es la base estándar de $R^{n'}$, entonces
+    basta escribir $X\otimes I_{n'}$ en la base
+    \[ e_1\otimes f_1, \, e_1\otimes f_2, \ldots, e_1\otimes f_{n'}, \, e_2\otimes f_1, \, e_2\otimes f_2, \ldots \]
+    Entonces,
+    \[ \det (X\otimes Y) = \det (I_{n'}\otimes X)\cdot \det (I_n\otimes Y)
+    = \det (X)^{n'} \cdot \det (Y)^n. \qedhere \]
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
-  Para el campo de números $K = \QQ (\sqrt{-3},\zeta_5)$ calcule
+  Para el campo de números $K = \QQ (\sqrt{3},\zeta_5)$ calcule
   $\O_K$ y $\Delta_K$. ¿Cuáles primos racionales se ramifican en $K$?
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Tenemos $[\QQ (\sqrt{3}) : \QQ] = 2$ y
+    $[\QQ (\zeta_5) : \QQ] = \phi (5) = 4$. Notamos que
+    $\sqrt{3} \notin \QQ (\zeta_5)$: por ejemplo, si esto sería cierto,
+    entonces $3$ (y también $2$) se ramificaría en $\QQ (\zeta_5)$, pero sabemos
+    que allí se ramifica solo $5$. Estas consideraciones nos llevan a
+    la conclusión que
+    \[ [\QQ (\sqrt{3},\zeta_5) : \QQ] =
+       [\QQ (\sqrt{3}) : \QQ]\cdot [\QQ (\zeta_5) : \QQ] = 8, \]
+    y los campos son linealmente disjuntos. Ya sabemos cómo calcular los
+    discriminantes:
+    $$\Delta_{\QQ (\sqrt{3})} = 4\cdot 3, \quad \Delta_{\QQ (\zeta_5)} = 5^3.$$
+    Los discriminantes son coprimos, así que una base de $\O_K$ es el
+    producto de las bases:
+    \[ 1, ~ \zeta_5, ~ \zeta_5^2, ~ \zeta_5^3, ~
+       \sqrt{3}, ~ \sqrt{3}\zeta_5, ~ \sqrt{3}\zeta_5^2, ~ \sqrt{3}\zeta_5^3. \]
+    En fin, el discriminante será
+    $$\Delta_K = (2^2\cdot 3)^4\cdot (5^3)^2 = 2^8\cdot 3^4\cdot 5^6.$$
+    Solo para confirmarlo, preguntémoslo a PARI/GP:
+    \begin{framed}
+\begin{verbatim}
+? K=nfinit(t^2-3);
+? L=rnfinit(K,polcyclo(5));
+? nfinit(L).disc
+% = 324000000
+? factor (%)
+% = 
+[2 8]
+
+[3 4]
+
+[5 6]
+\end{verbatim}
+    \end{framed}
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Consideremos los campos cuadráticos $K = \QQ (\sqrt{3})$ y
-  $K' = \QQ (\sqrt{5})$ y su compositum $KK' = \QQ (\sqrt{3},\sqrt{5})$.
-  Sea $\O = \ZZ \oplus \sqrt{3}\ZZ \oplus \sqrt{5}\ZZ \oplus \sqrt{15}\ZZ$.
+  $K' = \QQ (\sqrt{-5})$ y su compositum $KK' = \QQ (\sqrt{3},\sqrt{-5})$.
+  Sea $\O = \ZZ \oplus \sqrt{3}\ZZ \oplus \sqrt{-5}\ZZ \oplus \sqrt{-15}\ZZ$.
 
-  \begin{enumerate}
-  \item[1)] Calcule el índice $[\O_{KK'} : \O]$.
+  Calcule $\O_{KK'}$, $\Delta_{KK'}$ y el índice $[\O_{KK'} : \O]$.
 
-  \item[2)] Calcule $\O_{KK'}$ y $\Delta_{KK'}$.
-  \end{enumerate}
+  \ifdefined\solutions
+  \begin{solucion}
+    Tenemos $\Delta_K = 4\cdot 3$ y $\Delta_{K'} = 4\cdot 5$. De aquí sabemos
+    que
+    $$\Delta (\O) = (2^2\cdot 3)^2\cdot (2^2\cdot 5)^2 = 2^8\cdot 3^2\cdot 5^2.$$
+    Sin embargo, los discriminantes no son coprimos, así que no podemos afirmar
+    que $\O = \O_K$.
+
+    De hecho, desde el principio se puede observar que se nos escapó un elemento
+    entero bastante obvio: $3 \equiv -5 \equiv 3 \pmod{4}$, pero luego
+    $-15\equiv 1\pmod{4}$, y el elemento $\frac{1+\sqrt{-15}}{2}$ es entero.
+    Lo que no es tan obvio es que $\frac{\sqrt{3} + \sqrt{-5}}{2}$ es entero,
+    pero lo podemos comprobar calculando directamente el polinomio mínimo.
+    Primero, el polinomio mínimo de $\sqrt{3} + \sqrt{-5}$ es
+    $$x^4 + 4x^2 + 64.$$
+
+    Este es un caso particular del cálculo general: dados dos campos cuadráticos
+    linealmente disjuntos $\QQ (\sqrt{d_1})$ y $\QQ (\sqrt{d_2})$, el polinomio
+    mínimo de $\sqrt{d_1} + \sqrt{d_2}$ sobre $\QQ$ es su polinomio
+    característico que viene dado por
+    $$x^4 - 2\,(d_1+d_2)\,x^2 + (d_1 - d_2)^2.$$
+
+    Ahora si $\sqrt{3} + \sqrt{-5}$ es una raíz de $x^4 + 4x^2 + 64$, entonces
+    $\frac{\sqrt{3} + \sqrt{-5}}{2}$ es una raíz de $x^4 + x^2 + 4$. Esto
+    demuestra la integralidad. Tiene sentido entonces considerar el anillo más
+    grande
+    $$\O' = \ZZ \oplus \sqrt{3}\ZZ \oplus \frac{\sqrt{3} + \sqrt{-5}}{2}\ZZ \oplus \frac{1 + \sqrt{-15}}{2}\ZZ.$$
+    Para no equivocarnos y calcular bien el índice $[\O' : \O]$, notamos que la
+    base de $\O$ se expresa en términos de la base de $\O'$ como
+    \[ \begin{pmatrix}
+      1 & 0 & 0 & -1 \\
+      0 & 1 & -1 & 0 \\
+      0 & 0 & 2 & 0 \\
+      0 & 0 & 0 & 2
+    \end{pmatrix}. \]
+    El determinante de esta matriz es $4$, así que $[\O' : \O] = 4$ y luego
+    $\Delta (\O') = \Delta (\O)/4^2 = 2^4\cdot 3^2\cdot 5^2$. Ahora
+    $$2^4\cdot 3^2\cdot 5^2 = \Delta (\O') = [\O_{KK'} : \O']^2\cdot \Delta_{KK'}.$$
+    Sabemos que $2$, $3$ se ramifican en $\QQ (\sqrt{3})$ y $2$, $5$ se
+    ramifican en $\QQ (\sqrt{-5})$, así que necesariamente $2,3,5$ dividen a
+    $\Delta_K$. Esto nos deja muy pocas posibilidades:
+    $$[\O_{KK'} : \O'] = 1, 2.$$
+    Entonces, bastaría considerar el cociente $\frac{1}{2}\O'/\O'$; es decir,
+    ver cuáles elementos entre
+    \begin{gather*}
+      \frac{a_1}{2}\,\alpha_1 + \frac{a_2}{2}\,\alpha_2 + \frac{a_3}{2}\,\alpha_3 + \frac{a_4}{2}\,\alpha_4,\\
+      \alpha_1 = 1, ~
+      \alpha_2 = \sqrt{3}, ~
+      \alpha_3 = \frac{\sqrt{3} + \sqrt{-5}}{2}, ~
+      \alpha_4 = \frac{1 + \sqrt{-15}}{2}.
+    \end{gather*}
+    son enteros para $a_i = 0,1$.
+    \begin{framed}\small
+\begin{verbatim}
+? K = nfinit(t^2-3);
+? L = rnfinit(K,x^2+5);
+? alpha2 = rnfeltreltoabs(L,t);
+? alpha3 = rnfeltreltoabs(L,(t+x)/2);
+? alpha4 = rnfeltreltoabs(L,(1+t*x)/2);
+
+? { for(a1=0,1, for(a2=0,1, for(a3=0,1, for(a4=0,1,
+        print([[a1,a2,a3,a4],
+               minpoly((a1+a2*alpha2+a3*alpha3+a4*alpha4)/2)])
+)))) };
+[[0, 0, 0, 0], x]
+[[0, 0, 0, 1], x^2 - 1/2*x + 1]
+[[0, 0, 1, 0], x^4 + 1/4*x^2 + 1/4]
+[[0, 0, 1, 1], x^4 - x^3 + 5/2*x^2 + 3/4*x + 9/16]
+[[0, 1, 0, 0], x^2 - 3/4]
+[[0, 1, 0, 1], x^4 - x^3 + 3/4*x^2 - 1/4*x + 23/8]
+[[0, 1, 1, 0], x^4 - 11/4*x^2 + 4]
+[[0, 1, 1, 1], x^4 - x^3 - 1/2*x^2 + 6*x + 6]
+[[1, 0, 0, 0], x - 1/2]
+[[1, 0, 0, 1], x^2 - 3/2*x + 3/2]
+[[1, 0, 1, 0], x^4 - 2*x^3 + 7/4*x^2 - 3/4*x + 3/8]
+[[1, 0, 1, 1], x^4 - 3*x^3 + 11/2*x^2 - 3*x + 1]
+[[1, 1, 0, 0], x^2 - x - 1/2]
+[[1, 1, 0, 1], x^4 - 3*x^3 + 15/4*x^2 - 9/4*x + 27/8]
+[[1, 1, 1, 0], x^4 - 2*x^3 - 5/4*x^2 + 9/4*x + 27/8]
+[[1, 1, 1, 1], x^4 - 3*x^3 + 5/2*x^2 + 21/4*x + 49/16]
+\end{verbatim}
+    \end{framed}
+
+    No hay elementos enteros adicionales, y entonces podemos concluir que
+    $\O_{KK'} = \O'$, $\Delta_{KK'} = 2^4\cdot 3^2\cdot 5^2$,
+    $[\O_{KK'} : \O] = 4$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Calcule que
   \[ \Delta (\ZZ [\zeta_{p^e}]) = \Delta (\Phi_{p^e}) = \pm\,p^s,
      \quad \text{donde } s = p^{e-1}\,(pe - e - 1). \]
+  ¿Cuál es el signo?
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Tenemos
+  \[ \Delta (1, \zeta, \ldots, \zeta^{d-1}) = \Delta (\Phi_{p^e})
+     = \pm N_{K/\QQ} (\Phi_{p^e}' (\zeta)). \]
+  Ahora
+  $$x^{p^e} - 1 = (x^{p^{e-1}} - 1)\,\Phi_{p^e} (x),$$
+  Tomando las derivadas,
+  $$p^e\,x^{p^e-1} = p^{e-1}\,x^{p^{e-1}-1}\,\Phi_{p^e} (x) + (x^{p^{e-1}} - 1)\,\Phi_{p^e}' (x).$$
+  Al sustituir $\zeta$ en lugar de $x$, nos queda
+  $$p^e\,\zeta^{p^e-1} = (\zeta_p - 1)\,\Phi_{p^e}' (\zeta).$$
+  Dado que $\zeta$ es invertible, tenemos $N_{K/\QQ} (\zeta) = \pm 1$.
+  Ahora para calcular la norma de $\zeta_p - 1$, notamos que
+  \[ [\QQ (\zeta_{p^e}) : \QQ (\zeta_p)] =
+     \frac{[\QQ (\zeta_{p^e}) : \QQ]}{[\QQ (\zeta_p) : \QQ]} =
+     \frac{\phi (p^e)}{\phi (p)} = p^{e-1}. \]
+  (Recordamos que $\phi (p^e) = (p-1)\,p^{e-1}$.) Entonces,
+  \[ N_{K/\QQ} (\zeta_p - 1) =
+     N_{\QQ (\zeta_p)/\QQ} (\zeta_p - 1)^{p^{e-1}} = p^{p^{e-1}}. \]
+  Esto nos lleva a la fórmula
+  $$N_{K/\QQ} (\Phi_{p^e}' (\zeta)) = \pm \frac{(p^e)^{\phi (p^e)}}{p^{p^{e-1}}} = \pm p^s,$$
+  donde
+  $$s = e\,\phi (p^e) - p^{e-1} = p^{e-1} \, (pe- e - 1).$$
+  El signo del discriminante sale del teorema de Brill: este es
+  $(-1)^{\phi (p^e)/2}$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Demuestre que si $n = m p^e$, donde $p \nmid m$, entonces se cumple
   la congruencia
   $$\Phi_n (x) \equiv \Phi_m (x)^{\phi (p^e)} \pmod{p}.$$
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Se trata de polinomios con coeficientes enteros, así que en teoría podríamos
+    resolver el ejercicio ocupando fórmulas como
+    $x^n - 1 = \prod_{d\mid n} \Phi_d (x)$ que definen los polinomios
+    ciclotómicos. Procedamos por inducción sobre $m$ y $e$.
+    Por ejemplo, si $m = 1$, entonces la fórmula sí se cumple:
+    \[ \Phi_{p^e} (x) = \Phi_p (x^{p^{e-1}}) = \frac{x^{p^e} - 1}{x^{p^{e-1}} - 1} \equiv (x-1)^{p^e - p^{e-1}} = (x-1)^{\phi (p^e)} \pmod{p}. \]
+    De la misma manera, si $e = 0$, entonces la fórmula se vuelve trivial.
+
+    Para el paso inductivo, escribamos
+    \[ \Phi_n (x) = (x^n-1)\left/\prod_{\substack{d \mid n \\ d < n}} \Phi_d (x)\right.
+    = (x^n-1)\left/\Bigl(\prod_{\substack{d \mid m \\ d < m}}\prod_{0 \le k \le e} \Phi_{d p^k} (x)\prod_{0 \le k \le e-1} \Phi_{m p^k} (x)\Bigr)\right. \]
+    Reduciendo módulo $p$, y usando la identidad
+    $\sum_{0 \le k \le e} \phi (p^k) = p^e$,
+    \[ \Phi_n (x) \equiv \cfrac{\left((x^m - 1)\left/\prod_{\substack{d \mid m \\ d < m}} \Phi_d (x)\right.\right)^{p^e}}{\Phi_m (x)^{p^{e-1}}} = \Phi_m (x)^{\phi (p^e)} \pmod{p}. \qedhere \]
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \end{document}

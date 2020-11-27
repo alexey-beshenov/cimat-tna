@@ -1,0 +1,429 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\usepackage{tikz-cd}
+\usetikzlibrary{babel}
+\usetikzlibrary{calc}
+
+\newcounter{tarea}
+\setcounter{tarea}{6}
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}[tarea]
+
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\usepackage{framed}
+
+\usepackage{mathspec}
+
+\setmainfont{PT Serif}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+
+\DeclareMathOperator{\Gal}{Gal}
+
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\CC}{\mathbb{C}}
+\renewcommand{\Re}{\operatorname{Re}}
+
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+
+\title{Teoría de números algebraicos\\Tarea 6}
+\author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
+\date{8 de octubre de 2020}
+
+% \def\solutions{true}
+
+\begin{document}
+
+{\sffamily\bfseries\maketitle}
+
+\ifdefined\solutions
+\else
+\thispagestyle{empty}
+\fi
+
+\vspace{1em}
+
+\begin{ejercicio}
+  Para un campo cuadrático $\QQ (\sqrt{d})$ encuentre $n$ tal que
+  $\QQ (\sqrt{d}) \subset \QQ (\zeta_n)$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Tenemos $\sqrt{-1} \in \QQ (\zeta_4)$ y $\sqrt{\pm 2} \in \QQ (\zeta_8)$.
+    Si $p$ es un primo impar, sabemos que $\sqrt{p^*} \in \QQ (\zeta_p)$, donde
+    $p^* = (-1)^{\frac{p-1}{2}}\,p$ (véase la tarea 3). Si $p \equiv 3\pmod{4}$,
+    de todos modos $\sqrt{p} \in \QQ (\zeta_{4p})$. Ahora si $d$ es un entero
+    libre de cuadrados, podemos factorizarlo como $\pm 2^e p_1 \cdots p_s$,
+    donde $e = 0, 1$ y los $p_i$ son impares, y las consideraciones de arriba
+    nos dicen que $\QQ (\sqrt{d})$ es un subcampo de
+    $\QQ (\zeta_{8 p_1\cdots p_s})$.
+
+    Este es un caso particular del teorema de Kronecker--Weber que afirma que
+    cualquier campo abeliano $K/\QQ$ se encaja en un campo ciclotómico.
+  \end{solucion}
+  \fi
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para $K = \QQ (\sqrt[4]{2},i)$ calcule el grupo $\Gal (K/\QQ)$ y describa
+  los subcampos de $K$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Primero hay que ver que $K/\QQ$ es una extensión de Galois. Esto se sigue
+    del hecho de que $K$ es el campo de descomposición del polinomio
+    $$x^4 - 2 = (x - \sqrt[4]{2})\,(x + \sqrt[4]{2})\,(x - i\sqrt[4]{2})\,(x + i\sqrt[4]{2}).$$
+    Se trata del compositum de campos $\QQ (\sqrt[4]{2})$ y $\QQ (i)$,
+    y como una base de $K$ sobre $\QQ$ podemos tomar
+    \[ 1, \, 2^{1/4}, \, 2^{1/2}, \, 2^{3/4}, \,
+       i, \, i2^{1/4}, \, i2^{1/2}, \, i2^{3/4}. \]
+
+    Hay dos automorfismos evidentes:
+    $\sigma\colon \sqrt[4]{2} \mapsto i\sqrt[4]{2}$ de orden $4$
+    y $\tau\colon i \mapsto -i$ de orden $2$
+    (la conjugación compleja). Calculamos que
+    $\sigma\tau = \tau\sigma^3 \ne \tau\sigma$. De estas consideraciones se ve
+    que $\sigma$ y $\tau$ generan un grupo de $8$ elementos que será isomorfo al
+    grupo diédrico $D_4$ (también conocido como $D_8$).  Aquí está el diagrama
+    de subgrupos. Hay $5$ subgrupos de índice $4$ y $3$ subgrupos de índice $2$.
+
+    \begin{center}
+      \begin{tikzpicture}
+        \node (D4) {$G$};
+        \node (s41) at (-3,2) {$\langle\tau,\sigma^2\rangle$};
+        \node (s42) at (0,2) {$\langle\sigma\rangle$};
+        \node (s43) at (+3,2) {$\langle\tau\sigma,\sigma^2\rangle$};
+
+        \node (s21) at (-4,4) {$\langle\tau\rangle$};
+        \node (s22) at (-2,4) {$\sigma\langle\tau\rangle\sigma^{-1}$};
+        \node (s23) at (0,4) {$\langle\sigma^2\rangle$};
+        \node (s24) at (+2,4) {$\langle\tau\sigma\rangle$};
+        \node (s25) at (+4,4) {$\tau\langle\tau\sigma\rangle\tau^{-1}$};
+
+        \draw (s41.south) -- (D4.north west);
+        \draw (s42.south) -- (D4.north);
+        \draw (s43.south) -- (D4.north east);
+
+        \draw (s23.south west) -- ($(s41.north)+(0.2,0)$);
+        \draw (s23.south) -- (s42.north);
+        \draw (s23.south east) -- ($(s43.north)-(0.2,0)$);
+        \draw (s21.south) -- ($(s41.north)-(0.2,0)$);
+        \draw ($(s22.south)-(0.3,0)$) -- (s41.north);
+        \draw ($(s24.south)+(0.3,0)$) -- (s43.north);
+        \draw (s25.south) -- ($(s43.north)+(0.2,0)$);
+
+        \node (s1) at (0,6) {$\{ 1 \}$};
+        \draw ($(s1.south)-(0.2,0)$) -- (s21.north);
+        \draw ($(s1.south)-(0.1,0)$) -- (s22.north);
+        \draw (s1.south) -- (s23.north);
+        \draw ($(s1.south)+(0.1,0)$) -- (s24.north);
+        \draw ($(s1.south)+(0.2,0)$) -- (s25.north);
+      \end{tikzpicture}
+    \end{center}
+
+    Es un poco trabajoso, pero no es muy difícil calcular uno por uno los
+    subcampos fijos correspondientes.
+
+    \begin{center}
+      \begin{tikzpicture}
+        \node (D4) {$G$};
+        \node (s41) at (-3,2) {$\QQ (\sqrt{2})$};
+        \node (s42) at (0,2) {$\QQ (i)$};
+        \node (s43) at (+3,2) {$\QQ (\sqrt{-2})$};
+
+        \node (s21) at (-4,4) {$\QQ (\sqrt[4]{2})$};
+        \node (s22) at (-2,4) {$\QQ (i\sqrt[4]{2})$};
+        \node (s23) at (0,4) {$\QQ (\zeta_8)$};
+        \node (s24) at (+2,4) {$\QQ (\zeta_8 \sqrt[4]{2})$};
+        \node (s25) at (+4,4) {$\QQ (\zeta_8^3 \sqrt[4]{2})$};
+
+        \draw (s41.south) -- (D4.north west);
+        \draw (s42.south) -- (D4.north);
+        \draw (s43.south) -- (D4.north east);
+
+        \draw (s23.south west) -- ($(s41.north)+(0.2,0)$);
+        \draw (s23.south) -- (s42.north);
+        \draw (s23.south east) -- ($(s43.north)-(0.2,0)$);
+        \draw (s21.south) -- ($(s41.north)-(0.2,0)$);
+        \draw ($(s22.south)-(0.3,0)$) -- (s41.north);
+        \draw ($(s24.south)+(0.3,0)$) -- (s43.north);
+        \draw (s25.south) -- ($(s43.north)+(0.2,0)$);
+
+        \node (s1) at (0,6) {$\QQ (\sqrt[4]{2},i)$};
+        \draw ($(s1.south)-(0.2,0)$) -- (s21.north);
+        \draw ($(s1.south)-(0.1,0)$) -- (s22.north);
+        \draw (s1.south) -- (s23.north);
+        \draw ($(s1.south)+(0.1,0)$) -- (s24.north);
+        \draw ($(s1.south)+(0.2,0)$) -- (s25.north);
+
+        \node at ($(s21)!.5!(s22)$) {$\cong$};
+        \node at ($(s24)!.5!(s25)$) {$\cong$};
+      \end{tikzpicture}
+    \end{center}
+    (Para verificar los cálculos, note que
+    $\zeta_8 = \frac{\sqrt{2}}{2} + i\frac{\sqrt{2}}{2}$.)
+  \end{solucion}
+  \fi
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos el campo bicuadrático $K = \QQ (\sqrt{-3}, \sqrt{5})$.
+
+  \begin{enumerate}
+  \item[1)] Describa cómo los primos racionales se factorizan en $\O_K$.
+
+  \item[2)] Calcule la densidad de primos que corresponden a cada tipo de
+    descomposición.
+  \end{enumerate}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    En $K$ tenemos tres subcampos cuadráticos:
+    \[ F_1 = \QQ (\sqrt{-3}), \quad
+    F_2 = \QQ (\sqrt{5}), \quad
+    F_3 = \QQ (\sqrt{-15}). \]
+
+    La descomposición en $F_i$ se determina por los símbolos de Legendre
+    correspondientes. Todo depende del resto de $p$ módulo $15$:
+    \begin{align*}
+      \legendre{-3}{p} & = \begin{cases}
+        +1, & p\equiv 1 \pmod{3},\\
+        -1, & p\equiv 2 \pmod{3};
+      \end{cases}\\
+      \legendre{5}{p} & = \begin{cases}
+        +1, & p\equiv 1,4 \pmod{5},\\
+        -1, & p\equiv 2,3 \pmod{5};
+      \end{cases}\\
+      \legendre{-15}{p} & = \begin{cases}
+        +1, & p\equiv 1,2,4,8 \pmod{15},\\
+        -1, & p\equiv 7,11,13,14 \pmod{15}.
+      \end{cases}
+    \end{align*}
+
+    La extensión $K/\QQ$ es de Galois, así que $e_p\,f_p\,g_p = 4$. Primero
+    podemos ver qué pasa con los primos ramificados. Tenemos $K = F_1 F_2$
+    y los disciminantes son $\Delta_{F_1} = -3$, $\Delta_{F_2} = 5$, así que
+    $\Delta_K = 3^2\cdot 5^2$, y los primos ramificados en $K$ son $3$ y $5$.
+
+    Si $p = 3$, entonces $p$ se ramifica en $F_1$ y es inerte en $F_2$. Esto
+    quiere decir que $2 \mid e_3$ y $2 \mid f_3$, así que el tipo de
+    descomposición será $\mathfrak{p}^2$.
+
+    Si $p = 5$, entonces $p$ se ramifica en $F_2$ y es inerte en $F_1$, así
+    que el tipo de descomposición es $\mathfrak{p}^2$.
+
+    Para los primos no ramificados se cumple $f_p\,g_p = 4$.
+
+    Si $p$ se escinde en uno de los subcampos cuadráticos, pero es inerte en
+    otro, entonces $2 \mid f_p$ y $g_p \ge 2$, así que el tipo de
+    descomposición será $\mathfrak{p}_1\,\mathfrak{p}_2$, donde $f = f' = 2$.
+    Los primos correspondientes son los siguientes.
+
+    \begin{itemize}
+    \item Si $p \equiv 2, 8 \pmod{15}$, entonces $p$ es inerte en $F_1$ y $F_2$,
+      pero se escinde en $F_3$.
+
+    \item Si $p \equiv 7, 13 \pmod{15}$, entonces $p$ se escinde en $F_1$, pero
+      es inerte en $F_2$ y $F_3$.
+
+    \item Si $p \equiv 11, 14 \pmod{15}$, entonces $p$ es inerte en $F_1$ y
+      $F_3$, pero se escinde en $F_2$.
+    \end{itemize}
+
+    Nos queda el caso de $p \equiv 1,4 \pmod{15}$ cuando $p$ se escinde en los
+    tres subcampos cuadráticos. Nos gustaría probar que en este caso la
+    factorización tiene forma
+    $p\O_K = \mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$.
+    Esto es equivalente a probar que para todo ideal primo
+    $\mathfrak{p} \subset \O_K$ tal que $\mathfrak{p} \mid p$ se tiene
+    $[\O_K/\mathfrak{p} : \FF_p] = 1$. En otras palabres, hay que ver que para
+    todo $\alpha \in \O_K$ existe un entero racional $a \in \ZZ$ tal que
+    $\alpha \equiv a \pmod{\mathfrak{p}}$. Consideremos los ideales
+    $\mathfrak{p}_1 = \mathfrak{p} \cap \O_{F_1}$ y
+    $\mathfrak{p}_2 = \mathfrak{p} \cap \O_{F_2}$. Estos son ideales primos en
+    $\O_{F_1}$ y $\O_{F_2}$ respectivamente. Por nuestra hipótesis, se tiene
+    $[\O_{F_1}/\mathfrak{p}_1 : \FF_p] = 1$ y $[\O_{F_2}/\mathfrak{p}_2 : \FF_p]
+    = 1$. En otras palabras, cualquier elemento $\alpha \in \O_{F_i}$ es
+    congruente a algún entero racional módulo $\mathfrak{p}_i$. Ahora
+    $K = F_1 F_2$, y todo elemento $\alpha \in \O_K$ tiene forma
+    $\sum_i \alpha_i \beta_i$, donde $\alpha_i \in \O_{F_1}$ y
+    $\beta_i \in \O_{F_2}$. Dado que
+    $\mathfrak{p} \mid \mathfrak{p}_1 \O_K$ y
+    $\mathfrak{p} \mid \mathfrak{p}_2 \O_K$, sabemos que cada $\alpha_i$ y
+    $\beta_i$ se reduce a un entero racional módulo $\mathfrak{p}$, y por ende
+    $\sum_i \alpha_i \beta_i$ cumple con la misma propiedad. Esto termina la
+    prueba.
+
+    Notamos que el argumento que acabamos de ver se generaliza al siguiente
+    resultado. Si un primo racional $p \in \ZZ$ se factoriza en $[K : \QQ]$
+    ideales primos en $\O_K$, entonces se dice que $p$
+    \textbf{se escinde completamente} en $K$. Ahora si $K$ es el compositum de
+    $F_1$ y $F_2$, y $p$ se escinde completamente en $F_1$ y $F_2$, entonces este
+    también se escinde completamente en $K$.
+
+    Según el teorema de Dirichlet sobre primos en progresiones aritméticas,
+    las densidades son entonces $\frac{3}{4}$ para
+    $\mathfrak{p}_1\,\mathfrak{p}_2$ y $\frac{1}{4}$ para
+    $\mathfrak{p}_1 \, \mathfrak{p}_2 \, \mathfrak{p}_3 \, \mathfrak{p}_4$.
+  \end{solucion}
+  \fi
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $p$ un número primo y $\chi$ el carácter de Dirichlet de orden $2$ mód
+  $p$, definido por el símbolo de Legendre $\chi (n) = \legendre{n}{p}$.
+
+  \begin{enumerate}
+  \item[1)] Demuestre que
+    $\exp (g (\chi)\,L (1,\chi)) = \prod_n (1 - \zeta_p^n)\,\prod_r (1 - \zeta_p^r)^{-1}$,
+    donde $g (\chi) = \sum_{1 \le a \le p-1} \chi (a)\,\zeta_p^a$,
+    y los productos son sobre los no-residuos y residuos cuadráticos mód $p$
+    respectivamente.
+
+  \item[2)] Use la parte anterior para calcular $L (1,\chi)$, donde $\chi$ es el
+    carácter de orden $2$ mód $5$.
+    (Para el valor numérico en PARI/GP, basta digitar \texttt{lfun(5,1)})
+  \end{enumerate}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Denotemos
+    $$P = \prod_n (1 - \zeta_p^n) \, \prod_r (1 - \zeta_p^r)^{-1}.$$
+    Tenemos
+    $$\log P = \sum_n \log (1 - \zeta_p^n) - \sum_r \log (1 - \zeta_p^r) = \sum_a -\chi (a) \, \log (1 - \zeta_p^a).$$
+    La serie $-\log (1-z) = \sum_{n\ge 1} \frac{z^n}{n}$ converge para $|z| < 1$
+    y también converge para $z = \zeta_p^r$ (el teorema de Abel). Podemos
+    escribir
+    $$\log P = \sum_{m\ge 1} \frac{1}{m}\,\sum_a \chi (a)\,\zeta_p^{am}.$$
+    Ahora ocupamos la identidad para las sumas cuadráticas de Gauss
+    $$\sum_a \chi (a)\,\zeta_p^{am} = g (\chi)\,\chi (m).$$
+    Entonces,
+    $$\log P = \sum_a \chi (a)\,\sum_{m\ge 1} \frac{\chi (m)}{m} = g (\chi)\,L (1,\chi).$$
+    Esto establece la identidad deseada $\exp (g (\chi)\,L (1,\chi)) = P$.
+
+    En particular, si $p = 5$, calculamos
+    $$g (\chi) = \zeta_5 - \zeta_5^2 - \zeta_5^3 + \zeta_5^4 = \sqrt{5}$$
+    y
+    \[ P = \frac{(1 - \zeta_5^2)\,(1 - \zeta_5^3)}{(1 - \zeta_5)\,(1 - \zeta_5^4)}
+         = 1 - \zeta_5^2 - \zeta_5^3 = \frac{3+\sqrt{5}}{2}. \]
+    Ahora
+    $$L (1,\chi) = \frac{1}{\sqrt{5}}\,\log \frac{3+\sqrt{5}}{2}.$$
+    Lo podemos confirmar con PARI/GP:
+    \begin{framed}
+\begin{verbatim}
+? 1/sqrt(5) * log ((3 + sqrt(5))/2)
+% = 0.43040894096400403888943323295060542543
+? lfun (5,1)
+% = 0.43040894096400403888943323295060542542
+\end{verbatim}
+    \end{framed}
+    De manera similar, si $p = 3$, entonces $g (\chi) = \zeta_3 - \zeta_3^2 = \sqrt{-3}$
+    y $P = \frac{1 - \zeta_3^2}{1 - \zeta_3} = 1 + \zeta_3 = \zeta_6$.
+    Así nos quedamos con la fórmula
+    $$\exp (2\pi i/6) = \exp (\sqrt{-3} \, L (1,\chi)).$$
+    Entonces (módulo $2\pi i\ZZ$) se cumple
+    $\frac{2\pi i}{6} = i\sqrt{3} \, L (1,\chi)$.
+    De aquí $L (1,\chi) = \frac{\pi}{3\sqrt{3}}$.
+    \begin{framed}
+\begin{verbatim}
+? lfun (-3,1)
+% = 0.60459978807807261686469275254738524409
+? Pi/(3*sqrt(3))
+% = 0.60459978807807261686469275254738524409
+\end{verbatim}
+    \end{framed}
+  \end{solucion}
+  \fi
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos funciones $f,g\colon \ZZ_{>1} \to \CC$ y las series de
+  Dirichlet correspondientes
+  $F (s) = \sum_{n\ge 1} \frac{f(n)}{n^s}$ y
+  $G (s) = \sum_{n\ge 1} \frac{g(n)}{n^s}$.
+
+  \begin{enumerate}
+  \item[1)] Demuestre que cuando las series convergen absolutamente en $s$,
+    se tiene
+    $F (s)\cdot G (s) = \sum_{n\ge 1} \frac{(f\ast g) (n)}{n^s}$,
+    donde
+    $(f\ast g) (n) = \sum_{d\mid n} f (d) \, g \left(\frac{n}{d}\right)$.
+
+  \item[2)] Sean $\mu (n)$ la función de Möbius,
+    $\tau (n)$ el número de divisores,
+    $\sigma (n) = \sum_{d \mid n} d$ la suma de divisores,
+    y $\phi (n)$ la función de Euler. Demuestre que
+  \end{enumerate}
+  \[ \sum_{n\ge 1} \frac{\mu (n)}{n^s} = \frac{1}{\zeta (s)}, ~
+     \sum_{n\ge 1} \frac{\tau (n)}{n^s} = \zeta (s)^2, ~
+     \sum_{n\ge 1} \frac{\sigma (n)}{n^s} = \zeta (s)\,\zeta (s-1), ~
+     \sum_{n\ge 1} \frac{\phi (n)}{n^s} = \frac{\zeta (s-1)}{\zeta (s)}. \]
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Usando la convergencia absoluta, podemos cambiar el orden de términos
+    y escribir
+    \[ F (s)\cdot G (s)
+    = \Bigl(\sum_{m\ge 1} \frac{f (m)}{m^s}\Bigr) \cdot
+    \Bigl(\sum_{n\ge 1} \frac{g (n)}{n^s}\Bigr)
+    = \sum_{m,n\ge 1} \frac{f (m) \, g (n)}{(mn)^s}
+    = \sum_{n\ge 1} \sum_{d \mid n} \frac{f (d) \, g (n/d)}{n^s}. \]
+    Además, la serie que acabamos de obtener también converge absolutamente
+    en $s$, dado que
+    \[ \sum_{n\ge 1} \frac{|(f \ast g) (n)|}{|n^s|} \le
+    \sum_{n\ge 1} \sum_{d\mid n} \frac{|f (d)|\cdot |g (n/d)|}{|n^s|} =
+    \Bigl(\sum_{m\ge 1} \frac{|f (s)|}{|n^s|}\Bigr)\cdot
+    \Bigl(\sum_{n\ge 1} \frac{|g (s)|}{|n^s|}\Bigr) < \infty. \]
+
+    La serie $\zeta (s) = \sum_{n\ge 1} \frac{1}{n^s}$ converge
+    absolutamente para
+    $\Re s > 1$, así que la serie $\sum_{n\ge 1} \frac{\mu (n)}{n^s}$
+    converge absolutamente para $\Re s > 1$.
+
+    Denotemos por $1$ la función constante $n \mapsto 1$. Tenemos
+    \[ (\mu\ast 1) (n) = \sum_{d\mid n} \mu (d) = \begin{cases}
+      1, & \text{si }n = 1,\\
+      0, & \text{si }n > 1.
+    \end{cases}. \]
+    De hecho, escribiendo $n = p_1^{e_1}\cdots p_s^{e_s}$, para $n > 1$, tenemos
+    $$\sum_{d\mid n} \mu (d) = \sum_{(e_1,\ldots,e_n)} \mu (p_1^{e_1}\cdots p_s^{e_s}),$$
+    donde $e_i = 0$ o $1$. Luego,
+    \[ \sum_{d\mid n} \mu (d) = 1 - s + {s \choose 2} - {s \choose 3} + \cdots + (-1)^s
+    = (1-1)^s = 0. \]
+
+    Para la segunda identidad, calculamos
+    $$(1 \ast 1) (n) = \sum_{d\mid n} 1 = \tau (n).$$
+    Entonces, $\zeta (s)^2 = \sum_{n\ge 1} \frac{\tau (n)}{n^s}$, y esta serie
+    converge absolutamente para ${\Re s > 1}$.
+
+    Para la tercera identidad, notamos que
+    $$\zeta (s-1) = \sum_{n\ge 1} \frac{1}{n^{s-1}} = \sum_{n\ge 1} \frac{n}{n^s},$$
+    y esta serie converge absolutamente para $\Re s > 2$. Calculamos entonces
+    $$(1\ast id) (n)= \sum_{d\mid n} d = \sigma (n).$$
+    Entonces, $\zeta (s)\,\zeta (s-1) = \sum_{n\ge 1} \frac{\sigma (n)}{n^s}$,
+    y esta serie converge absolutamente para $\Re s > 2$.
+
+    En fin, para la última identidad, calculamos
+    \[ \frac{\zeta (s-1)}{\zeta (s)}
+    = \Bigl(\sum_{m\ge 1} \frac{m}{m^s}\Bigr)\cdot
+    \Bigl(\sum_{n\ge 1} \frac{\mu (n)}{n^s}\Bigr). \]
+    Ahora
+    $$(id\ast\mu) (n) = \sum_{d\mid n} \mu (d)\,\frac{n}{d} = \phi (n).$$
+    Esto se sigue de la fórmula $\sum_{d\mid n} \phi (d) = n$ y la inversión
+    de Möbius. Entonces, podemos concluir que
+    $\frac{\zeta (s-1)}{\zeta (s)} = \sum_{n\ge 1} \frac{\phi (n)}{n^s}$,
+    y esta serie converge absolutamente para $\Re s > 2$.
+  \end{solucion}
+  \fi
+\end{ejercicio}
+
+\end{document}

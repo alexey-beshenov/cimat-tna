@@ -5,6 +5,8 @@
 
 \usepackage{amsmath,amssymb,amsthm}
 
+\usepackage{multicol}
+
 \usepackage{tikz-cd}
 \usetikzlibrary{babel}
 
@@ -15,8 +17,7 @@
 
 \newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
 
-\usepackage{array}
-\newcolumntype{x}[1]{>{\centering\hspace{0pt}}p{#1}}
+\usepackage{framed}
 
 \usepackage{mathspec}
 
@@ -29,7 +30,9 @@
 \newcommand{\QQ}{\mathbb{Q}}
 \renewcommand{\O}{\mathcal{O}}
 
-\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\Res}{Res}
+\renewcommand\gcd{\operatorname{mcd}}
 
 \title{Teoría de números algebraicos\\Tarea 4}
 \author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
@@ -53,6 +56,43 @@
 \begin{ejercicio}
   Encuentre la fórmula para el discriminante del polinomio
   $$x^n + ax + b.$$
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Este cálculo es bien conocido, pero espero que no hayan \emph{googleado}
+    la respuesta inmediatamente :--) Daré una prueba que tiene sentido en
+    el contexto de nuestra clase. Hemos visto la fórmula
+    \[ \Delta (f) = (-1)^{n\choose 2}\,\Res (f,f')
+                  = (-1)^{n \choose 2} \prod_{1 \le i \le n} f' (\alpha_i), \]
+    donde $\alpha_1,\ldots,\alpha_n$ son las raíces de $f$.
+    En nuestro caso $f = x^n + ax + b$ y su derivada es
+    $f' = n x^{n-1} + a$. Para una raíz $\alpha$ de $f$ calculamos
+    \[ \alpha f' (\alpha) = n\,\alpha^n + a\,\alpha =
+       n\,(-a\alpha - b) + a\,\alpha = -nb - (n-1)\,a\,\alpha. \]
+    Entonces,
+    $$\frac{\alpha}{(n-1)\,a}\,f' (\alpha) = -\frac{nb}{(n-1)\,a} - \alpha.$$
+    Ahora
+    \[ \prod_i f' (\alpha_i) =
+       \frac{(n-1)^n\,a^n}{\prod_i \alpha} \, \prod_i \left(-\frac{nb}{(n-1)\,a} - \alpha_i\right)
+       = \frac{(n-1)^n\,a^n}{(-1)^n b}\,f\left(-\frac{nb}{(n-1)\,a}\right). \]
+    Calculamos que
+    \[ f\left(-\frac{nb}{(n-1)\,a}\right) =
+       (-1)^n\,\frac{n^n\,b^n}{(n-1)^n\,a^n} - \frac{nb}{(n-1)} + b. \]
+    De aquí
+    $$\prod_i f' (\alpha_i) = n^n\,b^{n-1} - (-1)^n\,(n-1)^{n-1}\,a^n.$$
+    Entonces, podemos escribir la fórmula del discriminante como
+    $$\Delta (f) = (-1)^{n\choose 2}\,((-1)^{n+1}\,(n-1)^{n-1}\,a^n + n^n\,b^{n-1}).$$
+
+    Técnicamente hablando, en algún momento hemos ocupado la división por
+    $\alpha_i$ y por $a$, asumiendo de manera implícita que $a,b\ne 0$.
+    Sin embargo, de todos modos, el resultante puede ser escrito como
+    el determinante de alguna matriz formada por los coeficientes de $f$ y $f'$,
+    y entonces este es un polinomio en los coeficientes de $f$. Como
+    consecuencia, si nuestra fórmula es válida para $a,b \ne 0$, esta debe ser
+    válida para $a = 0$ o $b = 0$. (Les doy esta justificación tramposa para no
+    considerar diferentes casos por separado :--)
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -60,6 +100,60 @@
   $\alpha \notin m \O_K$ para $m > 1$. Demuestre que en este caso
   existe una base de $\O_K$ sobre $\ZZ$ que contiene $\alpha$. En particular,
   demuestre que $\O_K$ siempre admite una base que contiene $1$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Esta pregunta es sobre álgebra lineal. Dado que $\O_K \cong \ZZ^n$, estamos
+    simplemente afirmando que si $\vec{a} = (a_1,\ldots,a_n)$ es un vector
+    que cumple la condición $\gcd (a_1,\ldots,a_n) = 1$, entonces $\vec{a}$ está
+    contenido en alguna base de $\ZZ^n$. Esto equivale a decir que existe una
+    matriz entera invertible de $n\times n$ que contiene el vector $\vec{a}$
+    como una de sus columnas (o filas). Está claro que esto es imposible si
+    $a_1,\ldots,a_n$ no son coprimos: el determinante de la matriz será
+    divisible por $d = \gcd (a_1,\ldots,a_n)$. Para $n = 2$ la afirmación está
+    clara:
+    \[ \gcd (a_1, a_2) = 1 \iff
+       \det\begin{pmatrix} a_1 & b_1 \\ a_2 & b_2 \end{pmatrix} = \pm 1
+       \text{ para algunos }b_1,b_2 \in \ZZ. \]
+    Se puede dar una prueba por inducción que a partir de $\vec{a}$   
+    construye una matriz en $\GL_n (\ZZ)$ que contiene $\vec{a}$. A saber, si
+    $\gcd (a_1,\ldots,a_n) = 1$, consideremos los números
+    $\frac{a_1}{d},\ldots,\frac{a_{n-1}}{d}$, donde
+    $d = \gcd (a_1,\ldots,a_{n-1})$. En este caso por la hipótesis de inducción
+    habrá una matriz de determinante $\pm 1$
+    \[ \begin{pmatrix}
+      a_1/d & b_{11} & \cdots & b_{1,n-2} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      a_{n-1}/d & b_{n-1,1} & \cdots & b_{n-1,n-2}
+    \end{pmatrix}. \]
+    Ahora $\gcd (a_1,\ldots,a_n) = \gcd (d, a_n) = 1$, así que se tiene
+    $x d + y a_n = 1$ para algunos $x,y\in \ZZ$. Se puede verificar que
+    \[ \det \begin{pmatrix}
+      a_1 & b_{11} & \cdots & b_{1,n-2} & y\,a_1/d \\
+      \vdots & \vdots & \ddots & \vdots & \vdots \\
+      a_{n-1} & b_{n-1,1} & \cdots & b_{n-1,n-2} & y\,a_{n-1}/d \\
+      a_n & 0 & \cdots & 0 & x
+    \end{pmatrix} = \pm 1. \]
+    (Despeje el determinante respecto a la última fila.)
+
+    \pagebreak
+
+    Propongo ver un argumento un poco distinto y más natural.
+
+    Consideremos el cociente de $\ZZ$-módulos $M = \ZZ^n/\ZZ\vec{a}$. Afirmamos
+    que este es un $\ZZ$-módulo libre (de rango $n-1$). Dado que $M$ es un grupo
+    abeliano finitamente generado (siendo un cociente de $\ZZ^n$), es suficiente
+    probar que $M$ es libre de torsión. La torsión significa en este caso que
+    existe un vector $\vec{b} \notin \ZZ \vec{a}$, tal que para algún $c \ne 0$
+    se cumple $c \vec{b} \in \ZZ \vec{a}$. Pero no es difícil ver que esto es
+    imposible bajo nuestra hipótesis sobre $\vec{a}$.
+
+    Ahora tenemos $\ZZ^n/\ZZ\vec{a} \cong \ZZ^{n-1}$. Esto significa que existen
+    algunos vectores $\vec{e}_1, \ldots, \vec{e}_{n-1} \in \ZZ^n$ tales que sus
+    imágenes en el cociente $\ZZ^n/\ZZ\vec{a}$ forman una base. Pero luego
+    $\vec{e}_1, \ldots, \vec{e}_{n-1}, \vec{a}$ es una base de $\ZZ^n$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -80,11 +174,163 @@
   \item[c)] Use estas consideraciones para calcular el anillo de enteros $\O_K$
     y discriminante $\Delta_K$ (¡la respuesta depende de $d$!).
   \end{enumerate}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Las trazas son
+    \[ T_{K/\QQ} (\beta) = 3a, \quad
+       T_{K/\QQ} (\alpha\beta) = 3cd, \quad
+       T_{K/\QQ} (\alpha^2\beta) = 3bd, \]
+    y la norma es
+    $$N_{K/\QQ} (\beta) = a^3 - 3 abcd + b^3 d + c^3 d^2.$$
+
+    Ahora si $\beta \in \O_K$, entonces las trazas y normas de arriba son
+    números enteros. Las condiciones para las trazas quieren decir que existen
+    $a',b',c' \in \ZZ$ tales que
+    \[ a = \frac{a'}{3}, \quad b = \frac{b'}{3d}, \quad c = \frac{c'}{3d}. \]
+    Lo que queremos ver es que $d \mid b'$ y $d \mid c'$, y para esto vamos a revisar
+    la norma de $3\beta$ que resulta ser igual a
+    $$a'^3 - \frac{3 a' b' c'}{d} + \frac{b'^3}{d^2} + \frac{c'^3}{d} \in \ZZ.$$
+    Entonces,
+    $$-\frac{3 a' b' c' + c'^3}{d} + \frac{b'^3}{d^2} \in \ZZ.$$
+    Supongamos que para algún $p \mid d$ se tiene $p \nmid b'$. En este caso
+    tomando las valuaciones $p$-ádicas de la expresión de arriba llegamos a una
+    contradicción. Entonces, $d \mid b'$. Ahora sustituyendo $b = \frac{b'}{3}$,
+    de la misma manera se ve que $d \mid c'$. Esto demuestra que
+    $\beta \in \frac{1}{3}\ZZ[\alpha]$. Entonces,
+    $$\ZZ [\alpha] \subseteq \O_K \subseteq \frac{1}{3}\ZZ[\alpha].$$
+    Podemos analizar el cociente $\frac{1}{3}\ZZ[\alpha]/\ZZ[\alpha]$ para ver cuáles
+    elementos enteros faltan a $\ZZ [\alpha]$; es decir, cuáles elementos entre
+    $$\beta = \frac{1}{3}\,(a + b\alpha + c\alpha^2)$$
+    son enteros, donde $0 \le a,b,c < 3$. Escribamos el polinomio característico
+    de $\beta$ (lo calculé en PARI/GP):
+    \[ x^3 - ax^2 + \frac{a^2 - bcd}{3}\,x - \frac{a^3 + b^3 d + d^2 c^3 - 3 abcd}{27}. \]
+
+    Si $b = 0$ o $c = 0$, entonces el coeficiente de $x$ no será entero, y si
+    $a = 0$, el término constante no es entero. Esto nos dice que $abc \ne 0$,
+    y tenemos que analizar ocho diferentes casos. Además, notamos que $\beta$
+    es entero si y solamente si $-\beta$ lo es. Módulo $3$, esto corresponde
+    a pasar de $(a,b,c)$ a $(2a, 2b, 2c)$. Entonces, en realidad no son ocho
+    casos diferentes, sino solamente cuatro.
+    
+    En cada caso la condición sobre el coeficiente de $x$ nos dice cuál es el
+    resto de $d$ módulo $3$, mientras que la condición sobre el término
+    constante quiere decir algo sobre $d$ módulo $3^3$.
+
+    \begin{center}\renewcommand{\arraystretch}{1.5}
+      \begin{tabular}{cccccc}
+        $a$ & $b$ & $c$ & $d~(3)$ & $27\times\text{term. const.}$ & $d~(3^3)$ \\
+        \hline
+        $1$ & $1$ & $1$ & $1$ & $d^2 - 2d + 1$ & $1,10,19$ \\
+        $1$ & $1$ & $2$ & $2$ & $8d^2 - 5d + 1$ & --- \\
+        $1$ & $2$ & $1$ & $2$ & $d^2 + 2d + 1$ & $8, 17, 26$ \\
+        $1$ & $2$ & $2$ & $1$ & $8d^2 - 4d + 1$ & --- \\
+        \hline
+      \end{tabular}
+    \end{center}
+    Al final, la respuesta depende de $d \pmod{9}$. Nos salió lo siguiente:
+    \begin{itemize}
+    \item Si $d \equiv 1 \pmod{9}$, entonces el elemento
+      $$\beta = \frac{1}{3} + \frac{1}{3}\alpha + \frac{1}{3}\alpha^2$$
+      es entero (el otro que nos saldrá es $2\beta$). Tenemos
+      $$\O_K = \ZZ [\alpha,\beta] = \ZZ \oplus \alpha\ZZ \oplus \beta\ZZ.$$
+      Para verificar el resultado, calculamos que el discriminante
+      correspondiente será
+      \[ \Delta_K = \det \begin{pmatrix}
+        T (1) & T (\alpha) & T (\beta) \\
+        T (\alpha) & T (\alpha^2) & T (\alpha\beta) \\
+        T (\beta) & T (\alpha\beta) & T (\beta^2) \\
+      \end{pmatrix} = \det \begin{pmatrix}
+        3 & 0 & 1 \\
+        0 & 0 & d \\
+        1 & d & (2d+1)/3 \\
+      \end{pmatrix} = -3d^2. \]
+      Por otra parte,
+      $\Delta (\ZZ [\alpha]) = -27 d^2$, y luego
+      $[\O_K : \ZZ [\alpha]] = 3$. Podemos también escribir la expresión para
+      $\Delta (\ZZ[\beta])$ y concluir que
+      $[\O_K : \ZZ [\beta]] = \frac{d-1}{9}$.
+
+    \item Si $d \equiv 8 \pmod{9}$, entonces el elemento
+      $$\beta = \frac{1}{3} + \frac{2}{3}\alpha + \frac{1}{3}\alpha^2$$
+      es entero. En este caso también se tiene $\Delta_K = -3d^2$ y
+      $[\O_K : \ZZ [\alpha]] = 3$. Además, es posible ver que
+      $[\O_K : \ZZ [\beta]] = \frac{d-8}{9}$.
+
+    \item En el resto de los casos cuando $d \not\equiv \pm 1\pmod{9}$, no habrá
+      elementos enteros adicionales.
+    \end{itemize}
+
+    Cuando $d \equiv\pm 1 \pmod{9}$, entonces $\O_K = \ZZ [\alpha,\beta]$,
+    y en el caso contrario, $\O_K = \ZZ [\alpha]$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Encuentre el anillo de enteros $\O_K$ y discriminante $\Delta_K$ para
   los campos cúbicos $\QQ (\sqrt[3]{6})$ y $\QQ (\sqrt[3]{12})$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    En el caso de $\QQ (\sqrt[3]{6})$, el ejercicio anterior nos dice que
+    $\O_K = \ZZ [\sqrt[3]{6}]$, y el discriminante correspondiente será
+    $\Delta_K = \Delta (x^3 - 6) = -27\cdot 6^2 = -2^2\cdot 3^5$.
+
+    Ahora para $\QQ (\sqrt[3]{12})$, el número $12$ no es libre de cuadrados,
+    así que no podemos aplicar el mismo argumento. Denotemos
+    $\alpha = \sqrt[3]{12}$. No es difícil notar otro elemento entero:
+    $\beta = \alpha^2/2 = \sqrt[3]{18}$. Calculamos que
+    \[ \Delta (\ZZ [\alpha]) = -2^4\cdot 3^5, \quad
+       \Delta (\ZZ [\beta]) = -2^2\cdot 3^7. \]
+    Ahora consideremos
+    $$\ZZ [\alpha,\beta] = \ZZ \oplus \alpha\ZZ \oplus \beta\ZZ$$
+    (note que $\alpha\beta = 6$, $\alpha^2 = 2\beta$, $\beta^2 = 6\alpha$).
+    Calculamos
+    \[ \Delta (\ZZ [\alpha,\beta]) = \det \begin{pmatrix}
+      T (1) & T (\alpha) & T (\beta) \\
+      T (\alpha) & T (\alpha^2) & T (\alpha\beta) \\
+      T (\beta) & T (\alpha\beta) & T (\beta^2) \\
+    \end{pmatrix} = \det \begin{pmatrix}
+      3 & 0 & 0 \\
+      0 & 0 & 18 \\
+      0 & 18 & 0 \\
+    \end{pmatrix} = -2^2\cdot 3^5. \]
+
+    Esto implica que
+    $$[\O_K : \ZZ [\alpha,\beta]] = m = 1, 2, 3, 6, 9, 18.$$
+    Podemos analizar la integridad de los elementos en el cociente
+    $\frac{1}{m}\ZZ[\alpha]/\ZZ[\alpha]$. Para esto consideremos los elementos
+    $$\gamma = \frac{a}{m} + \frac{b}{m}\alpha + \frac{c}{m}\beta,$$
+    donde $0 \le a,b,c < m$. Basta considerar $m = 18$. En teoría, todo esto se
+    puede hacer a mano, hasta cierto punto. Por ejemplo, calculamos
+    $$T_{K/\QQ} (\gamma) = \frac{3a}{m} = \frac{a}{6},$$
+    de donde $a = 0,6,12$, lo que quita una parte del trabajo. Podemos
+    sustituir estos valores de $a$ y, por ejemplo, analizar $N_{K/\QQ} (\gamma)$,
+    pero mejor hacerlo con la computadora.
+
+    \begin{framed}\small
+\begin{verbatim}
+? m = 18;
+? nrm = norm (1/m*Mod(a + b*x + c*x^2/2, x^3-12))
+% = 1/5832*a^3 - 1/324*c*b*a + (1/486*b^3 + 1/324*c^3)
+
+{ for (a=0,m-1, for (b=0,m-1, for (c=0,m-1,
+        if (denominator(eval(nrm)) == 1,
+          print ([a,b,c])
+        )
+  )))
+};
+
+[0, 0, 0]
+/* ¡y nada más! */
+\end{verbatim}
+    \end{framed}
+    Esto implica que $\O_K = \ZZ [\alpha,\beta]$. Ya calculamos
+    $\Delta_K$. Notamos que para $\QQ (\sqrt[3]{6})$ y $\QQ (\sqrt[3]{12})$ nos
+    salió el mismo discriminante.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -95,10 +341,104 @@
   \item[b)] Describa las factorizaciones de primos racionales $p \in \ZZ$ en
     $\O_K$.
   \item[c)] Describa los ideales primos $\mathfrak{p} \subset \O_K$
-    tales que $N_{K/\QQ} (\mathfrak{p}) \le 30$.
-  \item[d)] Describa todos los ideales $I \subset \O_K$
-    tales que $N_{K/\QQ} (I) \le 30$.
+    tales que $N_{K/\QQ} (\mathfrak{p}) \le 10$.
+  \item[d)] Describa todos los ideales $I \subseteq \O_K$
+    tales que $N_{K/\QQ} (I) \le 10$.
   \end{enumerate}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Denotando $\sqrt[3]{17}$ por $\alpha$, el ejercicio 3 nos dice que
+    \[ \O_K = \ZZ [\alpha,\beta], \quad
+       \beta = \frac{1}{3} + \frac{2}{3}\,\alpha + \frac{1}{3}\,\alpha^2. \]
+    Además, allí escribimos la fórmula curiosa
+    $[\O_K : \ZZ [\beta]] = \frac{d-8}{9}$, y para $d = 17$ tenemos suerte
+    y $\O_K = \ZZ [\beta]$. Por otra parte, $[\O_K : \ZZ [\alpha]] = 3$.
+    Esto significa que podemos aplicar el Kummer--Dedekind al polinomio mínimo
+    de $\beta$:
+    $$x^3 - x^2 - 11x - 12.$$
+    Sin embargo, será más fácil considerar el polinomio $x^3 - 17$ para todos
+    los primos excepto $p = 3$. En ese caso excepcional tenemos
+    $$x^3 - x^2 - 11x - 12 \equiv x\,(x + 1)^2 \pmod{3},$$
+    lo que nos da la factorización
+    $$3\O_K = \mathfrak{p}_3 \, \mathfrak{p}_3'^2 = (3, \beta)\,(3, 1+\beta)^2,$$
+    donde $N_{K/\QQ} (\mathfrak{p}_3) = N_{K/\QQ} (\mathfrak{p}_3') = 3$.
+    Para los primos distintos de $3$, las factorizaciones son las siguientes.
+
+    \begin{itemize}
+    \item $17\O_K = \mathfrak{p}^3$, donde $\mathfrak{p} = \sqrt[3]{17}\O_K$.
+      Tenemos $N_{K/\QQ} (\mathfrak{p}) = 17$.
+
+    \item Si $p \equiv 2 \pmod{3}$ y $p \ne 17$, entonces
+      $p\O_K = \mathfrak{p} \, \mathfrak{p}'$, lo que viene de la
+      factorización
+      $$x^3 - 17 \equiv (x-a) \times \text{polinomio cuadrático} \pmod{p}.$$
+      Aquí $N_{K/\QQ} (\mathfrak{p}) = p$ y $N_{K/\QQ} (\mathfrak{p}') = p^2$.
+
+    \item Para $p \equiv 1 \pmod{3}$ hay dos opciones.
+      Si $17$ no es un cubo módulo $p$, entonces $\mathfrak{p} = p\O_K$ es un
+      ideal primo y $N_{K/\QQ} (\mathfrak{p}) = p^3$.
+      Si $17$ es un cubo módulo $p$, entonces
+      $p\O_K = \mathfrak{p} \, \mathfrak{p}' \, \mathfrak{p}''$, lo que viene
+      de la factorización
+      $$x^3 - 17 \equiv (x - a_1)\,(x - a_2)\,(x - a_3) \pmod{p}.$$
+    \end{itemize}
+
+    Ahora si nos interesan los ideales primos de norma
+    $N_{K/\QQ} (\mathfrak{p}) \le 10$, esto en particular implica que
+    $\mathfrak{p} \mid p$, donde $p < 10$. Para obtener todos los ideales de
+    norma $N_{K/\QQ} (I) \le 10$, hay que multiplicar los ideales primos
+    correspondientes (usando la unicidad de descomposición de ideales en ideales
+    primos).
+
+    Los primos $p \equiv 2 \pmod{3}$ que nos interesan son $p = 2, 5$, y las
+    factorizaciones de $x^3 - 17$ son
+    \begin{align*}
+      p=2\colon & (x+1)\,(x^2 + x + 1),\\
+      p=5\colon & (x+2)\,(x^2 + 3x + 4).
+    \end{align*}
+    El primo $p = 7$ es inerte, y el ideal primo correspondiente
+    $\mathfrak{p} = 7\O_K$ tiene norma $7^3$ y no nos interesa. Ahora los
+    ideales primos de norma $< 10$ que salen de la lista de arriba son
+    nada más los siguientes:
+    \begin{align*}
+      N=2\colon & \mathfrak{p}_2 = (2, 1+\alpha),\\
+      N=3\colon & \mathfrak{p}_3 = (3, \beta), ~ \mathfrak{p}_3' = (3, 1+\beta),\\
+      N=4\colon & \mathfrak{p}_2' = (2, 1 + \alpha + \alpha^2),\\
+      N=5\colon & \mathfrak{p}_5 = (5, 2 + \alpha).
+    \end{align*}
+    Si nos interesan todos los ideales de norma $\le 10$, hay que
+    considerar los productos:
+    \begin{align*}
+      N=1\colon & \O_K, \\
+      N=2\colon & \mathfrak{p}_2,\\
+      N=3\colon & \mathfrak{p}_3, ~ \mathfrak{p}_3',\\
+      N=4\colon & \mathfrak{p}_2^2, ~ \mathfrak{p}_2',\\
+      N=5\colon & \mathfrak{p}_5,\\
+      N=6\colon & \mathfrak{p}_2\,\mathfrak{p}_3, ~ \mathfrak{p}_2\,\mathfrak{p}_3',\\
+      N=8\colon & \mathfrak{p}_2^3, ~ \mathfrak{p}_2\,\mathfrak{p}_2',\\
+      N=9\colon & \mathfrak{p}_3^2, ~ \mathfrak{p}_3\,\mathfrak{p}_3', ~ \mathfrak{p}_3'^2,\\
+      N=10\colon & \mathfrak{p}_2\,\mathfrak{p}_5,
+    \end{align*}
+
+    En total, nos salieron $15$ ideales. Podemos comprobarlo con PARI/GP.
+    Allí la función \texttt{ideallist($K$,$N$)} devuelve los ideales en $\O_K$
+    de norma $\le N$ como una lista separada por normas
+    \begin{framed}\small
+\begin{verbatim}
+? L = ideallist (nfinit(x^3-17),10);
+? vector (#L, i, #L[i])
+% = [1, 1, 2, 2, 1, 2, 0, 2, 3, 1]
+? vecsum(%)
+% = 15
+\end{verbatim}
+    \end{framed}
+
+    Las consideraciones similares demuestran que para cualquier campo de números
+    $K/\QQ$ y $N$ fijo hay un número finito de ideales
+    $I \subseteq \O_K$ con la norma $N_{K/\QQ} (I) \le N$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \end{document}
