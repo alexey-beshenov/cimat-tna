@@ -1852,8 +1852,9 @@ la prueba del teorema de Dirichlet sobre primos en progresiones aritméticas
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\iffalse
+\pdfbookmark{Clase 29 (30/11/20)}{clase-29}
 \section{Perspectiva: Prolongación analítica}
+\marginpar{\small Clase 29 \\ 30/11/20}
 
 En muchos casos una función de variable compleja definida por una serie sobre
 el dominio de convergencia (como la función $\zeta_K (s)$ que al principio se
@@ -1880,6 +1881,22 @@ es la \textbf{función Gamma}. En particular, $\Gamma (k) = (k-1)!$ para $k = 1,
 Tomando $K = \QQ$, se obtiene la ecuación funcional para la función zeta de
 Riemann
 $$\zeta (1-s) = \left(\cos\frac{\pi s}{2}\right)\,2\,(2\pi)^{-s}\,\Gamma (s)\,\zeta (s).$$
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{pic/riemann-zeta-negative.pdf}
+  \end{center}
+
+  \caption{Valores negativos de $\zeta (s)$}
+\end{figure}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{pic/zeta-x2-2-negative.pdf}
+  \end{center}
+
+  \caption{Valores negativos de $\zeta_{\QQ (\sqrt{\pm 2})} (s)$}
+\end{figure}
 
 Sustituyendo $s = 1$ en la ecuación funcional, notamos que el término
 $\left(\cos\frac{\pi s}{2}\right)^{r_1+r_2}$ tiene cero de orden $r_1 + r_2$,
@@ -2113,6 +2130,14 @@ constante que luego se recupera de la condición $\int_0^1 B_k (x) \, dx = 0$.)
   \caption{Polinomios y números de Bernoulli}
 \end{figure}
 
+\begin{figure}
+  \begin{center}
+    \includegraphics{pic/bernoulli-polynomials.pdf}
+  \end{center}
+
+  \caption{Polinomios de Bernoulli $B_n (x)$}
+\end{figure}
+
 A continuación nos servirá el siguiente caso particular de series de Fourier.
 Sea $f\colon \mathbb{R} \to \mathbb{R}$ una función continua por trozos y
 periódica tal que $f (x+1) = f (x)$. Luego, para todo $x_0\in \mathbb{R}$ donde
@@ -2153,6 +2178,14 @@ $f$ es continua y las derivadas izquierda y derecha de $f$ existen, se cumple
     \end{align*}
   \end{proof}
 \end{proposicion}
+
+\begin{figure}
+  \begin{center}
+    \includegraphics{pic/bernoulli-polynomials-periodic.pdf}
+  \end{center}
+
+  \caption{Funciones periódicas $B_n (x - \lfloor x\rfloor)$}
+\end{figure}
 
 La serie de Fourier \eqref{eq:serie-de-Fourier-polinomios-de-Bernoulli} nos
 lleva al siguiente famoso resultado.
@@ -2590,6 +2623,7 @@ Veamos un par de ejemplos particulares.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\iffalse
 \section{Equivalencia aritmética}
 
 Hemos visto hasta el momento que la función zeta $\zeta_K (s)$ trae mucha
