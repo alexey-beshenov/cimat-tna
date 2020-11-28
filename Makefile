@@ -13,10 +13,10 @@ tna.pdf:
 	xelatex tna
 
 beamer:
-	cd pari-pres && $(MAKE)
+	cd diapositivas && $(MAKE)
 
 clean:
 	rm -f *.aux *.log *.bbl *.blg *.toc *.pdf
 	cd pic && $(MAKE) clean
 	cd tareas && $(MAKE) clean
-	cd pari-pres && $(MAKE) clean
+	cd diapositivas && $(MAKE) clean
