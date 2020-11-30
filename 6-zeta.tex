@@ -1986,6 +1986,9 @@ $$\zeta_K^* (n) = \lim_{s \to n} (s-n)^{-d_n}\,\zeta_K (s),$$
 donde $d_n$ denota el orden de cero en $s = n$ (para el polo en $s = 1$ tenemos
 $d_1 = -1$).
 
+Para las funciones $L (s,\chi)$ los valores especiales se definen de manera
+similar.
+
 Un ejemplo primordial de valores especiales es
 \[ \zeta_K^* (0) = \lim_{s \to 0} s^{-(r_1 + r_2 - 1)}\,\zeta_K (s) = -\frac{\Reg_K\,h_k}{\# \mu_K}
    \longleftrightarrow
@@ -2011,16 +2014,17 @@ conjeturas de Beilinson en \cite{Motives-I}, y el libro
 función zeta de Riemann. Aquí me gustaría explicar un resultado clásico.
 
 \begin{teorema}[Siegel--Klingen]
-  Para un campo totalmente real $K/\QQ$ los valores $\zeta_n (-n)$ para
-  $n = 0,1,2,\ldots$ son números racionales.
+  Para un campo totalmente real $K/\QQ$ los valores
+  $\zeta_K (-1)$, $\zeta_K (-3)$, $\zeta_K (-5)$, $\ldots$
+  son números racionales.
 \end{teorema}
 
 Aquí se trata literalmente de valores $\zeta_K (-n)$, no de residuos
 $\zeta_K^* (-n)$. Hemos calculado arriba los ordenes de ceros triviales
 $\zeta_K (-n)$, y estos son $r_2$ o $r_1 + r_2$, dependiendo de la paridad de
 $n$. En particular, si $K$ no es totalmente real y $r_2 > 0$, entonces
-$\zeta_K (-n) = 0$ para todo $n \le 0$, y el teorema no es muy interesante.
-Por esto la hipótesis dice que $K/\QQ$ es totalmente real.
+$\zeta_K (-n) = 0$ para todo $n \le 0$. Por esto la hipótesis dice que $K/\QQ$
+es totalmente real.
 
 Para la prueba completa del teorema véase \cite[\S VII.9]{Neukirch-ANT}.
 A continuación veremos una prueba para $K/\QQ$ una extensión abeliana. En este
@@ -2493,7 +2497,7 @@ donde la paridad de $k$ corresponde a la paridad del carácter.
   En fin, dado que
   \[ g (\overline{\chi})^{-1} =
      \frac{1}{m}\,\chi (-1)\,g (\chi) =
-     \frac{1}{m}\,(-1)^k\,g (\chi)\]
+     \frac{1}{m}\,(-1)^k\,g (\chi) \]
   por el lema~\ref{lema:sumas-de-Gauss-2}, llegamos a la fórmula deseada
   \[ L (k,\chi) = (-1)^{k+1}\,\frac{(2\pi i)^k}{2\cdot k!\,m^k}\,g (\chi)\,B_{k,\overline{\chi}}. \qedhere \]
 \end{proof}
@@ -2523,6 +2527,10 @@ donde la paridad de $k$ corresponde a la paridad del carácter.
 Si $K/\QQ$ es un campo real abeliano, entonces tenemos la descomposición
 $$\zeta_K (s) = \prod_\chi L (s,\chi),$$
 y ya sabemos calcular los valores especiales de $\prod_\chi L (s,\chi)$.
+Nos sale la fórmula para $n = 0,1,2,\ldots$
+$$\zeta_K (-n) = (-1)^{[K:\QQ]}\,\prod_{\chi\in X} \frac{B_{n+1,\chi}}{n+1} \in \QQ.$$
+En particular, esto demuestra el teorema de Siegel--Klingen en el caso abeliano.
+
 Veamos un par de ejemplos particulares.
 
 \begin{ejemplo}
