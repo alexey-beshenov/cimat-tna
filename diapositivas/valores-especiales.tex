@@ -1,0 +1,798 @@
+\documentclass{beamer}
+
+\usetheme{boxes}
+\definecolor{beamer@structure@color}{rgb}{0,0,0}
+
+\usecolortheme{structure}
+
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{frametitle}{\color{black}
+\def\myhrulefill{\leavevmode\leaders\hrule height 1pt\hfill\kern 0pt}
+\headingfont\insertframetitle\par\vskip-8pt\myhrulefill}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\renewcommand{\O}{\mathcal{O}}
+
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Reg}{Reg}
+
+\renewcommand{\gcd}{\operatorname{mcd}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\sin}{\operatorname{sen}}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamercovered{transparent}
+
+\usepackage{mathspec}
+\setmainfont{Montserrat}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+\newfontfamily\headingfont[]{Montserrat Bold}
+
+\usepackage{xcolor}
+\usepackage{framed}
+\definecolor{shadecolor}{rgb}{0.945, 0.902, 0.698}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[noframenumbering]
+  \headingfont
+  \begin{center}
+    {\huge Valores especiales de
+
+      funciones zeta de Dedekind
+
+      y series L de Dirichlet
+
+    }
+
+    \vspace{3em}
+
+    30/11/2020
+
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Recordatorio sobre
+
+      funciones zeta y series L
+
+    }
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Funciones zeta de Dedekind}
+
+  \begin{itemize}
+  \item<1-> \textbf{Campo de números}: extensión finita $K/\QQ$.
+
+  \item<2-> \textbf{Anillo de enteros}:
+    $$\O_K = \{ \alpha \in K \mid f (\alpha) = 0\text{ para }f \in \ZZ[x]\text{ mónico} \}.$$
+
+  \item<3-> \textbf{Norma de ideales}: $N_{K/\QQ} (I) = \# (\O_K/I)$ para $I \ne 0$.
+
+  \item<4-> \textbf{Función zeta de Dedekind}:
+    $$\zeta_K (s) = \sum_{0 \ne I \subseteq \O_K} \frac{1}{N_{K/\QQ} (I)^s} = \prod_{0 \ne \mathfrak{p} \subset \O_K} \frac{1}{1 - N_{K/\QQ} (\mathfrak{p})^{-s}}.$$
+
+  \item<5-> $\zeta_\QQ (s) = \zeta (s)$ es la \textbf{función zeta de Riemann}.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Series L de Dirichlet}
+
+  \begin{itemize}
+  \item<1-> \textbf{Carácter de Dirichlet}:
+    $$\chi\colon (\ZZ/m\ZZ)^\times \to \CC^\times.$$
+
+  \item<2-> $\chi$ es \textbf{primitivo} si $m$ es el mínimo posible
+
+    (no está inducido por $(\ZZ/m\ZZ)^\times \to (\ZZ/m'\ZZ)^\times$
+    para $m' \mid m$).
+
+  \item<3-> $\chi (n) = 0$ si $\gcd (n,m) \ne 1$.
+
+  \item<4-> \textbf{Serie L de Dirichlet}:
+    $$L (s,\chi) = \sum_{n \ge 0} \frac{\chi(n)}{n^s} = \prod_p \frac{1}{1 - \chi(p)\,p^{-s}}.$$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Caso abeliano}
+
+  \begin{itemize}
+  \item<1-> \textbf{Kronecker--Weber}: si $\Gal (K/\QQ)$ es abeliano, entonces
+    $K \subseteq \QQ (\zeta_m)$ para algún $m$.
+
+  \item<2-> $K$ $\leftrightarrow$ $H \subseteq \Gal (\QQ (\zeta_m)/\QQ) \cong (\ZZ/m\ZZ)^\times$
+     $\leftrightarrow$ $X \subseteq \widehat{(\ZZ/m\ZZ)^\times}$.
+
+  \item<3-> $\zeta_K = \prod_{\chi \in X} L (s,\chi).$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Prolongación analítica}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Prolongación analítica para $\zeta_K (s)$}
+
+  \begin{itemize}
+  \item<1-> $\zeta_K (s)$ se extiende a una función meromorfa sobre $s \in \CC$ con
+    único polo simple en $s = 1$.
+
+  \item<2-> \textbf{Ecuación funcional}: $\zeta_K (1-s) = A(s)\,\zeta_K (s)$,
+
+  \item<3-> $A (s) = |\Delta_K|^{s - 1/2}\,\left(\cos\frac{\pi s}{2}\right)^{r_1+r_2}\,\left(\sin\frac{\pi s}{2}\right)^{r_2}\,\left(2\,(2\pi)^{-s}\,\Gamma (s)\right)^n$,
+
+  \item<4-> $n = [K : \QQ]$,
+
+  \item<5-> $r_1$ --- número de encajes reales $K \hookrightarrow \RR$,
+
+    $2 r_2$ --- número de encajes complejos $K \hookrightarrow \CC$,
+
+  \item<6-> $\Gamma (s) = \int_0^\infty e^{-t}\,t^{s-1}\,dt$ --- la \textbf{función Gamma},
+
+    $\Gamma (k) = (k-1)!$ para $k = 1,2,3,\ldots$
+    
+  \item<7-> $K = \QQ$: ecuación funcional para la zeta de Riemann
+    $$\zeta (1-s) = \left(\cos\frac{\pi s}{2}\right)\,2\,(2\pi)^{-s}\,\Gamma (s)\,\zeta (s).$$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Polo en $s = 1$ vs. cero en $s = 0$}
+
+  \[ \zeta_K (1-s) = |\Delta_K|^{s - 1/2}\,\left(\cos\frac{\pi s}{2}\right)^{r_1+r_2}\,\left(\sin\frac{\pi s}{2}\right)^{r_2}\,\left(2\,(2\pi)^{-s}\,\Gamma (s)\right)^n\,\zeta_K (s). \]
+
+  \begin{itemize}
+  \item<1-> Pongamos $s = 1$.
+
+  \item<2-> $\left(\cos\frac{\pi s}{2}\right)^{r_1+r_2}$ $\rightsquigarrow$ cero de orden $r_1 + r_2$.
+
+  \item<3-> $\zeta_K (s)$ $\rightsquigarrow$ polo de orden $1$ de residuo
+    $$\zeta_K^* (1) = \lim_{s \to 0} (s-1)\,\zeta_K (s) = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}}$$
+    (\textbf{fórmula del número de clases}).
+
+  \item<4-> Cero de orden $r_1 + r_2 - 1$ de residuo
+    $$\zeta_K^* (0) = \lim_{s \to 0} s^{-(r_1 + r_2 - 1)}\,\zeta_K (s) = -\frac{\Reg_K\,h_k}{\# \mu_K}.$$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ceros triviales}
+
+  \[ \zeta_K (1-s) = |\Delta_K|^{s - 1/2}\,\left(\cos\frac{\pi s}{2}\right)^{r_1+r_2}\,\left(\sin\frac{\pi s}{2}\right)^{r_2}\,\left(2\,(2\pi)^{-s}\,\Gamma (s)\right)^n\,\zeta_K (s). \]
+
+  Ceros en $s = 0,-1,-2,-3,\ldots$
+  \begin{center}\small
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rcccccccc}
+      \hline
+      $s\colon$ & $0$ & $-1$ & $-2$ & $-3$ & $-4$ & $-5$ & $-6$ & $\cdots$ \\
+      \hline
+      $\text{ord}\colon$ & $r_1 + r_2 - 1$ & $r_2$ & $r_1 + r_2$ & $r_2$ & $r_1 + r_2$ & $r_2$ & $r_1 + r_2$ & $\cdots$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+
+  \textbf{Hipótesis de Riemann extendida}: otros ceros tienen
+  $\Re s = \frac{1}{2}$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Valores negativos de la zeta de Riemann}
+
+  \begin{center}
+    \includegraphics[width=10cm]{../pic/riemann-zeta-negative.pdf}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Valores negativos para $K = \QQ (\sqrt{\pm 2})$}
+
+  \begin{center}
+    \includegraphics[width=10cm]{../pic/zeta-x2-2-negative.pdf}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Prolongación analítica para $L (s,\chi)$}
+
+  \begin{itemize}
+  \item<1-> $\chi$ --- carácter primitivo mód $m$.
+
+  \item<2-> \textbf{Ecuación funcional}: $L (1-s,\chi) = A(s) \, L (s,\overline{\chi})$,
+
+  \item<3-> $A (s) = \frac{m^{s-1}\,\Gamma (s)}{(2\pi)^s} \, \left(e^{-\pi i s/2} + \chi (-1)\,e^{\pi i s/2}\right)\,g (\chi)$,
+
+  \item<4-> \textbf{Suma de Gauss}: $g (\chi) = \sum\limits_{1 \le a \le m-1} \chi (a) \, \zeta_m^a$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ceros triviales}
+
+  \[ L (1-s,\chi) = \frac{m^{s-1}\,\Gamma (s)}{(2\pi)^s} \, \left(e^{-\pi i s/2} + \chi (-1)\,e^{\pi i s/2}\right)\,g (\chi) \, L (s,\overline{\chi}). \]
+
+  \[ e^{-\pi i s/2} + \chi (-1)\,e^{\pi i s/2} = \begin{cases}
+  2 \, \cos \left(\frac{\pi s}{2}\right), & \text{si }\chi (-1) = +1,\\
+  -2i \, \sin \left(\frac{\pi s}{2}\right), & \text{si }\chi (-1) = -1.
+  \end{cases} \]
+
+  \begin{itemize}
+  \item $\chi (-1) = +1$: ceros simples en $s = 0, -2, -4, -6, \ldots$
+
+  \item $\chi (-1) = -1$: ceros simples en $s = -1, -3, -5, \ldots$
+  \end{itemize}
+
+  \textbf{Hipótesis de Riemann generalizada}: otros ceros tienen
+  $\Re s = \frac{1}{2}$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Prolongación para $\chi = \left(\frac{\pm 8}{\cdot}\right)$}
+
+  \begin{center}  
+    \includegraphics[width=8cm]{../pic/lfun-negative.pdf}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Valores especiales}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Valores especiales}
+
+  \begin{itemize}
+  \item<1-> Para $s = n \in \ZZ$ sea $d_n$ el orden de cero en $s = n$.
+
+  \item<2-> $\zeta_K^* (n) = \lim_{s \to n} (s-n)^{-d_n}\,\zeta_K (s)$.
+
+  \item<3-> Ejemplo primordial:
+    \[ \zeta_K^* (0) = -\frac{\Reg_K\,h_k}{\# \mu_K}
+      \longleftrightarrow
+      \zeta_K^* (1) = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}}. \]
+
+  \item<4-> ¿Cómo generalizar estas fórmulas?
+
+  \item<5-> Similar para las funciones $L (s,\chi)$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Teorema de Siegel-Klingen}
+
+  \begin{itemize}
+  \item<1-> Para un campo totalmente real ($r_2 = 0$) los valores
+    $\zeta_K (-1)$, $\zeta_K (-3)$, $\zeta_K (-5)$, $\ldots$ son números racionales.
+
+  \item<2-> Objetivo de hoy: prueba en el caso abeliano.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Números y polinomios
+
+      de Bernoulli
+
+    }
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Números y polinomios de Bernoulli}
+
+  \begin{itemize}
+  \item<1-> \textbf{números de Bernoulli} $B_k \in \QQ$:
+  $$\frac{t\,e^t}{e^t - 1} = \sum_{k\ge 0} \frac{B_k}{k!}\,t^k,$$
+
+  \item<2-> \textbf{polinomios de Bernoulli} $B_k (x) \in \QQ [x]$:
+    $$\frac{t\,e^{tx}}{e^t-1} = \sum_{k \ge 0} B_k (x)\,\frac{t^k}{k!}.$$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Números y polinomios de Bernoulli}
+
+  \begin{center}\small
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{clc}
+      \hline
+      $k$ & $B_k (x)$ & $B_k$ \\
+      \hline
+      $0$ & $1$ & $1$ \\
+      \hline
+      $1$ & $x - \frac{1}{2}$ & $\frac{1}{2}$ \\
+      \hline
+      $2$ & $x^2 - x + \frac{1}{6}$ & $\frac{1}{6}$ \\
+      \hline
+      $3$ & $x^3 - \frac{3}{2}\,x^2 + \frac{1}{2}\,x$ & $0$ \\
+      \hline
+      $4$ & $x^4 - 2\,x^3 + x^2 - \frac{1}{30}$ & $-\frac{1}{30}$ \\
+      \hline
+      $5$ & $x^5 - \frac{5}{2}\,x^4 + \frac{5}{3}\,x^3 - \frac{1}{6}\,x$ & $0$ \\
+      \hline
+      $6$ & $x^6 - 3\,x^5 + \frac{5}{2}\,x^4 - \frac{1}{2}\,x^2 + \frac{1}{42}$ & $\frac{1}{42}$ \\
+      \hline
+      $7$ & $x^7 - \frac{7}{2}\,x^6 + \frac{7}{2}\,x^5 - \frac{7}{6}\,x^3 + \frac{1}{6}\,x$ & $0$ \\
+      \hline
+      $8$ & $x^8 - 4\,x^7 + \frac{14}{3}\,x^6 - \frac{7}{3}\,x^4 + \frac{2}{3}\,x^2 - \frac{1}{30}$ & $-\frac{1}{30}$ \\
+      \hline
+      $9$ & $x^9 - \frac{9}{2}\,x^8 + 6\,x^7 - \frac{21}{5}\,x^5 + 2\,x^3 - \frac{3}{10}\,x$ & $0$ \\
+      \hline
+      $10$ & $x^{10} - 5\,x^9 + \frac{15}{2}\,x^8 - 7\,x^6 + 5\,x^4 - \frac{3}{2}\,x^2 + \frac{5}{66}$ & $\frac{5}{66}$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Polinomios de Bernoulli}
+
+  \begin{center}
+    \includegraphics[width=7cm]{../pic/bernoulli-polynomials.pdf}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Propiedades básicas}
+
+  \begin{itemize}
+  \item<1-> $B_k (1) = B_k$.
+
+  \item<2-> $B_k (x+1) - B_k (x) = k\,x^{k-1}$.
+
+    En particular, $B_k (0) = B_k$ para $k \ne 1$.
+
+  \item<3-> $B_k (1-x) = (-1)^k\,B_k (x)$.
+
+    En particular, $B_k = 0$ para $k \ge 3$ impar.
+
+  \item<4-> $B_k' (x) = k\,B_{k-1} (x)$ y $\int_0^1 B_k (x)\,dx = 0$ para $k \ge 1$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Series de Fourier}
+
+  \begin{itemize}
+    \item $f\colon \mathbb{R} \to \mathbb{R}$ continua por trozos,
+      periódica tal que $f (x+1) = f (x)$.
+
+    \item Para todo $x_0\in \mathbb{R}$ donde $f$ es continua y las derivadas
+      izquierda y derecha de $f$ existen,
+      $$f (x_0) = \sum_{n\in\mathbb{Z}} \widehat{f} (n) \, e^{2\pi i n x_0},$$
+      donde
+      $$\widehat{f} (n) = \int_0^1 e^{-2\pi i n x} \, f(x) \, dx.$$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{\dots{}para polinomios de Bernoulli}
+
+  \[ B_k (x - \lfloor x\rfloor) = -\frac{k!}{(2\pi i)^k}\sum_{\substack{n\in \mathbb{Z} \\ n \ne 0}} \frac{e^{2\pi i n x}}{n^k}. \]
+
+  \begin{itemize}
+  \item<2-> Para $x = 0$ y $2k$:
+    \begin{align*}
+      B_{2k} & = B_{2k} (0) \\
+      & = -\frac{(2k)!}{(-1)^k\,(2\pi)^{2k}} \, 2\,\sum_{n \ge 1} \frac{1}{n^{2k}} \\
+      & = (-1)^{k+1}\frac{(2k)!}{2^{2k-1}\,\pi^{2k}}\,\zeta (2k).
+    \end{align*}
+
+  \item<3-> \textbf{Euler}:
+    $$\zeta (2k) = (-1)^{k+1} \, B_{2k}\,\frac{2^{2k-1}}{(2k)!}\,\pi^{2k}.$$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ejemplos}
+
+  \begin{align*}
+    \zeta (2) & = \frac{\pi^2}{6} \approx 1.644934\ldots, \\
+    \zeta (4) & = \frac{\pi^4}{90} \approx 1.082323\ldots, \\
+    \zeta (6) & = \frac{\pi^6}{945}  \approx 1.017343\ldots, \\
+    \zeta (8) & = \frac{\pi^8}{9450} \approx 1.004077\ldots, \\
+    \zeta (10) & = \frac{\pi^{10}}{93\,555} \approx 1.000994\ldots, \\
+    \zeta (12) & = \frac{691\,\pi^{12}}{638\,512\,875} \approx 1.000246\ldots
+  \end{align*}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Corolarios}
+
+  \[ \zeta (2k) = (-1)^{k+1} \, B_{2k}\,\frac{2^{2k-1}}{(2k)!}\,\pi^{2k}. \]
+
+  \begin{itemize}
+  \item<2-> $(-1)^{k+1}\,B_{2k} > 0$ para $k \ge 1$.
+
+  \item<3-> $|B_{2k+2}| > |B_{2k}|$ para $k \ge 3$.
+
+  \item<4-> $\zeta (-n) = -\frac{B_{n+1}}{n+1}$ para $n = 0,1,2,3,\ldots$
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Valores impares}
+
+  \begin{itemize}
+  \item<1-> \textbf{Apéry, 1977}:
+    $\zeta (3) \approx 1.2020569031\ldots$
+    es irracional.
+
+  \item<2-> \textbf{Rivoal, 2000}:
+    infinitud de irracionales entre $\zeta (2k+1)$
+
+  \item<3-> \textbf{Zudilin, 2004}:
+    entre $\zeta(5)$, $\zeta(7)$, $\zeta(9)$, $\zeta(11)$ uno es irracional.
+
+  \item<4-> \textbf{Gran conjetura}: los $\zeta (2k+1)$ son trascandentes,
+    algebraicamente independientes entre sí.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Números de Bernoulli
+
+      generalizados
+
+    }
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Números de Bernoulli generalizados}
+
+  \begin{itemize}
+  \item<1-> $\chi\colon (\ZZ/m\ZZ)^\times \to \CC^\times$ --- carácter de Dirichlet primitivo.
+
+  \item<2-> Números de Bernoulli generalizados $B_{k,\chi} \in \QQ (\zeta_m)$:
+    $$\sum_{k\ge 0} B_{k,\chi}\,\frac{t^k}{k!} = \sum_a \frac{\chi (a)\,t\,e^{at}}{e^{mt} - 1},$$
+    suma sobre $1 \le a \le m-1$.
+  \end{itemize}
+
+  \begin{itemize}
+  \item<3-> $B_{k,\chi} = 0$ si $\chi (-1) = (-1)^{k+1}$.
+
+  \item<4-> $B_{k,\chi} = m^{k-1} \, \sum_a \chi (a)\,B_k (a/m)$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Sumas de Gauss}
+
+  \begin{itemize}
+  \item<1-> $g (\chi) = \sum_a \chi (a) \, \zeta_m^a$.
+
+  \item<2-> $g_n (\chi) = \sum_a \chi (a) \, \zeta_m^{an}$.
+
+  \item<3-> \textbf{Lema 1}: $\overline{\chi (n)} \, g (\chi) = g_n (\chi)$.
+
+    En particular, $\overline{g (\chi)} = \chi (-1)\,g (\overline{\chi})$.
+
+  \item<4-> \textbf{Lema 2}: $|g (\chi)|^2 = g (\chi)\,\overline{g (\chi)} = m$.
+
+  En particular,
+  $g (\chi)^{-1} = \frac{1}{m}\,\chi (-1)\,g (\overline{\chi})$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Teorema}
+
+  \begin{itemize}
+  \item<1-> $\chi$ carácter primitivo mód $m$,
+
+  \item<2-> $k > 1$ cumple $\chi (-1) = (-1)^k$,
+
+  \item<3-> $L (k,\chi) = (-1)^{k+1} \, \frac{(2\pi i)^k}{2\cdot k! \, m^k}\,g (\chi)\,B_{k,\overline{\chi}}$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Demostración}
+
+  \begin{itemize}
+  \item<1-> Lema 1: $\chi (n)\,g (\overline{\chi}) = \sum_a \overline{\chi (a)}\,\zeta^{an}_m$.
+
+  \item<2-> $L (k,\chi)\,g (\overline{\chi}) = \sum_a \overline{\chi (a)} \, \sum_{n\ge 1} \frac{\zeta_m^{an}}{n^k}$.
+
+  \item<3-> Usando $\chi (-1) = (-1)^k$,
+    $L (k,\chi)\,g (\overline{\chi}) = \frac{1}{2} \sum_a \overline{\chi (a)} \sum_{\substack{n \in \mathbb{Z} \\ n \ne 0}} \frac{\zeta_m^{an}}{n^k}$.
+
+  \item<4-> Serie de Fourier: $B_k (x - \lfloor x\rfloor) = -\frac{k!}{(2\pi i)^k} \, \sum_{\substack{n \in \mathbb{Z} \\ n \ne 0}} \frac{e^{2\pi i n x}}{n^k}$.
+
+  \item<5-> Sustituyendo $x = a/m$:
+    $\sum_{\substack{n \in \mathbb{Z} \\ n \ne 0}} \frac{\zeta_m^{an}}{n^k} = -\frac{(2\pi i)^k}{k!}\,B_k (a/m)$.
+
+  \item<6-> Expresión para $B_{k,\chi}$ en términos de $B_k (x)$:
+    $L (k,\chi)\,g (\overline{\chi}) = -\frac{(2\pi i)^k}{2\cdot k!} \sum_a \overline{\chi (a)} B_k (a/m) = -\frac{(2\pi i)^k}{2\cdot k!\,m^{k-1}}\,B_{k,\overline{\chi}}$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Demostración (cont.)}
+
+  \begin{itemize}
+  \item<1->
+    $L (k,\chi)\,g (\overline{\chi}) = -\frac{(2\pi i)^k}{2\cdot k!} \sum_a \overline{\chi (a)} B_k (a/m) = -\frac{(2\pi i)^k}{2\cdot k!\,m^{k-1}}\,B_{k,\overline{\chi}}$.
+
+    \item<2-> Lema 2: $g (\overline{\chi})^{-1} = \frac{1}{m}\,\chi (-1)\,g (\chi) = \frac{1}{m}\,(-1)^k\,g (\chi)$.
+
+    \item<3-> Conclusión:
+      $L (k,\chi) = (-1)^{k+1}\,\frac{(2\pi i)^k}{2\cdot k!\,m^k}\,g (\chi)\,B_{k,\overline{\chi}}$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Corolarios}
+
+  \[ L (k,\chi) = (-1)^{k+1}\,\frac{(2\pi i)^k}{2\cdot k!\,m^k}\,g (\chi)\,B_{k,\overline{\chi}}. \]
+
+  \begin{itemize}
+  \item<2-> Si $\chi (-1) = (-1)^k$ para $k > 1$, entonces $B_{k,\chi} \ne 0$.
+
+    ($L (s,\chi) = \prod_p \frac{1}{1 - \chi (p)\,p^{-s}} \ne 0$ para $s > 1$.)
+
+  \item<3-> $L (-n,\chi) = -\frac{B_{n+1,\chi}}{n+1}$ para $n = 0,1,2,3,\ldots$
+
+    (Ecuación funcional.)
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge Siegel-Klingen abeliano}
+  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Demostración}
+
+  \begin{itemize}
+  \item<1-> $K/\QQ$ totalmente real, abeliano.
+
+  \item<2-> $\zeta_K (s) = \prod_{\chi\in X} L (s,\chi)$.
+
+  \item<3-> $K$ totalmente real $\iff$ $\chi (-1) = +1$ para $\chi \in X$.
+
+  \item<4-> $\zeta_K (-n) = (-1)^{[K:\QQ]}\,\prod_{\chi \in X} \frac{B_{n+1,\chi}}{n+1} \in \QQ$.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ejemplo: $\QQ (\zeta_7 + \zeta_7^{-1})$}
+
+  \begin{itemize}
+  \item<1-> $K = \QQ (\zeta_7 + \zeta_7^{-1})$.
+
+  \item<2-> $X = \{ 1, \chi, \overline{\chi} \}$, donde $\chi$ es un carácter
+    cúbico de $(\ZZ/7\ZZ)^\times$:
+
+    $\chi\colon 1\mapsto 1, \quad
+    2 \mapsto \zeta_3^2, \quad
+    3 \mapsto \zeta_3, \quad
+    4 \mapsto \zeta_3, \quad
+    5 \mapsto \zeta_3^2, \quad
+    6 \mapsto 1$.
+
+  \item<3-> Nota: $B_{k,\overline{\chi}} = \overline{B_{k,\chi}}$,
+    $B_{k,\chi}\,B_{k,\overline{\chi}} = |B_{k,\chi}|^2$.
+
+  \item<4-> Algunos cálculos:
+
+    \begin{center}\small
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rccccccc}
+      \hline
+      $k\colon$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ \\
+      \hline
+      $B_k\colon$ & $\frac{1}{2}$ & $\frac{1}{6}$ & $0$ & $-\frac{1}{30}$ & $0$ & $\frac{1}{42}$ & $0$ \\
+      \hline
+      $B_{k,\chi}\colon$ & $0$ & $\frac{8-4\,\zeta_3}{7}$ & $0$ & $\frac{-128 + 88\,\zeta_3}{7}$ & $0$ & $672 - 516\,\zeta_3$ & $0$ \\
+      \hline
+      $B_{k,\chi}\,B_{k,\overline{\chi}}\colon$ & $0$ & $\frac{16}{7}$ & $0$ & $\frac{5056}{7}$ & $0$ & $1064592$ & $0$ \\
+      \hline
+      $\zeta_K (1-k)\colon$ & $0$ & $-\frac{1}{21}$ & $0$ & $\frac{79}{210}$ & $0$ & $-\frac{7393}{63}$ & $0$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo: $\QQ (\zeta_7 + \zeta_7^{-1})$ (cont.)}
+
+  \begin{shaded}\small
+\begin{verbatim}
+? f = x^3 + x^2 - 2*x - 1;
+? for (k=1,6, print ([-k, bestappr (lfun(f,-k))]))
+[-1, -1/21]
+[-2, 0]
+[-3, 79/210]
+[-4, 0]
+[-5, -7393/63]
+[-6, 0]
+\end{verbatim}
+\end{shaded}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Ejemplo: $\QQ (\sqrt{2},\sqrt{3})$}
+
+  \begin{itemize}
+  \item<1-> $K = \QQ (\sqrt{2},\sqrt{3}) \subset \QQ (\zeta_{24})$.
+
+  \item<2-> $X = \{ 1, \chi_1, \chi_2, \chi_1\chi_2 \}$, donde $\chi_1$ es un carácter
+    cuadrático de $(\ZZ/8\ZZ)^\times$ y $\chi_2$ es un carácter cuadrático de
+    $(\ZZ/12\ZZ)^\times$:
+
+    $\chi_1\colon 1 \mapsto +1, \quad
+    3\mapsto -1, \quad
+    5\mapsto -1, \quad
+    7\mapsto +1;$
+
+    $\chi_2\colon 1 \mapsto +1, \quad
+    5\mapsto -1, \quad
+    7\mapsto -1, \quad
+    11\mapsto +1$.
+
+  \item<3-> Algunos cálculos:
+
+    \begin{center}\small
+      \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rccccccc}
+      \hline
+      $k\colon$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ \\
+      \hline
+      $B_k\colon$ & $\frac{1}{2}$ & $\frac{1}{6}$ & $0$ & $-\frac{1}{30}$ & $0$ & $\frac{1}{42}$ & $0$ \\
+      \hline
+      $B_{k,\chi_1}\colon$ & $0$ & $2$ & $0$ & $-44$ & $0$ & $2166$ & $0$ \\
+      \hline
+      $B_{k,\chi_2}\colon$ & $0$ & $4$ & $0$ & $-184$ & $0$ & $20172$ & $0$ \\
+      \hline
+      $B_{k,\chi_1 \chi_2}\colon$ & $0$ & $12$ & $0$ & $-2088$ & $0$ & $912996$ & $0$ \\
+      \hline
+      $\zeta_K (1-k)\colon$ & $0$ & $1$ & $0$ & $\frac{22011}{10}$ & $0$ & $\frac{2198584943}{3}$ & $0$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Ejemplo: $\QQ (\sqrt{2},\sqrt{3})$ (cont.)}
+
+  \begin{shaded}\small
+\begin{verbatim}
+? f = x^4 - 10*x^2 + 1;
+? for (k=0,6, print ([-k, bestappr (lfun(f,-k))]))
+[0, 0]
+[-1, 1]
+[-2, 0]
+[-3, 22011/10]
+[-4, 0]
+[-5, 2198584943/3]
+[-6, 0]
+\end{verbatim}
+\end{shaded}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+  \headingfont
+
+  \begin{center}
+    {\huge ¡Gracias por su atención!}
+  \end{center}
+\end{frame}
+
+\end{document}
