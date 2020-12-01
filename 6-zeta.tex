@@ -1882,7 +1882,10 @@ es la \textbf{función Gamma}. En particular, $\Gamma (k) = (k-1)!$ para $k = 1,
 
 Tomando $K = \QQ$, se obtiene la ecuación funcional para la función zeta de
 Riemann
-$$\zeta (1-s) = \left(\cos\frac{\pi s}{2}\right)\,2\,(2\pi)^{-s}\,\Gamma (s)\,\zeta (s).$$
+\begin{equation}
+  \label{eqn:ecuacion-funcional-para-zeta-de-Riemann}
+  \zeta (1-s) = \left(\cos\frac{\pi s}{2}\right)\,2\,(2\pi)^{-s}\,\Gamma (s)\,\zeta (s).
+\end{equation}
 
 \begin{figure}
   \begin{center}
@@ -1939,7 +1942,10 @@ Las series L de Dirichlet también admiten prolongación a todo el plano complej
   Sea $\chi$ un carácter de Dirichlet primitivo mód $m$. La serie $L (s,\chi)$
   admite prolongación analítica a todo plano complejo que satisface la ecuación
   funcional
-  $$L (1-s,\chi) = A(s) \, L (s,\overline{\chi}),$$
+  \begin{equation}
+    \label{eqn:ecuacion-funcional-para-series-L}
+    L (1-s,\chi) = A(s) \, L (s,\overline{\chi}),
+  \end{equation}
   donde
   $$A (s) = \frac{m^{s-1}\,\Gamma (s)}{(2\pi)^s} \, \left(e^{-\pi i s/2} + \chi (-1)\,e^{\pi i s/2}\right)\,g (\chi)$$
   y
@@ -2292,11 +2298,12 @@ lleva al siguiente famoso resultado.
   $$\zeta (-n) = -\frac{B_{n+1}}{n+1}.$$
 
   \begin{proof}
-    De la ecuación funcional se ve que $\zeta (-2k) = 0$ (se anula
-    $\sin (-\pi k/2)$). Esto coincide con el hecho de que $B_n = 0$ para $n > 1$
-    impar. Por otra parte, para $s = -(2k+1)$ impar la fórmula de Euler se
-    simplifica a $\zeta (-(2k+1)) = -\frac{B_{2k+2}}{2k+2}$. En fin, de la
-    ecuación funcional se deduce que $\zeta (0) = -\frac{1}{2} = -B_1$.
+    De la ecuación funcional \eqref{eqn:ecuacion-funcional-para-zeta-de-Riemann}
+    se ve que $\zeta (-2k) = 0$ (se anula $\sin (-\pi k/2)$). Esto coincide con
+    el hecho de que $B_n = 0$ para $n > 1$ impar. Por otra parte, para
+    $s = -(2k+1)$ impar la fórmula de Euler se simplifica a
+    $\zeta (-(2k+1)) = -\frac{B_{2k+2}}{2k+2}$. En fin, de la ecuación funcional
+    se deduce que $\zeta (0) = -\frac{1}{2} = -B_1$.
   \end{proof}
 \end{corolario}
 
@@ -2320,6 +2327,7 @@ racionales que generalizan los números de Bernoulli.
 Notamos que $B_{k,\chi} \in \QQ (\zeta_m)$.
 
 \begin{proposicion}
+  \label{prop:propiedades-de-numeros-de-Bernoulli-generalizados}
   \begin{enumerate}
   \item[a)] Para $\chi \ne 1$ se tiene $B_{k,\chi} = 0$ si
     $\chi (-1) = (-1)^{k+1}$.
@@ -2503,6 +2511,7 @@ donde la paridad de $k$ corresponde a la paridad del carácter.
 \end{proof}
 
 \begin{corolario}
+  \label{cor:no-anulacion-de-B-k-chi}
   Si $\chi (-1) = (-1)^k$ para $k > 1$, entonces $B_{k,\chi} \ne 0$.
 
   \begin{proof}
@@ -2513,23 +2522,55 @@ donde la paridad de $k$ corresponde a la paridad del carácter.
 \end{corolario}
 
 \begin{corolario}
+  \label{cor:valores-negativos-de-series-L}
   Para todo $n = 0,1,2,3,\ldots$ se tiene
   $$L (-n,\chi) = -\frac{B_{n+1,\chi}}{n+1}.$$
 
   \begin{proof}
-    Se sigue de la ecuación funcional para $L (s,\chi)$. Los detalles se dejan
-    como un ejercicio.
+    Se sigue de la ecuación funcional
+    \eqref{eqn:ecuacion-funcional-para-series-L}. Los detalles se dejan como un
+    ejercicio.
   \end{proof}
 \end{corolario}
 
 \subsection{Ejemplo: Campos reales abelianos}
 
-Si $K/\QQ$ es un campo real abeliano, entonces tenemos la descomposición
-$$\zeta_K (s) = \prod_\chi L (s,\chi),$$
-y ya sabemos calcular los valores especiales de $\prod_\chi L (s,\chi)$.
-Nos sale la fórmula para $n = 0,1,2,\ldots$
-$$\zeta_K (-n) = (-1)^{[K:\QQ]}\,\prod_{\chi\in X} \frac{B_{n+1,\chi}}{n+1} \in \QQ.$$
-En particular, esto demuestra el teorema de Siegel--Klingen en el caso abeliano.
+Estamos listos para probar el teorema de Siegel--Klingen para las extensiones
+abelianas.
+
+\begin{teorema}
+  Si $K/\QQ$ es un campo de números totalmente real abeliano, entonces
+  $\zeta_K (-n)$ son números racionales no nulos para $n = 1,3,5,\ldots$
+
+  \begin{proof}
+    Dado que $K/\QQ$ es una extensión abeliana, tenemos la descomposición de la
+    función zeta
+    $$\zeta_K (s) = \prod_{\chi\in X} L (s,\chi),$$
+    donde $X \subseteq \widehat{(\ZZ/m\ZZ)^\times}$ es el grupo de caracteres de
+    Dirichlet que corresponde a $K \subseteq \QQ (\zeta_m)$. Ahora ocupando
+    nuestras fórmulas para los valores especiales de funciones $L$ de Dirichlet
+    (corolario~\ref{cor:valores-negativos-de-series-L}),
+    $$\zeta_K (-n) = (-1)^{[K:\QQ]}\,\prod_{\chi\in X} \frac{B_{n+1,\chi}}{n+1}.$$
+    Puesto que $K$ es un campo totalmente real, para todo $\chi \in X$ se tiene
+    $\chi (-1) = +1$, así que $B_{n+1,\chi} \ne 0$ para $n$ impar
+    (corolario~\ref{cor:no-anulacion-de-B-k-chi}). Esto también se sigue del
+    hecho de que el orden de anulación de $\zeta_K (s)$ para
+    $s = -1, -3, -5, \ldots$ es igual a $r_2$, y en nuestro caso $r_2 = 0$.
+    Los números de Bernoulli generalizados $B_{n+1,\chi}$ están en la extensión
+    ciclotómica $\QQ (\zeta_m)$, y nos gustaría ver que el producto
+    $\prod_{\chi\in X} B_{n+1,\chi}$ es un número racional. Para esto podemos
+    ocupar la fórmula
+    $$B_{n+1,\chi} = m^n\,\sum_{1 \le a \le m-1} \chi (a)\,B_{n+1} (a/m)$$
+    (proposición~\ref{prop:propiedades-de-numeros-de-Bernoulli-generalizados}).
+    Los caracteres $\chi\in X$ pueden ser identificados con caracteres de Galois
+    $\Gal (K/\QQ) \to \CC^\times$, y el grupo $\Gal (\QQ (\zeta_m)/\QQ)$ actúa
+    sobre $\chi\in X$ permutando las raíces de la unidad complejas. Entonces,
+    para todo automorfismo $\sigma \in \Gal (\QQ (\zeta_m)/\QQ)$ se tiene
+    $\sigma (B_{n+1,\chi}) = B_{n+1,\sigma\cdot\chi}$. En particular, $\sigma$
+    deja fijo el producto $\prod_{\chi\in X} B_{n+1,\chi}$, así que este es un
+    número racional.
+  \end{proof}
+\end{teorema}
 
 Veamos un par de ejemplos particulares.
 

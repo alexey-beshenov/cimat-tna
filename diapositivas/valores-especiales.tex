@@ -1,4 +1,11 @@
+\ifdefined\handout
+\documentclass[handout]{beamer}
+\else
 \documentclass{beamer}
+\fi
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
 
 \usetheme{boxes}
 \definecolor{beamer@structure@color}{rgb}{0,0,0}
@@ -665,7 +672,10 @@
 
   \item<3-> $K$ totalmente real $\iff$ $\chi (-1) = +1$ para $\chi \in X$.
 
-  \item<4-> $\zeta_K (-n) = (-1)^{[K:\QQ]}\,\prod_{\chi \in X} \frac{B_{n+1,\chi}}{n+1} \in \QQ$.
+  \item<4-> $\zeta_K (-n) = (-1)^{[K:\QQ]}\,\prod_{\chi \in X} \frac{B_{n+1,\chi}}{n+1}$.
+
+  \item<5-> $B_{n+1,\chi} \in \QQ (\zeta_m)$, pero
+    $\prod_{\chi\in X} B_{n+1,\chi}$ es $\Gal (\QQ (\zeta_m)/\QQ)$-invariante.
   \end{itemize}
 \end{frame}
 
