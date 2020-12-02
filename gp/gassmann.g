@@ -3,7 +3,7 @@
 # cc son las clases de conjugación en G                              #
 ######################################################################
 
-isGassmannTripple := function (H,Hp,cc)
+isGassmannTriple := function (H,Hp,cc)
   local c;
 
   for c in cc do
@@ -41,7 +41,7 @@ findGassmannTriple := function (G)
 
       for H in Elements (ccSubgr[i]) do
         for Hp in Elements (ccSubgr[j]) do
-          if isGassmannTripple (H,Hp,cc) and Size(H) > hSize then
+          if isGassmannTriple (H,Hp,cc) and Size(H) > hSize then
             triple := [G,H,Hp];
             hSize := Size(H);
           fi;
