@@ -356,7 +356,7 @@ fórmula del número de clases nos da entonces
 \begin{equation}
   \label{eq:formula-de-clases-sqrt5-2}
   \lim_{s \to 1^+} (s - 1)\,\zeta_K (s) =
-  \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}} =
+  \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_K}{\#\mu_K\,\sqrt{|\Delta_K|}} =
   \frac{1}{\sqrt{5}}\,h_K\cdot 2\,\log \frac{1+\sqrt{5}}{2}.
 \end{equation}
 En fin,
@@ -2682,16 +2682,570 @@ Veamos un par de ejemplos particulares.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\iffalse
+\pdfbookmark{Clase 30 (02/12/20)}{clase-30}
 \section{Equivalencia aritmética}
+\marginpar{\small Clase 30 \\ 02/12/20}
 
-Hemos visto hasta el momento que la función zeta $\zeta_K (s)$ trae mucha
-información aritmética sobre el campo de números $K$. Sin embargo, $\zeta_K (s)$
-no sabe \emph{todo} de $K$: podemos tener $\zeta_K (s) = \zeta_{K'} (s)$ para
-dos campos no isomorfos $K \not\cong K'$.
+La fórmula del número de clases nos sugiere que la función zeta $\zeta_K (s)$
+trae mucha información aritmética sobre el campo de números $K$, pero
+$\zeta_K (s)$ no sabe \emph{todo} de $K$: es posible que
+$\zeta_K (s) = \zeta_{K'} (s)$ para dos campos no isomorfos $K \not\cong
+K'$. Aún así, si dos campos comparten la misma función zeta, estos tienen muchas
+propiedades en común. Este será el tema de la presente sección. La referencia
+original es el artículo \cite{Perlis-1977}, y también recomiendo los apuntes
+\cite{Sutherland-AE}.
 
-**TODO** \cite{Perlis-1977}.
-\fi
+\begin{definicion}
+  Se dice que dos campos de números $K/\QQ$ y $K/\QQ$ son
+  \textbf{aritméticamente equivalentes} si $\zeta_K (s) = \zeta_{K'} (s)$.
+\end{definicion}
+
+Está claro que esta es una relación de equivalencia, y si $K\cong K'$, entonces
+los campos son aritméticamente equivalentes. Nuestro objetivo es entender qué
+precisamente significa la equivalencia aritmética. Primero vamos a revisar
+la ecuación funcional para $\zeta_K (s)$. Nos conviene reescribirla de manera
+más simétrica.
+
+\begin{teorema}
+  Definamos la \textbf{función zeta de Dedekind completada} por
+  $$Z_K (s) = |\Delta_K|^{s/2}\,\Gamma_\RR (s)^{r_1}\,\Gamma_\CC (s)^{r_2}\,\zeta_K (s),$$
+  donde
+  \[ \Gamma_\RR (s) = \pi^{-s/2}\,\Gamma \Bigl(\frac{s}{2}\Bigr), \quad
+    \Gamma_\CC (s) = 2\,(2\pi)^{-s}\,\Gamma (s). \]
+  Luego, $Z_K (s)$ se extiende a una función meromorfa sobre todo el plano
+  complejo con polos simples en $s = 0$ y $s = 1$ que satisface la ecuación
+  funcional
+  $$Z_K (s) = Z_K (1-s).$$
+
+  \begin{proof}
+    Véase por ejemplo \cite[\S VII.5]{Neukirch-ANT}.
+  \end{proof}
+\end{teorema}
+
+La ecuación funcional impone cierta rigidez sobre $Z_K (s)$ y en particular
+implica que esta función se determina por el producto de Euler para
+$\zeta_K (s)$, posiblemente con un número finito de factores quitados.
+Para verlo, necesitamos la siguiente observación.
+
+\begin{lema}
+  Dados números reales $1 < x_1 \le x_2 \le \cdots \le x_m$ y
+  $1 < y_1 \le y_2 \le \cdots \le y_n$, definamos las funciones complejas
+  \[ f (s) = \prod_{1\le i\le m} (1 - x_i^{-s}), \quad
+    g (s) = \prod_{1\le j\le n} (1 - y_j^{-s}), \quad
+    h (s) = \frac{f (s)}{g (s)}. \]
+
+  Sea $\phi (s)$ una función meromorfa que no tiene ceros y polos en $s$ que
+  coincide con los ceros o polos de $h (s)$. Supongamos que se cumple una
+  ecuación funcional
+  $$h (s) = \phi (s) \, h (1-s).$$
+  Luego, $f (s) = g (s)$ y $\phi (s) = 1$.
+
+  \begin{proof}
+    Las funciones $f (s)$ y $g (s)$ no tienen polos, y sus ceros son
+    $\frac{2\pi i k}{\log x_i}$ y $\frac{2\pi i k}{\log y_j}$ respectivamente
+    para $k\in \ZZ$. Todo cero de $h (s)$ debe ser un cero de $f (s)$, y por
+    nuestra hipótesis, este no puede ser un cero de $\phi (s)$. Además, las
+    funciones $f (s)$ y $f (1-s)$ no tienen ceros en común (los ceros de $f (s)$
+    cumplen $\Re s = 0$, mientras que los ceros de $f (1-s)$ cumplen
+    $\Re s = 1$). Entonces, los ceros de $h (s)$ no pueden coincidir con los
+    ceros de $h (1-s)$. Dado que $h (s) = \phi (s) \, h (1-s)$, esto implica que
+    $h (s)$ no tiene ceros. De manera similar se demuestra que $h (s)$ no tiene
+    polos. Entonces, $f (s)$ y $g (s)$ deben tener los mismos ceros de las
+    mismas multiplicidades, así que $(x_1,\ldots,x_m) = (y_1,\ldots,y_n)$ y
+    $f (s) = g (s)$. Se sigue que $h (s) = 1$ y $\phi (s) = 1$.
+  \end{proof}
+\end{lema}
+
+\begin{proposicion}
+  Sean $K/\QQ$ y $K'/\QQ$ dos campos de números, y supongamos que salvo un
+  número finito de primos racionales $p \in \ZZ$ se cumple
+  \[ \prod_{\mathfrak{p} \mid p\O_K} (1 - N_{K/\QQ} (\mathfrak{p})^{-s}) =
+    \prod_{\mathfrak{p} \mid p\O_{K'}} (1 - N_{K'/\QQ} (\mathfrak{p})^{-s}). \]
+  Luego, $\zeta_K (s) = \zeta_{K'} (s)$, $Z_K (s) = Z_{K'} (s)$,
+  $[K:\QQ] = [K':\QQ]$, $r_1 = r'_1$, $r_2 = r'_2$, $\Delta_K = \Delta_{K'}$.
+
+  \begin{proof}
+    Sea $S$ el conjunto finito de primos racionales para cuales no se cumple la
+    hipótesis de arriba. Podemos aplicar el lema anterior a las funciones
+    \[ f (s) = \prod_{\substack{\mathfrak{p} \mid p\O_K \\ p\in S}} (1 - N_{K/\QQ} (\mathfrak{p})^{-s}), \quad
+      g (s) = \prod_{\substack{\mathfrak{p} \mid p\O_{K'} \\ p\in S}} (1 - N_{K'/\QQ} (\mathfrak{p})^{-s}), \quad
+      \phi (s) = \frac{Z_K (s) \, Z_{K'} (1-s) \, \zeta_{K'} (s) \, \zeta_K (1-s)}{Z_{K'} (s) \, Z_K (1-s) \, \zeta_K (s) \, \zeta_{K'} (1-s)}. \]
+
+    De hecho, los ceros y polos de $Z_K (s)$ y $\zeta_K (s)$ están en $s = 0$ y
+    $s = 1$, y estos no coinciden con los ceros de $f (s)$ y $f (g)$. Además,
+    calculamos que $\phi (s)\,h (1-s) = h (s)$ usando
+    $$\zeta_K (1-s)\,f (1-s) = \zeta_{K'} (1-s)\,g (1-s)$$
+    ---por la definición, $f(s)$ y $g(s)$ precisamente corresponden a los
+    factores de Euler de $\zeta_K (s)$ y $\zeta_{K'} (s)$ que no coinciden.
+
+    Luego, el lema nos da $f (s) = g (s)$, lo que significa que
+    $\zeta_K (s) = \zeta_{K'} (s)$. Recordemos que los ordenes de ceros
+    de $\zeta_K (s)$ en enteros negativos $s = -n$ son $r_2$ o $r_1 + r_2$,
+    dependiendo de la paridad de $n$. Entonces, la igualdad
+    $\zeta_K (s) = \zeta_{K'} (s)$ implica que $r_1 = r'_1$ y $r_2 = r'_2$.
+    Como consecuencia, $[K:\QQ] = r_1 + 2 r_2 = r'_1 + 2 r'_2 = [K':\QQ]$.
+
+    Por el mismo lema anterior, se tiene $\phi (s) = 1$, de donde se deduce
+    $$Z_K (s)^2 = Z_K (s)\,Z_K (1-s) = Z_{K'} (s)\,Z_{K'} (1-s) = Z_{K'} (s)^2.$$
+    Calculamos el residuo
+    \[ \lim_{s\to 1^+} (1-s)\,Z_K (s)^2 =
+      |\Delta_K|\,\Bigl(\pi^{-1/2}\,\Gamma \Bigl(\frac{1}{2}\Bigr)\Bigr)^{2r_1}\,\Bigl(2\,(2\pi)^{-1}\,\Gamma (1)\Bigr)^{2r_2}\,\zeta_K^* (1)^2 =
+      |\Delta_K|\,\pi^{-2r_2}\,\zeta_K^* (1)^2. \]
+    Aquí usamos que $\Gamma \Bigl(\frac{1}{2}\Bigr) = \sqrt{\pi}$. Entonces,
+    nuestra identidad nos da
+    $$|\Delta_K|\,\pi^{-2r_2} = |\Delta_{K'}|\,\pi^{-2r'_2},$$
+    de donde $|\Delta_K| = |\Delta_K'|$. Recordemos que el signo del
+    discriminante es $(-1)^{r_2}$, así que $\Delta_K = \Delta_{K'}$.
+  \end{proof}
+\end{proposicion}
+
+En particular, acabamos de ver que dos campos aritméticamente equivalentes
+necesariamente comparten el grado, el número de encajes reales y complejos,
+y el discriminante.
+
+Ahora si $p\in \ZZ$ es un primo racional que no se ramifica en $K$ (es decir,
+$p\nmid \Delta_K$), entonces se tiene factorización
+$p\O_K = \mathfrak{p}_1 \cdots \mathfrak{p}_s$, donde los grados de campos
+residuales $f_i = [\O_K/\mathfrak{p}_i : \FF_p]$ satisfacen
+$f_1 + \cdots + f_s = [K : \QQ]$. De esta manera a cada primo no ramificado
+corresponde una partición de $[K : \QQ]$, y esta se llama el
+\textbf{tipo de descomposición} de $p$. El siguiente resultado explica el
+término «equivalencia aritmética».
+
+\begin{teorema}
+  Las siguientes condiciones son equivalentes.
+  \begin{enumerate}
+  \item[1)] $\zeta_K (s) = \zeta_{K'} (s)$,
+
+  \item[2)] los tipos de descomposición de $p$ en $K$ y $K'$ coinciden para todo
+    $p$ no ramificado,
+
+  \item[3)] los tipos de descomposición de $p$ en $K$ y $K'$ coinciden para todo
+    $p$, salvo un número finito.
+  \end{enumerate}
+
+  \begin{proof}
+    Para $n \ge 1$ denotemos por $a_n$ el número de ideales en $\O_K$ de norma
+    $n$. Tenemos $\zeta_K (s) = \sum_{n\ge 1} \frac{a_n}{n^s}$, y si
+    $\zeta_K (s) = \zeta_{K'} (s)$, entonces $a_n = a'_n$ para todo $n \ge 1$
+    porque para una serie de Dirichlet los coeficientes $a_n$ están definidos de
+    modo único.
+
+    Ahora si $p\O_K = \mathfrak{p}_1\cdots \mathfrak{p}_s$, entonces
+    $N_{K/\QQ} (\mathfrak{p}_i) = p^{f_i}$. Se sigue que $a_p$ es el número de
+    ideales primos sobre $p$ con el grado del campo residual $f = 1$.
+    Luego, el número de ideales primos con $f = 2$ será
+    $a_{p^2} - {a_p \choose 2} - a_p$.  De la misma manera, el número de ideales
+    primos con el grado del campo residual $f$ se expresa mediante
+    $a_p, a_{p^2}, \ldots, a_{p^{f-1}}$. Entonces, los coeficientes $a_n$
+    determinan los tipos de descomposición de primos racionales en $K$.  Dado
+    que $a_n = a'_n$, los tipos de descomposición serán los mismos en $K$ y
+    $K'$. Esto establece la implicación 1)$\Rightarrow $2), y la implicación
+    2)$\Rightarrow$3) es trivial.
+
+    Para la implicación 3)$\Rightarrow$1), notamos que si los tipos de
+    descomposición coinciden, posiblemente salvo un número finito de primos $p$,
+    entonces los factores de Euler
+    \[ \prod_{\mathfrak{p} \mid p\O_K} (1 - N_{K/\QQ} (\mathfrak{p})^{-s}) =
+      \prod_{\mathfrak{p} \mid p\O_{K'}} (1 - N_{K'/\QQ} (\mathfrak{p})^{-s}). \]
+    coinciden, salvo un número finito de $p$. La proposición de arriba implica
+    que $\zeta_K (s) = \zeta_{K'} (s)$.
+  \end{proof}
+\end{teorema}
+
+\subsection{Triplas de Gassmann}
+
+El matemático suizo Fritz Gassmann (1899--1990) encontró en 1926 una
+caracterización elemental de la equivalencia aritmética, que da una manera
+eficaz de verificarla y construir ejemplos no triviales con $K$ y $K'$ no
+isomorfos.
+
+\begin{definicion}
+  Sean $G$ un grupo finito y $H, H'$ sus subrupos. Se dice que $(G,H,H')$ es una
+  \textbf{tripla de Gassmann} si existe una biyección entre $H$ y $H'$ que
+  preserva las clases de conjugación en $G$. En otras palabras, si para todo
+  $g \in G$ se tiene
+  $$\# (H\cap g^G) = \# (H'\cap g^G),$$
+  donde $g^G$ denota la clase de conjugación de $g$.
+\end{definicion}
+
+Gassmann probó el siguiente resultado.
+
+\begin{teorema}
+  Sean $K$ y $K'$ dos campos de números y $L/\QQ$ una extensión de Galois tal
+  que $K, K' \subseteq L$ (por ejemplo, la cerradura de Galois del compositum
+  $K K'$). Entonces, $K$ y $K'$ son aritméticamente equivalentes si y solamente
+  si
+  $$(\Gal (L/\QQ), \, \Gal (L/K), \, \Gal (L/K'))$$
+  es una tripla de Gassmann.
+\end{teorema}
+
+El teorema de Gassmann nos permite construir ejemplos de campos no isomorfos
+aritméticamente equivalentes. Para esto basta encontrar una tripla de Gassmann
+$(G, H, H')$ con $H$ y $H'$ subgrupos no conjugados en $G$ y saber realizar $G$
+como el grupo de Galois de alguna extensión $L/\QQ$\footnote{Recordemos que el
+  \textbf{problema inverso} de la teoría de Galois afirma que cualquier grupo
+  finito $G$ se realiza como un grupo de Galois de $L/\QQ$. Esta es una gran
+  conjetura, pero la solución existe para muchos $G$ y varias familias
+  infinitas.}. Luego basta tomar $K = L^H$ y $K' = L^{H'}$, y puesto que $H$ y
+$H'$ no son conjugados, tendremos $K \not\cong K'$.
+
+Una manera fácil de construir triplas de Gassmann no triviales es la siguiente.
+
+\begin{proposicion}
+  Para un grupo finito $H$ definamos la \textbf{estadística de ordenes} como la
+  función
+  \[ \phi_H\colon \NN \to \NN, \quad
+    n \mapsto \# \{ h\in H \mid \ord h = n \}. \]
+  Para dos grupos finitos $H$ y $H'$ existe una tripla de Gassmann $(G,H,H')$
+  si y solamente si $\phi_H = \phi_{H'}$.
+
+  \begin{proof}
+    En una dirección, si $(G,H,H')$ es una tripla de Gassmann, entonces por la
+    definición existe una biyección $H \leftrightarrow H'$ que preserva las
+    clases de conjugación en $G$, y los elementos cada clase de conjugación
+    tienen el mismo orden, así que $\phi_H = \phi_{H'}$.
+
+    En la otra dirección, supongamos que $\phi_H = \phi_{H'}$. Pongamos
+    $n = \# H = \# H'$ y sea $G$ el grupo simétrico $S_n$. La acción de $H$
+    sobre sí mismo mediante la multiplicación por la izquierda nos da encajes
+    $H, H' \hookrightarrow G$. Todo $h \in H$ da lugar a una permutación que
+    consiste en $\frac{n}{\ord h}$ ciclos de longitud $\ord h$. Ahora $h \in H$
+    y $h' \in H'$ serán conjugados en $G$ si y solamente si $\ord h = \ord h'$.
+    Dado que $\phi_H = \phi_{H'}$, podemos escoger una biyección
+    $H \leftrightarrow H'$ que preserva los ordenes de elementos, y luego las
+    clases de conjugación en $G$. Esto nos da una tripla de Gassmann $(G,H,H')$.
+  \end{proof}
+\end{proposicion}
+
+Todo grupo simétrico se realiza como un grupo de Galois de alguna extensión
+$L/\QQ$, así que el último argumento nos permite construir ejemplos de
+equivalencia aritmética. Sin embargo, la extensión $L/\QQ$ tendrá grado $n!$,
+así que este método no será muy eficaz.
+
+\begin{ejemplo}
+  Con ayuda de computadora, ocupando el programa
+  GAP\footnote{\url{https://gap-system.org/}}, se pueden buscar grupos no
+  isomorfos $H$ y $H'$ de pequeño orden $\# H = \# H'$ tales que
+  $\phi_H = \phi_{H'}$. Resulta que el ejemplo más pequeño se realiza por grupos
+  de orden $16$. Por ejemplo, podemos tomar $H = \ZZ/4\ZZ \oplus \ZZ/4\ZZ$ y el
+  producto semidirecto no trivial
+  $H' = \ZZ/4\ZZ \rtimes \ZZ/4\ZZ$.\footnote{Estos dos grupos están tabulados en
+    \emph{Small Groups Library} de GAP como \texttt{[16,2]} y \texttt{[16,4]}.}
+
+  Las clases de conjugación en $H$ son triviales. Hay tres elementos de orden
+  $2$: estos son $(0,2)$, $(2,0)$, $(2,2)$. El resto de elementos no triviales
+  tienen orden $4$, en total son $16 - 3 - 1 = 12$. Por otra parte, en $H'$ las
+  clases de conjugación son las siguientes.
+
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{rccc}
+      \hline
+      orden de elementos: & $1$ & $2$ & $4$ \\
+      \hline
+      tamaño de clase: & $1$ & $1$ & $2$ \\
+      \hline
+      número de clases: & $1$ & $3$ & $6$ \\
+      \hline
+    \end{tabular}
+  \end{center}
+  La estadística de ordenes es la misma. \qedhere
+\end{ejemplo}
+
+\begin{ejemplo}
+  Por otra parte, la búsqueda en GAP nos dice que el grupo más pequeño $G$ que
+  admite una tripla de Gassmann $(G,H,H')$ con $H$ y $H'$ no conjugados tiene
+  orden $32$ (en la notación de GAP, este es \texttt{[32,43]}).
+
+  \begin{shaded}\small
+\begin{verbatim}
+isGassmannTripple := function (H,Hp,cc)
+  local c;
+
+  for c in cc do
+    if Size(Intersection(H,c)) <> Size(Intersection(Hp,c)) then
+      return false;
+    fi;
+  od;
+
+  return true;
+end;;
+\end{verbatim}
+  \end{shaded}
+
+  Para obtener campos $K$ y $K'$ de grado menor posible,
+  vamos a minimizar el índice $[G:H]$ / maximizar el orden $\# H$.
+
+  \begin{shaded}
+\begin{verbatim}
+findGassmannTriple := function (G)
+  local cc, ccSubgr, i, j, H, Hp, hSize, triple;
+
+  triple := [];
+  hSize := 0;
+  triple := [];
+
+  cc := ConjugacyClasses(G);
+  ccSubgr := ConjugacyClassesSubgroups(G);
+
+  for i in [1..Size(ccSubgr)] do
+    for j in [i+1..Size(ccSubgr)] do
+      # H and H' must have the same size
+      if (Size(Representative(ccSubgr[i])) <>
+            Size(Representative(ccSubgr[j]))) then
+        continue;
+      fi;
+
+      for H in Elements (ccSubgr[i]) do
+        for Hp in Elements (ccSubgr[j]) do
+          if isGassmannTripple (H,Hp,cc) and Size(H) > hSize then
+            triple := [G,H,Hp];
+            hSize := Size(H);
+          fi;
+        od;
+      od;
+
+    od;
+  od;
+
+  return triple;
+end;;
+\end{verbatim}
+  \end{shaded}
+
+  \begin{shaded}
+\begin{verbatim}
+gap> findGassmannTriple (SmallGroup(32,43));
+[ <pc group of size 32 with 5 generators>, Group([ f2, f3 ]), 
+  Group([ f2*f4, f3 ]) ]
+gap> Size(last[2]);
+4
+\end{verbatim}
+  \end{shaded}
+
+  En este caso $[G:H] = 8$, y $G$ puede ser realizado como un grupo de Galois de
+  alguna extensión $L/\QQ$, lo que nos da un ejemplo de dos campos no isomorfos
+  aritméticamente equivalentes de grado $8$. Con ayuda de PARI/GP o LMFDB,
+  encontramos dos campos específicos definidos por polinomios irreducibles
+  \[ f = x^8 - x^4 - 1, \quad
+    f' = x^8 - 4\,x^6 + 5\,x^4 - 2\,x^2 - 1. \]
+  En este caso $r_1 = 2$, $r_2 = 3$, y el discriminante correspondiente es
+  $-2^{16}\cdot 5^4 = -40960000$.
+
+  Para verificar la equivalencia aritmética de manera indirecta, sin ocupar los
+  grupos de Galois, podemos recurrir a las siguientes consideraciones.
+  El teorema de Kummer--Dedekind nos dice que que salvo un número finito de
+  primos, el tipo de descomposición de $p$ en $\O_K$ es el mismo que el tipo de
+  descomposición del polinomio $f$ mód $p$. Podemos entonces escribir un código
+  que compara los tipos de descomposición de $f$ y $f'$ para una cantidad
+  suficientemente grande de primos.
+
+  \begin{shaded}\small
+\begin{verbatim}
+dectype (f,p) = {
+  local (dec = factor(f*Mod(1,p)));
+  vecsort (vector (matsize(dec)[1], i, poldegree(dec[i,1])))
+};
+
+N = 10^6;
+
+compare (f1,f2) = {
+  local (badprimes = List());
+
+  forprime (p=2,N,
+    if (dectype(f1,p) != dectype(f2,p),
+      listput (badprimes,p)
+    )
+  );
+
+  Vec(badprimes)
+};
+\end{verbatim}
+  \end{shaded}
+
+  Aquí esencialmente estamos comparando los factores de Euler de las funciones
+  zeta $\zeta_K (s)$ y $\zeta_{K'} (s)$, salvo un número finito, que como ya
+  sabemos, no afectan el resultado. Por otra parte, el cálculo de los valores de
+  las funciones zeta con una buena precisión requiere bastante memoria, y por
+  esto lo evitamos.
+
+  \begin{shaded}\small
+\begin{verbatim}
+? f1 = x^8 - x^4 - 1;
+? f2 = x^8 - 4*x^6 + 5*x^4 - 2*x^2 - 1;
+? compare (f1,f2)
+? = []
+? K1 = nfinit(f1);
+? K2 = nfinit(f2);
+? nfisisom(K1,K2)
+% = 0
+? K1.disc
+% = -40960000
+? K2.disc
+% = -40960000
+? K1.sign
+% = [2, 3]
+? K2.sign
+% = [2, 3]
+\end{verbatim}
+  \end{shaded}
+\end{ejemplo}
+
+\begin{ejemplo}
+  El artículo de Perlis \cite{Perlis-1977} contiene un argumento sencillo de la
+  teoría de grupos que demuestra que para una tripla de Gassmann no trivial
+  $(G,H,H')$ necesariamente se tiene $[G : H] \ge 7$. Esto significa que los
+  campos no isomorfos de grado $\le 6$ no pueden ser aritméticamente
+  equivalentes. De nuevo, usando GAP, se puede verificar que el grupo más
+  pequeño que nos da una tripla con $[G : H] = 7$ es $G = \GL_3 (\FF_2)$.
+
+  \begin{shaded}\small
+\begin{verbatim}
+gap> findGassmannTriple(GL(3,2));
+[ SL(3,2), <matrix group of size 24 with 4 generators>, 
+  <matrix group of size 24 with 4 generators> ]
+gap> Size(last[1])/Size(last[2]);
+7
+\end{verbatim}
+  \end{shaded}
+
+  De hecho, hay una manera geométrica de obtener la tripla de Gassmann en
+  cuestión. El grupo $\GL_3 (\FF_2) \cong \SL_3 (\FF_2) \cong \PSL_3 (\FF_2)$
+  actúa sobre los $7$ puntos de $\AA^3 (\FF_2) \setminus \{ 0 \}$, y por otra
+  parte sobre los $7$ hiperplanos en este espacio que corresponden a los puntos
+  del plano proyectivo $\PP^2 (\FF_2)$. Estas acciones son
+  $2$-transitivas\footnote{Para cualesquiera $(x,y)$, $(x',y')$ con $x\ne y$,
+    $x'\ne y'$ existe $g\in G$ tal que $(g\cdot x, g\cdot y) = (x',y')$}.
+  Ahora sean $P$ un punto no nulo en $\AA^3 (\FF_2)$ y $L$ el hiperplano
+  ortogonal correspondiente. Una matriz $A \in \GL_3 (\FF_2)$ fija $L$ si y
+  solamente si la matriz traspuesta $A^t$ fija $P$. Sean $H$ el grupo
+  estabilizador de $P$ y $H'$ el estabilizador de $L$. Se puede ver que $H$ y
+  $H'$ no son conjugados, y para toda matriz $A \in \GL_3 (\FF_2)$ existe una
+  biyección
+  $$(H\cap A^G) \leftrightarrow (H'\cap A^G).$$
+  Especificamente, esta biyección viene dada por $B\mapsto B^t$, ya que toda
+  matriz es conjugada con su traspuesta.
+
+  Realizando $\GL_3 (\FF_2)$ como un grupo de Galois, a partir de esta tripla de
+  Gassmann se pueden encontrar polinomios específicos
+  \[ f = x^7 - 7\,x - 3, \quad
+    f' = x^7 - 7\,x^4 - 21\,x^3 + 21\,x^2 + 42^x - 9. \]
+  En este caso $r_1 = 3$, $r_2 = 2$, $\Delta = 3^6\cdot 7^8 = 4202539929$.
+
+  \begin{shaded}\small
+\begin{verbatim}
+? f1 = x^7 - 7*x - 3;
+? f2 = x^7 - 7*x^4 - 21*x^3 + 21*x^2 + 42*x - 9;
+? compare (f1,f2);
+% = [3]
+? K1 = nfinit(f1);
+? K2 = nfinit(f2);
+? nfisisom(K1,K2)
+% = 0
+? K1.disc
+% = 4202539929
+? K2.disc
+% = 4202539929
+? K1.sign
+% = [3, 2]
+? K2.sign
+% = [3, 2] 
+\end{verbatim}
+  \end{shaded}
+\end{ejemplo}
+
+Antes de discutir la prueba del teorema de Gassmann, notamos su consecuencia
+importante.
+
+\begin{corolario}
+  Si $K$ y $K'$ son aritméticamente equivalentes, entonces
+  $\O_K^\times \cong \O_{K'}^\times$.
+
+  \begin{proof}
+    Primero, $r_1 = r'_1$ y $r_2 = r'_2$ implica que
+    $$\rk \O_K^\times = r_1 + r_2 - 1 = r'_1 + r'_2 - 1 = \rk \O_{K'}^\times.$$
+    Nos falta ver que las partes de torsión de los grupos de unidades también
+    coinciden; es decir, que $\mu_K = \mu_{K'}$.
+
+    Por la definición, el \textbf{corazón normal}\footnote{\emph{normal core} en
+      inglés y \emph{cœur} en francés} de $K$ es el subcampo más grande
+    $F\subseteq K$ tal que la extensión $F/\QQ$ es normal. Este será
+    precisamente el subcampo de $L$ fijo por el subgrupo generado por todos los
+    subgrupos conjugados $H^g$ para $g \in G$. Por la definición de triplas de
+    Gassmann, para todo $h\in H$ tenemos
+    $\# (H\cap h^G) = \# (H'\cap H^G) \ne 0$. En particular, algún conjugado
+    $h^g$ está en $H'$. De aquí se sigue fácilmente que
+    $\langle H^g \mid g\in G\rangle = \langle H'^g \mid g\in G\rangle$, así que
+    $K$ y $K'$ comparten el mismo corazón normal.
+
+    Las extensiones ciclotómicas $\QQ (\mu_K)/\QQ$ y $\QQ (\mu_{K'})/\QQ$ son
+    normales, así que ambas están en el corazón normal de $K$ y $K'$, y por ende
+    $\mu_K = \mu_{K'}$.
+  \end{proof}
+\end{corolario}
+
+\begin{corolario}
+  Si $K$ y $K'$ son aritméticamente equivalentes, entonces
+  $$\Reg_K\,h_K = \Reg_{K'}\,h_{K'}.$$
+
+  \begin{proof}
+    Dado que $\zeta_K (s) = \zeta_{K'} (s)$, las funciones zeta tienen el mismo
+    residuo en $s = 1$ que nos da la fórmula del número de clases:
+    \[ \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_K}{\#\mu_K\,\sqrt{|\Delta_K|}} = 
+      \frac{2^{r'_1}\,(2\pi)^{r'_2}\,\Reg_{K'}\,h_{K'}}{\#\mu_{K'}\,\sqrt{|\Delta_{K'}|}}. \]
+    Aquí $r_1 = r'_1$, $r_2 = r'_2$, $\Delta_K = \Delta_{K'}$.
+  \end{proof}
+\end{corolario}
+
+Esto nos deja con la siguiente pregunta: ¿será también cierto que la
+equivalencia aritmética implica que $\Reg_K = \Reg_{K'}$ y $h_K = h_{K'}$? La
+respuesta es \emph{negativa}.
+
+\begin{ejemplo}
+  En \cite{deSmit-Perlis-1994} de Smit y Perlis
+  construyen una familia de ejemplos, entre cuales está
+  \[ K = \QQ (\sqrt[8]{-15}), \quad K' = \QQ (\sqrt[8]{-240}). \]
+  Estos dos campos son aritméticamente equivalentes, pero
+  \[ \Reg_K = 66.316448\ldots, \quad
+    h_K = 16, \quad
+    \Reg_{K'} = 132.632896\ldots, \quad
+    h_{K'} = 8. \]
+
+  \begin{shaded}\small
+\begin{verbatim}
+? f1 = x^8 + 15;
+? f2 = x^8 + 240;
+? compare (f1,f2);
+% = []
+? K1 = bnfinit(f1);
+? K2 = bnfinit(f2);
+? nfisisom(K1,K2)
+% = 0
+? K1.disc
+% = 174960000000
+? K2.disc
+% = 174960000000
+? K1.sign
+% = [0, 4]
+? K2.sign
+% = [0, 4]
+? K1.no
+% = 16
+? K2.no
+% = 8
+? K1.reg
+% = 66.316448148870962189601403176835356992
+? K2.reg
+% = 132.63289629774192437920280635367071398
+\end{verbatim}
+  \end{shaded}
+\end{ejemplo}
+
+Entonces, la función zeta $\zeta_K (s)$ sabe mucho del campo de números $K$,
+¡pero no todo! En algún sentido, esto pasa porque, aunque los invariantes
+aritméticos de $K$ aparecen en las fórmulas para los valores especiales de
+$\zeta_K (s)$, estos invariantes están «entrelazados» entre sí.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
