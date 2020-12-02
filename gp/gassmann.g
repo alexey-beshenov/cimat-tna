@@ -24,7 +24,6 @@ end;;
 findGassmannTriple := function (G)
   local cc, ccSubgr, i, j, H, Hp, hSize, triple;
 
-  triple := [];
   hSize := 0;
   triple := [];
 
@@ -33,7 +32,8 @@ findGassmannTriple := function (G)
 
   for i in [1..Size(ccSubgr)] do
     for j in [i+1..Size(ccSubgr)] do
-      # H and H' must have the same size
+
+      # H y H' deben ser del mismo orden
       if (Size(Representative(ccSubgr[i])) <>
             Size(Representative(ccSubgr[j]))) then
         continue;
