@@ -1,0 +1,23 @@
+alexey@topos:~/cimat-tna/gp$ gap
+
+ ┌───────┐   GAP 4.8.6, 12-Nov-2016, build of 2016-12-18 09:03:11 (UTC)
+ │  GAP  │   http://www.gap-system.org
+ └───────┘   Architecture: x86_64-linux-gnu-gcc-default64
+ Libs used:  gmp, readline
+ Loading the library and packages ...
+ Components: small 2.1, small2 2.0, id2 3.0, trans 1.0, prim 2.1
+ Packages:   AutPGrp 1.10.2, CTblLib 1.2.2, GAPDoc 1.6.3
+ Try '??help' for help. See also '?copyright', '?cite' and '?authors'
+
+gap> Read ("gassmann.g");
+
+gap> smallGroupsGassmann (50);
+[ 32, 43 ]
+[ 48, 29 ]
+[ 48, 49 ]
+
+gap> findGassmannTriple (GL(3,2));
+[ SL(3,2), <matrix group of size 24 with 4 generators>, 
+  <matrix group of size 24 with 4 generators> ]
+
+gap> quit;
