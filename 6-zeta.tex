@@ -1587,7 +1587,7 @@ primo $\mathfrak{p}\mid p$ y $p\O_K = \mathfrak{p}^e$, donde $e = [K :
     $\mathfrak{p}_1 \subset \O_{F_2}$
     tales que
     $\mathfrak{P} \mid \mathfrak{p}_1 \mid p$ y
-    $\mathfrak{P} \mid \mathfrak{p}_2 \mid p$.
+    $\mathfrak{p}_2 \mid p$.
 
     Consideremos los grupos de descomposición
     \begin{align*}
@@ -2799,10 +2799,6 @@ Para verlo, necesitamos la siguiente observación.
   \end{proof}
 \end{proposicion}
 
-En particular, acabamos de ver que dos campos aritméticamente equivalentes
-necesariamente comparten el grado, el número de encajes reales y complejos,
-y el discriminante.
-
 Ahora si $p\in \ZZ$ es un primo racional que no se ramifica en $K$ (es decir,
 $p\nmid \Delta_K$), entonces se tiene factorización
 $p\O_K = \mathfrak{p}_1 \cdots \mathfrak{p}_s$, donde los grados de campos
@@ -2823,6 +2819,10 @@ término «equivalencia aritmética».
   \item[3)] los tipos de descomposición de $p$ en $K$ y $K'$ coinciden para todo
     $p$, salvo un número finito.
   \end{enumerate}
+
+  En particular, dos campos aritméticamente equivalentes necesariamente
+  comparten el grado $[K : \QQ]$, el número de encajes reales $r_1$ y complejos
+  $r_2$, y el discriminante $\Delta_K$.
 
   \begin{proof}
     Para $n \ge 1$ denotemos por $a_n$ el número de ideales en $\O_K$ de norma
@@ -3097,7 +3097,10 @@ compare (f1,f2) = {
   teoría de grupos que demuestra que para una tripla de Gassmann no trivial
   $(G,H,H')$ necesariamente se tiene $[G : H] \ge 7$. Esto significa que los
   campos no isomorfos de grado $\le 6$ no pueden ser aritméticamente
-  equivalentes. De nuevo, usando GAP, se puede verificar que el grupo más
+  equivalentes. Perlis dice que un campo $K$ es \textbf{solitario} si todo campo
+  aritméticamente equivalente a $K$ debe ser isomorfo a $K$.
+
+  De nuevo, usando GAP, se puede verificar que el grupo más
   pequeño que nos da una tripla con $[G : H] = 7$ es $G = \GL_3 (\FF_2)$.
 
   \begin{shaded}\small
@@ -3130,7 +3133,7 @@ gap> Size(last[1])/Size(last[2]);
   Realizando $\GL_3 (\FF_2)$ como un grupo de Galois, a partir de esta tripla de
   Gassmann se pueden encontrar polinomios específicos
   \[ f = x^7 - 7\,x - 3, \quad
-    f' = x^7 - 7\,x^4 - 21\,x^3 + 21\,x^2 + 42^x - 9. \]
+    f' = x^7 - 7\,x^4 - 21\,x^3 + 21\,x^2 + 42\,x - 9. \]
   En este caso $r_1 = 3$, $r_2 = 2$, $\Delta = 3^6\cdot 7^8 = 4202539929$.
 
   \begin{shaded}\small
@@ -3155,8 +3158,9 @@ gap> Size(last[1])/Size(last[2]);
   \end{shaded}
 \end{ejemplo}
 
-Antes de discutir la prueba del teorema de Gassmann, notamos su consecuencia
-importante.
+Más ejemplos particulares de campos aritméticamente equivalentes de grado
+pequeño se encuentran en el artículo \cite{Bosma-deSmit-2002}. Antes de discutir
+la prueba del teorema de Gassmann, notamos su consecuencia importante.
 
 \begin{corolario}
   Si $K$ y $K'$ son aritméticamente equivalentes, entonces
@@ -3246,6 +3250,10 @@ Entonces, la función zeta $\zeta_K (s)$ sabe mucho del campo de números $K$,
 ¡pero no todo! En algún sentido, esto pasa porque, aunque los invariantes
 aritméticos de $K$ aparecen en las fórmulas para los valores especiales de
 $\zeta_K (s)$, estos invariantes están «entrelazados» entre sí.
+
+\subsection{Demostración del teorema de Gassmann}
+
+**TODO**
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
