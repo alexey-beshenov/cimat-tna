@@ -1550,8 +1550,9 @@ racional $p$ es \textbf{totalmente ramificado}\footnote{No hemos mencionado este
   término hasta el momento solo porque por el carácter introductorio de este
   curso, no hemos tratado de manera más sistemática la teoría de
   ramificación\ldots} en una extensión $K/\QQ$ si en $\O_K$ hay único ideal
-primo $\mathfrak{p}\mid p$ y $p\O_K = \mathfrak{p}^e$, donde $e = [K :
-  \QQ]$. Notamos que esto es equivalente a tener $f (\mathfrak{p}|p) = 1$.
+primo $\mathfrak{p}\mid p$ y $p\O_K = \mathfrak{p}^e$, donde
+$e = [K : \QQ]$. Notamos que esto es equivalente a tener
+$f (\mathfrak{p}|p) = 1$.
 
 \begin{lema}
   En una torre de extensiones $\QQ \subseteq F \subseteq K$,
@@ -1569,9 +1570,19 @@ primo $\mathfrak{p}\mid p$ y $p\O_K = \mathfrak{p}^e$, donde $e = [K :
 
 \begin{lema}
   Sean $F_1$ y $F_2$ dos campos de números, donde $F_2/\QQ$ es una extensión de
-  Galois. Si un primo racional $p$ no se ramifica en $F_2/\QQ$, entonces
-  el índice de ramificación de $p$ en $F_1/\QQ$ es el mismo que el índice
-  de ramificación de $p$ en $F_1 F_2/\QQ$.
+  Galois. Dado un primo racional $p$, consideremos ideales primos
+  $\mathfrak{P} \subset \O_{F_1 F_2}$, $\mathfrak{p}_1 \subset \O_{F_1}$,
+  $\mathfrak{p}_1 \subset \O_{F_2}$ tales que
+  $\mathfrak{P} \mid \mathfrak{p}_1 \mid p$ y $\mathfrak{p}_2 \mid p$.
+
+  \begin{enumerate}
+  \item[1)] Si $p$ no se ramifica en $F_2$, entonces
+    $e (\mathfrak{P} \mid \mathfrak{p}_1) = 1$.
+
+  \item[2)] En particular, si $F_2/\QQ$ es también una extensión de Galois,
+    y $p$ no se ramifica en $F_2$, entonces el índice de ramificación de $p$ en
+    $F_1/\QQ$ es el mismo que el índice de ramificación de $p$ en $F_1 F_2/\QQ$.
+  \end{enumerate}
 
   \[ \begin{tikzcd}
     & F_1 F_2\ar[-]{dl}[description]{nr}\ar[-]{dr} \\
@@ -1580,16 +1591,9 @@ primo $\mathfrak{p}\mid p$ y $p\O_K = \mathfrak{p}^e$, donde $e = [K :
   \end{tikzcd} \]
 
   \begin{proof}
-    Recordemos que en este caso $F_1 F_2/F_1$ es también una extensión de
-    Galois. Consideremos ideales primos
-    $\mathfrak{P} \subset \O_{F_1 F_2}$,
-    $\mathfrak{p}_1 \subset \O_{F_1}$,
-    $\mathfrak{p}_1 \subset \O_{F_2}$
-    tales que
-    $\mathfrak{P} \mid \mathfrak{p}_1 \mid p$ y
-    $\mathfrak{p}_2 \mid p$.
-
-    Consideremos los grupos de descomposición
+    Recordemos que si $F_2/\QQ$ es una extensión de Galois, entonces
+    $F_1 F_2/F_1$ es también una extensión de Galois. Consideremos los grupos
+    de descomposición
     \begin{align*}
       D (\mathfrak{P}|\mathfrak{p}_1) & = \{ \sigma \in \Gal (F_1 F_2/F_1) \mid \sigma (\mathfrak{P}) = \mathfrak{P} \}, \\
       D (\mathfrak{p}_2|p) & = \{ \sigma \in \Gal (F_2/\QQ) \mid \sigma (\mathfrak{p}_2) = \mathfrak{p}_2 \}.
@@ -1606,10 +1610,14 @@ primo $\mathfrak{p}\mid p$ y $p\O_K = \mathfrak{p}^e$, donde $e = [K :
     (véase \ref{prop:irracionalidades-naturales}). Como consecuencia, tenemos
     un homomorfismo inyectivo
     $I (\mathfrak{P}|\mathfrak{p}_1) \hookrightarrow I (\mathfrak{p}_2|p)$.
-
     En particular, si $p$ no se ramifica en $F_2$, entonces
     $I (\mathfrak{p}_2|p) = 1$, y luego $I (\mathfrak{P}|\mathfrak{p}_1) = 1$,
-    así que
+    así que $e (\mathfrak{P} \mid \mathfrak{p}_1) = 1$.
+
+    Para la parte 2) del lema, dado un primo racional $p$, sean
+    $\mathfrak{P} \subset \O_{F_1 F_2}$ un ideal primo tal que
+    $\mathfrak{P} \mid p$ y $\mathfrak{p}_1 = \mathfrak{P} \cap \O_{F_1}$,
+    $\mathfrak{p}_2 = \mathfrak{P} \cap \O_{F_2}$. Entonces,
     \[ e (\mathfrak{P}|p) =
        e (\mathfrak{P}|\mathfrak{p}_1)\,e (\mathfrak{p}_1|p) =
        e (\mathfrak{p}_1|p). \qedhere\]
