@@ -2880,6 +2880,7 @@ isomorfos.
 Gassmann probó el siguiente resultado.
 
 \begin{teorema}
+  \label{thm:Gassmann}
   Sean $K$ y $K'$ dos campos de números y $L/\QQ$ una extensión de Galois tal
   que $K, K' \subseteq L$ (por ejemplo, la cerradura de Galois del compositum
   $K K'$). Entonces, $K$ y $K'$ son aritméticamente equivalentes si y solamente
@@ -3261,7 +3262,100 @@ $\zeta_K (s)$, estos invariantes están «entrelazados» entre sí.
 
 \subsection{Demostración del teorema de Gassmann}
 
-**TODO**
+Para probar el teorema de Gassmann~\ref{thm:Gassmann}, necesitamos revisar cómo
+el automorfismo de Frobenius determina el tipo de descomposición de primos
+racionales. Sea $L/\QQ$ una extensión de Galois y $K \subseteq L$ un
+subcampo. Denotemos $G = \Gal (L/\QQ)$ y $H = \Gal (L/K)$.
+
+\begin{enumerate}
+\item A todo primo racional $p$ que no se ramifica en $L$ corresponde el
+  automorfismo de Frobenius $\Frob_p \in G$. El teorema de densidad de
+  Chebotarëv (véase~\ref{thm:Chebotarev}) nos dice que para cada $\sigma \in G$
+  existe un número infinito de $p$ tales que $\Frob_p$ tiene la misma clase de
+  conjugación que $\sigma$.
+
+\item El teorema~\ref{thm:tipo-de-descomposicion-en-extension-no-Galois} nos
+  dice que para $p$ no ramificado en $L$ el tipo de descomposición
+  $p \O_K = \mathfrak{p}_1\cdots \mathfrak{p}_s$ se determina por la acción de
+  $\Frob_p$ sobre las clases laterales
+  $$H\backslash G = \{ H\tau \mid \tau \in G \}$$
+  por la multiplicación por la derecha. Específicamente, los grados de campos
+  residuales $f_1,\ldots,f_s$ corresponden exactamente al tipo de ciclo de
+  $\Frob_p$ visto como una permutación del conjunto $H\backslash G$.
+
+\item En general, dada una representación por permutaciones $G\to \Sym (X)$,
+  la traza correspondiente cuenta los puntos fijos y da lugar a un carácter
+  $\chi\colon G\to \ZZ$ que es una función constante sobre las clases laterales.
+  $$\chi (\sigma) = \#\{ x \in X \mid \sigma (x) = x \}.$$
+  El tipo de ciclo de cada $\sigma \in G$ se determina por el carácter $\chi$,
+  específicamente por los valores de $\chi (\sigma^n)$ para $n = 1,2,3,\ldots$
+
+\item En nuestro caso particular, nos interesa la representación
+  $G \to \Sym (H \backslash G)$ y el carácter correspondiente
+  $$\chi_H (\sigma) = \# \{ H\tau \in H\backslash G \mid H \tau \sigma = H \tau \}.$$
+\end{enumerate}
+
+Ahora supongamos que $K, K' \subseteq L$ son dos subcampos y $H = \Gal (L/K)$,
+$H' = \Gal (L/K')$.
+
+\begin{lema}
+  Los campos $K$ y $K'$ son aritméticamente equivalentes si y solamente si
+  $\chi_H = \chi_{H'}$.
+
+  \begin{proof}
+    Si $K$ y $K'$ son aritméticamente equivalentes, entonces salvo un número
+    finito, todo primo $p$ tiene el mismo tipo de descomposición en $K$ y $K'$.
+    Entonces, el tipo de ciclo de la acción de $\Frob_p$ sobre $H\backslash G$ y
+    $H' \backslash G$ coincide. Puesto que cada clase de conjugación $\sigma^G$
+    se realiza por $\Frob_p$ por un número infinito de $p$, esto implica que
+    $\chi_H = \chi_{H'}$.
+
+    Viceversa, si $\chi_H = \chi_{H'}$, entonces para todo $p$ no ramificado en
+    $L$ el tipo de ciclo de $\Frob_p$ actuando sobre $H\backslash G$ y
+    $H'\backslash G$ coincide. Esto implica que el tipo de descomposición de $p$
+    en $K$ y $K'$ es el mismo. Entonces, $K$ y $K'$ son aritméticamente
+    equivalentes.
+  \end{proof}
+\end{lema}
+
+Para probar el teorema de Gassmann, nos falta relacionar la condición
+$\chi_H = \chi_{H'}$ con las triplas de Gassmann.
+
+\begin{lema}
+  Para un grupo finito $G$, dos subgrupos $H, H' \subset G$ dan lugar a una
+  tripla de Gassmann $(G,H,H')$ si y solamente si $\chi_H = \chi_{H'}$.
+
+  \begin{proof}
+    Definamos
+    $$\psi_H\colon G\to \ZZ, \quad \sigma \mapsto \# (H \cap \sigma^G).$$
+    Esta es una función constante sobre las clases de conjugación, y por la
+    definición, $(G,H,H')$ es una tripla de Gassmann si y solamente si
+    $\psi_H = \psi_{H'}$.
+
+    Para $\sigma \in G$ consideremos el centralizador correspondiente
+    $$C_G (\sigma) = \{ \tau \in G \mid \tau\sigma = \sigma\tau \}.$$
+    Este es el estabilizador de la acción de $G$ sobre la clase de conjugación
+    $\sigma^G$ mediante la conjugación. Tenemos
+    \[ \psi_H (\sigma)\cdot \# C_G (\sigma) =
+      \# \{ \tau \in G \mid \tau \sigma \tau^{-1} \in H \} =
+      \# \{ \tau \in G \mid H \tau \sigma = H \tau \} =
+      \chi_H (\sigma) \cdot \# H. \]
+    Podemos definir entonces la función $\phi_H\colon G \to \QQ$ mediante
+    $\phi_H (\sigma) = \# C_G (\sigma) / \# H$. El cálculo de arriba nos dice
+    que $\chi_H = \psi_H\,\phi_H$.
+
+    Ahora si $(G,H,H')$ es una tripla de Gassmann, entonces $\phi_H = \psi_{H'}$
+    y $\phi_H = \phi_{H'}$ (dado que $\# H = \# H'$). Esto implica que
+    $\chi_H = \chi_{H'}$. Viceversa, si $\chi_H = \chi_{H'}$, entonces
+    $\phi_H = \phi_{H'}$, dado que
+    $\# (H\backslash G) = \chi_H (1) = \chi_{H'} (1) = \# (H'\backslash G)$.
+    Esto implica que $\psi_H = \psi_{H'}$, así que $(G,H,H')$ es una tripla de
+    Gassmann.
+  \end{proof}
+\end{lema}
+
+Juntando todas las observaciones, se obtiene una prueba del teorema de
+Gassmann~\ref{thm:Gassmann}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
