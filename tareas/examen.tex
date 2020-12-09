@@ -1,0 +1,108 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{fullpage}
+
+\usepackage[perpage,symbol]{footmisc}
+\renewcommand{\thefootnote}{\ifcase\value{footnote}\or{*}\or{**}\or{***}\or{****}\fi}
+
+\usepackage{amsmath,amssymb,amsthm}
+
+\theoremstyle{definition}
+\newtheorem{ejercicio}{Ejercicio}
+
+\newenvironment{solucion}{\begin{proof}[Solución]}{\end{proof}}
+
+\usepackage{framed}
+
+\usepackage{mathspec}
+
+\setmainfont{PT Serif}
+\setsansfont{Montserrat}
+\setmonofont{PT Mono}
+
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Cl}{Cl}
+
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\renewcommand{\O}{\mathcal{O}}
+
+\title{Teoría de números algebraicos\\Examen final}
+\author{Alexey Beshenov (alexey.beshenov@cimat.mx)}
+\date{9 de diciembre de 2020}
+
+% \def\solutions{true}
+
+\begin{document}
+
+{\sffamily\bfseries\maketitle}
+
+\ifdefined\solutions
+\else
+\thispagestyle{empty}
+\fi
+
+\noindent\emph{Fecha límite: 16 de diciembre de 2020.}
+
+\begin{ejercicio}
+  Consideremos el polinomio $f = x^3 + 5x^2 - x - 4$.
+
+  \begin{enumerate}
+  \item[0)] Demuestre que $f$ es irreducible en $\QQ [x]$.
+    Sea $K = \QQ [x]/(f)$.
+
+  \item[1)] Calcule el anillo de enteros $\O_K$ y discriminante $\Delta_K$.
+
+  \item[2)] Demuestre que $u_1 = \alpha + 1$ y $u_2 = \alpha - 1$, donde
+    $\alpha = x \mod f$, Son unidades en $\O_K^\times$. Asumiendo que $u_1$ y
+    $u_2$ generan la parte libre de $\O_K^\times$, calcule el regulador.
+
+  \item[3)] Calcule el grupo de clases $\Cl (K)$.
+
+  \item[4)] Usando la fórmula analítica del número de clases\footnote{El residuo
+      de $\zeta_K (s)$ en $s=1$ puede ser calculado en PARI/GP.}, compruebe que
+    $u_1$ y $u_2$ son efectivamente unidades fundamentales.
+  \end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+  Para un campo de números $K/\QQ$ demuestre que la cerradura de Galois $L/K$
+  contiene subcampo $\QQ (\sqrt{\Delta_K})$. Dé un ejemplo particular cuando
+  $\Delta_K$ no es un cuadrado y $K \ne \QQ (\sqrt{\Delta_K})$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Sea $k > 0$ un entero positivo libre de cuadrados. Supongamos que
+  $k \equiv 1,2 \pmod{4}$ y $k$ no tiene forma $3a^2 \pm 1$ para $a \in \ZZ$.
+  Demuestre que si $3 \nmid h_{\QQ (\sqrt{-k})}$, entonces la ecuación
+  $y^2 = x^3 - k$ no tiene soluciones enteras.
+
+  Punto extra: encuentre un contraejemplo para $3 \mid h_{\QQ (\sqrt{-k})}$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Dada una extensión ciclotómica $\QQ (\zeta_m)$, sean
+  $X \subseteq \widehat{(\ZZ/m\ZZ)^\times}$ un grupo de caracteres de Dirichlet
+  y $K \subseteq \QQ (\zeta_m)$ el subcampo correspondiente. Demuestre que $K$
+  es un campo real (es decir, $r_2 = 0$) si y solamente si $\chi (-1) = +1$ para
+  todo $\chi \in X$.
+\end{ejercicio}
+
+\begin{ejercicio}
+  Consideremos el campo cuadrático real $K = \QQ (\sqrt{3})$.
+  \begin{enumerate}
+  \item[1)] Calcule el residuo de $\zeta_K (s)$ en $s = 1$.
+
+  \item[2)] Exprese $\zeta_K (s)$ como un producto de series L de Dirichlet.
+
+  \item[3)] Calcule los valores
+    $\zeta_K (0)$, $\zeta_K (-1)$, $\zeta_K (-2)$, $\zeta_K (-3)$.
+
+  \item[4)] Calcule los valores $\zeta_K (2)$ y $\zeta_K (4)$.
+  \end{enumerate}
+\end{ejercicio}
+
+\end{document}
