@@ -1,13 +1,7 @@
 # Curso de la teoría de números algebraicos en CIMAT, Guanajuato (otoño 2020)
 
 Para mayor información sobre el curso, véase la página
-
-http://cadadr.org/cimat-tna/
-
-
-Para cualquier pregunta, commentario o corrección:
-
-alexey.beshenov@cimat.mx
+https://cadadr.org/cimat-tna/
 
 
 ## Plan del curso
@@ -278,7 +272,7 @@ alexey.beshenov@cimat.mx
   https://www.youtube.com/embed/88a8VZcoe-k
 
 * Clase 24 (09/11/2020). Fracciones continuas para √d. Soluciones de la ecuación
-  de Pell x² − dy² = ±1. Unidad fundamental para ℤ[√d]$ y ℤ[(1+√d)/2].
+  de Pell x² − dy² = ±1. Unidad fundamental para ℤ[√d] y ℤ[(1+√d)/2].
 
   https://www.youtube.com/embed/Mt4iRzBv_ks
 
