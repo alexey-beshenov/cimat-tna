@@ -5,9 +5,12 @@
 
 \usepackage{amsmath,amssymb,amsthm}
 
+\usepackage{multirow}
+
 \usepackage{tikz-cd}
 \usetikzlibrary{babel}
 \usetikzlibrary{calc}
+\usetikzlibrary{arrows}
 
 \newcounter{tarea}
 \setcounter{tarea}{7}
@@ -26,6 +29,7 @@
 
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\Stab}{Stab}
 
 \newcommand{\FF}{\mathbb{F}}
 \newcommand{\ZZ}{\mathbb{Z}}
@@ -64,7 +68,32 @@
   \sigma \, I (\mathfrak{q}|\mathfrak{p}) \, \sigma^{-1}. \]
   Además, si $\mathfrak{p}$ no se ramifica, entonces el Frobenius cumple
   \[ \Frob_{\sigma (\mathfrak{q})|\mathfrak{p}} =
-  \sigma \, \Frob_{\mathfrak{q}|\mathfrak{p}} \, \sigma^{-1}. \]
+     \sigma \, \Frob_{\mathfrak{q}|\mathfrak{p}} \, \sigma^{-1}. \]
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Recordemos que $D (\mathfrak{q}|\mathfrak{p})$ es el grupo estabilizador de
+    $\mathfrak{q}$ respecto a la acción del grupo de Galois $\Gal (L/K)$ sobre
+    los primos $\mathfrak{q}_1,\ldots,\mathfrak{q}_g$ que están sobre
+    $\mathfrak{p}$. Es un cálculo general que para un $G$-conjunto $X$ se cumple
+    $\Stab_{\sigma x} = \sigma \Stab_x \sigma^{-1}$.
+
+    Para el grupo de inercia, podemos considerar el diagrama
+    \[ \begin{tikzcd}
+        1 \ar{r} & I (\sigma(\mathfrak{q})|\mathfrak{p}) \ar{r}\ar[equals]{d} & D (\sigma(\mathfrak{q})|\mathfrak{p}) \ar{r}\ar[equals]{d} & \Gal (\kappa(\sigma(\mathfrak{q}))/\kappa(\mathfrak{p})) \ar{r}\ar[equals]{d} & 1 \\
+        1 \ar{r} & \sigma I (\mathfrak{q}|\mathfrak{p}) \sigma^{-1} \ar{r} & \sigma D (\mathfrak{q}|\mathfrak{p}) \sigma^{-1} \ar{r} & \overline{\sigma} \Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p})) \overline{\sigma}^{-1} \ar{r} & 1
+      \end{tikzcd} \]
+
+    Aquí $\sigma \in \Gal (L/K)$ induce un isomorfismo
+    $\overline{\sigma}\colon \kappa (\mathfrak{q}) \to \kappa (\sigma (\mathfrak{q}))$.
+
+    De allí también se sigue la afirmación sobre el Frobenius.
+    \[ \begin{tikzcd}
+        D (\sigma(\mathfrak{q})|\mathfrak{p}) \ar{r}{\cong}\ar[equals]{d} & \Gal (\kappa(\sigma(\mathfrak{q}))/\kappa(\mathfrak{p})) \ar[equals]{d} \\
+        \sigma D (\mathfrak{q}|\mathfrak{p}) \sigma^{-1} \ar{r}{\cong} & \overline{\sigma} \Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p})) \overline{\sigma}^{-1}
+      \end{tikzcd} \]
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -74,9 +103,8 @@
   $\mathfrak{Q} \mid \mathfrak{q}$ y $\mathfrak{q}\mid\mathfrak{p}$.
 
   \begin{enumerate}
-  \item[1)] Demuestre que la restricción de automorfismos identifica
-    $D (\mathfrak{Q}|\mathfrak{q})$ con un subgrupo de
-    $D (\mathfrak{Q}|\mathfrak{p})$ e
+  \item[1)] Demuestre que $D (\mathfrak{Q}|\mathfrak{q})$ se identifica con un
+    subgrupo de $D (\mathfrak{Q}|\mathfrak{p})$ e
     $I (\mathfrak{Q}|\mathfrak{q})$ con un subgrupo de
     $I (\mathfrak{Q}|\mathfrak{p})$.
 
@@ -87,6 +115,51 @@
     $\Frob_{\mathfrak{q}|\mathfrak{p}}$ es la restricción de
     $\Frob_{\mathfrak{Q}|\mathfrak{p}}$.
   \end{enumerate}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Estamos en la siguiente situación:
+    \[ \begin{tikzcd}
+        \O_L \ar[->>]{r} \ar[-]{d} & \kappa (\mathfrak{Q}) \ar[-]{d} \\
+        \O_K \ar[->>]{r} \ar[-]{d} & \kappa (\mathfrak{q}) \ar[-]{d} \\
+        \O_F \ar[->>]{r} & \kappa (\mathfrak{p})
+      \end{tikzcd} \]
+    Tenemos inclusiones naturales
+    $\Gal (L/K) \subset \Gal (L/F)$
+    y
+    $\Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{q})) \subset \Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{p}))$,
+    y estas nos dan el diagrama conmutativo
+    \[ \begin{tikzcd}
+        1 \ar{r} & I (\mathfrak{Q}|\mathfrak{q}) \ar{r}\ar[dashed]{d} & D (\mathfrak{Q}|\mathfrak{q}) \ar{r}\ar[right hook->]{d} & \Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{q})) \ar{r}\ar[right hook->]{d} & 1 \\
+        1 \ar{r} & I (\mathfrak{Q}|\mathfrak{p}) \ar{r} & D (\mathfrak{Q}|\mathfrak{p}) \ar{r} & \Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{p})) \ar{r} & 1
+      \end{tikzcd} \]
+    Aquí la flecha punteada existe por la conmutatividad del segundo cuadrado,
+    y es un monomorfismo porque la flecha en el medio lo es. Si $\mathfrak{p}$
+    no se ramifica, se obtiene
+    \[ \begin{tikzcd}
+        D (\mathfrak{Q}|\mathfrak{q}) \ar{r}{\cong}\ar[right hook->]{d} & \Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{q}))\ar[right hook->]{d} \\
+        D (\mathfrak{Q}|\mathfrak{p}) \ar{r}{\cong} & \Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{p}))
+      \end{tikzcd} \]
+    Tenemos
+    \[ \Frob_{\mathfrak{Q}|\mathfrak{p}}\colon \alpha \mapsto \alpha^{\# \kappa (\mathfrak{p})} = \alpha^{p^{f (\mathfrak{p}|p)}} \]
+    y
+    \[ \Frob_{\mathfrak{Q}|\mathfrak{q}}\colon \alpha \mapsto \alpha^{\# \kappa (\mathfrak{q})} = \alpha^{p^{f (\mathfrak{q}|p)}} = \Bigl(\alpha^{p^{f (\mathfrak{p}|p)}}\Bigr)^{f (\mathfrak{q}|\mathfrak{p})}. \]
+
+    Si $K/F$ es también una extensión normal, entonces tiene sentido considerar
+    el diagrama
+    \[ \begin{tikzcd}
+        D (\mathfrak{Q}|\mathfrak{p}) \ar{r}{\cong}\ar[->>]{d} & \Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{p}))\ar[->>]{d} \\
+        D (\mathfrak{q}|\mathfrak{p}) \ar{r}{\cong} & \Gal (\kappa(\mathfrak{q})/\kappa(\mathfrak{p}))
+      \end{tikzcd} \]
+    inducido por
+    $\Gal (L/F) \twoheadrightarrow \Gal (K/F)$,
+    y
+    $\Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{p})) \twoheadrightarrow \Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{p}))$.
+    Estas son las restricciones de automorfismos, con el núcleo
+    $\Gal (L/K)$ y $\Gal (\kappa(\mathfrak{Q})/\kappa(\mathfrak{q}))$
+    respectivamente.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -95,6 +168,64 @@
   Calcule $\Gal (K/\QQ)$, las clases de conjugación, los tipos de descomposición
   que corresponden a cada $\Frob_{\mathfrak{p}\mid p}$, y las densidades que nos
   da el teorema de Chebotarëv.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Podemos ocupar la reducción módulo $p$. Para un polinomio mónico
+    $f \in \ZZ [x]$ y un primo $p$, supongamos que el polinomio correspondiente
+    $\overline{f} \in \FF_p [x]$ no tiene raíces múltiples en
+    $\overline{\FF_p}$.  En este caso el grupo de Galois de $\overline{f}$ se
+    encaja en el grupo de Galois de $f$. Para las pruebas, véanse por ejemplo
+    \S\S VI.2 + VII.2 en el libro de Lang. Aquí me gustaría usar nuestro
+    polinomio particular para explicar el uso de este resultado.
+
+    El polinomio $f = x^4 + 8x + 12$ tiene factores múltiples al factorizarlo
+    módulo $p = 2$ y $5$. La factorización módulo $p = 5$ nos da
+    $$\overline{f} = (x+1)\,(x^3 + 4x^2 + x + 2).$$
+    El grupo de Galois de $\overline{f}$ será
+    $\Gal (\FF_{p^3}/\FF_p) \cong C_3$, lo que nos dice que el grupo de Galois
+    de $f$ contiene un elemento de orden $3$.
+
+    El grupo de Galois de $f$ se realiza como un subgrupo transitivo de $S_4$, y
+    las únicas posibilidades para este son
+    $$C_4, ~ V_4, ~ D_8, ~ A_4, ~ S_4.$$
+    Sabiendo que tenemos un elemento de orden $3$, nos quedan solamente dos
+    posibilidades: $A_4$ y $S_4$. Calculamos el discriminante
+    $$\Delta (f) = \prod_{i < j} (\alpha_i - \alpha_j)^2.$$
+    En este caso particular $\Delta (f) = 2^{12} \cdot 3^4$ es un
+    cuadrado. Entonces,
+    $$\prod_{i < j} (\alpha_i - \alpha_j) \in \QQ,$$
+    y por lo tanto este número es fijo respecto a la acción del grupo de
+    Galois. Notamos que la transposición que intercambia dos raíces $\alpha_i$ y
+    $\alpha_j$ no está en el grupo de Galois: esta transposición cambia el signo
+    de $\prod_{i < j} (\alpha_i - \alpha_j)$. Entonces, el grupo de Galois es
+    $A_4$.
+
+    Ahora bien, las clases de conjugación en $A_4$ son las siguientes.
+    \begin{itemize}
+    \item $C_1 = \{ id \}$. En este caso el Frobenius es trivial, así que $p$ se
+      escinde completamente en $12$ ideales primos. La densidad correspondiente
+      será $\frac{1}{12}$.
+
+    \item $C_2 = \{ (1~2)\,(3~4), ~ (1~3)\,(2~4), ~ (1~4)\,(2~3) \}$. En este caso
+      el Frobenius tiene orden $2$, lo que corresponde a descomposiciones de la
+      forma $\mathfrak{p}_1\cdots\mathfrak{p}_6$. La densidad correspondiente es
+      $\frac{1}{4}$.
+
+    \item $C_3 = \{ (1~2~3), ~ (1~3~4), ~ (1~4~2), ~ (2~4~3) \}$. En este caso el
+      Frobenius tiene orden $3$, lo que corresponde a las factorizaciones de la
+      forma $\mathfrak{p}_1\,\mathfrak{p}_2\,\mathfrak{p}_3\,\mathfrak{p}_4$. La
+      densidad correspondiente es $\frac{1}{3}$.
+
+    \item $C_4 = \{ (1~2~4), ~ (1~3~2), ~ (1~4~3), ~ (2~3~4) \}$. Este caso es
+      similar al anterior.
+    \end{itemize}
+
+    En particular, podemos concluir que hay tres tipos de factorizaciones: en
+    $4$ ideales primos (densidad $\frac{2}{3}$), en $6$ ideales primos (densidad
+    $\frac{1}{4}$), y en $12$ ideales primos (densidad $\frac{1}{12}$).
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -109,12 +240,98 @@
     $\mathfrak{p} \mid p$. Determine cómo el tipo de factorización de $p$ en
     $\O_K$ para toda posibilidad para $\Frob_{\mathfrak{p}|p}$.
   \end{enumerate}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Tenemos $L = KF$, donde $F = \QQ (i)$. La extensión $F/\QQ$ es de
+    Galois. Dado un primo racional $p$, sean $\mathfrak{P} \subset \O_L$ un
+    ideal primo tal que $\mathfrak{P}\mid p$ y
+    $\mathfrak{p} = \mathfrak{P} \cap \O_K$ y
+    $\mathfrak{q} = \mathfrak{P} \cap \O_F$.
+
+    Se puede ver que en esta situación la restricción de automorfismos induce
+    inclusiones
+    $D (\mathfrak{P}|\mathfrak{p}) \hookrightarrow D (\mathfrak{q}|p)$ e
+    $I (\mathfrak{P}|\mathfrak{p}) \hookrightarrow I (\mathfrak{q}|p)$.
+    El único primo $p$ que se ramifica en $F$ es $p = 2$. Entonces, para todo
+    $p$ impar se tiene $I (\mathfrak{P}|\mathfrak{p}) = I (\mathfrak{q}|p) = 1$.
+    Esto implica que
+    $$e (\mathfrak{P}|p) = e (\mathfrak{P}|\mathfrak{p})\,e (\mathfrak{p}|p) = e (\mathfrak{p}|p).$$
+    Tenemos $\Delta (x^4 - 2) = -2^{11}$, así que en $K$ también se ramifica
+    solamente $p = 2$. Entonces, $e (\mathfrak{P}|p) = 1$ para todo $p$ impar.
+    Esto verifica la parte 1).
+
+    Ahora $K$ es el subcampo fijo por la conjugación compleja, que bajo el
+    isomorfismo $\Gal (L/\QQ) \cong D_4$ corresponde al subgrupo
+    $H = \{ 1, f \}$. Las clases laterales correspondientes son
+    \[ H, ~ H r, ~ H r^2, ~ H r^3. \]
+
+    La siguiente tabla nos da las acciones del Frobenius
+    $\Frob_{\mathfrak{p}|p}$ sobre las clases laterales y las descomposiciones
+    correspondientes de $p$ en $K$.
+
+    \begin{center}\def\arraystretch{1.75}
+      \begin{tabular}{cccc}
+        \hline
+        $\Frob_{\mathfrak{p}|p}$ & órbitas & descomposición & densidad \\
+        \hline
+        $1$ & $\{ H \}, ~ \{ Hr \}, ~ \{ Hr^2 \}, ~ \{ Hr^3 \}$ & $\mathfrak{p}_1 \mathfrak{p}_2 \mathfrak{p}_3 \mathfrak{p}_4$ & $\frac{1}{8}$ \\
+        \hline
+        $r$ & $\{ H \to Hr \to Hr^2 \to Hr^3 \}$ & \multirow{2}{*}{inerte, $f = 4$} & \multirow{2}{*}{$\frac{1}{4}$} \\
+        $r^3$ & $\{ H \to H r^3 \to H r^2 \to H r \}$ \\
+        \hline
+        $r^2$ & $\{ H \to H r^2 \}, ~ \{ H r \to H r^3 \}$ & \multirow{3}{*}{$\mathfrak{p}_1 \mathfrak{p}_2$, $f_1 = f_2 = 2$} & \multirow{3}{*}{$\frac{3}{8}$} \\
+        $rf = fr^3$ & $\{ H \to H r^3 \}, ~ \{ H r \to H r^2 \}$ \\
+        $r^3 f = fr$ & $\{ H \to Hr \}, ~ \{ H r^2 \to H r^3 \}$ \\
+        \hline
+        $f$ & $\{ H \}, ~ \{ H r \to H r^3 \}, ~ \{ H r^2 \}$ & \multirow{2}{*}{$\mathfrak{p}_1 \mathfrak{p}_2 \mathfrak{p}_3$, $f_1 = f_2 = 1$, $f_3 = 2$} & \multirow{2}{*}{$\frac{1}{4}$} \\
+        $r^2 f = f r^2$ & $\{ H \to H r^2 \}, ~ \{ H r \}, ~ \{ H r^3 \}$ \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Para la extensión ciclotómica $L = \QQ (\zeta_n)$ determine cómo los primos
   no ramificados $p\nmid n$ se descomponen en el subcampo
   $K = \QQ (\zeta_n + \zeta_n^{-1})$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Para $p\nmid n$ el automorfismo de Frobenius sobre $\QQ (\zeta_n)$ viene
+    dado por $\zeta_n \mapsto \zeta_n^p$. El grado de campos residuales $f$ es
+    el orden del Frobenius; es decir, el orden de $p$ en el grupo multiplicativo
+    $(\ZZ/n\ZZ)^\times \cong \Gal (\QQ (\zeta_n)/\QQ)$.
+
+    Ahora $K = \QQ (\zeta_n + \zeta_n^{-1})$ es el subcampo fijo por la
+    conjugación compleja $\zeta_n \mapsto \zeta_n^{-1}$ y
+    $\Gal (K/\QQ) \cong (\ZZ/n\ZZ)^\times / \{ \pm 1 \}$. El Frobenius
+    corresponde a la clase de $p$ en el cociente
+    $(\ZZ/n\ZZ)^\times / \{ \pm 1 \}$, y el grado del campo residual será el
+    orden de $p$ en ese grupo.
+
+    He aquí un ejemplo particular para el campo $\QQ (\zeta_7)$.
+
+    \begin{center}\def\arraystretch{1.75}
+      \begin{tabular}{rcccccc}
+        \hline
+        $p$ mód $7\colon$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ \\
+        orden en $(\ZZ/7\ZZ)^\times\colon$ & $1$ & $3$ & $6$ & $3$ & $6$ & $2$ \\
+        orden en $\frac{(\ZZ/7\ZZ)^\times}{\{ \pm 1 \}}\colon$ & $1$ & $3$ & $3$ & $3$ & $3$ & $1$ \\
+        desc. en $\QQ (\zeta_7)\colon$ & $\mathfrak{P}_1\cdots\mathfrak{P}_6$ & $\mathfrak{P}_1\mathfrak{P}_2$ & inerte & $\mathfrak{P}_1\mathfrak{P}_2$ & inerte & $\mathfrak{P}_1\mathfrak{P}_2\mathfrak{P}_3$ \\
+        desc. en $\QQ (\zeta_7 + \zeta_7^{-1})\colon$ & $\mathfrak{p}_1\mathfrak{p}_2\mathfrak{p}_3$ & inerte & inerte & inerte & inerte & $\mathfrak{p}_1\mathfrak{p}_2\mathfrak{p}_3$ \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    Otro ejemplo: $p = 2$ tiene orden $4$ en $(\ZZ/15\ZZ)^\times$ y también en
+    $(\ZZ/15\ZZ)^\times / \{ \pm 1 \}$. Entonces, $p$ se descompone en
+    $2 = \phi (15)/4$ ideales primos en $\QQ (\zeta_{15})$, y es inerte en el
+    subcampo $\QQ (\zeta_{15} + \zeta_{15}^{-1})$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \end{document}
