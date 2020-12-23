@@ -25,9 +25,12 @@
 
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Reg}{Reg}
 
+\newcommand{\FF}{\mathbb{F}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
 \renewcommand{\O}{\mathcal{O}}
 
 \title{Teoría de números algebraicos\\Examen final}
@@ -57,7 +60,7 @@
   \item[1)] Calcule el anillo de enteros $\O_K$ y discriminante $\Delta_K$.
 
   \item[2)] Demuestre que $u_1 = \alpha + 1$ y $u_2 = \alpha - 1$, donde
-    $\alpha = x \mod f$, Son unidades en $\O_K^\times$. Asumiendo que $u_1$ y
+    $\alpha = x \mod f$, son unidades en $\O_K^\times$. Asumiendo que $u_1$ y
     $u_2$ generan la parte libre de $\O_K^\times$, calcule el regulador.
 
   \item[3)] Calcule el grupo de clases $\Cl (K)$.
@@ -66,12 +69,205 @@
       de $\zeta_K (s)$ en $s=1$ puede ser calculado en PARI/GP.}, compruebe que
     $u_1$ y $u_2$ son efectivamente unidades fundamentales.
   \end{enumerate}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Basta ver que el polinomio es irreducible en $\ZZ [x]$, y para esto basta
+    notar que al reducir $f$ mód $3$ nos queda un polinomio cúbico irreducible
+    (= que no tiene raíces mód $3$).
+
+    Ahora calculamos que
+    $$\Delta (\ZZ [\alpha]) = \Delta (f) = 1957 = 19\cdot 103.$$
+    Tenemos
+    $$\Delta (\ZZ [\alpha]) = [\O_K : \ZZ[\alpha]]^2\cdot \Delta_K,$$
+    y $\Delta (\ZZ [\alpha])$ es libre de cuadrados, así que
+    $\O_K = \ZZ[\alpha]$ y $\Delta_K = \Delta (\ZZ [\alpha])$.
+
+    Notamos que el polinomio $f$ tiene tres raíces
+    reales. Esto se ve de los cambios de signos:
+    \[ f (-6) = -34, \quad
+       f (-5) = 1, \quad
+       f (0) = -4, \quad
+       f (1) = 1. \]
+    Los valores aproximados de estas raíces (calculados en PARI/GP usando la
+    función \texttt{polroots}) son
+    \[ x_1 = -5.040964\ldots, \quad
+       x_2 = -0.870538\ldots, \quad
+       x_3 =  0.911503\ldots. \]
+
+    Se sigue que hay tres encajes reales $\sigma\colon K \hookrightarrow \RR$.
+    En particular, el grupo de unidades $\O_K^\times$ tiene rango $2$. Dado que
+    el campo es totalmente real, las raíces de la unidad son
+    $\mu_K = \{ \pm 1 \}$, y debe haber dos unidades fundamentales $u_1$, $u_2$
+    tales que
+    $$\O_K^\times = \{ \pm 1 \} \times \langle u_1\rangle \times \langle u_2\rangle.$$
+    El ejercicio nos sugiere considerar $u_1 = \alpha + 1$ y $u_2 = \alpha - 1$.
+    Para ver que estas son unidades, basta calcular que
+    $N_{K/\QQ} (u_1) = N_{K/\QQ} (u_2) = -1$. El regulador correspondiente será
+    \[ \det \begin{pmatrix}
+        \log |x_1 + 1| & \log |x_1 - 1| \\
+        \log |x_2 + 1| & \log |x_2 - 1| \\
+      \end{pmatrix} = 4.551450\ldots \]
+
+    Para calcular el grupo de clases, empezamos por la cota de Minkowski
+    \[ M_K = \frac{n!}{n^n}\,\left(\frac{4}{\pi}\right)^{r_2}\,\sqrt{|\Delta_K|}
+      = \frac{3!}{3^3}\,\sqrt{1957} = 9.83\ldots \]
+    Esta nos dice que todo elemento del grupo de clases está representado por un
+    ideal entero de norma $\le 9$. Para encontrar estos ideales, consideremos
+    los ideales primos que están arriba de $p = 2,3,5,7$. Esto es fácil porque
+    $\O_K = \ZZ [\alpha] = \ZZ [x]/(f)$, y basta considerar las factorizaciones
+    de $f$ mód $p$ (teorema de Kummer--Dedekind).
+
+    Primero notamos que $f$ queda irreducible mód $3$ y mód $7$, lo que nos da
+    ideales primos $\mathfrak{p}_3 \mid 3$ y $\mathfrak{p}_7 \mid 7$ de norma
+    $3^3$ y $7^3$ respectivamente. Esta excede la cota de Minkowski.
+    Por otra parte, mód $2$ se obtiene factorización de la forma
+    $$f \equiv x\,(x^2 + x + 1),$$
+    lo que nos da dos ideales primos:
+    \[ \mathfrak{p}_2 = (2, \alpha), \quad
+      \mathfrak{p}_2' = (2, 1 + \alpha + \alpha^2), \]
+    de norma $2$ y $4$ respectivamente. En fin, mód $5$ nos salen de nuevo un
+    factor lineal y otro cuadrático:
+    $$f \equiv (x + 2) \, (x^2 + 3x + 3).$$
+    El factor cuadrático corresponde a un ideal primo de norma $5^2$ que no nos
+    interesará, mientras que el factor lineal nos da el ideal primo
+    $$\mathfrak{p}_5 = (5, 2 + \alpha)$$
+    de norma $5$.
+
+    Primero afirmo que $\mathfrak{p}_5$ y $\mathfrak{p}_2'$ representan el mismo
+    elemento en el grupo de clases. Para esto podemos calcular que
+    $$(1 + \alpha/2)\,\mathfrak{p}_2' = \mathfrak{p}_5.$$
+    Por otra parte, calculamos que $\mathfrak{p}_2^2 = (\alpha)$, así que
+    $\mathfrak{p}_2$ tiene orden $2$ en el grupo de clases, y en particular
+    $[\mathfrak{p}_2'] = [\mathfrak{p}_2]^{-1} = [\mathfrak{p}_2]$.
+
+    Nos quedan entonces dos posibilidades: si $\mathfrak{p}_2 = (2,\alpha)$
+    es un ideal principal, entonces el grupo de clases es trivial. Por otra
+    parte, si el ideal $\mathfrak{p}_2$ no es principal, entonces el grupo de
+    clases tiene orden $2$. Afirmo que estamos en la segunda situación.
+
+    Vamos a ocupar la relación $\mathfrak{p}_2^2 = (\alpha)$. Si el ideal
+    $\mathfrak{p}_2$ fuera principal, tendríamos $\mathfrak{p}_2 = (\beta)$ para
+    algún $\beta \in \O_K$, y luego $\beta^2 = u\,\alpha$, donde
+    $u \in \O_K^\times$. La última relación no se ve muy interesante:
+    ¡todavía no hemos calculado el grupo de unidades! Sin embargo, podemos
+    observar que si $u = vw^2$, entonces $(\beta\,w^{-1})^2 = v\alpha$, así que
+    bastaría probar que $u\alpha$ no es un cuadrado para todos $u$ que
+    representan diferentes elementos del grupo cociente
+    $\O_K^\times/(\O_K^\times)^2$.
+
+    Si $u_1, u_2$ son unidades fundamentales, entonces
+    $\O_K^\times = \{ \pm 1 \} \times \langle u_1\rangle \times \langle u_2\rangle$,
+    y luego $\O_K^\times/(\O_K^\times)^2 = \{ \pm 1 \, u_1^{e_1} \, u_2^{e_2} \}$,
+    donde $e_{1,2} = 0,1$. No conocemos las unidades fundamentales, pero tenemos
+    dos buenos candidatos para estas: $u_1 = \alpha + 1$ y $u_2 = \alpha - 1$.
+    Para verificar que estos números representan los elementos de
+    $\O_K^\times/(\O_K^\times)^2$, tenemos que ver que entre
+    $$-1, \, u_1, \, u_1 u_2, \, u_2, \, -u_1, \, -u_1 u_2, \, -u_2$$
+    no hay cuadrados.
+
+    Dado que nuestro campo es totalmente real, si $x$ es un cuadrado en $K$,
+    entonces para cualquier encaje $\sigma_{1,2,3}\colon K \hookrightarrow \RR$
+    la imagen $\sigma_i (x)$ debe ser un número positivo. Hagamos una tabla:
+
+    \begin{center}
+      \renewcommand{\arraystretch}{1.5}
+      \begin{tabular}{cccc}
+        \hline
+        $x$ & $\sigma_1 (x)$ & $\sigma_2 (x)$ & $\sigma_3 (x)$ \\
+        \hline
+        $-1$ & $-1$ & $-1$ & $-1$ \\
+        \hline
+        $u_1 = \alpha + 1$  & $-4.040965$ & $+0.129461$ & $+1.911503$ \\
+        \hline
+        $u_2 = \alpha - 1$ & $-6.040965$ & $-1.870539$ & $-0.088497$ \\
+        \hline
+        $u_1 u_2 = \alpha^2 - 1$ & $+24.411324$ & $-0.242162$ & $-0.169162$ \\
+        \hline
+        $-u_1 = -\alpha - 1$ & $+4.040965$ & $-0.129461$ & $-1.911503$ \\
+        \hline
+        $-u_2 = -\alpha + 1$ & $+6.040965$ & $+1.870539$ & $+0.088497$ \\
+        \hline
+        $-u_1 u_2 = -\alpha^2 + 1$ & $-24.411324$ & $+0.242162$ & $+0.169162$ \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    De aquí podemos concluir que todos los números de arriba no son cuadrados,
+    con la única posible excepción de $-u^2 = -\alpha + 1$, que tiene todos los
+    encajes positivos. Para ver que $-\alpha + 1$ tampoco es un cuadrado,
+    bastaría encontrar un ideal primo $\mathfrak{p}$ tal que
+    $\overline{-\alpha + 1}$ no es un cuadrado en el campo finito
+    $\O_K/\mathfrak{p}$. Por ejemplo, $\mathfrak{p} = (5,2+\alpha)$ nos da
+    $\O_K/\mathfrak{p} \cong \FF_5$.  Tenemos
+    $-\alpha + 1 \equiv 3 \pmod{\mathfrak{p}}$, y este no es un cuadrado mód
+    $5$.
+
+    Ahora bien, nuestro cálculo hasta ahora nos dice que los elementos de
+    $\O_K^\times/(\O_K^\times)^2$ pueden ser representados por
+    $$1, \, u_1, \, u_1 u_2, \, u_2, \, -1, \, -u_1, \, -u_1 u_2, \, -u_2.$$
+    Para concluir, hay que ver que $\alpha u$ no es un cuadrado para todos los
+    $u$ de arriba. Esto se sigue de la tabla de abajo.
+
+    \begin{center}
+      \renewcommand{\arraystretch}{1.5}
+      \begin{tabular}{cccc}
+        \hline
+        $x$ & $\sigma_1 (x)$ & $\sigma_2 (x)$ & $\sigma_3 (x)$ \\
+        \hline
+        $\alpha$ & $-5.040965$ & $-0.870539$ & $0.911503$ \\
+        \hline
+        $\alpha u_1 = \alpha^2 + \alpha$ & $+20.370359$ & $-0.112701$ & $+1.742342$ \\
+        \hline
+        $\alpha u_1 u_2 = -5\alpha^2 + 4$ & $-123.056620$ & $+0.210812$ & $-0.154191$ \\
+        \hline
+        $\alpha u_2 = \alpha^2 - \alpha$ & $+30.452289$ & $+1.628376$ & $-0.080665$ \\
+        \hline
+        $-\alpha$ & $+5.040965$ & $+0.870539$ & $-0.911503$ \\
+        \hline
+        $-\alpha u_1 = -\alpha^2 - \alpha$ & $-20.370359$ & $+0.112701$ & $-1.742342$ \\
+        \hline
+        $-\alpha u_1 u_2 = 5\alpha^2 - 4$ & $+123.056620$ & $-0.210812$ & $+0.154191$ \\
+        \hline
+        $-\alpha u_2 = -\alpha^2 + \alpha$ & $-30.452289$ & $-1.628376$ & $+0.080665$ \\
+        \hline
+      \end{tabular}
+    \end{center}
+
+    Entonces, el ideal $\mathfrak{p}_2$ no es principal, y por lo tanto el grupo
+    de clases es isomorfo a $\ZZ/2\ZZ$.
+
+    En fin, usando PARI/GP, calculamos que
+    $$\lim_{s \to 1^+} (s-1)\,\zeta_K (s) = 0.8230844\ldots$$
+    Por otra parte,
+    $$\lim_{s \to 1^+} (s-1)\,\zeta_K (s) = \frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_k}{\#\mu_K\,\sqrt{|\Delta_K|}} = \frac{2^3\cdot\Reg_K\cdot 2}{2\cdot \sqrt{1957}}.$$
+    Comparando las dos expresiones, se obtiene $\Reg_K = 4.551450\ldots$ Este es
+    el regulador que fue calculado arriba, así que podemos concluir que
+    $u_1,u_2$ son unidades fundamentales.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
   Para un campo de números $K/\QQ$ demuestre que la cerradura de Galois $L/K$
-  contiene subcampo $\QQ (\sqrt{\Delta_K})$. Dé un ejemplo particular cuando
-  $\Delta_K$ no es un cuadrado y $K \ne \QQ (\sqrt{\Delta_K})$.
+  contiene como subcampo $\QQ (\sqrt{\Delta_K})$. Dé un ejemplo particular
+  cuando $\Delta_K$ no es un cuadrado y $K \ne \QQ (\sqrt{\Delta_K})$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Recordemos la fórmula para el discriminante
+    $$\Delta_K = \det (\sigma_i (\alpha_j))_{i,j}^2,$$
+    donde $\alpha_1, \ldots, \alpha_n$ es una $\ZZ$-base de $\O_K$.
+    Tenemos entonces
+    $$\sqrt{\Delta_K} = \pm \det (\sigma_i (\alpha_j))_{i,j} \in L,$$
+    donde los números $\sigma_i (\alpha_j)$ pueden ser vistos como elementos de
+    la cerradura de Galois $L/K$.
+
+    Para dar un ejemplo, el campo cúbico real $K = \QQ (\sqrt[3]{2})$ tiene
+    discriminante $\Delta_K = -2^2\cdot 3^3$. La cerradura de Galois es
+    $L = \QQ (\sqrt[3]{2},\zeta_3)$, y esta contiene $\sqrt{-3} = 1 + 2\zeta_3$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -81,6 +277,49 @@
   $y^2 = x^3 - k$ no tiene soluciones enteras.
 
   Punto extra: encuentre un contraejemplo para $3 \mid h_{\QQ (\sqrt{-k})}$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Considerando la ecuación mód $4$ y usando que $k \equiv 1,2 \pmod{4}$,
+    notamos que $x$ es necesariamente impar. Además, $x$ e $y$ deben ser
+    coprimos: si $p \mid x$ y $p \mid y$, entonces $p^2 \mid k$, pero $k$ es
+    libre de cuadrados por nuestra hipótesis.
+
+    Dado que $k \equiv 1,2 \pmod{4}$, para el campo cuadrático imaginario
+    $K = \QQ (\sqrt{-k})$ se tiene $\O_K = \ZZ [\sqrt{-k}]$.  Factoricemos la
+    ecuación como
+    \[ \tag{*} x^3 = y^2 + k = (y + \sqrt{-k})\,(y - \sqrt{-k}). \]
+
+    Sea $\mathfrak{p} \subset \ZZ [\sqrt{-k}]$ un ideal primo que divide a
+    ideales $(y + \sqrt{-k})$ e $(y - \sqrt{-k})$ (y por lo tanto a $(x)$).
+    En este caso $\mathfrak{p}$ divide al ideal $(2y)$. Puesto que $x$ es impar,
+    tenemos $\mathfrak{p} \nmid 2$, y luego $\mathfrak{p} \mid y$. Pero esto
+    contradice el hecho de que $x$ e $y$ son coprimos.
+
+    Entonces, los ideales $(y + \sqrt{-k})$ e $(y - \sqrt{-k})$ son
+    coprimos. Usando esto, podemos concluir de (*) que se tiene
+    \[ (y + \sqrt{-k}) = I^3 \]
+    para algún ideal $I \subset \ZZ [\sqrt{-k}]$. Por nuestra hipótesis
+    $3 \nmid h_K$, y en este caso el hecho de que $I^3$ es un ideal principal
+    implica que $I$ es también principal. Escribamos
+    $I = (a + b\sqrt{-k})$. Tenemos
+    $$y + \sqrt{-k} = u\,(a + b\sqrt{-k})^3$$
+    para alguna unidad $u \in \ZZ [\sqrt{-k}]^\times$. De todos modos, por
+    nuestra hipótesis $k \ne 1$, así que $u = \pm 1$, y siempre podemos asumir
+    que $u = +1$, dado que $-1 = (-1)^3$. Analicemos la expresión
+    \[ y + \sqrt{-k} = (a + b\sqrt{-k})^3 =
+      (a^2 - 3k\,b^2)\,a + (3a^2 - kb^2)\,b\,\sqrt{-k}. \]
+    De aquí necesariamente $b = \pm 1$, y luego $k = 3a^2 \pm 1$, pero esto
+    contradice nuestra hipótesis sobre $k$. Hemos obtenido una contradicción,
+    así que la ecuación no tiene soluciones enteras.
+
+    Revisando la tabla de grupos de clases para los campos cuadráticos
+    imaginarios, encontramos que el primer numero de clases divisible por $3$
+    aparece para $k = 23$, donde $h_{\QQ (\sqrt{-23})} = 3$. Este $k$ no tiene
+    forma $3a^2 \pm 1$. La ecuación $y^2 = x^3 - 23$ sí tiene solución
+    $(x,y) = (3, \pm 2)$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -89,6 +328,22 @@
   y $K \subseteq \QQ (\zeta_m)$ el subcampo correspondiente. Demuestre que $K$
   es un campo real (es decir, $r_2 = 0$) si y solamente si $\chi (-1) = +1$ para
   todo $\chi \in X$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Un subcampo $K \subseteq \QQ (\zeta_m)$ es real si y solamente si los
+    elementos de $K$ están fijos por la conjugación compleja; es decir, por el
+    subgrupo
+    $$H = \{ \pm 1 \} \subset (\ZZ/m\ZZ)^\times \cong \Gal (\QQ (\zeta_m)/\QQ).$$
+    El subcampo de $\QQ (\zeta_m)$ fijo por $H$ es
+    $L = \QQ (\zeta_m + \zeta_m^{-1})$. En términos de caracteres de Dirichlet,
+    a $L$ corresponde el grupo de caracteres mód $m$ que cumplen $\chi (-1) = +1$:
+    $$Y = H^\perp = \{ \chi \in \widehat{(\ZZ/m\ZZ)^\times} \mid \chi (-1) = +1 \}.$$
+
+    Ahora $K$ es real si y solamente si $K \subseteq L$, si y solamente si
+    $X \subseteq Y$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -103,6 +358,54 @@
 
   \item[4)] Calcule los valores $\zeta_K (2)$ y $\zeta_K (4)$.
   \end{enumerate}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    El residuo en $s = 1$ viene dado por la fórmula analítica del número de
+    clases:
+    $$\frac{2^{r_1}\,(2\pi)^{r_2}\,\Reg_K\,h_K}{\# \mu_K \, \sqrt{|\Delta_K|}}.$$
+    En este caso $r_1 = 2$, $r_2 = 0$. La unidad fundamental de $K$ es
+    $2 + \sqrt{3}$, así que $\Reg_K = \log (2 + \sqrt{3})$. Hemos calculado en
+    clase que $h_K = 1$. En fin, $\mu_K = \{ \pm 1 \}$ y
+    $\Delta_K = 12$. Tenemos entonces el residuo
+    $$\zeta_K^* (1) = \frac{\log (2 + \sqrt{3})}{\sqrt{3}} = 0.760345\ldots$$
+
+    De la misma manera, en $s = 0$ habrá un cero simple de residuo
+    $$\zeta_K^* (0) = -\frac{\Reg_K\,h_K}{\# \mu_K} = -\frac{\log (2+\sqrt{3})}{2} = -0.658478\ldots$$
+
+    Por lo que vimos en clase, se tiene
+    $$\zeta_K (s) = \zeta (s)\,L(s,\chi),$$
+    donde $\chi$ es el carácter de Dirichlet mód $12$ dado por
+    $$\chi\colon 1\mapsto +1, \quad 5 \mapsto -1, \quad 7 \mapsto -1, \quad 11 \mapsto +1.$$
+
+    Tenemos
+    \begin{align*}
+      \zeta_K (-1) & = \frac{B_2}{2}\,\frac{B_{2,\chi}}{2}, \\
+      \zeta_K (-2) & = 0, \\
+      \zeta_K (-3) & = \frac{B_4}{4}\,\frac{B_{4,\chi}}{4},
+    \end{align*}
+    Aquí
+    $$B_{k,\chi} = 12^{k-1} \, \sum_{(a,12)=1} \chi (a) \, B_k (a/12).$$
+    Usando esta fórmula, calculamos que
+    $$B_{2,\chi} = 4, \quad B_{4,\chi} = -184.$$
+    Dado que
+    $$B_2 = \frac{1}{6}, \quad B_4 = -\frac{1}{30},$$
+    se obtiene
+    $$\zeta_K (-1) = \frac{1}{6}, \quad \zeta_K (-3) = \frac{23}{60}.$$
+
+    En fin, de la ecuación funcional, para $k$ par se obtiene
+    $$\zeta_K (k) = \frac{(2\pi)^{2k}}{12^{k - 1/2}\cdot 4\cdot ((k-1)!)^2}\,\zeta_K (1-k),$$
+
+    En particular, para $k = 2$
+    \[ \zeta_K (2) = \frac{\pi^4}{2\cdot 3^{3/2}}\,\zeta_K (-1) =
+      \frac{\pi^4}{36\sqrt{3}} =
+      1.562199\ldots \]
+    y para $k = 4$
+    \[ \zeta_K (4) = \frac{\pi^8}{8\cdot 3^{11/2}}\,\zeta_K (-3) =
+      \frac{23\,\pi^8}{116640\sqrt{3}} =
+      1.080236\ldots \qedhere \]
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \end{document}
