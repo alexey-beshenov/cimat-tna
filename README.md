@@ -10,7 +10,7 @@ https://cadadr.org/cimat-tna/
 
 * Campos y anillos de números
 
-* Reciprocidad cuadrática mediante sumas de Gauss en ℤ[ζp]
+* Reciprocidad cuadrática mediante sumas de Gauss en ℤ[ζ<sub>p</sub>]
 
 * Divisibilidad y factorización en dominios (dominios de factorización única,
   dominios de ideales principales, dominios euclidianos)
@@ -43,7 +43,7 @@ https://cadadr.org/cimat-tna/
 
 * Teorema de Kummer–Dedekind
 
-* Aplicación: campos cuadráticos y campos ciclotómicos ℚ(ζp)
+* Aplicación: campos cuadráticos y campos ciclotómicos ℚ(ζ<sub>p</sub>)
 
 ### Capítulo 3. Álgebra ℤ-lineal
 
@@ -65,7 +65,7 @@ https://cadadr.org/cimat-tna/
 
 * Campos linealmente disjuntos
 
-* Anillo de enteros de ℚ(ζn)
+* Anillo de enteros de ℚ(ζ<sub>n</sub>)
 
 * Cálculos en PARI/GP
 
@@ -111,7 +111,7 @@ https://cadadr.org/cimat-tna/
 
 * Teorema de unidades de Dirichlet
 
-* Aplicación: unidades en ℤ[ζp]
+* Aplicación: unidades en ℤ[ζ<sub>p</sub>]
 
 * Fracciones continuas. Fracciones continuas periódicas.
 
@@ -204,11 +204,11 @@ https://cadadr.org/cimat-tna/
   https://youtube.com/watch?v=KYSi0HwAEk8
 
 * Clase 12 (21/09/2020). Teoremas de Brill y Stickelberger.
-  Campos linealmente disjuntos. El anillo de enteros de ℚ(ζn).
+  Campos linealmente disjuntos. El anillo de enteros de ℚ(ζ<sub>n</sub>).
 
   https://youtube.com/watch?v=aBOx3o1KVYU
 
-* Clase 13 (23/09/2020). Factorización de primos en ℚ(ζn).
+* Clase 13 (23/09/2020). Factorización de primos en ℚ(ζ<sub>n</sub>).
   Campos de números en PARI/GP.
 
   https://youtube.com/watch?v=WoZBCfD0SvA
