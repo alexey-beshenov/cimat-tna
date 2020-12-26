@@ -26,6 +26,7 @@
 
 \DeclareMathOperator{\Cl}{Cl}
 \DeclareMathOperator{\covol}{covol}
+\DeclareMathOperator{\im}{im}
 \DeclareMathOperator{\vol}{vol}
 
 \newcommand{\FF}{\mathbb{F}}
@@ -58,6 +59,39 @@
 \begin{ejercicio}
   Demuestre que si $X$ es un conjunto convexo simétrico compacto tal que
   $\vol X = 2^n\cdot \covol \Lambda$, entonces $X \cap \Lambda \ne \{ 0 \}$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Para $k = 1,2,3,\ldots$ definamos
+    $$X_k = (1 + 1/k)\,X.$$
+    Esto nos da una cadena de conjuntos convexos simétricos compactos
+    $$X_1 \supset X_2 \supset X_3 \supset \cdots \supset X$$
+    Además, es fácil ver que
+    $$\bigcap_{k\ge 1} X_k = X.$$
+
+    Notamos que $\vol X_k > \vol X$, así que para todo $k$ se cumple la
+    condición del teorema de Minkowski, y existe un punto no nulo
+    $\omega_k \in X_k \cap \Lambda$. Todos estos puntos están en $X_1$ que es
+    compacto, y por la compacidad la sucesión $(\omega_k)$ tiene una subsucesión
+    convergente $(\omega_{n_k})$. Pongamos
+    $$\omega = \lim_{k\to\infty} \omega_{n_k}.$$
+    Primero, los $\omega_{n_k}$ son elementos de $\Lambda\setminus\{ 0 \}$ que
+    es un conjunto discreto, así que el mismo $\omega$ debe ser un elemento de
+    $\Lambda\setminus \{ 0 \}$.
+
+    Afirmamos que $\omega \in X \cap \Lambda$. En efecto, usando que $\Lambda$
+    es un conjunto discreto, podemos concluir que para $k$ suficientemente
+    grande
+    $$\omega_{n_k} = \omega_{n_{k+1}} = \omega_{n_{k+2}} = \cdots = \omega.$$
+    Efectivamente, existe $\epsilon > 0$ suficientemente pequeño tal que
+    $B_\epsilon (\omega) \cap \Lambda = \{ \omega \}$. Luego existe $k$ tal que
+    todos los $\omega_{n_\ell}$ para $\ell \ge k$ están en la bola
+    $B_\epsilon (\omega)$, y por esto coinciden con $\omega$.
+    Tenemos $\omega = \omega_{n_\ell} \in X_{n_\ell}$ para todo $\ell \ge k$, y
+    luego
+    \[ \omega \in \bigcap_{\ell \ge k} X_{n_\ell} = \bigcap_{k\ge 1} X_k = X. \qedhere \]
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -65,6 +99,19 @@
   $$X_t = \{ (x_\tau)_\tau \in K_\RR \mid |x_\tau| < t\text{ para todo }\tau \}.$$
   Calcule que
   $$\vol (X_t) = 2^{r_1}\,(2\pi)^{r_2}\,t^n.$$
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Este cálculo es muy sencillo. Si $x_\tau$ es una coordenada real, entonces
+    esta contribuye $2t$. Por otra parte, si $x_\sigma$ y
+    $x_{\overline{\sigma}}$ es un par de coordenadas complejas, entonces nos
+    interesa la condición $u^2 + v^2 < t^2$. Este es un círculo de radio $t$, y
+    su área es $\pi t^2$. Tenemos entonces
+    \[ \vol (X) = 2^{r_2}\,\vol_{Leb.} (X) =
+      2^{r_2}\cdot (2t)^{r_1}\cdot (\pi t^2)^{r_2} =
+      2^{r_1}\,(2\pi)^{r_2}\,t^n. \qedhere \]
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -73,6 +120,23 @@
   Demuestre que los ideales correspondientes
   $\mathfrak{p}_1,\ldots,\mathfrak{p}_s \subset \O_K$ generan un subgrupo en
   $\Cl (K)$ isomorfo a $(\ZZ/2\ZZ)^{s-1}$.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Tenemos $d \ne 1,3$ y $\O_K^\times = \{ \pm 1 \}$. Todo primo $p_i \mid d$
+    se ramifica: se tiene $p_i\O_K = \mathfrak{p}_i^2$ para algún ideal primo
+    $\mathfrak{p}_i \subset \O_K$. Este ideal no es principal: en el caso
+    contrario $\alpha^2 = \pm p_i$ para algún $\alpha \in \O_K$, pero luego
+    $\sqrt{\pm p_i} \in K$, y este no es el caso.
+
+    Consideremos el homomorfismo de grupos $\phi\colon (\ZZ/2\ZZ)^s \to \Cl (K)$
+    que envía $(0,\ldots,1,\ldots,0)$ a $[\mathfrak{p}_i]$. Ocupando el mismo
+    argumento de arriba, se calcula que
+    $$\ker \phi = \{ (0,\ldots,0), ~ (1,\ldots,1) \}.$$
+    Entonces, $\Cl (K)$ contiene como un subgrupo
+    \[ \im \phi \cong (\ZZ/2\ZZ)^s/\ker\phi \cong (\ZZ/2\ZZ)^{s-1}. \qedhere \]
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -82,12 +146,350 @@
      \QQ (\sqrt{33}), \quad
      \QQ (\sqrt[3]{19}), \quad
      \QQ (\sqrt{-3}, \sqrt{-5}). \]
-\end{ejercicio}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Todos estos cálculos son bastante trabajosos, pero escogí los ejemplos de
+    arriba precisamente para tener algo no trivial. Tal vez este ejercicio tenía
+    que ser una tarea separada.
+
+    \begin{itemize}
+    \item Para $K = \QQ (\sqrt{-110})$ tenemos $\Delta_K = -2^3\cdot 5\cdot 11$,
+      y la cota de Minkowski es $M_K \approx 13.35$. Las factorizaciones de
+      primos relevantes son las siguientes:
+      \begin{align*}
+        2\O_K & = \mathfrak{p}_2^2, \\
+        3\O_K & = \mathfrak{p}_3\,\mathfrak{p}_3', \\
+        5\O_K & = \mathfrak{p}_5^2, \\
+        7\O_K & = \mathfrak{p}_7\,\mathfrak{p}_7', \\
+        11\O_K & = \mathfrak{p}_{11}^2, \\
+        13\O_K & = \mathfrak{p}_{13} \quad \text{(inerte)},
+      \end{align*}
+      donde
+      \begin{align*}
+        \mathfrak{p}_2 & = (2, \alpha), \\
+        \mathfrak{p}_3 & = (3, 1 + \alpha), \\
+        \mathfrak{p}_5 & = (5, \alpha), \\
+        \mathfrak{p}_7 & = (7, 3 + \alpha), \\
+        \mathfrak{p}_{11} & = (11, \alpha).
+      \end{align*}
+
+      Aquí los ideales primos arriba de $p = 2,3,5,7,11$ no son principales
+      porque en $\O_K = \ZZ [\sqrt{-110}]$ no hay elementos de norma $p$:
+      la norma viene dada por
+      $N_{K/\QQ} (a + b\,\alpha) = a^2 + 110\,b^2$. Otros ideales de norma
+      $< M_K$ son
+      \[ \mathfrak{p}_2\,\mathfrak{p}_3, \quad
+        \mathfrak{p}_2\,\mathfrak{p}_3', \quad
+        \mathfrak{p}_3^2, \quad \mathfrak{p}_3'^2, \quad
+        \mathfrak{p}_2\,\mathfrak{p}_5. \]
+      Estos tampoco son principales: en $\O_K$ no hay elementos de norma
+      $6$ y $10$, y los elementos de norma $9$ son $\pm 3$, y es fácil ver que
+      $\mathfrak{p}_3^2 \ne 3\O_K$.
+      Calculamos que
+      $\mathfrak{p}_{11}\,(\alpha/11) = \mathfrak{p}_2\,\mathfrak{p}_5$,
+      así que en el grupo de clases se tiene
+      $[\mathfrak{p}_{11}] = [\mathfrak{p}_2\,\mathfrak{p}_5]$.
+
+      Esto nos dice que
+      \[ \tag{*}
+        \Cl (K) = \{
+        [\O_K], \,
+        [\mathfrak{p}_2], \,
+        [\mathfrak{p}_3], \,
+        [\mathfrak{p}_3'], \,
+        [\mathfrak{p}_5], \,
+        [\mathfrak{p}_2\,\mathfrak{p}_3], \,
+        [\mathfrak{p}_2\,\mathfrak{p}_3'], \,
+        [\mathfrak{p}_7], \,
+        [\mathfrak{p}_7'],
+        [\mathfrak{p}_3^2], \,
+        [\mathfrak{p}_3'^2], \,
+        [\mathfrak{p}_2\,\mathfrak{p}_5] \} \]
+      (todavía no estoy afirmando que todos estos elementos son distintos;
+      lo veremos un poco más adelante).
+
+      Podemos calcular que
+      \[ \mathfrak{p}_3^2 = (9, 4 + \alpha), \quad
+        \mathfrak{p}_3^3 = (27, 22 + \alpha), \quad
+        \mathfrak{p}_3^6 = (17 + 2\alpha). \]
+
+      El ideal $\mathfrak{p}_3^3$ tampoco es principal porque en $\O_K$ no hay
+      elementos de norma $27$. Esto demuestra que $[\mathfrak{p}_3]$ es un
+      elemento de orden $6$ en el grupo de clases. Calculamos sus potencias
+      \[ [\mathfrak{p}_3]^3 = [\mathfrak{p}_5], \quad
+        [\mathfrak{p}_3]^4 = [\mathfrak{p}_3]^{-2} = [\mathfrak{p}_3'^2], \quad
+        [\mathfrak{p}_3]^5 = [\mathfrak{p}_3]^{-1} = [\mathfrak{p}_3']. \]
+
+      Dado que $\Cl (K)$ tiene un elemento $[\mathfrak{p}_3]$ de orden $6$ y
+      otro elemento $[\mathfrak{p}_2] \ne [\mathfrak{p}_3]^3 = [\mathfrak{p}_5]$
+      de orden $2$, podemos concluir que $\Cl (K)$ es un grupo abeliano de orden
+      $12$. En particular, todos los elementos en (*) son distintos.
+      Hay solamente dos posibilidades: $\ZZ/12\ZZ$ y
+      $\ZZ/6\ZZ \oplus \ZZ/2\ZZ \cong \ZZ/3\ZZ \oplus (\ZZ/2\ZZ)^2$.
+
+      Se puede probar la relación
+      \[ [\mathfrak{p}_7] = [\mathfrak{p}_3']\,[\mathfrak{p}_2]\,[\mathfrak{p}_5], \]
+      que nos dice en particular que $[\mathfrak{p}_7]$ tiene orden $6$ en el
+      grupo de clases. De aquí y nuestra lista de elementos de $\Cl (K)$ se ve
+      que no hay elementos de orden $12$. La única opción que nos queda es
+      entonces $\ZZ/6\ZZ \oplus \ZZ/2\ZZ$.
+
+    \item Para $K = \QQ (\sqrt{-127})$ tenemos
+      $\O_K = \ZZ \Bigl[\frac{1+\sqrt{-127}}{2}\Bigr] \cong \ZZ[x]/(x^2 - x + 32)$,
+      $\Delta_K = -127$, y la cota de Minkowski es $M_K \approx 7.17$.
+
+      Denotemos $\alpha = \frac{1+\sqrt{-127}}{2}$.
+
+      El primo $p = 2$ se escinde: tenemos
+      \[ 2\O_K = \mathfrak{p}_2\,\mathfrak{p}_2', \quad
+        \mathfrak{p}_2 = (2, \alpha), \quad
+        \mathfrak{p}_2' = (2, 1+\alpha). \]
+      Por otra parte, los primos $p = 3, 5, 7$ son inertes.
+      Como consecuencia, el grupo de clases está generado por
+      $[\mathfrak{p}_2]$.
+
+      El ideal $\mathfrak{p}_2$ no es principal: la norma sobre $\O_K$ viene
+      dada por
+      \[ N (a + b\alpha) = a^2 + ab + 32\,b^2
+        = \frac{1}{4}\,\Bigl((2a + b)^2 + 127\,b^2\Bigr), \]
+      y esta no puede ser igual a $2$. Además,
+      $$\mathfrak{p}_2^2 = (4, 2\alpha, \alpha^2) = (4, \alpha)$$
+      tampoco será principal: para esto basta notar que el único elemento en
+      $\O_K$ de norma $4$ es $\pm 2$ y $\mathfrak{p}_2^2 \ne 2\O_K$.
+      De manera similar, se verifica que $\mathfrak{p}_2^3$ y
+      $$\mathfrak{p}_2^4 = (16, 4\alpha, \alpha^2) = (16, \alpha)$$ no son
+      principales. Por otra parte,
+      $$\mathfrak{p}_2^5 = (16, \alpha)\,(2, \alpha) = (32, 2\alpha, \alpha^2) = (\alpha)$$
+      sí es principal (para la última igualdad, use que
+      $32 = N_{K/\QQ} (\alpha)$, y por otra parte,
+      $\alpha^2 - \alpha + 32 = 0$).
+
+      Esto demuestra que $[\mathfrak{p}_2]$ tiene orden $5$ en el grupo de
+      clases. Podemos concluir que $\Cl (K) \cong \ZZ/5\ZZ$.
+
+    \item Para $K = \QQ (\sqrt{33})$ tenemos $\Delta_K = 33$, y la cota de
+      Minkowski es $M_K \approx 2.87$. Bastaría entonces revisar qué sucede con
+      el primo $p = 2$. Escribamos
+      $\O_K = \ZZ [\alpha]$, donde $\alpha = \frac{1+\sqrt{33}}{2}$.
+      Factorizando el polinomio mínimo $f = f^\alpha_\QQ = x^2 - x - 8$
+      mód $2$, se obtiene
+      \[ 2\O_K = \mathfrak{p}_2\,\mathfrak{p}_2', \quad
+        \mathfrak{p}_2 = (2, \alpha), \quad
+        \mathfrak{p}_2' = (2, 1 + \alpha). \]
+      Estos ideales resultan ser principales. Por ejemplo, se tiene
+      $\mathfrak{p}_2 = (2 + \alpha)$. Una de las inclusiones está clara,
+      y para la otra podemos observar que $N_{K/\QQ} (2+\alpha) = -2$,
+      así que $2$ (y luego $\alpha$) pertenece al ideal generado por
+      $2 + \alpha$.
+
+      Podemos concluir que el grupo de clases es trivial. Notamos que según el
+      ejercicio anterior, el grupo de clases del campo \emph{imaginario}
+      $\QQ (\sqrt{-33})$ será no trivial, con por lo menos un elemento no
+      trivial de $2$-torsión (en realidad,
+      $\Cl (\QQ(\sqrt{-33})) \cong \ZZ/2\ZZ \times \ZZ/2\ZZ$). Como acabamos de
+      ver, el mismo resultado no funciona para los campos cuadráticos reales.
+
+    \item Para $K = \QQ (\sqrt[3]{19})$ tenemos $\Delta_K = -3\cdot 19^2$ y la
+      cota de Minkowski es $M_K \approx 9.31$. Los primos relevantes se
+      descomponen de la siguiente manera:
+      \begin{align*}
+        2\O_K & = \mathfrak{p}_2\,\mathfrak{p}_2',\\
+        3\O_K & = \mathfrak{p}_3\,\mathfrak{p}_3'^2,\\
+        5\O_K & = \mathfrak{p}_5\,\mathfrak{p}_5',\\
+        7\O_K & = \mathfrak{p}_7 \quad \text{(inerte)}.
+      \end{align*}
+      Aquí
+      \begin{gather*}
+        N (\mathfrak{p}_2) = 2, ~ N (\mathfrak{p}_2') = 2^2, \\
+        N (\mathfrak{p}_3) = N (\mathfrak{p}_3') = 3, \\
+        N (\mathfrak{p}_5) = 5, ~ N (\mathfrak{p}_5') = 5^2, \\
+        N (\mathfrak{p}_7) = 3^3.
+      \end{gather*}
+      De manera explícita, denotando $\alpha = \sqrt[3]{19}$, los ideales primos
+      que están sobre $2$ y $5$ se obtienen factorizando el polinomio
+      $f = x^3 - 19$:
+      \[ \mathfrak{p}_2 = (2, 1 + \alpha), \quad
+        \mathfrak{p}_2' = (2, 1 + \alpha + \alpha^2), \quad
+        \mathfrak{p}_5 = (5, 1 + \alpha), \quad
+        \mathfrak{p}_5' = (5, 1 + 4\alpha + \alpha^2). \]
+      Los ideales primos arriba de $3$ se obtiene factorizando
+      $g = x^3 - x^2 - 6x - 12$ que es el polinomio mínimo de
+      $\beta = \frac{1}{3}\,(1 + \alpha + \alpha^2)$ (véase el capítulo~3 de los
+      apuntes donde se considera el ejemplo de $\QQ (\sqrt[3]{19})$).
+      El resultado es
+      \[ \mathfrak{p}_3 = (3, 2 + \beta), \quad
+        \mathfrak{p}_3' = (3, \beta). \]
+
+      Primero afirmo que en $\O_K$ no hay elementos de norma $2$ y $4$, y por lo
+      tanto los ideales $\mathfrak{p}_2$ y $\mathfrak{p}_2'$ no son principales.
+      Recordemos que
+      $$\O_K = \ZZ [\alpha,\beta] = \ZZ \oplus \ZZ\alpha \oplus \ZZ\beta.$$
+      Calculamos
+      \[ N_{K/\QQ} (a + b\alpha + c\beta) =
+        a^3 + a^2c - 19\,abc - 6\,ac^2 + 19\,b^3 + 19\,b^2c + 12c^3. \]
+      Las ecuaciones
+      $$N_{K/\QQ} (a + b\alpha + c\beta) \equiv 2,4 \pmod{19}$$
+      no tienen solución, y por lo tanto podemos concluir que
+      $N_{K/\QQ} (a + b\alpha + c\beta) = 2,4$ tampoco tienen solución.
+
+      Ahora se puede calcular que
+      $$(3)\,\mathfrak{p}_2^3 = (4 + \alpha + \alpha^2),$$
+      así que $[\mathfrak{p}_2]$ es un elemento de orden $3$ en el grupo de
+      clases. Por otra parte,
+      $[\mathfrak{p}_2'] = [\mathfrak{p}_2]^{-1} = [\mathfrak{p}_2]^2$.
+
+      Luego con ayuda de computadora se verifican las relaciones
+      \begin{gather*}
+        3\,\mathfrak{p}_3 = \mathfrak{p}_3'\,(2 + \alpha),\\
+        3\,\mathfrak{p}_2 = \mathfrak{p}_3'\,(1 - \alpha),\\
+        3\,\mathfrak{p}_5 = \mathfrak{p}_3'\,(4 - \alpha),
+      \end{gather*}
+      de donde
+      \[ [\mathfrak{p}_3] = [\mathfrak{p}_3'] = [\mathfrak{p}_2], \quad
+        [\mathfrak{p}_5] = [\mathfrak{p}_2]. \]
+      De aquí podemos concluir que $\Cl (K) \cong \ZZ/3\ZZ$.
+
+    \item Para $K = \QQ (\sqrt{-3}, \sqrt{-5})$ tenemos
+      $\O_K = \ZZ \Bigl[\frac{1+\sqrt{-3}}{2},\sqrt{-5}\Bigr]$,
+      $\Delta_K = 2^4\cdot 3^2\cdot 5^2$, y la cota de Minkowski es
+      $M_K \approx 9.11$. Nos interesa cómo los primos $p = 2,3,5,7$ se
+      factorizan en $\O_K$. El tipo de descomposición puede ser deducido
+      de la descomposición de $p$ en los subcampos $\QQ (\sqrt{-3})$,
+      $\QQ (\sqrt{-5})$, $\QQ (\sqrt{15})$, usando que $K/\QQ$ es una extensión
+      de Galois.
+      \begin{align*}
+        2\O_K & = \mathfrak{p}_2^2, & N & = 4, \\
+        3\O_K & = \mathfrak{p}_3^2\,\mathfrak{p}_3'^2, & N & = 3, \\
+        5\O_K & = \mathfrak{p}_5^2, & N & = 25, \\
+        7\O_K & = \mathfrak{p}_7\,\mathfrak{p}_7'\,\mathfrak{p}_7''\,\mathfrak{p}_7''', & N & = 7.
+      \end{align*}
+    \end{itemize}
+
+    El ideal primo arriba de $p = 5$ será irrelevante porque su norma excede la
+    cota de Minkowski.
+
+    Para ocupar el teorema de Kummer--Dedekind, podemos, por ejemplo, tomar
+    $\alpha = \frac{1+\sqrt{-3}}{2} + \sqrt{-5}$. El polinomio mínimo
+    correspondiente es $f = x^4 - 2 x^3 + 13 x^2 - 12 x + 21$. Calculamos
+    $\Delta (f) = \Delta (\ZZ [\alpha]) = 2^4\cdot 3^2\cdot 5^2\cdot 17^2$.
+    Entonces, $[\O_K : \ZZ [\alpha]] = 17$, y las factorizaciones de $p \ne 17$
+    corresponden a las factorizaciones de $f$ mód $p$. Calculamos
+    \begin{align*}
+      f & \equiv (x^2 + x + 1)^2 \pmod{2}, \\
+      f & \equiv x^2\,(x+2)^2 \pmod{3}, \\
+      f & \equiv x\,(x+1)\,(x+5)\,(x+6) \pmod{7}.
+    \end{align*}
+
+    Entonces,
+    \begin{gather*}
+      \mathfrak{p}_2 = (2, \alpha^2 + \alpha + 1), \\
+      \mathfrak{p}_3 = (3, \alpha), \quad
+      \mathfrak{p}_3' = (3, \alpha+2), \\
+      \mathfrak{p}_7 = (7, \alpha), \quad
+      \mathfrak{p}_7' = (7, \alpha+1), \quad
+      \mathfrak{p}_7'' = (7, \alpha+5), \quad
+      \mathfrak{p}_7'' = (7, \alpha+6).
+    \end{gather*}
+
+    No es difícil verificar que el ideal $\mathfrak{p}_2$ es principal: podemos
+    tomar como su generador $\sqrt{-3} + \sqrt{-5}$. Para el resto de ideales,
+    nos conviene escribirlos ocupando los automorfismos que generan el grupo de
+    Galois:
+    \[ \sigma\colon \sqrt{-3} \mapsto -\sqrt{-3}, \quad
+      \tau\colon \sqrt{-5} \mapsto -\sqrt{-5}. \]
+
+    Primero, tenemos
+    \[ \mathfrak{p}_3 = \Bigl(3, \frac{1+\sqrt{-3}}{2} + \sqrt{-5}\Bigr), \quad
+      \mathfrak{p}_3' = \tau (\mathfrak{p}_3), \]
+    donde $D (\mathfrak{p}_3|3) = D (\mathfrak{p}_3'|3) = \{ 1, \sigma \}$.
+    Para los ideales arriba de $p = 7$, tenemos
+    \begin{gather*}
+      \mathfrak{p}_7 = \Bigl(7, \frac{1+\sqrt{-3}}{2} + \sqrt{-5}\Bigr), \quad
+      \mathfrak{p}_7' = \tau (\mathfrak{p}_7), \quad
+      \mathfrak{p}_7'' = \sigma (\mathfrak{p}_7), \quad
+      \mathfrak{p}_7'' = \sigma\tau (\mathfrak{p}_7).
+    \end{gather*}
+
+    Calculamos
+    \[ \mathfrak{p}_3^2 = \Bigl(\frac{1 + 3\sqrt{-3}}{2} + \sqrt{-5}\Bigr),
+      \quad
+      \mathfrak{p}_3'^2 = \tau (\mathfrak{p}_3^2), \]
+    y además
+    $$\mathfrak{p}_3\,\mathfrak{p}_3' = (\sqrt{-3}).$$
+    Afirmo que los ideales $\mathfrak{p}_3$ y $\mathfrak{p}_3'$ no son
+    principales. Para esto bastaría ver que en $\O_K$ no hay elementos de norma
+    $3$. Lo haré en PARI/GP, reduciendo la norma mód 5.
+
+    \begin{framed}
+\begin{verbatim}
+? K = nfinit(t^2 + 3);
+? L = nfinit(rnfinit(K,x^2 + 5));
+? nrm = norm (Mod(L.zk*[a,b,c,d]~,L.pol))
+% = ...
+? test (N) = {
+  for (a=0,N-1,
+    for (b=0,N-1,
+      for (c=0,N-1,
+        for (d=0,N-1,
+          if (Mod (eval(nrm), N) == Mod (3,N),
+            return (1)
+        )
+      )
+    )
+  )
+);
+0 };
+
+? test(5)
+% = 0
+\end{verbatim}
+    \end{framed}
+    Todo esto quiere decir que $[\mathfrak{p}_3] = [\mathfrak{p}_3']$ es un
+    elemento de orden $2$ en el grupo de clases.
+
+    Calculamos que
+    \[ \mathfrak{p}_3\,\mathfrak{p}_7 =
+      \Bigl(\frac{1+\sqrt{-3}}{2} + \sqrt{-5}\Bigr). \]
+    De manera similar,
+    \[ \mathfrak{p}_3\,\sigma\mathfrak{p}_7 =
+      \sigma\mathfrak{p}_3\,\sigma\mathfrak{p}_7 =
+      \sigma (\mathfrak{p}_3\,\mathfrak{p}_7) =
+      \Bigl(\frac{1-\sqrt{-3}}{2} + \sqrt{-5}\Bigr), \]
+    y
+    \[ \mathfrak{p}_3'\,\tau\mathfrak{p}_7 =
+      \tau (\mathfrak{p}_3\,\mathfrak{p}_7) =
+      \Bigl(\frac{1+\sqrt{-3}}{2} - \sqrt{-5}\Bigr), \]
+    y en fin,
+    \[ \mathfrak{p}_3'\,\sigma\tau\mathfrak{p}_7 =
+      \sigma\tau (\mathfrak{p}_3\,\mathfrak{p}_7) =
+      \Bigl(\frac{1-\sqrt{-3}}{2} - \sqrt{-5}\Bigr). \]
+    Estos cálculos demuestran que
+    \[ [\mathfrak{p}_7] =
+      [\mathfrak{p}_7'] =
+      [\mathfrak{p}_7''] =
+      [\mathfrak{p}_7'''] =
+      [\mathfrak{p}_3] =
+      [\mathfrak{p}_3']. \]
+    Podemos concluir que $\Cl (K) \cong \ZZ/2\ZZ$.
+  \end{solucion}
+  \fi
+ \end{ejercicio}
 
 \begin{ejercicio}
   Sea $K/\QQ$ un campo de números. Demuestre que para cualquier ideal
   $I \subset \O_K$ existe una extensión finita $L/K$ tal que el ideal
   correspondiente $I\,\O_L$ es principal.
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Gracias a la finitud del grupo de clases, sabemos que el ideal $I^n$ es
+    principal para algún $n = 1,2,3,\ldots$ (por ejemplo, basta tomar
+    $n = h_K$). Tenemos $I^n = (\alpha)$ para algún $\alpha \in \O_K$.
+    Ahora $\sqrt[n]{\alpha}$ es también un entero algebraico, y en la extensión
+    $L = K (\sqrt[n]{\alpha})$ se tiene $I \mathcal{O}_L = (\sqrt[n]{\alpha})$.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \begin{ejercicio}
@@ -102,6 +504,26 @@
   \item[2)] Demuestre si existe una sección $s$ como arriba, entonces
     $M'\oplus M'' \cong M$.
   \end{enumerate}
+
+  \ifdefined\solutions
+  \begin{solucion}
+    Si $(e_i)_{i \in I}$ es una base de $M''$ como $R$-módulo, escojamos
+    elementos $(m_i)_{i \in I}$ tales que $p (m_i) = e_i$.
+    Luego $s\colon e_i \mapsto m_i$ define una sección.
+
+    En la parte 2), definamos la aplicación $R$-lineal
+    \[ \phi\colon M'\oplus M'' \to M, \quad
+      (m', m'') \mapsto i (m') + s (m''). \]
+
+    Tenemos un diagrama conmutativo
+    \[ \begin{tikzcd}[column sep=5em]
+        0 \ar{r} & M' \ar{r}{m' \mapsto (m',0)}\ar{d}{id} & M'\oplus M'' \ar{r}{(m',m'') \mapsto m''}\ar{d}{\phi} & M'' \ar{r}\ar{d}{id} & 0 \\
+        0 \ar{r} & M' \ar{r}{i} & M \ar{r}{p} & M'' \ar{r} & 0
+      \end{tikzcd} \]
+    Por el lema del tres (o del cinco, lema de la serpiente, etc.) podemos
+    concluir que $\phi$ es un isomorfismo.
+  \end{solucion}
+  \fi
 \end{ejercicio}
 
 \end{document}
