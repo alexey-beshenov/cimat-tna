@@ -2799,8 +2799,10 @@ Para verlo, necesitamos la siguiente observación.
     \[ \lim_{s\to 1^+} (1-s)\,Z_K (s)^2 =
       |\Delta_K|\,\Bigl(\pi^{-1/2}\,\Gamma \Bigl(\frac{1}{2}\Bigr)\Bigr)^{2r_1}\,\Bigl(2\,(2\pi)^{-1}\,\Gamma (1)\Bigr)^{2r_2}\,\zeta_K^* (1)^2 =
       |\Delta_K|\,\pi^{-2r_2}\,\zeta_K^* (1)^2. \]
-    Aquí usamos que $\Gamma \Bigl(\frac{1}{2}\Bigr) = \sqrt{\pi}$. Entonces,
-    nuestra identidad nos da
+    Aquí usamos que $\Gamma \Bigl(\frac{1}{2}\Bigr) = \sqrt{\pi}$\footnote{Este
+      es un caso particular de la ecuación funcional
+      $\Gamma (s)\,\Gamma (1-s) = \frac{\pi}{\sin \pi s}$.}. Entonces, nuestra
+    identidad nos da
     $$|\Delta_K|\,\pi^{-2r_2} = |\Delta_{K'}|\,\pi^{-2r'_2},$$
     de donde $|\Delta_K| = |\Delta_K'|$. Recordemos que el signo del
     discriminante es $(-1)^{r_2}$, así que $\Delta_K = \Delta_{K'}$.
@@ -2861,7 +2863,7 @@ término «equivalencia aritmética».
   \end{proof}
 \end{teorema}
 
-\subsection{Triplas de Gassmann}
+\subsection{Ternas de Gassmann}
 
 El matemático suizo Fritz Gassmann (1899--1990) encontró en 1926 una
 caracterización elemental de la equivalencia aritmética, que da una manera
@@ -2870,7 +2872,7 @@ isomorfos.
 
 \begin{definicion}
   Sean $G$ un grupo finito y $H, H'$ sus subrupos. Se dice que $(G,H,H')$ es una
-  \textbf{tripla de Gassmann} si existe una biyección entre $H$ y $H'$ que
+  \textbf{terna de Gassmann} si existe una biyección entre $H$ y $H'$ que
   preserva las clases de conjugación en $G$. En otras palabras, si para todo
   $g \in G$ se tiene
   $$\# (H\cap g^G) = \# (H'\cap g^G),$$
@@ -2886,11 +2888,11 @@ Gassmann probó el siguiente resultado.
   $K K'$). Entonces, $K$ y $K'$ son aritméticamente equivalentes si y solamente
   si
   $$(\Gal (L/\QQ), \, \Gal (L/K), \, \Gal (L/K'))$$
-  es una tripla de Gassmann.
+  es una terna de Gassmann.
 \end{teorema}
 
 El teorema de Gassmann nos permite construir ejemplos de campos no isomorfos
-aritméticamente equivalentes. Para esto basta encontrar una tripla de Gassmann
+aritméticamente equivalentes. Para esto basta encontrar una terna de Gassmann
 $(G, H, H')$ con $H$ y $H'$ subgrupos no conjugados en $G$ y saber realizar $G$
 como el grupo de Galois de alguna extensión $L/\QQ$\footnote{Recordemos que el
   \textbf{problema inverso} de la teoría de Galois afirma que cualquier grupo
@@ -2899,18 +2901,18 @@ como el grupo de Galois de alguna extensión $L/\QQ$\footnote{Recordemos que el
   infinitas.}. Luego basta tomar $K = L^H$ y $K' = L^{H'}$, y puesto que $H$ y
 $H'$ no son conjugados, tendremos $K \not\cong K'$.
 
-Una manera fácil de construir triplas de Gassmann no triviales es la siguiente.
+Una manera fácil de construir ternas de Gassmann no triviales es la siguiente.
 
 \begin{proposicion}
   Para un grupo finito $H$ definamos la \textbf{estadística de ordenes} como la
   función
   \[ \phi_H\colon \NN \to \NN, \quad
     n \mapsto \# \{ h\in H \mid \ord h = n \}. \]
-  Para dos grupos finitos $H$ y $H'$ existe una tripla de Gassmann $(G,H,H')$
+  Para dos grupos finitos $H$ y $H'$ existe una terna de Gassmann $(G,H,H')$
   si y solamente si $\phi_H = \phi_{H'}$.
 
   \begin{proof}
-    En una dirección, si $(G,H,H')$ es una tripla de Gassmann, entonces por la
+    En una dirección, si $(G,H,H')$ es una terna de Gassmann, entonces por la
     definición existe una biyección $H \leftrightarrow H'$ que preserva las
     clases de conjugación en $G$, y los elementos cada clase de conjugación
     tienen el mismo orden, así que $\phi_H = \phi_{H'}$.
@@ -2923,7 +2925,7 @@ Una manera fácil de construir triplas de Gassmann no triviales es la siguiente.
     y $h' \in H'$ serán conjugados en $G$ si y solamente si $\ord h = \ord h'$.
     Dado que $\phi_H = \phi_{H'}$, podemos escoger una biyección
     $H \leftrightarrow H'$ que preserva los ordenes de elementos, y luego las
-    clases de conjugación en $G$. Esto nos da una tripla de Gassmann $(G,H,H')$.
+    clases de conjugación en $G$. Esto nos da una terna de Gassmann $(G,H,H')$.
   \end{proof}
 \end{proposicion}
 
@@ -2964,7 +2966,7 @@ así que este método no será muy eficaz.
 
 \begin{ejemplo}
   Por otra parte, la búsqueda en GAP nos dice que el grupo más pequeño $G$ que
-  admite una tripla de Gassmann $(G,H,H')$ con $H$ y $H'$ no conjugados tiene
+  admite una terna de Gassmann $(G,H,H')$ con $H$ y $H'$ no conjugados tiene
   orden $32$ (en la notación de GAP, este es \texttt{[32,43]}).
 
   \begin{shaded}\small
@@ -3103,14 +3105,14 @@ compare (f1,f2) = {
 
 \begin{ejemplo}
   El artículo de Perlis \cite{Perlis-1977} contiene un argumento sencillo de la
-  teoría de grupos que demuestra que para una tripla de Gassmann no trivial
+  teoría de grupos que demuestra que para una terna de Gassmann no trivial
   $(G,H,H')$ necesariamente se tiene $[G : H] \ge 7$. Esto significa que los
   campos no isomorfos de grado $\le 6$ no pueden ser aritméticamente
   equivalentes. Perlis dice que un campo $K$ es \textbf{solitario} si todo campo
   aritméticamente equivalente a $K$ debe ser isomorfo a $K$.
 
   De nuevo, usando GAP, se puede verificar que el grupo más
-  pequeño que nos da una tripla con $[G : H] = 7$ es $G = \GL_3 (\FF_2)$.
+  pequeño que nos da una terna con $[G : H] = 7$ es $G = \GL_3 (\FF_2)$.
 
   \begin{shaded}\small
 \begin{verbatim}
@@ -3122,7 +3124,7 @@ gap> Size(last[1])/Size(last[2]);
 \end{verbatim}
   \end{shaded}
 
-  De hecho, hay una manera geométrica de obtener la tripla de Gassmann en
+  De hecho, hay una manera geométrica de obtener la terna de Gassmann en
   cuestión. El grupo $\GL_3 (\FF_2) \cong \SL_3 (\FF_2) \cong \PSL_3 (\FF_2)$
   actúa sobre los $7$ puntos de $\AA^3 (\FF_2) \setminus \{ 0 \}$, y por otra
   parte sobre los $7$ hiperplanos en este espacio que corresponden a los puntos
@@ -3139,7 +3141,7 @@ gap> Size(last[1])/Size(last[2]);
   Especificamente, esta biyección viene dada por $B\mapsto B^t$, ya que toda
   matriz es conjugada con su traspuesta.
 
-  Realizando $\GL_3 (\FF_2)$ como un grupo de Galois, a partir de esta tripla de
+  Realizando $\GL_3 (\FF_2)$ como un grupo de Galois, a partir de esta terna de
   Gassmann se pueden encontrar polinomios específicos
   \[ f = x^7 - 7\,x - 3, \quad
     f' = x^7 - 7\,x^4 - 21\,x^3 + 21\,x^2 + 42\,x - 9. \]
@@ -3185,7 +3187,7 @@ la prueba del teorema de Gassmann, notamos su consecuencia importante.
       inglés y \emph{cœur} en francés} de $K$ es el subcampo más grande
     $F\subseteq K$ tal que la extensión $F/\QQ$ es normal. Este será
     precisamente el subcampo de $L$ fijo por el subgrupo generado por todos los
-    subgrupos conjugados $H^g$ para $g \in G$. Por la definición de triplas de
+    subgrupos conjugados $H^g$ para $g \in G$. Por la definición de ternas de
     Gassmann, para todo $h\in H$ tenemos
     $\# (H\cap h^G) = \# (H'\cap H^G) \ne 0$. En particular, algún conjugado
     $h^g$ está en $H'$. De aquí se sigue fácilmente que
@@ -3319,17 +3321,17 @@ $H' = \Gal (L/K')$.
 \end{lema}
 
 Para probar el teorema de Gassmann, nos falta relacionar la condición
-$\chi_H = \chi_{H'}$ con las triplas de Gassmann.
+$\chi_H = \chi_{H'}$ con las ternas de Gassmann.
 
 \begin{lema}
   Para un grupo finito $G$, dos subgrupos $H, H' \subset G$ dan lugar a una
-  tripla de Gassmann $(G,H,H')$ si y solamente si $\chi_H = \chi_{H'}$.
+  terna de Gassmann $(G,H,H')$ si y solamente si $\chi_H = \chi_{H'}$.
 
   \begin{proof}
     Definamos
     $$\psi_H\colon G\to \ZZ, \quad \sigma \mapsto \# (H \cap \sigma^G).$$
     Esta es una función constante sobre las clases de conjugación, y por la
-    definición, $(G,H,H')$ es una tripla de Gassmann si y solamente si
+    definición, $(G,H,H')$ es una terna de Gassmann si y solamente si
     $\psi_H = \psi_{H'}$.
 
     Para $\sigma \in G$ consideremos el centralizador correspondiente
@@ -3344,12 +3346,12 @@ $\chi_H = \chi_{H'}$ con las triplas de Gassmann.
     $\phi_H (\sigma) = \# C_G (\sigma) / \# H$. El cálculo de arriba nos dice
     que $\chi_H = \psi_H\,\phi_H$.
 
-    Ahora si $(G,H,H')$ es una tripla de Gassmann, entonces $\phi_H = \psi_{H'}$
+    Ahora si $(G,H,H')$ es una terna de Gassmann, entonces $\phi_H = \psi_{H'}$
     y $\phi_H = \phi_{H'}$ (dado que $\# H = \# H'$). Esto implica que
     $\chi_H = \chi_{H'}$. Viceversa, si $\chi_H = \chi_{H'}$, entonces
     $\phi_H = \phi_{H'}$, dado que
     $\# (H\backslash G) = \chi_H (1) = \chi_{H'} (1) = \# (H'\backslash G)$.
-    Esto implica que $\psi_H = \psi_{H'}$, así que $(G,H,H')$ es una tripla de
+    Esto implica que $\psi_H = \psi_{H'}$, así que $(G,H,H')$ es una terna de
     Gassmann.
   \end{proof}
 \end{lema}
