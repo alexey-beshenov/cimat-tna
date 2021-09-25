@@ -8,3 +8,5 @@ all: $(PDF_FILES)
 
 clean:
 	rm -f *.aux *.log *.pdf
+
+.PHONY: clean

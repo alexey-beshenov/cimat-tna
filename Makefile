@@ -1,22 +1,25 @@
-all: pics hw tna.pdf beamer
+define bibrun
+    xelatex $(1); bibtex $(1); xelatex $(1); xelatex $(1)
+endef
 
-pics:
-	cd pic && $(MAKE)
+all: pic tna.pdf diapositivas tareas
 
-hw:
-	cd tareas && $(MAKE)
+diapositivas:
+	$(MAKE) -C diapositivas
 
-tna.pdf:
-	xelatex tna
-	bibtex tna
-	xelatex tna
-	xelatex tna
+pic:
+	$(MAKE) -C pic
 
-beamer:
-	cd diapositivas && $(MAKE)
+tareas:
+	$(MAKE) -C tareas
+
+tna.pdf: tna.tex
+	$(call bibrun,tna)
 
 clean:
 	rm -f *.aux *.log *.bbl *.blg *.toc *.pdf
-	cd pic && $(MAKE) clean
-	cd tareas && $(MAKE) clean
-	cd diapositivas && $(MAKE) clean
+	$(MAKE) -C diapositivas clean
+	$(MAKE) -C pic clean
+	$(MAKE) -C tareas clean
+
+.PHONY: clean diapositivas pic tareas
