@@ -13,7 +13,7 @@ pic:
 tareas:
 	$(MAKE) -C tareas
 
-tna.pdf: tna.tex
+tna.pdf: $(wildcard *.tex)
 	$(call bibrun,tna)
 
 clean:
