@@ -318,3 +318,11 @@ José de Jesús García Ruvalcaba,
 William Eduardo Pena,
 Óscar Andrés Ramírez Ramírez, y
 Alexis Zamora.
+
+
+# Copyleft
+
+Esta obra está licenciada bajo CC BY-SA 4.0.
+Para ver una copia de esta licencia, visite
+https://creativecommons.org/licenses/by-sa/4.0/
+ 
