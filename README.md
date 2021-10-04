@@ -322,7 +322,5 @@ Alexis Zamora.
 
 # Copyleft
 
-Esta obra está licenciada bajo CC BY-SA 4.0.
-Para ver una copia de esta licencia, visite
+Esta obra está disponible bajo la licencia CC BY-SA 4.0.
 https://creativecommons.org/licenses/by-sa/4.0/
- 
